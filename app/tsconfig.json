@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "relewise-client": [
+                "node_modules/relewise-client/src"
+            ],
+            "relewise-client/*": [
+                "node_modules/relewise-client/src/*"
+            ]
+        }
+    },
+    "include": [
+        "index.ts",
+        "src/**/*.ts",
+        "tests/**/*.ts",
+        "environment.d.ts"
+    ]
+}

@@ -1,23 +1,17 @@
-import { RELEWISE_DATASET_ID, RELEWISE_API_KEY } from "./config";
-import { Recommender } from "@relewise/relewise-client";
-const recommender = new Recommender(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
-recommender.popularProducts({
-    basedOn: 'MostPurchased',
-    sinceMinutesAgo: 10368000,
-    language: {
-        value: 'da-dk'
-    },
-    filters: {},
-    settings: {
-        selectedProductProperties: {
-            displayName: true,
-            dataKeys: [
-                "Images",
-                "Labeling",
-                "SubTitle"
-            ],
-        }
+import { RELEWISE_DATASET_ID, RELEWISE_API_KEY } from './local.config';
+import { Tracker, User } from "@relewise/relewise-client";
+const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY, "https://localhost:5000");
+tracker.trackOrder({
+    order: {
+        cartName: "",
+        lineItems: [],
+        subtotal: {
+            amount: 100,
+            currency: {
+                value: "DKK",
+            }
+        },
+        trackingNumber: "",
+        user: User.Anonymous(),
     }
-}).then((result) => {
-    console.log(result);
 });

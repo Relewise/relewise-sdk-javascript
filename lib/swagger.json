@@ -27,7 +27,7 @@
               "schema": {
                 "$ref": "#/components/schemas/ProductPerformanceRequest"
               },
-              "example": {"fromUnixTimeSeconds":1648112482,"toUnixTimeSeconds":1648717282,"filters":{},"numberOfResults":1000,"classifications":[],"typeName":"ProductPerformanceRequest","language":{"value":"da"},"currency":{"value":"DKK"}}
+              "example": {"fromUnixTimeSeconds":1658219488,"toUnixTimeSeconds":1658824288,"filters":{},"numberOfResults":1000,"classifications":[],"typeName":"ProductPerformanceRequest","language":{"value":"da"},"currency":{"value":"DKK"}}
             }
           }
         },
@@ -39,7 +39,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductPerformanceResponse"
                 },
-                "example": {"results":[{"product":{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},"classifications":[{"combination":{},"carts":{"opened":10},"rank":{"overall":{"byViews":1.0,"bySales":1.0},"withinCategories":[{"category":{"id":"C-1","displayName":"Root Category 1"},"rank":{"byViews":1.0,"bySales":1.0}}],"withinBrand":{"byViews":1.0,"bySales":1.0}}}]}],"totalNumberOfResults":1,"statistics":{"serverTimeInMs":0.1}}
+                "example": {"results":[{"product":{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},"classifications":[{"combination":{},"carts":{"opened":10},"rank":{"overall":{"byViews":1.0,"bySales":1.0},"withinCategories":[{"category":{"id":"C-1","displayName":"Root Category 1"},"rank":{"byViews":1.0,"bySales":1.0}}],"withinBrand":{"byViews":1.0,"bySales":1.0}}}]}],"totalNumberOfResults":1,"statistics":{"serverTimeInMs":0.1}}
               }
             }
           }
@@ -195,7 +195,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -235,7 +235,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -274,7 +274,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -313,7 +313,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -352,7 +352,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -392,7 +392,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -431,7 +431,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -470,7 +470,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -509,7 +509,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -548,7 +548,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -587,7 +587,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -626,7 +626,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -665,7 +665,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -704,7 +704,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProductRecommendationResponse"
                 },
-                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"b-1","displayName":"Brand 1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"b-2","displayName":"Brand 2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
+                "example": {"recommendations":[{"productId":"P-1","displayName":"Product 1","rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-1","displayName":"Root Category 1"},{"id":"C-1-1","displayName":"Sub Category 1-1"}]}],"salesPrice":199.95,"brand":{"id":"B-1"}},{"productId":"P-3","displayName":"Product 3 with Variants","variant":{"variantId":"V-1","rank":1},"rank":1,"categoryPaths":[{"pathFromRoot":[{"id":"C-2","displayName":"Root Category 2"},{"id":"C-2-1","displayName":"Sub Category 2-1"}]}],"salesPrice":399.95,"brand":{"id":"B-2"},"allVariants":[{"variantId":"V-1","rank":1},{"variantId":"V-2","rank":2}]}]}
               }
             }
           }
@@ -1015,6 +1015,234 @@
         }
       }
     },
+    "/{datasetId}/v1/PopularProductCategoriesRecommendationRequest": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PopularProductCategoriesRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryRecommendationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/PersonalProductCategoryRecommendationRequest": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalProductCategoryRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryRecommendationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/PopularContentCategoriesRecommendationRequest": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PopularContentCategoriesRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentCategoryRecommendationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/PersonalContentCategoryRecommendationRequest": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalContentCategoryRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentCategoryRecommendationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/PopularBrandsRecommendationRequest": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PopularBrandsRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandRecommendationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/PersonalBrandRecommendationRequest": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalBrandRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryRecommendationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/{datasetId}/v1/ProductSearchRequest": {
       "post": {
         "tags": [
@@ -1122,7 +1350,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategorySearchResponse"
+                  "$ref": "#/components/schemas/ProductCategorySearchResponse"
                 }
               }
             }
@@ -1160,7 +1388,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategorySearchResponse"
+                  "$ref": "#/components/schemas/ProductCategorySearchResponse"
                 }
               }
             }
@@ -1538,7 +1766,7 @@
               "schema": {
                 "$ref": "#/components/schemas/TrackBrandViewRequest"
               },
-              "example": {"brandView":{"user":{"temporaryId":"temporaryId","data":{}},"brand":{"id":"b-2"},"typeName":"BrandView"}}
+              "example": {"brandView":{"user":{"temporaryId":"temporaryId","data":{}},"brand":{"id":"B-2"},"typeName":"BrandView"}}
             }
           }
         },
@@ -1798,10 +2026,302 @@
           }
         }
       }
+    },
+    "/{datasetId}/v1/TrackProductCategoryUpdateRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackProductCategoryUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/TrackContentCategoryUpdateRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackContentCategoryUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/TrackProductCategoryAdministrativeActionRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackProductCategoryAdministrativeActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/TrackContentCategoryAdministrativeActionRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackContentCategoryAdministrativeActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/TrackBrandAdministrativeActionRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackBrandAdministrativeActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/{datasetId}/v1/TrackBrandUpdateRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackBrandUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AndFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Filter"
+          }
+        ],
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AndFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/CartDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/OrFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductDisplayNameFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductHasVariantsFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductListPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductRecentlyPurchasedByUserFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductRecentlyViewedByUserFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductSalesPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantListPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantSalesPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantSpecificationFilter"
+                }
+              ]
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AssortmentFacet": {
         "required": [
           "$type",
@@ -2189,33 +2709,105 @@
           "displayName": {
             "type": "string",
             "nullable": true
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DataValue"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "BrandAvailableFacetValue": {
+      "BrandAdministrativeAction": {
         "required": [
-          "hits",
-          "selected"
+          "kind"
         ],
         "type": "object",
         "properties": {
-          "value": {
+          "filters": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand"
+                "$ref": "#/components/schemas/FilterCollection"
               }
             ],
             "nullable": true
           },
-          "hits": {
-            "type": "integer",
-            "format": "int32"
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
           },
-          "selected": {
-            "type": "boolean"
+          "kind": {
+            "enum": [
+              "Disable",
+              "Enable",
+              "Delete"
+            ],
+            "type": "string"
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
           }
         },
+        "additionalProperties": false
+      },
+      "BrandAssortmentFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Filter"
+          }
+        ],
+        "properties": {
+          "assortments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandDataFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataFilter"
+          }
+        ],
         "additionalProperties": false
       },
       "BrandFacet": {
@@ -2231,7 +2823,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/StringBrandValueFacetResult"
+            "$ref": "#/components/schemas/StringBrandNameAndIdResultValueFacetResult"
           }
         ],
         "additionalProperties": false
@@ -2298,6 +2890,313 @@
                 "$ref": "#/components/schemas/FieldIndexConfiguration"
               }
             ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandNameAndIdResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandNameAndIdResultAvailableFacetValue": {
+        "required": [
+          "hits",
+          "selected"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandNameAndIdResult"
+              }
+            ],
+            "nullable": true
+          },
+          "hits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "selected": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandRecommendationRequestSettings": {
+        "required": [
+          "allowFillIfNecessaryToReachNumberOfRecommendations",
+          "allowReplacingOfRecentlyShownRecommendations",
+          "numberOfRecommendations",
+          "prioritizeDiversityBetweenRequests"
+        ],
+        "type": "object",
+        "properties": {
+          "numberOfRecommendations": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowFillIfNecessaryToReachNumberOfRecommendations": {
+            "type": "boolean"
+          },
+          "allowReplacingOfRecentlyShownRecommendations": {
+            "type": "boolean"
+          },
+          "prioritizeDiversityBetweenRequests": {
+            "type": "boolean"
+          },
+          "selectedBrandProperties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedBrandPropertiesSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandRecommendationResponse": {
+        "type": "object",
+        "properties": {
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandResult"
+            },
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "statistics": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Statistics"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandRecommendationWeights": {
+        "required": [
+          "brandViews",
+          "productPurchases",
+          "productViews"
+        ],
+        "type": "object",
+        "properties": {
+          "brandViews": {
+            "type": "number",
+            "format": "double"
+          },
+          "productViews": {
+            "type": "number",
+            "format": "double"
+          },
+          "productPurchases": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandResult": {
+        "required": [
+          "rank"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "viewedByUser": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewedByUserInfo"
+              }
+            ],
+            "nullable": true
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DataValue"
+            },
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandResultDetails": {
+        "required": [
+          "createdUtc",
+          "disabled",
+          "purchasedFromByDifferentNumberOfUsers",
+          "viewedByDifferentNumberOfUsers",
+          "viewedTotalNumberOfTimes"
+        ],
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DataValue"
+            },
+            "nullable": true
+          },
+          "viewedByUser": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewedByUserInfo"
+              }
+            ],
+            "nullable": true
+          },
+          "createdUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastViewedUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "viewedTotalNumberOfTimes": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "viewedByDifferentNumberOfUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "purchasedFromByDifferentNumberOfUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "purchasedByUser": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PurchasedByUserInfo"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandUpdate": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "brand": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Brand"
+              }
+            ],
+            "nullable": true
+          },
+          "kind": {
+            "enum": [
+              "None",
+              "UpdateAndAppend",
+              "ReplaceProvidedProperties",
+              "ClearAndReplace"
+            ],
+            "type": "string"
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
             "nullable": true
           }
         },
@@ -2492,6 +3391,67 @@
         },
         "additionalProperties": false
       },
+      "Category": {
+        "required": [
+          "$type"
+        ],
+        "type": "object",
+        "properties": {
+          "$type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Multilingual"
+              }
+            ],
+            "nullable": true
+          },
+          "categoryPaths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoryPath"
+            },
+            "nullable": true
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DataValue"
+            },
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "$type",
+          "mapping": {
+            "Relewise.Client.DataTypes.ContentCategory, Relewise.Client": "#/components/schemas/ContentCategory",
+            "Relewise.Client.DataTypes.ProductCategory, Relewise.Client": "#/components/schemas/ProductCategory"
+          }
+        }
+      },
       "CategoryFacet": {
         "required": [
           "categorySelectionStrategy"
@@ -2533,6 +3493,58 @@
           }
         },
         "additionalProperties": false
+      },
+      "CategoryIdFilter": {
+        "required": [
+          "$type",
+          "evaluationScope",
+          "negated"
+        ],
+        "type": "object",
+        "properties": {
+          "$type": {
+            "type": "string"
+          },
+          "categoryIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "evaluationScope": {
+            "enum": [
+              "ImmediateParent",
+              "ImmediateParentOrItsParent",
+              "Ancestor"
+            ],
+            "type": "string"
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "negated": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "$type",
+          "mapping": {
+            "Relewise.Client.Requests.Filters.ContentCategoryIdFilter, Relewise.Client": "#/components/schemas/ContentCategoryIdFilter",
+            "Relewise.Client.Requests.Filters.ProductCategoryIdFilter, Relewise.Client": "#/components/schemas/ProductCategoryIdFilter"
+          }
+        }
       },
       "CategoryIndexConfiguration": {
         "type": "object",
@@ -2599,11 +3611,13 @@
         "additionalProperties": false
       },
       "CategoryNameAndId": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "displayName": {
             "allOf": [
@@ -2656,32 +3670,21 @@
         "additionalProperties": false
       },
       "CategoryPath": {
+        "required": [
+          "breadcrumbPathStartingFromRoot"
+        ],
         "type": "object",
         "properties": {
           "breadcrumbPathStartingFromRoot": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CategoryNameAndId"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
-      "CategoryPathResultDetails": {
-        "type": "object",
-        "properties": {
-          "breadcrumbPathStartingFromRoot": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CategoryNameAndId"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CategoryResult": {
+      "CategoryPathResult": {
         "required": [
           "rank"
         ],
@@ -2701,40 +3704,88 @@
         },
         "additionalProperties": false
       },
-      "CategorySearchResponse": {
-        "required": [
-          "hits"
-        ],
+      "CategoryPathResultDetails": {
         "type": "object",
         "properties": {
-          "results": {
+          "breadcrumbPathStartingFromRoot": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CategoryResult"
+              "$ref": "#/components/schemas/CategoryNameAndId"
             },
-            "nullable": true
-          },
-          "recommendations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CategoryResult"
-            },
-            "nullable": true
-          },
-          "hits": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "statistics": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Statistics"
-              }
-            ],
             "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "CategoryResult": {
+        "required": [
+          "$type",
+          "rank"
+        ],
+        "type": "object",
+        "properties": {
+          "$type": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "viewedByUser": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewedByUserInfo"
+              }
+            ],
+            "nullable": true
+          },
+          "paths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoryPathResult"
+            },
+            "nullable": true
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DataValue"
+            },
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "$type",
+          "mapping": {
+            "Relewise.Client.DataTypes.ContentCategoryResult, Relewise.Client": "#/components/schemas/ContentCategoryResult",
+            "Relewise.Client.DataTypes.ProductCategoryResult, Relewise.Client": "#/components/schemas/ProductCategoryResult"
+          }
+        }
       },
       "ClassificationMetrics": {
         "type": "object",
@@ -2893,8 +3944,11 @@
           "kind": {
             "enum": [
               "DisableInRecommendations",
+              "Disable",
               "EnableInRecommendations",
-              "PermanentlyDelete"
+              "Enable",
+              "PermanentlyDelete",
+              "Delete"
             ],
             "type": "string"
           },
@@ -2970,10 +4024,70 @@
         },
         "additionalProperties": false
       },
-      "ContentCategoryIdFilter": {
-        "required": [
-          "evaluationScope"
+      "ContentCategory": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Category"
+          }
         ],
+        "additionalProperties": false
+      },
+      "ContentCategoryAdministrativeAction": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "kind": {
+            "enum": [
+              "Disable",
+              "Enable",
+              "Delete"
+            ],
+            "type": "string"
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentCategoryAssortmentFilter": {
         "type": "object",
         "allOf": [
           {
@@ -2981,22 +4095,130 @@
           }
         ],
         "properties": {
-          "categoryIds": {
+          "assortments": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentCategoryDataFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataFilter"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "ContentCategoryIdFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CategoryIdFilter"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "ContentCategoryRecommendationRequestSettings": {
+        "required": [
+          "allowFillIfNecessaryToReachNumberOfRecommendations",
+          "allowReplacingOfRecentlyShownRecommendations",
+          "numberOfRecommendations",
+          "prioritizeDiversityBetweenRequests"
+        ],
+        "type": "object",
+        "properties": {
+          "numberOfRecommendations": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowFillIfNecessaryToReachNumberOfRecommendations": {
+            "type": "boolean"
+          },
+          "allowReplacingOfRecentlyShownRecommendations": {
+            "type": "boolean"
+          },
+          "prioritizeDiversityBetweenRequests": {
+            "type": "boolean"
+          },
+          "selectedContentCategoryProperties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedContentCategoryPropertiesSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentCategoryRecommendationResponse": {
+        "type": "object",
+        "properties": {
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentCategoryResult"
             },
             "nullable": true
           },
-          "evaluationScope": {
-            "enum": [
-              "ImmediateParent",
-              "ImmediateParentOrItsParent",
-              "Ancestor"
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "statistics": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Statistics"
+              }
             ],
-            "type": "string"
+            "nullable": true
           }
         },
+        "additionalProperties": false
+      },
+      "ContentCategoryRecommendationWeights": {
+        "required": [
+          "categoryViews",
+          "contentViews"
+        ],
+        "type": "object",
+        "properties": {
+          "categoryViews": {
+            "type": "number",
+            "format": "double"
+          },
+          "contentViews": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentCategoryResult": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CategoryResult"
+          }
+        ],
         "additionalProperties": false
       },
       "ContentCategorySearchRequest": {
@@ -3117,6 +4339,44 @@
         },
         "additionalProperties": false
       },
+      "ContentCategoryUpdate": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategory"
+              }
+            ],
+            "nullable": true
+          },
+          "kind": {
+            "enum": [
+              "UpdateAndAppend",
+              "ReplaceProvidedProperties",
+              "ClearAndReplace"
+            ],
+            "type": "string"
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ContentDataBooleanValueFacet": {
         "type": "object",
         "allOf": [
@@ -3172,52 +4432,12 @@
         "additionalProperties": false
       },
       "ContentDataFilter": {
-        "required": [
-          "filterOutIfKeyIsNotFound",
-          "mustMatchAllConditions"
-        ],
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Filter"
+            "$ref": "#/components/schemas/DataFilter"
           }
         ],
-        "properties": {
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "filterOutIfKeyIsNotFound": {
-            "type": "boolean"
-          },
-          "mustMatchAllConditions": {
-            "type": "boolean"
-          },
-          "conditions": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ValueConditionCollection"
-              }
-            ],
-            "nullable": true
-          },
-          "language": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Language"
-              }
-            ],
-            "nullable": true
-          },
-          "currency": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Currency"
-              }
-            ],
-            "nullable": true
-          }
-        },
         "additionalProperties": false
       },
       "ContentDataIntegerValueFacet": {
@@ -3775,7 +4995,7 @@
           "categoryPaths": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CategoryResult"
+              "$ref": "#/components/schemas/CategoryPathResult"
             },
             "nullable": true
           },
@@ -4501,11 +5721,13 @@
         "additionalProperties": false
       },
       "Currency": {
+        "required": [
+          "value"
+        ],
         "type": "object",
         "properties": {
           "value": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -4603,6 +5825,82 @@
         },
         "additionalProperties": false
       },
+      "DataFilter": {
+        "required": [
+          "$type",
+          "filterOutIfKeyIsNotFound",
+          "mustMatchAllConditions",
+          "negated"
+        ],
+        "type": "object",
+        "properties": {
+          "$type": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterOutIfKeyIsNotFound": {
+            "type": "boolean"
+          },
+          "mustMatchAllConditions": {
+            "type": "boolean"
+          },
+          "conditions": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ValueConditionCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "negated": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "$type",
+          "mapping": {
+            "Relewise.Client.Requests.Filters.BrandDataFilter, Relewise.Client": "#/components/schemas/BrandDataFilter",
+            "Relewise.Client.Requests.Filters.ContentCategoryDataFilter, Relewise.Client": "#/components/schemas/ContentCategoryDataFilter",
+            "Relewise.Client.Requests.Filters.ContentDataFilter, Relewise.Client": "#/components/schemas/ContentDataFilter",
+            "Relewise.Client.Requests.Filters.ProductCategoryDataFilter, Relewise.Client": "#/components/schemas/ProductCategoryDataFilter",
+            "Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client": "#/components/schemas/ProductDataFilter",
+            "Relewise.Client.Requests.Filters.VariantDataFilter, Relewise.Client": "#/components/schemas/VariantDataFilter"
+          }
+        }
+      },
       "DataIndexConfiguration": {
         "type": "object",
         "properties": {
@@ -4680,7 +5978,8 @@
       },
       "DataValue": {
         "required": [
-          "type"
+          "type",
+          "value"
         ],
         "type": "object",
         "properties": {
@@ -4699,9 +5998,7 @@
             ],
             "type": "string"
           },
-          "value": {
-            "nullable": true
-          }
+          "value": { }
         },
         "additionalProperties": false
       },
@@ -5581,12 +6878,20 @@
         "discriminator": {
           "propertyName": "$type",
           "mapping": {
+            "Relewise.Client.Requests.Filters.AndFilter, Relewise.Client": "#/components/schemas/AndFilter",
+            "Relewise.Client.Requests.Filters.BrandAssortmentFilter, Relewise.Client": "#/components/schemas/BrandAssortmentFilter",
+            "Relewise.Client.Requests.Filters.BrandDataFilter, Relewise.Client": "#/components/schemas/BrandDataFilter",
             "Relewise.Client.Requests.Filters.BrandIdFilter, Relewise.Client": "#/components/schemas/BrandIdFilter",
             "Relewise.Client.Requests.Filters.CartDataFilter, Relewise.Client": "#/components/schemas/CartDataFilter",
+            "Relewise.Client.Requests.Filters.ContentCategoryAssortmentFilter, Relewise.Client": "#/components/schemas/ContentCategoryAssortmentFilter",
+            "Relewise.Client.Requests.Filters.ContentCategoryDataFilter, Relewise.Client": "#/components/schemas/ContentCategoryDataFilter",
             "Relewise.Client.Requests.Filters.ContentCategoryIdFilter, Relewise.Client": "#/components/schemas/ContentCategoryIdFilter",
             "Relewise.Client.Requests.Filters.ContentDataFilter, Relewise.Client": "#/components/schemas/ContentDataFilter",
             "Relewise.Client.Requests.Filters.ContentIdFilter, Relewise.Client": "#/components/schemas/ContentIdFilter",
+            "Relewise.Client.Requests.Filters.OrFilter, Relewise.Client": "#/components/schemas/OrFilter",
             "Relewise.Client.Requests.Filters.ProductAssortmentFilter, Relewise.Client": "#/components/schemas/ProductAssortmentFilter",
+            "Relewise.Client.Requests.Filters.ProductCategoryAssortmentFilter, Relewise.Client": "#/components/schemas/ProductCategoryAssortmentFilter",
+            "Relewise.Client.Requests.Filters.ProductCategoryDataFilter, Relewise.Client": "#/components/schemas/ProductCategoryDataFilter",
             "Relewise.Client.Requests.Filters.ProductCategoryIdFilter, Relewise.Client": "#/components/schemas/ProductCategoryIdFilter",
             "Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client": "#/components/schemas/ProductDataFilter",
             "Relewise.Client.Requests.Filters.ProductDisplayNameFilter, Relewise.Client": "#/components/schemas/ProductDisplayNameFilter",
@@ -5613,10 +6918,25 @@
             "items": {
               "oneOf": [
                 {
+                  "$ref": "#/components/schemas/AndFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandDataFilter"
+                },
+                {
                   "$ref": "#/components/schemas/BrandIdFilter"
                 },
                 {
                   "$ref": "#/components/schemas/CartDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryDataFilter"
                 },
                 {
                   "$ref": "#/components/schemas/ContentCategoryIdFilter"
@@ -5628,7 +6948,16 @@
                   "$ref": "#/components/schemas/ContentIdFilter"
                 },
                 {
+                  "$ref": "#/components/schemas/OrFilter"
+                },
+                {
                   "$ref": "#/components/schemas/ProductAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryDataFilter"
                 },
                 {
                   "$ref": "#/components/schemas/ProductCategoryIdFilter"
@@ -6051,11 +7380,13 @@
         "additionalProperties": false
       },
       "Language": {
+        "required": [
+          "value"
+        ],
         "type": "object",
         "properties": {
           "value": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -6118,6 +7449,7 @@
       "LineItem": {
         "required": [
           "lineTotal",
+          "product",
           "quantity"
         ],
         "type": "object",
@@ -6127,8 +7459,7 @@
               {
                 "$ref": "#/components/schemas/Product"
               }
-            ],
-            "nullable": true
+            ]
           },
           "variant": {
             "allOf": [
@@ -6141,8 +7472,7 @@
           "custom": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           },
@@ -6159,7 +7489,8 @@
       },
       "Money": {
         "required": [
-          "amount"
+          "amount",
+          "currency"
         ],
         "type": "object",
         "properties": {
@@ -6172,32 +7503,141 @@
               {
                 "$ref": "#/components/schemas/Currency"
               }
-            ],
-            "nullable": true
+            ]
           }
         },
         "additionalProperties": false
       },
       "MultiCurrency": {
+        "required": [
+          "values"
+        ],
         "type": "object",
         "properties": {
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Money"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "Multilingual": {
+        "required": [
+          "values"
+        ],
         "type": "object",
         "properties": {
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Value"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Filter"
+          }
+        ],
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AndFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/BrandIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/CartDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentCategoryIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ContentIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/OrFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductCategoryIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductDisplayNameFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductHasVariantsFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductListPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductRecentlyPurchasedByUserFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductRecentlyViewedByUserFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductSalesPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantAssortmentFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantDataFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantIdFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantListPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantSalesPriceFilter"
+                },
+                {
+                  "$ref": "#/components/schemas/VariantSpecificationFilter"
+                }
+              ]
             },
             "nullable": true
           }
@@ -6205,6 +7645,13 @@
         "additionalProperties": false
       },
       "Order": {
+        "required": [
+          "cartName",
+          "lineItems",
+          "subtotal",
+          "trackingNumber",
+          "user"
+        ],
         "type": "object",
         "properties": {
           "user": {
@@ -6212,31 +7659,26 @@
               {
                 "$ref": "#/components/schemas/User"
               }
-            ],
-            "nullable": true
+            ]
           },
           "subtotal": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/Money"
               }
-            ],
-            "nullable": true
+            ]
           },
           "lineItems": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LineItem"
-            },
-            "nullable": true
+            }
           },
           "trackingNumber": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "cartName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "channel": {
             "type": "string",
@@ -6281,6 +7723,168 @@
           }
         }
       },
+      "PersonalBrandRecommendationRequest": {
+        "required": [
+          "sinceMinutesAgo"
+        ],
+        "type": "object",
+        "properties": {
+          "sinceMinutesAgo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weights": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandRecommendationWeights"
+              }
+            ],
+            "nullable": true
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandRecommendationRequestSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "nullable": true
+          },
+          "relevanceModifiers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RelevanceModifierCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "displayedAtLocationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonalContentCategoryRecommendationRequest": {
+        "required": [
+          "sinceMinutesAgo"
+        ],
+        "type": "object",
+        "properties": {
+          "sinceMinutesAgo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weights": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryRecommendationWeights"
+              }
+            ],
+            "nullable": true
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryRecommendationRequestSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "nullable": true
+          },
+          "relevanceModifiers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RelevanceModifierCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "displayedAtLocationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PersonalContentRecommendationRequest": {
         "type": "object",
         "properties": {
@@ -6288,6 +7892,87 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/ContentRecommendationRequestSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "nullable": true
+          },
+          "relevanceModifiers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RelevanceModifierCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "displayedAtLocationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonalProductCategoryRecommendationRequest": {
+        "required": [
+          "sinceMinutesAgo"
+        ],
+        "type": "object",
+        "properties": {
+          "sinceMinutesAgo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weights": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryRecommendationWeights"
+              }
+            ],
+            "nullable": true
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryRecommendationRequestSettings"
               }
             ],
             "nullable": true
@@ -6413,6 +8098,168 @@
         },
         "additionalProperties": false
       },
+      "PopularBrandsRecommendationRequest": {
+        "required": [
+          "sinceMinutesAgo"
+        ],
+        "type": "object",
+        "properties": {
+          "sinceMinutesAgo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weights": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandRecommendationWeights"
+              }
+            ],
+            "nullable": true
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandRecommendationRequestSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "nullable": true
+          },
+          "relevanceModifiers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RelevanceModifierCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "displayedAtLocationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PopularContentCategoriesRecommendationRequest": {
+        "required": [
+          "sinceMinutesAgo"
+        ],
+        "type": "object",
+        "properties": {
+          "sinceMinutesAgo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weights": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryRecommendationWeights"
+              }
+            ],
+            "nullable": true
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryRecommendationRequestSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "nullable": true
+          },
+          "relevanceModifiers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RelevanceModifierCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "displayedAtLocationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PopularContentsRequest": {
         "required": [
           "sinceMinutesAgo"
@@ -6427,6 +8274,87 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/ContentRecommendationRequestSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "nullable": true
+          },
+          "relevanceModifiers": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RelevanceModifierCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "displayedAtLocationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PopularProductCategoriesRecommendationRequest": {
+        "required": [
+          "sinceMinutesAgo"
+        ],
+        "type": "object",
+        "properties": {
+          "sinceMinutesAgo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weights": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryRecommendationWeights"
+              }
+            ],
+            "nullable": true
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryRecommendationRequestSettings"
               }
             ],
             "nullable": true
@@ -6792,11 +8720,13 @@
         "additionalProperties": false
       },
       "Product": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "displayName": {
             "allOf": [
@@ -6831,8 +8761,7 @@
           "custom": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           },
@@ -6890,8 +8819,11 @@
             "enum": [
               "None",
               "DisableInRecommendations",
+              "Disable",
               "EnableInRecommendations",
-              "PermanentlyDelete"
+              "Enable",
+              "PermanentlyDelete",
+              "Delete"
             ],
             "type": "string"
           },
@@ -6899,8 +8831,11 @@
             "enum": [
               "None",
               "DisableInRecommendations",
+              "Disable",
               "EnableInRecommendations",
-              "PermanentlyDelete"
+              "Enable",
+              "PermanentlyDelete",
+              "Delete"
             ],
             "type": "string"
           },
@@ -6929,11 +8864,13 @@
         "additionalProperties": false
       },
       "ProductAndVariantId": {
+        "required": [
+          "productId"
+        ],
         "type": "object",
         "properties": {
           "productId": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "variantId": {
             "type": "string",
@@ -7067,10 +9004,70 @@
         },
         "additionalProperties": false
       },
-      "ProductCategoryIdFilter": {
-        "required": [
-          "evaluationScope"
+      "ProductCategory": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Category"
+          }
         ],
+        "additionalProperties": false
+      },
+      "ProductCategoryAdministrativeAction": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterCollection"
+              }
+            ],
+            "nullable": true
+          },
+          "language": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Language"
+              }
+            ],
+            "nullable": true
+          },
+          "kind": {
+            "enum": [
+              "Disable",
+              "Enable",
+              "Delete"
+            ],
+            "type": "string"
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Currency"
+              }
+            ],
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCategoryAssortmentFilter": {
         "type": "object",
         "allOf": [
           {
@@ -7078,22 +9075,33 @@
           }
         ],
         "properties": {
-          "categoryIds": {
+          "assortments": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "nullable": true
-          },
-          "evaluationScope": {
-            "enum": [
-              "ImmediateParent",
-              "ImmediateParentOrItsParent",
-              "Ancestor"
-            ],
-            "type": "string"
           }
         },
+        "additionalProperties": false
+      },
+      "ProductCategoryDataFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataFilter"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "ProductCategoryIdFilter": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CategoryIdFilter"
+          }
+        ],
         "additionalProperties": false
       },
       "ProductCategoryIdRelevanceModifier": {
@@ -7129,6 +9137,108 @@
             "type": "boolean"
           }
         },
+        "additionalProperties": false
+      },
+      "ProductCategoryRecommendationRequestSettings": {
+        "required": [
+          "allowFillIfNecessaryToReachNumberOfRecommendations",
+          "allowReplacingOfRecentlyShownRecommendations",
+          "numberOfRecommendations",
+          "prioritizeDiversityBetweenRequests"
+        ],
+        "type": "object",
+        "properties": {
+          "numberOfRecommendations": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowFillIfNecessaryToReachNumberOfRecommendations": {
+            "type": "boolean"
+          },
+          "allowReplacingOfRecentlyShownRecommendations": {
+            "type": "boolean"
+          },
+          "prioritizeDiversityBetweenRequests": {
+            "type": "boolean"
+          },
+          "selectedProductCategoryProperties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedProductCategoryPropertiesSettings"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCategoryRecommendationResponse": {
+        "type": "object",
+        "properties": {
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryResult"
+            },
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "statistics": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Statistics"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCategoryRecommendationWeights": {
+        "required": [
+          "categoryViews",
+          "productPurchases",
+          "productViews"
+        ],
+        "type": "object",
+        "properties": {
+          "categoryViews": {
+            "type": "number",
+            "format": "double"
+          },
+          "productViews": {
+            "type": "number",
+            "format": "double"
+          },
+          "productPurchases": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCategoryResult": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CategoryResult"
+          }
+        ],
         "additionalProperties": false
       },
       "ProductCategorySearchRequest": {
@@ -7229,6 +9339,41 @@
         },
         "additionalProperties": false
       },
+      "ProductCategorySearchResponse": {
+        "required": [
+          "hits"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryResult"
+            },
+            "nullable": true
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryResult"
+            },
+            "nullable": true
+          },
+          "hits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statistics": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Statistics"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ProductCategorySearchSettings": {
         "type": "object",
         "allOf": [
@@ -7244,6 +9389,44 @@
           },
           "onlyIncludeRecommendationsForEmptyResults": {
             "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCategoryUpdate": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategory"
+              }
+            ],
+            "nullable": true
+          },
+          "kind": {
+            "enum": [
+              "UpdateAndAppend",
+              "ReplaceProvidedProperties",
+              "ClearAndReplace"
+            ],
+            "type": "string"
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
             "nullable": true
           }
         },
@@ -7338,52 +9521,12 @@
         "additionalProperties": false
       },
       "ProductDataFilter": {
-        "required": [
-          "filterOutIfKeyIsNotFound",
-          "mustMatchAllConditions"
-        ],
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Filter"
+            "$ref": "#/components/schemas/DataFilter"
           }
         ],
-        "properties": {
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "filterOutIfKeyIsNotFound": {
-            "type": "boolean"
-          },
-          "mustMatchAllConditions": {
-            "type": "boolean"
-          },
-          "conditions": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ValueConditionCollection"
-              }
-            ],
-            "nullable": true
-          },
-          "language": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Language"
-              }
-            ],
-            "nullable": true
-          },
-          "currency": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Currency"
-              }
-            ],
-            "nullable": true
-          }
-        },
         "additionalProperties": false
       },
       "ProductDataIntegerValueFacet": {
@@ -7906,11 +10049,19 @@
       "ProductPerformanceRequest": {
         "required": [
           "byVariant",
+          "classifications",
+          "currency",
+          "filters",
           "fromUnixTimeSeconds",
+          "language",
           "numberOfResults",
           "orderBy",
+          "selectedBrandProperties",
+          "selectedProductProperties",
+          "selectedVariantProperties",
           "skipNumberOfResults",
           "toUnixTimeSeconds",
+          "typeName",
           "variantData"
         ],
         "type": "object",
@@ -7928,8 +10079,7 @@
               {
                 "$ref": "#/components/schemas/FilterCollection"
               }
-            ],
-            "nullable": true
+            ]
           },
           "numberOfResults": {
             "type": "integer",
@@ -7947,16 +10097,14 @@
               {
                 "$ref": "#/components/schemas/SelectedProductPropertiesSettings"
               }
-            ],
-            "nullable": true
+            ]
           },
           "selectedVariantProperties": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/SelectedVariantPropertiesSettings"
               }
-            ],
-            "nullable": true
+            ]
           },
           "orderBy": {
             "enum": [
@@ -7981,12 +10129,17 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/StringStringKeyValuePair"
-            },
-            "nullable": true
+            }
+          },
+          "selectedBrandProperties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedBrandPropertiesSettings"
+              }
+            ]
           },
           "typeName": {
             "type": "string",
-            "nullable": true,
             "readOnly": true
           },
           "language": {
@@ -7994,16 +10147,14 @@
               {
                 "$ref": "#/components/schemas/Language"
               }
-            ],
-            "nullable": true
+            ]
           },
           "currency": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/Currency"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",
@@ -8333,7 +10484,6 @@
       "ProductRecommendationRequestSettings": {
         "required": [
           "allowFillIfNecessaryToReachNumberOfRecommendations",
-          "allowProductsCurrentlyInCart",
           "allowReplacingOfRecentlyShownRecommendations",
           "numberOfRecommendations",
           "prioritizeDiversityBetweenRequests",
@@ -8382,7 +10532,16 @@
             "type": "boolean"
           },
           "allowProductsCurrentlyInCart": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
+          },
+          "selectedBrandProperties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedBrandPropertiesSettings"
+              }
+            ],
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8469,7 +10628,7 @@
           "categoryPaths": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CategoryResult"
+              "$ref": "#/components/schemas/CategoryPathResult"
             },
             "nullable": true
           },
@@ -8510,7 +10669,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand"
+                "$ref": "#/components/schemas/BrandResult"
               }
             ],
             "nullable": true
@@ -8665,7 +10824,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand"
+                "$ref": "#/components/schemas/BrandResultDetails"
               }
             ],
             "nullable": true
@@ -8931,6 +11090,14 @@
               }
             ],
             "nullable": true
+          },
+          "selectedBrandProperties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedBrandPropertiesSettings"
+              }
+            ],
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -9062,6 +11229,16 @@
           "replaceExistingVariants": {
             "type": "boolean"
           },
+          "brandUpdateKind": {
+            "enum": [
+              "None",
+              "UpdateAndAppend",
+              "ReplaceProvidedProperties",
+              "ClearAndReplace"
+            ],
+            "type": "string",
+            "nullable": true
+          },
           "typeName": {
             "type": "string",
             "nullable": true,
@@ -9079,11 +11256,13 @@
         "additionalProperties": false
       },
       "ProductVariant": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "displayName": {
             "allOf": [
@@ -9104,8 +11283,7 @@
           "specification": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           },
@@ -9119,8 +11297,7 @@
           "custom": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           },
@@ -9202,6 +11379,10 @@
         "additionalProperties": false
       },
       "ProductView": {
+        "required": [
+          "product",
+          "user"
+        ],
         "type": "object",
         "properties": {
           "user": {
@@ -9209,16 +11390,14 @@
               {
                 "$ref": "#/components/schemas/User"
               }
-            ],
-            "nullable": true
+            ]
           },
           "product": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/Product"
               }
-            ],
-            "nullable": true
+            ]
           },
           "variant": {
             "allOf": [
@@ -9747,6 +11926,9 @@
         "additionalProperties": false
       },
       "RecommendPopularSearchTermSettings": {
+        "required": [
+          "numberOfRecommendations"
+        ],
         "type": "object",
         "properties": {
           "targetEntityTypes": {
@@ -9763,6 +11945,10 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "numberOfRecommendations": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -10705,6 +12891,72 @@
         },
         "additionalProperties": false
       },
+      "SelectedBrandPropertiesSettings": {
+        "required": [
+          "allData",
+          "assortments",
+          "displayName",
+          "viewedByUserInfo"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "boolean"
+          },
+          "assortments": {
+            "type": "boolean"
+          },
+          "viewedByUserInfo": {
+            "type": "boolean"
+          },
+          "allData": {
+            "type": "boolean"
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectedContentCategoryPropertiesSettings": {
+        "required": [
+          "allData",
+          "assortments",
+          "displayName",
+          "paths",
+          "viewedByUserInfo"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "boolean"
+          },
+          "paths": {
+            "type": "boolean"
+          },
+          "assortments": {
+            "type": "boolean"
+          },
+          "viewedByUserInfo": {
+            "type": "boolean"
+          },
+          "allData": {
+            "type": "boolean"
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "SelectedContentPropertiesSettings": {
         "required": [
           "allData",
@@ -10728,6 +12980,41 @@
             "type": "boolean"
           },
           "viewedByUserInfo": {
+            "type": "boolean"
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectedProductCategoryPropertiesSettings": {
+        "required": [
+          "allData",
+          "assortments",
+          "displayName",
+          "paths",
+          "viewedByUserInfo"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "boolean"
+          },
+          "paths": {
+            "type": "boolean"
+          },
+          "assortments": {
+            "type": "boolean"
+          },
+          "viewedByUserInfo": {
+            "type": "boolean"
+          },
+          "allData": {
             "type": "boolean"
           },
           "dataKeys": {
@@ -11225,7 +13512,7 @@
         },
         "additionalProperties": false
       },
-      "StringBrandValueFacetResult": {
+      "StringBrandNameAndIdResultValueFacetResult": {
         "required": [
           "$type",
           "field"
@@ -11245,7 +13532,7 @@
           "available": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BrandAvailableFacetValue"
+              "$ref": "#/components/schemas/BrandNameAndIdResultAvailableFacetValue"
             },
             "nullable": true
           },
@@ -11654,6 +13941,50 @@
           }
         }
       },
+      "TrackBrandAdministrativeActionRequest": {
+        "type": "object",
+        "properties": {
+          "administrativeAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandAdministrativeAction"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackBrandUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "brandUpdate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandUpdate"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TrackBrandViewRequest": {
         "type": "object",
         "properties": {
@@ -11720,6 +14051,50 @@
         },
         "additionalProperties": false
       },
+      "TrackContentCategoryAdministrativeActionRequest": {
+        "type": "object",
+        "properties": {
+          "administrativeAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryAdministrativeAction"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackContentCategoryUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "contentCategoryUpdate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryUpdate"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TrackContentUpdateRequest": {
         "type": "object",
         "properties": {
@@ -11765,6 +14140,9 @@
         "additionalProperties": false
       },
       "TrackOrderRequest": {
+        "required": [
+          "order"
+        ],
         "type": "object",
         "properties": {
           "order": {
@@ -11772,8 +14150,7 @@
               {
                 "$ref": "#/components/schemas/Order"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",
@@ -11793,6 +14170,50 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/ProductAdministrativeAction"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackProductCategoryAdministrativeActionRequest": {
+        "type": "object",
+        "properties": {
+          "administrativeAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryAdministrativeAction"
+              }
+            ],
+            "nullable": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackProductCategoryUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "productCategoryUpdate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryUpdate"
               }
             ],
             "nullable": true
@@ -11853,6 +14274,9 @@
         "additionalProperties": false
       },
       "TrackProductViewRequest": {
+        "required": [
+          "productView"
+        ],
         "type": "object",
         "properties": {
           "productView": {
@@ -11860,8 +14284,7 @@
               {
                 "$ref": "#/components/schemas/ProductView"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",
@@ -11968,16 +14391,14 @@
           "classifications": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           },
           "identifiers": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           },
@@ -12253,6 +14674,10 @@
         "additionalProperties": false
       },
       "Value": {
+        "required": [
+          "language",
+          "text"
+        ],
         "type": "object",
         "properties": {
           "language": {
@@ -12260,12 +14685,10 @@
               {
                 "$ref": "#/components/schemas/Language"
               }
-            ],
-            "nullable": true
+            ]
           },
           "text": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -12395,52 +14818,12 @@
         "additionalProperties": false
       },
       "VariantDataFilter": {
-        "required": [
-          "filterOutIfKeyIsNotFound",
-          "mustMatchAllConditions"
-        ],
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Filter"
+            "$ref": "#/components/schemas/DataFilter"
           }
         ],
-        "properties": {
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "filterOutIfKeyIsNotFound": {
-            "type": "boolean"
-          },
-          "mustMatchAllConditions": {
-            "type": "boolean"
-          },
-          "conditions": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ValueConditionCollection"
-              }
-            ],
-            "nullable": true
-          },
-          "language": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Language"
-              }
-            ],
-            "nullable": true
-          },
-          "currency": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Currency"
-              }
-            ],
-            "nullable": true
-          }
-        },
         "additionalProperties": false
       },
       "VariantDataRelevanceModifier": {

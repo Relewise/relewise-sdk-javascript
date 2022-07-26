@@ -9,9 +9,7 @@
       return `enum ${contract.name} {\r\n${contract.content} \r\n }`;
     },
     interface: (contract) => {
-      if (interfaceOverrides[contract.name])
-        return interfaceOverrides[contract.name](contract);
-      return `interface ${contract.name} {\r\n${contract.content}}`;
+      return interfaceOverrides[contract.name] ? interfaceOverrides[contract.name](contract) : `interface ${contract.name} {\r\n${contract.content}}`;
     },
     type: (contract) => {
       return `type ${contract.name} = ${contract.content}`;

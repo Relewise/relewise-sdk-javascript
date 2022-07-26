@@ -18,6 +18,19 @@ tracker.trackOrder({
     }
 });
 
+tracker.trackCart({
+    cart: {
+        lineItems: [],
+        subtotal: {
+            amount: 100,
+            currency: {
+                value: "DKK",
+            }
+        },
+        user: User.Anonymous(),
+    }
+});
+
 tracker.tractkProductView({
     productView: {
         product: {
@@ -32,6 +45,29 @@ tracker.trackContentView({
         content: {
             id: "1",
         },
+        user: User.Anonymous()
+    }
+});
+
+tracker.trackBrandView({
+    brandView: {
+        brand: {
+            id: "1",
+        },
+        user: User.Anonymous()
+    }
+});
+
+tracker.trackProductCategoryView({
+    productCategoryView: {
+        idPath: ["1"],
+        user: User.Anonymous()
+    }
+});
+
+tracker.trackContentCategoryView({
+    contentCategoryView: {
+        idPath: ["1"],
         user: User.Anonymous()
     }
 });

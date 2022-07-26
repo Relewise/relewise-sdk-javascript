@@ -110,10 +110,7 @@ export interface BooleanProductDataValueFacetResult {
 }
 
 export interface Brand {
-  id?: string | null;
-  displayName?: string | null;
-  assortments?: number[] | null;
-  data?: Record<string, DataValue>;
+  id: string;
 }
 
 export interface BrandAdministrativeAction {
@@ -232,14 +229,14 @@ export interface BrandUpdate {
 }
 
 export interface BrandView {
-  user?: User | null;
-  brand?: Brand | null;
+  user: User;
+  brand: Brand;
   typeName?: string | null;
   custom?: Record<string, string | null>;
 }
 
 export interface Cart {
-  user?: User | null;
+  user: User;
   name?: string | null;
   subtotal?: Money | null;
   lineItems?: LineItem[] | null;
@@ -375,12 +372,7 @@ export type ContainsCondition = ValueCondition & {
 };
 
 export interface Content {
-  id?: string | null;
-  displayName?: Multilingual | null;
-  categoryPaths?: CategoryPath[] | null;
-  assortments?: number[] | null;
-  data?: Record<string, DataValue>;
-  custom?: Record<string, string | null>;
+  id: string;
 }
 
 export interface ContentAdministrativeAction {
@@ -472,6 +464,13 @@ export type ContentCategorySearchSettings = SearchSettings & {
 export interface ContentCategoryUpdate {
   category?: ContentCategory | null;
   kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
+  typeName?: string | null;
+  custom?: Record<string, string | null>;
+}
+
+export interface ContentCategoryView {
+  user: User;
+  idPath: string[];
   typeName?: string | null;
   custom?: Record<string, string | null>;
 }
@@ -711,8 +710,8 @@ export interface ContentUpdate {
 }
 
 export interface ContentView {
-  user?: User | null;
-  content?: Content | null;
+  user: User;
+  content: Content;
   typeName?: string | null;
   custom?: Record<string, string | null>;
 }
@@ -1391,14 +1390,6 @@ export type PriceRangesFacetResult = FacetResult & {
 
 export interface Product {
   id: string;
-  displayName?: Multilingual | null;
-  categoryPaths?: CategoryPath[] | null;
-  assortments?: number[] | null;
-  data?: Record<string, DataValue>;
-  custom?: Record<string, string>;
-  listPrice?: MultiCurrency | null;
-  salesPrice?: MultiCurrency | null;
-  brand?: Brand | null;
 }
 
 export interface ProductAdministrativeAction {
@@ -1545,8 +1536,8 @@ export interface ProductCategoryUpdate {
 }
 
 export interface ProductCategoryView {
-  user?: User | null;
-  idPath?: string[] | null;
+  user: User;
+  idPath: string[];
   typeName?: string | null;
   custom?: Record<string, string | null>;
 }
@@ -2524,12 +2515,12 @@ export interface TrackBrandUpdateRequest {
 }
 
 export interface TrackBrandViewRequest {
-  brandView?: BrandView | null;
+  brandView: BrandView;
   custom?: Record<string, string | null>;
 }
 
 export interface TrackCartRequest {
-  cart?: Cart | null;
+  cart: Cart;
   custom?: Record<string, string | null>;
 }
 
@@ -2548,13 +2539,18 @@ export interface TrackContentCategoryUpdateRequest {
   custom?: Record<string, string | null>;
 }
 
+export interface TrackContentCategoryViewRequest {
+  contentCategoryView: ContentCategoryView;
+  custom?: Record<string, string | null>;
+}
+
 export interface TrackContentUpdateRequest {
   contentUpdate?: ContentUpdate | null;
   custom?: Record<string, string | null>;
 }
 
 export interface TrackContentViewRequest {
-  contentView?: ContentView | null;
+  contentView: ContentView;
   custom?: Record<string, string | null>;
 }
 
@@ -2579,7 +2575,7 @@ export interface TrackProductCategoryUpdateRequest {
 }
 
 export interface TrackProductCategoryViewRequest {
-  productCategoryView?: ProductCategoryView | null;
+  productCategoryView: ProductCategoryView;
   custom?: Record<string, string | null>;
 }
 

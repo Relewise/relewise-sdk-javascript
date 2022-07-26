@@ -27,7 +27,7 @@
               "schema": {
                 "$ref": "#/components/schemas/ProductPerformanceRequest"
               },
-              "example": {"fromUnixTimeSeconds":1658219488,"toUnixTimeSeconds":1658824288,"filters":{},"numberOfResults":1000,"classifications":[],"typeName":"ProductPerformanceRequest","language":{"value":"da"},"currency":{"value":"DKK"}}
+              "example": {"fromUnixTimeSeconds":1658231505,"toUnixTimeSeconds":1658836305,"filters":{},"numberOfResults":1000,"classifications":[],"typeName":"ProductPerformanceRequest","language":{"value":"da"},"currency":{"value":"DKK"}}
             }
           }
         },
@@ -1809,6 +1809,37 @@
         }
       }
     },
+    "/{datasetId}/v1/TrackContentCategoryViewRequest": {
+      "post": {
+        "tags": [
+          "Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackContentCategoryViewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/{datasetId}/v1/TrackSearchTermRequest": {
       "post": {
         "tags": [
@@ -2700,11 +2731,13 @@
         }
       },
       "Brand": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "displayName": {
             "type": "string",
@@ -3203,6 +3236,10 @@
         "additionalProperties": false
       },
       "BrandView": {
+        "required": [
+          "brand",
+          "user"
+        ],
         "type": "object",
         "properties": {
           "user": {
@@ -3210,16 +3247,14 @@
               {
                 "$ref": "#/components/schemas/User"
               }
-            ],
-            "nullable": true
+            ]
           },
           "brand": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/Brand"
               }
-            ],
-            "nullable": true
+            ]
           },
           "typeName": {
             "type": "string",
@@ -3238,6 +3273,9 @@
         "additionalProperties": false
       },
       "Cart": {
+        "required": [
+          "user"
+        ],
         "type": "object",
         "properties": {
           "user": {
@@ -3245,8 +3283,7 @@
               {
                 "$ref": "#/components/schemas/User"
               }
-            ],
-            "nullable": true
+            ]
           },
           "name": {
             "type": "string",
@@ -3872,11 +3909,13 @@
         "additionalProperties": false
       },
       "Content": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "displayName": {
             "allOf": [
@@ -3911,8 +3950,7 @@
           "custom": {
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             },
             "nullable": true
           }
@@ -4360,6 +4398,42 @@
               "ClearAndReplace"
             ],
             "type": "string"
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentCategoryView": {
+        "required": [
+          "idPath",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          },
+          "idPath": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "typeName": {
             "type": "string",
@@ -5396,6 +5470,10 @@
         "additionalProperties": false
       },
       "ContentView": {
+        "required": [
+          "content",
+          "user"
+        ],
         "type": "object",
         "properties": {
           "user": {
@@ -5403,16 +5481,14 @@
               {
                 "$ref": "#/components/schemas/User"
               }
-            ],
-            "nullable": true
+            ]
           },
           "content": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/Content"
               }
-            ],
-            "nullable": true
+            ]
           },
           "typeName": {
             "type": "string",
@@ -9433,6 +9509,10 @@
         "additionalProperties": false
       },
       "ProductCategoryView": {
+        "required": [
+          "idPath",
+          "user"
+        ],
         "type": "object",
         "properties": {
           "user": {
@@ -9440,15 +9520,13 @@
               {
                 "$ref": "#/components/schemas/User"
               }
-            ],
-            "nullable": true
+            ]
           },
           "idPath": {
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "nullable": true
+            }
           },
           "typeName": {
             "type": "string",
@@ -13986,6 +14064,9 @@
         "additionalProperties": false
       },
       "TrackBrandViewRequest": {
+        "required": [
+          "brandView"
+        ],
         "type": "object",
         "properties": {
           "brandView": {
@@ -13993,8 +14074,7 @@
               {
                 "$ref": "#/components/schemas/BrandView"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",
@@ -14008,6 +14088,9 @@
         "additionalProperties": false
       },
       "TrackCartRequest": {
+        "required": [
+          "cart"
+        ],
         "type": "object",
         "properties": {
           "cart": {
@@ -14015,8 +14098,7 @@
               {
                 "$ref": "#/components/schemas/Cart"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",
@@ -14095,6 +14177,30 @@
         },
         "additionalProperties": false
       },
+      "TrackContentCategoryViewRequest": {
+        "required": [
+          "contentCategoryView"
+        ],
+        "type": "object",
+        "properties": {
+          "contentCategoryView": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryView"
+              }
+            ]
+          },
+          "custom": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TrackContentUpdateRequest": {
         "type": "object",
         "properties": {
@@ -14118,6 +14224,9 @@
         "additionalProperties": false
       },
       "TrackContentViewRequest": {
+        "required": [
+          "contentView"
+        ],
         "type": "object",
         "properties": {
           "contentView": {
@@ -14125,8 +14234,7 @@
               {
                 "$ref": "#/components/schemas/ContentView"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",
@@ -14230,6 +14338,9 @@
         "additionalProperties": false
       },
       "TrackProductCategoryViewRequest": {
+        "required": [
+          "productCategoryView"
+        ],
         "type": "object",
         "properties": {
           "productCategoryView": {
@@ -14237,8 +14348,7 @@
               {
                 "$ref": "#/components/schemas/ProductCategoryView"
               }
-            ],
-            "nullable": true
+            ]
           },
           "custom": {
             "type": "object",

@@ -15,3 +15,19 @@ tracker.trackOrder({
         user: User.Anonymous(),
     }
 });
+tracker.tractkProductView({
+    productView: {
+        product: {
+            id: "1",
+        },
+        user: User.Anonymous()
+    }
+});
+tracker.trackContentView({
+    contentView: {
+        content: {
+            id: "1",
+        },
+        user: User.Anonymous()
+    }
+});

@@ -1,7 +1,7 @@
 import { RELEWISE_DATASET_ID, RELEWISE_API_KEY } from './local.config';
 import { Tracker, User } from "@relewise/relewise-client";
 
-const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY, "https://localhost:5000");
+const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY, { serverUrl: "https://localhost:5000" });
 
 tracker.trackOrder({
     order: {

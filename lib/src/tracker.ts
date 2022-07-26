@@ -1,12 +1,12 @@
-import { RelewiseClient } from "./relewise.client";
+import { RelewiseClient, RelewiseClientOptions } from "./relewise.client";
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
     TrackBrandViewRequest
 } from "./models/data-contracts";
 
 export class Tracker extends RelewiseClient {
-    constructor(protected readonly datasetId: string, protected readonly apiKey: string, serverUrl?: string) {
-        super(datasetId, apiKey, serverUrl);
+    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
+        super(datasetId, apiKey, options);
     }
 
     public async trackOrder(request: TrackOrderRequest): Promise<void | undefined> {

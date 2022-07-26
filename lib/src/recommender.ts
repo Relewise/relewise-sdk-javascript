@@ -1,31 +1,14 @@
-import { RelewiseClient } from "./relewise.client";
+import { RelewiseClient, RelewiseClientOptions } from "./relewise.client";
 import {
-    PurchasedWithProductRequest,
-    ProductsViewedAfterViewingProductRequest,
-    ProductsViewedAfterViewingContentRequest,
-    PopularProductsRequest,
-    RecentlyViewedProductsRequest,
-    ProductRecommendationResponse,
-    PurchasedWithMultipleProductsRequest,
-    PurchasedWithCurrentCartRequest,
-    SimilarProductsRequest,
-    PersonalProductRecommendationRequest,
-    SearchTermBasedProductRecommendationRequest,
-    PopularSearchTermsRecommendationRequest,
-    SortProductsRequest,
-    SortVariantsRequest,
-    CustomProductRecommendationRequest,
-    ContentsViewedAfterViewingContentRequest,
-    PersonalContentRecommendationRequest,
-    ContentsViewedAfterViewingMultipleContentsRequest,
-    ContentsViewedAfterViewingProductRequest,
-    ContentsViewedAfterViewingMultipleProductsRequest,
-    PopularContentsRequest,
+    PurchasedWithProductRequest, ProductsViewedAfterViewingProductRequest, ProductsViewedAfterViewingContentRequest, PopularProductsRequest, RecentlyViewedProductsRequest, ProductRecommendationResponse,
+    PurchasedWithMultipleProductsRequest, PurchasedWithCurrentCartRequest, SimilarProductsRequest, PersonalProductRecommendationRequest, SearchTermBasedProductRecommendationRequest, PopularSearchTermsRecommendationRequest,
+    SortProductsRequest, SortVariantsRequest, CustomProductRecommendationRequest, ContentsViewedAfterViewingContentRequest, PersonalContentRecommendationRequest, ContentsViewedAfterViewingMultipleContentsRequest,
+    ContentsViewedAfterViewingProductRequest, ContentsViewedAfterViewingMultipleProductsRequest, PopularContentsRequest,
 } from "./models/data-contracts";
 
 export class Recommender extends RelewiseClient {
-    constructor(protected readonly datasetId: string, protected readonly apiKey: string, serverUrl?: string) {
-        super(datasetId, apiKey, serverUrl);
+    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
+        super(datasetId, apiKey, options);
     }
 
     public async purchasedWithProduct(request: PurchasedWithProductRequest): Promise<ProductRecommendationResponse | undefined> {

@@ -1,15 +1,29 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 
-export abstract class RelewiseClient {
-    private _baseProductionServerUrl: string = "https://api.relewise.com";
-    private _urlPath: string = "v1";
+if (process.env.NODE_ENV?.trim() === 'development') {
+    const https = require('https');
+    const httpsAgent = new https.Agent({
+        rejectUnauthorized: false,
+    })
+    axios.defaults.httpsAgent = httpsAgent
+    // eslint-disable-next-line no-console
+    console.log(process.env.NODE_ENV, `RejectUnauthorized is disabled.`)
+}
 
-    constructor(protected readonly datasetId: string, protected readonly apiKey: string, serverUrl?: string) {
+export interface RelewiseClientOptions {
+    serverUrl?: string;
+}
+
+export abstract class RelewiseClient {
+    private readonly _baseProductionServerUrl: string = "https://api.relewise.com";
+    private readonly _urlPath: string = "v1";
+
+    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
         if (!datasetId) throw new Error('Dataset id cannot be null or empty. Please contact Relewise if you don\'t have an account already or would like a free demo license');
         if (!apiKey) throw new Error('API Key secret cannot be null or empty. Please contact Relewise support if you don\'t know the apiKeySecret for your datasetId.');
 
-        if (serverUrl) {
-            this.serverUrl = serverUrl;
+        if (options?.serverUrl) {
+            this.serverUrl = options.serverUrl;
         }
     }
 

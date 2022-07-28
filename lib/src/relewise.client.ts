@@ -6,8 +6,6 @@ if (process.env.NODE_ENV?.trim() === 'development') {
         rejectUnauthorized: false,
     })
     axios.defaults.httpsAgent = httpsAgent
-    // eslint-disable-next-line no-console
-    console.log(process.env.NODE_ENV, `RejectUnauthorized is disabled.`)
 }
 
 export interface RelewiseClientOptions {
@@ -50,7 +48,7 @@ export abstract class RelewiseClient {
     }
 
     private handleError<TResponse>(e: AxiosError<TResponse>) {
-        console.error(e.code, e?.response?.data)
+        console.error(e)
     }
 
     private createRequestUrl(baseUrl: string, ...segments: string[]) {

@@ -25,7 +25,7 @@
     "predocs": "rimraf ./docs",
     "docs": "typedoc src --out docs",
     "clean": "rimraf ./build ./dist ./docs",
-    "gen-api": "swagger-typescript-api -p swagger.json -o src/models -t ./api-templates --modular --clean-output --no-client --enum-names-as-values"
+    "gen-api": "swagger-typescript-api -p http://api-vm-01.share/rbadl/swagger.json -o src/models -t ./api-templates --modular --clean-output --no-client --enum-names-as-values"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.28.6",

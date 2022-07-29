@@ -48,7 +48,7 @@ export abstract class RelewiseClient {
     }
 
     private handleError<TResponse>(e: AxiosError<TResponse>) {
-        console.error(e)
+        console.error(e.code, e?.response?.data)
     }
 
     private createRequestUrl(baseUrl: string, ...segments: string[]) {

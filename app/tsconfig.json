@@ -7,7 +7,7 @@
         "esModuleInterop": true,
         "baseUrl": ".",
         "rootDir": ".",
-        "outDir": "build/dist",
+        "outDir": "dist",
         "allowJs": true,
         "lib": ["es5", "es6", "dom", "esnext"],
         "paths": {

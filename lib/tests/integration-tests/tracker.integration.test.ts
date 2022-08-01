@@ -7,7 +7,14 @@ const tracker = new Tracker(DATASET_ID, API_KEY, { serverUrl: SERVER_URL });
 test('Track Order', async () => {
     const result = await tracker.trackOrder({
             cartName: "default",
-            lineItems: [],
+            lineItems: [
+                {
+                    lineTotal: 100,
+                    productId: "p-1",
+                    quantity: 1,
+                    variantId: "v1"
+                }
+            ],
             subtotal: {
                 amount: 100,
                 currency: "DKK", 
@@ -22,7 +29,14 @@ test('Track Order', async () => {
 test('Track Cart', async () => {
     const result = await tracker.trackCart({
         cartName: "default",
-        lineItems: [],
+        lineItems: [
+            {
+                lineTotal: 100,
+                productId: "p-1",
+                quantity: 1,
+                variantId: "v1"
+            }
+        ],
         subtotal: {
             amount: 100,
             currency: "DKK", 

@@ -1,4 +1,4 @@
-import { Tracker, UserFactory } from "@/index";
+import { Tracker, UserFactory } from "../../src";
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 

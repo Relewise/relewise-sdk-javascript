@@ -6,6 +6,10 @@
         "strict": true,
         "esModuleInterop": true,
         "baseUrl": ".",
+        "rootDir": ".",
+        "outDir": "dist",
+        "allowJs": true,
+        "lib": ["es5", "es6", "dom", "esnext"],
         "paths": {
             "relewise-client": [
                 "node_modules/relewise-client/src"
@@ -20,5 +24,10 @@
         "src/**/*.ts",
         "tests/**/*.ts",
         "environment.d.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      "build",
+      "dist"
     ]
 }

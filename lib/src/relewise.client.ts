@@ -6,8 +6,6 @@ if (process.env.NODE_ENV?.trim() === 'development') {
         rejectUnauthorized: false,
     })
     axios.defaults.httpsAgent = httpsAgent
-    // eslint-disable-next-line no-console
-    console.log(process.env.NODE_ENV, `RejectUnauthorized is disabled.`)
 }
 
 export interface RelewiseClientOptions {

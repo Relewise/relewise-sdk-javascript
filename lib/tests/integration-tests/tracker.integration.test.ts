@@ -6,18 +6,14 @@ const tracker = new Tracker(DATASET_ID, API_KEY, { serverUrl: SERVER_URL });
 
 test('Track Order', async () => {
     const result = await tracker.trackOrder({
-        order: {
-            cartName: "",
+            cartName: "default",
             lineItems: [],
             subtotal: {
                 amount: 100,
-                currency: {
-                    value: "DKK",
-                }
+                currency: "DKK", 
             },
             trackingNumber: "",
             user: UserFactory.anonymous(),
-        }
     });
 
     expect(result).toBeDefined();
@@ -25,16 +21,13 @@ test('Track Order', async () => {
 
 test('Track Cart', async () => {
     const result = await tracker.trackCart({
-        cart: {
-            lineItems: [],
-            subtotal: {
-                amount: 100,
-                currency: {
-                    value: "DKK",
-                }
-            },
-            user: UserFactory.anonymous(),
-        }
+        cartName: "default",
+        lineItems: [],
+        subtotal: {
+            amount: 100,
+            currency: "DKK", 
+        },
+        user: UserFactory.anonymous(),
     });
     expect(result).toBeDefined();
 });

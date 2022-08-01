@@ -13,9 +13,19 @@ npm install @relewise/client
 Start by bootstrapping the client:
 
 ```
-const recommender = new Recommender(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
-const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
 const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+```
+
+Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
+
+After which you have access to various methods depending on the client, in this case the tracker:
+
+Tracking a product view
+```
+await tracker.tractProductView({
+        productId: 'p-1',
+        user: UserFactory.Anonymous()
+});
 ```
 
 ## Contributing

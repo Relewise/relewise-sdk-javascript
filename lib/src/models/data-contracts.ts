@@ -154,6 +154,9 @@ export type BoostAndBuryRule = MerchandisingRule & {
 
 export interface Brand {
   id: string;
+  displayName?: string | null;
+  assortments?: number[] | null;
+  data?: Record<string, DataValue>;
 }
 
 export interface BrandAdministrativeAction {
@@ -464,6 +467,11 @@ export type ContainsCondition = ValueCondition & {
 
 export interface Content {
   id: string;
+  displayName?: Multilingual | null;
+  categoryPaths?: CategoryPath[] | null;
+  assortments?: number[] | null;
+  data?: Record<string, DataValue>;
+  custom?: Record<string, string>;
 }
 
 export interface ContentAdministrativeAction {
@@ -1735,6 +1743,14 @@ export type PriceRangesFacetResult = FacetResult & {
 
 export interface Product {
   id: string;
+  displayName?: Multilingual | null;
+  categoryPaths?: CategoryPath[] | null;
+  assortments?: number[] | null;
+  data?: Record<string, DataValue>;
+  custom?: Record<string, string>;
+  listPrice?: MultiCurrency | null;
+  salesPrice?: MultiCurrency | null;
+  brand?: Brand | null;
 }
 
 export interface ProductAdministrativeAction {
@@ -3283,37 +3299,13 @@ export interface TrimStringTransformer {
   valuesToTrim?: string[] | null;
 }
 
-export class User {
+export interface User {
   authenticatedId?: string | null;
   temporaryId?: string | null;
   email?: string | null;
   classifications?: Record<string, string>;
   identifiers?: Record<string, string>;
   data?: Record<string, DataValue>;
-
-  static Anonymous(): User {
-    return {};
-  }
-
-  static ByAuthenticatedId(authenticatedId: string, temporaryId?: string): User {
-    return { authenticatedId, temporaryId };
-  }
-
-  static ByTemporaryId(temporaryId: string): User {
-    return { temporaryId };
-  }
-
-  static ByIdentifier(key: string, value: string): User {
-    return { identifiers: { [key]: value } };
-  }
-
-  static ByIdentifiers(identifiers: Record<string, string>): User {
-    return { identifiers };
-  }
-
-  static ByEmail(email: string): User {
-    return { email };
-  }
 }
 
 export interface UserCondition {

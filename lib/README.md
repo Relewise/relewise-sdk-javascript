@@ -1,65 +1,40 @@
-## Usage
+# relewise-sdk-javascript [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![npm version](https://badge.fury.io/js/@relewise%2Frelewise-client.svg)](https://badge.fury.io/js/@relewise%2Frelewise-client) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://https://github.com/Relewise/relewise-sdk-csharp-extensions/pulls)
 
-The following tasks are available for `npm run`:
+## Installation 
 
-- `dev`: Run Rollup in watch mode to detect changes to files during development
-- `gen-api`: Generate all project specific Typescript interfaces from the swagger.json definitions file (should be run before build:types)
-- `build`: Run Rollup to build a production release distributable
-- `build:types`: Run Microsoft API Extractor to rollup a types declaration (`d.ts`) file 
-- `docs`: Run TypeDoc for TSDoc generated documentation in the "*docs/*" folder
-- `clean`: Remove all build artifacts
-
-## Development
-
-**From the lib project**, issue the `npm link` (or `yarn link`) command:
+Install via NPM or you preferred package manager: 
 
 ```
-npm link
+npm install @relewise/client
 ```
 
-Start Rollup in watch mode:
+## Usage examples
+
+Start by bootstrapping the client:
 
 ```
-npm run dev
+const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
 ```
 
-**From the app project**:
+Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
 
-Link to the lib project using the `npm link @relewise/relewise-client` (or `yarn link @relewise/relewise-client`) command
+After which you have access to various methods depending on the client, in this case the tracker:
 
-Now, run your app via `npm start`.
-
-## Development Cleanup
-
-Once development completes, `unlink` both your library and test app projects.
-
-**From the app project**, unlink the library using `npm unlink @relewise/relewise-client` (or `yarn unlink @relewise/relewise-client`) command:
-
-**From the lib project**, issue the `npm unlink` (or `yarn unlink`) command:
-
+Tracking a product view
 ```
-npm unlink
+await tracker.tractProductView({
+        productId: 'p-1',
+        user: UserFactory.Anonymous()
+});
 ```
 
-## Release Publishing
+## Contributing
 
-Update your `package.json` to next version number, and remember to tag a release.
+Pull requests are always welcome.  
+Please fork this repository and make a PR when you are ready with your contribution.  
 
-Once ready to submit your package to the NPM Registry, execute the following tasks via `npm` (or `yarn`):
+Otherwise you are welcome to open an Issue in our [issue tracker](https://github.com/Relewise/relewise-sdk-javascript/issues).
 
-- `npm run clean` &mdash; Assure a clean build
-- `npm run gen-api` &mdash; Generate the typescript API interfaces
-- `npm run build` &mdash; Build the package
-- `npm run build:types` &mdash; Build API Extractor d.ts declaration
+## License
 
-Assure the proper npm login:
-
-```
-npm login
-```
-
-Submit your package to the registry:
-
-```
-npm publish --access public
-```
+relewise-sdk-javascript is licensed under the [MIT license](./LICENSE)

@@ -10,7 +10,7 @@ env:
   node-version: '16'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -28,20 +28,4 @@ jobs:
           npm run gen-api 
           npm run build
           npm run build:types
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./lib
-    strategy:
-      fail-fast: true
-    steps:
-      - uses: actions/checkout@v3
-      - name: Unit tests
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.node-version }}
-      - run: |
           npm test

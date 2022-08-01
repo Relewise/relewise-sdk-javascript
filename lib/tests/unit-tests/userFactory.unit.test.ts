@@ -7,7 +7,7 @@ test('Anonymous', () => {
 
 test('ByAuthenticatedId', () => {
     const user = UserFactory.byAuthenticatedId("1234");
-    expect(Object.keys(user)).toHaveLength(2);
+    expect(Object.keys(user)).toHaveLength(1);
     expect(user.temporaryId).toBeUndefined();
     expect(user.authenticatedId).toBe("1234");
 });

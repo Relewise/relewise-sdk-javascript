@@ -6,7 +6,7 @@ export class UserFactory {
     }
     
     static byAuthenticatedId(authenticatedId: string, temporaryId?: string): User {
-        return { authenticatedId, temporaryId };
+        return { authenticatedId, ...(temporaryId && { temporaryId }), };
     }
     
     static byTemporaryId(temporaryId: string): User {

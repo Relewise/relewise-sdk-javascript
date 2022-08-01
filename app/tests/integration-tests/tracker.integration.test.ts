@@ -1,7 +1,8 @@
-import { RELEWISE_DATASET_ID, RELEWISE_API_KEY, RELEWISE_SERVER_URL } from '../../local.config';
-import { Tracker, User } from "@relewise/relewise-client";
+import { Tracker, UserFactory } from "@relewise/relewise-client";
 
-const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY, { serverUrl: RELEWISE_SERVER_URL });
+const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
+
+const tracker = new Tracker(DATASET_ID, API_KEY, { serverUrl: SERVER_URL });
 
 test('Track Order', async () => {
     const result = await tracker.trackOrder({
@@ -15,7 +16,7 @@ test('Track Order', async () => {
                 }
             },
             trackingNumber: "",
-            user: User.Anonymous(),
+            user: UserFactory.Anonymous(),
         }
     });
 
@@ -32,70 +33,48 @@ test('Track Cart', async () => {
                     value: "DKK",
                 }
             },
-            user: User.Anonymous(),
+            user: UserFactory.Anonymous(),
         }
     });
-
     expect(result).toBeDefined();
 });
 
 test('Track Product View', async () => {
     const result = await tracker.tractProductView({
-        productView: {
-            product: {
-                id: 'p-1'
-            },
-            user: User.Anonymous(),
-        }
+         productId: 'p-1',
+         user: UserFactory.Anonymous()
     });
-
     expect(result).toBeDefined();
 });
 
 test('Track Product Category View', async () => {
     const result = await tracker.trackProductCategoryView({
-        productCategoryView: {
             idPath: ["c1"],
-            user: User.Anonymous(),
-        }
+            user: UserFactory.Anonymous(),
     });
-
     expect(result).toBeDefined();
 });
 
 test('Track Content View', async () => {
     const result = await tracker.trackContentView({
-        contentView: {
-            content: {
-                id: 'p-1'
-            },
-            user: User.Anonymous(),
-        }
+        contentId: 'p-1',
+        user: UserFactory.Anonymous(),
     });
-
     expect(result).toBeDefined();
 });
 
 test('Track Content Category View', async () => {
     const result = await tracker.trackContentCategoryView({
-        contentCategoryView: {
-            idPath: ["c1"],
-            user: User.Anonymous(),
-        }
+        idPath: ["c1"],
+        user: UserFactory.Anonymous(),
     });
-
     expect(result).toBeDefined();
 });
 
 test('Track Brand View', async () => {
     const result = await tracker.trackBrandView({
-        brandView: {
-            brand: {
-                id: 'b-1'
-            },
-            user: User.Anonymous(),
-        }
+        brandId: 'b-1',
+        user: UserFactory.Anonymous(),
     });
-
     expect(result).toBeDefined();
 });

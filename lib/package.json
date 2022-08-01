@@ -2,7 +2,7 @@
   "name": "@relewise/relewise-client",
   "version": "0.0.1-alpha.1",
   "description": "Relewise recommendation engine JS/TS client API https://relewise.com",
-  "author": "Rasmus Østergaard",
+  "author": "Relewise",
   "homepage": "https://relewise.com",
   "license": "ISC",
   "keywords": [
@@ -22,10 +22,9 @@
     "build": "rollup -c",
     "prebuild:types": "rimraf ./build",
     "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
-    "predocs": "rimraf ./docs",
-    "docs": "typedoc src --out docs",
     "clean": "rimraf ./build ./dist ./docs",
-    "gen-api": "swagger-typescript-api -p http://api-vm-01.share/rbadl/swagger.json -o src/models -t ./api-templates --modular --clean-output --no-client --enum-names-as-values"
+    "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --clean-output --no-client --enum-names-as-values",
+    "publish": "npm run gen-api && npm run build && npm run build:types"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.28.6",
@@ -40,7 +39,6 @@
     "swagger-typescript-api": "^9.3.1",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "typedoc": "^0.23.9",
     "typescript": "^4.6.4"
   },
   "dependencies": {

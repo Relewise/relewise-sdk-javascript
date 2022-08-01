@@ -10,7 +10,7 @@ env:
   node-version: '16'
 
 jobs:
-  link:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -28,10 +28,9 @@ jobs:
           npm run gen-api 
           npm run build
           npm run build:types
-          npm link
 
   test:
-    needs: link
+    needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,6 +44,6 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - run: |
-          npm link @relewise/relewise-client
           npm ci
+          npm install --link ../lib
           npm test

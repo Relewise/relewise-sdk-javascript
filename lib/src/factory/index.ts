@@ -1,1 +1,1 @@
-export * from "./factory.user";
+export * from "./user.factory";

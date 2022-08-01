@@ -1,27 +1,27 @@
 import { User } from "../models/data-contracts";
 
 export class UserFactory {
-    static Anonymous(): User {
+    static anonymous(): User {
         return { };
     }
     
-    static ByAuthenticatedId(authenticatedId: string, temporaryId?: string): User {
+    static byAuthenticatedId(authenticatedId: string, temporaryId?: string): User {
         return { authenticatedId, temporaryId };
     }
     
-    static ByTemporaryId(temporaryId: string): User {
+    static byTemporaryId(temporaryId: string): User {
         return { temporaryId };
     }
     
-    static ByIdentifier(key: string, value: string): User {
+    static byIdentifier(key: string, value: string): User {
         return { identifiers: { [key]: value } };
     }
     
-    static ByIdentifiers(identifiers: Record<string, string>): User {
+    static byIdentifiers(identifiers: Record<string, string>): User {
         return { identifiers };
     }
     
-    static ByEmail(email: string): User {
+    static byEmail(email: string): User {
         return { email };
     }
 }

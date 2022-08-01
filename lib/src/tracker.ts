@@ -17,12 +17,13 @@ export class Tracker extends RelewiseClient {
         return this.request<TrackCartRequest, void>('TrackCartRequest', request);
     }
 
-    public async tractProductView({ productId, user }: { productId: string, user: User }): Promise<void | undefined> {
+    public async tractProductView({ productId, variantId, user }: { productId: string, variantId?: string, user: User }): Promise<void | undefined> {
         return this.request<TrackProductViewRequest, void>('TrackProductViewRequest', {
             productView: {
                 product: {
                     id: productId
                 },
+                ...(variantId && { variant: { id: variantId }}),
                 user: user,
             }
         });

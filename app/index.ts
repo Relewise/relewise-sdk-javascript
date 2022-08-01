@@ -1,4 +1,4 @@
-import { Tracker, UserFactory } from "@relewise/relewise-client";
+import { Tracker, UserFactory } from "@relewise/client";
 
 const tracker = new Tracker("...", "...");
 

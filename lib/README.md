@@ -5,7 +5,7 @@
 Install via NPM or you preferred package manager: 
 
 ```
-npm install @relewise/relewise-client
+npm install @relewise/client
 ```
 
 ## Usage examples

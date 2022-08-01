@@ -25,7 +25,7 @@ npm run dev
 
 **From the app project**:
 
-Link to the lib project using the `npm link @relewise/relewise-client` (or `yarn link @relewise/relewise-client`) command
+Link to the lib project using the `npm link @relewise/client` (or `yarn link @relewise/client`) command
 
 Now, run your app via `npm start`.
 
@@ -33,7 +33,7 @@ Now, run your app via `npm start`.
 
 Once development completes, `unlink` both your library and test app projects.
 
-**From the app project**, unlink the library using `npm unlink @relewise/relewise-client` (or `yarn unlink @relewise/relewise-client`) command:
+**From the app project**, unlink the library using `npm unlink @relewise/client` (or `yarn unlink @relewise/client`) command:
 
 **From the lib project**, issue the `npm unlink` (or `yarn unlink`) command:
 

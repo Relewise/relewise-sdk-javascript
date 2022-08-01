@@ -1,4 +1,4 @@
-import { UserFactory } from "@relewise/relewise-client";
+import { UserFactory } from "../../src/factory";
 
 test('Anonymous', () => {
     const user = UserFactory.anonymous();

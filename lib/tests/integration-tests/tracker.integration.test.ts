@@ -1,4 +1,4 @@
-import { Tracker, UserFactory } from "@relewise/relewise-client";
+import { Tracker, UserFactory } from "@/index";
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
@@ -16,7 +16,7 @@ test('Track Order', async () => {
                 }
             },
             trackingNumber: "",
-            user: UserFactory.Anonymous(),
+            user: UserFactory.anonymous(),
         }
     });
 
@@ -33,7 +33,7 @@ test('Track Cart', async () => {
                     value: "DKK",
                 }
             },
-            user: UserFactory.Anonymous(),
+            user: UserFactory.anonymous(),
         }
     });
     expect(result).toBeDefined();
@@ -42,7 +42,7 @@ test('Track Cart', async () => {
 test('Track Product View', async () => {
     const result = await tracker.tractProductView({
          productId: 'p-1',
-         user: UserFactory.Anonymous()
+         user: UserFactory.anonymous()
     });
     expect(result).toBeDefined();
 });
@@ -50,7 +50,7 @@ test('Track Product View', async () => {
 test('Track Product Category View', async () => {
     const result = await tracker.trackProductCategoryView({
             idPath: ["c1"],
-            user: UserFactory.Anonymous(),
+            user: UserFactory.anonymous(),
     });
     expect(result).toBeDefined();
 });
@@ -58,7 +58,7 @@ test('Track Product Category View', async () => {
 test('Track Content View', async () => {
     const result = await tracker.trackContentView({
         contentId: 'p-1',
-        user: UserFactory.Anonymous(),
+        user: UserFactory.anonymous(),
     });
     expect(result).toBeDefined();
 });
@@ -66,7 +66,7 @@ test('Track Content View', async () => {
 test('Track Content Category View', async () => {
     const result = await tracker.trackContentCategoryView({
         idPath: ["c1"],
-        user: UserFactory.Anonymous(),
+        user: UserFactory.anonymous(),
     });
     expect(result).toBeDefined();
 });
@@ -74,7 +74,7 @@ test('Track Content Category View', async () => {
 test('Track Brand View', async () => {
     const result = await tracker.trackBrandView({
         brandId: 'b-1',
-        user: UserFactory.Anonymous(),
+        user: UserFactory.anonymous(),
     });
     expect(result).toBeDefined();
 });

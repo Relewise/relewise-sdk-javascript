@@ -18,6 +18,8 @@
     "dist"
   ],
   "scripts": {
+    "test": "set NODE_ENV=development && jest ./tests/unit-tests",
+    "integration-test": "set NODE_ENV=development && jest ./tests/integration-tests",
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "prebuild:types": "rimraf ./build",
@@ -27,6 +29,7 @@
     "publish": "npm run gen-api && npm run build && npm run build:types"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.6",
     "@microsoft/api-extractor": "^7.28.6",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-json": "^4.1.0",
@@ -37,6 +40,8 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.77.1",
     "swagger-typescript-api": "^9.3.1",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4"

@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./app
+        working-directory: ./lib
     strategy:
       fail-fast: true
     steps:
@@ -45,5 +45,4 @@ jobs:
           node-version: ${{ env.node-version }}
       - run: |
           npm ci
-          npm install --link ../lib
           npm test

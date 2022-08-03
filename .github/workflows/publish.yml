@@ -19,7 +19,7 @@ jobs:
           scope: '@relewise'
       - run: |
           npm ci
-          npm run build
+          npm run publish
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

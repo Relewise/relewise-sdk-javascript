@@ -1,16 +1,12 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "target": "es6",
     "baseUrl": ".",
+    "lib": ["es5", "es6", "dom", "esnext"],
     "paths": {
       "@/*": [
         "src/*"
@@ -21,7 +17,8 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "environment.d.ts"
   ],
   "exclude": [
     "node_modules", 

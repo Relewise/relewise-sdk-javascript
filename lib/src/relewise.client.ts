@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 export interface RelewiseClientOptions {
     serverUrl?: string;
 }
@@ -23,16 +21,15 @@ export abstract class RelewiseClient {
         const apiKeyHeader = `APIKey ${this.apiKey}`;
         const requestUrl = this.createRequestUrl(this.serverUrl, this.datasetId, this._urlPath, name);
 
-        const options = {
+        const response = await fetch(requestUrl, {
             method: 'POST',
             headers: {
                 Authorization: apiKeyHeader,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        };
+        });
 
-        const response = await fetch(requestUrl, options)
         try {
             return await response.json() as TResponse;
         } catch(err) {

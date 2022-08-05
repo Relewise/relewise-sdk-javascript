@@ -5,7 +5,7 @@ const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_conf
 const tracker = new Tracker(DATASET_ID, API_KEY, { serverUrl: SERVER_URL });
 
 test('Track Order', async () => {
-    const result = await tracker.trackOrder({
+    await expect(async() => await tracker.trackOrder({
             cartName: "default",
             lineItems: [
                 {
@@ -21,67 +21,40 @@ test('Track Order', async () => {
             },
             trackingNumber: "",
             user: UserFactory.anonymous(),
-    });
-
-    expect(result).toBeDefined();
-});
-
-test('Track Cart', async () => {
-    const result = await tracker.trackCart({
-        cartName: "default",
-        lineItems: [
-            {
-                lineTotal: 100,
-                productId: "p-1",
-                quantity: 1,
-                variantId: "v1"
-            }
-        ],
-        subtotal: {
-            amount: 100,
-            currency: "DKK", 
-        },
-        user: UserFactory.anonymous(),
-    });
-    expect(result).toBeDefined();
+    })).not.toThrow();
 });
 
 test('Track Product View', async () => {
-    const result = await tracker.tractProductView({
+    await expect(async() => await tracker.tractProductView({
          productId: 'p-1',
          user: UserFactory.anonymous()
-    });
-    expect(result).toBeDefined();
+    })).not.toThrow();
 });
 
 test('Track Product Category View', async () => {
-    const result = await tracker.trackProductCategoryView({
+    await expect(async() => await tracker.trackProductCategoryView({
             idPath: ["c1"],
             user: UserFactory.anonymous(),
-    });
-    expect(result).toBeDefined();
+    })).not.toThrow();
 });
 
 test('Track Content View', async () => {
-    const result = await tracker.trackContentView({
+    await expect(async() => await tracker.trackContentView({
         contentId: 'p-1',
         user: UserFactory.anonymous(),
-    });
-    expect(result).toBeDefined();
+    })).not.toThrow();
 });
 
 test('Track Content Category View', async () => {
-    const result = await tracker.trackContentCategoryView({
+    await expect(async() => await tracker.trackContentCategoryView({
         idPath: ["c1"],
         user: UserFactory.anonymous(),
-    });
-    expect(result).toBeDefined();
+    })).not.toThrow();
 });
 
 test('Track Brand View', async () => {
-    const result = await tracker.trackBrandView({
+    await expect(async() => await tracker.trackBrandView({
         brandId: 'b-1',
         user: UserFactory.anonymous(),
-    });
-    expect(result).toBeDefined();
+    })).not.toThrow();
 });

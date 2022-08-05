@@ -1,12 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from "axios";
-
-if (process.env.NODE_ENV?.trim() === 'development') {
-    const https = require('https');
-    const httpsAgent = new https.Agent({
-        rejectUnauthorized: false,
-    })
-    axios.defaults.httpsAgent = httpsAgent
-}
+const fetch = require('node-fetch');
 
 export interface RelewiseClientOptions {
     serverUrl?: string;
@@ -31,24 +23,21 @@ export abstract class RelewiseClient {
         const apiKeyHeader = `APIKey ${this.apiKey}`;
         const requestUrl = this.createRequestUrl(this.serverUrl, this.datasetId, this._urlPath, name);
 
-        try {
-            const response: AxiosResponse<TResponse> = await axios.post<TResponse>(requestUrl, data, {
-                withCredentials: false,
-                method: 'POST',
-                headers: {
-                    Authorization: apiKeyHeader,
-                    'Content-Type': 'application/json',
-                },
-            })
-            
-            return response.data;
-        } catch (e: any) {
-            this.handleError(e);
-        }
-    }
+        const options = {
+            method: 'POST',
+            headers: {
+                Authorization: apiKeyHeader,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
 
-    private handleError<TResponse>(e: AxiosError<TResponse>) {
-        console.error(e.code, e?.response?.data)
+        const response = await fetch(requestUrl, options)
+        try {
+            return await response.json() as TResponse;
+        } catch(err) {
+            return undefined;
+        }
     }
 
     private createRequestUrl(baseUrl: string, ...segments: string[]) {

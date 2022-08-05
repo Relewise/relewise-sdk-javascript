@@ -18,8 +18,8 @@
     "dist"
   ],
   "scripts": {
-    "test": "set NODE_ENV=development && jest ./tests/unit-tests",
-    "integration-test": "set NODE_ENV=development && jest ./tests/integration-tests",
+    "test": "jest ./tests/unit-tests",
+    "integration-test": "jest ./tests/integration-tests",
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "prebuild:types": "rimraf ./build",

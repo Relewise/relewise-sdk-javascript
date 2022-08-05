@@ -1,13 +1,5 @@
 const fetch = require('node-fetch');
 
-let httpsAgent: any = null;
-if (process.env.NODE_ENV?.trim() === 'development') {
-    const https = require('https');
-    httpsAgent = new https.Agent({
-        rejectUnauthorized: false,
-    })
-}
-
 export interface RelewiseClientOptions {
     serverUrl?: string;
 }
@@ -38,7 +30,6 @@ export abstract class RelewiseClient {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            agent: httpsAgent
         };
 
         const response = await fetch(requestUrl, options)

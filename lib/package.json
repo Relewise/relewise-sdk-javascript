@@ -1,6 +1,6 @@
 {
   "name": "@relewise/client",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "Relewise recommendation engine JS/TS client API https://relewise.com",
   "author": "Relewise",
   "homepage": "https://relewise.com",

@@ -46,7 +46,7 @@ export class Tracker extends RelewiseClient {
         });
     }
 
-    public async tractProductView({ productId, variantId, user }: { productId: string, variantId?: string, user: User }): Promise<void | undefined> {
+    public async trackProductView({ productId, variantId, user }: { productId: string, variantId?: string, user: User }): Promise<void | undefined> {
         return this.request<TrackProductViewRequest, void>('TrackProductViewRequest', {
             productView: {
                 product: {

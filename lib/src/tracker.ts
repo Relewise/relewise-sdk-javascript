@@ -1,15 +1,15 @@
-import { RelewiseClient, RelewiseClientOptions } from "./relewise.client";
+import { RelewiseClient, RelewiseClientOptions } from './relewise.client';
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
     TrackBrandViewRequest, User
-} from "./models/data-contracts";
+} from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
     constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
         super(datasetId, apiKey, options);
     }
 
-    public async trackOrder({ user, subtotal, trackingNumber, lineItems, cartName = "default" }: { user: User, subtotal: { currency: string, amount: number }, trackingNumber: string, lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], cartName?: string }): Promise<void | undefined> {
+    public async trackOrder({ user, subtotal, trackingNumber, lineItems, cartName = 'default' }: { user: User, subtotal: { currency: string, amount: number }, trackingNumber: string, lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], cartName?: string }): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
             order: {
                 lineItems: lineItems.map(l => ({
@@ -28,7 +28,7 @@ export class Tracker extends RelewiseClient {
         });
     }
 
-    public async trackCart({ user, subtotal, lineItems, cartName = "default" }: { user?: User, subtotal: { currency: string, amount: number }, lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], cartName?: string }): Promise<void | undefined> {
+    public async trackCart({ user, subtotal, lineItems, cartName = 'default' }: { user?: User, subtotal: { currency: string, amount: number }, lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], cartName?: string }): Promise<void | undefined> {
         return this.request<TrackCartRequest, void>('TrackCartRequest', {
             cart: {
                 lineItems: lineItems.map(l => ({

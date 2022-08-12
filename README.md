@@ -41,18 +41,18 @@ When the user has accepted cookies, then use this method on the `UserFactory`. M
 UserFactory.byTemporaryId('<Unique Id from localstorage>')
 ```
 
-If the user is not logged in and has not accepted cookies then use the anonymous()
+If the user is not logged in and has not accepted cookies then use the anonymous().
 ```ts
 UserFactory.anonymous()
 ```
 
 ## Using the SDK via CDN.
 
-For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html)
+For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html).
 
 ## Running integration tests
 
-You can read about running the integration tests [here](/lib/dev.guide.md#testing)
+You can read about running the integration tests [here](/lib/dev.guide.md#testing).
 
 ## Contributing
 

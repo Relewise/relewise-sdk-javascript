@@ -27,21 +27,36 @@ await tracker.tractProductView({
         user: UserFactory.anonymous()
 });
 ```
+When tracking a user behaviour to Relewise, it is important to provide the correct type of `User` to Relewise.
 
-When sending a tracking event to Relewise it is important to sent the correct User-information to Relewise to get the best personalization.
-The SDK supports all the possible ways to sent a User to the API.
+Types of users in Relewise:
+- Anonymous – users who did not consent to be tracked (GDPR).
+- Temporary – users who have not logged in and are using a temporary ID, e.g. cookie based.
+- Authenticated – users who have logged in and where we have a persistent ID, e.g. ID from database.
 
-When the user is logged into the website, then use this method on the `UserFactory`.
-```ts
-UserFactory.byAuthenticatedId('<Your User Id>')
-```
-
-When the user has accepted cookies, then use this method on the `UserFactory`. Most 3rd party cookiebanners creates a unique identifier for each user. We recommend that you use this identifier, when tracking the users behavior on the website.
+#### A temporary user is a profile, where the ID might change if the end-user decides to clear browser data or change device.
 ```ts
 UserFactory.byTemporaryId('<Unique Id from localstorage>')
 ```
+Best practice:
+ - Use an ID that is “long-living” and classified as 1st party, e.g. cookie or localStorage.
+ - Use same ID as the shop uses to recognize the user.
+ - Make sure the ID does not change, when the user completes an order.
 
-If the user is not logged in and has not accepted cookies then use the anonymous().
+#### An authenticated user is defined by a logged-in user:
+```ts
+UserFactory.byAuthenticatedId('authenticatedId')
+```
+Best practice:
+ - If possible, use an ID that is semantic and constant.
+ - For a user journey that “starts” as a Temporary User, make sure
+to map the Temporary ID on the first request to Relewise.
+– this can also be done through a UserUpdate-request.
+```ts
+UserFactory.byAuthenticatedId('authenticatedId', 'temporaryId')
+```
+
+#### If the user is not logged in and has not accepted cookies, then use the Anonymous user type.
 ```ts
 UserFactory.anonymous()
 ```

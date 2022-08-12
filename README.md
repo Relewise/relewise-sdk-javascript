@@ -50,6 +50,10 @@ UserFactory.anonymous()
 
 For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html)
 
+## Running integration tests
+
+You can read about running the integration tests [here](/lib/dev.guide.md#testing)
+
 ## Contributing
 
 Pull requests are always welcome.  

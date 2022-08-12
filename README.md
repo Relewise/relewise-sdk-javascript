@@ -28,6 +28,28 @@ await tracker.tractProductView({
 });
 ```
 
+When sending a tracking event to Relewise it is important to sent the correct User-information to Relewise to get the best personalization.
+The SDK supports all the possible ways to sent a User to the API.
+
+When the user is logged into the website, then use this method on the `UserFactory`.
+```ts
+UserFactory.byAuthenticatedId('<Your User Id>')
+```
+
+When the user has accepted cookies, then use this method on the `UserFactory`. Most 3rd party cookiebanners creates a unique identifier for each user. We recommend that you use this identifier, when tracking the users behavior on the website.
+```ts
+UserFactory.byTemporaryId('<Unique Id from localstorage>')
+```
+
+If the user is not logged in and has not accepted cookies then use the anonymous()
+```ts
+UserFactory.anonymous()
+```
+
+## Using the SDK via CDN.
+
+For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html)
+
 ## Contributing
 
 Pull requests are always welcome.  

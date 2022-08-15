@@ -23,6 +23,24 @@ test('Track Order', async () => {
     })).not.toThrow();
 });
 
+test('Track Cart', async () => {
+    await expect(async() => await tracker.trackCart({
+            lineItems: [
+                {
+                    lineTotal: 100,
+                    productId: 'p-1',
+                    quantity: 1,
+                    variantId: 'v1'
+                }
+            ],
+            subtotal: {
+                amount: 100,
+                currency: 'DKK', 
+            },
+            user: UserFactory.anonymous(),
+    })).not.toThrow();
+});
+
 test('Track Product View', async () => {
     await expect(async() => await tracker.trackProductView({
          productId: 'p-1',

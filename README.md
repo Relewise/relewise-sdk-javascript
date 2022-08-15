@@ -27,6 +27,47 @@ await tracker.tractProductView({
         user: UserFactory.anonymous()
 });
 ```
+When tracking a user behaviour to Relewise, it is important to provide the correct type of `User` to Relewise.
+
+Types of users in Relewise:
+- Anonymous – users who did not consent to be tracked (GDPR).
+- Temporary – users who have not logged in and are using a temporary ID, e.g. cookie based.
+- Authenticated – users who have logged in and where we have a persistent ID, e.g. ID from database.
+
+#### A temporary user is a profile, where the ID might change if the end-user decides to clear browser data or change device.
+```ts
+UserFactory.byTemporaryId('<Unique Id from localstorage>')
+```
+Best practice:
+ - Use an ID that is “long-living” and classified as 1st party, e.g. cookie or localStorage.
+ - Use same ID as the shop uses to recognize the user.
+ - Make sure the ID does not change, when the user completes an order.
+
+#### An authenticated user is defined by a logged-in user:
+```ts
+UserFactory.byAuthenticatedId('authenticatedId')
+```
+Best practice:
+ - If possible, use an ID that is semantic and constant.
+ - For a user journey that “starts” as a Temporary User, make sure
+to map the Temporary ID on the first request to Relewise.
+– this can also be done through a UserUpdate-request.
+```ts
+UserFactory.byAuthenticatedId('authenticatedId', 'temporaryId')
+```
+
+#### If the user is not logged in and has not accepted cookies, then use the Anonymous user type.
+```ts
+UserFactory.anonymous()
+```
+
+## Using the SDK via CDN.
+
+For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html).
+
+## Running integration tests
+
+You can read about running the integration tests [here](/lib/dev.guide.md#testing).
 
 ## Contributing
 

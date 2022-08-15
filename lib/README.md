@@ -1,36 +1,5 @@
 # Relewise JS SDK
 
-## Installation 
+This is the official Relewise TS/JS SDK for integreting with our API.
 
-Install via NPM or you preferred package manager: 
-
-```
-npm install @relewise/client
-```
-
-## Usage examples
-
-Start by bootstrapping the client:
-
-```ts
-const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
-```
-
-Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
-
-After which you have access to various methods depending on the client, in this case the tracker:
-
-Tracking a product view
-```ts
-await tracker.tractProductView({
-        productId: 'p-1',
-        user: UserFactory.anonymous()
-});
-```
-
-## Contributing
-
-Pull requests are always welcome.  
-Please fork this repository and make a PR when you are ready with your contribution.  
-
-Otherwise you are welcome to open an Issue in our [issue tracker](https://github.com/Relewise/relewise-sdk-javascript/issues).
+For usage documentation go to our [GitHub repository](https://github.com/Relewise/relewise-sdk-javascript).

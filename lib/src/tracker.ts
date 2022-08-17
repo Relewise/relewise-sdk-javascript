@@ -98,11 +98,11 @@ export class Tracker extends RelewiseClient {
         });
     }
 
-    public async trackSearchTerm({ term, languageName, user }: { term: string, user: User, languageName: string }): Promise<void | undefined> {
+    public async trackSearchTerm({ term, language, user }: { term: string, user: User, language: string }): Promise<void | undefined> {
         return this.request<TrackSearchTermRequest, void>('TrackSearchTermRequest', {
             searchTerm: {
                 language: {
-                    value: languageName
+                    value: language
                 },
                 term: term,
                 user: user,

@@ -78,8 +78,8 @@ test('Track Brand View', async () => {
 
 test('Track Search Term', async () => {
     await expect(async() => await tracker.trackSearchTerm({
-        term: 'b-1',
-        languageName: 'da-DK',
+        term: 'term',
+        language: 'da-DK',
         user: UserFactory.anonymous(),
     })).not.toThrow();
 });

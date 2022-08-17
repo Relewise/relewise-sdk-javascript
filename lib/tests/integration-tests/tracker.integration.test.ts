@@ -75,3 +75,11 @@ test('Track Brand View', async () => {
         user: UserFactory.anonymous(),
     })).not.toThrow();
 });
+
+test('Track Search Term', async () => {
+    await expect(async() => await tracker.trackSearchTerm({
+        term: 'term',
+        language: 'da-DK',
+        user: UserFactory.anonymous(),
+    })).not.toThrow();
+});

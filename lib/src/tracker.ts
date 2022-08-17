@@ -1,7 +1,7 @@
 import { RelewiseClient, RelewiseClientOptions } from './relewise.client';
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
-    TrackBrandViewRequest, User
+    TrackBrandViewRequest, User, TrackSearchTermRequest
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -93,6 +93,18 @@ export class Tracker extends RelewiseClient {
                 brand: {
                     id: brandId
                 },
+                user: user,
+            }
+        });
+    }
+
+    public async trackSearchTerm({ term, languageName, user }: { term: string, user: User, languageName: string }): Promise<void | undefined> {
+        return this.request<TrackSearchTermRequest, void>('TrackSearchTermRequest', {
+            searchTerm: {
+                language: {
+                    value: languageName
+                },
+                term: term,
                 user: user,
             }
         });

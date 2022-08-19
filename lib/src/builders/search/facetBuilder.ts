@@ -1,4 +1,4 @@
-import { BrandFacet, Category, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from "@/models/data-contracts";
+import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from "@/models/data-contracts";
 
 export class FacetBuilder {
     private facets: (
@@ -21,64 +21,48 @@ export class FacetBuilder {
         | VariantSpecificationFacet
     )[] = [];
 
-    public addCategoryFacet(categorySelectionStrategy: "ImmediateParent" | "Ancestors", selectedValues?: string | string[] | null): this {
-        const selected = Array.isArray(selectedValues)
-            ? selectedValues
-            : (selectedValues != null ? [selectedValues] : null);
-
-        const facet: CategoryFacet ={
+    public addCategoryFacet(categorySelectionStrategy: "ImmediateParent" | "Ancestors", selectedValues: string[] | null = null): this {
+        const facet: CategoryFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,
             field: "Category",
-            selected: selected
+            selected: selectedValues
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addBrandFacet(selectedValues?: string | string[] | null): this {
-        const selected = Array.isArray(selectedValues)
-            ? selectedValues
-            : (selectedValues != null ? [selectedValues] : null);
-
-        const facet: BrandFacet ={
+    public addBrandFacet(selectedValues: string[] | null = null): this {
+        const facet: BrandFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.BrandFacet, Relewise.Client',
             field: "Brand",
-            selected: selected
+            selected: selectedValues
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductAssortmentFacet(selectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant", selectedValues?: number | number[] | null): this {
-        const selected = Array.isArray(selectedValues)
-            ? selectedValues
-            : (selectedValues != null ? [selectedValues] : null);
-
+    public addProductAssortmentFacet(selectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant", selectedValues: number[] | null = null): this {
         const facet: ProductAssortmentFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductAssortmentFacet, Relewise.Client',
             field: "Assortment",
             assortmentFilterType: "Or",
             assortmentSelectionStrategy: selectionStrategy,
-            selected: selected
+            selected: selectedValues
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addContentAssortmentFacet(selectedValues?: number | number[] | null): this {
-        const selected = Array.isArray(selectedValues)
-            ? selectedValues
-            : (selectedValues != null ? [selectedValues] : null);
-
+    public addContentAssortmentFacet(selectedValues: number[] | null = null): this {
         const facet: ContentAssortmentFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentAssortmentFacet, Relewise.Client',
             field: "Assortment",
             assortmentFilterType: "Or",
-            selected: selected
+            selected: selectedValues
         };
         this.facets.push(facet);
 

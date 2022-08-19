@@ -22,10 +22,21 @@ test('take', () => {
     expect(subject.take).toBe(expected);
 });
 
-test('take', () => {
+test('setTerm', () => {
     const expectedTerm = "shoe";
 
     const subject: SearchTermPredictionRequest = baseBuilder()
+        .setTerm(expectedTerm)
+        .build();
+
+    expect(subject.term).toBe(expectedTerm);
+});
+
+test('reset Term', () => {
+    const expectedTerm = null;
+
+    const subject: SearchTermPredictionRequest = baseBuilder()
+        .setTerm("test")
         .setTerm(expectedTerm)
         .build();
 

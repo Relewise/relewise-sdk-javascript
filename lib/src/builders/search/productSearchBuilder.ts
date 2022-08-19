@@ -1,5 +1,5 @@
 import { ContentSearchRequest, ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from "@/models/data-contracts";
-import { PaginationBuilder } from "../filterBuilder";
+import { PaginationBuilder } from "../paginationBuilder";
 import { Settings } from "../settings";
 import { SearchBuilder } from "./searchBuilder";
 import { SearchRequestBuilder } from "./searchRequestBuilder";

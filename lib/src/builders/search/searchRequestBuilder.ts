@@ -1,5 +1,6 @@
 import { SearchRequest } from "@/models/data-contracts";
-import { FilterBuilder, RelevanceModifierBuilder } from "../filterBuilder";
+import { FilterBuilder } from "../filterBuilder";
+import { RelevanceModifierBuilder } from "../relevanceModifierBuilder";
 import { Settings } from "../settings";
 
 export abstract class SearchRequestBuilder {

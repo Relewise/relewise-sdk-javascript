@@ -23,7 +23,7 @@ const productSearchBuilder = new ProductSearchBuilder(
         allData: true,
     })
     .setExplodedVariants(5)
-    .setRecommendationSettings({take: 1, onlyIncludeRecommendationsWhenLessResultsThan: 1})
+    .setRecommendationSettings({ take: 1, onlyIncludeRecommendationsWhenLessResultsThan: 1 })
 
     .setTerm('hello')
 
@@ -31,6 +31,10 @@ const productSearchBuilder = new ProductSearchBuilder(
         .setPageSize(30)
         .setPage(1))
 
+    .facets(f => f
+        .addBrandFacet()
+        .addBrandFacet(["HP", "Lenovo"])
+    )
     .filters(filters => filters
         .addVariantsAssortmentFilter(137, true)
         .addVariantsAssortmentFilter([137], true)
@@ -50,9 +54,9 @@ const contentSearchBuilder = new ContentSearchBuilder({
     displayedAtLocation: "search page",
     user: UserFactory.anonymous()
 })
-.filters(filters => filters.addProductAssortmentFilter(137))
-.setTerm("")
-.filters(filters => filters.addProductAssortmentFilter(137));
+    .filters(filters => filters.addProductAssortmentFilter(137))
+    .setTerm("")
+    .filters(filters => filters.addProductAssortmentFilter(137));
 
 const searchTermPredictionBuilder = new SearchTermPredictionBuilder({
     language: "da-DK",
@@ -60,10 +64,10 @@ const searchTermPredictionBuilder = new SearchTermPredictionBuilder({
     displayedAtLocation: "search page",
     user: UserFactory.anonymous()
 })
-.filters(filters => filters.addProductAssortmentFilter(137))
-.setTerm("")
-.addEntityType("Brand", "Content")
-.filters(filters => filters.addProductAssortmentFilter(137));
+    .filters(filters => filters.addProductAssortmentFilter(137))
+    .setTerm("")
+    .addEntityType("Brand", "Content")
+    .filters(filters => filters.addProductAssortmentFilter(137));
 
 searcher.searchTermPrediction(searchTermPredictionBuilder.build());
 
@@ -73,9 +77,9 @@ const searchCollectionBuilder = new SearchCollectionBuilder({
     displayedAtLocation: "search page",
     user: UserFactory.anonymous()
 })
-.filters(filters => filters.addProductAssortmentFilter(137))
-.addRequest(productSearchBuilder.build())
-.addBuilder(contentSearchBuilder)
-.addBuilder(searchTermPredictionBuilder);
+    .filters(filters => filters.addProductAssortmentFilter(137))
+    .addRequest(productSearchBuilder.build())
+    .addBuilder(contentSearchBuilder)
+    .addBuilder(searchTermPredictionBuilder);
 
 searcher.batch(searchCollectionBuilder.build());

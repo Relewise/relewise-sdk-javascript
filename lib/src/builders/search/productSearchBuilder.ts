@@ -1,91 +1,110 @@
-import { ContentSearchRequest, ProductSearchRequest, RecommendationSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from "@/models/data-contracts";
+import { ContentSearchRequest, ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from "@/models/data-contracts";
 import { PaginationBuilder } from "../filterBuilder";
 import { Settings } from "../settings";
-import { Builder } from "./builder";
+import { SearchBuilder } from "./searchBuilder";
 import { SearchRequestBuilder } from "./searchRequestBuilder";
 
-export class ContentSearchBuilder extends SearchRequestBuilder implements Builder {
-    private pageNumber: number = 1;
-    private pageSize: number = 0;
+export class ContentSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
+    private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private term: string | null | undefined;
 
     constructor(settings: Settings) {
         super(settings)
     }
 
-    public setTerm(term: string) {
+    public setTerm(term: string | null | undefined): this {
+        this.term = term;
+
+        return this;
+    }
+
+    public pagination(paginate: (pagination: PaginationBuilder) => void) : this {
+        paginate(this.paginationBuilder);
+
         return this;
     }
 
     public build(): ContentSearchRequest {
         return {
             ...this.baseBuild(),
-            skip: 0,
-            take: 0,
+            ...this.paginationBuilder.build(),
+            term: this.term,
         };
     }
 }
 
-export class ProductSearchBuilder extends SearchRequestBuilder implements Builder {
-    private pageNumber: number = 1;
-    private pageSize: number = 10;
+export class ProductSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
+    private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private term: string | null | undefined;
+
+    private searchSettings: ProductSearchSettings = {
+        $type: 'Relewise.Client.Requests.Search.Settings.ProductSearchSettings, Relewise.Client'
+    };
 
     constructor(settings: Settings) {
         super(settings)
     }
 
-    public setProductProperties(productProperties: SelectedProductPropertiesSettings): ProductSearchBuilder {
+    public setProductProperties(productProperties: SelectedProductPropertiesSettings): this {
+        this.searchSettings.selectedProductProperties = productProperties;
 
         return this;
     }
 
-    public setVariantProperties(variantProperties: SelectedVariantPropertiesSettings): ProductSearchBuilder {
+    public setVariantProperties(variantProperties: SelectedVariantPropertiesSettings): this {
+        this.searchSettings.selectedVariantProperties = variantProperties;
 
         return this;
     }
 
-    public setExplodedVariants(count?: number | null): ProductSearchBuilder {
+    public setBrandProperties(brandProperties: SelectedBrandPropertiesSettings): this {
+        this.searchSettings.selectedBrandProperties = brandProperties;
 
         return this;
     }
 
-    public setRecommendationSettings({ take, onlyIncludeRecommendationsWhenLessResultsThan }: {  take?: number | null, onlyIncludeRecommendationsWhenLessResultsThan?: number | null }): ProductSearchBuilder {
+    public setExplodedVariants(count?: number | null): this {
+        this.searchSettings.explodedVariants = count;
 
         return this;
     }
-    // public setRecommendationSettings(settings: RecommendationSettings): ProductSearchBuilder {
+
+    // public setRecommendationSettings({ take, onlyIncludeRecommendationsWhenLessResultsThan }: {  take?: number | null, onlyIncludeRecommendationsWhenLessResultsThan?: number | null }): ProductSearchBuilder {
 
     //     return this;
     // }
+    public setRecommendationSettings(settings: RecommendationSettings): this {
+        this.searchSettings.recommendations = settings;
+
+        return this;
+    }
 
     /**
      * Set the term used to filter products by
      */
-    public setTerm(term: string | null | undefined): ProductSearchBuilder {
+    public setTerm(term: string | null | undefined): this {
 
         this.term = term;
 
         return this;
     }
 
-    public pagination(paginate: (pagination: PaginationBuilder) => void) : ProductSearchBuilder {
+    public pagination(paginate: (pagination: PaginationBuilder) => void) : this {
+        paginate(this.paginationBuilder);
 
         return this;
     }
 
-
     public build(): ProductSearchRequest {
         return {
             ...this.baseBuild(),
-    
-            skip: (this.pageNumber - 1) * this.pageSize,
-            take: this.pageSize,
+            ...this.paginationBuilder.build(),
+
             term: this.term,
 
             facets: null,
-            settings: null,
-            sorting: null,   
+            settings: this.searchSettings,
+            sorting: null,
         };
     }
 }

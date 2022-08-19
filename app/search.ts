@@ -1,4 +1,4 @@
-import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SelectedVariantPropertiesSettings } from "../lib/src";
+import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder } from "@relewise/client";
 
 const searcher = new Searcher("x", "y");
 
@@ -11,20 +11,17 @@ const productSearchBuilder = new ProductSearchBuilder(
     })
 
     .setIndex("default")
-    .addCustom("key1", "value")
-    .removeCustom("key1")
 
     .setProductProperties({
         displayName: true,
         pricing: true,
-        allData: true,
-        kaf: "",
+        allData: true
     })
     .setVariantProperties({
         displayName: true,
         pricing: true,
         allData: true,
-    } as SelectedVariantPropertiesSettings)
+    })
     .setExplodedVariants(5)
     .setRecommendationSettings({take: 1, onlyIncludeRecommendationsWhenLessResultsThan: 1})
 
@@ -57,7 +54,18 @@ const contentSearchBuilder = new ContentSearchBuilder({
 .setTerm("")
 .filters(filters => filters.addProductAssortmentFilter(137));
 
-searcher.searchContents(contentSearchBuilder.build());
+const searchTermPredictionBuilder = new SearchTermPredictionBuilder({
+    language: "da-DK",
+    currency: "DKK",
+    displayedAtLocation: "search page",
+    user: UserFactory.anonymous()
+})
+.filters(filters => filters.addProductAssortmentFilter(137))
+.setTerm("")
+.addEntityType("Brand", "Content")
+.filters(filters => filters.addProductAssortmentFilter(137));
+
+searcher.searchTermPrediction(searchTermPredictionBuilder.build());
 
 const searchCollectionBuilder = new SearchCollectionBuilder({
     language: "da-DK",
@@ -67,6 +75,7 @@ const searchCollectionBuilder = new SearchCollectionBuilder({
 })
 .filters(filters => filters.addProductAssortmentFilter(137))
 .addRequest(productSearchBuilder.build())
-.addBuilder(contentSearchBuilder);
+.addBuilder(contentSearchBuilder)
+.addBuilder(searchTermPredictionBuilder);
 
 searcher.batch(searchCollectionBuilder.build());

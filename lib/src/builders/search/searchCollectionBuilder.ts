@@ -1,6 +1,6 @@
 import { ContentSearchRequest, ProductSearchRequest, SearchRequestCollection, SearchTermPredictionRequest } from "@/models/data-contracts";
 import { Settings } from "../settings";
-import { Builder } from "./builder";
+import { SearchBuilder } from "./searchBuilder";
 import { SearchRequestBuilder } from "./searchRequestBuilder";
 
 export class SearchCollectionBuilder extends SearchRequestBuilder {
@@ -16,7 +16,7 @@ export class SearchCollectionBuilder extends SearchRequestBuilder {
         return this;
     }
 
-    public addBuilder(builder: Builder) {
+    public addBuilder(builder: SearchBuilder) {
         this.addRequest(builder.build());
 
         return this;

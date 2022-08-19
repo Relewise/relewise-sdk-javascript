@@ -1,5 +1,5 @@
 import { ContentSearchRequest, ProductSearchRequest, SearchTermPredictionRequest } from "@/models/data-contracts";
 
-export interface Builder<T = ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest> {
+export interface SearchBuilder<T = ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest> {
     build(): T;
 }

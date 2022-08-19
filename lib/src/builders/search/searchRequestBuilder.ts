@@ -1,12 +1,12 @@
 import { SearchRequest } from "@/models/data-contracts";
-import { FilterBuilder } from "../filterBuilder";
+import { FilterBuilder, RelevanceModifierBuilder } from "../filterBuilder";
 import { Settings } from "../settings";
 
 export abstract class SearchRequestBuilder {
     private readonly filterBuilder: FilterBuilder = new FilterBuilder();
     private readonly postFilterBuilder: FilterBuilder = new FilterBuilder();
+    private readonly relevanceModifierBuilder: RelevanceModifierBuilder = new RelevanceModifierBuilder();
     private indexId: string | null | undefined;
-    private customFields: Record<string, string | null> = {};
 
     constructor(
         private readonly settings: Settings) {
@@ -24,20 +24,19 @@ export abstract class SearchRequestBuilder {
         return this;
     }
 
+    public relevanceModifiers(relevanceModifierBuilder: (builder: RelevanceModifierBuilder) => void): this {
+        relevanceModifierBuilder(this.relevanceModifierBuilder);
+
+        return this;
+    }
+
+    /**
+     * Only needed when needing to specific an index different from the 'default'-index
+     * @param id 
+     * @returns 
+     */
     public setIndex(id?: string | null): this {
         this.indexId = id;
-
-        return this;
-    }
-
-    public addCustom(key: string, value: string | null): this {
-        this.customFields.key = value;
-
-        return this;
-    }
-
-    public removeCustom(key: string): this {
-        delete this.customFields.key;
 
         return this;
     }
@@ -48,12 +47,10 @@ export abstract class SearchRequestBuilder {
             user: this.settings.user,
             language: { value: this.settings.language },
             displayedAtLocation: this.settings.displayedAtLocation,
-            filters: { items: this.filterBuilder.filters },
-            postFilters: { items: this.postFilterBuilder.filters },
-
-            relevanceModifiers: null,
-            ...(this.indexId && { indexSelector: { id: this.indexId } }),
-            custom: this.customFields,
+            filters: this.filterBuilder.build(),
+            postFilters: this.postFilterBuilder.build() ,
+            relevanceModifiers: this.relevanceModifierBuilder.build(),
+            ...(this.indexId && { indexSelector: { id: this.indexId } })
         };
     }
 }

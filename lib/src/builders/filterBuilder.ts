@@ -1,19 +1,17 @@
-import { Filter, ProductAssortmentFilter, ProductCategoryIdFilter, ProductDataFilter, VariantAssortmentFilter } from "@/models/data-contracts";
+import { Filter, FilterCollection, ProductAssortmentFilter, ProductCategoryIdFilter, ProductDataFilter, ProductIdFilter, RelevanceModifier, RelevanceModifierCollection, VariantAssortmentFilter } from "@/models/data-contracts";
+
+//type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
 
 export class FilterBuilder {
-    private _filters: Filter[] = [];
-
-    public get filters(): Filter[] {
-        return this._filters;
-    }
+    private filters: Filter[] = [];
 
     /**
      * Adds a product assortment filter to the request
      * @param assortmentIds 
      * @param negated 
      */
-    public addProductAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false): FilterBuilder {
-        const assortments: number[] = Array.isArray(assortmentIds) 
+    public addProductAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false): this {
+        const assortments: number[] = Array.isArray(assortmentIds)
             ? assortmentIds
             : [assortmentIds];
 
@@ -32,8 +30,8 @@ export class FilterBuilder {
      * @param assortmentIds 
      * @param negated 
      */
-    public addVariantsAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false): FilterBuilder {
-        const assortments: number[] = Array.isArray(assortmentIds) 
+    public addVariantsAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false): this {
+        const assortments: number[] = Array.isArray(assortmentIds)
             ? assortmentIds
             : [assortmentIds];
 
@@ -48,12 +46,12 @@ export class FilterBuilder {
     }
 
     /**
-     * Adds a product category ids filter to the request
+     * Filters the request to only return products within the specificed categories
      * @param assortmentIds 
      * @param negated 
      */
-    public addProductCategoryIdFilter(evaluationScope: "ImmediateParent" | "ImmediateParentOrItsParent" | "Ancestor", categoryIds: string[] | string, negated: boolean = false): FilterBuilder {
-        const ids: string[] = Array.isArray(categoryIds) 
+    public addProductCategoryIdFilter(evaluationScope: "ImmediateParent" | "ImmediateParentOrItsParent" | "Ancestor", categoryIds: string[] | string, negated: boolean = false): this {
+        const ids: string[] = Array.isArray(categoryIds)
             ? categoryIds
             : [categoryIds];
 
@@ -69,17 +67,18 @@ export class FilterBuilder {
     }
 
     /**
-     * Adds a product data filter to the request
+     * Filters the request to only return the specificied products
      * @param assortmentIds 
      * @param negated 
      */
-     public addProductDataFilter(key: string, value: any, negated: boolean = false): FilterBuilder {
-        const filter: ProductDataFilter = {
-            $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
-            key: key,
-            filterOutIfKeyIsNotFound: false,
-            mustMatchAllConditions: false,
+    public addProductIdFilter(productIds: string | string[], negated: boolean = false): this {
+        const ids: string[] = Array.isArray(productIds)
+            ? productIds
+            : [productIds];
 
+        const filter: ProductIdFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductIdFilter, Relewise.Client',
+            productIds: ids,
             negated: negated
         };
         this.filters.push(filter);
@@ -87,11 +86,41 @@ export class FilterBuilder {
         return this;
     }
 
-    public reset(): FilterBuilder {
-        this._filters = [];
+    /**
+     * Adds a product data filter to the request
+     * @param assortmentIds 
+     * @param negated 
+     */
+    // public addProductDataFilter(key: string, value: any, conditions: Conditions | Conditions[], negated: boolean = false): this {
+    //     const filter: ProductDataFilter = {
+    //         $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
+    //         key: key,
+    //         filterOutIfKeyIsNotFound: false,
+    //         mustMatchAllConditions: false,
+    //         conditions: {},
+    //         negated: negated
+    //     };
+    //     this.filters.push(filter);
+
+    //     return this;
+    // }
+
+    public reset(): this {
+        this.filters = [];
 
         return this;
     }
+
+    public build(): FilterCollection | null {
+        return this.filters.length === 0
+            ? null
+            : { items: this.filters }
+    }
+}
+
+type Pagination = {
+    take: number;
+    skip: number;
 }
 
 export class PaginationBuilder {
@@ -109,7 +138,7 @@ export class PaginationBuilder {
     }
 
     /**
-     * Page size is index 1 based,
+     * Page size is index 1 based
      * @param pageNumber 
      * @returns 
      */
@@ -121,5 +150,28 @@ export class PaginationBuilder {
         this.pageNumber = pageNumber;
 
         return this;
+    }
+
+    build(): Pagination {
+        return {
+            take: this.pageSize,
+            skip: (this.pageNumber - 1) * this.pageSize
+        }
+    }
+}
+
+export class RelevanceModifierBuilder {
+    private modifiers: RelevanceModifier[] = [];
+
+    public reset(): this {
+        this.modifiers = [];
+
+        return this;
+    }
+
+    public build(): RelevanceModifierCollection | null {
+        return this.modifiers.length === 0
+            ? null
+            : { items: this.modifiers }
     }
 }

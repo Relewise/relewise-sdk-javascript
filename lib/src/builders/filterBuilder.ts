@@ -118,7 +118,7 @@ export class FilterBuilder {
     }
 }
 
-type Pagination = {
+export type Pagination = {
     take: number;
     skip: number;
 }

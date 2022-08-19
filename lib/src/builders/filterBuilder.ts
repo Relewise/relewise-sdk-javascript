@@ -384,6 +384,7 @@ export class FilterBuilder {
     public and(filterBuilder: (builder: FilterBuilder) => void, negated: boolean = false): this {
         const builder = new FilterBuilder();
         filterBuilder(builder);
+        
         const filter: AndFilter = {
             $type: 'Relewise.Client.Requests.Filters.AndFilter, Relewise.Client',
             filters: builder.build()?.items,
@@ -397,6 +398,7 @@ export class FilterBuilder {
     public or(filterBuilder: (builder: FilterBuilder) => void, negated: boolean = false): this {
         const builder = new FilterBuilder();
         filterBuilder(builder);
+
         const filter: OrFilter = {
             $type: 'Relewise.Client.Requests.Filters.OrFilter, Relewise.Client',
             filters: builder.build()?.items,

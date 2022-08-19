@@ -1,10 +1,12 @@
 import { ContentSearchRequest, ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from "@/models/data-contracts";
 import { PaginationBuilder } from "../paginationBuilder";
 import { Settings } from "../settings";
+import { FacetBuilder } from "./facetBuilder";
 import { SearchBuilder } from "./searchBuilder";
 import { SearchRequestBuilder } from "./searchRequestBuilder";
 
 export class ContentSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
+    private facetBuilder: FacetBuilder = new FacetBuilder();
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private term: string | null | undefined;
 
@@ -24,16 +26,24 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
+    public facets(facets: (pagination: FacetBuilder) => void) : this {
+        facets(this.facetBuilder);
+
+        return this;
+    }
+
     public build(): ContentSearchRequest {
         return {
             ...this.baseBuild(),
             ...this.paginationBuilder.build(),
             term: this.term,
+            facets: this.facetBuilder.build()
         };
     }
 }
 
 export class ProductSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
+    private facetBuilder: FacetBuilder = new FacetBuilder();
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private term: string | null | undefined;
 
@@ -69,10 +79,6 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    // public setRecommendationSettings({ take, onlyIncludeRecommendationsWhenLessResultsThan }: {  take?: number | null, onlyIncludeRecommendationsWhenLessResultsThan?: number | null }): ProductSearchBuilder {
-
-    //     return this;
-    // }
     public setRecommendationSettings(settings: RecommendationSettings): this {
         this.searchSettings.recommendations = settings;
 
@@ -95,6 +101,12 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
+    public facets(facets: (pagination: FacetBuilder) => void) : this {
+        facets(this.facetBuilder);
+
+        return this;
+    }
+
     public build(): ProductSearchRequest {
         return {
             ...this.baseBuild(),
@@ -102,7 +114,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
 
             term: this.term,
 
-            facets: null,
+            facets: this.facetBuilder.build(),
             settings: this.searchSettings,
             sorting: null,
         };

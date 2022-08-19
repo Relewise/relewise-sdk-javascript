@@ -1,4 +1,4 @@
-import { BrandAssortmentFilter, BrandIdFilter, ContentCategoryAssortmentFilter, ContentCategoryIdFilter, ContentIdFilter, Filter, FilterCollection, Int32NullableRange, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryIdFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, RelevanceModifier, RelevanceModifierCollection, VariantAssortmentFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter } from "@/models/data-contracts";
+import { AndFilter, BrandAssortmentFilter, BrandIdFilter, ContentCategoryAssortmentFilter, ContentCategoryIdFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryIdFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from "@/models/data-contracts";
 
 //type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
 
@@ -327,7 +327,7 @@ export class FilterBuilder {
      * @param upperBound 
      * @param negated 
      */
-     public addVariantSalesPriceFilter(lowerBound?: number, upperBound?: number, negated: boolean = false): this {
+    public addVariantSalesPriceFilter(lowerBound?: number, upperBound?: number, negated: boolean = false): this {
         const filter: VariantSalesPriceFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantSalesPriceFilter, Relewise.Client',
             range: {
@@ -347,13 +347,59 @@ export class FilterBuilder {
      * @param upperBound 
      * @param negated 
      */
-     public addVariantListPriceFilter(lowerBound?: number, upperBound?: number, negated: boolean = false): this {
+    public addVariantListPriceFilter(lowerBound?: number, upperBound?: number, negated: boolean = false): this {
         const filter: VariantListPriceFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantListPriceFilter, Relewise.Client',
             range: {
                 lowerBoundInclusive: lowerBound,
                 upperBoundInclusive: upperBound
             },
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Filters the request to only return variants with a certain specification
+     * @param key 
+     * @param equalTo 
+     * @param filterOutIfKeyIsNotFound controls if variants with or without the key should be returned
+     * @param negated 
+     */
+    public addVariantSpecificationFilter(key: string, equalTo: string, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const filter: VariantSpecificationFilter = {
+            $type: 'Relewise.Client.Requests.Filters.VariantSpecificationFilter, Relewise.Client',
+            key: key,
+            equalTo: equalTo,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public and(filterBuilder: (builder: FilterBuilder) => void, negated: boolean = false): this {
+        const builder = new FilterBuilder();
+        filterBuilder(builder);
+        const filter: AndFilter = {
+            $type: 'Relewise.Client.Requests.Filters.AndFilter, Relewise.Client',
+            filters: builder.build()?.items,
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public or(filterBuilder: (builder: FilterBuilder) => void, negated: boolean = false): this {
+        const builder = new FilterBuilder();
+        filterBuilder(builder);
+        const filter: OrFilter = {
+            $type: 'Relewise.Client.Requests.Filters.OrFilter, Relewise.Client',
+            filters: builder.build()?.items,
             negated: negated
         };
         this.filters.push(filter);

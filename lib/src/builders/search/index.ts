@@ -1,3 +1,4 @@
+export * from "./facetBuilder";
 export * from "./searchBuilder";
 export * from "./searchRequestBuilder";
 export * from "./productSearchBuilder";

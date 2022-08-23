@@ -68,7 +68,7 @@ export class ConditionBuilder {
     }
 }
 
-abstract class DataValueBase implements DataValue {
+export abstract class DataValueBase implements DataValue {
     constructor(type: 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection', value: any) {
         this.type = type;
         this.value = value;
@@ -84,14 +84,32 @@ export class StringDataValue extends DataValueBase {
     }
 }
 
+export class StringListDataValue extends DataValueBase {
+    constructor(value: string[]) {
+        super('StringList', value);
+    }
+}
+
 export class NumberDataValue extends DataValueBase {
     constructor(value: number) {
         super('Double', value);
     }
 }
 
+export class DoubleListDataValue extends DataValueBase {
+    constructor(value: number[]) {
+        super('DoubleList', value);
+    }
+}
+
 export class BooleanDataValue extends DataValueBase {
     constructor(value: boolean) {
         super('Boolean', value);
+    }
+}
+
+export class BooleanListDataValue extends DataValueBase {
+    constructor(value: boolean[]) {
+        super('BooleanList', value);
     }
 }

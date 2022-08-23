@@ -2,12 +2,14 @@ import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, Se
 import { PaginationBuilder } from "../paginationBuilder";
 import { Settings } from "../settings";
 import { FacetBuilder } from "./facetBuilder";
+import { ProductSortingBuilder } from './productSortingBuilder';
 import { SearchBuilder } from "./searchBuilder";
 import { SearchRequestBuilder } from "./searchRequestBuilder";
 
 export class ProductSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
     private facetBuilder: FacetBuilder = new FacetBuilder();
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
+    private sortingBuilder: ProductSortingBuilder = new ProductSortingBuilder();
     private term: string | null | undefined;
 
     private searchSettings: ProductSearchSettings = {
@@ -58,29 +60,36 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    public pagination(paginate: (pagination: PaginationBuilder) => void) : this {
+    public pagination(paginate: (pagination: PaginationBuilder) => void): this {
         paginate(this.paginationBuilder);
 
         return this;
     }
 
-    public facets(facets: (pagination: FacetBuilder) => void) : this {
+    public facets(facets: (facets: FacetBuilder) => void): this {
         facets(this.facetBuilder);
 
         return this;
     }
 
+    public sorting(sorting: (sortingBuilder: ProductSortingBuilder) => void): this {
+        sorting(this.sortingBuilder);
+
+        return this;
+    }
+
     public build(): ProductSearchRequest {
+        const { take, skip } = this.paginationBuilder.build();
         return {
             ...this.baseBuild(),
-            ...this.paginationBuilder.build(),
+            take,
+            skip,
 
             term: this.term,
 
             facets: this.facetBuilder.build(),
             settings: this.searchSettings,
-            sorting: null,
+            sorting: this.sortingBuilder.build(),
         };
     }
 }
-

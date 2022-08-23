@@ -1,6 +1,5 @@
-import { AndFilter, BrandAssortmentFilter, BrandIdFilter, ContentCategoryAssortmentFilter, ContentCategoryIdFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryIdFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from "@/models/data-contracts";
-
-//type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
+import { AndFilter, BrandAssortmentFilter, BrandIdFilter, ContentCategoryAssortmentFilter, ContentCategoryIdFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryIdFilter, ProductDataFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from "@/models/data-contracts";
+import { ConditionBuilder } from './conditionBuilder';
 
 export class FilterBuilder {
     private filters: Filter[] = [];
@@ -384,7 +383,7 @@ export class FilterBuilder {
     public and(filterBuilder: (builder: FilterBuilder) => void, negated: boolean = false): this {
         const builder = new FilterBuilder();
         filterBuilder(builder);
-        
+
         const filter: AndFilter = {
             $type: 'Relewise.Client.Requests.Filters.AndFilter, Relewise.Client',
             filters: builder.build()?.items,
@@ -414,19 +413,22 @@ export class FilterBuilder {
      * @param assortmentIds 
      * @param negated 
      */
-    // public addProductDataFilter(key: string, value: any, conditions: Conditions | Conditions[], negated: boolean = false): this {
-    //     const filter: ProductDataFilter = {
-    //         $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
-    //         key: key,
-    //         filterOutIfKeyIsNotFound: false,
-    //         mustMatchAllConditions: false,
-    //         conditions: {},
-    //         negated: negated
-    //     };
-    //     this.filters.push(filter);
+    public addProductDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
 
-    //     return this;
-    // }
+        const filter: ProductDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
 
     public reset(): this {
         this.filters = [];

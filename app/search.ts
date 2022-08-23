@@ -1,4 +1,4 @@
-import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder } from "@relewise/client";
+import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder, FilterBuilder } from "@relewise/client";
 
 const searcher = new Searcher("x", "y");
 
@@ -35,16 +35,19 @@ const productSearchBuilder = new ProductSearchBuilder(
         .addBrandFacet()
         .addBrandFacet(["HP", "Lenovo"])
     )
-    .filters(filters => filters
+    .filters((filters: FilterBuilder) => filters
         .addVariantsAssortmentFilter(137, true)
         .addVariantsAssortmentFilter([137], true)
         .addProductAssortmentFilter([137], true)
         .addProductAssortmentFilter(137, true)
         .addProductDataFilter("size", "XL"))
-    .postFilters(filters => filters
+
+    .postFilters((filters: FilterBuilder) => filters
         .addProductAssortmentFilter(137)
         .addProductAssortmentFilter([137], true)
-        .addProductDataFilter("size", "XL"));
+        .addProductDataFilter("size", "XL"))
+        
+    .sortBy(s => s.sortByProductAttribute("DisplayName", "Ascending", n => n.sortByProductRelevance()));
 
 searcher.searchProducts(productSearchBuilder.build());
 

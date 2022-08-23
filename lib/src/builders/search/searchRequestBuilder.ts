@@ -13,26 +13,30 @@ export abstract class SearchRequestBuilder {
         private readonly settings: Settings) {
     }
 
+    /**
+     * Adds filters to the request
+     * @param filterBuilder 
+     * @returns 
+     */
     public filters(filterBuilder: (builder: FilterBuilder) => void): this {
         filterBuilder(this.filterBuilder);
 
         return this;
     }
 
+    /**
+     * Adds post filters to the request
+     * @param filterBuilder 
+     * @returns 
+     */
     public postFilters(filterBuilder: (builder: FilterBuilder) => void): this {
         filterBuilder(this.postFilterBuilder);
 
         return this;
     }
 
-    public relevanceModifiers(relevanceModifierBuilder: (builder: RelevanceModifierBuilder) => void): this {
-        relevanceModifierBuilder(this.relevanceModifierBuilder);
-
-        return this;
-    }
-
     /**
-     * Only needed when needing to specific an index different from the 'default'-index
+     * Use only when a specific index different from the 'default'-index is needed
      * @param id 
      * @returns 
      */
@@ -50,7 +54,7 @@ export abstract class SearchRequestBuilder {
             displayedAtLocation: this.settings.displayedAtLocation,
             filters: this.filterBuilder.build(),
             postFilters: this.postFilterBuilder.build() ,
-            relevanceModifiers: this.relevanceModifierBuilder.build(),
+            relevanceModifiers: null,
             ...(this.indexId && { indexSelector: { id: this.indexId } })
         };
     }

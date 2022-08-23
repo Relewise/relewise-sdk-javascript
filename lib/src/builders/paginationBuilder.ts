@@ -7,7 +7,12 @@ export class PaginationBuilder {
     private pageNumber: number = 1;
     private pageSize: number = 10;
 
-    public setPageSize(pageSize: number): PaginationBuilder {
+    /**
+     * Defines how many results to return
+     * @param pageSize 
+     * @returns 
+     */
+    public setPageSize(pageSize: number): this {
         if (pageSize < 0) {
             throw new Error("pageSize can not be below 0")
         }
@@ -18,11 +23,11 @@ export class PaginationBuilder {
     }
 
     /**
-     * Page size is index 1 based
+     * Page starts at 1, so this to skip 'X' pages of results
      * @param pageNumber 
      * @returns 
      */
-    public setPage(pageNumber: number): PaginationBuilder {
+    public setPage(pageNumber: number): this {
         if (pageNumber < 1) {
             throw new Error("pageNumber can not be below 1")
         }

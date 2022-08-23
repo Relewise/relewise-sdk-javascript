@@ -1,6 +1,7 @@
 import { ContentSearchRequest } from "@/models/data-contracts";
 import { PaginationBuilder } from "../paginationBuilder";
 import { Settings } from "../settings";
+import { ContentSortingBuilder } from './contentSortingBuilder';
 import { FacetBuilder } from "./facetBuilder";
 import { SearchBuilder } from "./searchBuilder";
 import { SearchRequestBuilder } from "./searchRequestBuilder";
@@ -8,6 +9,7 @@ import { SearchRequestBuilder } from "./searchRequestBuilder";
 export class ContentSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
     private facetBuilder: FacetBuilder = new FacetBuilder();
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
+    private sortingBuilder: ContentSortingBuilder = new ContentSortingBuilder();
     private term: string | null | undefined;
 
     constructor(settings: Settings) {
@@ -32,13 +34,19 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
+    public sorting(sorting: (sortingBuilder: ContentSortingBuilder) => void): this {
+        sorting(this.sortingBuilder);
+
+        return this;
+    }
+
     public build(): ContentSearchRequest {
         return {
             ...this.baseBuild(),
             ...this.paginationBuilder.build(),
             term: this.term,
             facets: this.facetBuilder.build(),
-            sorting: null
+            sorting: this.sortingBuilder.build()
         };
     }
 }

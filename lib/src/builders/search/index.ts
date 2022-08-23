@@ -1,6 +1,7 @@
 export * from "./facetBuilder";
 export * from "./searchBuilder";
 export * from "./productSortingBuilder";
+export * from "./contentSortingBuilder";
 export * from "./searchRequestBuilder";
 export * from "./contentSearchBuilder";
 export * from "./productSearchBuilder";

@@ -41,10 +41,15 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
     }
 
     public build(): ContentSearchRequest {
+        const { take, skip } = this.paginationBuilder.build();
         return {
             ...this.baseBuild(),
-            ...this.paginationBuilder.build(),
+
+            take,
+            skip,
+
             term: this.term,
+            
             facets: this.facetBuilder.build(),
             sorting: this.sortingBuilder.build()
         };

@@ -10,13 +10,13 @@ export class SearchCollectionBuilder extends SearchRequestBuilder {
         super(settings)
     }
 
-    public addRequest(request: ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest) {
+    public addRequest(request: ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest): this {
         this.requests.push(request);
 
         return this;
     }
 
-    public addBuilder(builder: SearchBuilder) {
+    public addBuilder(builder: SearchBuilder): this {
         this.addRequest(builder.build());
 
         return this;

@@ -18,14 +18,12 @@ export class SearchTermPredictionBuilder extends SearchRequestBuilder {
     }
 
     public setTerm(term: string | null | undefined): this {
-
         this.term = term;
 
         return this;
     }
 
-    public addEntityType(...types: ("Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory")[]) : this {
-
+    public addEntityType(...types: ("Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory")[]): this {
         this.targetEntityTypes = types;
 
         return this;

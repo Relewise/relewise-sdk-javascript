@@ -41,9 +41,9 @@ export class ContentSortingBuilder {
     }
 
     public sortByContentAttribute(
-        attribute: "Id" | "DisplayName", 
-        order: 'Ascending' | 'Descending', 
-        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', 
+        attribute: "Id" | "DisplayName",
+        order: 'Ascending' | 'Descending',
+        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto',
         thenBy?: (thenBy: ContentSortingBuilder) => void) {
 
         const sort: ContentAttributeSorting = {
@@ -67,8 +67,8 @@ export class ContentSortingBuilder {
     }
 
     public build(): ContentSortBySpecification | null {
-        return this.value == null 
-        ? null
-        : { value: this.value };
+        return this.value == null
+            ? null
+            : { value: this.value };
     }
 }

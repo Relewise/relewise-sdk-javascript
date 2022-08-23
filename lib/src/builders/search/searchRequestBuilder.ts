@@ -51,7 +51,7 @@ export abstract class SearchRequestBuilder {
             language: { value: this.settings.language },
             displayedAtLocation: this.settings.displayedAtLocation,
             filters: this.filterBuilder.build(),
-            postFilters: this.postFilterBuilder.build() ,
+            postFilters: this.postFilterBuilder.build(),
             relevanceModifiers: null,
             ...(this.indexId && { indexSelector: { id: this.indexId } })
         };

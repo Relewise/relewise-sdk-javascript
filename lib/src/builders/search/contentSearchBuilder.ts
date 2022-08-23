@@ -22,13 +22,13 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    public pagination(paginate: (pagination: PaginationBuilder) => void) : this {
+    public pagination(paginate: (pagination: PaginationBuilder) => void): this {
         paginate(this.paginationBuilder);
 
         return this;
     }
 
-    public facets(facets: (pagination: FacetBuilder) => void) : this {
+    public facets(facets: (pagination: FacetBuilder) => void): this {
         facets(this.facetBuilder);
 
         return this;
@@ -49,7 +49,7 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
             skip,
 
             term: this.term,
-            
+
             facets: this.facetBuilder.build(),
             sorting: this.sortingBuilder.build()
         };

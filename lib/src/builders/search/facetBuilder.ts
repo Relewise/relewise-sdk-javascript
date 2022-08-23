@@ -69,6 +69,53 @@ export class FacetBuilder {
         return this;
     }
 
+    public addVariantSpecificationFacet(key: string, selectedValues: string[] | null = null): this {
+        const facet: VariantSpecificationFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.VariantSpecificationFacet, Relewise.Client',
+            field: "VariantSpecification",
+            key: key,
+            selected: selectedValues
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductDataDoubleRangeFacet(key: string, selectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant", lowerBound?: number, upperBound?: number): this {
+        const facet: ProductDataDoubleRangeFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangeFacet, Relewise.Client',
+            field: "Data",
+            key: key,
+            dataSelectionStrategy: selectionStrategy,
+            selected: {
+                lowerBoundInclusive: lowerBound,
+                upperBoundInclusive: upperBound
+            }
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductDataStringValueFacet(
+        key: string,
+        selectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant",
+        selectedValues: string[] | null = null,
+        collectionFilterType?: "Or" | "And" | null): this {
+
+        const facet: ProductDataStringValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataStringValueFacet, Relewise.Client',
+            field: "Data",
+            key: key,
+            dataSelectionStrategy: selectionStrategy,
+            selected: selectedValues,
+            collectionFilterType: collectionFilterType
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
     build(): ProductFacetQuery | null {
         return this.facets.length == 0
             ? null

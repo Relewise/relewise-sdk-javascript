@@ -1,4 +1,4 @@
-import { ProductAttributeSorting, ProductDataSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '@/models/data-contracts';
+import { ProductAttributeSorting, ProductDataSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductSortBySpecification, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '@/models/data-contracts';
 
 export class ProductSortingBuilder {
     private value:
@@ -43,7 +43,12 @@ export class ProductSortingBuilder {
         this.value = sort;
     }
 
-    public sortByProductAttribute(attribute: "Id" | "DisplayName" | "BrandId" | "BrandName" | "ListPrice" | "SalesPrice", order: 'Ascending' | 'Descending', mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', thenBy?: (thenBy: ProductSortingBuilder) => void) {
+    public sortByProductAttribute(
+        attribute: "Id" | "DisplayName" | "BrandId" | "BrandName" | "ListPrice" | "SalesPrice", 
+        order: 'Ascending' | 'Descending', 
+        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', 
+        thenBy?: (thenBy: ProductSortingBuilder) => void) {
+
         const sort: ProductAttributeSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductAttributeSorting, Relewise.Client',
             attribute,
@@ -55,7 +60,12 @@ export class ProductSortingBuilder {
         this.value = sort;
     }
 
-    public sortByProductVariantAttribute(attribute: "Id" | "DisplayName" | "ListPrice" | "SalesPrice", order: 'Ascending' | 'Descending', mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', thenBy?: (thenBy: ProductSortingBuilder) => void) {
+    public sortByProductVariantAttribute(
+        attribute: "Id" | "DisplayName" | "ListPrice" | "SalesPrice", 
+        order: 'Ascending' | 'Descending', 
+        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', 
+        thenBy?: (thenBy: ProductSortingBuilder) => void) {
+            
         const sort: ProductVariantAttributeSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductVariantAttributeSorting, Relewise.Client',
             attribute,

@@ -1,4 +1,4 @@
-import { AndFilter, BrandAssortmentFilter, BrandIdFilter, ContentCategoryAssortmentFilter, ContentCategoryIdFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryIdFilter, ProductDataFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from "@/models/data-contracts";
+import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryIdFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryIdFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from "@/models/data-contracts";
 import { ConditionBuilder } from './conditionBuilder';
 
 export class FilterBuilder {
@@ -410,7 +410,10 @@ export class FilterBuilder {
 
     /**
      * Adds a product data filter to the request
-     * @param assortmentIds 
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
     public addProductDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
@@ -421,6 +424,179 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
             key: key,
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a variant data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addVariantDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: VariantDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.VariantDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a brand data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addBrandDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: BrandDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.BrandDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a cart data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addCartDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: CartDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.CartDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a cart data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addContentCategoryDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: ContentCategoryDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentCategoryDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a content data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addContentDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: ContentDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a product category data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addProductCategoryDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: ProductCategoryDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductCategoryDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+    * Adds a product display name filter to the request
+    * @param key 
+    * @param conditionBuilder 
+    * @param mustMatchAllConditions 
+    * @param filterOutIfKeyIsNotFound 
+    * @param negated 
+    */
+    public addProductDisplayNameFilter(conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, negated: boolean = false): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const filter: ProductDisplayNameFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductDisplayNameFilter, Relewise.Client',
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated

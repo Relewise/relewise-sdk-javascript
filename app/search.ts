@@ -1,14 +1,15 @@
-import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder, FilterBuilder } from "@relewise/client";
+import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder, FilterBuilder, StringDataValue } from "@relewise/client";
 
 const searcher = new Searcher("x", "y");
 
-const productSearchBuilder = new ProductSearchBuilder(
-    {
-        language: "da-DK",
-        currency: "DKK",
-        displayedAtLocation: "search page",
-        user: UserFactory.anonymous()
-    })
+const settings = {
+    language: "da-DK",
+    currency: "DKK",
+    displayedAtLocation: "search page",
+    user: UserFactory.anonymous()
+};
+
+const productSearchBuilder = new ProductSearchBuilder(settings)
 
     .setIndex("default")
 
@@ -36,37 +37,32 @@ const productSearchBuilder = new ProductSearchBuilder(
         .addBrandFacet(["HP", "Lenovo"])
     )
     .filters((filters: FilterBuilder) => filters
-        .addVariantsAssortmentFilter(137, true)
-        .addVariantsAssortmentFilter([137], true)
+        .addVariantAssortmentFilter(137, true)
+        .addVariantAssortmentFilter([137], true)
         .addProductAssortmentFilter([137], true)
         .addProductAssortmentFilter(137, true)
-        .addProductDataFilter("size", "XL"))
+        .addProductDataFilter({
+            key: "size", 
+            condtions: f => f.addEqualsCondition(new StringDataValue("XL")
+        })
+        .addProductDataFilter("size", f => f.addEqualsCondition(new StringDataValue("XL"))))
 
     .postFilters((filters: FilterBuilder) => filters
         .addProductAssortmentFilter(137)
-        .addProductAssortmentFilter([137], true)
-        .addProductDataFilter("size", "XL"))
-        
-    .sortBy(s => s.sortByProductAttribute("DisplayName", "Ascending", n => n.sortByProductRelevance()));
+        .addProductAssortmentFilter([137], true))
+    
+    .sorting(s => s
+        .sortByProductAttribute("DisplayName", "Ascending", n => n
+            .sortByProductRelevance()));
 
 searcher.searchProducts(productSearchBuilder.build());
 
-const contentSearchBuilder = new ContentSearchBuilder({
-    language: "da-DK",
-    currency: "DKK",
-    displayedAtLocation: "search page",
-    user: UserFactory.anonymous()
-})
+const contentSearchBuilder = new ContentSearchBuilder(settings)
     .filters(filters => filters.addProductAssortmentFilter(137))
     .setTerm("")
     .filters(filters => filters.addProductAssortmentFilter(137));
 
-const searchTermPredictionBuilder = new SearchTermPredictionBuilder({
-    language: "da-DK",
-    currency: "DKK",
-    displayedAtLocation: "search page",
-    user: UserFactory.anonymous()
-})
+const searchTermPredictionBuilder = new SearchTermPredictionBuilder(settings)
     .filters(filters => filters.addProductAssortmentFilter(137))
     .setTerm("")
     .addEntityType("Brand", "Content")
@@ -74,12 +70,7 @@ const searchTermPredictionBuilder = new SearchTermPredictionBuilder({
 
 searcher.searchTermPrediction(searchTermPredictionBuilder.build());
 
-const searchCollectionBuilder = new SearchCollectionBuilder({
-    language: "da-DK",
-    currency: "DKK",
-    displayedAtLocation: "search page",
-    user: UserFactory.anonymous()
-})
+const searchCollectionBuilder = new SearchCollectionBuilder(settings)
     .filters(filters => filters.addProductAssortmentFilter(137))
     .addRequest(productSearchBuilder.build())
     .addBuilder(contentSearchBuilder)

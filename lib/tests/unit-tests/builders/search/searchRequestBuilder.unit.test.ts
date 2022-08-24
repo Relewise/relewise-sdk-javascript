@@ -7,7 +7,7 @@ function baseBuilder() {
     return new SearchTermPredictionBuilder({
         language: "da-DK",
         currency: "DKK",
-        displayedAtLocation: "search page",
+        displayedAtLocation: "search page", 
         user: UserFactory.anonymous()
     });
 };

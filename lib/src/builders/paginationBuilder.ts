@@ -14,7 +14,7 @@ export class PaginationBuilder {
      */
     public setPageSize(pageSize: number): this {
         if (pageSize < 0) {
-            throw new Error("pageSize can not be below 0")
+            throw new Error('pageSize can not be below 0')
         }
 
         this.pageSize = pageSize;
@@ -29,7 +29,7 @@ export class PaginationBuilder {
      */
     public setPage(pageNumber: number): this {
         if (pageNumber < 1) {
-            throw new Error("pageNumber can not be below 1")
+            throw new Error('pageNumber can not be below 1')
         }
 
         this.pageNumber = pageNumber;
@@ -40,7 +40,7 @@ export class PaginationBuilder {
     build(): Pagination {
         return {
             take: this.pageSize,
-            skip: (this.pageNumber - 1) * this.pageSize
+            skip: (this.pageNumber - 1) * this.pageSize,
         }
     }
 }

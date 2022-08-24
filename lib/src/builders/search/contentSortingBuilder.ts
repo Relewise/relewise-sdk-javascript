@@ -8,7 +8,7 @@ export class ContentSortingBuilder {
         | ContentRelevanceSorting
         | null = null;
 
-    public sortByContentData(key: string, order: 'Ascending' | 'Descending' = 'Descending', mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', thenBy?: (thenBy: ContentSortingBuilder) => void) {
+    public sortByContentData(key: string, order: 'Ascending' | 'Descending' = 'Descending', mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto', thenBy?: (thenBy: ContentSortingBuilder) => void) {
         const sort: ContentDataSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Content.ContentDataSorting, Relewise.Client',
             mode,
@@ -41,9 +41,9 @@ export class ContentSortingBuilder {
     }
 
     public sortByContentAttribute(
-        attribute: "Id" | "DisplayName",
+        attribute: 'Id' | 'DisplayName',
         order: 'Ascending' | 'Descending',
-        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto',
+        mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto',
         thenBy?: (thenBy: ContentSortingBuilder) => void) {
 
         const sort: ContentAttributeSorting = {

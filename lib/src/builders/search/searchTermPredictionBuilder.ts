@@ -1,11 +1,11 @@
-import { SearchTermPredictionRequest } from "@/models/data-contracts";
-import { Settings } from "../settings";
-import { SearchRequestBuilder } from "./searchRequestBuilder";
+import { SearchTermPredictionRequest } from '@/models/data-contracts';
+import { Settings } from '../settings';
+import { SearchRequestBuilder } from './searchRequestBuilder';
 
 export class SearchTermPredictionBuilder extends SearchRequestBuilder {
     private count: number = 0;
     private term: string | null | undefined;
-    private targetEntityTypes: ("Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory")[] | null = null;
+    private targetEntityTypes: ('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[] | null = null;
 
     constructor(settings: Settings) {
         super(settings)
@@ -23,7 +23,7 @@ export class SearchTermPredictionBuilder extends SearchRequestBuilder {
         return this;
     }
 
-    public addEntityType(...types: ("Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory")[]): this {
+    public addEntityType(...types: ('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[]): this {
         this.targetEntityTypes = types;
 
         return this;
@@ -37,8 +37,8 @@ export class SearchTermPredictionBuilder extends SearchRequestBuilder {
             take: this.count,
             settings: {
                 $type: 'Relewise.Client.Requests.Search.Settings.SearchTermPredictionSettings, Relewise.Client',
-                targetEntityTypes: this.targetEntityTypes
-            }
+                targetEntityTypes: this.targetEntityTypes,
+            },
         };
     }
 }

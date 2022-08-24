@@ -1,6 +1,6 @@
-import { SearchRequest } from "@/models/data-contracts";
-import { FilterBuilder } from "../filterBuilder";
-import { Settings } from "../settings";
+import { SearchRequest } from '@/models/data-contracts';
+import { FilterBuilder } from '../filterBuilder';
+import { Settings } from '../settings';
 
 export abstract class SearchRequestBuilder {
     private readonly filterBuilder: FilterBuilder = new FilterBuilder();
@@ -53,7 +53,7 @@ export abstract class SearchRequestBuilder {
             filters: this.filterBuilder.build(),
             postFilters: this.postFilterBuilder.build(),
             relevanceModifiers: null,
-            ...(this.indexId && { indexSelector: { id: this.indexId } })
+            ...(this.indexId && { indexSelector: { id: this.indexId } }),
         };
     }
 }

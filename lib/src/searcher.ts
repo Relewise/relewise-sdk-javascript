@@ -7,7 +7,7 @@ import {
     ContentSearchRequest,
     ContentSearchResponse,
     SearchTermPredictionRequest,
-    SearchTermPredictionResponse
+    SearchTermPredictionResponse,
 } from './models/data-contracts';
 
 export class Searcher extends RelewiseClient {

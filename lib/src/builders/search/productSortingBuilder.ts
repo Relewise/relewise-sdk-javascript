@@ -10,7 +10,7 @@ export class ProductSortingBuilder {
         | ProductVariantSpecificationSorting
         | null = null;
 
-    public sortByProductData(key: string, order: 'Ascending' | 'Descending', mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', thenBy?: (thenBy: ProductSortingBuilder) => void) {
+    public sortByProductData(key: string, order: 'Ascending' | 'Descending', thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
         const sort: ProductDataSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductDataSorting, Relewise.Client',
             dataSelectionStrategy: 'Product',
@@ -44,10 +44,10 @@ export class ProductSortingBuilder {
     }
 
     public sortByProductAttribute(
-        attribute: "Id" | "DisplayName" | "BrandId" | "BrandName" | "ListPrice" | "SalesPrice", 
+        attribute: 'Id' | 'DisplayName' | 'BrandId' | 'BrandName' | 'ListPrice' | 'SalesPrice', 
         order: 'Ascending' | 'Descending', 
-        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', 
-        thenBy?: (thenBy: ProductSortingBuilder) => void) {
+        thenBy?: (thenBy: ProductSortingBuilder) => void,
+        mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto' ) {
 
         const sort: ProductAttributeSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductAttributeSorting, Relewise.Client',
@@ -61,11 +61,11 @@ export class ProductSortingBuilder {
     }
 
     public sortByProductVariantAttribute(
-        attribute: "Id" | "DisplayName" | "ListPrice" | "SalesPrice", 
+        attribute: 'Id' | 'DisplayName' | 'ListPrice' | 'SalesPrice', 
         order: 'Ascending' | 'Descending', 
-        mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', 
-        thenBy?: (thenBy: ProductSortingBuilder) => void) {
-            
+        thenBy?: (thenBy: ProductSortingBuilder) => void, 
+        mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
+
         const sort: ProductVariantAttributeSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductVariantAttributeSorting, Relewise.Client',
             attribute,
@@ -77,7 +77,7 @@ export class ProductSortingBuilder {
         this.value = sort;
     }
 
-    public sortByProductVariantSpecification(key: string, order: 'Ascending' | 'Descending', mode: "Auto" | "Alphabetical" | "Numerical" = 'Auto', thenBy?: (thenBy: ProductSortingBuilder) => void) {
+    public sortByProductVariantSpecification(key: string, order: 'Ascending' | 'Descending', thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
         const sort: ProductVariantSpecificationSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductVariantSpecificationSorting, Relewise.Client',
             key,
@@ -100,7 +100,7 @@ export class ProductSortingBuilder {
 
     public build(): ProductSortBySpecification | null {
         return this.value == null 
-        ? null
-        : { value: this.value };
+            ? null
+            : { value: this.value };
     }
 }

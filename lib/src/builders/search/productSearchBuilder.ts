@@ -1,10 +1,10 @@
-import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from "@/models/data-contracts";
-import { PaginationBuilder } from "../paginationBuilder";
-import { Settings } from "../settings";
-import { FacetBuilder } from "./facetBuilder";
+import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from '@/models/data-contracts';
+import { PaginationBuilder } from '../paginationBuilder';
+import { Settings } from '../settings';
+import { FacetBuilder } from './facetBuilder';
 import { ProductSortingBuilder } from './productSortingBuilder';
-import { SearchBuilder } from "./searchBuilder";
-import { SearchRequestBuilder } from "./searchRequestBuilder";
+import { SearchBuilder } from './searchBuilder';
+import { SearchRequestBuilder } from './searchRequestBuilder';
 
 export class ProductSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
     private facetBuilder: FacetBuilder = new FacetBuilder();
@@ -13,7 +13,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     private term: string | null | undefined;
 
     private searchSettings: ProductSearchSettings = {
-        $type: 'Relewise.Client.Requests.Search.Settings.ProductSearchSettings, Relewise.Client'
+        $type: 'Relewise.Client.Requests.Search.Settings.ProductSearchSettings, Relewise.Client',
     };
 
     constructor(settings: Settings) {

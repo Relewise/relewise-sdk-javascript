@@ -1,10 +1,10 @@
-import { ContentSearchRequest } from "@/models/data-contracts";
-import { PaginationBuilder } from "../paginationBuilder";
-import { Settings } from "../settings";
+import { ContentSearchRequest } from '@/models/data-contracts';
+import { PaginationBuilder } from '../paginationBuilder';
+import { Settings } from '../settings';
 import { ContentSortingBuilder } from './contentSortingBuilder';
-import { FacetBuilder } from "./facetBuilder";
-import { SearchBuilder } from "./searchBuilder";
-import { SearchRequestBuilder } from "./searchRequestBuilder";
+import { FacetBuilder } from './facetBuilder';
+import { SearchBuilder } from './searchBuilder';
+import { SearchRequestBuilder } from './searchRequestBuilder';
 
 export class ContentSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
     private facetBuilder: FacetBuilder = new FacetBuilder();
@@ -51,7 +51,7 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
             term: this.term,
 
             facets: this.facetBuilder.build(),
-            sorting: this.sortingBuilder.build()
+            sorting: this.sortingBuilder.build(),
         };
     }
 }

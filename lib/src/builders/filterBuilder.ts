@@ -1,4 +1,4 @@
-import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryIdFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryIdFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from "@/models/data-contracts";
+import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryIdFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryIdFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '@/models/data-contracts';
 import { ConditionBuilder } from './conditionBuilder';
 
 export class FilterBuilder {
@@ -17,7 +17,7 @@ export class FilterBuilder {
         const filter: ProductAssortmentFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductAssortmentFilter, Relewise.Client',
             assortments: assortments,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -37,7 +37,7 @@ export class FilterBuilder {
         const filter: VariantAssortmentFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantAssortmentFilter, Relewise.Client',
             assortments: assortments,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -57,7 +57,7 @@ export class FilterBuilder {
         const filter: BrandAssortmentFilter = {
             $type: 'Relewise.Client.Requests.Filters.BrandAssortmentFilter, Relewise.Client',
             assortments: assortments,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -77,7 +77,7 @@ export class FilterBuilder {
         const filter: ContentCategoryAssortmentFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentCategoryAssortmentFilter, Relewise.Client',
             assortments: assortments,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -97,7 +97,7 @@ export class FilterBuilder {
         const filter: ProductCategoryAssortmentFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryAssortmentFilter, Relewise.Client',
             assortments: assortments,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -110,7 +110,7 @@ export class FilterBuilder {
      * @param categoryIds 
      * @param negated 
      */
-    public addProductCategoryIdFilter(evaluationScope: "ImmediateParent" | "ImmediateParentOrItsParent" | "Ancestor", categoryIds: string[] | string, negated: boolean = false): this {
+    public addProductCategoryIdFilter(evaluationScope: 'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor', categoryIds: string[] | string, negated: boolean = false): this {
         const ids: string[] = Array.isArray(categoryIds)
             ? categoryIds
             : [categoryIds];
@@ -119,7 +119,7 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryIdFilter, Relewise.Client',
             evaluationScope: evaluationScope,
             categoryIds: ids,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -132,7 +132,7 @@ export class FilterBuilder {
      * @param categoryIds 
      * @param negated 
      */
-    public addContentCategoryIdFilter(evaluationScope: "ImmediateParent" | "ImmediateParentOrItsParent" | "Ancestor", categoryIds: string[] | string, negated: boolean = false): this {
+    public addContentCategoryIdFilter(evaluationScope: 'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor', categoryIds: string[] | string, negated: boolean = false): this {
         const ids: string[] = Array.isArray(categoryIds)
             ? categoryIds
             : [categoryIds];
@@ -141,7 +141,7 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ContentCategoryIdFilter, Relewise.Client',
             evaluationScope: evaluationScope,
             categoryIds: ids,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -161,7 +161,7 @@ export class FilterBuilder {
         const filter: ProductIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductIdFilter, Relewise.Client',
             productIds: ids,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -181,7 +181,7 @@ export class FilterBuilder {
         const filter: VariantIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantIdFilter, Relewise.Client',
             variantIds: ids,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -201,7 +201,7 @@ export class FilterBuilder {
         const filter: BrandIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.BrandIdFilter, Relewise.Client',
             brandIds: ids,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -221,7 +221,7 @@ export class FilterBuilder {
         const filter: ContentIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentIdFilter, Relewise.Client',
             contentIds: ids,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -239,9 +239,9 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ProductHasVariantsFilter, Relewise.Client',
             numberOfVariants: {
                 lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound
+                upperBoundInclusive: upperBound,
             },
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -257,7 +257,7 @@ export class FilterBuilder {
         const filter: ProductRecentlyPurchasedByUserFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductRecentlyPurchasedByUserFilter, Relewise.Client',
             sinceUtc: sinceUtc,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -273,7 +273,7 @@ export class FilterBuilder {
         const filter: ProductRecentlyViewedByUserFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductRecentlyViewedByUserFilter, Relewise.Client',
             sinceUtc: sinceUtc,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -291,9 +291,9 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ProductSalesPriceFilter, Relewise.Client',
             range: {
                 lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound
+                upperBoundInclusive: upperBound,
             },
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -311,9 +311,9 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ProductListPriceFilter, Relewise.Client',
             range: {
                 lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound
+                upperBoundInclusive: upperBound,
             },
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -331,9 +331,9 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.VariantSalesPriceFilter, Relewise.Client',
             range: {
                 lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound
+                upperBoundInclusive: upperBound,
             },
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -351,9 +351,9 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.VariantListPriceFilter, Relewise.Client',
             range: {
                 lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound
+                upperBoundInclusive: upperBound,
             },
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -373,7 +373,7 @@ export class FilterBuilder {
             key: key,
             equalTo: equalTo,
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -387,7 +387,7 @@ export class FilterBuilder {
         const filter: AndFilter = {
             $type: 'Relewise.Client.Requests.Filters.AndFilter, Relewise.Client',
             filters: builder.build()?.items,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -401,7 +401,7 @@ export class FilterBuilder {
         const filter: OrFilter = {
             $type: 'Relewise.Client.Requests.Filters.OrFilter, Relewise.Client',
             filters: builder.build()?.items,
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -426,7 +426,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -451,7 +451,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -476,7 +476,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -501,7 +501,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -526,7 +526,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -551,7 +551,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -576,7 +576,7 @@ export class FilterBuilder {
             filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 
@@ -599,7 +599,7 @@ export class FilterBuilder {
             $type: 'Relewise.Client.Requests.Filters.ProductDisplayNameFilter, Relewise.Client',
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
-            negated: negated
+            negated: negated,
         };
         this.filters.push(filter);
 

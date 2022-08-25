@@ -1,4 +1,5 @@
-import { ContainsCondition, DataValue, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, Money, Multilingual, Value, ValueConditionCollection } from '@/models/data-contracts';
+import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection } from '@/models/data-contracts';
+import { DataValueBase } from '@/models/dataValue';
 
 export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
 
@@ -65,68 +66,5 @@ export class ConditionBuilder {
         return this.conditions.length === 0
             ? null
             : { items: this.conditions }
-    }
-}
-
-export abstract class DataValueBase<T> implements DataValue {
-    constructor(type: 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection', value: T) {
-        this.type = type;
-        this.value = value;
-    }
-
-    type: 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection';
-    value: T;
-}
-
-export class StringDataValue extends DataValueBase<string> {
-    constructor(value: string) {
-        super('String', value);
-    }
-}
-
-export class StringListDataValue extends DataValueBase<string[]> {
-    constructor(value: string[]) {
-        super('StringList', value);
-    }
-}
-
-export class NumberDataValue extends DataValueBase<number> {
-    constructor(value: number) {
-        super('Double', value);
-    }
-}
-
-export class DoubleListDataValue extends DataValueBase<number[]> {
-    constructor(value: number[]) {
-        super('DoubleList', value);
-    }
-}
-
-export class BooleanDataValue extends DataValueBase<boolean> {
-    constructor(value: boolean) {
-        super('Boolean', value);
-    }
-}
-
-export class BooleanListDataValue extends DataValueBase<boolean[]> {
-    constructor(value: boolean[]) {
-        super('BooleanList', value);
-    }
-}
-
-export class MoneyDataValue extends DataValueBase<Money> {
-    constructor(amount: number, currency: string) {
-        super('Money', {
-            amount: amount,
-            currency: { value: currency },
-        });
-    }
-}
-
-export class MultilingualDataValue extends DataValueBase<Multilingual> {
-    constructor(values: { value: string, language: string }[]) {
-        super('Multilingual', {
-            values: values.map(x => ({ text: x.value, language: { value: x.language } }))
-        });
     }
 }

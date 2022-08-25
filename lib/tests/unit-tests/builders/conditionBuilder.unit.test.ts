@@ -1,8 +1,9 @@
 import { test, expect } from '@jest/globals'
-import { ConditionBuilder, StringDataValue } from '../../../src/builders/conditionBuilder';
+import { ConditionBuilder } from '../../../src/builders/conditionBuilder';
+import { StringDataValue } from '../../../src/models/dataValue';
 
 test('build', () => {
-    const subject = new ConditionBuilder().addContainsCondition(new StringDataValue("X"), "Any").build();
+    const subject = new ConditionBuilder().addContainsCondition(new StringDataValue('X'), 'Any').build();
 
     expect(subject?.items?.length).toBe(1);
 });

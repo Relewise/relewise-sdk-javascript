@@ -3,5 +3,5 @@ export * from './relewise.client';
 export * from './tracker';
 export * from './searcher';
 export * from './factory';
-export * from './models/data-contracts';
 export * from './models/dataValue';
+export * from './models/data-contracts';

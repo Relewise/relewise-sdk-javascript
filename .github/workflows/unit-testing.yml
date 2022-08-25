@@ -28,4 +28,9 @@ jobs:
       - run: npm run build
       - run: npm run build:types
       - run: npm test
-      - run: npm  run integration-test --DATASET_ID=${{secrets.INTEGRATIONTESTS_DATASET_ID}} --API_KEY=${{secrets.INTEGRATIONTESTS_API_KEY}}
+        name: Unit tests
+      - run: npm run integration-test
+        env:
+          DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
+          API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}
+        name: Integration tests

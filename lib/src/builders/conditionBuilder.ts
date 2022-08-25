@@ -1,4 +1,4 @@
-import { ContainsCondition, DataValue, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, Money, ValueConditionCollection } from '@/models/data-contracts';
+import { ContainsCondition, DataValue, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, Money, Multilingual, Value, ValueConditionCollection } from '@/models/data-contracts';
 
 export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
 
@@ -119,6 +119,14 @@ export class MoneyDataValue extends DataValueBase<Money> {
         super('Money', {
             amount: amount,
             currency: { value: currency },
+        });
+    }
+}
+
+export class MultilingualDataValue extends DataValueBase<Multilingual> {
+    constructor(values: { value: string, language: string }[]) {
+        super('Multilingual', {
+            values: values.map(x => ({ text: x.value, language: { value: x.language } }))
         });
     }
 }

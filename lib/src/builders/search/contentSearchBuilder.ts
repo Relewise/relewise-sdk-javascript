@@ -1,4 +1,4 @@
-import { ContentSearchRequest } from '@/models/data-contracts';
+import { ContentSearchRequest, ContentSearchSettings, RecommendationSettings, SelectedContentPropertiesSettings } from '@/models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { ContentSortingBuilder } from './contentSortingBuilder';
@@ -12,8 +12,24 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
     private sortingBuilder: ContentSortingBuilder = new ContentSortingBuilder();
     private term: string | null | undefined;
 
+    private searchSettings: ContentSearchSettings = {
+        $type: 'Relewise.Client.Requests.Search.Settings.ContentSearchSettings, Relewise.Client',
+    };
+
     constructor(settings: Settings) {
         super(settings)
+    }
+
+    public setContentProperties(contentProperties: SelectedContentPropertiesSettings): this {
+        this.searchSettings.selectedContentProperties = contentProperties;
+
+        return this;
+    }
+
+    public setRecommendationSettings(settings: RecommendationSettings): this {
+        this.searchSettings.recommendations = settings;
+
+        return this;
     }
 
     public setTerm(term: string | null | undefined): this {
@@ -44,7 +60,8 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
         const { take, skip } = this.paginationBuilder.build();
         return {
             ...this.baseBuild(),
-
+            
+            settings: this.searchSettings,
             take,
             skip,
 

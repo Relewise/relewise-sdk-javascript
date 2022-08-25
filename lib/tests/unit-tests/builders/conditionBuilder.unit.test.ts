@@ -6,3 +6,9 @@ test('build', () => {
 
     expect(subject?.items?.length).toBe(1);
 });
+
+test('empty', () => {
+    const subject = new ConditionBuilder().build();
+
+    expect(subject).toBe(null);
+});

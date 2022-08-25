@@ -46,3 +46,14 @@ test('ProductData facet', async() => {
 
     expect(result?.facets?.items![0].field).toBe('Data');
 });
+
+test('Category facet', async() => {
+
+    const request: ProductSearchRequest = baseBuilder()
+        .facets(f => f.addCategoryFacet('ImmediateParent'))
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.facets?.items![0].field).toBe('Category');
+});

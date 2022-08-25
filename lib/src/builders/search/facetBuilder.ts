@@ -1,4 +1,4 @@
-import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '@/models/data-contracts';
+import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, Facet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '@/models/data-contracts';
 
 export class FacetBuilder {
     private facets: (
@@ -101,7 +101,7 @@ export class FacetBuilder {
         key: string,
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         selectedValues: string[] | null = null,
-        collectionFilterType?: 'Or' | 'And' | null): this {
+        collectionFilterType?: 'Or' | 'And'): this {
 
         const facet: ProductDataStringValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataStringValueFacet, Relewise.Client',
@@ -120,7 +120,7 @@ export class FacetBuilder {
         key: string,
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         selectedValues: boolean[] | null = null,
-        collectionFilterType?: 'Or' | 'And' | null): this {
+        collectionFilterType?: 'Or' | 'And'): this {
 
         const facet: ProductDataBooleanValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataBooleanValueFacet, Relewise.Client',
@@ -139,7 +139,7 @@ export class FacetBuilder {
         key: string,
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         selectedValues: number[] | null = null,
-        collectionFilterType?: 'Or' | 'And' | null): this {
+        collectionFilterType?: 'Or' | 'And'): this {
 
         const facet: ProductDataDoubleValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleValueFacet, Relewise.Client',
@@ -147,25 +147,6 @@ export class FacetBuilder {
             key: key,
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
-            collectionFilterType: collectionFilterType,
-        };
-        this.facets.push(facet);
-
-        return this;
-    }
-
-    public addProductDataIntegerValueFacet(
-        key: string,
-        selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
-        selectedValues: number[] | null = null,
-        collectionFilterType?: 'Or' | 'And' | null): this {
-
-        const facet: ProductDataIntegerValueFacet = {
-            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataIntegerValueFacet, Relewise.Client',
-            field: 'Data',
-            key: key,
-            dataSelectionStrategy: selectionStrategy,
-            selected: selectedValues?.map(n => Math.floor(n)),
             collectionFilterType: collectionFilterType,
         };
         this.facets.push(facet);
@@ -210,6 +191,34 @@ export class FacetBuilder {
 
         return this;
     }
+
+    // public addListPriceRangesFacet(
+    //     priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
+    //     lowerBound?: number,
+    //     upperBound?: number): this {
+
+    //     const facet: PriceRangesFacet = {
+    //         $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangesFacet, Relewise.Client',
+    //         field: 'ListPrice',
+    //         predefinedRanges: [
+    //         {
+    //             lowerBoundInclusive: 1.0,
+    //             upperBoundExclusive: 5.0
+    //         }
+    //         ],
+    //         expandedRangeSize: 5.0,
+    //         selected: [
+    //         {
+    //             lowerBoundInclusive: 1.0,
+    //             upperBoundExclusive: 5.0
+    //         }
+    //         ],
+    //         priceSelectionStrategy,
+    //     };
+    //     this.facets.push(facet);
+
+    //     return this;
+    // }
 
     build(): ProductFacetQuery | null {
         return this.facets.length === 0

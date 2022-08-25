@@ -1,14 +1,14 @@
-import { UserFactory } from "../../../../src/factory";
-import { SearchTermPredictionBuilder } from "../../../../src/builders/search";
+import { UserFactory } from '../../../../src/factory';
+import { SearchTermPredictionBuilder } from '../../../../src/builders/search';
 import { test, expect } from '@jest/globals'
-import { SearchTermPredictionRequest } from "../../../../src/models/data-contracts";
+import { SearchTermPredictionRequest } from '../../../../src/models/data-contracts';
 
 function baseBuilder() {
     return new SearchTermPredictionBuilder({
-        language: "da-DK",
-        currency: "DKK",
-        displayedAtLocation: "search page",
-        user: UserFactory.anonymous()
+        language: 'da-DK',
+        currency: 'DKK',
+        displayedAtLocation: 'search page',
+        user: UserFactory.anonymous(),
     });
 };
 
@@ -23,7 +23,7 @@ test('take', () => {
 });
 
 test('setTerm', () => {
-    const expectedTerm = "shoe";
+    const expectedTerm = 'shoe';
 
     const subject: SearchTermPredictionRequest = baseBuilder()
         .setTerm(expectedTerm)
@@ -36,7 +36,7 @@ test('reset Term', () => {
     const expectedTerm = null;
 
     const subject: SearchTermPredictionRequest = baseBuilder()
-        .setTerm("test")
+        .setTerm('test')
         .setTerm(expectedTerm)
         .build();
 
@@ -45,20 +45,20 @@ test('reset Term', () => {
 
 test('entityType', () => {
     const subject: SearchTermPredictionRequest = baseBuilder()
-        .addEntityType("Brand")
+        .addEntityType('Brand')
         .build();
 
-    expect(subject.settings?.targetEntityTypes).toContain("Brand");
+    expect(subject.settings?.targetEntityTypes).toContain('Brand');
     expect(subject.settings?.targetEntityTypes).toHaveLength(1);
 });
 
 test('entityTypes', () => {
     const subject: SearchTermPredictionRequest = baseBuilder()
-        .addEntityType("Brand", "Product")
+        .addEntityType('Brand', 'Product')
         .build();
 
-    expect(subject.settings?.targetEntityTypes).toContain("Brand");
-    expect(subject.settings?.targetEntityTypes).toContain("Product");
+    expect(subject.settings?.targetEntityTypes).toContain('Brand');
+    expect(subject.settings?.targetEntityTypes).toContain('Product');
     expect(subject.settings?.targetEntityTypes).toHaveLength(2);
 });
 

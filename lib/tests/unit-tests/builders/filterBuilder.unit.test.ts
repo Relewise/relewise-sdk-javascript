@@ -16,7 +16,7 @@ test('empty', () => {
 
 test('product id filter', () => {
     const subject: FilterCollection | null = baseBuilder()
-        .addProductIdFilter("1")
+        .addProductIdFilter('1')
         .build();
 
     expect(subject?.items?.length).toBe(1);

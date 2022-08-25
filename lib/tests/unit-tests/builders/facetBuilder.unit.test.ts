@@ -2,7 +2,6 @@ import { test, expect } from '@jest/globals'
 import { FacetBuilder } from '../../../src/builders/search';
 import { BrandFacet, ProductFacetQuery } from '../../../src/models/data-contracts';
 
-
 function baseBuilder() {
     return new FacetBuilder();
 };

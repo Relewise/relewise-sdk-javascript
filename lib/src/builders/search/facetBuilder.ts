@@ -192,33 +192,30 @@ export class FacetBuilder {
         return this;
     }
 
-    // public addListPriceRangesFacet(
-    //     priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
-    //     lowerBound?: number,
-    //     upperBound?: number): this {
+    public addListPriceRangesFacet(
+        priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
+        predefinedRanges?: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null,
+        expandedRangeSize?: number | null,
+        selectedValues: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null = null): this {
 
-    //     const facet: PriceRangesFacet = {
-    //         $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangesFacet, Relewise.Client',
-    //         field: 'ListPrice',
-    //         predefinedRanges: [
-    //         {
-    //             lowerBoundInclusive: 1.0,
-    //             upperBoundExclusive: 5.0
-    //         }
-    //         ],
-    //         expandedRangeSize: 5.0,
-    //         selected: [
-    //         {
-    //             lowerBoundInclusive: 1.0,
-    //             upperBoundExclusive: 5.0
-    //         }
-    //         ],
-    //         priceSelectionStrategy,
-    //     };
-    //     this.facets.push(facet);
+        const facet: PriceRangesFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangesFacet, Relewise.Client',
+            field: 'ListPrice',
+            predefinedRanges: predefinedRanges?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
+            expandedRangeSize: expandedRangeSize,
+            selected: selectedValues?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
+            priceSelectionStrategy,
+        };
+        this.facets.push(facet);
 
-    //     return this;
-    // }
+        return this;
+    }
 
     build(): ProductFacetQuery | null {
         return this.facets.length === 0

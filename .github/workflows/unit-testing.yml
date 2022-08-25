@@ -24,12 +24,16 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - run: npm ci
+        name: Install dependencies
       - run: npm run gen-api 
+        name: Generate API type defs
       - run: npm run build
+        name: Build
       - run: npm run build:types
+        name: Build Types
       - run: npm test
         name: Unit tests
-      - run: npm run integration-test --DATASET_ID=${{secrets.INTEGRATIONTESTS_DATASET_ID}}
+      - run: npm run integration-test --DATASET_ID=${{secrets.INTEGRATIONTESTS_DATASET_ID}} --API_KEY=${{secrets.INTEGRATIONTESTS_API_KEY}}
         env:
           DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
           API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}

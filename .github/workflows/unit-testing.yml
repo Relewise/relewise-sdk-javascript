@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  node-version: '16'
+  node-version: '18'
 
 jobs:
   test:

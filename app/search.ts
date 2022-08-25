@@ -1,4 +1,4 @@
-import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder, FilterBuilder, StringDataValue } from "@relewise/client";
+import { UserFactory, Searcher, ProductSearchBuilder, ContentSearchBuilder, SearchCollectionBuilder, SearchTermPredictionBuilder, FilterBuilder, StringDataValue, ProductSortingBuilder } from "@relewise/client";
 
 const searcher = new Searcher("x", "y");
 
@@ -8,6 +8,27 @@ const settings = {
     displayedAtLocation: "search page",
     user: UserFactory.anonymous()
 };
+
+const defaultSearchBuilderExample = new ProductSearchBuilder(settings)
+    .setProductProperties({
+        displayName: true,
+        pricing: true,
+        dataKeys: ["Url", "ShortDescription", "ImageUrls"]
+    })
+    .pagination(p => p
+        .setPageSize(30)
+        .setPage(1))
+    .facets(f => f
+        .addBrandFacet(["HP", "Lenovo"])
+        .addSalesPriceRangeFacet("Product", 100, 500)
+        .addVariantSpecificationFacet("Size", ["XL"])
+    )
+    .filters(f => f
+        .addProductAssortmentFilter(1)
+        .addVariantAssortmentFilter(1)
+    );
+
+searcher.searchProducts(defaultSearchBuilderExample.build());
 
 const productSearchBuilder = new ProductSearchBuilder(settings)
 
@@ -41,18 +62,14 @@ const productSearchBuilder = new ProductSearchBuilder(settings)
         .addVariantAssortmentFilter([137], true)
         .addProductAssortmentFilter([137], true)
         .addProductAssortmentFilter(137, true)
-        .addProductDataFilter({
-            key: "size", 
-            condtions: f => f.addEqualsCondition(new StringDataValue("XL")
-        })
         .addProductDataFilter("size", f => f.addEqualsCondition(new StringDataValue("XL"))))
 
     .postFilters((filters: FilterBuilder) => filters
         .addProductAssortmentFilter(137)
         .addProductAssortmentFilter([137], true))
-    
+
     .sorting(s => s
-        .sortByProductAttribute("DisplayName", "Ascending", n => n
+        .sortByProductAttribute("DisplayName", "Ascending", (n: ProductSortingBuilder) => n
             .sortByProductRelevance()));
 
 searcher.searchProducts(productSearchBuilder.build());

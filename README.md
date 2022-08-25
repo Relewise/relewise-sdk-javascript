@@ -10,23 +10,41 @@ npm install @relewise/client
 
 ## Usage examples
 
-Start by bootstrapping the client:
+### Bootstrapping
+
+Whether you need to track or search, you need to start by bootstrapping either the `Tracker` or `Searcher`.
 
 ```ts
 const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const searcher = new Searher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
 ```
 
 Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
 
-After which you have access to various methods depending on the client, in this case the tracker:
+After which you have access to various methods depending on the client you bootstrapped.
 
-Tracking a product view:
+### Tracking
+
+If you need to tracking orders, cart changes, or different views on your store, you need to use the `Tracker` 
+
+Here is an example of how to track a product view:
 ```ts
-await tracker.tractProductView({
+await tracker.trackProductView({
         productId: 'p-1',
         user: UserFactory.anonymous()
 });
 ```
+Replace `p-1` with the productId of the product a customer has viewed.
+
+You can also track the following types:
+- ProductCategoryView
+- ContentView
+- ContentCategoryView
+- Order
+- Cart
+- BrandView
+- SearchTerm (When not using Relewise for searching, but still want to provide metrics to enhance recommendations)
+
 When tracking a user behaviour to Relewise, it is important to provide the correct type of `User` to Relewise.
 
 Types of users in Relewise:
@@ -59,6 +77,44 @@ UserFactory.byAuthenticatedId('authenticatedId', 'temporaryId')
 #### If the user is not logged in and has not accepted cookies, then use the Anonymous user type.
 ```ts
 UserFactory.anonymous()
+```
+
+### Search
+
+When you need to use the Relewise fully-fledged search engine, then bootstrap the `Searcher`.
+
+Here is a basic usage example for selecting product properties, paging, facets and filters.
+
+```ts
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+
+const settings = {
+    language: 'da-DK',
+    currency: 'DKK',
+    displayedAtLocation: 'search page',
+    user: UserFactory.anonymous()
+};
+
+const builder = new ProductSearchBuilder(settings)
+    .setProductProperties({
+        displayName: true,
+        pricing: true,
+        dataKeys: ['Url', 'ShortDescription', 'ImageUrls', '[dataFieldConventionName]*']
+    })
+    .pagination(p => p
+        .setPageSize(30)
+        .setPage(1))
+    .facets(f => f
+        .addBrandFacet(['HP', 'Lenovo'])
+        .addSalesPriceRangeFacet('Product', 100, 500)
+        .addVariantSpecificationFacet('Size', ['XL'])
+    )
+    .filters(f => f
+        .addProductAssortmentFilter(1)
+        .addVariantAssortmentFilter(1)
+    );
+
+searcher.searchProducts(builder.build());
 ```
 
 ## Using the SDK via CDN.

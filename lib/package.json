@@ -32,7 +32,7 @@
     "prebuild:types": "rimraf ./build",
     "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
     "clean": "rimraf ./build ./dist ./docs",
-    "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --clean-output --no-client --enum-names-as-values",
+    "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --no-client --enum-names-as-values",
     "publish": "npm run gen-api && npm run build && npm run build:types"
   },
   "devDependencies": {

@@ -13,8 +13,9 @@ const defaultSearchBuilderExample = new ProductSearchBuilder(settings)
     .setProductProperties({
         displayName: true,
         pricing: true,
-        dataKeys: ["Url", "ShortDescription", "ImageUrls"]
+        dataKeys: ["Url", "ShortDescription", "ImageUrls", "DK_*"]
     })
+    .setTerm("shoe")
     .pagination(p => p
         .setPageSize(30)
         .setPage(1))
@@ -69,7 +70,7 @@ const productSearchBuilder = new ProductSearchBuilder(settings)
         .addProductAssortmentFilter([137], true))
 
     .sorting(s => s
-        .sortByProductAttribute("DisplayName", "Ascending", (n: ProductSortingBuilder) => n
+        .sortByProductData("InStock", "Descending", (n) => n
             .sortByProductRelevance()));
 
 searcher.searchProducts(productSearchBuilder.build());
@@ -90,7 +91,7 @@ searcher.searchTermPrediction(searchTermPredictionBuilder.build());
 const searchCollectionBuilder = new SearchCollectionBuilder(settings)
     .filters(filters => filters.addProductAssortmentFilter(137))
     .addRequest(productSearchBuilder.build())
-    .addBuilder(contentSearchBuilder)
-    .addBuilder(searchTermPredictionBuilder);
+    .addRequest(contentSearchBuilder.build())
+    .addRequest(searchTermPredictionBuilder.build());
 
 searcher.batch(searchCollectionBuilder.build());

@@ -20,19 +20,19 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         super(settings)
     }
 
-    public setProductProperties(productProperties: SelectedProductPropertiesSettings): this {
+    public setSelectedProductProperties(productProperties: SelectedProductPropertiesSettings): this {
         this.searchSettings.selectedProductProperties = productProperties;
 
         return this;
     }
 
-    public setVariantProperties(variantProperties: SelectedVariantPropertiesSettings): this {
+    public setSelectedVariantProperties(variantProperties: SelectedVariantPropertiesSettings): this {
         this.searchSettings.selectedVariantProperties = variantProperties;
 
         return this;
     }
 
-    public setBrandProperties(brandProperties: SelectedBrandPropertiesSettings): this {
+    public setSelectedBrandProperties(brandProperties: SelectedBrandPropertiesSettings): this {
         this.searchSettings.selectedBrandProperties = brandProperties;
 
         return this;

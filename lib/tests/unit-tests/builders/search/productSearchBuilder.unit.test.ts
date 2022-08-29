@@ -1,19 +1,19 @@
-import { UserFactory } from "../../../../src/factory";
-import { ProductSearchBuilder } from "../../../../src/builders/search";
+import { UserFactory } from '../../../../src/factory';
+import { ProductSearchBuilder } from '../../../../src/builders/search';
 import { test, expect } from '@jest/globals'
-import { ProductSearchRequest } from "../../../../src/models/data-contracts";
+import { ProductSearchRequest } from '../../../../src/models/data-contracts';
 
 function baseBuilder() {
     return new ProductSearchBuilder({
-        language: "da-DK",
-        currency: "DKK",
-        displayedAtLocation: "search page",
-        user: UserFactory.anonymous()
+        language: 'da-DK',
+        currency: 'DKK',
+        displayedAtLocation: 'search page',
+        user: UserFactory.anonymous(),
     });
 };
 
 test('setTerm', () => {
-    const expectedTerm = "shoe";
+    const expectedTerm = 'shoe';
 
     const subject: ProductSearchRequest = baseBuilder()
         .setTerm(expectedTerm)
@@ -26,7 +26,7 @@ test('reset Term', () => {
     const expectedTerm = null;
 
     const subject: ProductSearchRequest = baseBuilder()
-        .setTerm("test")
+        .setTerm('test')
         .setTerm(expectedTerm)
         .build();
 
@@ -43,7 +43,7 @@ test('explodedVariants', () => {
 
 test('productProperties', () => {
     const subject: ProductSearchRequest = baseBuilder()
-        .setProductProperties({
+        .setSelectedProductProperties({
             displayName: true,
             categoryPaths: true,
             assortments: true,
@@ -61,12 +61,12 @@ test('productProperties', () => {
 
 test('variantProperties', () => {
     const subject: ProductSearchRequest = baseBuilder()
-        .setVariantProperties({
+        .setSelectedVariantProperties({
             displayName: true,
             assortments: true,
             pricing: true,
             allData: true,
-            allSpecifications: true
+            allSpecifications: true,
         })
         .build();
 
@@ -75,7 +75,7 @@ test('variantProperties', () => {
 
 test('brandProperties', () => {
     const subject: ProductSearchRequest = baseBuilder()
-        .setBrandProperties({
+        .setSelectedBrandProperties({
             displayName: true,
             assortments: true,
             allData: true,

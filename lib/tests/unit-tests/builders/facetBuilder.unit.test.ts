@@ -23,18 +23,18 @@ test('brand', () => {
 
 test('brand has selected value', () => {
     const subject: ProductFacetQuery | null = baseBuilder()
-        .addBrandFacet(["HP"])
+        .addBrandFacet(['HP'])
         .build();
 
     expect(subject?.items).toHaveLength(1);
     const brandFacet = subject!.items![0] as BrandFacet;
-    expect(brandFacet.selected).toEqual(["HP"])
+    expect(brandFacet.selected).toEqual(['HP'])
 });
 
 test('brand to be added as facet and to have its value set', () => {
     const builder: FacetBuilder = baseBuilder();
     builder.addBrandFacet();
-    builder.addBrandFacet(["HP"]);
+    builder.addBrandFacet(['HP']);
 
     const subject: ProductFacetQuery | null = builder.build();
 

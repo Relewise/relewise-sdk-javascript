@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals'
-import { Pagination, PaginationBuilder } from "../../../src/builders/paginationBuilder";
+import { Pagination, PaginationBuilder } from '../../../src/builders/paginationBuilder';
 
 function baseBuilder() {
     return new PaginationBuilder();

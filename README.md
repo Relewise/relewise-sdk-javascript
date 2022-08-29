@@ -96,11 +96,12 @@ const settings = {
 };
 
 const builder = new ProductSearchBuilder(settings)
-    .setProductProperties({
+    .setSelectedProductProperties({
         displayName: true,
         pricing: true,
-        dataKeys: ['Url', 'ShortDescription', 'ImageUrls', '[dataFieldConventionName]*']
+        dataKeys: ['Url', 'ShortDescription', 'ImageUrls', 'DK_*']
     })
+    .setTerm('shoe')
     .pagination(p => p
         .setPageSize(30)
         .setPage(1))
@@ -113,6 +114,45 @@ const builder = new ProductSearchBuilder(settings)
         .addProductAssortmentFilter(1)
         .addVariantAssortmentFilter(1)
     );
+
+searcher.searchProducts(builder.build());
+```
+
+### Category pages
+
+You can also use the `Searcher` for category pages without specifying the `term`:
+
+```ts
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+
+const settings = {
+    language: 'da-DK',
+    currency: 'DKK',
+    displayedAtLocation: 'search page',
+    user: UserFactory.anonymous()
+};
+
+const builder = new ProductSearchBuilder(settings)
+    .setSelectedProductProperties({
+        displayName: true,
+        pricing: true,
+        dataKeys: ['Url', 'ShortDescription', 'ImageUrls', 'DK_*']
+    })
+    .pagination(p => p
+        .setPageSize(30)
+        .setPage(1))
+    .facets(f => f
+        .addBrandFacet(['HP', 'Lenovo'])
+        .addSalesPriceRangeFacet('Product', 100, 500)
+        .addVariantSpecificationFacet('Size', ['XL'])
+    )
+    .filters(f => f
+        .addProductAssortmentFilter(1)
+        .addVariantAssortmentFilter(1)
+    )
+    .sorting(s => s
+        .sortByProductData('InStock', 'Descending', (n) => n
+            .sortByProductRelevance()));
 
 searcher.searchProducts(builder.build());
 ```

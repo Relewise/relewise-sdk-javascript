@@ -38,6 +38,13 @@ export interface AbandonedCartTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
+export interface AnalyzerRequest {
+  $type: string;
+  language?: Language | null;
+  currency?: Currency | null;
+  custom?: Record<string, string | null>;
+}
+
 export type AndCondition = UserCondition & { conditions?: UserConditionCollection | null };
 
 export type AndFilter = Filter & {
@@ -99,10 +106,31 @@ export interface AssortmentFacetResult {
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
 }
 
-export interface BatchedTrackingRequest {
-  items?: Trackable[] | null;
-  custom?: Record<string, string | null>;
-}
+export type BatchedTrackingRequest = TrackingRequest & {
+  items?:
+    | (
+        | BrandAdministrativeAction
+        | BrandUpdate
+        | BrandView
+        | Cart
+        | ContentAdministrativeAction
+        | ContentCategoryAdministrativeAction
+        | ContentCategoryUpdate
+        | ContentCategoryView
+        | ContentUpdate
+        | ContentView
+        | Order
+        | ProductAdministrativeAction
+        | ProductCategoryAdministrativeAction
+        | ProductCategoryUpdate
+        | ProductCategoryView
+        | ProductUpdate
+        | ProductView
+        | SearchTerm
+        | UserUpdate
+      )[]
+    | null;
+};
 
 export interface BooleanAvailableFacetValue {
   value: boolean;
@@ -159,25 +187,21 @@ export interface Brand {
   data?: Record<string, DataValue>;
 }
 
-export interface BrandAdministrativeAction {
+export type BrandAdministrativeAction = Trackable & {
   filters?: FilterCollection | null;
   language?: Language | null;
   kind: "Disable" | "Enable" | "Delete";
   currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export type BrandAssortmentFilter = Filter & { assortments?: number[] | null };
 
 export type BrandDataFilter = DataFilter;
 
-export interface BrandDetailsCollectionResponse {
+export type BrandDetailsCollectionResponse = TimedResponse & {
   brands?: BrandResultDetails[] | null;
-
-  /** @format int32 */
   totalNumberOfResults?: number | null;
-  statistics?: Statistics | null;
-}
+};
 
 export type BrandFacet = StringValueFacet;
 
@@ -209,18 +233,25 @@ export interface BrandNameAndIdResultAvailableFacetValue {
   selected: boolean;
 }
 
-export interface BrandQuery {
+export type BrandQuery = LicensedRequest & {
   filters?: FilterCollection | null;
-
-  /** @format int32 */
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
-
-  /** @format int32 */
   skipNumberOfResults: number;
   returnTotalNumberOfResults: boolean;
   includeDisabledBrands: boolean;
+};
+
+export interface BrandRecommendationRequest {
+  $type: string;
+  settings?: BrandRecommendationRequestSettings | null;
+  language?: Language | null;
+  user?: User | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  filters?: FilterCollection | null;
+  displayedAtLocationType?: string | null;
+  currency?: Currency | null;
   custom?: Record<string, string | null>;
 }
 
@@ -234,11 +265,7 @@ export interface BrandRecommendationRequestSettings {
   custom?: Record<string, string | null>;
 }
 
-export interface BrandRecommendationResponse {
-  recommendations?: BrandResult[] | null;
-  custom?: Record<string, string | null>;
-  statistics?: Statistics | null;
-}
+export type BrandRecommendationResponse = RecommendationResponse & { recommendations?: BrandResult[] | null };
 
 export interface BrandRecommendationWeights {
   /** @format double */
@@ -289,26 +316,20 @@ export interface BrandResultDetails {
   purchasedByUser?: PurchasedByUserInfo | null;
 }
 
-export interface BrandUpdate {
+export type BrandUpdate = Trackable & {
   brand?: Brand | null;
   kind: "None" | "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface BrandView {
-  user?: User | null;
-  brand: Brand;
-  custom?: Record<string, string | null>;
-}
+export type BrandView = Trackable & { user?: User | null; brand: Brand };
 
-export interface Cart {
+export type Cart = Trackable & {
   user?: User | null;
   name?: string | null;
   subtotal?: Money | null;
   lineItems?: LineItem[] | null;
   data?: Record<string, DataValue>;
-  custom?: Record<string, string | null>;
-}
+};
 
 export type CartDataFilter = Filter & {
   key?: string | null;
@@ -329,11 +350,6 @@ export interface CartDetails {
   data?: Record<string, DataValue>;
 }
 
-export interface CartMetrics {
-  /** @format int32 */
-  opened: number;
-}
-
 export interface Category {
   $type: string;
   id?: string | null;
@@ -341,6 +357,15 @@ export interface Category {
   categoryPaths?: CategoryPath[] | null;
   assortments?: number[] | null;
   data?: Record<string, DataValue>;
+  custom?: Record<string, string | null>;
+}
+
+export interface CategoryAdministrativeAction {
+  $type: string;
+  filters?: FilterCollection | null;
+  language?: Language | null;
+  kind: "Disable" | "Enable" | "Delete";
+  currency?: Currency | null;
   custom?: Record<string, string | null>;
 }
 
@@ -365,12 +390,6 @@ export interface CategoryIndexConfiguration {
 export interface CategoryIndexConfigurationEntry {
   id?: FieldIndexConfiguration | null;
   displayName?: FieldIndexConfiguration | null;
-}
-
-export interface CategoryMetrics {
-  category?: CategoryNameAndIdResult | null;
-  immediateParent: boolean;
-  rank?: ViewsAndSalesMetrics | null;
 }
 
 export interface CategoryNameAndId {
@@ -443,12 +462,10 @@ export interface CategoryResultDetails {
   custom?: Record<string, string | null>;
 }
 
-export interface ClassificationMetrics {
-  combination?: Record<string, string | null>;
-  views?: ViewsMetrics | null;
-  sales?: SalesMetrics | null;
-  carts?: CartMetrics | null;
-  rank?: RankMetrics | null;
+export interface CategoryUpdate {
+  $type: string;
+  kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
+  custom?: Record<string, string | null>;
 }
 
 export type ClearTextParser = Parser;
@@ -474,13 +491,12 @@ export interface Content {
   custom?: Record<string, string>;
 }
 
-export interface ContentAdministrativeAction {
+export type ContentAdministrativeAction = Trackable & {
   filters?: FilterCollection | null;
   language?: Language | null;
   kind: "DisableInRecommendations" | "Disable" | "EnableInRecommendations" | "Enable" | "PermanentlyDelete" | "Delete";
   currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export type ContentAssortmentFacet = AssortmentFacet;
 
@@ -493,29 +509,21 @@ export type ContentAttributeSorting = ContentSorting & {
 
 export type ContentCategory = Category;
 
-export interface ContentCategoryAdministrativeAction {
-  filters?: FilterCollection | null;
-  language?: Language | null;
-  kind: "Disable" | "Enable" | "Delete";
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type ContentCategoryAdministrativeAction = CategoryAdministrativeAction;
 
 export type ContentCategoryAssortmentFilter = Filter & { assortments?: number[] | null };
 
 export type ContentCategoryDataFilter = DataFilter;
 
-export interface ContentCategoryDetailsCollectionResponse {
+export type ContentCategoryDetailsCollectionResponse = TimedResponse & {
   categories?: ContentCategoryResultDetails[] | null;
-
-  /** @format int32 */
   totalNumberOfResults?: number | null;
-  statistics?: Statistics | null;
-}
+};
 
 export type ContentCategoryIdFilter = CategoryIdFilter;
 
-export interface ContentCategoryQuery {
+export interface ContentCategoryIdFilterCategoryQuery {
+  $type: string;
   filters?: FilterCollection | null;
 
   /** @format int32 */
@@ -530,6 +538,25 @@ export interface ContentCategoryQuery {
   custom?: Record<string, string | null>;
 }
 
+export type ContentCategoryQuery = ContentCategoryIdFilterCategoryQuery;
+
+export interface ContentCategoryRecommendationRequest {
+  $type: string;
+  settings?: ContentCategoryRecommendationRequestSettings | null;
+  language?: Language | null;
+  user?: User | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  filters?: FilterCollection | null;
+  displayedAtLocationType?: string | null;
+  currency?: Currency | null;
+  custom?: Record<string, string | null>;
+}
+
+export type ContentCategoryRecommendationRequestCollection = LicensedRequest & {
+  requests?: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)[] | null;
+  requireDistinctContentAcrossResults: boolean;
+};
+
 export interface ContentCategoryRecommendationRequestSettings {
   /** @format int32 */
   numberOfRecommendations: number;
@@ -540,11 +567,13 @@ export interface ContentCategoryRecommendationRequestSettings {
   custom?: Record<string, string | null>;
 }
 
-export interface ContentCategoryRecommendationResponse {
+export type ContentCategoryRecommendationResponse = RecommendationResponse & {
   recommendations?: ContentCategoryResult[] | null;
-  custom?: Record<string, string | null>;
-  statistics?: Statistics | null;
-}
+};
+
+export type ContentCategoryRecommendationResponseCollection = TimedResponse & {
+  responses?: ContentCategoryRecommendationResponse[] | null;
+};
 
 export interface ContentCategoryRecommendationWeights {
   /** @format double */
@@ -558,48 +587,21 @@ export type ContentCategoryResult = CategoryResult;
 
 export type ContentCategoryResultDetails = CategoryResultDetails;
 
-export interface ContentCategorySearchRequest {
+export type ContentCategorySearchRequest = PaginatedSearchRequest & {
   term?: string | null;
   settings?: ContentCategorySearchSettings | null;
+};
 
-  /** @format int32 */
-  skip: number;
-
-  /** @format int32 */
-  take: number;
-  language?: Language | null;
-  currency?: Currency | null;
-  user?: User | null;
-  displayedAtLocation?: string | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  indexSelector?: SearchIndexSelector | null;
-  postFilters?: FilterCollection | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface ContentCategorySearchResponse {
-  /** @format int32 */
-  hits: number;
-  statistics?: Statistics | null;
-}
+export type ContentCategorySearchResponse = PaginatedSearchResponse;
 
 export type ContentCategorySearchSettings = SearchSettings & {
   numberOfRecommendations?: number | null;
   onlyIncludeRecommendationsForEmptyResults?: boolean | null;
 };
 
-export interface ContentCategoryUpdate {
-  category?: ContentCategory | null;
-  kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
-  custom?: Record<string, string | null>;
-}
+export type ContentCategoryUpdate = CategoryUpdate & { category?: ContentCategory | null };
 
-export interface ContentCategoryView {
-  user?: User | null;
-  idPath: string[];
-  custom?: Record<string, string | null>;
-}
+export type ContentCategoryView = Trackable & { user?: User | null; idPath: string[] };
 
 export type ContentDataBooleanValueFacet = BooleanContentDataValueFacet;
 
@@ -625,13 +627,10 @@ export type ContentDataStringValueFacet = StringContentDataValueFacet;
 
 export type ContentDataStringValueFacetResult = StringContentDataValueFacetResult;
 
-export interface ContentDetailsCollectionResponse {
+export type ContentDetailsCollectionResponse = TimedResponse & {
   contents?: ContentResultDetails[] | null;
-
-  /** @format int32 */
   totalNumberOfResults?: number | null;
-  statistics?: Statistics | null;
-}
+};
 
 export interface ContentFacetQuery {
   items?:
@@ -694,22 +693,18 @@ export interface ContentIndexConfiguration {
 
 export type ContentPopularitySorting = ContentSorting;
 
-export interface ContentQuery {
+export type ContentQuery = LicensedRequest & {
   filters?: FilterCollection | null;
-
-  /** @format int32 */
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
-
-  /** @format int32 */
   skipNumberOfResults: number;
   returnTotalNumberOfResults: boolean;
   includeDisabledContents: boolean;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface ContentRecommendationRequest {
+  $type: string;
   settings?: ContentRecommendationRequestSettings | null;
   language?: Language | null;
   user?: User | null;
@@ -720,11 +715,19 @@ export interface ContentRecommendationRequest {
   custom?: Record<string, string | null>;
 }
 
-export interface ContentRecommendationRequestCollection {
-  requests?: ContentRecommendationRequest[] | null;
+export type ContentRecommendationRequestCollection = LicensedRequest & {
+  requests?:
+    | (
+        | ContentsViewedAfterViewingContentRequest
+        | ContentsViewedAfterViewingMultipleContentsRequest
+        | ContentsViewedAfterViewingMultipleProductsRequest
+        | ContentsViewedAfterViewingProductRequest
+        | PersonalContentRecommendationRequest
+        | PopularContentsRequest
+      )[]
+    | null;
   requireDistinctContentAcrossResults: boolean;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface ContentRecommendationRequestSettings {
   /** @format int32 */
@@ -736,16 +739,11 @@ export interface ContentRecommendationRequestSettings {
   prioritizeDiversityBetweenRequests: boolean;
 }
 
-export interface ContentRecommendationResponse {
-  recommendations?: ContentResult[] | null;
-  custom?: Record<string, string | null>;
-  statistics?: Statistics | null;
-}
+export type ContentRecommendationResponse = RecommendationResponse & { recommendations?: ContentResult[] | null };
 
-export interface ContentRecommendationResponseCollection {
+export type ContentRecommendationResponseCollection = TimedResponse & {
   responses?: ContentRecommendationResponse[] | null;
-  statistics?: Statistics | null;
-}
+};
 
 export type ContentRelevanceSorting = ContentSorting;
 
@@ -786,37 +784,18 @@ export interface ContentResultDetails {
   custom?: Record<string, string | null>;
 }
 
-export interface ContentSearchRequest {
+export type ContentSearchRequest = PaginatedSearchRequest & {
   term?: string | null;
   facets?: ContentFacetQuery | null;
   settings?: ContentSearchSettings | null;
   sorting?: ContentSortBySpecification | null;
+};
 
-  /** @format int32 */
-  skip: number;
-
-  /** @format int32 */
-  take: number;
-  language?: Language | null;
-  currency?: Currency | null;
-  user?: User | null;
-  displayedAtLocation?: string | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  indexSelector?: SearchIndexSelector | null;
-  postFilters?: FilterCollection | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface ContentSearchResponse {
+export type ContentSearchResponse = PaginatedSearchResponse & {
   results?: ContentResult[] | null;
   facets?: ContentFacetResult | null;
   recommendations?: ContentResult[] | null;
-
-  /** @format int32 */
-  hits: number;
-  statistics?: Statistics | null;
-}
+};
 
 export type ContentSearchSettings = SearchSettings & {
   selectedContentProperties?: SelectedContentPropertiesSettings | null;
@@ -833,65 +812,26 @@ export interface ContentSorting {
   thenBy?: ContentAttributeSorting | ContentDataSorting | ContentPopularitySorting | ContentRelevanceSorting | null;
 }
 
-export interface ContentUpdate {
+export type ContentUpdate = Trackable & {
   content?: Content | null;
   kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface ContentView {
-  user?: User | null;
-  content: Content;
-  custom?: Record<string, string | null>;
-}
+export type ContentView = Trackable & { user?: User | null; content: Content };
 
-export interface ContentsViewedAfterViewingContentRequest {
-  contentId?: string | null;
-  settings?: ContentRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type ContentsViewedAfterViewingContentRequest = ContentRecommendationRequest & { contentId?: string | null };
 
-export interface ContentsViewedAfterViewingMultipleContentsRequest {
+export type ContentsViewedAfterViewingMultipleContentsRequest = ContentRecommendationRequest & {
   contentIds?: string[] | null;
-  settings?: ContentRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface ContentsViewedAfterViewingMultipleProductsRequest {
+export type ContentsViewedAfterViewingMultipleProductsRequest = ContentRecommendationRequest & {
   productAndVariantIds?: ProductAndVariantId[] | null;
-  settings?: ContentRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface ContentsViewedAfterViewingProductRequest {
+export type ContentsViewedAfterViewingProductRequest = ContentRecommendationRequest & {
   productAndVariantId?: ProductAndVariantId | null;
-  settings?: ContentRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface ContextConditionConfiguration {
   filters?: RequestContextFilter[] | null;
@@ -901,18 +841,10 @@ export interface Currency {
   value: string;
 }
 
-export interface CustomProductRecommendationRequest {
+export type CustomProductRecommendationRequest = ProductRecommendationRequest & {
   recommendationType?: string | null;
   parameters?: Record<string, string | null>;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export type DataDoubleSelector = ValueSelector & { key?: string | null };
 
@@ -933,7 +865,7 @@ export interface DataIndexConfiguration {
   unspecified?: FieldIndexConfiguration | null;
 }
 
-export interface DataRangesFacetResult {
+export type DataRangesFacetResult = RangesFacetResult & {
   key?: string | null;
   dataSelectionStrategy?:
     | "Product"
@@ -941,13 +873,7 @@ export interface DataRangesFacetResult {
     | "VariantWithFallbackToProduct"
     | "ProductWithFallbackToVariant"
     | null;
-
-  /** @format int32 */
-  rangeSize: number;
-  selected?: DoubleRange[] | null;
-  available?: DoubleRangeAvailableFacetValue[] | null;
-  field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-}
+};
 
 export interface DataValue {
   type:
@@ -961,7 +887,7 @@ export interface DataValue {
     | "DoubleList"
     | "BooleanList"
     | "MultilingualCollection";
-  value: any;
+  value?: any;
 }
 
 export interface DecimalNullableChainableRange {
@@ -1004,43 +930,26 @@ export interface DecimalRangeAvailableFacetValue {
   selected: boolean;
 }
 
-export interface DeleteMerchandisingRuleRequest {
-  /** @format uuid */
-  id: string;
-  custom?: Record<string, string | null>;
-}
+export type DeleteMerchandisingRuleRequest = LicensedRequest & { id: string };
 
-export interface DeletePredictionRulesRequest {
+export type DeletePredictionRulesRequest = DeleteSearchRulesRequest;
+
+export type DeleteSearchIndexRequest = LicensedRequest & { id?: string | null; deletedBy?: string | null };
+
+export interface DeleteSearchRulesRequest {
+  $type: string;
   ids?: string[] | null;
   deletedBy?: string | null;
   custom?: Record<string, string | null>;
 }
 
-export interface DeleteSearchIndexRequest {
-  id?: string | null;
-  deletedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+export type DeleteSearchRulesResponse = TimedResponse;
 
-export interface DeleteSearchRulesResponse {
-  statistics?: Statistics | null;
-}
+export type DeleteSynonymsRequest = LicensedRequest & { ids?: string[] | null; deletedBy?: string | null };
 
-export interface DeleteSynonymsRequest {
-  ids?: string[] | null;
-  deletedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+export type DeleteSynonymsResponse = TimedResponse;
 
-export interface DeleteSynonymsResponse {
-  statistics?: Statistics | null;
-}
-
-export interface DeleteTriggerConfigurationRequest {
-  /** @format uuid */
-  id: string;
-  custom?: Record<string, string | null>;
-}
+export type DeleteTriggerConfigurationRequest = LicensedRequest & { id: string };
 
 export type DistinctCondition = ValueCondition & { numberOfOccurrencesAllowedWithTheSameValue: number };
 
@@ -1237,14 +1146,9 @@ export interface GlobalTriggerConfiguration {
   settings?: Record<string, string | null>;
 }
 
-export interface GlobalTriggerConfigurationRequest {
-  custom?: Record<string, string | null>;
-}
+export type GlobalTriggerConfigurationRequest = LicensedRequest;
 
-export interface GlobalTriggerConfigurationResponse {
-  configuration?: GlobalTriggerConfiguration | null;
-  statistics?: Statistics | null;
-}
+export type GlobalTriggerConfigurationResponse = TimedResponse & { configuration?: GlobalTriggerConfiguration | null };
 
 export type GreaterThanCondition = ValueCondition & { value: number };
 
@@ -1370,6 +1274,11 @@ export interface LanguageIndexConfigurationEntry {
 
 export type LessThanCondition = ValueCondition & { value: number };
 
+export interface LicensedRequest {
+  $type: string;
+  custom?: Record<string, string | null>;
+}
+
 export interface LineItem {
   product: Product;
   variant?: ProductVariant | null;
@@ -1408,30 +1317,30 @@ export interface MerchandisingRule {
   settings?: Record<string, string | null>;
 }
 
-export interface MerchandisingRuleCollectionResponse {
+export type MerchandisingRuleCollectionResponse = TimedResponse & {
   rules?: (BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule)[] | null;
-  statistics?: Statistics | null;
-}
+};
 
-export interface MerchandisingRuleRequest {
-  /** @format uuid */
-  id: string;
+export type MerchandisingRuleRequest = LicensedRequest & { id: string; type?: number | null };
 
-  /** @format int32 */
-  type?: number | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface MerchandisingRuleResponse {
+export type MerchandisingRuleResponse = TimedResponse & {
   rule?: BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule | null;
-  statistics?: Statistics | null;
-}
+};
 
-export interface MerchandisingRulesRequest {
-  /** @format int32 */
-  type?: number | null;
-  custom?: Record<string, string | null>;
-}
+export type MerchandisingRulesRequest = LicensedRequest & { type?: number | null };
+
+export type MixedRecommendationResponseCollection = TimedResponse & {
+  responses?:
+    | (
+        | BrandRecommendationResponse
+        | ContentCategoryRecommendationResponse
+        | ContentRecommendationResponse
+        | ProductCategoryRecommendationResponse
+        | ProductRecommendationResponse
+        | SearchTermRecommendationResponse
+      )[]
+    | null;
+};
 
 export interface Money {
   /** @format double */
@@ -1440,11 +1349,25 @@ export interface Money {
 }
 
 export interface MultiCurrency {
-  values: Money[];
+  values?: Money[] | null;
 }
 
 export interface Multilingual {
-  values: Value[];
+  values?: MultilingualValue[] | null;
+}
+
+export interface MultilingualCollection {
+  values?: MultilingualCollectionValue[] | null;
+}
+
+export interface MultilingualCollectionValue {
+  language?: Language | null;
+  values?: string[] | null;
+}
+
+export interface MultilingualValue {
+  language: Language;
+  text?: string | null;
 }
 
 export type OrCondition = UserCondition & { conditions?: UserConditionCollection | null };
@@ -1485,7 +1408,7 @@ export type OrFilter = Filter & {
     | null;
 };
 
-export interface Order {
+export type Order = Trackable & {
   user: User;
   subtotal: Money;
   lineItems: LineItem[];
@@ -1493,8 +1416,7 @@ export interface Order {
   cartName: string;
   channel?: string | null;
   subChannel?: string | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface OverriddenContentRecommendationRequestSettings {
   /** @format int32 */
@@ -1560,161 +1482,121 @@ export interface OverriddenSelectedVariantPropertiesSettings {
   specificationKeys?: string[] | null;
 }
 
+export interface PaginatedSearchRequest {
+  /** @format int32 */
+  skip: number;
+
+  /** @format int32 */
+  take: number;
+  language?: Language | null;
+  currency?: Currency | null;
+  user?: User | null;
+  displayedAtLocation?: string | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  filters?: FilterCollection | null;
+  indexSelector?: SearchIndexSelector | null;
+  postFilters?: FilterCollection | null;
+  custom?: Record<string, string | null>;
+}
+
+export interface PaginatedSearchResponse {
+  /** @format int32 */
+  hits: number;
+  statistics?: Statistics | null;
+}
+
 export interface Parser {
   $type: string;
 }
 
-export interface PersonalBrandRecommendationRequest {
-  /** @format int32 */
+export type PersonalBrandRecommendationRequest = BrandRecommendationRequest & {
   sinceMinutesAgo: number;
   weights?: BrandRecommendationWeights | null;
-  settings?: BrandRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PersonalContentCategoryRecommendationRequest {
-  /** @format int32 */
+export type PersonalContentCategoryRecommendationRequest = ContentCategoryRecommendationRequest & {
   sinceMinutesAgo: number;
   weights?: ContentCategoryRecommendationWeights | null;
-  settings?: ContentCategoryRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PersonalContentRecommendationRequest {
-  settings?: ContentRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type PersonalContentRecommendationRequest = ContentRecommendationRequest;
 
-export interface PersonalProductCategoryRecommendationRequest {
-  /** @format int32 */
+export type PersonalProductCategoryRecommendationRequest = ProductCategoryRecommendationRequest & {
   sinceMinutesAgo: number;
   weights?: ProductCategoryRecommendationWeights | null;
-  settings?: ProductCategoryRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PersonalProductRecommendationRequest {
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type PersonalProductRecommendationRequest = ProductRecommendationRequest;
 
-export interface PopularBrandsRecommendationRequest {
-  /** @format int32 */
+export type PopularBrandsRecommendationRequest = BrandRecommendationRequest & {
   sinceMinutesAgo: number;
   weights?: BrandRecommendationWeights | null;
-  settings?: BrandRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PopularContentCategoriesRecommendationRequest {
-  /** @format int32 */
+export type PopularContentCategoriesRecommendationRequest = ContentCategoryRecommendationRequest & {
   sinceMinutesAgo: number;
   weights?: ContentCategoryRecommendationWeights | null;
-  settings?: ContentCategoryRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PopularContentsRequest {
-  /** @format int32 */
-  sinceMinutesAgo: number;
-  settings?: ContentRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type PopularContentsRequest = ContentRecommendationRequest & { sinceMinutesAgo: number };
 
-export interface PopularProductCategoriesRecommendationRequest {
-  /** @format int32 */
+export type PopularProductCategoriesRecommendationRequest = ProductCategoryRecommendationRequest & {
   sinceMinutesAgo: number;
   weights?: ProductCategoryRecommendationWeights | null;
-  settings?: ProductCategoryRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PopularProductsRequest {
+export type PopularProductsRequest = ProductRecommendationRequest & {
   basedOn: "MostPurchased" | "MostViewed";
-
-  /** @format int32 */
   sinceMinutesAgo: number;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PopularSearchTermsRecommendationRequest {
+export type PopularSearchTermsRecommendationRequest = RecommendationRequest & {
   term?: string | null;
   settings?: RecommendPopularSearchTermSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
+};
+
+export type PredictionRule = SearchRule & {
+  condition?: PredictionRuleSearchTermCondition | null;
+  promote?: PredictionRulePromotion | null;
+  suppress?: PredictionRuleSuppression | null;
+};
+
+export interface PredictionRulePromotion {
+  to: "Top" | "Bottom";
+  values?: string[] | null;
+}
+
+export interface PredictionRuleSaveSearchRulesRequest {
+  $type: string;
+  rules?: PredictionRule[] | null;
+  modifiedBy?: string | null;
   custom?: Record<string, string | null>;
 }
 
-export type PredictionRule = SearchRule & {
-  condition?: SearchTermCondition | null;
-  promote?: Promotion | null;
-  suppress?: Suppression | null;
-};
+export interface PredictionRuleSaveSearchRulesResponse {
+  $type: string;
+  rules?: PredictionRule[] | null;
+  statistics?: Statistics | null;
+}
+
+export interface PredictionRuleSearchRulesResponse {
+  $type: string;
+  rules?: PredictionRule[] | null;
+
+  /** @format int32 */
+  hits: number;
+  statistics?: Statistics | null;
+}
+
+export interface PredictionRuleSearchTermCondition {
+  kind: "BeginsWith" | "EndsWith" | "PartiallyMatches";
+  values?: string[] | null;
+}
+
+export interface PredictionRuleSuppression {
+  condition: "Contains";
+  values?: string[] | null;
+}
 
 export type PriceRangeFacet = Facet & {
   selected?: DecimalNullableRange | null;
@@ -1753,7 +1635,7 @@ export interface Product {
   brand?: Brand | null;
 }
 
-export interface ProductAdministrativeAction {
+export type ProductAdministrativeAction = Trackable & {
   filters?: FilterCollection | null;
   language?: Language | null;
   productUpdateKind:
@@ -1773,8 +1655,7 @@ export interface ProductAdministrativeAction {
     | "PermanentlyDelete"
     | "Delete";
   currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface ProductAndVariantId {
   productId: string;
@@ -1803,27 +1684,34 @@ export type ProductAttributeSorting = ProductSorting & {
 
 export type ProductCategory = Category;
 
-export interface ProductCategoryAdministrativeAction {
-  filters?: FilterCollection | null;
-  language?: Language | null;
-  kind: "Disable" | "Enable" | "Delete";
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type ProductCategoryAdministrativeAction = CategoryAdministrativeAction;
 
 export type ProductCategoryAssortmentFilter = Filter & { assortments?: number[] | null };
 
 export type ProductCategoryDataFilter = DataFilter;
 
-export interface ProductCategoryDetailsCollectionResponse {
+export type ProductCategoryDetailsCollectionResponse = TimedResponse & {
   categories?: ProductCategoryResultDetails[] | null;
-
-  /** @format int32 */
   totalNumberOfResults?: number | null;
-  statistics?: Statistics | null;
-}
+};
 
 export type ProductCategoryIdFilter = CategoryIdFilter;
+
+export interface ProductCategoryIdFilterCategoryQuery {
+  $type: string;
+  filters?: FilterCollection | null;
+
+  /** @format int32 */
+  numberOfResults: number;
+  language?: Language | null;
+  currency?: Currency | null;
+
+  /** @format int32 */
+  skipNumberOfResults: number;
+  returnTotalNumberOfResults: boolean;
+  includeDisabledCategories: boolean;
+  custom?: Record<string, string | null>;
+}
 
 export type ProductCategoryIdRelevanceModifier = RelevanceModifier & {
   categoryId?: string | null;
@@ -1863,20 +1751,24 @@ export interface ProductCategoryInterestTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
-export interface ProductCategoryQuery {
-  filters?: FilterCollection | null;
+export type ProductCategoryQuery = ProductCategoryIdFilterCategoryQuery;
 
-  /** @format int32 */
-  numberOfResults: number;
+export interface ProductCategoryRecommendationRequest {
+  $type: string;
+  settings?: ProductCategoryRecommendationRequestSettings | null;
   language?: Language | null;
+  user?: User | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  filters?: FilterCollection | null;
+  displayedAtLocationType?: string | null;
   currency?: Currency | null;
-
-  /** @format int32 */
-  skipNumberOfResults: number;
-  returnTotalNumberOfResults: boolean;
-  includeDisabledCategories: boolean;
   custom?: Record<string, string | null>;
 }
+
+export type ProductCategoryRecommendationRequestCollection = LicensedRequest & {
+  requests?: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)[] | null;
+  requireDistinctContentAcrossResults: boolean;
+};
 
 export interface ProductCategoryRecommendationRequestSettings {
   /** @format int32 */
@@ -1888,11 +1780,13 @@ export interface ProductCategoryRecommendationRequestSettings {
   custom?: Record<string, string | null>;
 }
 
-export interface ProductCategoryRecommendationResponse {
+export type ProductCategoryRecommendationResponse = RecommendationResponse & {
   recommendations?: ProductCategoryResult[] | null;
-  custom?: Record<string, string | null>;
-  statistics?: Statistics | null;
-}
+};
+
+export type ProductCategoryRecommendationResponseCollection = TimedResponse & {
+  responses?: ProductCategoryRecommendationResponse[] | null;
+};
 
 export interface ProductCategoryRecommendationWeights {
   /** @format double */
@@ -1912,51 +1806,24 @@ export type ProductCategoryResultDetails = CategoryResultDetails & {
   purchasedByUser?: PurchasedByUserInfo | null;
 };
 
-export interface ProductCategorySearchRequest {
+export type ProductCategorySearchRequest = PaginatedSearchRequest & {
   term?: string | null;
   settings?: ProductCategorySearchSettings | null;
+};
 
-  /** @format int32 */
-  skip: number;
-
-  /** @format int32 */
-  take: number;
-  language?: Language | null;
-  currency?: Currency | null;
-  user?: User | null;
-  displayedAtLocation?: string | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  indexSelector?: SearchIndexSelector | null;
-  postFilters?: FilterCollection | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface ProductCategorySearchResponse {
+export type ProductCategorySearchResponse = PaginatedSearchResponse & {
   results?: ProductCategoryResult[] | null;
   recommendations?: ProductCategoryResult[] | null;
-
-  /** @format int32 */
-  hits: number;
-  statistics?: Statistics | null;
-}
+};
 
 export type ProductCategorySearchSettings = SearchSettings & {
   numberOfRecommendations?: number | null;
   onlyIncludeRecommendationsForEmptyResults?: boolean | null;
 };
 
-export interface ProductCategoryUpdate {
-  category?: ProductCategory | null;
-  kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
-  custom?: Record<string, string | null>;
-}
+export type ProductCategoryUpdate = CategoryUpdate & { category?: ProductCategory | null };
 
-export interface ProductCategoryView {
-  user?: User | null;
-  idPath: string[];
-  custom?: Record<string, string | null>;
-}
+export type ProductCategoryView = Trackable & { user?: User | null; idPath: string[] };
 
 export type ProductDataBooleanValueFacet = BooleanProductDataValueFacet;
 
@@ -1997,13 +1864,10 @@ export type ProductDataStringValueFacet = StringProductDataValueFacet;
 
 export type ProductDataStringValueFacetResult = StringProductDataValueFacetResult;
 
-export interface ProductDetailsCollectionResponse {
+export type ProductDetailsCollectionResponse = TimedResponse & {
   products?: ProductResultDetails[] | null;
-
-  /** @format int32 */
   totalNumberOfResults?: number | null;
-  statistics?: Statistics | null;
-}
+};
 
 export type ProductDisplayNameFilter = Filter & {
   language?: Language | null;
@@ -2083,7 +1947,13 @@ export interface ProductIndexConfiguration {
 export type ProductInterestTriggerConfiguration = ProductInterestTriggerResultTriggerConfiguration & {
   productViews?: Int32NullableRange | null;
   filters?: FilterCollection | null;
+  resultSettings?: ProductInterestTriggerResultResultSettings | null;
 };
+
+export interface ProductInterestTriggerResultResultSettings {
+  selectedProductProperties?: SelectedProductPropertiesSettings | null;
+  selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
+}
 
 export interface ProductInterestTriggerResultTriggerConfiguration {
   $type: string;
@@ -2119,18 +1989,11 @@ export type ProductListPriceRelevanceModifier = RelevanceModifier & {
   negated: boolean;
 };
 
-export interface ProductPerformanceRequest {
-  /** @format int64 */
+export type ProductPerformanceRequest = AnalyzerRequest & {
   fromUnixTimeSeconds: number;
-
-  /** @format int64 */
   toUnixTimeSeconds: number;
   filters?: FilterCollection | null;
-
-  /** @format int32 */
   numberOfResults: number;
-
-  /** @format int32 */
   skipNumberOfResults: number;
   byVariant: boolean;
   selectedProductProperties?: SelectedProductPropertiesSettings | null;
@@ -2139,45 +2002,101 @@ export interface ProductPerformanceRequest {
   variantData: "FromVariant" | "FromProduct" | "FromProductDividedByVariants";
   classifications?: StringStringKeyValuePair[] | null;
   selectedBrandProperties?: SelectedBrandPropertiesSettings | null;
-  language?: Language | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface ProductPerformanceResponse {
+export type ProductPerformanceResponse = TimedResponse & {
   results?: ProductPerformanceResult[] | null;
-
-  /** @format int32 */
   totalNumberOfResults: number;
-
-  /** @format int32 */
   remainingNumberOfResults: number;
-  statistics?: Statistics | null;
-}
+};
 
 export interface ProductPerformanceResult {
   product?: ProductResult | null;
-  classifications?: ClassificationMetrics[] | null;
+  classifications?: ProductPerformanceResultClassificationMetrics[] | null;
+}
+
+export interface ProductPerformanceResultCartMetrics {
+  /** @format int32 */
+  opened: number;
+}
+
+export interface ProductPerformanceResultCategoryMetrics {
+  category?: CategoryNameAndIdResult | null;
+  immediateParent: boolean;
+  rank?: ProductPerformanceResultViewsAndSalesMetrics | null;
+}
+
+export interface ProductPerformanceResultClassificationMetrics {
+  combination?: Record<string, string | null>;
+  views?: ProductPerformanceResultViewsMetrics | null;
+  sales?: ProductPerformanceResultSalesMetrics | null;
+  carts?: ProductPerformanceResultCartMetrics | null;
+  rank?: ProductPerformanceResultRankMetrics | null;
+}
+
+export interface ProductPerformanceResultRankMetrics {
+  overall?: ProductPerformanceResultViewsAndSalesMetrics | null;
+  withinCategories?: ProductPerformanceResultCategoryMetrics[] | null;
+  withinBrand?: ProductPerformanceResultViewsAndSalesMetrics | null;
+}
+
+export interface ProductPerformanceResultSalesByCurrency {
+  currency?: Currency | null;
+
+  /** @format int32 */
+  orders: number;
+
+  /** @format double */
+  averageSubtotal: number;
+}
+
+export interface ProductPerformanceResultSalesMetrics {
+  /** @format int32 */
+  orders: number;
+
+  /** @format double */
+  averageNoOfLineItems: number;
+  currencies?: ProductPerformanceResultSalesByCurrency[] | null;
+  withKnownCartOpener?: ProductPerformanceResultSalesWithKnownCartOpenerMetrics | null;
+}
+
+export interface ProductPerformanceResultSalesWithKnownCartOpenerMetrics {
+  /** @format int32 */
+  orders: number;
+
+  /** @format int32 */
+  opened: number;
+
+  /** @format double */
+  openedPercent: number;
+}
+
+export interface ProductPerformanceResultViewsAndSalesMetrics {
+  /** @format double */
+  byViews: number;
+
+  /** @format double */
+  bySales: number;
+}
+
+export interface ProductPerformanceResultViewsMetrics {
+  /** @format int32 */
+  total: number;
 }
 
 export type ProductPopularitySorting = ProductSorting;
 
-export interface ProductQuery {
+export type ProductQuery = LicensedRequest & {
   filters?: FilterCollection | null;
-
-  /** @format int32 */
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
-
-  /** @format int32 */
   skipNumberOfResults: number;
   returnTotalNumberOfResults: boolean;
   includeDisabledProducts: boolean;
   includeDisabledVariants: boolean;
   excludeProductsWithNoVariants: boolean;
-  custom?: Record<string, string | null>;
-}
+};
 
 export type ProductRecentlyPurchasedByUserFilter = Filter & { sinceUtc: string };
 
@@ -2206,11 +2125,26 @@ export interface ProductRecommendationRequest {
   custom?: Record<string, string | null>;
 }
 
-export interface ProductRecommendationRequestCollection {
-  requests?: ProductRecommendationRequest[] | null;
+export type ProductRecommendationRequestCollection = LicensedRequest & {
+  requests?:
+    | (
+        | CustomProductRecommendationRequest
+        | PersonalProductRecommendationRequest
+        | PopularProductsRequest
+        | ProductsViewedAfterViewingContentRequest
+        | ProductsViewedAfterViewingProductRequest
+        | PurchasedWithCurrentCartRequest
+        | PurchasedWithMultipleProductsRequest
+        | PurchasedWithProductRequest
+        | RecentlyViewedProductsRequest
+        | SearchTermBasedProductRecommendationRequest
+        | SimilarProductsRequest
+        | SortProductsRequest
+        | SortVariantsRequest
+      )[]
+    | null;
   requireDistinctProductsAcrossResults: boolean;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface ProductRecommendationRequestSettings {
   /** @format int32 */
@@ -2226,16 +2160,11 @@ export interface ProductRecommendationRequestSettings {
   selectedBrandProperties?: SelectedBrandPropertiesSettings | null;
 }
 
-export interface ProductRecommendationResponse {
-  recommendations?: ProductResult[] | null;
-  custom?: Record<string, string | null>;
-  statistics?: Statistics | null;
-}
+export type ProductRecommendationResponse = RecommendationResponse & { recommendations?: ProductResult[] | null };
 
-export interface ProductRecommendationResponseCollection {
+export type ProductRecommendationResponseCollection = TimedResponse & {
   responses?: ProductRecommendationResponse[] | null;
-  statistics?: Statistics | null;
-}
+};
 
 export type ProductRelevanceSorting = ProductSorting;
 
@@ -2310,37 +2239,18 @@ export type ProductSalesPriceRelevanceModifier = RelevanceModifier & {
   negated: boolean;
 };
 
-export interface ProductSearchRequest {
+export type ProductSearchRequest = PaginatedSearchRequest & {
   term?: string | null;
   facets?: ProductFacetQuery | null;
   settings?: ProductSearchSettings | null;
   sorting?: ProductSortBySpecification | null;
+};
 
-  /** @format int32 */
-  skip: number;
-
-  /** @format int32 */
-  take: number;
-  language?: Language | null;
-  currency?: Currency | null;
-  user?: User | null;
-  displayedAtLocation?: string | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  indexSelector?: SearchIndexSelector | null;
-  postFilters?: FilterCollection | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface ProductSearchResponse {
+export type ProductSearchResponse = PaginatedSearchResponse & {
   results?: ProductResult[] | null;
   facets?: ProductFacetResult | null;
   recommendations?: ProductResult[] | null;
-
-  /** @format int32 */
-  hits: number;
-  statistics?: Statistics | null;
-}
+};
 
 export type ProductSearchSettings = SearchSettings & {
   selectedProductProperties?: SelectedProductPropertiesSettings | null;
@@ -2374,21 +2284,20 @@ export interface ProductSorting {
     | null;
 }
 
-export interface ProductUpdate {
+export type ProductUpdate = Trackable & {
   product?: Product | null;
   variants?: ProductVariant[] | null;
   productUpdateKind: "None" | "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
   variantUpdateKind: "None" | "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
   replaceExistingVariants: boolean;
   brandUpdateKind?: "None" | "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace" | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface ProductVariant {
   id: string;
   displayName?: Multilingual | null;
   assortments?: number[] | null;
-  specification?: Record<string, string>;
+  specification?: Record<string, string | null>;
   data?: Record<string, DataValue>;
   custom?: Record<string, string>;
   listPrice?: MultiCurrency | null;
@@ -2405,41 +2314,13 @@ export type ProductVariantSpecificationSorting = ProductSorting & {
   mode: "Auto" | "Alphabetical" | "Numerical";
 };
 
-export interface ProductView {
-  user?: User | null;
-  product: Product;
-  variant?: ProductVariant | null;
-  custom?: Record<string, string | null>;
-}
+export type ProductView = Trackable & { user?: User | null; product: Product; variant?: ProductVariant | null };
 
-export interface ProductsViewedAfterViewingContentRequest {
-  contentId?: string | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type ProductsViewedAfterViewingContentRequest = ProductRecommendationRequest & { contentId?: string | null };
 
-export interface ProductsViewedAfterViewingProductRequest {
+export type ProductsViewedAfterViewingProductRequest = ProductRecommendationRequest & {
   productAndVariantId?: ProductAndVariantId | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface Promotion {
-  to: "Top" | "Bottom";
-  values?: string[] | null;
-}
+};
 
 export interface PurchasedByUserInfo {
   /** @format date-time */
@@ -2449,69 +2330,46 @@ export interface PurchasedByUserInfo {
   totalNumberOfTimesPurchased: number;
 }
 
-export interface PurchasedWithCurrentCartRequest {
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type PurchasedWithCurrentCartRequest = ProductRecommendationRequest;
 
-export interface PurchasedWithMultipleProductsRequest {
+export type PurchasedWithMultipleProductsRequest = ProductRecommendationRequest & {
   productAndVariantIds?: ProductAndVariantId[] | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface PurchasedWithProductRequest {
+export type PurchasedWithProductRequest = ProductRecommendationRequest & {
   productAndVariantId?: ProductAndVariantId | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export type RangesFacetResult = FacetResult & {
+  $type: string;
   rangeSize: number;
   selected?: DoubleRange[] | null;
   available?: DoubleRangeAvailableFacetValue[] | null;
 };
 
-export interface RankMetrics {
-  overall?: ViewsAndSalesMetrics | null;
-  withinCategories?: CategoryMetrics[] | null;
-  withinBrand?: ViewsAndSalesMetrics | null;
-}
-
-export interface RecentlyViewedProductsRequest {
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type RecentlyViewedProductsRequest = ProductRecommendationRequest;
 
 export interface RecommendPopularSearchTermSettings {
   targetEntityTypes?: ("Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory")[] | null;
 
   /** @format int32 */
   numberOfRecommendations: number;
+}
+
+export interface RecommendationRequest {
+  $type: string;
+  language?: Language | null;
+  user?: User | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  filters?: FilterCollection | null;
+  displayedAtLocationType?: string | null;
+  currency?: Currency | null;
+  custom?: Record<string, string | null>;
+}
+
+export interface RecommendationResponse {
+  custom?: Record<string, string | null>;
+  statistics?: Statistics | null;
 }
 
 export interface RecommendationSettings {
@@ -2570,86 +2428,34 @@ export interface RequestContextFilter {
   currencies?: Currency[] | null;
 }
 
-export interface SalesByCurrency {
-  currency?: Currency | null;
-
-  /** @format int32 */
-  orders: number;
-
-  /** @format double */
-  averageSubtotal: number;
-}
-
-export interface SalesMetrics {
-  /** @format int32 */
-  orders: number;
-
-  /** @format double */
-  averageNoOfLineItems: number;
-  currencies?: SalesByCurrency[] | null;
-  withKnownCartOpener?: SalesWithKnownCartOpenerMetrics | null;
-}
-
-export interface SalesWithKnownCartOpenerMetrics {
-  /** @format int32 */
-  orders: number;
-
-  /** @format int32 */
-  opened: number;
-
-  /** @format double */
-  openedPercent: number;
-}
-
-export interface SaveGlobalTriggerConfigurationRequest {
+export type SaveGlobalTriggerConfigurationRequest = LicensedRequest & {
   configuration?: GlobalTriggerConfiguration | null;
   modifiedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface SaveMerchandisingRuleRequest {
+export type SaveMerchandisingRuleRequest = LicensedRequest & {
   rule?: BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule | null;
   modifiedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface SavePredictionRuleResponse {
-  rules?: PredictionRule[] | null;
-  statistics?: Statistics | null;
-}
+export type SavePredictionRuleResponse = PredictionRuleSaveSearchRulesResponse;
 
-export interface SavePredictionRulesRequest {
-  rules?: PredictionRule[] | null;
-  modifiedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+export type SavePredictionRulesRequest = PredictionRuleSaveSearchRulesRequest;
 
-export interface SaveSearchIndexRequest {
-  index?: SearchIndex | null;
-  modifiedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+export type SaveSearchIndexRequest = LicensedRequest & { index?: SearchIndex | null; modifiedBy?: string | null };
 
-export interface SaveSynonymsRequest {
-  synonyms?: Synonym[] | null;
-  modifiedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+export type SaveSynonymsRequest = LicensedRequest & { synonyms?: Synonym[] | null; modifiedBy?: string | null };
 
-export interface SaveSynonymsResponse {
-  values?: Synonym[] | null;
-  statistics?: Statistics | null;
-}
+export type SaveSynonymsResponse = TimedResponse & { values?: Synonym[] | null };
 
-export interface SaveTriggerConfigurationRequest {
+export type SaveTriggerConfigurationRequest = LicensedRequest & {
   configuration?:
     | AbandonedCartTriggerConfiguration
     | ProductCategoryInterestTriggerConfiguration
     | ProductInterestTriggerConfiguration
     | null;
   modifiedBy?: string | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface SearchIndex {
   id?: string | null;
@@ -2668,32 +2474,24 @@ export interface SearchIndex {
   configuration?: IndexConfiguration | null;
 }
 
-export interface SearchIndexCollectionResponse {
-  indexes?: SearchIndex[] | null;
-  statistics?: Statistics | null;
-}
+export type SearchIndexCollectionResponse = TimedResponse & { indexes?: SearchIndex[] | null };
 
-export interface SearchIndexRequest {
-  id?: string | null;
-  custom?: Record<string, string | null>;
-}
+export type SearchIndexRequest = LicensedRequest & { id?: string | null };
 
-export interface SearchIndexResponse {
-  index?: SearchIndex | null;
-  statistics?: Statistics | null;
-}
+export type SearchIndexResponse = TimedResponse & { index?: SearchIndex | null };
 
 export interface SearchIndexSelector {
   id?: string | null;
 }
 
-export interface SearchIndexesRequest {
-  custom?: Record<string, string | null>;
-}
+export type SearchIndexesRequest = LicensedRequest;
 
-export interface SearchPredictionRuleRequest {
+export type SearchPredictionRuleRequest = SearchPredictionRuleRequestSortBySearchRuleRequest;
+
+export interface SearchPredictionRuleRequestSortBySearchRuleRequest {
+  $type: string;
   filters?: SearchRuleFilters | null;
-  sorting?: SortBySorting | null;
+  sorting?: SearchPredictionRuleRequestSortBySorting | null;
 
   /** @format int32 */
   skip: number;
@@ -2703,13 +2501,12 @@ export interface SearchPredictionRuleRequest {
   custom?: Record<string, string | null>;
 }
 
-export interface SearchPredictionRuleResponse {
-  rules?: PredictionRule[] | null;
-
-  /** @format int32 */
-  hits: number;
-  statistics?: Statistics | null;
+export interface SearchPredictionRuleRequestSortBySorting {
+  sortBy: "Created" | "Modified";
+  sortOrder: "Ascending" | "Descending";
 }
+
+export type SearchPredictionRuleResponse = PredictionRuleSearchRulesResponse;
 
 export interface SearchRequest {
   language?: Language | null;
@@ -2723,27 +2520,35 @@ export interface SearchRequest {
   custom?: Record<string, string | null>;
 }
 
-export interface SearchRequestCollection {
-  requests?: SearchRequest[] | null;
-  language?: Language | null;
-  currency?: Currency | null;
-  user?: User | null;
-  displayedAtLocation?: string | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  indexSelector?: SearchIndexSelector | null;
-  postFilters?: FilterCollection | null;
-  custom?: Record<string, string | null>;
-}
+export type SearchRequestCollection = SearchRequest & {
+  requests?:
+    | (
+        | ContentCategorySearchRequest
+        | ContentSearchRequest
+        | ProductCategorySearchRequest
+        | ProductSearchRequest
+        | SearchRequestCollection
+        | SearchTermPredictionRequest
+      )[]
+    | null;
+};
 
 export interface SearchResponse {
   statistics?: Statistics | null;
 }
 
-export interface SearchResponseCollection {
-  responses?: SearchResponse[] | null;
-  statistics?: Statistics | null;
-}
+export type SearchResponseCollection = SearchResponse & {
+  responses?:
+    | (
+        | ContentCategorySearchResponse
+        | ContentSearchResponse
+        | ProductCategorySearchResponse
+        | ProductSearchResponse
+        | SearchResponseCollection
+        | SearchTermPredictionResponse
+      )[]
+    | null;
+};
 
 export interface SearchRule {
   $type: string;
@@ -2776,51 +2581,17 @@ export interface SearchSettings {
   $type: string;
 }
 
-export interface SearchTerm {
-  language?: Language | null;
-  user?: User | null;
+export type SearchTerm = Trackable & { language?: Language | null; user?: User | null; term?: string | null };
+
+export type SearchTermBasedProductRecommendationRequest = ProductRecommendationRequest & { term?: string | null };
+
+export type SearchTermPredictionRequest = SearchRequest & {
   term?: string | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface SearchTermBasedProductRecommendationRequest {
-  term?: string | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface SearchTermCondition {
-  kind: "BeginsWith" | "EndsWith" | "PartiallyMatches";
-  values?: string[] | null;
-}
-
-export interface SearchTermPredictionRequest {
-  term?: string | null;
-
-  /** @format int32 */
   take: number;
   settings?: SearchTermPredictionSettings | null;
-  language?: Language | null;
-  currency?: Currency | null;
-  user?: User | null;
-  displayedAtLocation?: string | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  indexSelector?: SearchIndexSelector | null;
-  postFilters?: FilterCollection | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface SearchTermPredictionResponse {
-  predictions?: SearchTermPredictionResult[] | null;
-  statistics?: Statistics | null;
-}
+export type SearchTermPredictionResponse = SearchResponse & { predictions?: SearchTermPredictionResult[] | null };
 
 export interface SearchTermPredictionResult {
   term?: string | null;
@@ -2836,11 +2607,7 @@ export type SearchTermPredictionSettings = SearchSettings & {
   targetEntityTypes?: ("Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory")[] | null;
 };
 
-export interface SearchTermRecommendationResponse {
-  recommendations?: SearchTermResult[] | null;
-  custom?: Record<string, string | null>;
-  statistics?: Statistics | null;
-}
+export type SearchTermRecommendationResponse = RecommendationResponse & { recommendations?: SearchTermResult[] | null };
 
 export interface SearchTermResult {
   term?: string | null;
@@ -2949,49 +2716,16 @@ export interface SimilarProductsEvaluationSettings {
   significanceOfSimilarSalesPrice: number;
 }
 
-export interface SimilarProductsRequest {
+export type SimilarProductsRequest = ProductRecommendationRequest & {
   existingProductId?: ProductAndVariantId | null;
   productData?: Product | null;
   considerAlreadyKnownInformationAboutProduct: boolean;
   evaluationSettings?: SimilarProductsEvaluationSettings | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface SortBySorting {
-  sortBy: "Created" | "Modified";
-  sortOrder: "Ascending" | "Descending";
-}
+export type SortProductsRequest = ProductRecommendationRequest & { productIds?: string[] | null };
 
-export interface SortProductsRequest {
-  productIds?: string[] | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface SortVariantsRequest {
-  productId?: string | null;
-  settings?: ProductRecommendationRequestSettings | null;
-  language?: Language | null;
-  user?: User | null;
-  relevanceModifiers?: RelevanceModifierCollection | null;
-  filters?: FilterCollection | null;
-  displayedAtLocationType?: string | null;
-  currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+export type SortVariantsRequest = ProductRecommendationRequest & { productId?: string | null };
 
 export interface SpecificationsIndexConfiguration {
   keys?: Record<string, FieldIndexConfiguration>;
@@ -3079,11 +2813,6 @@ export interface StringValueFacetResult {
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
 }
 
-export interface Suppression {
-  condition: "Contains";
-  values?: string[] | null;
-}
-
 export interface Synonym {
   /** @format uuid */
   id: string;
@@ -3111,7 +2840,15 @@ export interface Synonym {
   allowInPredictions: boolean;
 }
 
-export interface SynonymSortingSorting {
+export type SynonymsRequest = LicensedRequest & {
+  sorting?: SynonymsRequestSynonymSortingSorting | null;
+  take: number;
+  skip: number;
+  term?: string | null;
+  isApproved?: boolean | null;
+};
+
+export interface SynonymsRequestSynonymSortingSorting {
   sortBy:
     | "Created"
     | "CreatedBy"
@@ -3125,131 +2862,77 @@ export interface SynonymSortingSorting {
   sortOrder: "Ascending" | "Descending";
 }
 
-export interface SynonymsRequest {
-  sorting?: SynonymSortingSorting | null;
-
-  /** @format int32 */
-  take: number;
-
-  /** @format int32 */
-  skip: number;
-  term?: string | null;
-  isApproved?: boolean | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface SynonymsResponse {
-  values?: Synonym[] | null;
-
-  /** @format int32 */
-  hits: number;
-  statistics?: Statistics | null;
-}
+export type SynonymsResponse = TimedResponse & { values?: Synonym[] | null; hits: number };
 
 export interface TargetConditionConfiguration {
   filters?: FilterCollection | null;
 }
 
-export interface TrackBrandAdministrativeActionRequest {
+export interface TimedResponse {
+  statistics?: Statistics | null;
+}
+
+export type TrackBrandAdministrativeActionRequest = TrackingRequest & {
   administrativeAction?: BrandAdministrativeAction | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackBrandUpdateRequest {
-  brandUpdate?: BrandUpdate | null;
-  custom?: Record<string, string | null>;
-}
+export type TrackBrandUpdateRequest = TrackingRequest & { brandUpdate?: BrandUpdate | null };
 
-export interface TrackBrandViewRequest {
-  brandView: BrandView;
-  custom?: Record<string, string | null>;
-}
+export type TrackBrandViewRequest = TrackingRequest & { brandView: BrandView };
 
-export interface TrackCartRequest {
-  cart: Cart;
-  custom?: Record<string, string | null>;
-}
+export type TrackCartRequest = TrackingRequest & { cart: Cart };
 
-export interface TrackContentAdministrativeActionRequest {
+export type TrackContentAdministrativeActionRequest = TrackingRequest & {
   administrativeAction?: ContentAdministrativeAction | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackContentCategoryAdministrativeActionRequest {
+export type TrackContentCategoryAdministrativeActionRequest = TrackingRequest & {
   administrativeAction?: ContentCategoryAdministrativeAction | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackContentCategoryUpdateRequest {
+export type TrackContentCategoryUpdateRequest = TrackingRequest & {
   contentCategoryUpdate?: ContentCategoryUpdate | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackContentCategoryViewRequest {
-  contentCategoryView: ContentCategoryView;
-  custom?: Record<string, string | null>;
-}
+export type TrackContentCategoryViewRequest = TrackingRequest & { contentCategoryView: ContentCategoryView };
 
-export interface TrackContentUpdateRequest {
-  contentUpdate?: ContentUpdate | null;
-  custom?: Record<string, string | null>;
-}
+export type TrackContentUpdateRequest = TrackingRequest & { contentUpdate?: ContentUpdate | null };
 
-export interface TrackContentViewRequest {
-  contentView: ContentView;
-  custom?: Record<string, string | null>;
-}
+export type TrackContentViewRequest = TrackingRequest & { contentView: ContentView };
 
-export interface TrackOrderRequest {
-  order: Order;
-  custom?: Record<string, string | null>;
-}
+export type TrackOrderRequest = TrackingRequest & { order: Order };
 
-export interface TrackProductAdministrativeActionRequest {
+export type TrackProductAdministrativeActionRequest = TrackingRequest & {
   administrativeAction?: ProductAdministrativeAction | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackProductCategoryAdministrativeActionRequest {
+export type TrackProductCategoryAdministrativeActionRequest = TrackingRequest & {
   administrativeAction?: ProductCategoryAdministrativeAction | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackProductCategoryUpdateRequest {
+export type TrackProductCategoryUpdateRequest = TrackingRequest & {
   productCategoryUpdate?: ProductCategoryUpdate | null;
-  custom?: Record<string, string | null>;
-}
+};
 
-export interface TrackProductCategoryViewRequest {
-  productCategoryView: ProductCategoryView;
-  custom?: Record<string, string | null>;
-}
+export type TrackProductCategoryViewRequest = TrackingRequest & { productCategoryView: ProductCategoryView };
 
-export interface TrackProductUpdateRequest {
-  productUpdate?: ProductUpdate | null;
-  custom?: Record<string, string | null>;
-}
+export type TrackProductUpdateRequest = TrackingRequest & { productUpdate?: ProductUpdate | null };
 
-export interface TrackProductViewRequest {
-  productView: ProductView;
-  custom?: Record<string, string | null>;
-}
+export type TrackProductViewRequest = TrackingRequest & { productView: ProductView };
 
-export interface TrackSearchTermRequest {
-  searchTerm?: SearchTerm | null;
-  custom?: Record<string, string | null>;
-}
+export type TrackSearchTermRequest = TrackingRequest & { searchTerm?: SearchTerm | null };
 
-export interface TrackUserUpdateRequest {
-  userUpdate?: UserUpdate | null;
-  custom?: Record<string, string | null>;
-}
+export type TrackUserUpdateRequest = TrackingRequest & { userUpdate?: UserUpdate | null };
 
 export interface Trackable {
   custom?: Record<string, string | null>;
 }
 
-export interface TriggerConfigurationCollectionResponse {
+export interface TrackingRequest {
+  custom?: Record<string, string | null>;
+}
+
+export type TriggerConfigurationCollectionResponse = TimedResponse & {
   configurations?:
     | (
         | AbandonedCartTriggerConfiguration
@@ -3257,43 +2940,23 @@ export interface TriggerConfigurationCollectionResponse {
         | ProductInterestTriggerConfiguration
       )[]
     | null;
-  statistics?: Statistics | null;
-}
+};
 
-export interface TriggerConfigurationRequest {
-  /** @format uuid */
-  id: string;
+export type TriggerConfigurationRequest = LicensedRequest & { id: string; type?: number | null };
 
-  /** @format int32 */
-  type?: number | null;
-  custom?: Record<string, string | null>;
-}
-
-export interface TriggerConfigurationResponse {
+export type TriggerConfigurationResponse = TimedResponse & {
   configuration?:
     | AbandonedCartTriggerConfiguration
     | ProductCategoryInterestTriggerConfiguration
     | ProductInterestTriggerConfiguration
     | null;
-  statistics?: Statistics | null;
-}
+};
 
-export interface TriggerConfigurationsRequest {
-  /** @format int32 */
-  type?: number | null;
-  custom?: Record<string, string | null>;
-}
+export type TriggerConfigurationsRequest = LicensedRequest & { type?: number | null };
 
-export interface TriggerResultRequest {
-  /** @format uuid */
-  configurationId: string;
-  custom?: Record<string, string | null>;
-}
+export type TriggerResultRequest = LicensedRequest & { configurationId: string };
 
-export interface TriggerResultResponse {
-  result?: ITriggerResult | null;
-  statistics?: Statistics | null;
-}
+export type TriggerResultResponse = TimedResponse & { result?: ITriggerResult | null };
 
 export interface TrimStringTransformer {
   valuesToTrim?: string[] | null;
@@ -3303,8 +2966,8 @@ export interface User {
   authenticatedId?: string | null;
   temporaryId?: string | null;
   email?: string | null;
-  classifications?: Record<string, string>;
-  identifiers?: Record<string, string>;
+  classifications?: Record<string, string | null>;
+  identifiers?: Record<string, string | null>;
   data?: Record<string, DataValue>;
 }
 
@@ -3337,10 +3000,7 @@ export interface UserConditionConfiguration {
   conditions?: UserConditionCollection | null;
 }
 
-export interface UserDetailsCollectionResponse {
-  results?: UserResultDetails[][] | null;
-  statistics?: Statistics | null;
-}
+export type UserDetailsCollectionResponse = TimedResponse & { results?: UserResultDetails[][] | null };
 
 export type UserFavoriteProductRelevanceModifier = RelevanceModifier & {
   sinceMinutesAgo: number;
@@ -3349,12 +3009,11 @@ export type UserFavoriteProductRelevanceModifier = RelevanceModifier & {
   ifNotPurchasedBaseWeight: number;
 };
 
-export interface UserQuery {
+export type UserQuery = LicensedRequest & {
   criteria?: UserQueryCriteria[] | null;
   language?: Language | null;
   currency?: Currency | null;
-  custom?: Record<string, string | null>;
-}
+};
 
 export interface UserQueryCriteria {
   authenticatedId?: string | null;
@@ -3392,16 +3051,10 @@ export interface UserResultDetails {
   temporaryIds?: string[] | null;
 }
 
-export interface UserUpdate {
+export type UserUpdate = Trackable & {
   user?: User | null;
   kind: "None" | "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
-  custom?: Record<string, string | null>;
-}
-
-export interface Value {
-  language: Language;
-  text: string;
-}
+};
 
 export interface ValueCondition {
   $type: string;
@@ -3521,17 +3174,4 @@ export interface ViewedByUserInfo {
 
   /** @format int32 */
   totalNumberOfTimesViewed: number;
-}
-
-export interface ViewsAndSalesMetrics {
-  /** @format double */
-  byViews: number;
-
-  /** @format double */
-  bySales: number;
-}
-
-export interface ViewsMetrics {
-  /** @format int32 */
-  total: number;
 }

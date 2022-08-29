@@ -16,7 +16,7 @@ export class StringDataValue extends DataValueBase<string> {
     }
 }
 
-export class StringListDataValue extends DataValueBase<string[]> {
+export class StringCollectionDataValue extends DataValueBase<string[]> {
     constructor(value: string[]) {
         super('StringList', value);
     }
@@ -28,7 +28,7 @@ export class NumberDataValue extends DataValueBase<number> {
     }
 }
 
-export class DoubleListDataValue extends DataValueBase<number[]> {
+export class DoubleCollectionDataValue extends DataValueBase<number[]> {
     constructor(value: number[]) {
         super('DoubleList', value);
     }
@@ -40,7 +40,7 @@ export class BooleanDataValue extends DataValueBase<boolean> {
     }
 }
 
-export class BooleanListDataValue extends DataValueBase<boolean[]> {
+export class BooleanCollectionDataValue extends DataValueBase<boolean[]> {
     constructor(value: boolean[]) {
         super('BooleanList', value);
     }

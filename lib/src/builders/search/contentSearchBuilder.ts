@@ -14,6 +14,7 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
 
     private searchSettings: ContentSearchSettings = {
         $type: 'Relewise.Client.Requests.Search.Settings.ContentSearchSettings, Relewise.Client',
+        recommendations: {},
     };
 
     constructor(settings: Settings) {

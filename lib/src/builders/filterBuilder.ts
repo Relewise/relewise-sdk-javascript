@@ -2,7 +2,35 @@ import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartD
 import { ConditionBuilder } from './conditionBuilder';
 
 export class FilterBuilder {
-    private filters: Filter[] = [];
+    private filters: (AndFilter
+        | BrandAssortmentFilter
+        | BrandDataFilter
+        | BrandIdFilter
+        | CartDataFilter
+        | ContentCategoryAssortmentFilter
+        | ContentCategoryDataFilter
+        | ContentCategoryIdFilter
+        | ContentDataFilter
+        | ContentIdFilter
+        | OrFilter
+        | ProductAssortmentFilter
+        | ProductCategoryAssortmentFilter
+        | ProductCategoryDataFilter
+        | ProductCategoryIdFilter
+        | ProductDataFilter
+        | ProductDisplayNameFilter
+        | ProductHasVariantsFilter
+        | ProductIdFilter
+        | ProductListPriceFilter
+        | ProductRecentlyPurchasedByUserFilter
+        | ProductRecentlyViewedByUserFilter
+        | ProductSalesPriceFilter
+        | VariantAssortmentFilter
+        | VariantDataFilter
+        | VariantIdFilter
+        | VariantListPriceFilter
+        | VariantSalesPriceFilter
+        | VariantSpecificationFilter)[] = [];
 
     /**
      * Adds a product assortment filter to the request
@@ -384,9 +412,14 @@ export class FilterBuilder {
         const builder = new FilterBuilder();
         filterBuilder(builder);
 
+        const filters = builder.build();
+        if (filters === null || filters.items === undefined || filters.items === null || filters.items.length <= 0) {
+            throw new Error('And-filters must contain atleast 1 filter');
+        }
+
         const filter: AndFilter = {
             $type: 'Relewise.Client.Requests.Filters.AndFilter, Relewise.Client',
-            filters: builder.build()?.items,
+            filters: filters.items,
             negated: negated,
         };
         this.filters.push(filter);
@@ -398,9 +431,14 @@ export class FilterBuilder {
         const builder = new FilterBuilder();
         filterBuilder(builder);
 
+        const filters = builder.build();
+        if (filters === null || filters.items === undefined || filters.items === null || filters.items.length <= 0) {
+            throw new Error('Or-filters must contain atleast 1 filter');
+        }
+
         const filter: OrFilter = {
             $type: 'Relewise.Client.Requests.Filters.OrFilter, Relewise.Client',
-            filters: builder.build()?.items,
+            filters: filters.items,
             negated: negated,
         };
         this.filters.push(filter);

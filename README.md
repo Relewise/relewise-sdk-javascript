@@ -81,7 +81,7 @@ UserFactory.anonymous()
 
 ### Search
 
-When you need to use the Relewise fully-fledged search engine, then bootstrap the `Searcher`.
+To sure our fully-fledged search engine, start by bootstraping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.
 
 Here is a basic usage example for selecting product properties, paging, facets and filters.
 
@@ -117,6 +117,8 @@ const builder = new ProductSearchBuilder(settings)
 
 searcher.searchProducts(builder.build());
 ```
+
+You can use the `*` in `dataKeys` to extract properties by conventions - if you store data that is unqiue for a store or have many `dataKeys` with the same prefix or postfix.
 
 ### Category pages
 
@@ -157,6 +159,23 @@ const builder = new ProductSearchBuilder(settings)
 searcher.searchProducts(builder.build());
 ```
 
+When using sorting, it is important to also sort by relevance after sorting by stock, new products, etc., so that you still get the benefit of personalized results.
+
+### Batching of requests
+
+You can also batch requests in one HTTP requests to reduce latency.
+
+```ts
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+
+const searchCollectionBuilder = new SearchCollectionBuilder(settings)
+    .addRequest(productSearchBuilder.build())
+    .addRequest(contentSearchBuilder.build())
+    .addRequest(searchTermPredictionBuilder.build());
+
+searcher.batch(searchCollectionBuilder.build());
+```
+    
 ## Using the SDK via CDN.
 
 For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html).

@@ -16,7 +16,7 @@ Whether you need to track or search, you need to start by bootstrapping either t
 
 ```ts
 const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
-const searcher = new Searher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
 ```
 
 Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 

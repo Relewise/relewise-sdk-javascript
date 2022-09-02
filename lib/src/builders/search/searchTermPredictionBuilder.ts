@@ -4,7 +4,7 @@ import { SearchRequestBuilder } from './searchRequestBuilder';
 
 export class SearchTermPredictionBuilder extends SearchRequestBuilder {
     private count: number = 0;
-    private term: string | null | undefined;
+    private term: string = '';
     private targetEntityTypes: ('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[] | null = null;
 
     constructor(settings: Settings) {
@@ -17,7 +17,7 @@ export class SearchTermPredictionBuilder extends SearchRequestBuilder {
         return this;
     }
 
-    public setTerm(term: string | null | undefined): this {
+    public setTerm(term: string): this {
         this.term = term;
 
         return this;

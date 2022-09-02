@@ -32,17 +32,6 @@ test('setTerm', () => {
     expect(subject.term).toBe(expectedTerm);
 });
 
-test('reset Term', () => {
-    const expectedTerm = null;
-
-    const subject: SearchTermPredictionRequest = baseBuilder()
-        .setTerm('test')
-        .setTerm(expectedTerm)
-        .build();
-
-    expect(subject.term).toBe(expectedTerm);
-});
-
 test('entityType', () => {
     const subject: SearchTermPredictionRequest = baseBuilder()
         .addEntityType('Brand')

@@ -21,7 +21,7 @@ const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
 
 Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
 
-After which you have access to various methods depending on the client you bootstrapped.
+After which you have access to various methods depending on the client you've bootstrapped.
 
 ### Tracking
 
@@ -81,7 +81,7 @@ UserFactory.anonymous()
 
 ### Search
 
-To sure our fully-fledged search engine, start by bootstraping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.
+To use our fully-fledged search engine, start by bootstraping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.
 
 Here is a basic usage example for selecting product properties, paging, facets and filters.
 

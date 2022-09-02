@@ -25,7 +25,7 @@ After which you have access to various methods depending on the client you've bo
 
 ### Tracking
 
-If you need to tracking orders, cart changes, or different views on your store, you need to use the `Tracker` 
+If you need to track e.g. Product-, Category or Content Views, track Cart Updates or Completed Orders in your solution, you need to use the `Tracker` 
 
 Here is an example of how to track a product view:
 ```ts

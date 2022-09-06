@@ -1,12 +1,14 @@
 import { DataValue, Money, MultiCurrency, Multilingual } from './data-contracts';
 
+export type DataValueTypes = 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection';
+
 export abstract class DataValueBase<T> implements DataValue {
-    constructor(type: 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection', value: T) {
+    constructor(type: DataValueTypes, value: T) {
         this.type = type;
         this.value = value;
     }
 
-    type: 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection';
+    type: DataValueTypes;
     value: T;
 }
 

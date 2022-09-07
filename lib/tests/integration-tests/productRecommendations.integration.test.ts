@@ -20,7 +20,7 @@ test('PurchasedWithProduct', async() => {
     expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
-test('PurchasedWithProduct', async() => {
+test('ProductsViewedAfterViewingProduct', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendProducts(new ProductsViewedAfterViewingProductBuilder(settings).product({productId: '1'}));
 

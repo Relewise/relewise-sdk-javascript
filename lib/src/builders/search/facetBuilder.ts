@@ -1,4 +1,4 @@
-import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, Facet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '@/models/data-contracts';
+import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '@/models/data-contracts';
 
 export class FacetBuilder {
     private facets: (
@@ -211,6 +211,57 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
             priceSelectionStrategy,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addContentDataDoubleRangeFacet(key: string, lowerBound?: number|null, upperBound?: number|null): this {
+        const facet: ContentDataDoubleRangeFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataDoubleRangeFacet, Relewise.Client',
+            field: 'Data',
+            selected: {lowerBoundInclusive: lowerBound, upperBoundInclusive: upperBound},
+            key: key,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addContentDataStringValueFacet(key: string, selectedValues: string[] | null = null, collectionFilterType?: 'Or' | 'And'): this {
+        const facet: ContentDataStringValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataStringValueFacet, Relewise.Client',
+            field: 'Data',
+            selected: selectedValues,
+            key: key,
+            collectionFilterType: collectionFilterType,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addContentDataBooleanValueFacet(key: string, selectedValues: boolean[] | null = null, collectionFilterType?: 'Or' | 'And'): this {
+        const facet: ContentDataBooleanValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataBooleanValueFacet, Relewise.Client',
+            field: 'Data',
+            selected: selectedValues,
+            key: key,
+            collectionFilterType: collectionFilterType,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addContentDataDoubleValueFacet(key: string, selectedValues: number[] | null = null, collectionFilterType?: 'Or' | 'And'): this {
+        const facet: ContentDataDoubleValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataDoubleValueFacet, Relewise.Client',
+            field: 'Data',
+            selected: selectedValues,
+            key: key,
+            collectionFilterType: collectionFilterType,
         };
         this.facets.push(facet);
 

@@ -1,4 +1,4 @@
-import { User } from "../models/data-contracts";
+import { User } from '../models/data-contracts';
 
 export class UserFactory {
     static anonymous(): User {
@@ -6,7 +6,7 @@ export class UserFactory {
     }
     
     static byAuthenticatedId(authenticatedId: string, temporaryId?: string): User {
-        return { authenticatedId, ...(temporaryId && { temporaryId }), };
+        return { authenticatedId, ...(temporaryId && { temporaryId }) };
     }
     
     static byTemporaryId(temporaryId: string): User {

@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  node-version: '16'
+  node-version: '18'
 
 jobs:
   test:
@@ -23,9 +23,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
-      - run: |
-          npm ci
-          npm run gen-api 
-          npm run build
-          npm run build:types
-          npm test
+      - run: npm ci
+        name: Install dependencies
+      - run: npm run gen-api 
+        name: Generate API type defs
+      - run: npm run build
+        name: Build
+      - run: npm run build:types
+        name: Build Types
+      - run: npm test
+        name: Unit tests
+      - run: npm run integration-test
+        env:
+          npm_config_DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
+          npm_config_API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}
+        name: Integration tests

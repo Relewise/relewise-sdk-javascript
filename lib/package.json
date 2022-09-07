@@ -25,12 +25,14 @@
   "scripts": {
     "test": "jest ./tests/unit-tests",
     "integration-test": "jest ./tests/integration-tests",
+    "lint": "eslint --ext .ts,.js ./src",
+    "lint-fix": "eslint --fix --ext .ts,.js ./src",
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "prebuild:types": "rimraf ./build",
     "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
     "clean": "rimraf ./build ./dist ./docs",
-    "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --clean-output --no-client --enum-names-as-values",
+    "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --no-client --enum-names-as-values",
     "publish": "npm run gen-api && npm run build && npm run build:types"
   },
   "devDependencies": {
@@ -41,7 +43,7 @@
     "@rollup/plugin-typescript": "^8.3.3",
     "@types/jest": "^28.1.6",
     "@types/node": "^18.6.3",
-    "eslint": "^8.20.0",
+    "eslint": "^8.22.0",
     "jest": "^28.1.3",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
@@ -52,7 +54,8 @@
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "@typescript-eslint/parser": "^5.34.0"
   },
   "dependencies": {
     "cross-fetch": "^3.1.5"

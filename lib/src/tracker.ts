@@ -1,7 +1,7 @@
 import { RelewiseClient, RelewiseClientOptions } from './relewise.client';
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
-    TrackBrandViewRequest, User, TrackSearchTermRequest
+    TrackBrandViewRequest, User, TrackSearchTermRequest,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -14,17 +14,17 @@ export class Tracker extends RelewiseClient {
             order: {
                 lineItems: lineItems.map(l => ({
                     product: {
-                        id: l.productId
+                        id: l.productId,
                     },
                     ...(l.variantId && { variant: { id: l.variantId }}),
                     lineTotal: l.lineTotal,
-                    quantity: l.quantity
+                    quantity: l.quantity,
                 })),
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
                 trackingNumber: trackingNumber,
                 cartName: cartName,
                 user: user,
-            }
+            },
         });
     }
 
@@ -33,16 +33,16 @@ export class Tracker extends RelewiseClient {
             cart: {
                 lineItems: lineItems.map(l => ({
                     product: {
-                        id: l.productId
+                        id: l.productId,
                     },
                     ...(l.variantId && { variant: { id: l.variantId }}),
                     lineTotal: l.lineTotal,
-                    quantity: l.quantity
+                    quantity: l.quantity,
                 })),
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
                 name: cartName,
                 user: user,
-            }
+            },
         });
     }
 
@@ -50,11 +50,11 @@ export class Tracker extends RelewiseClient {
         return this.request<TrackProductViewRequest, void>('TrackProductViewRequest', {
             productView: {
                 product: {
-                    id: productId
+                    id: productId,
                 },
                 ...(variantId && { variant: { id: variantId }}),
                 user: user,
-            }
+            },
         });
     }
 
@@ -63,7 +63,7 @@ export class Tracker extends RelewiseClient {
             productCategoryView: {
                 idPath: idPath,
                 user: user,
-            }
+            },
         });
     }
 
@@ -71,10 +71,10 @@ export class Tracker extends RelewiseClient {
         return this.request<TrackContentViewRequest, void>('TrackContentViewRequest', {
             contentView: {
                 content: {
-                    id: contentId
+                    id: contentId,
                 },
                 user: user,
-            }
+            },
         });
     }
 
@@ -83,7 +83,7 @@ export class Tracker extends RelewiseClient {
             contentCategoryView: {
                 idPath: idPath,
                 user: user,
-            }
+            },
         });
     }
 
@@ -91,10 +91,10 @@ export class Tracker extends RelewiseClient {
         return this.request<TrackBrandViewRequest, void>('TrackBrandViewRequest', {
             brandView: {
                 brand: {
-                    id: brandId
+                    id: brandId,
                 },
                 user: user,
-            }
+            },
         });
     }
 
@@ -102,11 +102,11 @@ export class Tracker extends RelewiseClient {
         return this.request<TrackSearchTermRequest, void>('TrackSearchTermRequest', {
             searchTerm: {
                 language: {
-                    value: language
+                    value: language,
                 },
                 term: term,
                 user: user,
-            }
+            },
         });
     }
 }

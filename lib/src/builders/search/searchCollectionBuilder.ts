@@ -1,0 +1,24 @@
+import { ContentSearchRequest, ProductSearchRequest, SearchRequestCollection, SearchTermPredictionRequest } from '@/models/data-contracts';
+import { Settings } from '../settings';
+import { SearchRequestBuilder } from './searchRequestBuilder';
+
+export class SearchCollectionBuilder extends SearchRequestBuilder {
+    private requests: (ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest)[] = [];
+
+    constructor(settings: Settings) {
+        super(settings)
+    }
+
+    public addRequest(request: ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest): this {
+        this.requests.push(request);
+
+        return this;
+    }
+
+    public build(): SearchRequestCollection {
+        return {
+            ...this.baseBuild(),
+            requests: this.requests,
+        };
+    }
+}

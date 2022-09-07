@@ -10,23 +10,41 @@ npm install @relewise/client
 
 ## Usage examples
 
-Start by bootstrapping the client:
+### Bootstrapping
+
+Whether you need to track or search, you need to start by bootstrapping either the `Tracker` or `Searcher`.
 
 ```ts
 const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
 ```
 
 Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
 
-After which you have access to various methods depending on the client, in this case the tracker:
+After which you have access to various methods depending on the client you've bootstrapped.
 
-Tracking a product view:
+### Tracking
+
+If you need to track e.g. Product-, Category or Content Views, track Cart Updates or Completed Orders in your solution, you need to use the `Tracker` 
+
+Here is an example of how to track a product view:
 ```ts
-await tracker.tractProductView({
+await tracker.trackProductView({
         productId: 'p-1',
         user: UserFactory.anonymous()
 });
 ```
+Replace `p-1` with the productId of the product a customer has viewed.
+
+You can also track the following types:
+- ProductCategoryView
+- ContentView
+- ContentCategoryView
+- Order
+- Cart
+- BrandView
+- SearchTerm (When not using Relewise for searching, but still want to provide metrics to enhance recommendations)
+
 When tracking a user behaviour to Relewise, it is important to provide the correct type of `User` to Relewise.
 
 Types of users in Relewise:
@@ -61,6 +79,103 @@ UserFactory.byAuthenticatedId('authenticatedId', 'temporaryId')
 UserFactory.anonymous()
 ```
 
+### Search
+
+To use our fully-fledged search engine, start by bootstraping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.
+
+Here is a basic usage example for selecting product properties, paging, facets and filters.
+
+```ts
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+
+const settings = {
+    language: 'da-DK',
+    currency: 'DKK',
+    displayedAtLocation: 'search page',
+    user: UserFactory.anonymous()
+};
+
+const builder = new ProductSearchBuilder(settings)
+    .setSelectedProductProperties({
+        displayName: true,
+        pricing: true,
+        dataKeys: ['Url', 'ShortDescription', 'ImageUrls', 'DK_*']
+    })
+    .setTerm('shoe')
+    .pagination(p => p
+        .setPageSize(30)
+        .setPage(1))
+    .facets(f => f
+        .addBrandFacet(['HP', 'Lenovo'])
+        .addSalesPriceRangeFacet('Product', 100, 500)
+        .addVariantSpecificationFacet('Size', ['XL'])
+    )
+    .filters(f => f
+        .addProductAssortmentFilter(1)
+        .addVariantAssortmentFilter(1)
+    );
+
+searcher.searchProducts(builder.build());
+```
+
+You can use the `*` in `dataKeys` to extract properties by conventions - if you store data that is unqiue for a store or have many `dataKeys` with the same prefix or postfix.
+
+### Category pages
+
+You can also use the `Searcher` for category pages without specifying the `term`:
+
+```ts
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+
+const settings = {
+    language: 'da-DK',
+    currency: 'DKK',
+    displayedAtLocation: 'search page',
+    user: UserFactory.anonymous()
+};
+
+const builder = new ProductSearchBuilder(settings)
+    .setSelectedProductProperties({
+        displayName: true,
+        pricing: true,
+        dataKeys: ['Url', 'ShortDescription', 'ImageUrls', 'DK_*']
+    })
+    .pagination(p => p
+        .setPageSize(30)
+        .setPage(1))
+    .facets(f => f
+        .addBrandFacet(['HP', 'Lenovo'])
+        .addSalesPriceRangeFacet('Product', 100, 500)
+        .addVariantSpecificationFacet('Size', ['XL'])
+    )
+    .filters(f => f
+        .addProductAssortmentFilter(1)
+        .addVariantAssortmentFilter(1)
+    )
+    .sorting(s => s
+        .sortByProductData('InStock', 'Descending', (n) => n
+            .sortByProductRelevance()));
+
+searcher.searchProducts(builder.build());
+```
+
+When using sorting, it is important to also sort by relevance after sorting by stock, new products, etc., so that you still get the benefit of personalized results.
+
+### Batching of requests
+
+You can also batch requests in one HTTP requests to reduce latency.
+
+```ts
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+
+const searchCollectionBuilder = new SearchCollectionBuilder(settings)
+    .addRequest(productSearchBuilder.build())
+    .addRequest(contentSearchBuilder.build())
+    .addRequest(searchTermPredictionBuilder.build());
+
+searcher.batch(searchCollectionBuilder.build());
+```
+    
 ## Using the SDK via CDN.
 
 For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html).

@@ -31,6 +31,7 @@ export class SearchTermPredictionBuilder extends SearchRequestBuilder {
 
     public build(): SearchTermPredictionRequest {
         return {
+            $type: 'Relewise.Client.Requests.Search.SearchTermPredictionRequest, Relewise.Client',
             ...this.baseBuild(),
 
             term: this.term,

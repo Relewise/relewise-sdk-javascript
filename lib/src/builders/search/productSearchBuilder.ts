@@ -82,6 +82,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     public build(): ProductSearchRequest {
         const { take, skip } = this.paginationBuilder.build();
         return {
+            $type: 'Relewise.Client.Requests.Search.ProductSearchRequest, Relewise.Client',
             ...this.baseBuild(),
             take,
             skip,

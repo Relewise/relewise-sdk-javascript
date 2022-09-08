@@ -39,6 +39,10 @@ import {
     SelectedContentPropertiesSettings,
     SimilarProductsEvaluationSettings,
     Product,
+    PersonalBrandRecommendationRequest,
+    BrandRecommendationRequestSettings,
+    BrandRecommendationWeights,
+    PopularBrandsRecommendationRequest,
 } from './models/data-contracts';
 import { FilterBuilder, Settings } from './builders';
 import { UserFactory } from './factory/user.factory';
@@ -783,8 +787,6 @@ export class PopularSearchTermsRecommendationBuilder extends RecommendationReque
     }
 }
 
-
-
 export class SimilarProductsProductBuilder extends ProductRecommendationBuilder implements ProductsRecommendationBuider<SimilarProductsRequest> {
     private evaluationSettings: SimilarProductsEvaluationSettings | null = null;
     private considerAlreadyKnownInformationAboutProduct: boolean = false;
@@ -812,6 +814,120 @@ export class SimilarProductsProductBuilder extends ProductRecommendationBuilder 
         };
 
         return { request, name: 'SimilarProductsRequest' };
+    }
+}
+
+export class BrandSettingsRecommendationBuilder extends RecommendationRequestBuilder {
+    protected recommendationSettings: BrandRecommendationRequestSettings = {
+        allowFillIfNecessaryToReachNumberOfRecommendations: true,
+        allowReplacingOfRecentlyShownRecommendations: true,
+        numberOfRecommendations: 10,
+        prioritizeDiversityBetweenRequests: false,
+    };
+
+    constructor(
+        settings: Settings) {
+        super(settings);
+    }
+
+    public setBrandProperties(brandProperties: SelectedBrandPropertiesSettings): this {
+        this.recommendationSettings.selectedBrandProperties = brandProperties;
+
+        return this;
+    }
+
+    public setNumberOfRecommendations(count: number): this {
+        this.recommendationSettings.numberOfRecommendations = count;
+
+        return this;
+    }
+
+    public allowFillIfNecessaryToReachNumberOfRecommendations(allowed: boolean = true): this {
+        this.recommendationSettings.allowFillIfNecessaryToReachNumberOfRecommendations = allowed;
+
+        return this;
+    }
+
+    public allowReplacingOfRecentlyShownRecommendations(allowed: boolean = true): this {
+        this.recommendationSettings.allowReplacingOfRecentlyShownRecommendations = allowed;
+
+        return this;
+    }
+
+    public prioritizeDiversityBetweenRequests(prioritize: boolean = true): this {
+        this.recommendationSettings.prioritizeDiversityBetweenRequests = prioritize;
+
+        return this;
+    }
+}
+
+interface BrandsRecommendationBuider<TRequest> {
+    build(): { request: TRequest, name: string };
+};
+
+export class PersonalBrandRecommendationBuilder extends BrandSettingsRecommendationBuilder implements BrandsRecommendationBuider<PersonalBrandRecommendationRequest> {
+    private since: number = 0;
+    private weights: BrandRecommendationWeights = { brandViews: 1.0, productViews: 1.0, productPurchases: 1.0 };
+
+    constructor(
+        settings: Settings) {
+        super(settings);
+    }
+
+    public sinceMinutesAgo(sinceMinutesAgo: number): this {
+        this.since = sinceMinutesAgo;
+
+        return this;
+    }
+
+    public setWeights(weights: BrandRecommendationWeights): this {
+        this.weights = weights;
+
+        return this;
+    }
+
+    public build() {
+        const request: PersonalBrandRecommendationRequest = {
+            ...this.baseBuild(),
+            sinceMinutesAgo: this.since,
+            weights: this.weights,
+            settings: this.recommendationSettings,
+        };
+
+        return { request, name: 'PersonalBrandRecommendationRequest' };
+    }
+}
+
+export class PopularBrandsRecommendationBuilder extends BrandSettingsRecommendationBuilder implements BrandsRecommendationBuider<PopularBrandsRecommendationRequest> {
+    private since: number = 0;
+    private weights: BrandRecommendationWeights = { brandViews: 1.0, productViews: 1.0, productPurchases: 1.0 };
+
+    constructor(
+        settings: Settings) {
+        super(settings);
+    }
+
+    public sinceMinutesAgo(sinceMinutesAgo: number): this {
+        this.since = sinceMinutesAgo;
+
+        return this;
+    }
+
+    public setWeights(weights: BrandRecommendationWeights): this {
+        this.weights = weights;
+
+        return this;
+    }
+
+    public build() {
+        const request: PopularBrandsRecommendationRequest = {
+            ...this.baseBuild(),         
+            sinceMinutesAgo: this.since,
+            weights: this.weights,
+            settings: this.recommendationSettings,
+        };
+
+        return { request, name: 'PopularBrandsRecommendationRequest' };
     }
 }
 

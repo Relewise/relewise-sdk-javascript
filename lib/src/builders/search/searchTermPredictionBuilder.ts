@@ -40,6 +40,6 @@ export class SearchTermPredictionBuilder extends SearchRequestBuilder {
                 $type: 'Relewise.Client.Requests.Search.Settings.SearchTermPredictionSettings, Relewise.Client',
                 targetEntityTypes: this.targetEntityTypes,
             },
-        };
+        } as SearchTermPredictionRequest;
     }
 }

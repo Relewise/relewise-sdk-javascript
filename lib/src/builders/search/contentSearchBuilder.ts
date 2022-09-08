@@ -71,6 +71,6 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
 
             facets: this.facetBuilder.build(),
             sorting: this.sortingBuilder.build(),
-        };
+        } as ContentSearchRequest;
     }
 }

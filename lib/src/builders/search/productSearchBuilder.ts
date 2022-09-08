@@ -82,6 +82,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     public build(): ProductSearchRequest {
         const { take, skip } = this.paginationBuilder.build();
         return {
+            $type: 'Relewise.Client.Requests.Search.ProductSearchRequest, Relewise.Client',
             ...this.baseBuild(),
             take,
             skip,
@@ -91,6 +92,6 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
             facets: this.facetBuilder.build(),
             settings: this.searchSettings,
             sorting: this.sortingBuilder.build(),
-        };
+        } as ProductSearchRequest;
     }
 }

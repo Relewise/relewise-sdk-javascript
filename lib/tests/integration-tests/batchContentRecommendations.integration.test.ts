@@ -1,4 +1,4 @@
-import { ContentRecommendationRequestCollection, ContentsRecommendationCollectionBuider, ContentsViewedAfterViewingContentBuilder, PopularContentsBuilder, Recommender, UserFactory } from '../../src';
+import { ContentRecommendationRequestCollection, ContentsRecommendationCollectionBuilder, ContentsViewedAfterViewingContentBuilder, PopularContentsBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -14,7 +14,7 @@ const settings = {
 
 test('Batched Content Reommendations', async() => {
 
-    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuider()
+    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()
         .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build().request)
         .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build().request)
         .build();

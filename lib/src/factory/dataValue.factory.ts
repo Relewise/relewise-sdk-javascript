@@ -1,4 +1,4 @@
-import { BooleanCollectionDataValue, BooleanDataValue, DoubleCollectionDataValue, MoneyDataValue, MultiCurrencyDataValue, MultilingualDataValue, NumberDataValue, StringCollectionDataValue, StringDataValue } from '@/models/dataValue';
+import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MoneyDataValue, MultiCurrencyDataValue, MultilingualDataValue } from '..';
 
 export class DataValueFactory {
     static string(value: string): StringDataValue {

@@ -60,6 +60,7 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
     public build(): ContentSearchRequest {
         const { take, skip } = this.paginationBuilder.build();
         return {
+            $type: 'Relewise.Client.Requests.Search.ContentSearchRequest, Relewise.Client', 
             ...this.baseBuild(),
             
             settings: this.searchSettings,
@@ -70,6 +71,6 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
 
             facets: this.facetBuilder.build(),
             sorting: this.sortingBuilder.build(),
-        };
+        } as ContentSearchRequest;
     }
 }

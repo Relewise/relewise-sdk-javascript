@@ -1,10 +1,12 @@
 import { SearchRequest } from '@/models/data-contracts';
 import { FilterBuilder } from '../filterBuilder';
+import { RelevanceModifierBuilder } from '../relevanceModifierBuilder';
 import { Settings } from '../settings';
 
 export abstract class SearchRequestBuilder {
     private readonly filterBuilder: FilterBuilder = new FilterBuilder();
     private readonly postFilterBuilder: FilterBuilder = new FilterBuilder();
+    private readonly relevanceModifiersBuilder: RelevanceModifierBuilder = new RelevanceModifierBuilder();
     private indexId: string | null | undefined;
 
     constructor(
@@ -33,6 +35,12 @@ export abstract class SearchRequestBuilder {
         return this;
     }
 
+    public relevanceModifiers(relevanceModifiersBuilder: (builder: RelevanceModifierBuilder) => void): this {
+        relevanceModifiersBuilder(this.relevanceModifiersBuilder);
+
+        return this;
+    }
+
     /**
      * Use only when a specific index different from the 'default'-index is needed
      * @param id 
@@ -52,7 +60,7 @@ export abstract class SearchRequestBuilder {
             displayedAtLocation: this.settings.displayedAtLocation,
             filters: this.filterBuilder.build(),
             postFilters: this.postFilterBuilder.build(),
-            relevanceModifiers: null,
+            relevanceModifiers: this.relevanceModifiersBuilder.build(),
             ...(this.indexId && { indexSelector: { id: this.indexId } }),
         };
     }

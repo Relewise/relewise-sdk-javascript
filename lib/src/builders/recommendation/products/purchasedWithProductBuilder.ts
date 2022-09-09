@@ -19,7 +19,7 @@ export class PurchasedWithProductBuilder extends ProductRecommendationBuilder im
             settings: this.recommendationSettings,
             productAndVariantId: this.productAndVariantId!,
             $type: 'Relewise.Client.Requests.Recommendations.PurchasedWithProductRequest, Relewise.Client',
-        } as PurchasedWithProductRequest;
+        };
 
         return { request, name: 'PurchasedWithProductRequest' };
     }

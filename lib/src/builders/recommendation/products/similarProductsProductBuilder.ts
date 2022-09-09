@@ -22,7 +22,7 @@ export class SimilarProductsProductBuilder extends ProductRecommendationBuilder 
     public build() {
         const request: SimilarProductsRequest = {
             ...this.baseBuild(),
-            settings: this.recommendationSettings as ProductRecommendationRequestSettings,
+            settings: this.recommendationSettings,
             existingProductId: this.productAndVariantId,
             considerAlreadyKnownInformationAboutProduct: this.considerAlreadyKnownInformationAboutProduct,
             productData: this.productData,

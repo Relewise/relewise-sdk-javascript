@@ -19,7 +19,7 @@ export class ProductsViewedAfterViewingProductBuilder extends ProductRecommendat
             settings: this.recommendationSettings,
             productAndVariantId: this.productAndVariantId,
             $type: 'Relewise.Client.Requests.Recommendations.ProductsViewedAfterViewingProductRequest, Relewise.Client',
-        } as ProductsViewedAfterViewingProductRequest;
+        };
 
         return { request, name: 'ProductsViewedAfterViewingProductRequest' };
     }

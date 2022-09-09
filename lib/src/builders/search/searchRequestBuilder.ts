@@ -1,12 +1,12 @@
 import { SearchRequest } from '@/models/data-contracts';
 import { FilterBuilder } from '../filterBuilder';
-import { RelevanceModifiersBuilder } from '../relevanceModifiersBuilder';
+import { RelevanceModifierBuilder } from '../relevanceModifierBuilder';
 import { Settings } from '../settings';
 
 export abstract class SearchRequestBuilder {
     private readonly filterBuilder: FilterBuilder = new FilterBuilder();
     private readonly postFilterBuilder: FilterBuilder = new FilterBuilder();
-    private readonly relevanceModifiersBuilder: RelevanceModifiersBuilder = new RelevanceModifiersBuilder();
+    private readonly relevanceModifiersBuilder: RelevanceModifierBuilder = new RelevanceModifierBuilder();
     private indexId: string | null | undefined;
 
     constructor(
@@ -35,7 +35,7 @@ export abstract class SearchRequestBuilder {
         return this;
     }
 
-    public relevanceModifiers(relevanceModifiersBuilder: (builder: RelevanceModifiersBuilder) => void): this {
+    public relevanceModifiers(relevanceModifiersBuilder: (builder: RelevanceModifierBuilder) => void): this {
         relevanceModifiersBuilder(this.relevanceModifiersBuilder);
 
         return this;

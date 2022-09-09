@@ -1,6 +1,6 @@
 import { BrandIdRelevanceModifier, ConditionBuilder, DataDoubleSelector, FilterBuilder, FixedDoubleValueSelector, ProductAssortmentRelevanceModifier, ProductCategoryIdRelevanceModifier, ProductDataRelevanceModifier, ProductIdRelevanceModifier, ProductListPriceRelevanceModifier, ProductRecentlyPurchasedByUserRelevanceModifier, ProductRecentlyViewedByUserRelevanceModifier, ProductSalesPriceRelevanceModifier, RelevanceModifierCollection, UserFavoriteProductRelevanceModifier, VariantAssortmentRelevanceModifier, VariantDataRelevanceModifier, VariantListPriceRelevanceModifier, VariantSalesPriceRelevanceModifier, VariantSpecificationsInCommonRelevanceModifier, VariantSpecificationValueRelevanceModifier } from '..';
 
-export class RelevanceModifiersBuilder {
+export class RelevanceModifierBuilder {
     private modifiers: (
         | BrandIdRelevanceModifier
         | ProductAssortmentRelevanceModifier

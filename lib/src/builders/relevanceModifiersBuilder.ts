@@ -133,7 +133,7 @@ export class RelevanceModifiersBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: conditionBuilder.build()?.items,
             multiplierSelector: multiplierSelector,
-            multiplyWeightBy: 0,
+            multiplyWeightBy: 0, // Obsolete, but required property
             filters: filterBuilder.build(),
         };
         this.modifiers.push(modifier);
@@ -164,7 +164,7 @@ export class RelevanceModifiersBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: conditionBuilder.build()?.items,
             multiplierSelector: multiplierSelector,
-            multiplyWeightBy: 0,
+            multiplyWeightBy: 0, // Obsolete, but required property
             filters: filterBuilder.build(),
         };
         this.modifiers.push(modifier);

@@ -15,10 +15,10 @@ export class PurchasedWithProductBuilder extends ProductRecommendationBuilder im
         }
 
         const request: PurchasedWithProductRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PurchasedWithProductRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             productAndVariantId: this.productAndVariantId!,
-            $type: 'Relewise.Client.Requests.Recommendations.PurchasedWithProductRequest, Relewise.Client',
         };
 
         return { request, name: 'PurchasedWithProductRequest' };

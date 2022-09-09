@@ -15,10 +15,10 @@ export class ProductsViewedAfterViewingProductBuilder extends ProductRecommendat
         }
 
         const request: ProductsViewedAfterViewingProductRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.ProductsViewedAfterViewingProductRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             productAndVariantId: this.productAndVariantId,
-            $type: 'Relewise.Client.Requests.Recommendations.ProductsViewedAfterViewingProductRequest, Relewise.Client',
         };
 
         return { request, name: 'ProductsViewedAfterViewingProductRequest' };

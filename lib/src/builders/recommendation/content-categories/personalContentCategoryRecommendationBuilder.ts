@@ -34,6 +34,6 @@ export class PersonalContentCategoryRecommendationBuilder extends ContentCategor
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PersonalContentCategoryRecommendationRequest' };
+        return request;
     }
 }

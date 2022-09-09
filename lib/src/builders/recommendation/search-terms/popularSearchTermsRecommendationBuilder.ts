@@ -28,12 +28,12 @@ export class PopularSearchTermsRecommendationBuilder extends RecommendationReque
 
     public build() {
         const request: PopularSearchTermsRecommendationRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PopularSearchTermsRecommendationRequest, Relewise.Client',
             ...this.baseBuild(),
             term: this.term,
-            $type: '',
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PopularSearchTermsRecommendationRequest' };
+        return request;
     }
 }

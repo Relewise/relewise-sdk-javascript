@@ -30,10 +30,9 @@ export class PersonalProductCategoryRecommendationBuilder extends ProductCategor
             ...this.baseBuild(),
             sinceMinutesAgo: this.since,
             weights: this.weights,
-
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PersonalProductCategoryRecommendationRequest' };
+        return request;
     }
 }

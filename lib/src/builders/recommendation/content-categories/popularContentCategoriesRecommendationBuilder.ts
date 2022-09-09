@@ -33,6 +33,6 @@ export class PopularContentCategoriesRecommendationBuilder extends ContentCatego
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PopularContentCategoriesRecommendationRequest' };
+        return request;
     }
 }

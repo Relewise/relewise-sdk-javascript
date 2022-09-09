@@ -20,6 +20,7 @@ export class SortVariantsBuilder extends ProductSettingsRecommendationBuilder im
 
     public build() {
         const request: SortVariantsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.SortVariantsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             productId: this.id,

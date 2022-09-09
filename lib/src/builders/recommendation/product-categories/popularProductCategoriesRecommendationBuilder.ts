@@ -33,6 +33,6 @@ export class PopularProductCategoriesRecommendationBuilder extends ProductCatego
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PopularProductCategoriesRecommendationRequest' };
+        return request;
     }
 }

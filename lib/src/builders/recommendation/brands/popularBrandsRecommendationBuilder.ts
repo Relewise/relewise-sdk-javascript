@@ -32,6 +32,6 @@ export class PopularBrandsRecommendationBuilder extends BrandSettingsRecommendat
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PopularBrandsRecommendationRequest' };
+        return request;
     }
 }

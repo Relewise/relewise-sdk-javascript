@@ -32,6 +32,6 @@ export class PersonalBrandRecommendationBuilder extends BrandSettingsRecommendat
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PersonalBrandRecommendationRequest' };
+        return request;
     }
 }

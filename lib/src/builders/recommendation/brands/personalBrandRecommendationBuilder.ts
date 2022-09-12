@@ -26,6 +26,7 @@ export class PersonalBrandRecommendationBuilder extends BrandSettingsRecommendat
 
     public build() {
         const request: PersonalBrandRecommendationRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PersonalBrandRecommendationRequest, Relewise.Client',
             ...this.baseBuild(),
             sinceMinutesAgo: this.since,
             weights: this.weights,

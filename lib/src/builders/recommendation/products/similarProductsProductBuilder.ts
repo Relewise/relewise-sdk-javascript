@@ -21,6 +21,7 @@ export class SimilarProductsProductBuilder extends ProductRecommendationBuilder 
 
     public build() {
         const request: SimilarProductsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.SimilarProductsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             existingProductId: this.productAndVariantId,
@@ -29,6 +30,6 @@ export class SimilarProductsProductBuilder extends ProductRecommendationBuilder 
             evaluationSettings: this.evaluationSettings,
         };
 
-        return { request, name: 'SimilarProductsRequest' };
+        return request;
     }
 }

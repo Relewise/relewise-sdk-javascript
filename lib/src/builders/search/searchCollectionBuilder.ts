@@ -17,6 +17,7 @@ export class SearchCollectionBuilder extends SearchRequestBuilder {
 
     public build(): SearchRequestCollection {
         return {
+            $type: 'Relewise.Client.Requests.Search.SearchRequestCollection, Relewise.Client',
             ...this.baseBuild(),
             requests: this.requests,
         };

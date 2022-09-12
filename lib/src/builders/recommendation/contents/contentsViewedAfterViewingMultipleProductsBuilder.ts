@@ -2,8 +2,9 @@ import { Settings } from '@/builders/settings';
 import { ContentsViewedAfterViewingMultipleProductsRequest, ProductAndVariantId } from '@/models/data-contracts';
 import { ProductsRecommendationBuilder } from '../products';
 import { ContentSettingsRecommendationBuilder } from './contentSettingsRecommendationBuilder';
+import { ContentsRecommendationBuilder } from './contentsRecommendationBuilder';
 
-export class ContentsViewedAfterViewingMultipleProductsBuilder extends ContentSettingsRecommendationBuilder implements ProductsRecommendationBuilder<ContentsViewedAfterViewingMultipleProductsRequest> {
+export class ContentsViewedAfterViewingMultipleProductsBuilder extends ContentSettingsRecommendationBuilder implements ContentsRecommendationBuilder<ContentsViewedAfterViewingMultipleProductsRequest> {
     private products: ProductAndVariantId[] = [];
 
     constructor(
@@ -25,11 +26,12 @@ export class ContentsViewedAfterViewingMultipleProductsBuilder extends ContentSe
 
     public build() {
         const request: ContentsViewedAfterViewingMultipleProductsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.ContentsViewedAfterViewingMultipleProductsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             productAndVariantIds: this.products,
         };
 
-        return { request, name: 'ContentsViewedAfterViewingMultipleProductsRequest' };
+        return request;
     }
 }

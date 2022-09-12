@@ -11,10 +11,11 @@ export class PersonalProductRecommendationBuilder extends ProductSettingsRecomme
 
     public build() {
         const request: PersonalProductRecommendationRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PersonalProductRecommendationRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PersonalProductRecommendationRequest' };
+        return request;
     }
 }

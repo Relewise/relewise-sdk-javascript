@@ -19,11 +19,12 @@ export class PopularContentsBuilder extends ContentSettingsRecommendationBuilder
 
     public build() {
         const request: PopularContentsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PopularContentsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             sinceMinutesAgo: this.since,
         };
 
-        return { request, name: 'PopularContentsRequest' };
+        return request;
     }
 }

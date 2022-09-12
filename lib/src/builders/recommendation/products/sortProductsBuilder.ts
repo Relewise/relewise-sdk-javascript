@@ -19,11 +19,12 @@ export class SortProductsBuilder extends ProductSettingsRecommendationBuilder im
 
     public build() {
         const request: SortProductsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.SortProductsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             productIds: this.ids,
         };
 
-        return { request, name: 'SortProductsRequest' };
+        return request;
     }
 }

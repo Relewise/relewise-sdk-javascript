@@ -19,11 +19,12 @@ export class ContentsViewedAfterViewingMultipleContentsBuilder extends ContentSe
 
     public build() {
         const request: ContentsViewedAfterViewingMultipleContentsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.ContentsViewedAfterViewingMultipleContentsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             contentIds: this.ids,
         };
 
-        return { request, name: 'ContentsViewedAfterViewingMultipleContentsRequest' };
+        return request;
     }
 }

@@ -26,6 +26,6 @@ export class SortVariantsBuilder extends ProductSettingsRecommendationBuilder im
             productId: this.id,
         };
 
-        return { request, name: 'SortVariantsRequest' };
+        return request;
     }
 }

@@ -19,11 +19,12 @@ export class SearchTermBasedProductRecommendationBuilder extends ProductSettings
 
     public build() {
         const request: SearchTermBasedProductRecommendationRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.SearchTermBasedProductRecommendationRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             term: this.term,
         };
 
-        return { request, name: 'SearchTermBasedProductRecommendationRequest' };
+        return request;
     }
 }

@@ -19,11 +19,12 @@ export class ContentsViewedAfterViewingContentBuilder extends ContentSettingsRec
 
     public build() {
         const request: ContentsViewedAfterViewingContentRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.ContentsViewedAfterViewingContentRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             contentId: this.id,
         };
 
-        return { request, name: 'ContentsViewedAfterViewingContentRequest' };
+        return request;
     }
 }

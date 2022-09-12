@@ -21,6 +21,6 @@ export class PurchasedWithProductBuilder extends ProductRecommendationBuilder im
             productAndVariantId: this.productAndVariantId!,
         };
 
-        return { request, name: 'PurchasedWithProductRequest' };
+        return request;
     }
 }

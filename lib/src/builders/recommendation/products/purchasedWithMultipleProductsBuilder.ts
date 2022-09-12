@@ -25,11 +25,12 @@ export class PurchasedWithMultipleProductsBuilder extends ProductSettingsRecomme
 
     public build() {
         const request: PurchasedWithMultipleProductsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PurchasedWithMultipleProductsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             productAndVariantIds: this.products,
         };
 
-        return { request, name: 'PurchasedWithMultipleProductsRequest' };
+        return request;
     }
 }

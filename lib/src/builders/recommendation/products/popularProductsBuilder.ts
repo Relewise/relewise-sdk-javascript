@@ -26,12 +26,13 @@ export class PopularProductsBuilder extends ProductSettingsRecommendationBuilder
 
     public build() {
         const request: PopularProductsRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PopularProductsRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
             basedOn: this.basedOnSelection,
             sinceMinutesAgo: this.since,
         };
 
-        return { request, name: 'PopularProductsRequest' };
+        return request;
     }
 }

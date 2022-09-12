@@ -11,10 +11,11 @@ export class PurchasedWithCurrentCartBuilder extends ProductSettingsRecommendati
 
     public build() {
         const request: PurchasedWithCurrentCartRequest = {
+            $type: 'Relewise.Client.Requests.Recommendations.PurchasedWithCurrentCartRequest, Relewise.Client',
             ...this.baseBuild(),
             settings: this.recommendationSettings,
         };
 
-        return { request, name: 'PurchasedWithCurrentCartRequest' };
+        return request;
     }
 }

@@ -21,6 +21,6 @@ export class ProductsViewedAfterViewingProductBuilder extends ProductRecommendat
             productAndVariantId: this.productAndVariantId,
         };
 
-        return { request, name: 'ProductsViewedAfterViewingProductRequest' };
+        return request;
     }
 }

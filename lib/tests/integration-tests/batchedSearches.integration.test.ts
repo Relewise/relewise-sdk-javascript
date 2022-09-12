@@ -24,7 +24,6 @@ test('Batched search requests', async() => {
         .addRequest(new ProductSearchBuilder(settings).setTerm('a').build())
         .build();
 
-
     const result = await searcher.batch(request);
 
     expect(result?.responses?.length).toBe(2);

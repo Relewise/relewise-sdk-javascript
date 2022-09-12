@@ -14,7 +14,7 @@ const settings = {
 
 test('PurchasedWithProduct', async() => {
 
-    const result: ProductRecommendationResponse | undefined = await recommender.recommendProducts(new PurchasedWithProductBuilder(settings).product({productId: '1'}));
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendPurchasedWithProduct(new PurchasedWithProductBuilder(settings).product({productId: '1'}).build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);
@@ -22,7 +22,7 @@ test('PurchasedWithProduct', async() => {
 
 test('ProductsViewedAfterViewingProduct', async() => {
 
-    const result: ProductRecommendationResponse | undefined = await recommender.recommendProducts(new ProductsViewedAfterViewingProductBuilder(settings).product({productId: '1'}));
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(new ProductsViewedAfterViewingProductBuilder(settings).product({productId: '1'}).build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);

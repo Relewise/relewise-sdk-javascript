@@ -15,18 +15,14 @@ const settings = {
 test('Batched Content Reommendations', async() => {
 
     const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()
-        .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build().request)
-        .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build().request)
+        .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build())
+        .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build())
         .build();
 
-    try {
-        const result = await recommender.batchContentRecommendations(request);
+    const result = await recommender.batchContentRecommendations(request);
 
-        expect(result?.responses).not.toBe(undefined);
-        expect(result!.responses![0].recommendations?.length).toBeGreaterThan(0);
-        expect(result!.responses![1].recommendations?.length).toBeGreaterThan(0);
-    } catch (e) {
-        console.log(e)
-    }
-   
+    expect(result?.responses).not.toBe(undefined);
+    expect(result!.responses![0].recommendations?.length).toBeGreaterThan(0);
+    expect(result!.responses![1].recommendations?.length).toBeGreaterThan(0);
+
 });

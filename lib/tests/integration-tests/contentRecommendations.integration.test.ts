@@ -14,7 +14,7 @@ const settings = {
 
 test('ContentsViewedAfterViewing', async() => {
 
-    const result: ContentRecommendationResponse | undefined = await recommender.recommendProducts(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087'));
+    const result: ContentRecommendationResponse | undefined = await recommender.recommendContentsViewedAfterViewingContent(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);
@@ -22,7 +22,7 @@ test('ContentsViewedAfterViewing', async() => {
 
 test('PopularContents', async() => {
 
-    const result: ContentRecommendationResponse | undefined = await recommender.recommendProducts(new PopularContentsBuilder(settings).sinceMinutesAgo(5000));
+    const result: ContentRecommendationResponse | undefined = await recommender.recommendPopularContents(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);

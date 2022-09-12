@@ -1,5 +1,7 @@
-import { RecentlyViewedProductsRequest } from '../../../models/data-contracts';
-import { ProductSettingsRecommendationBuilder, ProductsRecommendationBuilder, Settings } from '../..';
+import { Settings } from '@/builders/settings';
+import { RecentlyViewedProductsRequest } from '@/models/data-contracts';
+import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
+import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 
 export class RecentlyViewedProductsBuilder extends ProductSettingsRecommendationBuilder implements ProductsRecommendationBuilder<RecentlyViewedProductsRequest> {
     constructor(

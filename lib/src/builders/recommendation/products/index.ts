@@ -1,6 +1,6 @@
 export * from './purchasedWithCurrentCartBuilder';
 export * from './productsViewedAfterViewingProductBuilder';
-export * from './productRecommendationBuilder';
+export * from './bySingleProductRecommendationBuilder';
 export * from './productsViewedAfterViewingContentBuilder';
 export * from './personalProductRecommendationBuilder';
 export * from './popularProductsBuilder';

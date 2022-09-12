@@ -1,9 +1,9 @@
 import { Settings } from '@/builders/settings';
 import { ProductsViewedAfterViewingProductRequest } from '@/models/data-contracts';
-import { ProductRecommendationBuilder } from './productRecommendationBuilder';
+import { BySingleProductRecommendationBuilder } from './bySingleProductRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 
-export class ProductsViewedAfterViewingProductBuilder extends ProductRecommendationBuilder implements ProductsRecommendationBuilder<ProductsViewedAfterViewingProductRequest> {
+export class ProductsViewedAfterViewingProductBuilder extends BySingleProductRecommendationBuilder implements ProductsRecommendationBuilder<ProductsViewedAfterViewingProductRequest> {
     constructor(
         settings: Settings) {
         super(settings);

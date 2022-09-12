@@ -2,7 +2,7 @@ import { Settings } from '@/builders/settings';
 import { ProductAndVariantId } from '@/models/data-contracts';
 import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
 
-export class ProductRecommendationBuilder extends ProductSettingsRecommendationBuilder {
+export class BySingleProductRecommendationBuilder extends ProductSettingsRecommendationBuilder {
     protected productAndVariantId: ProductAndVariantId | null = null;
 
     constructor(

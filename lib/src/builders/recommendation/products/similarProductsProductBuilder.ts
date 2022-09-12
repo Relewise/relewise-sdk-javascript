@@ -1,9 +1,9 @@
 import { Settings } from '@/builders/settings';
-import { SimilarProductsRequest, SimilarProductsEvaluationSettings, Product, ProductRecommendationRequestSettings } from '@/models/data-contracts';
-import { ProductRecommendationBuilder } from './productRecommendationBuilder';
+import { SimilarProductsRequest, SimilarProductsEvaluationSettings, Product } from '@/models/data-contracts';
+import { BySingleProductRecommendationBuilder } from './bySingleProductRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 
-export class SimilarProductsProductBuilder extends ProductRecommendationBuilder implements ProductsRecommendationBuilder<SimilarProductsRequest> {
+export class SimilarProductsProductBuilder extends BySingleProductRecommendationBuilder implements ProductsRecommendationBuilder<SimilarProductsRequest> {
     private evaluationSettings: SimilarProductsEvaluationSettings | null = null;
     private considerAlreadyKnownInformationAboutProduct: boolean = false;
     private productData: Product | null = null;

@@ -19,8 +19,6 @@ test('Batched Product Reommendations', async() => {
         .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).product({productId: '1'}).build())
         .build();
 
-    console.log(JSON.stringify(request))
-
     const result = await recommender.batchProductRecommendations(request);
 
     expect(result?.responses).not.toBe(undefined);

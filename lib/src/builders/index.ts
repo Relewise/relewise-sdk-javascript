@@ -4,3 +4,4 @@ export * from './paginationBuilder';
 export * from './conditionBuilder';
 export * from './relevanceModifierBuilder';
 export * from './search';
+export * from './recommendation';

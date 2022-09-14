@@ -242,6 +242,7 @@ export type BrandQuery = LicensedRequest & {
 };
 
 export interface BrandRecommendationRequest {
+  $type: string;
   settings: BrandRecommendationRequestSettings;
   language?: Language | null;
   user: User;
@@ -569,6 +570,7 @@ export interface ContentCategoryInterestTriggerResultTriggerConfiguration {
 export type ContentCategoryQuery = ContentCategoryIdFilterCategoryQuery;
 
 export interface ContentCategoryRecommendationRequest {
+  $type: string;
   settings?: ContentCategoryRecommendationRequestSettings | null;
   language?: Language | null;
   user: User;
@@ -729,6 +731,7 @@ export type ContentQuery = LicensedRequest & {
 };
 
 export interface ContentRecommendationRequest {
+  $type: string;
   settings: ContentRecommendationRequestSettings;
   language?: Language | null;
   user: User;
@@ -1503,6 +1506,8 @@ export interface OverriddenSelectedVariantPropertiesSettings {
 }
 
 export interface PaginatedSearchRequest {
+  $type: string;
+
   /** @format int32 */
   skip: number;
 
@@ -2134,6 +2139,7 @@ export type ProductRecentlyViewedByUserRelevanceModifier = RelevanceModifier & {
 };
 
 export interface ProductRecommendationRequest {
+  $type: string;
   settings: ProductRecommendationRequestSettings;
   language?: Language | null;
   user: User;
@@ -2528,6 +2534,7 @@ export interface SearchPredictionRuleRequestSortBySorting {
 export type SearchPredictionRuleResponse = PredictionRuleSearchRulesResponse;
 
 export interface SearchRequest {
+  $type: string;
   language?: Language | null;
   currency?: Currency | null;
   user: User;
@@ -2943,10 +2950,12 @@ export type TrackSearchTermRequest = TrackingRequest & { searchTerm?: SearchTerm
 export type TrackUserUpdateRequest = TrackingRequest & { userUpdate?: UserUpdate | null };
 
 export interface Trackable {
+  $type: string;
   custom?: Record<string, string | null>;
 }
 
 export interface TrackingRequest {
+  $type: string;
   custom?: Record<string, string | null>;
 }
 

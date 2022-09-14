@@ -52,7 +52,7 @@ export abstract class SearchRequestBuilder {
         return this;
     }
 
-    protected baseBuild(): SearchRequest {
+    protected baseBuild(): Omit<SearchRequest, '$type'> {
         return {
             currency: { value: this.settings.currency },
             user: this.settings.user,

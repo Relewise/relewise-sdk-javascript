@@ -151,6 +151,7 @@ const builder = new ProductSearchBuilder(settings)
     .filters(f => f
         .addProductAssortmentFilter(1)
         .addVariantAssortmentFilter(1)
+        .addProductCategoryIdFilter('ImmediateParent', ["category_id"])
     )
     .sorting(s => s
         .sortByProductData('InStock', 'Descending', (n) => n

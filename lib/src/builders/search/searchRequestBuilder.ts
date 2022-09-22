@@ -10,7 +10,7 @@ export abstract class SearchRequestBuilder {
     private indexId: string | null | undefined;
 
     constructor(
-        private readonly settings: Settings) {
+        private readonly settings?: Settings) {
     }
 
     /**
@@ -52,12 +52,14 @@ export abstract class SearchRequestBuilder {
         return this;
     }
 
-    protected baseBuild(): Omit<SearchRequest, '$type'> {
+    protected baseBuild(): Omit<SearchRequest, '$type' | 'currency' |  'language' | 'displayedAtLocation'> {
         return {
-            currency: { value: this.settings.currency },
-            user: this.settings.user,
-            language: { value: this.settings.language },
-            displayedAtLocation: this.settings.displayedAtLocation,
+            ...(this.settings && { 
+                currency: { value: this.settings.currency },
+                language: { value: this.settings.language },
+                displayedAtLocation: this.settings.displayedAtLocation,
+                user: this.settings.user,
+            }),
             filters: this.filterBuilder.build(),
             postFilters: this.postFilterBuilder.build(),
             relevanceModifiers: this.relevanceModifiersBuilder.build(),

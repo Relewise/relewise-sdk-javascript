@@ -15,7 +15,7 @@ export class ContentCategorySettingsRecommendationBuilder extends Recommendation
         super(settings);
     }
 
-    public setContentCategoryProperties(ContentCategoryProperties: SelectedContentCategoryPropertiesSettings): this {
+    public setSelectedContentCategoryProperties(ContentCategoryProperties: SelectedContentCategoryPropertiesSettings): this {
         this.recommendationSettings.selectedContentCategoryProperties = ContentCategoryProperties;
 
         return this;

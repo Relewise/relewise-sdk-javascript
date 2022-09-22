@@ -1,4 +1,4 @@
-import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '@/models/data-contracts';
+import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '@/models/data-contracts';
 
 export class FacetBuilder {
     private facets: (
@@ -11,6 +11,7 @@ export class FacetBuilder {
         | ContentDataBooleanValueFacet
         | ContentDataDoubleValueFacet
         | ContentDataIntegerValueFacet
+        | ContentDataDoubleRangesFacet
         | PriceRangeFacet
         | PriceRangesFacet
         | ProductDataDoubleRangeFacet
@@ -19,6 +20,7 @@ export class FacetBuilder {
         | ProductDataDoubleValueFacet
         | ProductDataIntegerValueFacet
         | VariantSpecificationFacet
+        | ProductDataDoubleRangesFacet
     )[] = [];
 
     public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null): this {
@@ -91,6 +93,33 @@ export class FacetBuilder {
                 lowerBoundInclusive: lowerBound,
                 upperBoundInclusive: upperBound,
             },
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductDataDoubleRangesFacet(
+        key: string,
+        selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
+        predefinedRanges?: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null,
+        expandedRangeSize?: number | null,
+        selectedValues: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null = null): this {
+
+        const facet: ProductDataDoubleRangesFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangesFacet, Relewise.Client',
+            field: 'Data',
+            key: key,
+            predefinedRanges: predefinedRanges?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
+            expandedRangeSize: expandedRangeSize,
+            selected: selectedValues?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
+            dataSelectionStrategy: selectionStrategy,
         };
         this.facets.push(facet);
 
@@ -223,6 +252,31 @@ export class FacetBuilder {
             field: 'Data',
             selected: {lowerBoundInclusive: lowerBound, upperBoundInclusive: upperBound},
             key: key,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addContentDataDoubleRangesFacet(
+        key: string,
+        predefinedRanges?: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null,
+        expandedRangeSize?: number | null,
+        selectedValues: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null = null): this {
+
+        const facet: ContentDataDoubleRangesFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangesFacet, Relewise.Client',
+            field: 'Data',
+            key: key,
+            predefinedRanges: predefinedRanges?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
+            expandedRangeSize: expandedRangeSize,
+            selected: selectedValues?.map(x => ({lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound})),
         };
         this.facets.push(facet);
 

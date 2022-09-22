@@ -5,7 +5,7 @@ import { SearchRequestBuilder } from './searchRequestBuilder';
 export class SearchCollectionBuilder extends SearchRequestBuilder {
     private requests: (ProductSearchRequest | ContentSearchRequest | SearchTermPredictionRequest)[] = [];
 
-    constructor(settings: Settings) {
+    constructor(settings?: Settings) {
         super(settings)
     }
 

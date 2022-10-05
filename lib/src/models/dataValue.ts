@@ -60,7 +60,7 @@ export class BooleanCollectionDataValue extends DataValueBase<Object> {
     }
 }
 
-interface MultiCurrencyWithType extends MultiCurrency {
+export interface MultiCurrencyWithType extends MultiCurrency {
     $type: string;
 }
 
@@ -74,7 +74,7 @@ export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType>
     }
 }
 
-interface MultilingualWithType extends Multilingual {
+export interface MultilingualWithType extends Multilingual {
     $type: string;
 }
 

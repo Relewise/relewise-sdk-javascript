@@ -60,19 +60,6 @@ export class BooleanCollectionDataValue extends DataValueBase<Object> {
     }
 }
 
-export class MoneyDataValue extends DataValueBase<Object> {
-    constructor(amount: number, currency: string) {
-        super('Money', 
-            {
-                $type: 'Relewise.Client.DataTypes.Money, Relewise.Client',
-                amount: amount,
-                currency: {
-                    value: currency,
-                },
-            });
-    }
-}
-
 interface MultiCurrencyWithType extends MultiCurrency {
     $type: string;
 }

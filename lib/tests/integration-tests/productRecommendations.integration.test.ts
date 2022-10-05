@@ -28,7 +28,7 @@ test('ProductsViewedAfterViewingProduct', async() => {
     expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
-test('ProductsViewedAfterViewingProduct with many conditions', async() => {
+test('ProductsViewedAfterViewingProduct with all conditions', async() => {
 
     const recommendationBuilder = new ProductsViewedAfterViewingProductBuilder({
         language: 'en-US',
@@ -43,12 +43,9 @@ test('ProductsViewedAfterViewingProduct with many conditions', async() => {
                 .addContainsCondition(DataValueFactory.booleanCollection([true]), 'Any')
                 .addContainsCondition(DataValueFactory.doubleCollection([1]), 'Any')
                 .addContainsCondition(DataValueFactory.multilingual([{language: 'en-us', value: 'd'}]), 'Any')
-                .addContainsCondition(DataValueFactory.multiCurrency([{currency: 'USD', amount: 1}]), 'Any')
-                .addContainsCondition(DataValueFactory.money(1, 'USD'), 'Any'),                
+                .addContainsCondition(DataValueFactory.multiCurrency([{currency: 'USD', amount: 1}]), 'Any'),          
             ));
 
-    console.log(JSON.stringify(recommendationBuilder.build()))
-    
     const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(recommendationBuilder.build());
 
     expect(result).not.toBe(undefined);

@@ -1,4 +1,4 @@
-import { ProductRecommendationResponse, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, UserFactory } from '../../src';
+import { DataValueFactory, ProductRecommendationResponse, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -26,4 +26,31 @@ test('ProductsViewedAfterViewingProduct', async() => {
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);
+});
+
+test('ProductsViewedAfterViewingProduct with many conditions', async() => {
+
+    const recommendationBuilder = new ProductsViewedAfterViewingProductBuilder({
+        language: 'en-US',
+        currency: 'USD',
+        displayedAtLocation: 'integration test Conditions',
+        user: UserFactory.anonymous(),
+    })
+        .product({productId: '1'})
+        .filters(f => f
+            .addProductDataFilter('ShortDescription', b => b
+                .addContainsCondition(DataValueFactory.stringCollection(['d']), 'Any')
+                .addContainsCondition(DataValueFactory.booleanCollection([true]), 'Any')
+                .addContainsCondition(DataValueFactory.doubleCollection([1]), 'Any')
+                .addContainsCondition(DataValueFactory.multilingual([{language: 'en-us', value: 'd'}]), 'Any')
+                .addContainsCondition(DataValueFactory.multiCurrency([{currency: 'USD', amount: 1}]), 'Any')
+                .addContainsCondition(DataValueFactory.money(1, 'USD'), 'Any'),                
+            ));
+
+    console.log(JSON.stringify(recommendationBuilder.build()))
+    
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(recommendationBuilder.build());
+
+    expect(result).not.toBe(undefined);
+    expect(result!.recommendations?.length).toEqual(0);
 });

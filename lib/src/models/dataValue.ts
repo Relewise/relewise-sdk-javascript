@@ -1,4 +1,4 @@
-import { DataValue, Money, MultiCurrency, Multilingual } from './data-contracts';
+import { DataValue, MultiCurrency, Multilingual } from './data-contracts';
 
 export type DataValueTypes = 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection';
 
@@ -12,13 +12,26 @@ export abstract class DataValueBase<T> implements DataValue {
     value: T;
 }
 
+export interface CollectionWithType<T> {
+    $type: string;
+    $values: T[];
+}
+
+export interface MultiCurrencyWithType extends MultiCurrency {
+    $type: string;
+}
+
+export interface MultilingualWithType extends Multilingual {
+    $type: string;
+}
+
 export class StringDataValue extends DataValueBase<string> {
     constructor(value: string) {
         super('String', value);
     }
 }
 
-export class StringCollectionDataValue extends DataValueBase<Object> {
+export class StringCollectionDataValue extends DataValueBase<CollectionWithType<string>> {
     constructor(value: string[]) {
         super('StringList', 
             {
@@ -34,7 +47,7 @@ export class NumberDataValue extends DataValueBase<number> {
     }
 }
 
-export class DoubleCollectionDataValue extends DataValueBase<Object> {
+export class DoubleCollectionDataValue extends DataValueBase<CollectionWithType<number>> {
     constructor(value: number[]) {
         super('DoubleList',
             {
@@ -50,7 +63,7 @@ export class BooleanDataValue extends DataValueBase<boolean> {
     }
 }
 
-export class BooleanCollectionDataValue extends DataValueBase<Object> {
+export class BooleanCollectionDataValue extends DataValueBase<CollectionWithType<boolean>> {
     constructor(value: boolean[]) {
         super('BooleanList', 
             {
@@ -58,10 +71,6 @@ export class BooleanCollectionDataValue extends DataValueBase<Object> {
                 $values: value,
             });
     }
-}
-
-export interface MultiCurrencyWithType extends MultiCurrency {
-    $type: string;
 }
 
 export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType> {
@@ -72,10 +81,6 @@ export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType>
                 values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })),
             });
     }
-}
-
-export interface MultilingualWithType extends Multilingual {
-    $type: string;
 }
 
 export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {

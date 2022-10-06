@@ -1,4 +1,4 @@
-import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MoneyDataValue, MultiCurrencyDataValue, MultilingualDataValue } from '..';
+import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue } from '..';
 
 export class DataValueFactory {
     static string(value: string): StringDataValue {
@@ -23,10 +23,6 @@ export class DataValueFactory {
 
     static booleanCollection(collection: boolean[]): BooleanCollectionDataValue {
         return new BooleanCollectionDataValue(collection);
-    }
-
-    static money(amount: number, currency: string): MoneyDataValue {
-        return new MoneyDataValue(amount, currency);
     }
 
     static multiCurrency(values: { amount: number, currency: string }[]): MultiCurrencyDataValue {

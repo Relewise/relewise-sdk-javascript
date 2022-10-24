@@ -1,4 +1,4 @@
-import { RecommendationRequest } from '@/models/data-contracts';
+import { RecommendationRequest } from '../../models/data-contracts';
 import { FilterBuilder } from '../filterBuilder';
 import { Settings } from '../settings';
 

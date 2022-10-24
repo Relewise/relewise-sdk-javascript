@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { PersonalProductRecommendationRequest } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { PersonalProductRecommendationRequest } from '../../../models/data-contracts';
 import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 

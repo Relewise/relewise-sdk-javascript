@@ -1,4 +1,4 @@
-import { ContentAttributeSorting, ContentDataSorting, ContentPopularitySorting, ContentRelevanceSorting, ContentSortBySpecification } from '@/models/data-contracts';
+import { ContentAttributeSorting, ContentDataSorting, ContentPopularitySorting, ContentRelevanceSorting, ContentSortBySpecification } from '../../models/data-contracts';
 
 export class ContentSortingBuilder {
     private value:

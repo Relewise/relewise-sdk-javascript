@@ -1,4 +1,4 @@
-import { CustomProductRecommendationRequest, PersonalProductRecommendationRequest, PopularProductsRequest, ProductsViewedAfterViewingContentRequest, ProductsViewedAfterViewingProductRequest, PurchasedWithCurrentCartRequest, PurchasedWithMultipleProductsRequest, PurchasedWithProductRequest, RecentlyViewedProductsRequest, SearchTermBasedProductRecommendationRequest, SimilarProductsRequest, SortProductsRequest, SortVariantsRequest, ProductRecommendationRequestCollection } from '@/models/data-contracts';
+import { CustomProductRecommendationRequest, PersonalProductRecommendationRequest, PopularProductsRequest, ProductsViewedAfterViewingContentRequest, ProductsViewedAfterViewingProductRequest, PurchasedWithCurrentCartRequest, PurchasedWithMultipleProductsRequest, PurchasedWithProductRequest, RecentlyViewedProductsRequest, SearchTermBasedProductRecommendationRequest, SimilarProductsRequest, SortProductsRequest, SortVariantsRequest, ProductRecommendationRequestCollection } from '../../../models/data-contracts';
 
 export class ProductsRecommendationCollectionBuilder {
     private requests: (CustomProductRecommendationRequest

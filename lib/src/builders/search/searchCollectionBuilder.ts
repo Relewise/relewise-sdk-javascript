@@ -1,4 +1,4 @@
-import { ContentSearchRequest, ProductSearchRequest, SearchRequestCollection, SearchTermPredictionRequest } from '@/models/data-contracts';
+import { ContentSearchRequest, ProductSearchRequest, SearchRequestCollection, SearchTermPredictionRequest } from '../../models/data-contracts';
 import { Settings } from '../settings';
 import { SearchRequestBuilder } from './searchRequestBuilder';
 

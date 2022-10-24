@@ -1,4 +1,4 @@
-import { ContentSearchRequest, ContentSearchSettings, RecommendationSettings, SelectedContentPropertiesSettings } from '@/models/data-contracts';
+import { ContentSearchRequest, ContentSearchSettings, RecommendationSettings, SelectedContentPropertiesSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { ContentSortingBuilder } from './contentSortingBuilder';

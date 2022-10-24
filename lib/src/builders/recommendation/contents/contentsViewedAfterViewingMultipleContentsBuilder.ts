@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { ContentsViewedAfterViewingMultipleContentsRequest } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { ContentsViewedAfterViewingMultipleContentsRequest } from '../../../models/data-contracts';
 import { ContentSettingsRecommendationBuilder } from './contentSettingsRecommendationBuilder';
 import { ContentsRecommendationBuilder } from './contentsRecommendationBuilder';
 

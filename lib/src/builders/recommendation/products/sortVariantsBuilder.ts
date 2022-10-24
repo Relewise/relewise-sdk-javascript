@@ -1,6 +1,6 @@
 
-import { Settings } from '@/builders/settings';
-import { SortVariantsRequest } from '@/models/data-contracts';
+import { Settings } from '../../settings';
+import { SortVariantsRequest } from '../../../models/data-contracts';
 import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 

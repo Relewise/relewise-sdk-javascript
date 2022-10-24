@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { PurchasedWithProductRequest } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { PurchasedWithProductRequest } from '../../../models/data-contracts';
 import { BySingleProductRecommendationBuilder } from './bySingleProductRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 

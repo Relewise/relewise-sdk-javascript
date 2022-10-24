@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { ProductAndVariantId } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { ProductAndVariantId } from '../../../models/data-contracts';
 import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
 
 export class BySingleProductRecommendationBuilder extends ProductSettingsRecommendationBuilder {

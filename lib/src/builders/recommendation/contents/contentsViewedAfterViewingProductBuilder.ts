@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { ContentsViewedAfterViewingProductRequest, ProductAndVariantId } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { ContentsViewedAfterViewingProductRequest, ProductAndVariantId } from '../../../models/data-contracts';
 import { ContentSettingsRecommendationBuilder } from './contentSettingsRecommendationBuilder';
 import { ContentsRecommendationBuilder } from './contentsRecommendationBuilder';
 

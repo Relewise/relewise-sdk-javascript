@@ -1,4 +1,4 @@
-import { SearchRequest } from '@/models/data-contracts';
+import { SearchRequest } from '../../models/data-contracts';
 import { FilterBuilder } from '../filterBuilder';
 import { RelevanceModifierBuilder } from '../relevanceModifierBuilder';
 import { Settings } from '../settings';

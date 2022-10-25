@@ -1,6 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { ContentsViewedAfterViewingMultipleProductsRequest, ProductAndVariantId } from '@/models/data-contracts';
-import { ProductsRecommendationBuilder } from '../products';
+import { Settings } from '../../../builders/settings';
+import { ContentsViewedAfterViewingMultipleProductsRequest, ProductAndVariantId } from '../../../models/data-contracts';
 import { ContentSettingsRecommendationBuilder } from './contentSettingsRecommendationBuilder';
 import { ContentsRecommendationBuilder } from './contentsRecommendationBuilder';
 

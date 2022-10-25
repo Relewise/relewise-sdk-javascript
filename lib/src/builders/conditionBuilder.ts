@@ -1,5 +1,4 @@
-import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection } from '@/models/data-contracts';
-import { DataValueBase } from '@/models/dataValue';
+import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection, DataValueBase } from '..';
 
 export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
 

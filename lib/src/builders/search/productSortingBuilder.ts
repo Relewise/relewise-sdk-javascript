@@ -1,4 +1,4 @@
-import { ProductAttributeSorting, ProductDataSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductSortBySpecification, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '@/models/data-contracts';
+import { ProductAttributeSorting, ProductDataSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductSortBySpecification, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '../../models/data-contracts';
 
 export class ProductSortingBuilder {
     private value:

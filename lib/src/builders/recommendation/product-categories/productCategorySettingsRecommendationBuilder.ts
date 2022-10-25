@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { ProductCategoryRecommendationRequestSettings, SelectedProductCategoryPropertiesSettings } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { ProductCategoryRecommendationRequestSettings, SelectedProductCategoryPropertiesSettings } from '../../../models/data-contracts';
 import { RecommendationRequestBuilder } from '../recommendationRequestBuilder';
 
 export class ProductCategorySettingsRecommendationBuilder extends RecommendationRequestBuilder {

@@ -1,5 +1,5 @@
-import { Settings } from '@/builders/settings';
-import { PopularProductCategoriesRecommendationRequest, ProductCategoryRecommendationWeights } from '@/models/data-contracts';
+import { Settings } from '../../../builders/settings';
+import { PopularProductCategoriesRecommendationRequest, ProductCategoryRecommendationWeights } from '../../../models/data-contracts';
 import { ProductCategoriesRecommendationBuilder } from './productCategoriesRecommendationBuilder';
 import { ProductCategorySettingsRecommendationBuilder } from './productCategorySettingsRecommendationBuilder';
 

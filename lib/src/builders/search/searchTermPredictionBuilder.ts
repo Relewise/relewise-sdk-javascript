@@ -1,4 +1,4 @@
-import { SearchTermPredictionRequest } from '@/models/data-contracts';
+import { SearchTermPredictionRequest } from '../../models/data-contracts';
 import { Settings } from '../settings';
 import { SearchRequestBuilder } from './searchRequestBuilder';
 

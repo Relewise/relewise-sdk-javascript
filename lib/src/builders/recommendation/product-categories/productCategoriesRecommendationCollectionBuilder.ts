@@ -1,4 +1,4 @@
-import { PersonalProductCategoryRecommendationRequest, PopularProductCategoriesRecommendationRequest, ProductCategoryRecommendationRequestCollection } from '@/models/data-contracts';
+import { PersonalProductCategoryRecommendationRequest, PopularProductCategoriesRecommendationRequest, ProductCategoryRecommendationRequestCollection } from '../../../models/data-contracts';
 
 export class ProductCategoriesRecommendationCollectionBuilder {
     private requests: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)[] = [];

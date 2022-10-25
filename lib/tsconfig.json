@@ -7,11 +7,12 @@
     "target": "es6",
     "baseUrl": ".",
     "lib": ["es5", "es6", "dom", "esnext"],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-    }
+    // This causes issues when creating index.d.ts
+    // "paths": {
+    //   "@/*": [
+    //     "src/*"
+    //   ],
+    // }
   },
   "include": [
     "src/**/*.ts",

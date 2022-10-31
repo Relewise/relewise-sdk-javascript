@@ -15,8 +15,8 @@ export class ProductCategorySettingsRecommendationBuilder extends Recommendation
         super(settings);
     }
 
-    public setProductCategoryProperties(ProductCategoryProperties: SelectedProductCategoryPropertiesSettings): this {
-        this.recommendationSettings.selectedProductCategoryProperties = ProductCategoryProperties;
+    public setProductCategoryProperties(ProductCategoryProperties: Partial<SelectedProductCategoryPropertiesSettings>): this {
+        this.recommendationSettings.selectedProductCategoryProperties = ProductCategoryProperties as SelectedProductCategoryPropertiesSettings;
 
         return this;
     }

@@ -15,8 +15,8 @@ export class ContentSettingsRecommendationBuilder extends RecommendationRequestB
         super(settings);
     }
 
-    public setSelectedContentProperties(contentProperties: SelectedContentPropertiesSettings): this {
-        this.recommendationSettings.selectedContentProperties = contentProperties;
+    public setSelectedContentProperties(contentProperties: Partial<SelectedContentPropertiesSettings>): this {
+        this.recommendationSettings.selectedContentProperties = contentProperties as SelectedContentPropertiesSettings;
 
         return this;
     }

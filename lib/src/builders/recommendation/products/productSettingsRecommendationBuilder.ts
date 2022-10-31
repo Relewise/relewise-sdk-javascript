@@ -16,20 +16,20 @@ export class ProductSettingsRecommendationBuilder extends RecommendationRequestB
         super(settings);
     }
 
-    public setSelectedProductProperties(productProperties: SelectedProductPropertiesSettings): this {
-        this.recommendationSettings.selectedProductProperties = productProperties;
+    public setSelectedProductProperties(productProperties: Partial<SelectedProductPropertiesSettings>): this {
+        this.recommendationSettings.selectedProductProperties = productProperties as SelectedProductPropertiesSettings;
 
         return this;
     }
 
-    public setSelectedVariantProperties(variantProperties: SelectedVariantPropertiesSettings): this {
-        this.recommendationSettings.selectedVariantProperties = variantProperties;
+    public setSelectedVariantProperties(variantProperties: Partial<SelectedVariantPropertiesSettings>): this {
+        this.recommendationSettings.selectedVariantProperties = variantProperties as SelectedVariantPropertiesSettings;
 
         return this;
     }
 
-    public setSelectedBrandProperties(brandProperties: SelectedBrandPropertiesSettings): this {
-        this.recommendationSettings.selectedBrandProperties = brandProperties;
+    public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings>): this {
+        this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings;
 
         return this;
     }

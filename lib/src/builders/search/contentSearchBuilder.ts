@@ -21,8 +21,8 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
         super(settings)
     }
 
-    public setContentProperties(contentProperties: SelectedContentPropertiesSettings): this {
-        this.searchSettings.selectedContentProperties = contentProperties;
+    public setContentProperties(contentProperties: Partial<SelectedContentPropertiesSettings>): this {
+        this.searchSettings.selectedContentProperties = contentProperties as SelectedContentPropertiesSettings;
 
         return this;
     }

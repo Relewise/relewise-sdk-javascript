@@ -15,8 +15,8 @@ export class BrandSettingsRecommendationBuilder extends RecommendationRequestBui
         super(settings);
     }
 
-    public setSelectedBrandProperties(brandProperties: SelectedBrandPropertiesSettings): this {
-        this.recommendationSettings.selectedBrandProperties = brandProperties;
+    public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings>): this {
+        this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings;
 
         return this;
     }

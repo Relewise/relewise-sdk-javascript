@@ -1,10 +1,10 @@
-import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue } from '..';
+import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue, ObjectDataValue, ObjectCollectionDataValue, DataValue } from '..';
 
 export class DataValueFactory {
     static string(value: string): StringDataValue {
         return new StringDataValue(value);
     }
-    
+
     static stringCollection(collection: string[]): StringCollectionDataValue {
         return new StringCollectionDataValue(collection);
     }
@@ -31,5 +31,13 @@ export class DataValueFactory {
 
     static multilingual(values: { value: string, language: string }[]): MultilingualDataValue {
         return new MultilingualDataValue(values);
+    }
+
+    static object(data: { [key: string]: DataValue }): ObjectDataValue {
+        return new ObjectDataValue({ data: data });
+    }
+
+    static objectCollection(objects: { [key: string]: DataValue }[]): ObjectCollectionDataValue {
+        return new ObjectCollectionDataValue(objects.map(x => ({ data: x })));
     }
 }

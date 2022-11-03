@@ -56,6 +56,7 @@ export type AndFilter = Filter & {
     | CartDataFilter
     | ContentCategoryAssortmentFilter
     | ContentCategoryDataFilter
+    | ContentCategoryHasAncestorFilter
     | ContentCategoryHasChildFilter
     | ContentCategoryHasParentFilter
     | ContentCategoryIdFilter
@@ -67,6 +68,7 @@ export type AndFilter = Filter & {
     | ProductAssortmentFilter
     | ProductCategoryAssortmentFilter
     | ProductCategoryDataFilter
+    | ProductCategoryHasAncestorFilter
     | ProductCategoryHasChildFilter
     | ProductCategoryHasParentFilter
     | ProductCategoryIdFilter
@@ -509,6 +511,8 @@ export type ContentCategoryDetailsCollectionResponse = TimedResponse & {
   totalNumberOfResults?: number | null;
 };
 
+export type ContentCategoryHasAncestorFilter = HasAncestorCategoryFilter;
+
 export type ContentCategoryHasChildFilter = HasChildCategoryFilter;
 
 export type ContentCategoryHasParentFilter = HasParentCategoryFilter;
@@ -924,6 +928,10 @@ export interface DataIndexConfiguration {
   unspecified?: FieldIndexConfiguration | null;
 }
 
+export interface DataObject {
+  data: Record<string, DataValue>;
+}
+
 export interface DataValue {
   type:
     | "String"
@@ -1204,6 +1212,7 @@ export interface FilterCollection {
         | CartDataFilter
         | ContentCategoryAssortmentFilter
         | ContentCategoryDataFilter
+        | ContentCategoryHasAncestorFilter
         | ContentCategoryHasChildFilter
         | ContentCategoryHasParentFilter
         | ContentCategoryIdFilter
@@ -1215,6 +1224,7 @@ export interface FilterCollection {
         | ProductAssortmentFilter
         | ProductCategoryAssortmentFilter
         | ProductCategoryDataFilter
+        | ProductCategoryHasAncestorFilter
         | ProductCategoryHasChildFilter
         | ProductCategoryHasParentFilter
         | ProductCategoryIdFilter
@@ -1267,6 +1277,13 @@ export type GlobalTriggerConfigurationResponse = TimedResponse & { configuration
 export type GreaterThanCondition = ValueCondition & { value: number };
 
 export type HasActivityCondition = UserCondition & { withinMinutes: number; forAtLeastSeconds: number };
+
+export interface HasAncestorCategoryFilter {
+  $type: string;
+  categoryIds?: string[] | null;
+  negated: boolean;
+  custom?: Record<string, string>;
+}
 
 export type HasAuthenticatedIdCondition = UserCondition;
 
@@ -1509,6 +1526,7 @@ export type OrFilter = Filter & {
     | CartDataFilter
     | ContentCategoryAssortmentFilter
     | ContentCategoryDataFilter
+    | ContentCategoryHasAncestorFilter
     | ContentCategoryHasChildFilter
     | ContentCategoryHasParentFilter
     | ContentCategoryIdFilter
@@ -1520,6 +1538,7 @@ export type OrFilter = Filter & {
     | ProductAssortmentFilter
     | ProductCategoryAssortmentFilter
     | ProductCategoryDataFilter
+    | ProductCategoryHasAncestorFilter
     | ProductCategoryHasChildFilter
     | ProductCategoryHasParentFilter
     | ProductCategoryIdFilter
@@ -1849,6 +1868,8 @@ export type ProductCategoryDetailsCollectionResponse = TimedResponse & {
   categories?: ProductCategoryResultDetails[] | null;
   totalNumberOfResults?: number | null;
 };
+
+export type ProductCategoryHasAncestorFilter = HasAncestorCategoryFilter;
 
 export type ProductCategoryHasChildFilter = HasChildCategoryFilter;
 

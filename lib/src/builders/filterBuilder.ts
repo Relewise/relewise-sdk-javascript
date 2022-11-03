@@ -1,4 +1,4 @@
-import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryIdFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryIdFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../models/data-contracts';
+import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryIdFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAndVariantId, ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../models/data-contracts';
 import { ConditionBuilder } from './conditionBuilder';
 
 export class FilterBuilder {
@@ -30,7 +30,8 @@ export class FilterBuilder {
         | VariantIdFilter
         | VariantListPriceFilter
         | VariantSalesPriceFilter
-        | VariantSpecificationFilter)[] = [];
+        | VariantSpecificationFilter
+        | ProductAndVariantIdFilter)[] = [];
 
     /**
      * Adds a product assortment filter to the request
@@ -641,6 +642,86 @@ export class FilterBuilder {
         };
         this.filters.push(filter);
 
+        return this;
+    }
+
+    /**
+    * Adds a product variant filter to the request
+    * @param products 
+    * @param negated 
+    */
+    public addProductAndVariantIdFilter(products: ProductAndVariantId | ProductAndVariantId[], negated: boolean = false): this {
+        const filter: ProductAndVariantIdFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductAndVariantIdFilter, Relewise.Client',
+            productAndVariantIds: Array.isArray(products) ? products : [products],
+            negated: negated,
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+    * Adds a product category level filter to the request
+    * @param levels 
+    * @param negated 
+    */
+    public addProductCategoryLevelFilter(levels: number | number[], negated: boolean = false): this {
+        const filter: ProductCategoryLevelFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductCategoryLevelFilter, Relewise.Client',
+            levels: Array.isArray(levels) ? levels : [levels],
+            negated: negated,
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+
+    /**
+    * Adds a product category has parent filter to the request
+    * @param categoryIds 
+    * @param negated 
+    */
+    public addProductCategoryHasParentFilter(categoryIds?: string | string[], negated: boolean = false): this {
+        const filter: ProductCategoryHasParentFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasParentFilter, Relewise.Client',
+            categoryIds: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            negated: negated,
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+
+    /**
+    * Adds a product category has child filter to the request
+    * @param categoryIds 
+    * @param negated 
+    */
+    public addProductCategoryHasChildFilter(categoryIds?: string | string[], negated: boolean = false): this {
+        const filter: ProductCategoryHasChildFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasChildFilter, Relewise.Client',
+            categoryIds: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            negated: negated,
+        };
+        this.filters.push(filter);
+        
+        return this;
+    }
+
+    /**
+    * Adds a product category has ancestor filter to the request
+    * @param categoryIds 
+    * @param negated 
+    */
+    public addProductCategoryHasAncestorFilter(categoryIds?: string | string[], negated: boolean = false): this {
+        const filter: ProductCategoryHasAncestorFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasAncestorFilter, Relewise.Client',
+            categoryIds: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            negated: negated,
+        };
+        this.filters.push(filter);
+    
         return this;
     }
 

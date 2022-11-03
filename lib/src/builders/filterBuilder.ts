@@ -31,7 +31,11 @@ export class FilterBuilder {
         | VariantListPriceFilter
         | VariantSalesPriceFilter
         | VariantSpecificationFilter
-        | ProductAndVariantIdFilter)[] = [];
+        | ProductAndVariantIdFilter
+        | ProductCategoryLevelFilter
+        | ProductCategoryHasParentFilter
+        | ProductCategoryHasChildFilter
+        | ProductCategoryHasAncestorFilter)[] = [];
 
     /**
      * Adds a product assortment filter to the request
@@ -685,7 +689,7 @@ export class FilterBuilder {
     public addProductCategoryHasParentFilter(categoryIds?: string | string[], negated: boolean = false): this {
         const filter: ProductCategoryHasParentFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasParentFilter, Relewise.Client',
-            categoryIds: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            categoryIds: Array.isArray(categoryIds) ? categoryIds : categoryIds ? [categoryIds] : [],
             negated: negated,
         };
         this.filters.push(filter);
@@ -701,7 +705,7 @@ export class FilterBuilder {
     public addProductCategoryHasChildFilter(categoryIds?: string | string[], negated: boolean = false): this {
         const filter: ProductCategoryHasChildFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasChildFilter, Relewise.Client',
-            categoryIds: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            categoryIds: Array.isArray(categoryIds) ? categoryIds : categoryIds ? [categoryIds] : [],
             negated: negated,
         };
         this.filters.push(filter);
@@ -717,7 +721,7 @@ export class FilterBuilder {
     public addProductCategoryHasAncestorFilter(categoryIds?: string | string[], negated: boolean = false): this {
         const filter: ProductCategoryHasAncestorFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasAncestorFilter, Relewise.Client',
-            categoryIds: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            categoryIds: Array.isArray(categoryIds) ? categoryIds : categoryIds ? [categoryIds] : [],
             negated: negated,
         };
         this.filters.push(filter);

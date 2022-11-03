@@ -17,10 +17,10 @@ function baseBuilder() {
 test('Relevance modifier without conditions', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .relevanceModifiers(b => b.addProductDataRelevanceModifier('NoveltyBoostModifier', conditions => conditions.addContainsCondition(DataValueFactory.object()), ValueSelectorFactory.dataDoubleSelector('NoveltyBoostModifier')))
+        .relevanceModifiers(b => b.addProductDataRelevanceModifier('NoveltyBoostModifier', conditions => conditions.addContainsCondition(DataValueFactory.object({'d': DataValueFactory.string('a')})), ValueSelectorFactory.dataDoubleSelector('NoveltyBoostModifier')))
         .build();
 
     const result = await searcher.searchProducts(request);
 
-    expect(result?.hits).toBeGreaterThan(0);
+    expect(result?.hits).toBe(0);
 });

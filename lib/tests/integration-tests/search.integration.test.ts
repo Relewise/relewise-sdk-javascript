@@ -17,7 +17,7 @@ function baseBuilder() {
 test('Relevance modifier without conditions', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .relevanceModifiers(b => b.addProductDataRelevanceModifier("NoveltyBoostModifier", conditions => conditions, ValueSelectorFactory.dataDoubleSelector("NoveltyBoostModifier")))
+        .relevanceModifiers(b => b.addProductDataRelevanceModifier('NoveltyBoostModifier', conditions => conditions, ValueSelectorFactory.dataDoubleSelector('NoveltyBoostModifier')))
         .build();
 
     const result = await searcher.searchProducts(request);

@@ -34,10 +34,10 @@ export class DataValueFactory {
     }
 
     static object(data: { [key: string]: DataValue }): ObjectDataValue {
-        return new ObjectDataValue({ data: data });
+        return new ObjectDataValue(data);
     }
 
     static objectCollection(objects: { [key: string]: DataValue }[]): ObjectCollectionDataValue {
-        return new ObjectCollectionDataValue(objects.map(x => ({ data: x })));
+        return new ObjectCollectionDataValue(objects);
     }
 }

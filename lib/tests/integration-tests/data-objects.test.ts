@@ -9,18 +9,24 @@ function baseBuilder() {
     return new ProductSearchBuilder({
         language: 'da',
         currency: 'DKK',
-        displayedAtLocation: 'integration test',
+        displayedAtLocation: 'integration test - data object',
         user: UserFactory.anonymous(),
     });
 };
 
-test('Relevance modifier without conditions', async() => {
+// TODO: Enable when the API supports this!
 
-    const request: ProductSearchRequest = baseBuilder()
-        .relevanceModifiers(b => b.addProductDataRelevanceModifier('NoveltyBoostModifier', conditions => conditions.addContainsCondition(DataValueFactory.object({'d': DataValueFactory.string('a')})), ValueSelectorFactory.dataDoubleSelector('NoveltyBoostModifier')))
-        .build();
+// test('Test data objects can be deserialized', async() => {
 
-    const result = await searcher.searchProducts(request);
+//     const request: ProductSearchRequest = baseBuilder()
+//         .filters(b => 
+//             b.addProductDataFilter(
+//                 'DataObject', 
+//                 conditions => conditions.addContainsCondition(DataValueFactory.object({'d': DataValueFactory.string('a')}))),
+//         )
+//         .build();
 
-    expect(result?.hits).toBe(0);
-});
+//     const result = await searcher.searchProducts(request);
+
+//     expect(result?.hits).toBe(0);
+// });

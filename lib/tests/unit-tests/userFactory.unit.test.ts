@@ -6,42 +6,48 @@ test('Anonymous', () => {
     expect(Object.keys(user)).toHaveLength(0);
 });
 
-test('ByAuthenticatedId', () => {
+test('byAuthenticatedId', () => {
     const user = UserFactory.byAuthenticatedId('1234');
     expect(Object.keys(user)).toHaveLength(1);
     expect(user.temporaryId).toBeUndefined();
     expect(user.authenticatedId).toBe('1234');
 });
 
-test('ByAuthenticatedId + TemporaryId', () => {
+test('byAuthenticatedId + TemporaryId', () => {
     const user = UserFactory.byAuthenticatedId('1234', '5678');
     expect(Object.keys(user)).toHaveLength(2);
     expect(user.authenticatedId).toBe('1234');
     expect(user.temporaryId).toBe('5678');
 });
 
-test('ByTemporaryId', () => {
+test('byTemporaryId', () => {
     const user = UserFactory.byTemporaryId('1234');
     expect(Object.keys(user)).toHaveLength(1);
     expect(user.temporaryId).toBe('1234');
 });
 
-test('ByIdentifier', () => {
+test('byIdentifier', () => {
     const user = UserFactory.byIdentifier('foo', 'bar');
     expect(Object.keys(user)).toHaveLength(1);
     expect(user.identifiers).toBeDefined();
     expect(user.identifiers!['foo']).toBe('bar');
 });
 
-test('ByIdentifiers', () => {
+test('byIdentifiers', () => {
     const user = UserFactory.byIdentifiers({ foo: 'bar' });
     expect(Object.keys(user)).toHaveLength(1);
     expect(user.identifiers).toBeDefined();
     expect(user.identifiers!['foo']).toBe('bar');
 });
 
-test('ByEmail', () => {
+test('byEmail', () => {
     const user = UserFactory.byEmail('foo@bar.com');
     expect(Object.keys(user)).toHaveLength(1);
     expect(user.email).toBeDefined();
+});
+
+test('byFingerprint', () => {
+    const user = UserFactory.byFingerprint('fingerprint');
+    expect(Object.keys(user)).toHaveLength(1);
+    expect(user.fingerprint).toBeDefined();
 });

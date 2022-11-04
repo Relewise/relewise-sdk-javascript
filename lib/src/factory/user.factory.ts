@@ -24,4 +24,8 @@ export class UserFactory {
     static byEmail(email: string): User {
         return { email };
     }
+
+    static byFingerprint(fingerprint: string): User {
+        return { fingerprint };
+    }
 }

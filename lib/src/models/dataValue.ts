@@ -25,6 +25,10 @@ export interface MultilingualWithType extends Multilingual {
     $type: string;
 }
 
+export interface DataObjectWithType extends DataObject {
+    $type: string;
+}
+
 export class StringDataValue extends DataValueBase<string> {
     constructor(value: string) {
         super('String', value);
@@ -93,18 +97,22 @@ export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {
     }
 }
 
-export class ObjectDataValue extends DataValueBase<DataObject> {
+export class ObjectDataValue extends DataValueBase<DataObjectWithType> {
     constructor(dataObject: DataObject) {
-        super('Object', dataObject);
+        super('Object',
+            {
+                $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
+                data: dataObject.data,
+            });
     }
 }
 
-export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<DataObject>> {
+export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<DataObjectWithType>> {
     constructor(dataObjects: DataObject[]) {
         super('ObjectList',
             {
                 $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
-                $values: dataObjects,
+                $values: dataObjects.map(x => ({ $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client', data: x.data })),
             });
     }
 }

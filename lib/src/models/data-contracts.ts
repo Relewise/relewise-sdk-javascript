@@ -103,7 +103,7 @@ export interface AssortmentFacet {
   assortmentFilterType: "Or";
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface AssortmentFacetResult {
@@ -154,7 +154,7 @@ export interface BooleanContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: boolean[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface BooleanContentDataValueFacetResult {
@@ -173,7 +173,7 @@ export interface BooleanProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: boolean[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface BooleanProductDataValueFacetResult {
@@ -1082,7 +1082,7 @@ export interface DoubleContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleContentDataValueFacetResult {
@@ -1115,7 +1115,7 @@ export interface DoubleNullableContentDataRangeFacet {
   selected?: DoubleNullableRange | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableContentDataRangeFacetResult {
@@ -1135,7 +1135,7 @@ export interface DoubleNullableContentDataRangesFacet {
   selected?: DoubleNullableChainableRange[] | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableContentDataRangesFacetResult {
@@ -1155,7 +1155,7 @@ export interface DoubleNullableProductDataRangeFacet {
   selected?: DoubleNullableRange | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableProductDataRangeFacetResult {
@@ -1177,7 +1177,7 @@ export interface DoubleNullableProductDataRangesFacet {
   selected?: DoubleNullableChainableRange[] | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableProductDataRangesFacetResult {
@@ -1215,7 +1215,7 @@ export interface DoubleProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleProductDataValueFacetResult {
@@ -1239,7 +1239,7 @@ export interface ExpectedSearchTermResult {
 export interface Facet {
   $type: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface FacetResult {
@@ -1422,7 +1422,7 @@ export interface Int32ContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface Int32ContentDataValueFacetResult {
@@ -1449,7 +1449,7 @@ export interface Int32ProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface Int32ProductDataValueFacetResult {
@@ -3056,6 +3056,9 @@ export interface SimilarProductsEvaluationSettings {
 
   /** @format double */
   significanceOfSimilarSalesPrice: number;
+
+  /** @format double */
+  significanceOfSimilarBrand: number;
 }
 
 export type SimilarProductsRequest = ProductRecommendationRequest & {
@@ -3153,7 +3156,7 @@ export interface StringContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: string[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface StringContentDataValueFacetResult {
@@ -3172,7 +3175,7 @@ export interface StringProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: string[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface StringProductDataValueFacetResult {
@@ -3194,7 +3197,7 @@ export interface StringValueFacet {
   $type: string;
   selected?: string[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings: FacetSettings;
+  settings?: FacetSettings | null;
 }
 
 export interface StringValueFacetResult {

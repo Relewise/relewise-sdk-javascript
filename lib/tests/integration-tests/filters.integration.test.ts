@@ -29,7 +29,7 @@ test('Product Assortment filter', async() => {
 test('Product Id filter', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .filters(f => f.addProductIdFilter(['p-1']))
+        .filters(f => f.addProductIdFilter(['1']))
         .pagination(p => p.setPageSize(20))
         .build();
 

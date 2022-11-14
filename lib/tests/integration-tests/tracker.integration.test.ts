@@ -10,11 +10,16 @@ test('Track Order', async() => {
         lineItems: [
             {
                 lineTotal: 100,
-                productId: 'p-1',
+                productId: '1',
                 quantity: 1,
                 variantId: 'v1',
             },
-        ],
+            {
+                lineTotal: 100,
+                productId: '2',
+                quantity: 1,
+                variantId: 'v1',
+            }        ],
         subtotal: {
             amount: 100,
             currency: 'DKK', 
@@ -29,7 +34,13 @@ test('Track Cart', async() => {
         lineItems: [
             {
                 lineTotal: 100,
-                productId: 'p-1',
+                productId: '1',
+                quantity: 1,
+                variantId: 'v1',
+            },
+            {
+                lineTotal: 100,
+                productId: '2',
                 quantity: 1,
                 variantId: 'v1',
             },
@@ -44,7 +55,14 @@ test('Track Cart', async() => {
 
 test('Track Product View', async() => {
     await expect(async() => await tracker.trackProductView({
-        productId: 'p-1',
+        productId: '1',
+        user: UserFactory.anonymous(),
+    })).not.toThrow();
+});
+
+test('Track Product View', async() => {
+    await expect(async() => await tracker.trackProductView({
+        productId: '2',
         user: UserFactory.anonymous(),
     })).not.toThrow();
 });
@@ -58,7 +76,14 @@ test('Track Product Category View', async() => {
 
 test('Track Content View', async() => {
     await expect(async() => await tracker.trackContentView({
-        contentId: 'p-1',
+        contentId: '1',
+        user: UserFactory.anonymous(),
+    })).not.toThrow();
+});
+
+test('Track Content View', async() => {
+    await expect(async() => await tracker.trackContentView({
+        contentId: '2',
         user: UserFactory.anonymous(),
     })).not.toThrow();
 });

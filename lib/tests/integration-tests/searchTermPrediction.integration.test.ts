@@ -17,7 +17,7 @@ function baseBuilder() {
 test('Getting Search Term Prediction', async() => {
 
     const request: SearchTermPredictionRequest = baseBuilder()
-        .setTerm('a')
+        .setTerm('1')
         .take(1)
         .addEntityType('Product', 'Content')
         .build();

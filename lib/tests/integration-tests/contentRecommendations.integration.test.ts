@@ -14,7 +14,7 @@ const settings = {
 
 test('ContentsViewedAfterViewing', async() => {
 
-    const result: ContentRecommendationResponse | undefined = await recommender.recommendContentsViewedAfterViewingContent(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build());
+    const result: ContentRecommendationResponse | undefined = await recommender.recommendContentsViewedAfterViewingContent(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1').build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);

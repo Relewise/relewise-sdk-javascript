@@ -103,6 +103,7 @@ export interface AssortmentFacet {
   assortmentFilterType: "Or";
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface AssortmentFacetResult {
@@ -153,6 +154,7 @@ export interface BooleanContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: boolean[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface BooleanContentDataValueFacetResult {
@@ -171,6 +173,7 @@ export interface BooleanProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: boolean[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface BooleanProductDataValueFacetResult {
@@ -989,6 +992,54 @@ export interface DecimalRangeAvailableFacetValue {
   selected: boolean;
 }
 
+export type DecompoundRule = SearchRule & { word: string; head?: string | null; modifiers?: string[] | null };
+
+export interface DecompoundRuleSaveSearchRulesRequest {
+  $type: string;
+  rules: DecompoundRule[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface DecompoundRuleSaveSearchRulesResponse {
+  $type: string;
+  rules?: DecompoundRule[] | null;
+  statistics?: Statistics | null;
+}
+
+export interface DecompoundRuleSearchRulesResponse {
+  $type: string;
+  rules?: DecompoundRule[] | null;
+
+  /** @format int32 */
+  hits: number;
+  statistics?: Statistics | null;
+}
+
+export type DecompoundRulesRequest = DecompoundRulesRequestSortBySearchRulesRequest;
+
+export interface DecompoundRulesRequestSortBySearchRulesRequest {
+  $type: string;
+  filters: SearchRuleFilters;
+  sorting: DecompoundRulesRequestSortBySorting;
+
+  /** @format int32 */
+  skip: number;
+
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface DecompoundRulesRequestSortBySorting {
+  sortBy: "Created" | "Modified";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type DecompoundRulesResponse = DecompoundRuleSearchRulesResponse;
+
+export type DeleteDecompoundRulesRequest = DeleteSearchRulesRequest;
+
 export type DeleteMerchandisingRuleRequest = LicensedRequest & { id: string };
 
 export type DeletePredictionRulesRequest = DeleteSearchRulesRequest;
@@ -1005,6 +1056,8 @@ export interface DeleteSearchRulesRequest {
 }
 
 export type DeleteSearchRulesResponse = TimedResponse;
+
+export type DeleteStemmingRulesRequest = DeleteSearchRulesRequest;
 
 export type DeleteSynonymsRequest = LicensedRequest & { ids?: string[] | null; deletedBy?: string | null };
 
@@ -1029,6 +1082,7 @@ export interface DoubleContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleContentDataValueFacetResult {
@@ -1061,6 +1115,7 @@ export interface DoubleNullableContentDataRangeFacet {
   selected?: DoubleNullableRange | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableContentDataRangeFacetResult {
@@ -1080,6 +1135,7 @@ export interface DoubleNullableContentDataRangesFacet {
   selected?: DoubleNullableChainableRange[] | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableContentDataRangesFacetResult {
@@ -1099,6 +1155,7 @@ export interface DoubleNullableProductDataRangeFacet {
   selected?: DoubleNullableRange | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableProductDataRangeFacetResult {
@@ -1120,6 +1177,7 @@ export interface DoubleNullableProductDataRangesFacet {
   selected?: DoubleNullableChainableRange[] | null;
   key: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleNullableProductDataRangesFacetResult {
@@ -1157,6 +1215,7 @@ export interface DoubleProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface DoubleProductDataValueFacetResult {
@@ -1180,11 +1239,16 @@ export interface ExpectedSearchTermResult {
 export interface Facet {
   $type: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface FacetResult {
   $type: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+}
+
+export interface FacetSettings {
+  alwaysIncludeSelectedInAvailable: boolean;
 }
 
 export interface FieldIndexConfiguration {
@@ -1358,6 +1422,7 @@ export interface Int32ContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface Int32ContentDataValueFacetResult {
@@ -1384,6 +1449,7 @@ export interface Int32ProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: number[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface Int32ProductDataValueFacetResult {
@@ -2702,6 +2768,10 @@ export interface RequestContextFilter {
   currencies?: Currency[] | null;
 }
 
+export type SaveDecompoundRulesRequest = DecompoundRuleSaveSearchRulesRequest;
+
+export type SaveDecompoundRulesResponse = DecompoundRuleSaveSearchRulesResponse;
+
 export type SaveGlobalTriggerConfigurationRequest = LicensedRequest & {
   configuration?: GlobalTriggerConfiguration | null;
   modifiedBy?: string | null;
@@ -2721,6 +2791,10 @@ export type SaveRedirectRulesRequest = RedirectRuleSaveSearchRulesRequest;
 export type SaveRedirectRulesResponse = RedirectRuleSaveSearchRulesResponse;
 
 export type SaveSearchIndexRequest = LicensedRequest & { index?: SearchIndex | null; modifiedBy?: string | null };
+
+export type SaveStemmingRulesRequest = StemmingRuleSaveSearchRulesRequest;
+
+export type SaveStemmingRulesResponse = StemmingRuleSaveSearchRulesResponse;
 
 export type SaveSynonymsRequest = LicensedRequest & { synonyms?: Synonym[] | null; modifiedBy?: string | null };
 
@@ -2982,6 +3056,9 @@ export interface SimilarProductsEvaluationSettings {
 
   /** @format double */
   significanceOfSimilarSalesPrice: number;
+
+  /** @format double */
+  significanceOfSimilarBrand: number;
 }
 
 export type SimilarProductsRequest = ProductRecommendationRequest & {
@@ -3004,6 +3081,52 @@ export interface Statistics {
   /** @format double */
   serverTimeInMs: number;
 }
+
+export type StemmingRule = SearchRule & { words: string[]; stem?: string | null };
+
+export interface StemmingRuleSaveSearchRulesRequest {
+  $type: string;
+  rules: StemmingRule[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface StemmingRuleSaveSearchRulesResponse {
+  $type: string;
+  rules?: StemmingRule[] | null;
+  statistics?: Statistics | null;
+}
+
+export interface StemmingRuleSearchRulesResponse {
+  $type: string;
+  rules?: StemmingRule[] | null;
+
+  /** @format int32 */
+  hits: number;
+  statistics?: Statistics | null;
+}
+
+export type StemmingRulesRequest = StemmingRulesRequestSortBySearchRulesRequest;
+
+export interface StemmingRulesRequestSortBySearchRulesRequest {
+  $type: string;
+  filters: SearchRuleFilters;
+  sorting: StemmingRulesRequestSortBySorting;
+
+  /** @format int32 */
+  skip: number;
+
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface StemmingRulesRequestSortBySorting {
+  sortBy: "Created" | "Modified";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type StemmingRulesResponse = StemmingRuleSearchRulesResponse;
 
 export interface StringAvailableFacetValue {
   value?: string | null;
@@ -3033,6 +3156,7 @@ export interface StringContentDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: string[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface StringContentDataValueFacetResult {
@@ -3051,6 +3175,7 @@ export interface StringProductDataValueFacet {
   collectionFilterType?: "Or" | "And" | null;
   selected?: string[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface StringProductDataValueFacetResult {
@@ -3072,6 +3197,7 @@ export interface StringValueFacet {
   $type: string;
   selected?: string[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
 }
 
 export interface StringValueFacetResult {

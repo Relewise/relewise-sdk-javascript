@@ -15,8 +15,8 @@ const settings = {
 test('Batched Product Reommendations', async() => {
 
     const request: ProductRecommendationRequestCollection = new ProductsRecommendationCollectionBuilder()
-        .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).product({ productId: '1' }).build())
-        .addRequest(new PurchasedWithProductBuilder(settings).product({ productId: '1' }).build())
+        .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())
+        .addRequest(new PurchasedWithProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())
         .build();
 
     const result = await recommender.batchProductRecommendations(request);

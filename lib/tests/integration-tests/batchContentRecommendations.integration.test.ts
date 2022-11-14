@@ -14,9 +14,9 @@ const settings = {
 
 test('Batched Content Reommendations', async() => {
 
-    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()
-        .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build())
+    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()      
         .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build())
+        .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setContentId('1087').build())
         .build();
 
     const result = await recommender.batchContentRecommendations(request);

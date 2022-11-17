@@ -10,10 +10,10 @@ export class ProductSortingBuilder {
         | ProductVariantSpecificationSorting
         | null = null;
 
-    public sortByProductData(key: string, order: 'Ascending' | 'Descending', thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
+    public sortByProductData(key: string, selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', order: 'Ascending' | 'Descending', thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
         const sort: ProductDataSorting = {
             $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductDataSorting, Relewise.Client',
-            dataSelectionStrategy: 'Product',
+            dataSelectionStrategy: selectionStrategy,
             mode,
             order,
             key,

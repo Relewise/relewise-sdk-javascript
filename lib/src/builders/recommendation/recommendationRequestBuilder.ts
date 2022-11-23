@@ -1,9 +1,11 @@
 import { RecommendationRequest } from '../../models/data-contracts';
 import { FilterBuilder } from '../filterBuilder';
+import { RelevanceModifierBuilder } from '../relevanceModifierBuilder';
 import { Settings } from '../settings';
 
 export abstract class RecommendationRequestBuilder {
     private readonly filterBuilder: FilterBuilder = new FilterBuilder();
+    private readonly relevanceModifiersBuilder: RelevanceModifierBuilder = new RelevanceModifierBuilder();
 
     constructor(
         private readonly settings: Settings) {
@@ -20,6 +22,12 @@ export abstract class RecommendationRequestBuilder {
         return this;
     }
 
+    public relevanceModifiers(relevanceModifiersBuilder: (builder: RelevanceModifierBuilder) => void): this {
+        relevanceModifiersBuilder(this.relevanceModifiersBuilder);
+
+        return this;
+    }
+
     protected baseBuild(): Omit<RecommendationRequest, '$type'> {
         return {
             currency: { value: this.settings.currency },
@@ -27,7 +35,7 @@ export abstract class RecommendationRequestBuilder {
             language: { value: this.settings.language },
             displayedAtLocationType: this.settings.displayedAtLocation,
             filters: this.filterBuilder.build() ?? {},
-            relevanceModifiers: null ?? {},
+            relevanceModifiers: this.relevanceModifiersBuilder.build() ?? {},
         };
     }
 }

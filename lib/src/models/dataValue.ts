@@ -3,13 +3,15 @@ import { DataObject, DataValue, MultiCurrency, Multilingual } from './data-contr
 export type DataValueTypes = 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection' | 'Object' | 'ObjectList';
 
 export abstract class DataValueBase<T> implements DataValue {
-    constructor(type: DataValueTypes, value: T) {
+    constructor(type: DataValueTypes, value: T, isCollection: boolean) {
         this.type = type;
         this.value = value;
+        this.isCollection = isCollection;
     }
 
     type: DataValueTypes;
     value: T;
+    isCollection: boolean;
 }
 
 export interface CollectionWithType<T> {
@@ -31,7 +33,7 @@ export interface DataObjectWithType extends DataObject {
 
 export class StringDataValue extends DataValueBase<string> {
     constructor(value: string) {
-        super('String', value);
+        super('String', value, false);
     }
 }
 
@@ -41,13 +43,14 @@ export class StringCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
-            });
+            },
+            true);
     }
 }
 
 export class NumberDataValue extends DataValueBase<number> {
     constructor(value: number) {
-        super('Double', value);
+        super('Double', value, false);
     }
 }
 
@@ -57,13 +60,14 @@ export class DoubleCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'System.Collections.Generic.List`1[[System.Double, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
-            });
+            },
+            true);
     }
 }
 
 export class BooleanDataValue extends DataValueBase<boolean> {
     constructor(value: boolean) {
-        super('Boolean', value);
+        super('Boolean', value, false);
     }
 }
 
@@ -73,7 +77,8 @@ export class BooleanCollectionDataValue extends DataValueBase<CollectionWithType
             {
                 $type: 'System.Collections.Generic.List`1[[System.Boolean, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
-            });
+            },
+            true);
     }
 }
 
@@ -83,7 +88,8 @@ export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType>
             {
                 $type: 'Relewise.Client.DataTypes.MultiCurrency, Relewise.Client',
                 values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })),
-            });
+            },
+            true);
     }
 }
 
@@ -93,7 +99,8 @@ export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {
             {
                 $type: 'Relewise.Client.DataTypes.Multilingual, Relewise.Client',
                 values: values.map(x => ({ text: x.value, language: { value: x.language } })),
-            });
+            },
+            true);
     }
 }
 
@@ -103,7 +110,8 @@ export class ObjectDataValue extends DataValueBase<DataObjectWithType> {
             {
                 $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
                 data: dataObject,
-            });
+            },
+            false);
     }
 }
 
@@ -113,6 +121,7 @@ export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
                 $values: dataObjects.map(x => ({ $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client', data: x })),
-            });
+            },
+            true);
     }
 }

@@ -34,7 +34,7 @@ export class ProductCategorySearchBuilder extends SearchRequestBuilder implement
     }
 
     /**
-     * Set the term used to filter products by
+     * Set the term used to filter product categories by
      */
     public setTerm(term: string | null | undefined): this {
 

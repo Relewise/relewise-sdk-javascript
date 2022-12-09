@@ -741,7 +741,6 @@ export interface ContentFacetQuery {
     | ProductCategoryDataStringValueFacet
     | ProductCategoryDataBooleanValueFacet
     | ProductCategoryDataDoubleValueFacet
-    | ProductCategoryDataIntegerValueFacet
     | ProductDataDoubleRangeFacet
     | ProductDataDoubleRangesFacet
     | ProductDataStringValueFacet
@@ -773,7 +772,6 @@ export interface ContentFacetResult {
         | ProductCategoryDataStringValueFacetResult
         | ProductCategoryDataBooleanValueFacetResult
         | ProductCategoryDataDoubleValueFacetResult
-        | ProductCategoryDataIntegerValueFacetResult
         | ProductDataDoubleRangeFacetResult
         | ProductDataDoubleRangesFacetResult
         | ProductDataStringValueFacetResult
@@ -1555,24 +1553,6 @@ export interface Int32NullableRange {
   upperBoundInclusive?: number | null;
 }
 
-export interface Int32ProductCategoryDataValueFacet {
-  $type: string;
-  key: string;
-  collectionFilterType?: "Or" | "And" | null;
-  selected?: number[] | null;
-  field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-  settings?: FacetSettings | null;
-}
-
-export interface Int32ProductCategoryDataValueFacetResult {
-  $type: string;
-  key?: string | null;
-  collectionFilterType?: "Or" | "And" | null;
-  selected?: number[] | null;
-  available?: Int32AvailableFacetValue[] | null;
-  field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
-}
-
 export interface Int32ProductDataValueFacet {
   $type: string;
   dataSelectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant";
@@ -1778,10 +1758,11 @@ export type Order = Trackable & {
   user: User;
   subtotal: Money;
   lineItems: LineItem[];
-  trackingNumber: string;
+  orderNumber: string;
   cartName: string;
   channel?: string | null;
   subChannel?: string | null;
+  trackingNumber?: string | null;
 };
 
 export interface OverriddenContentRecommendationRequestSettings {
@@ -2103,10 +2084,6 @@ export type ProductCategoryDataDoubleValueFacetResult = DoubleProductCategoryDat
 
 export type ProductCategoryDataFilter = DataFilter;
 
-export type ProductCategoryDataIntegerValueFacet = Int32ProductCategoryDataValueFacet;
-
-export type ProductCategoryDataIntegerValueFacetResult = Int32ProductCategoryDataValueFacetResult;
-
 export type ProductCategoryDataSorting = ProductCategorySorting & {
   key?: string | null;
   mode: "Auto" | "Alphabetical" | "Numerical";
@@ -2141,7 +2118,6 @@ export interface ProductCategoryFacetQuery {
     | ProductCategoryDataStringValueFacet
     | ProductCategoryDataBooleanValueFacet
     | ProductCategoryDataDoubleValueFacet
-    | ProductCategoryDataIntegerValueFacet
     | ProductDataDoubleRangeFacet
     | ProductDataDoubleRangesFacet
     | ProductDataStringValueFacet
@@ -2173,7 +2149,6 @@ export interface ProductCategoryFacetResult {
         | ProductCategoryDataStringValueFacetResult
         | ProductCategoryDataBooleanValueFacetResult
         | ProductCategoryDataDoubleValueFacetResult
-        | ProductCategoryDataIntegerValueFacetResult
         | ProductDataDoubleRangeFacetResult
         | ProductDataDoubleRangesFacetResult
         | ProductDataStringValueFacetResult
@@ -2342,9 +2317,9 @@ export interface ProductCategoryResultDetailsCategoryResultDetails {
 }
 
 export type ProductCategorySearchRequest = PaginatedSearchRequest & {
-  term: string;
-  facets?: ProductCategoryFacetQuery | null;
+  term?: string | null;
   settings?: ProductCategorySearchSettings | null;
+  facets?: ProductCategoryFacetQuery | null;
   sorting?: ProductCategorySortBySpecification | null;
 };
 
@@ -2457,7 +2432,6 @@ export interface ProductFacetQuery {
     | ProductCategoryDataStringValueFacet
     | ProductCategoryDataBooleanValueFacet
     | ProductCategoryDataDoubleValueFacet
-    | ProductCategoryDataIntegerValueFacet
     | ProductDataDoubleRangeFacet
     | ProductDataDoubleRangesFacet
     | ProductDataStringValueFacet
@@ -2489,7 +2463,6 @@ export interface ProductFacetResult {
         | ProductCategoryDataStringValueFacetResult
         | ProductCategoryDataBooleanValueFacetResult
         | ProductCategoryDataDoubleValueFacetResult
-        | ProductCategoryDataIntegerValueFacetResult
         | ProductDataDoubleRangeFacetResult
         | ProductDataDoubleRangesFacetResult
         | ProductDataStringValueFacetResult

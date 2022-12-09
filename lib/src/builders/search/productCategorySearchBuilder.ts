@@ -74,6 +74,6 @@ export class ProductCategorySearchBuilder extends SearchRequestBuilder implement
             facets: this.facetBuilder.build(),
             settings: this.searchSettings,
             sorting: this.sortingBuilder.build(),
-        } as ProductCategorySearchRequest;
+        };
     }
 }

@@ -474,6 +474,7 @@ export interface ConditionConfiguration {
 export type ContainsCondition = ValueCondition & {
   value?: DataValue | null;
   valueCollectionEvaluationMode: "All" | "Any";
+  objectPredicate?: DataObjectPredicate | null;
 };
 
 export interface Content {
@@ -922,6 +923,7 @@ export interface DataFilter {
   conditions?: ValueConditionCollection | null;
   language?: Language | null;
   currency?: Currency | null;
+  objectPath?: string[] | null;
   negated: boolean;
   custom?: Record<string, string>;
 }
@@ -933,6 +935,24 @@ export interface DataIndexConfiguration {
 
 export interface DataObject {
   data: Record<string, DataValue>;
+}
+
+export interface DataObjectPredicate {
+  valuePredicates: (DataObjectPredicateEqualTo | DataObjectPredicateContainsValue)[];
+}
+
+export type DataObjectPredicateContainsValue = DataObjectPredicateValuePredicate & {
+  value: DataValue;
+  mode: "All" | "Any";
+};
+
+export type DataObjectPredicateEqualTo = DataObjectPredicateValuePredicate & { value: DataValue };
+
+export interface DataObjectPredicateValuePredicate {
+  $type: string;
+  key: string;
+  objectPath?: string[] | null;
+  negated: boolean;
 }
 
 export interface DataValue {
@@ -950,6 +970,7 @@ export interface DataValue {
     | "Object"
     | "ObjectList";
   value?: any;
+  isCollection: boolean;
 }
 
 export interface DecimalNullableChainableRange {
@@ -1630,10 +1651,11 @@ export type Order = Trackable & {
   user: User;
   subtotal: Money;
   lineItems: LineItem[];
-  trackingNumber: string;
+  orderNumber: string;
   cartName: string;
   channel?: string | null;
   subChannel?: string | null;
+  trackingNumber?: string | null;
 };
 
 export interface OverriddenContentRecommendationRequestSettings {

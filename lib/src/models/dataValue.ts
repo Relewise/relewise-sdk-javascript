@@ -10,6 +10,8 @@ export abstract class DataValueBase<T> implements DataValue {
 
     type: DataValueTypes;
     value: T;
+
+    readonly abstract isCollection: boolean;
 }
 
 export interface CollectionWithType<T> {
@@ -33,6 +35,8 @@ export class StringDataValue extends DataValueBase<string> {
     constructor(value: string) {
         super('String', value);
     }
+
+    readonly isCollection = false;
 }
 
 export class StringCollectionDataValue extends DataValueBase<CollectionWithType<string>> {
@@ -43,12 +47,16 @@ export class StringCollectionDataValue extends DataValueBase<CollectionWithType<
                 $values: value,
             });
     }
+
+    readonly isCollection = true;
 }
 
 export class NumberDataValue extends DataValueBase<number> {
     constructor(value: number) {
         super('Double', value);
     }
+
+    readonly isCollection = false;
 }
 
 export class DoubleCollectionDataValue extends DataValueBase<CollectionWithType<number>> {
@@ -59,12 +67,16 @@ export class DoubleCollectionDataValue extends DataValueBase<CollectionWithType<
                 $values: value,
             });
     }
+
+    readonly isCollection = true;
 }
 
 export class BooleanDataValue extends DataValueBase<boolean> {
     constructor(value: boolean) {
         super('Boolean', value);
     }
+
+    readonly isCollection = false;
 }
 
 export class BooleanCollectionDataValue extends DataValueBase<CollectionWithType<boolean>> {
@@ -75,6 +87,8 @@ export class BooleanCollectionDataValue extends DataValueBase<CollectionWithType
                 $values: value,
             });
     }
+
+    readonly isCollection = true;
 }
 
 export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType> {
@@ -85,6 +99,8 @@ export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType>
                 values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })),
             });
     }
+
+    readonly isCollection = false;
 }
 
 export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {
@@ -95,6 +111,8 @@ export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {
                 values: values.map(x => ({ text: x.value, language: { value: x.language } })),
             });
     }
+
+    readonly isCollection = false;
 }
 
 export class ObjectDataValue extends DataValueBase<DataObjectWithType> {
@@ -105,6 +123,8 @@ export class ObjectDataValue extends DataValueBase<DataObjectWithType> {
                 data: dataObject,
             });
     }
+
+    readonly isCollection = false;
 }
 
 export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<DataObjectWithType>> {
@@ -115,4 +135,6 @@ export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<
                 $values: dataObjects.map(x => ({ $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client', data: x })),
             });
     }
+
+    readonly isCollection = true;
 }

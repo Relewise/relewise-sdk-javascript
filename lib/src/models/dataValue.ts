@@ -3,15 +3,15 @@ import { DataObject, DataValue, MultiCurrency, Multilingual } from './data-contr
 export type DataValueTypes = 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection' | 'Object' | 'ObjectList';
 
 export abstract class DataValueBase<T> implements DataValue {
-    constructor(type: DataValueTypes, value: T, isCollection: boolean) {
+    constructor(type: DataValueTypes, value: T) {
         this.type = type;
         this.value = value;
-        this.isCollection = isCollection;
     }
 
     type: DataValueTypes;
     value: T;
-    isCollection: boolean;
+
+    readonly abstract isCollection: boolean;
 }
 
 export interface CollectionWithType<T> {
@@ -33,8 +33,10 @@ export interface DataObjectWithType extends DataObject {
 
 export class StringDataValue extends DataValueBase<string> {
     constructor(value: string) {
-        super('String', value, false);
+        super('String', value);
     }
+
+    readonly isCollection = false;
 }
 
 export class StringCollectionDataValue extends DataValueBase<CollectionWithType<string>> {
@@ -43,15 +45,18 @@ export class StringCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
-            },
-            true);
+            });
     }
+
+    readonly isCollection = true;
 }
 
 export class NumberDataValue extends DataValueBase<number> {
     constructor(value: number) {
-        super('Double', value, false);
+        super('Double', value);
     }
+
+    readonly isCollection = false;
 }
 
 export class DoubleCollectionDataValue extends DataValueBase<CollectionWithType<number>> {
@@ -60,15 +65,18 @@ export class DoubleCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'System.Collections.Generic.List`1[[System.Double, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
-            },
-            true);
+            });
     }
+
+    readonly isCollection = true;
 }
 
 export class BooleanDataValue extends DataValueBase<boolean> {
     constructor(value: boolean) {
-        super('Boolean', value, false);
+        super('Boolean', value);
     }
+
+    readonly isCollection = false;
 }
 
 export class BooleanCollectionDataValue extends DataValueBase<CollectionWithType<boolean>> {
@@ -77,9 +85,10 @@ export class BooleanCollectionDataValue extends DataValueBase<CollectionWithType
             {
                 $type: 'System.Collections.Generic.List`1[[System.Boolean, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
-            },
-            true);
+            });
     }
+
+    readonly isCollection = true;
 }
 
 export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType> {
@@ -88,9 +97,10 @@ export class MultiCurrencyDataValue extends DataValueBase<MultiCurrencyWithType>
             {
                 $type: 'Relewise.Client.DataTypes.MultiCurrency, Relewise.Client',
                 values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })),
-            },
-            true);
+            });
     }
+
+    readonly isCollection = false;
 }
 
 export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {
@@ -99,9 +109,10 @@ export class MultilingualDataValue extends DataValueBase<MultilingualWithType> {
             {
                 $type: 'Relewise.Client.DataTypes.Multilingual, Relewise.Client',
                 values: values.map(x => ({ text: x.value, language: { value: x.language } })),
-            },
-            true);
+            });
     }
+
+    readonly isCollection = false;
 }
 
 export class ObjectDataValue extends DataValueBase<DataObjectWithType> {
@@ -110,9 +121,10 @@ export class ObjectDataValue extends DataValueBase<DataObjectWithType> {
             {
                 $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
                 data: dataObject,
-            },
-            false);
+            });
     }
+
+    readonly isCollection = false;
 }
 
 export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<DataObjectWithType>> {
@@ -121,7 +133,8 @@ export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
                 $values: dataObjects.map(x => ({ $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client', data: x })),
-            },
-            true);
+            });
     }
+
+    readonly isCollection = true;
 }

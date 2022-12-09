@@ -9,7 +9,16 @@ export class Tracker extends RelewiseClient {
         super(datasetId, apiKey, options);
     }
 
-    public async trackOrder({ user, subtotal, trackingNumber, lineItems, cartName = 'default' }: { user: User, subtotal: { currency: string, amount: number }, trackingNumber: string, lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], cartName?: string }): Promise<void | undefined> {
+
+    public async trackOrder({ user, subtotal, orderNumber, lineItems, cartName = 'default', trackingNumber }: {
+        user: User,
+        subtotal: { currency: string, amount: number },
+        orderNumber: string,
+        /** @deprecated Use orderNumber instead. */
+        trackingNumber?: string,
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[],
+        cartName?: string
+    }): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackOrderRequest, Relewise.Client',
             order: {
@@ -23,7 +32,8 @@ export class Tracker extends RelewiseClient {
                     quantity: l.quantity,
                 })),
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
-                orderNumber: trackingNumber,
+                orderNumber: orderNumber,
+                trackingNumber: trackingNumber,
                 cartName: cartName,
                 user: user,
             },

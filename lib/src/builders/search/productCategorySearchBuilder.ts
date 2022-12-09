@@ -21,8 +21,8 @@ export class ProductCategorySearchBuilder extends SearchRequestBuilder implement
         super(settings)
     }
 
-    public setselectedCategoryProperties(productProperties: Partial<SelectedProductCategoryPropertiesSettings>): this {
-        this.searchSettings.selectedCategoryProperties = productProperties as SelectedProductCategoryPropertiesSettings;
+    public setSelectedCategoryProperties(productCategoryProperties: Partial<SelectedProductCategoryPropertiesSettings>): this {
+        this.searchSettings.selectedCategoryProperties = productCategoryProperties as SelectedProductCategoryPropertiesSettings;
 
         return this;
     }

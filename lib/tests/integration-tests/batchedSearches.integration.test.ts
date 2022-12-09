@@ -27,5 +27,5 @@ test('Batched search requests', async() => {
 
     const result = await searcher.batch(request);
 
-    expect(result?.responses?.length).toBe(2);
+    expect(result?.responses?.length).toBe(3);
 });

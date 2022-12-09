@@ -59,10 +59,9 @@ export class ProductCategorySortingBuilder {
 
     private thenBy(thenBy: ((thenBy: ProductCategorySortingBuilder) => void) | undefined) {
         const thenByBuilder = new ProductCategorySortingBuilder();
-        if (thenBy) {
-            thenBy(thenByBuilder);
-            thenByBuilder.build();
-        }
+        
+        if (thenBy) { thenBy(thenByBuilder); }
+        
         return thenByBuilder;
     }
 

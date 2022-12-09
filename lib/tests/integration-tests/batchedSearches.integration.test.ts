@@ -1,4 +1,4 @@
-import { ProductSearchBuilder, SearchCollectionBuilder, Searcher, SearchTermPredictionBuilder, SearchTermPredictionRequest, UserFactory } from '../../src';
+import { ProductCategorySearchBuilder, ProductSearchBuilder, SearchCollectionBuilder, Searcher, SearchTermPredictionBuilder, SearchTermPredictionRequest, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -22,9 +22,10 @@ test('Batched search requests', async() => {
     })
         .addRequest(new SearchTermPredictionBuilder(settings).build())
         .addRequest(new ProductSearchBuilder(settings).setTerm('a').build())
+        .addRequest(new ProductCategorySearchBuilder(settings).setTerm('c').build())
         .build();
 
     const result = await searcher.batch(request);
 
-    expect(result?.responses?.length).toBe(2);
+    expect(result?.responses?.length).toBe(3);
 });

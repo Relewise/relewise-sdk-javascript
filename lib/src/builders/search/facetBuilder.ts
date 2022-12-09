@@ -1,4 +1,4 @@
-import { BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '../../models/data-contracts';
 
 export class FacetBuilder {
     private facets: (
@@ -10,7 +10,6 @@ export class FacetBuilder {
         | ContentDataStringValueFacet
         | ContentDataBooleanValueFacet
         | ContentDataDoubleValueFacet
-        | ContentDataIntegerValueFacet
         | ContentDataDoubleRangesFacet
         | PriceRangeFacet
         | PriceRangesFacet
@@ -18,11 +17,17 @@ export class FacetBuilder {
         | ProductDataStringValueFacet
         | ProductDataBooleanValueFacet
         | ProductDataDoubleValueFacet
-        | ProductDataIntegerValueFacet
         | VariantSpecificationFacet
         | ProductDataDoubleRangesFacet
+        | ProductCategoryAssortmentFacet
+        | ProductCategoryDataDoubleRangeFacet
+        | ProductCategoryDataStringValueFacet
+        | ProductCategoryDataBooleanValueFacet
+        | ProductCategoryDataDoubleValueFacet
+        | ProductCategoryDataDoubleRangesFacet
     )[] = [];
 
+    //#region Product
     public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null, facetSettings?: FacetSettings): this {
         const facet: CategoryFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryFacet, Relewise.Client',
@@ -54,19 +59,6 @@ export class FacetBuilder {
             field: 'Assortment',
             assortmentFilterType: 'Or',
             assortmentSelectionStrategy: selectionStrategy,
-            selected: selectedValues,
-            settings: facetSettings,
-        };
-        this.facets.push(facet);
-
-        return this;
-    }
-
-    public addContentAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings): this {
-        const facet: ContentAssortmentFacet = {
-            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentAssortmentFacet, Relewise.Client',
-            field: 'Assortment',
-            assortmentFilterType: 'Or',
             selected: selectedValues,
             settings: facetSettings,
         };
@@ -265,6 +257,21 @@ export class FacetBuilder {
 
         return this;
     }
+    //#endregion
+
+    //#region Content
+    public addContentAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings): this {
+        const facet: ContentAssortmentFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentAssortmentFacet, Relewise.Client',
+            field: 'Assortment',
+            assortmentFilterType: 'Or',
+            selected: selectedValues,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
 
     public addContentDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings): this {
         const facet: ContentDataDoubleRangeFacet = {
@@ -347,6 +354,104 @@ export class FacetBuilder {
 
         return this;
     }
+    //#endregion
+
+    //#region ProductCategories
+    public addProductCategoryAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings): this {
+        const facet: ProductCategoryAssortmentFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryAssortmentFacet, Relewise.Client',
+            field: 'Assortment',
+            assortmentFilterType: 'Or',
+            selected: selectedValues,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductCategoryDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings): this {
+        const facet: ProductCategoryDataDoubleRangeFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataDoubleRangeFacet, Relewise.Client',
+            field: 'Data',
+            selected: { lowerBoundInclusive: lowerBound, upperBoundInclusive: upperBound },
+            key: key,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductCategoryDataDoubleRangesFacet(
+        key: string,
+        predefinedRanges?: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null,
+        expandedRangeSize?: number | null,
+        selectedValues: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null = null, 
+        facetSettings?: FacetSettings): this {
+
+        const facet: ProductCategoryDataDoubleRangesFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangesFacet, Relewise.Client',
+            field: 'Data',
+            key: key,
+            predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
+            expandedRangeSize: expandedRangeSize,
+            selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductCategoryDataStringValueFacet(key: string, selectedValues: string[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+        const facet: ProductCategoryDataStringValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataStringValueFacet, Relewise.Client',
+            field: 'Data',
+            selected: selectedValues,
+            key: key,
+            collectionFilterType: collectionFilterType,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductCategoryDataBooleanValueFacet(key: string, selectedValues: boolean[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+        const facet: ProductCategoryDataBooleanValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataBooleanValueFacet, Relewise.Client',
+            field: 'Data',
+            selected: selectedValues,
+            key: key,
+            collectionFilterType: collectionFilterType,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductCategoryDataDoubleValueFacet(key: string, selectedValues: number[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+        const facet: ProductCategoryDataDoubleValueFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataDoubleValueFacet, Relewise.Client',
+            field: 'Data',
+            selected: selectedValues,
+            key: key,
+            collectionFilterType: collectionFilterType,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+    //#endregion
 
     build(): ProductFacetQuery | null {
         return this.facets.length === 0

@@ -4,6 +4,8 @@ import {
     SearchResponseCollection, 
     ProductSearchRequest, 
     ProductSearchResponse,
+    ProductCategorySearchRequest, 
+    ProductCategorySearchResponse,
     ContentSearchRequest,
     ContentSearchResponse,
     SearchTermPredictionRequest,
@@ -17,6 +19,10 @@ export class Searcher extends RelewiseClient {
 
     public async searchProducts(request: ProductSearchRequest): Promise<ProductSearchResponse | undefined> {
         return this.request<ProductSearchRequest, ProductSearchResponse>('ProductSearchRequest', request);
+    }
+
+    public async searchProductCategories(request: ProductCategorySearchRequest): Promise<ProductCategorySearchResponse | undefined> {
+        return this.request<ProductCategorySearchRequest, ProductCategorySearchResponse>('ProductCategorySearchRequest', request);
     }
 
     public async searchContents(request: ContentSearchRequest): Promise<ContentSearchResponse | undefined> {

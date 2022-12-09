@@ -23,7 +23,7 @@ export class Tracker extends RelewiseClient {
                     quantity: l.quantity,
                 })),
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
-                trackingNumber: trackingNumber,
+                orderNumber: trackingNumber,
                 cartName: cartName,
                 user: user,
             },

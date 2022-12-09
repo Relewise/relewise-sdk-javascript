@@ -1,4 +1,4 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataIntegerValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataIntegerValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataIntegerValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '../../models/data-contracts';
 
 export class FacetBuilder {
     private facets: (
@@ -10,7 +10,6 @@ export class FacetBuilder {
         | ContentDataStringValueFacet
         | ContentDataBooleanValueFacet
         | ContentDataDoubleValueFacet
-        | ContentDataIntegerValueFacet
         | ContentDataDoubleRangesFacet
         | PriceRangeFacet
         | PriceRangesFacet
@@ -18,7 +17,6 @@ export class FacetBuilder {
         | ProductDataStringValueFacet
         | ProductDataBooleanValueFacet
         | ProductDataDoubleValueFacet
-        | ProductDataIntegerValueFacet
         | VariantSpecificationFacet
         | ProductDataDoubleRangesFacet
         | ProductCategoryAssortmentFacet
@@ -26,7 +24,6 @@ export class FacetBuilder {
         | ProductCategoryDataStringValueFacet
         | ProductCategoryDataBooleanValueFacet
         | ProductCategoryDataDoubleValueFacet
-        | ProductCategoryDataIntegerValueFacet
         | ProductCategoryDataDoubleRangesFacet
     )[] = [];
 

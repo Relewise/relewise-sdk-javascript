@@ -85,3 +85,13 @@ test('brandProperties', () => {
 
     expect(subject.settings?.selectedBrandProperties?.displayName).toBe(true);
 });
+
+test('variantSearchSettings', () => {
+    const subject: ProductSearchRequest = baseBuilder()
+        .setVariantSearchSettings({
+            excludeResultsWithoutVariant: true,
+        })
+        .build();
+
+    expect(subject.settings?.variantSettings?.excludeResultsWithoutVariant).toBe(true);
+});

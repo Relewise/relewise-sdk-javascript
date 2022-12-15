@@ -1,4 +1,4 @@
-import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from '../../models/data-contracts';
+import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { FacetBuilder } from './facetBuilder';
@@ -35,6 +35,12 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
 
     public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings>): this {
         this.searchSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings;
+
+        return this;
+    }
+
+    public setVariantSearchSettings(variantSearchSettings: Partial<VariantSearchSettings>): this {
+        this.searchSettings.variantSettings = variantSearchSettings as VariantSearchSettings;
 
         return this;
     }

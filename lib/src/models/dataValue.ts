@@ -1,4 +1,4 @@
-import { DataObject, DataValue, MultiCurrency, Multilingual } from './data-contracts';
+import { DataObject, DataValue, MultiCurrency, Multilingual, MultilingualCollectionValue } from './data-contracts';
 
 export type DataValueTypes = 'String' | 'Double' | 'Boolean' | 'Multilingual' | 'Money' | 'MultiCurrency' | 'StringList' | 'DoubleList' | 'BooleanList' | 'MultilingualCollection' | 'Object' | 'ObjectList';
 
@@ -45,6 +45,18 @@ export class StringCollectionDataValue extends DataValueBase<CollectionWithType<
             {
                 $type: 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib]], System.Private.CoreLib',
                 $values: value,
+            });
+    }
+
+    readonly isCollection = true;
+}
+
+export class MultilingualCollectionDataValue extends DataValueBase<CollectionWithType<MultilingualCollectionValue>> {
+    constructor(values: { values: string[], language: string }[]) {
+        super('MultilingualCollection',
+            {
+                $type: 'System.Collections.Generic.List`1[[Relewise.Client.DataTypes.Multilingual, Relewise.Client]], System.Private.CoreLib',
+                $values: values.map(x => ({ values: x.values, language: { value: x.language } })),
             });
     }
 
@@ -131,7 +143,7 @@ export class ObjectCollectionDataValue extends DataValueBase<CollectionWithType<
     constructor(dataObjects: { [key: string]: DataValue }[]) {
         super('ObjectList',
             {
-                $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client',
+                $type: 'System.Collections.Generic.List`1[[Relewise.Client.DataTypes.DataObject, Relewise.Client]], System.Private.CoreLib',
                 $values: dataObjects.map(x => ({ $type: 'Relewise.Client.DataTypes.DataObject, Relewise.Client', data: x })),
             });
     }

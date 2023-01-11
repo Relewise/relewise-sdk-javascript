@@ -1,4 +1,4 @@
-import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue, ObjectDataValue, ObjectCollectionDataValue, DataValue } from '..';
+import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue, ObjectDataValue, ObjectCollectionDataValue, DataValue, MultilingualCollectionDataValue } from '..';
 
 export class DataValueFactory {
     static string(value: string): StringDataValue {
@@ -31,6 +31,10 @@ export class DataValueFactory {
 
     static multilingual(values: { value: string, language: string }[]): MultilingualDataValue {
         return new MultilingualDataValue(values);
+    }
+
+    static multilingualCollection(values: { values: string[], language: string }[]): MultilingualCollectionDataValue {
+        return new MultilingualCollectionDataValue(values);
     }
 
     static object(data: { [key: string]: DataValue }): ObjectDataValue {

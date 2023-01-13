@@ -1,4 +1,4 @@
-import { Searcher, ProductSearchBuilder, ProductCategorySearchBuilder, ProductSearchRequest, ProductCategorySearchRequest, UserFactory, ValueSelectorFactory } from '../../src';
+import { Searcher, ProductSearchBuilder, ProductCategorySearchBuilder, ProductSearchRequest, ProductCategorySearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -38,6 +38,25 @@ test('ProductCategorySearch: Relevance modifier without conditions', async() => 
 
     const request: ProductCategorySearchRequest = baseProductCategoryBuilder()
         .relevanceModifiers(b => b.addProductDataRelevanceModifier('NoveltyBoostModifier', conditions => conditions, ValueSelectorFactory.dataDoubleSelector('NoveltyBoostModifier')))
+        .build();
+
+    const result = await searcher.searchProductCategories(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('Product search - data object facets', async() => {
+
+    // 
+    const request: ProductCategorySearchRequest = baseProductCategoryBuilder()
+        .facets(f => f.addProductDataObjectFacet(
+            't', 
+            'Product',
+            f => f.addStringFacet('d', ['values']),
+            c => c.addContainsCondition(DataValueFactory.boolean(true)),
+            1,
+            2,
+            { alwaysIncludeSelectedInAvailable: true }))
         .build();
 
     const result = await searcher.searchProductCategories(request);

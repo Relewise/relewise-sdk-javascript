@@ -1,3 +1,4 @@
+export * from './dataObjectFacetBuilder';
 export * from './facetBuilder';
 export * from './searchBuilder';
 export * from './productSortingBuilder';

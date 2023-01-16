@@ -1,6 +1,6 @@
 import { DoubleRange, DataValueBase, ObjectValueMinByCondition, ObjectValueMaxByCondition, ObjectValueContainsCondition, ObjectValueEqualsCondition, ObjectValueGreaterThanCondition, ObjectValueLessThanCondition, ObjectValueInRangeCondition, ObjectValueCondition } from '..';
 
-export type Conditions = 
+export type DataObjectFilterConditions = 
     | ObjectValueContainsCondition
     | ObjectValueEqualsCondition
     | ObjectValueGreaterThanCondition
@@ -10,7 +10,7 @@ export type Conditions =
     | ObjectValueMinByCondition;
 
 export class DataObjectFilterConditionBuilder {
-    conditions: Conditions[] = [];
+    conditions: DataObjectFilterConditions[] = [];
 
     public addContainsCondition<T>(key: string, value: DataValueBase<T>, mode: 'All' | 'Any' = 'All', objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueContainsCondition = {
@@ -102,7 +102,7 @@ export class DataObjectFilterConditionBuilder {
         return this;
     }
 
-    public build(): Conditions[] | null {
+    public build(): DataObjectFilterConditions[] | null {
         return this.conditions.length === 0
             ? null
             : this.conditions

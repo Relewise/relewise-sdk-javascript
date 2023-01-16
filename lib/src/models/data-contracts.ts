@@ -234,7 +234,7 @@ export interface Brand {
 }
 
 export type BrandAdministrativeAction = Trackable & {
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   language?: Language | null;
   kind: "Disable" | "Enable" | "Delete";
   currency?: Currency | null;
@@ -280,7 +280,7 @@ export interface BrandNameAndIdResultAvailableFacetValue {
 }
 
 export type BrandQuery = LicensedRequest & {
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
@@ -408,7 +408,7 @@ export interface Category {
 
 export interface CategoryAdministrativeAction {
   $type: string;
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   language?: Language | null;
   kind: "Disable" | "Enable" | "Delete";
   currency?: Currency | null;
@@ -525,7 +525,7 @@ export interface Content {
 }
 
 export type ContentAdministrativeAction = Trackable & {
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   language?: Language | null;
   kind: "DisableInRecommendations" | "Disable" | "EnableInRecommendations" | "Enable" | "PermanentlyDelete" | "Delete";
   currency?: Currency | null;
@@ -563,7 +563,7 @@ export type ContentCategoryIdFilter = CategoryIdFilter;
 
 export interface ContentCategoryIdFilterCategoryQuery {
   $type: string;
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
 
   /** @format int32 */
   numberOfResults: number;
@@ -620,7 +620,7 @@ export type ContentCategoryQuery = ContentCategoryIdFilterCategoryQuery;
 
 export interface ContentCategoryRecommendationRequest {
   $type: string;
-  settings?: ContentCategoryRecommendationRequestSettings | null;
+  settings: ContentCategoryRecommendationRequestSettings;
   language?: Language | null;
   user: User;
   relevanceModifiers: RelevanceModifierCollection;
@@ -728,6 +728,10 @@ export type ContentDataIntegerValueFacet = Int32ContentDataValueFacet;
 
 export type ContentDataIntegerValueFacetResult = Int32ContentDataValueFacetResult;
 
+export type ContentDataObjectFacet = DataObjectFacet;
+
+export type ContentDataObjectFacetResult = DataObjectFacetResult;
+
 export type ContentDataSorting = ContentSorting & { key?: string | null; mode: "Auto" | "Alphabetical" | "Numerical" };
 
 export type ContentDataStringValueFacet = StringContentDataValueFacet;
@@ -746,6 +750,7 @@ export interface ContentFacetQuery {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
     | ContentDataStringValueFacet
@@ -760,6 +765,7 @@ export interface ContentFacetQuery {
     | DataObjectDoubleValueFacet
     | PriceRangeFacet
     | PriceRangesFacet
+    | ProductCategoryDataObjectFacet
     | ProductCategoryDataDoubleRangeFacet
     | ProductCategoryDataDoubleRangesFacet
     | ProductCategoryDataStringValueFacet
@@ -784,6 +790,7 @@ export interface ContentFacetResult {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
         | ContentDataStringValueFacetResult
@@ -798,6 +805,7 @@ export interface ContentFacetResult {
         | DataObjectDoubleValueFacetResult
         | PriceRangeFacetResult
         | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
         | ProductCategoryDataDoubleRangeFacetResult
         | ProductCategoryDataDoubleRangesFacetResult
         | ProductCategoryDataStringValueFacetResult
@@ -827,7 +835,7 @@ export interface ContentIndexConfiguration {
 export type ContentPopularitySorting = ContentSorting;
 
 export type ContentQuery = LicensedRequest & {
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
@@ -1026,6 +1034,7 @@ export type DataObjectFacet = Facet & {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
     | ContentDataStringValueFacet
@@ -1040,6 +1049,7 @@ export type DataObjectFacet = Facet & {
     | DataObjectDoubleValueFacet
     | PriceRangeFacet
     | PriceRangesFacet
+    | ProductCategoryDataObjectFacet
     | ProductCategoryDataDoubleRangeFacet
     | ProductCategoryDataDoubleRangesFacet
     | ProductCategoryDataStringValueFacet
@@ -1067,6 +1077,7 @@ export type DataObjectFacetResult = FacetResult & {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
         | ContentDataStringValueFacetResult
@@ -1081,6 +1092,7 @@ export type DataObjectFacetResult = FacetResult & {
         | DataObjectDoubleValueFacetResult
         | PriceRangeFacetResult
         | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
         | ProductCategoryDataDoubleRangeFacetResult
         | ProductCategoryDataDoubleRangesFacetResult
         | ProductCategoryDataStringValueFacetResult
@@ -1100,15 +1112,17 @@ export type DataObjectFacetResult = FacetResult & {
 };
 
 export interface DataObjectFilter {
-  conditions: (
-    | ObjectValueContainsCondition
-    | ObjectValueEqualsCondition
-    | ObjectValueGreaterThanCondition
-    | ObjectValueInRangeCondition
-    | ObjectValueLessThanCondition
-    | ObjectValueMaxByCondition
-    | ObjectValueMinByCondition
-  )[];
+  conditions?:
+    | (
+        | ObjectValueContainsCondition
+        | ObjectValueEqualsCondition
+        | ObjectValueGreaterThanCondition
+        | ObjectValueInRangeCondition
+        | ObjectValueLessThanCondition
+        | ObjectValueMaxByCondition
+        | ObjectValueMinByCondition
+      )[]
+    | null;
 
   /** @format int32 */
   skip?: number | null;
@@ -1120,6 +1134,13 @@ export interface DataObjectFilter {
 export type DataObjectStringValueFacet = StringDataObjectValueFacet;
 
 export type DataObjectStringValueFacetResult = StringDataObjectValueFacetResult;
+
+export interface DataObjectValueSelector {
+  key: string;
+  filter?: DataObjectFilter | null;
+  childSelector?: DataObjectValueSelector | null;
+  fallbackSelector?: DataObjectValueSelector | null;
+}
 
 export interface DataValue {
   type:
@@ -1788,7 +1809,7 @@ export interface LanguageIndexConfiguration {
 }
 
 export interface LanguageIndexConfigurationEntry {
-  language?: Language | null;
+  language: Language;
   included: boolean;
   isO639_1?: string | null;
 }
@@ -1894,7 +1915,7 @@ export interface MultilingualValue {
 export interface ObjectValueCondition {
   $type: string;
   negated: boolean;
-  key?: string | null;
+  key: string;
   objectPath?: string[] | null;
 }
 
@@ -2206,7 +2227,7 @@ export interface Product {
 }
 
 export type ProductAdministrativeAction = Trackable & {
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   language?: Language | null;
   productUpdateKind:
     | "None"
@@ -2287,6 +2308,10 @@ export type ProductCategoryDataDoubleValueFacetResult = DoubleProductCategoryDat
 
 export type ProductCategoryDataFilter = DataFilter;
 
+export type ProductCategoryDataObjectFacet = DataObjectFacet;
+
+export type ProductCategoryDataObjectFacetResult = DataObjectFacetResult;
+
 export type ProductCategoryDataSorting = ProductCategorySorting & {
   key?: string | null;
   mode: "Auto" | "Alphabetical" | "Numerical";
@@ -2308,6 +2333,7 @@ export interface ProductCategoryFacetQuery {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
     | ContentDataStringValueFacet
@@ -2322,6 +2348,7 @@ export interface ProductCategoryFacetQuery {
     | DataObjectDoubleValueFacet
     | PriceRangeFacet
     | PriceRangesFacet
+    | ProductCategoryDataObjectFacet
     | ProductCategoryDataDoubleRangeFacet
     | ProductCategoryDataDoubleRangesFacet
     | ProductCategoryDataStringValueFacet
@@ -2346,6 +2373,7 @@ export interface ProductCategoryFacetResult {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
         | ContentDataStringValueFacetResult
@@ -2360,6 +2388,7 @@ export interface ProductCategoryFacetResult {
         | DataObjectDoubleValueFacetResult
         | PriceRangeFacetResult
         | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
         | ProductCategoryDataDoubleRangeFacetResult
         | ProductCategoryDataDoubleRangesFacetResult
         | ProductCategoryDataStringValueFacetResult
@@ -2387,7 +2416,7 @@ export type ProductCategoryIdFilter = CategoryIdFilter;
 
 export interface ProductCategoryIdFilterCategoryQuery {
   $type: string;
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
 
   /** @format int32 */
   numberOfResults: number;
@@ -2455,7 +2484,7 @@ export type ProductCategoryQuery = ProductCategoryIdFilterCategoryQuery;
 
 export interface ProductCategoryRecommendationRequest {
   $type: string;
-  settings?: ProductCategoryRecommendationRequestSettings | null;
+  settings: ProductCategoryRecommendationRequestSettings;
   language?: Language | null;
   user: User;
   relevanceModifiers: RelevanceModifierCollection;
@@ -2605,6 +2634,12 @@ export type ProductDataObjectFacetResult = DataObjectFacetResult & {
   dataSelectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant";
 };
 
+export type ProductDataObjectSorting = ProductSorting & {
+  dataSelectionStrategy: "Product" | "Variant" | "VariantWithFallbackToProduct" | "ProductWithFallbackToVariant";
+  mode: "Auto" | "Alphabetical" | "Numerical";
+  valueSelector: DataObjectValueSelector;
+};
+
 export type ProductDataRelevanceModifier = RelevanceModifier & {
   key?: string | null;
   considerAsMatchIfKeyIsNotFound: boolean;
@@ -2644,6 +2679,7 @@ export interface ProductFacetQuery {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
     | ContentDataStringValueFacet
@@ -2658,6 +2694,7 @@ export interface ProductFacetQuery {
     | DataObjectDoubleValueFacet
     | PriceRangeFacet
     | PriceRangesFacet
+    | ProductCategoryDataObjectFacet
     | ProductCategoryDataDoubleRangeFacet
     | ProductCategoryDataDoubleRangesFacet
     | ProductCategoryDataStringValueFacet
@@ -2682,6 +2719,7 @@ export interface ProductFacetResult {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
         | ContentDataStringValueFacetResult
@@ -2696,6 +2734,7 @@ export interface ProductFacetResult {
         | DataObjectDoubleValueFacetResult
         | PriceRangeFacetResult
         | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
         | ProductCategoryDataDoubleRangeFacetResult
         | ProductCategoryDataDoubleRangesFacetResult
         | ProductCategoryDataStringValueFacetResult
@@ -2771,7 +2810,7 @@ export interface ProductInterestTriggerResultTriggerConfiguration {
 export type ProductListPriceFilter = Filter & { range: DecimalNullableRange; currency?: Currency | null };
 
 export type ProductListPriceRelevanceModifier = RelevanceModifier & {
-  range?: DecimalNullableRange | null;
+  range: DecimalNullableRange;
   currency?: Currency | null;
   multiplyWeightBy: number;
   negated: boolean;
@@ -2881,7 +2920,7 @@ export interface ProductPerformanceResultViewsMetrics {
 export type ProductPopularitySorting = ProductSorting;
 
 export type ProductQuery = LicensedRequest & {
-  filters?: FilterCollection | null;
+  filters: FilterCollection;
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
@@ -3028,7 +3067,7 @@ export interface ProductResultDetails {
 export type ProductSalesPriceFilter = Filter & { range: DecimalNullableRange; currency?: Currency | null };
 
 export type ProductSalesPriceRelevanceModifier = RelevanceModifier & {
-  range?: DecimalNullableRange | null;
+  range: DecimalNullableRange;
   currency?: Currency | null;
   multiplyWeightBy: number;
   negated: boolean;
@@ -3060,6 +3099,7 @@ export type ProductSearchSettings = SearchSettings & {
 export interface ProductSortBySpecification {
   value?:
     | ProductAttributeSorting
+    | ProductDataObjectSorting
     | ProductDataSorting
     | ProductPopularitySorting
     | ProductRelevanceSorting
@@ -3073,6 +3113,7 @@ export interface ProductSorting {
   order: "Ascending" | "Descending";
   thenBy?:
     | ProductAttributeSorting
+    | ProductDataObjectSorting
     | ProductDataSorting
     | ProductPopularitySorting
     | ProductRelevanceSorting
@@ -3980,7 +4021,7 @@ export type UserFavoriteProductRelevanceModifier = RelevanceModifier & {
 };
 
 export type UserQuery = LicensedRequest & {
-  criteria?: UserQueryCriteria[] | null;
+  criteria: UserQueryCriteria[];
   language?: Language | null;
   currency?: Currency | null;
 };
@@ -3991,7 +4032,7 @@ export interface UserQueryCriteria {
   email?: string | null;
   language?: Language | null;
   currency?: Currency | null;
-  identifiers?: Record<string, string | null>;
+  identifiers?: Record<string, string>;
 }
 
 export interface UserResultDetails {
@@ -4071,7 +4112,7 @@ export interface VariantIndexConfiguration {
 export type VariantListPriceFilter = Filter & { range: DecimalNullableRange; currency?: Currency | null };
 
 export type VariantListPriceRelevanceModifier = RelevanceModifier & {
-  range?: DecimalNullableRange | null;
+  range: DecimalNullableRange;
   currency?: Currency | null;
   multiplyWeightBy: number;
   negated: boolean;
@@ -4110,7 +4151,7 @@ export interface VariantResultDetails {
 export type VariantSalesPriceFilter = Filter & { range: DecimalNullableRange; currency?: Currency | null };
 
 export type VariantSalesPriceRelevanceModifier = RelevanceModifier & {
-  range?: DecimalNullableRange | null;
+  range: DecimalNullableRange;
   currency?: Currency | null;
   multiplyWeightBy: number;
   negated: boolean;

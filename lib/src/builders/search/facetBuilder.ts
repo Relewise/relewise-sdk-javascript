@@ -1,4 +1,6 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet } from '../../models/data-contracts';
+import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
+import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 
 export class FacetBuilder {
     private facets: (
@@ -25,6 +27,7 @@ export class FacetBuilder {
         | ProductCategoryDataBooleanValueFacet
         | ProductCategoryDataDoubleValueFacet
         | ProductCategoryDataDoubleRangesFacet
+        | ProductDataObjectFacet
     )[] = [];
 
     //#region Product
@@ -257,6 +260,44 @@ export class FacetBuilder {
 
         return this;
     }
+
+    public addProductDataObjectFacet(
+        key: string,
+        selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
+        builder?: (facets: DataObjectFacetBuilder) => void,
+        filter?: {
+            conditions?: (builder: DataObjectFilterConditionBuilder) => void,
+            skip?: number,
+            take?: number},
+        facetSettings?: FacetSettings): this {
+
+        const facetBuilder = new DataObjectFacetBuilder();
+        if (builder) {
+            builder(facetBuilder);
+        }
+
+        const conditionsBuilder = new DataObjectFilterConditionBuilder();
+        if (filter?.conditions) {
+            filter?.conditions(conditionsBuilder);
+        }
+
+        const facet: ProductDataObjectFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataObjectFacet, Relewise.Client',
+            field: 'Data',
+            items: facetBuilder.build() ?? [],
+            filter: {
+                conditions: conditionsBuilder.build() ?? [],
+                take: filter?.take,
+                skip: filter?.skip,
+            },
+            dataSelectionStrategy: selectionStrategy,
+            settings: facetSettings,
+            key: key,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
     //#endregion
 
     //#region Content
@@ -296,7 +337,7 @@ export class FacetBuilder {
         selectedValues: {
             lowerBound?: number,
             upperBound?: number
-        }[] | null = null, 
+        }[] | null = null,
         facetSettings?: FacetSettings): this {
 
         const facet: ContentDataDoubleRangesFacet = {
@@ -393,7 +434,7 @@ export class FacetBuilder {
         selectedValues: {
             lowerBound?: number,
             upperBound?: number
-        }[] | null = null, 
+        }[] | null = null,
         facetSettings?: FacetSettings): this {
 
         const facet: ProductCategoryDataDoubleRangesFacet = {
@@ -459,3 +500,4 @@ export class FacetBuilder {
             : { items: this.facets }
     }
 }
+

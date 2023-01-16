@@ -1,6 +1,7 @@
 import { DoubleRange, DataValueBase, ObjectValueMinByCondition, ObjectValueMaxByCondition, ObjectValueContainsCondition, ObjectValueEqualsCondition, ObjectValueGreaterThanCondition, ObjectValueLessThanCondition, ObjectValueInRangeCondition, ObjectValueCondition } from '..';
 
-export type Conditions = | ObjectValueContainsCondition
+export type Conditions = 
+    | ObjectValueContainsCondition
     | ObjectValueEqualsCondition
     | ObjectValueGreaterThanCondition
     | ObjectValueInRangeCondition
@@ -11,9 +12,10 @@ export type Conditions = | ObjectValueContainsCondition
 export class DataObjectFilterConditionBuilder {
     conditions: Conditions[] = [];
 
-    public addContainsCondition<T>(value: DataValueBase<T>, mode: 'All' | 'Any' = 'All', objectPath?: string[], negated: boolean = false): this {
+    public addContainsCondition<T>(key: string, value: DataValueBase<T>, mode: 'All' | 'Any' = 'All', objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueContainsCondition = {
             $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueContainsCondition, Relewise.Client',
+            key: key,
             value: value,
             objectPath: objectPath,
             mode: mode,
@@ -39,7 +41,7 @@ export class DataObjectFilterConditionBuilder {
 
     public addInRangeCondition(key: string, range: DoubleRange, objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueInRangeCondition = {
-            $type: 'Relewise.Client.Requests.Conditions.ObjectValueInRangeCondition, Relewise.Client',
+            $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueInRangeCondition, Relewise.Client',
             range: range,
             key: key,
             objectPath: objectPath,
@@ -52,7 +54,7 @@ export class DataObjectFilterConditionBuilder {
 
     public addGreaterThanCondition(key: string, value: number, objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueGreaterThanCondition = {
-            $type: 'Relewise.Client.Requests.Conditions.ObjectValueGreaterThanCondition, Relewise.Client',
+            $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueGreaterThanCondition, Relewise.Client',
             value: value,
             negated: negated,
             key: key,
@@ -65,7 +67,7 @@ export class DataObjectFilterConditionBuilder {
 
     public addLessThanCondition(key: string, value: number, objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueLessThanCondition = {
-            $type: 'Relewise.Client.Requests.Conditions.ObjectValueLessThanCondition, Relewise.Client',
+            $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueLessThanCondition, Relewise.Client',
             value: value,
             negated: negated,
             key: key,
@@ -78,7 +80,7 @@ export class DataObjectFilterConditionBuilder {
 
     public addMinByCondition(key: string, objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueMinByCondition = {
-            $type: 'Relewise.Client.Requests.Conditions.ObjectValueMinByCondition, Relewise.Client',
+            $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueMinByCondition, Relewise.Client',
             negated: negated,
             key: key,
             objectPath: objectPath,
@@ -90,7 +92,7 @@ export class DataObjectFilterConditionBuilder {
 
     public addMaxByCondition(key: string, objectPath?: string[], negated: boolean = false): this {
         const condition: ObjectValueMaxByCondition = {
-            $type: 'Relewise.Client.Requests.Conditions.ObjectValueMaxByCondition, Relewise.Client',
+            $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueMaxByCondition, Relewise.Client',
             negated: negated,
             key: key,
             objectPath: objectPath,

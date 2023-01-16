@@ -261,15 +261,14 @@ export class FacetBuilder {
         return this;
     }
 
-    // addContentDataObjectFacet
-
     public addProductDataObjectFacet(
         key: string,
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         builder?: (facets: DataObjectFacetBuilder) => void,
-        conditions?: (builder: DataObjectFilterConditionBuilder) => void,
-        skip?: number,
-        take?: number,         
+        filter?: {
+            conditions?: (builder: DataObjectFilterConditionBuilder) => void,
+            skip?: number,
+            take?: number},
         facetSettings?: FacetSettings): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
@@ -278,19 +277,18 @@ export class FacetBuilder {
         }
 
         const conditionsBuilder = new DataObjectFilterConditionBuilder();
-        if (conditions) {
-            conditions(conditionsBuilder);
+        if (filter?.conditions) {
+            filter?.conditions(conditionsBuilder);
         }
 
         const facet: ProductDataObjectFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataObjectFacet, Relewise.Client',
             field: 'Data',
             items: facetBuilder.build() ?? [],
-            // TODO: Create DataObjectFilterBuilder, for more fluent API and better reuse
             filter: {
                 conditions: conditionsBuilder.build() ?? [],
-                take: take,
-                skip: skip,
+                take: filter?.take,
+                skip: filter?.skip,
             },
             dataSelectionStrategy: selectionStrategy,
             settings: facetSettings,

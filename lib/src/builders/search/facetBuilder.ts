@@ -268,7 +268,8 @@ export class FacetBuilder {
         filter?: {
             conditions?: (builder: DataObjectFilterConditionBuilder) => void,
             skip?: number,
-            take?: number},
+            take?: number 
+        },
         facetSettings?: FacetSettings): this {
 
         const facetBuilder = new DataObjectFacetBuilder();

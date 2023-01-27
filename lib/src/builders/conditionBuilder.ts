@@ -1,4 +1,4 @@
-import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection, DataValueBase } from '..';
+import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection, DataValueBase, DataObjectFilter, DataObjectFilterConditionBuilder } from '..';
 
 export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
 
@@ -54,6 +54,25 @@ export class ConditionBuilder {
         const condition: LessThanCondition = {
             $type: 'Relewise.Client.Requests.Conditions.LessThanCondition, Relewise.Client',
             value: value,
+            negated: negated,
+        };
+        this.conditions.push(condition);
+
+        return this;
+    }
+
+    public addDataObjectCondition(conditions: (builder: DataObjectFilterConditionBuilder) => void, skip?: number, take?: number, negated: boolean = false): this {
+        const conditionsBuilder = new DataObjectFilterConditionBuilder();
+        conditions(conditionsBuilder);
+
+        const condition: ContainsCondition = {
+            $type: 'Relewise.Client.Requests.Conditions.ContainsCondition, Relewise.Client',
+            objectFilter: { 
+                conditions: conditionsBuilder.build(), 
+                skip: skip, 
+                take: take,
+            },
+            valueCollectionEvaluationMode: 'All',
             negated: negated,
         };
         this.conditions.push(condition);

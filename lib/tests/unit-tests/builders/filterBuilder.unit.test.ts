@@ -26,7 +26,7 @@ test('product object data filter', () => {
             filter.addDataObjectCondition(cond => {
                 cond.addEqualsCondition('VehicleTypeNumber', DataValueFactory.number(6203))
                 cond.addEqualsCondition('Manufacturer', DataValueFactory.string('VOLVO'))
-                cond.addContainsCondition('ProductionYears', DataValueFactory.stringCollection(['1959', '1972', '2020']), undefined, 'Any')
+                cond.addContainsCondition('ProductionYears', DataValueFactory.stringCollection(['1959', '1972', '2020']), 'Any')
                 cond.addInRangeCondition('Bhp', { lowerBoundInclusive: 50, upperBoundInclusive: 80 })
             })
         })

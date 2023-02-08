@@ -179,7 +179,7 @@ searcher.batch(searchCollectionBuilder.build());
     
 ## Using the SDK via CDN.
 
-For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/libraries.html).
+For more information about how to use the SDK via CDN - go to our [docs site](https://docs.relewise.com/docs/developer/getting-started.html#_2-choose-your-technology).
 
 ## Running integration tests
 

@@ -2,7 +2,7 @@ import { PersonalContentCategoryRecommendationRequest, PopularContentCategoriesR
 
 export class ContentCategoriesRecommendationCollectionBuilder {
     private requests: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)[] = [];
-    private distinctProductsAcrossResults: boolean = true;
+    private distinctCategoriesAcrossResults: boolean = true;
 
     public addRequest(request: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)): this {
         this.requests.push(request);
@@ -10,8 +10,8 @@ export class ContentCategoriesRecommendationCollectionBuilder {
         return this;
     }
 
-    public requireDistinctProductsAcrossResults(distinctProductsAcrossResults: boolean = true): this {
-        this.distinctProductsAcrossResults = distinctProductsAcrossResults;
+    public requireDistinctCategoriesAcrossResults(distinctCategoriesAcrossResults: boolean = true): this {
+        this.distinctCategoriesAcrossResults = distinctCategoriesAcrossResults;
 
         return this;
     }
@@ -19,7 +19,7 @@ export class ContentCategoriesRecommendationCollectionBuilder {
     public build(): ContentCategoryRecommendationRequestCollection {
         return {
             $type: 'Relewise.Client.Requests.Recommendations.ContentRecommendationRequestCollection, Relewise.Client',
-            requireDistinctContentAcrossResults: this.distinctProductsAcrossResults,
+            requireDistinctCategoriesAcrossResults: this.distinctCategoriesAcrossResults,
             requests: this.requests,
         }
     }

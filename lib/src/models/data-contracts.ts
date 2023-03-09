@@ -38,6 +38,36 @@ export interface AbandonedCartTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
+export type AbandonedSearchTriggerConfiguration = AbandonedSearchTriggerResultTriggerConfiguration & {
+  searchTypesInPrioritizedOrder: ("Product" | "ProductCategory" | "Content")[];
+  searchTermCondition?: SearchTermCondition | null;
+};
+
+export interface AbandonedSearchTriggerResultTriggerConfiguration {
+  $type: string;
+  custom?: Record<string, string | null>;
+
+  /** @format uuid */
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  group?: string | null;
+  enabled: boolean;
+
+  /** @format date-time */
+  created: string;
+  createdBy?: string | null;
+
+  /** @format date-time */
+  modified: string;
+  modifiedBy?: string | null;
+
+  /** @format int32 */
+  withinTimeSpanMinutes: number;
+  settings?: Record<string, string | null>;
+  userConditions?: UserConditionCollection | null;
+}
+
 export interface AnalyzerRequest {
   $type: string;
   language?: Language | null;
@@ -632,7 +662,7 @@ export interface ContentCategoryRecommendationRequest {
 
 export type ContentCategoryRecommendationRequestCollection = LicensedRequest & {
   requests?: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)[] | null;
-  requireDistinctContentAcrossResults: boolean;
+  requireDistinctCategoriesAcrossResults: boolean;
 };
 
 export interface ContentCategoryRecommendationRequestSettings {
@@ -867,7 +897,7 @@ export type ContentRecommendationRequestCollection = LicensedRequest & {
         | PopularContentsRequest
       )[]
     | null;
-  requireDistinctContentAcrossResults: boolean;
+  requireDistinctContentsAcrossResults: boolean;
 };
 
 export interface ContentRecommendationRequestSettings {
@@ -2496,7 +2526,7 @@ export interface ProductCategoryRecommendationRequest {
 
 export type ProductCategoryRecommendationRequestCollection = LicensedRequest & {
   requests?: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)[] | null;
-  requireDistinctContentAcrossResults: boolean;
+  requireDistinctCategoriesAcrossResults: boolean;
 };
 
 export interface ProductCategoryRecommendationRequestSettings {
@@ -3350,6 +3380,7 @@ export type SaveSynonymsResponse = TimedResponse & { values?: Synonym[] | null }
 export type SaveTriggerConfigurationRequest = LicensedRequest & {
   configuration?:
     | AbandonedCartTriggerConfiguration
+    | AbandonedSearchTriggerConfiguration
     | ContentCategoryInterestTriggerConfiguration
     | ProductCategoryInterestTriggerConfiguration
     | ProductInterestTriggerConfiguration
@@ -3468,10 +3499,13 @@ export type SearchTerm = Trackable & { language?: Language | null; user?: User |
 export type SearchTermBasedProductRecommendationRequest = ProductRecommendationRequest & { term: string };
 
 export interface SearchTermCondition {
-  kind: "Equals" | "StartsWith" | "EndsWith" | "Contains";
-  value: string;
+  kind?: "Equals" | "StartsWith" | "EndsWith" | "Contains" | null;
+  value?: string | null;
   andConditions?: SearchTermCondition[] | null;
   orConditions?: SearchTermCondition[] | null;
+
+  /** @format int32 */
+  minimumLength?: number | null;
 }
 
 export type SearchTermPredictionRequest = SearchRequest & {
@@ -3915,6 +3949,7 @@ export type TriggerConfigurationCollectionResponse = TimedResponse & {
   configurations?:
     | (
         | AbandonedCartTriggerConfiguration
+        | AbandonedSearchTriggerConfiguration
         | ContentCategoryInterestTriggerConfiguration
         | ProductCategoryInterestTriggerConfiguration
         | ProductInterestTriggerConfiguration
@@ -3928,6 +3963,7 @@ export type TriggerConfigurationRequest = LicensedRequest & { id: string; type?:
 export type TriggerConfigurationResponse = TimedResponse & {
   configuration?:
     | AbandonedCartTriggerConfiguration
+    | AbandonedSearchTriggerConfiguration
     | ContentCategoryInterestTriggerConfiguration
     | ProductCategoryInterestTriggerConfiguration
     | ProductInterestTriggerConfiguration

@@ -100,6 +100,21 @@ test('Track Content View', async() => {
         user: UserFactory.anonymous(),
     });
 
+    await tracker.trackContentView({
+        contentId: '3',
+        user: UserFactory.anonymous(),
+    });
+
+    await tracker.trackContentView({
+        contentId: '4',
+        user: UserFactory.anonymous(),
+    });
+
+    await tracker.trackContentView({
+        contentId: '5',
+        user: UserFactory.anonymous(),
+    });
+
     expect(result).toBeUndefined();
 });
 

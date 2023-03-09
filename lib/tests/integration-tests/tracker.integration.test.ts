@@ -6,7 +6,7 @@ const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_conf
 const tracker = new Tracker(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
 test('Track Order', async() => {
-    expect(async() => await tracker.trackOrder({
+    const result = await tracker.trackOrder({
         lineItems: [
             {
                 lineTotal: 100,
@@ -27,11 +27,13 @@ test('Track Order', async() => {
         orderNumber: '',
         trackingNumber: '',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Cart', async() => {
-    expect(async() => await tracker.trackCart({
+    const result = await tracker.trackCart({
         lineItems: [
             {
                 lineTotal: 100,
@@ -51,62 +53,95 @@ test('Track Cart', async() => {
             currency: 'DKK', 
         },
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Product View', async() => {
-    expect(async() => await tracker.trackProductView({
+    const result = await tracker.trackProductView({
         productId: '1',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Product View', async() => {
-    expect(async() => await tracker.trackProductView({
+    const result = await tracker.trackProductView({
         productId: '2',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Product Category View', async() => {
-    expect(async() => await tracker.trackProductCategoryView({
+    const result = await tracker.trackProductCategoryView({
         idPath: ['c1'],
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Content View', async() => {
-    await expect(async() => await tracker.trackContentView({
+    const result = await tracker.trackContentView({
         contentId: '1',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Content View', async() => {
-    expect(async() => await tracker.trackContentView({
+    const result = await tracker.trackContentView({
         contentId: '2',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Content Category View', async() => {
-    expect(async() => await tracker.trackContentCategoryView({
+    const result = await tracker.trackContentCategoryView({
         idPath: ['c1'],
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Brand View', async() => {
-    expect(async() => await tracker.trackBrandView({
+    const result = await tracker.trackBrandView({
         brandId: 'b-1',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
 });
 
 test('Track Search Term', async() => {
-    expect(async() => await tracker.trackSearchTerm({
+
+    const result = await tracker.trackSearchTerm({
         term: 'term',
         language: 'da-DK',
         user: UserFactory.anonymous(),
-    })).not.toBeUndefined();
+    });
+
+    expect(result).toBeUndefined();
+});
+
+test('Track User Update', async() => {
+    const user = UserFactory.byTemporaryId('tempId', { 
+        email: 'integrationtests@relewise.com', 
+        identifiers: {
+            'emailIntegrationId': 'abc',
+        }});
+
+    const result = await tracker.trackUserUpdate({
+        user: user,
+    });
+
+    expect(result).toBeUndefined();
 });

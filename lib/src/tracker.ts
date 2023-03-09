@@ -1,7 +1,7 @@
 import { RelewiseClient, RelewiseClientOptions } from './relewise.client';
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
-    TrackBrandViewRequest, User, TrackSearchTermRequest,
+    TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -132,6 +132,17 @@ export class Tracker extends RelewiseClient {
                 },
                 term: term,
                 user: user,
+            },
+        });
+    }
+
+    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }): Promise<void | undefined> {
+        return this.request<TrackUserUpdateRequest, void>('TrackUserUpdateRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackUserUpdateRequest, Relewise.Client',
+            userUpdate: {
+                $type: 'Relewise.Client.DataTypes.UserUpdate, Relewise.Client',
+                user: user,
+                kind: updateKind,
             },
         });
     }

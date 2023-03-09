@@ -8,7 +8,7 @@ export class ContentsRecommendationCollectionBuilder {
         | PersonalContentRecommendationRequest
         | PopularContentsRequest)[] = [];
 
-    private distinctProductsAcrossResults: boolean = true;
+    private distinctContentsAcrossResults: boolean = true;
 
     public addRequest(request: ContentsViewedAfterViewingContentRequest
         | ContentsViewedAfterViewingMultipleContentsRequest
@@ -21,8 +21,8 @@ export class ContentsRecommendationCollectionBuilder {
         return this;
     }
 
-    public distinctContentAcrossResults(distinctProductsAcrossResults: boolean = true): this {
-        this.distinctProductsAcrossResults = distinctProductsAcrossResults;
+    public requireDistinctContentsAcrossResults(distinctContentsAcrossResults: boolean = true): this {
+        this.distinctContentsAcrossResults = distinctContentsAcrossResults;
 
         return this;
     }
@@ -30,7 +30,7 @@ export class ContentsRecommendationCollectionBuilder {
     public build(): ContentRecommendationRequestCollection {
         return {
             $type: 'Relewise.Client.Requests.Recommendations.ContentRecommendationRequestCollection, Relewise.Client',
-            requireDistinctContentAcrossResults: this.distinctProductsAcrossResults,
+            requireDistinctContentsAcrossResults: this.distinctContentsAcrossResults,
             requests: this.requests,
         };
     }

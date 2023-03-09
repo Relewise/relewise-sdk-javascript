@@ -662,7 +662,7 @@ export interface ContentCategoryRecommendationRequest {
 
 export type ContentCategoryRecommendationRequestCollection = LicensedRequest & {
   requests?: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)[] | null;
-  requireDistinctContentAcrossResults: boolean;
+  requireDistinctCategoriesAcrossResults: boolean;
 };
 
 export interface ContentCategoryRecommendationRequestSettings {
@@ -897,7 +897,7 @@ export type ContentRecommendationRequestCollection = LicensedRequest & {
         | PopularContentsRequest
       )[]
     | null;
-  requireDistinctContentAcrossResults: boolean;
+  requireDistinctContentsAcrossResults: boolean;
 };
 
 export interface ContentRecommendationRequestSettings {
@@ -2526,7 +2526,7 @@ export interface ProductCategoryRecommendationRequest {
 
 export type ProductCategoryRecommendationRequestCollection = LicensedRequest & {
   requests?: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)[] | null;
-  requireDistinctContentAcrossResults: boolean;
+  requireDistinctCategoriesAcrossResults: boolean;
 };
 
 export interface ProductCategoryRecommendationRequestSettings {

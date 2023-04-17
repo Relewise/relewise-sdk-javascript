@@ -1,9 +1,8 @@
 name: Publish to NPM
 
 on:
-  push
-  #release:
-  #  types: [published]
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -25,10 +24,6 @@ jobs:
           placeholder: '${VERSION}'
       - run: npm ci
       - run: npm run publish
-      - name: "Read file contents"
-        uses: andstor/file-reader-action@v1
-        with:
-          path: "./lib/src/version.ts"
-      ##- run: npm publish --access public
-      ##  env:
-      ##    NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

@@ -773,7 +773,7 @@ export type ContentDetailsCollectionResponse = TimedResponse & {
   totalNumberOfResults?: number | null;
 };
 
-export interface ContentFacetQuery {
+export type ContentFacetQuery = FacetQuery & {
   items: (
     | ContentAssortmentFacet
     | ProductAssortmentFacet
@@ -810,7 +810,7 @@ export interface ContentFacetQuery {
     | ProductDataIntegerValueFacet
     | VariantSpecificationFacet
   )[];
-}
+};
 
 export interface ContentFacetResult {
   items?:
@@ -1602,6 +1602,10 @@ export interface Facet {
   settings?: FacetSettings | null;
 }
 
+export interface FacetQuery {
+  $type: string;
+}
+
 export interface FacetResult {
   $type: string;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
@@ -1609,6 +1613,7 @@ export interface FacetResult {
 
 export interface FacetSettings {
   alwaysIncludeSelectedInAvailable: boolean;
+  includeZeroHitsInAvailable: boolean;
 }
 
 export interface FieldIndexConfiguration {
@@ -2356,7 +2361,7 @@ export type ProductCategoryDetailsCollectionResponse = TimedResponse & {
   totalNumberOfResults?: number | null;
 };
 
-export interface ProductCategoryFacetQuery {
+export type ProductCategoryFacetQuery = FacetQuery & {
   items: (
     | ContentAssortmentFacet
     | ProductAssortmentFacet
@@ -2393,7 +2398,7 @@ export interface ProductCategoryFacetQuery {
     | ProductDataIntegerValueFacet
     | VariantSpecificationFacet
   )[];
-}
+};
 
 export interface ProductCategoryFacetResult {
   items?:
@@ -2702,7 +2707,7 @@ export type ProductDisplayNameFilter = Filter & {
   mustMatchAllConditions: boolean;
 };
 
-export interface ProductFacetQuery {
+export type ProductFacetQuery = FacetQuery & {
   items: (
     | ContentAssortmentFacet
     | ProductAssortmentFacet
@@ -2739,7 +2744,7 @@ export interface ProductFacetQuery {
     | ProductDataIntegerValueFacet
     | VariantSpecificationFacet
   )[];
-}
+};
 
 export interface ProductFacetResult {
   items?:

@@ -1,8 +1,9 @@
 name: Publish to NPM
 
 on:
-  release:
-    types: [published]
+  push
+  #release:
+  #  types: [published]
 
 jobs:
   publish:
@@ -17,8 +18,17 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.com/
           scope: '@relewise'
+      - name: Update version
+        uses: brettdorrans/write-version-to-file@master
+        with:
+          filename: './lib/src/version.ts'
+          placeholder: '${VERSION}'
       - run: npm ci
       - run: npm run publish
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: "Read file contents"
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "./lib/src/version.ts"
+      ##- run: npm publish --access public
+      ##  env:
+      ##    NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

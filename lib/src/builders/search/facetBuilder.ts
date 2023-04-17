@@ -498,7 +498,10 @@ export class FacetBuilder {
     build(): ProductFacetQuery | null {
         return this.facets.length === 0
             ? null
-            : { items: this.facets }
+            : { 
+                items: this.facets, 
+                $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.FacetQuery, Relewise.Client', 
+            }
     }
 }
 

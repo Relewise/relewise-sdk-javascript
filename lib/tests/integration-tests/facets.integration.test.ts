@@ -63,7 +63,7 @@ test('Product Category facet', async() => {
     const builder = new ProductCategorySearchBuilder({
         language: 'en-US',
         currency: 'USD',
-        displayedAtLocation: 'integration test -mza',
+        displayedAtLocation: 'integration test',
         user: UserFactory.anonymous(),
     });
 

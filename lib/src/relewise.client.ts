@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+import version from './version';
 
 export interface RelewiseClientOptions {
     serverUrl?: string;
@@ -30,6 +31,7 @@ export abstract class RelewiseClient {
             headers: {
                 Authorization: apiKeyHeader,
                 'Content-Type': 'application/json',
+                'X-Relewise-Version': version.tag,
             },
             body: JSON.stringify(data),
         });

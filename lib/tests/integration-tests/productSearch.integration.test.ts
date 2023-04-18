@@ -45,7 +45,7 @@ test('Product search - data object facets', async() => {
                 take: 1,
                 skip: 2,
             },
-            { alwaysIncludeSelectedInAvailable: true }))
+            { alwaysIncludeSelectedInAvailable: true, includeZeroHitsInAvailable: false }))
         .build();
 
     const result = await searcher.searchProducts(request);

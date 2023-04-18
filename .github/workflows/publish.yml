@@ -17,6 +17,11 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.com/
           scope: '@relewise'
+      - name: Update version
+        uses: brettdorrans/write-version-to-file@master
+        with:
+          filename: './lib/src/version.ts'
+          placeholder: '${VERSION}'
       - run: npm ci
       - run: npm run publish
       - run: npm publish --access public

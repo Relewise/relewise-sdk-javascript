@@ -1,4 +1,4 @@
-import { ProductSearchBuilder, ProductSearchRequest, Searcher, UserFactory } from '../../src';
+import { ProductCategorySearchBuilder, ProductCategorySearchRequest, ProductSearchBuilder, ProductSearchRequest, Searcher, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -56,4 +56,22 @@ test('Category facet', async() => {
     const result = await searcher.searchProducts(request);
 
     expect(result?.facets?.items![0].field).toBe('Category');
+});
+
+test('Product Category facet', async() => {
+
+    const builder = new ProductCategorySearchBuilder({
+        language: 'en-US',
+        currency: 'USD',
+        displayedAtLocation: 'integration test',
+        user: UserFactory.anonymous(),
+    });
+
+    const request: ProductCategorySearchRequest = builder
+        .facets(f => f.addProductCategoryDataStringValueFacet('Key'))
+        .build();
+
+    const result = await searcher.searchProductCategories(request);
+
+    expect(result).toBeDefined();
 });

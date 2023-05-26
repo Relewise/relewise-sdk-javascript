@@ -1,13 +1,52 @@
-import { DataObjectBooleanValueFacet, DataObjectDoubleRangeFacet, DataObjectDoubleRangesFacet, DataObjectDoubleValueFacet, DataObjectStringValueFacet, FacetSettings } from '../../models/data-contracts';
+import { DataObjectFacet, DataObjectBooleanValueFacet, DataObjectDoubleRangeFacet, DataObjectDoubleRangesFacet, DataObjectDoubleValueFacet, DataObjectStringValueFacet, FacetSettings } from '../../models/data-contracts';
+import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 
 
 export class DataObjectFacetBuilder {
     private facets: (
+        DataObjectFacet |
         DataObjectDoubleRangeFacet |
         DataObjectDoubleRangesFacet |
         DataObjectStringValueFacet |
         DataObjectBooleanValueFacet |
         DataObjectDoubleValueFacet)[] = [];
+
+    public addDataObjectFacet(
+        key: string,
+        builder?: (facets: DataObjectFacetBuilder) => void,
+        filter?: {
+            conditions?: (builder: DataObjectFilterConditionBuilder) => void,
+            skip?: number,
+            take?: number 
+        },
+        facetSettings?: FacetSettings): this {
+
+        const facetBuilder = new DataObjectFacetBuilder();
+        if (builder) {
+            builder(facetBuilder);
+        }
+            
+        const conditionsBuilder = new DataObjectFilterConditionBuilder();
+        if (filter?.conditions) {
+            filter?.conditions(conditionsBuilder);
+        }
+
+        const facet: DataObjectFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectFacet, Relewise.Client',
+            field: 'Data',
+            key: key,
+            items: facetBuilder.build() ?? [],
+            filter: {
+                conditions: conditionsBuilder.build() ?? [],
+                take: filter?.take,
+                skip: filter?.skip,
+            },
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
 
     public addStringFacet(
         key: string,

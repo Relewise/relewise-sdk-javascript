@@ -1,4 +1,4 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 
@@ -84,15 +84,14 @@ export class FacetBuilder {
     }
 
     public addProductDataDoubleRangeFacet(key: string, selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', lowerBound?: number, upperBound?: number, facetSettings?: FacetSettings): this {
+        const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
+
         const facet: ProductDataDoubleRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangeFacet, Relewise.Client',
             field: 'Data',
             key: key,
             dataSelectionStrategy: selectionStrategy,
-            selected: {
-                lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound,
-            },
+            selected: selected,
             settings: facetSettings,
         };
         this.facets.push(facet);
@@ -198,13 +197,11 @@ export class FacetBuilder {
         upperBound?: number,
         facetSettings?: FacetSettings): this {
 
+        const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
         const facet: PriceRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangeFacet, Relewise.Client',
             field: 'SalesPrice',
-            selected: {
-                lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound,
-            },
+            selected: selected,
             priceSelectionStrategy,
             settings: facetSettings,
         };
@@ -219,13 +216,11 @@ export class FacetBuilder {
         upperBound?: number,
         facetSettings?: FacetSettings): this {
 
+        const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
         const facet: PriceRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangeFacet, Relewise.Client',
             field: 'ListPrice',
-            selected: {
-                lowerBoundInclusive: lowerBound,
-                upperBoundInclusive: upperBound,
-            },
+            selected: selected,
             priceSelectionStrategy,
             settings: facetSettings,
         };
@@ -268,7 +263,7 @@ export class FacetBuilder {
         filter?: {
             conditions?: (builder: DataObjectFilterConditionBuilder) => void,
             skip?: number,
-            take?: number 
+            take?: number
         },
         facetSettings?: FacetSettings): this {
 
@@ -316,10 +311,12 @@ export class FacetBuilder {
     }
 
     public addContentDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings): this {
+        const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
+
         const facet: ContentDataDoubleRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataDoubleRangeFacet, Relewise.Client',
             field: 'Data',
-            selected: { lowerBoundInclusive: lowerBound, upperBoundInclusive: upperBound },
+            selected: selected,
             key: key,
             settings: facetSettings,
         };
@@ -413,10 +410,11 @@ export class FacetBuilder {
     }
 
     public addProductCategoryDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings): this {
+        const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
         const facet: ProductCategoryDataDoubleRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataDoubleRangeFacet, Relewise.Client',
             field: 'Data',
-            selected: { lowerBoundInclusive: lowerBound, upperBoundInclusive: upperBound },
+            selected: selected,
             key: key,
             settings: facetSettings,
         };
@@ -498,10 +496,22 @@ export class FacetBuilder {
     build(): ProductFacetQuery | null {
         return this.facets.length === 0
             ? null
-            : { 
-                items: this.facets, 
-                $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.FacetQuery, Relewise.Client', 
+            : {
+                items: this.facets,
+                $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.FacetQuery, Relewise.Client',
             }
+    }
+
+    private mapSelectedDoubleRange(lowerBound: number | undefined | null, upperBound: number | undefined| null) {
+        let selected: DoubleNullableRange | null = null;
+        const lowerBoundHasValue = lowerBound !== null || lowerBound !== undefined;
+        const upperBoundHasValue = upperBound !== null || upperBound !== undefined;
+        if (lowerBoundHasValue || upperBoundHasValue) {
+            selected = {};
+            if (lowerBoundHasValue) selected.lowerBoundInclusive = lowerBound;
+            if (upperBoundHasValue) selected.upperBoundInclusive = upperBound;
+        }
+        return selected;
     }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@relewise/client",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "Relewise is a next generation personalization SaaS-platform, which offers functionality within product- and content recommendations and personalized search. This official SDK helps you interact with our API.",
   "repository": {
     "type": "git",

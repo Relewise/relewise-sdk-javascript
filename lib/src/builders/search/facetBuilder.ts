@@ -504,8 +504,8 @@ export class FacetBuilder {
 
     private mapSelectedDoubleRange(lowerBound: number | undefined | null, upperBound: number | undefined| null) {
         let selected: DoubleNullableRange | null = null;
-        const lowerBoundHasValue = lowerBound !== null || lowerBound !== undefined;
-        const upperBoundHasValue = upperBound !== null || upperBound !== undefined;
+        const lowerBoundHasValue = lowerBound !== null && lowerBound !== undefined;
+        const upperBoundHasValue = upperBound !== null && upperBound !== undefined;
         if (lowerBoundHasValue || upperBoundHasValue) {
             selected = {};
             if (lowerBoundHasValue) selected.lowerBoundInclusive = lowerBound;

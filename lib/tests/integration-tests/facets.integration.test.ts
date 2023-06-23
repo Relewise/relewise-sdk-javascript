@@ -58,16 +58,28 @@ test('Category facet', async() => {
     expect(result?.facets?.items![0].field).toBe('Category');
 });
 
-test('Category Hierarchy facet', async() => {
+test('Product Category Hierarchy facet', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .facets(f => f.addCategoryHierarchyFacet('ImmediateParent'))
+        .facets(f => f.addProductCategoryHierarchyFacet('ImmediateParent'))
         .build();
 
     const result = await searcher.searchProducts(request);
 
     expect(result?.facets?.items![0].field).toBe('Category');
 });
+
+test('Content Category Hierarchy facet', async() => {
+
+    const request: ProductSearchRequest = baseBuilder()
+        .facets(f => f.addContentCategoryHierarchyFacet('ImmediateParent'))
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.facets?.items![0].field).toBe('Category');
+});
+
 
 test('Product Category facet', async() => {
 

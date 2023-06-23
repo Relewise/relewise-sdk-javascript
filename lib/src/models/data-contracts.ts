@@ -41,6 +41,8 @@ export interface AbandonedCartTriggerResultTriggerConfiguration {
 export type AbandonedSearchTriggerConfiguration = AbandonedSearchTriggerResultTriggerConfiguration & {
   searchTypesInPrioritizedOrder: ("Product" | "ProductCategory" | "Content")[];
   searchTermCondition?: SearchTermCondition | null;
+  suppressOnEntityFromSearchResultViewed: boolean;
+  considerAbandonedAfterMinutes: number;
 };
 
 export interface AbandonedSearchTriggerResultTriggerConfiguration {
@@ -84,6 +86,7 @@ export type AndFilter = Filter & {
     | BrandDataFilter
     | BrandIdFilter
     | CartDataFilter
+    | ContentAssortmentFilter
     | ContentCategoryAssortmentFilter
     | ContentCategoryDataFilter
     | ContentCategoryHasAncestorFilter
@@ -127,6 +130,8 @@ export interface ApplicableIndexes {
 export interface ApplicableLanguages {
   languages?: Language[] | null;
 }
+
+export type ApplyFilterSettings = FilterScopeSettings & { apply: boolean };
 
 export interface AssortmentFacet {
   $type: string;
@@ -328,6 +333,7 @@ export interface BrandRecommendationRequest {
   filters: FilterCollection;
   displayedAtLocationType: string;
   currency?: Currency | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -397,7 +403,7 @@ export type BrandUpdate = Trackable & {
   kind: "None" | "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
 };
 
-export type BrandView = Trackable & { user?: User | null; brand: Brand };
+export type BrandView = Trackable & { user?: User | null; brand: Brand; channel?: Channel | null };
 
 export type Cart = Trackable & {
   user?: User | null;
@@ -405,6 +411,7 @@ export type Cart = Trackable & {
   subtotal?: Money | null;
   lineItems?: LineItem[] | null;
   data?: Record<string, DataValue>;
+  channel?: Channel | null;
 };
 
 export type CartDataFilter = Filter & {
@@ -451,12 +458,36 @@ export type CategoryFacetResult = StringCategoryNameAndIdResultValueFacetResult 
   categorySelectionStrategy: "ImmediateParent" | "Ancestors";
 };
 
+export type CategoryHierarchyFacet = CategoryPathValueFacet & {
+  categorySelectionStrategy: "ImmediateParent" | "Ancestors";
+  selectedPropertiesSettings?:
+    | SelectedContentCategoryPropertiesSettings
+    | SelectedProductCategoryPropertiesSettings
+    | null;
+};
+
+export type CategoryHierarchyFacetResult = FacetResult & {
+  categorySelectionStrategy: "ImmediateParent" | "Ancestors";
+  nodes: CategoryHierarchyFacetResultCategoryNode[];
+};
+
+export interface CategoryHierarchyFacetResultCategoryNode {
+  category: ContentCategoryResult | ProductCategoryResult;
+
+  /** @format int32 */
+  hits: number;
+  parentId?: string | null;
+  children?: CategoryHierarchyFacetResultCategoryNode[] | null;
+  selected: boolean;
+}
+
 export interface CategoryIdFilter {
   $type: string;
   categoryIds?: string[] | null;
   evaluationScope: "ImmediateParent" | "ImmediateParentOrItsParent" | "Ancestor";
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export interface CategoryIndexConfiguration {
@@ -475,6 +506,7 @@ export interface CategoryLevelFilter {
   levels?: number[] | null;
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export interface CategoryNameAndId {
@@ -510,6 +542,13 @@ export interface CategoryPathResultDetails {
   breadcrumbPathStartingFromRoot?: CategoryNameAndId[] | null;
 }
 
+export interface CategoryPathValueFacet {
+  $type: string;
+  selected?: CategoryPath[] | null;
+  field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification";
+  settings?: FacetSettings | null;
+}
+
 export interface CategoryResult {
   $type: string;
   categoryId?: string | null;
@@ -528,6 +567,11 @@ export interface CategoryUpdate {
   $type: string;
   kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
   custom?: Record<string, string | null>;
+}
+
+export interface Channel {
+  name: string;
+  subChannel?: Channel | null;
 }
 
 export type ClearTextParser = Parser;
@@ -564,6 +608,8 @@ export type ContentAdministrativeAction = Trackable & {
 export type ContentAssortmentFacet = AssortmentFacet;
 
 export type ContentAssortmentFacetResult = AssortmentFacetResult;
+
+export type ContentAssortmentFilter = Filter & { assortments: number[] };
 
 export type ContentAttributeSorting = ContentSorting & {
   attribute: "Id" | "DisplayName";
@@ -657,6 +703,7 @@ export interface ContentCategoryRecommendationRequest {
   filters: FilterCollection;
   displayedAtLocationType: string;
   currency?: Currency | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -734,7 +781,7 @@ export type ContentCategorySearchSettings = SearchSettings & {
 
 export type ContentCategoryUpdate = CategoryUpdate & { category?: ContentCategory | null };
 
-export type ContentCategoryView = Trackable & { user?: User | null; idPath: string[] };
+export type ContentCategoryView = Trackable & { user?: User | null; idPath: string[]; channel?: Channel | null };
 
 export type ContentDataBooleanValueFacet = BooleanContentDataValueFacet;
 
@@ -780,6 +827,7 @@ export type ContentFacetQuery = FacetQuery & {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | CategoryHierarchyFacet
     | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
@@ -820,6 +868,7 @@ export interface ContentFacetResult {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | CategoryHierarchyFacetResult
         | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
@@ -883,6 +932,7 @@ export interface ContentRecommendationRequest {
   filters: FilterCollection;
   displayedAtLocationType: string;
   currency?: Currency | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -988,7 +1038,7 @@ export type ContentUpdate = Trackable & {
   kind: "UpdateAndAppend" | "ReplaceProvidedProperties" | "ClearAndReplace";
 };
 
-export type ContentView = Trackable & { user?: User | null; content: Content };
+export type ContentView = Trackable & { user?: User | null; content: Content; channel?: Channel | null };
 
 export type ContentsViewedAfterViewingContentRequest = ContentRecommendationRequest & { contentId: string };
 
@@ -1028,6 +1078,7 @@ export interface DataFilter {
   objectPath?: string[] | null;
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export interface DataIndexConfiguration {
@@ -1064,6 +1115,7 @@ export type DataObjectFacet = Facet & {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | CategoryHierarchyFacet
     | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
@@ -1107,6 +1159,7 @@ export type DataObjectFacetResult = FacetResult & {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | CategoryHierarchyFacetResult
         | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
@@ -1629,6 +1682,7 @@ export interface Filter {
   $type: string;
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export interface FilterCollection {
@@ -1639,6 +1693,7 @@ export interface FilterCollection {
         | BrandDataFilter
         | BrandIdFilter
         | CartDataFilter
+        | ContentAssortmentFilter
         | ContentCategoryAssortmentFilter
         | ContentCategoryDataFilter
         | ContentCategoryHasAncestorFilter
@@ -1678,6 +1733,19 @@ export interface FilterCollection {
 
 export type FilterRule = MerchandisingRule;
 
+export interface FilterScopeSettings {
+  $type: string;
+}
+
+export interface FilterScopes {
+  default?: ApplyFilterSettings | null;
+  fill?: ApplyFilterSettings | null;
+}
+
+export interface FilterSettings {
+  scopes?: FilterScopes | null;
+}
+
 export type FixedDoubleValueSelector = ValueSelector & { value: number };
 
 export type FixedPositionRule = MerchandisingRule & { position: number };
@@ -1712,6 +1780,7 @@ export interface HasAncestorCategoryFilter {
   categoryIds?: string[] | null;
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export type HasAuthenticatedIdCondition = UserCondition;
@@ -1721,6 +1790,7 @@ export interface HasChildCategoryFilter {
   categoryIds?: string[] | null;
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export type HasClassificationCondition = UserCondition & { key?: string | null; value?: string | null };
@@ -1742,6 +1812,7 @@ export interface HasParentCategoryFilter {
   categoryIds?: string[] | null;
   negated: boolean;
   custom?: Record<string, string>;
+  settings?: FilterSettings | null;
 }
 
 export type HasPlacedOrderCondition = UserCondition & { withinMinutes: number };
@@ -1977,6 +2048,7 @@ export type OrFilter = Filter & {
     | BrandDataFilter
     | BrandIdFilter
     | CartDataFilter
+    | ContentAssortmentFilter
     | ContentCategoryAssortmentFilter
     | ContentCategoryDataFilter
     | ContentCategoryHasAncestorFilter
@@ -2019,7 +2091,7 @@ export type Order = Trackable & {
   lineItems: LineItem[];
   orderNumber: string;
   cartName: string;
-  channel?: string | null;
+  channel?: Channel | null;
   subChannel?: string | null;
   trackingNumber?: string | null;
 };
@@ -2104,6 +2176,7 @@ export interface PaginatedSearchRequest {
   filters?: FilterCollection | null;
   indexSelector?: SearchIndexSelector | null;
   postFilters?: FilterCollection | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -2368,6 +2441,7 @@ export type ProductCategoryFacetQuery = FacetQuery & {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | CategoryHierarchyFacet
     | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
@@ -2408,6 +2482,7 @@ export interface ProductCategoryFacetResult {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | CategoryHierarchyFacetResult
         | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
@@ -2526,6 +2601,7 @@ export interface ProductCategoryRecommendationRequest {
   filters: FilterCollection;
   displayedAtLocationType: string;
   currency?: Currency | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -2637,7 +2713,7 @@ export interface ProductCategorySorting {
 
 export type ProductCategoryUpdate = CategoryUpdate & { category?: ProductCategory | null };
 
-export type ProductCategoryView = Trackable & { user?: User | null; idPath: string[] };
+export type ProductCategoryView = Trackable & { user?: User | null; idPath: string[]; channel?: Channel | null };
 
 export type ProductDataBooleanValueFacet = BooleanProductDataValueFacet;
 
@@ -2714,6 +2790,7 @@ export type ProductFacetQuery = FacetQuery & {
     | ProductCategoryAssortmentFacet
     | BrandFacet
     | CategoryFacet
+    | CategoryHierarchyFacet
     | ContentDataObjectFacet
     | ContentDataDoubleRangeFacet
     | ContentDataDoubleRangesFacet
@@ -2754,6 +2831,7 @@ export interface ProductFacetResult {
         | ProductCategoryAssortmentFacetResult
         | BrandFacetResult
         | CategoryFacetResult
+        | CategoryHierarchyFacetResult
         | ContentDataObjectFacetResult
         | ContentDataDoubleRangeFacetResult
         | ContentDataDoubleRangesFacetResult
@@ -2991,6 +3069,7 @@ export interface ProductRecommendationRequest {
   filters: FilterCollection;
   displayedAtLocationType: string;
   currency?: Currency | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -3187,7 +3266,12 @@ export type ProductVariantSpecificationSorting = ProductSorting & {
   mode: "Auto" | "Alphabetical" | "Numerical";
 };
 
-export type ProductView = Trackable & { user?: User | null; product: Product; variant?: ProductVariant | null };
+export type ProductView = Trackable & {
+  user?: User | null;
+  product: Product;
+  variant?: ProductVariant | null;
+  channel?: Channel | null;
+};
 
 export type ProductsViewedAfterViewingContentRequest = ProductRecommendationRequest & { contentId: string };
 
@@ -3228,6 +3312,7 @@ export interface RecommendationRequest {
   filters: FilterCollection;
   displayedAtLocationType: string;
   currency?: Currency | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -3433,6 +3518,7 @@ export interface SearchRequest {
   filters?: FilterCollection | null;
   indexSelector?: SearchIndexSelector | null;
   postFilters?: FilterCollection | null;
+  channel?: Channel | null;
   custom?: Record<string, string | null>;
 }
 
@@ -3499,7 +3585,12 @@ export interface SearchSettings {
   $type: string;
 }
 
-export type SearchTerm = Trackable & { language?: Language | null; user?: User | null; term?: string | null };
+export type SearchTerm = Trackable & {
+  language?: Language | null;
+  user?: User | null;
+  term?: string | null;
+  channel?: Channel | null;
+};
 
 export type SearchTermBasedProductRecommendationRequest = ProductRecommendationRequest & { term: string };
 
@@ -3557,7 +3648,8 @@ export interface SelectedBrandPropertiesSettings {
   dataKeys?: string[] | null;
 }
 
-export interface SelectedContentCategoryPropertiesSettings {
+export interface SelectedCategoryPropertiesSettings {
+  $type: string;
   displayName: boolean;
   paths: boolean;
   assortments: boolean;
@@ -3565,6 +3657,8 @@ export interface SelectedContentCategoryPropertiesSettings {
   allData: boolean;
   dataKeys?: string[] | null;
 }
+
+export type SelectedContentCategoryPropertiesSettings = SelectedCategoryPropertiesSettings;
 
 export interface SelectedContentPropertiesSettings {
   displayName: boolean;
@@ -3575,14 +3669,7 @@ export interface SelectedContentPropertiesSettings {
   dataKeys?: string[] | null;
 }
 
-export interface SelectedProductCategoryPropertiesSettings {
-  displayName: boolean;
-  paths: boolean;
-  assortments: boolean;
-  viewedByUserInfo: boolean;
-  allData: boolean;
-  dataKeys?: string[] | null;
-}
+export type SelectedProductCategoryPropertiesSettings = SelectedCategoryPropertiesSettings;
 
 export interface SelectedProductPropertiesSettings {
   displayName: boolean;

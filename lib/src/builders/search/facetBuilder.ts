@@ -1,4 +1,4 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 
@@ -8,6 +8,7 @@ export class FacetBuilder {
         | ProductAssortmentFacet
         | BrandFacet
         | CategoryFacet
+        | CategoryHierarchyFacet
         | ContentDataDoubleRangeFacet
         | ContentDataStringValueFacet
         | ContentDataBooleanValueFacet
@@ -38,6 +39,20 @@ export class FacetBuilder {
             field: 'Category',
             selected: selectedValues,
             settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: CategoryPath[] | null = null, facetSettings?: FacetSettings, selectedPropertiesSettings?: SelectedProductCategoryPropertiesSettings | SelectedContentCategoryPropertiesSettings | null): this {
+        const facet: CategoryHierarchyFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryHierarchyFacet, Relewise.Client',
+            categorySelectionStrategy: categorySelectionStrategy,
+            field: 'Category',
+            selected: selectedValues,
+            settings: facetSettings,
+            selectedPropertiesSettings: selectedPropertiesSettings,
         };
         this.facets.push(facet);
 

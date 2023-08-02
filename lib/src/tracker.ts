@@ -1,7 +1,7 @@
 import { RelewiseClient, RelewiseClientOptions } from './relewise.client';
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
-    TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest,
+    TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest, DataValue,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -16,7 +16,7 @@ export class Tracker extends RelewiseClient {
         orderNumber: string,
         /** @deprecated Use orderNumber instead. */
         trackingNumber?: string,
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[],
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], 
         cartName?: string
     }): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
@@ -40,7 +40,13 @@ export class Tracker extends RelewiseClient {
         });
     }
 
-    public async trackCart({ user, subtotal, lineItems, cartName = 'default' }: { user?: User, subtotal: { currency: string, amount: number }, lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], cartName?: string }): Promise<void | undefined> {
+    public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: { 
+        user?: User, 
+        subtotal: { currency: string, amount: number }, 
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], 
+        data?: Record<string, DataValue>, 
+        cartName?: string 
+    }): Promise<void | undefined> {
         return this.request<TrackCartRequest, void>('TrackCartRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackCartRequest, Relewise.Client',
             cart: {
@@ -56,6 +62,7 @@ export class Tracker extends RelewiseClient {
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
                 name: cartName,
                 user: user,
+                data: data,
             },
         });
     }

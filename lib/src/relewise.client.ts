@@ -37,7 +37,11 @@ export abstract class RelewiseClient {
         });
 
         try {
-            return await response.json() as TResponse;
+            const responseMessage = await response.json();
+            
+            if (response.ok) return responseMessage as TResponse;
+
+            throw responseMessage as ProblemDetailsError
         } catch(err) {
             return undefined;
         }
@@ -49,4 +53,13 @@ export abstract class RelewiseClient {
             ? baseUrl.concat(joinedSegments)
             : baseUrl.concat('/', joinedSegments);
     }
+}
+
+export interface ProblemDetailsError  {
+    type: string;
+    title: string;
+    status: number;
+    traceId: string;
+    detail?: string;
+    errors?: Record<string, string>;
 }

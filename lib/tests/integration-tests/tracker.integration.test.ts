@@ -171,7 +171,7 @@ test('Track Product View with invalid key', async() => {
         user: UserFactory.anonymous(),
     }).catch((e) => {
         expect(e).toBeDefined();
-        expect((e as ProblemDetailsError).details?.title ).toEqual('Unauthorized');
+        expect((e as ProblemDetailsError).details?.title).toEqual('Unauthorized');
         expect(e.message).toEqual('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.')
     });
 });

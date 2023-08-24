@@ -170,25 +170,29 @@ test('Track Product View with invalid key', async() => {
         productId: '2',
         user: UserFactory.anonymous(),
     }).catch((e) => {
-        console.log(e.message)
         expect(e).toBeDefined();
-        expect((e as ProblemDetailsError).title ).toEqual('Unauthorized1');
-        expect((e as any).fake ).toBeDefined();
-        expect(e).toMatch('error');
+        expect((e as ProblemDetailsError).details?.title ).toEqual('Unauthorized');
+        expect(e.message).toEqual('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.')
     });
 });
 
 test('Track Product View without id', async() => {
+    await expect(async() => {
+        return await tracker.trackProductView({
+            productId: null,
+            user: UserFactory.anonymous(),
+        } as any)
+    }).rejects.toThrow();
+});
 
+test('Track Product View without id', async() => {
     try {
         await tracker.trackProductView({
             productId: null,
             user: UserFactory.anonymous(),
         } as any);
-    } catch (e) {
-
+    }
+    catch (e) {
         expect(e).toBeDefined();
-        expect(e).toMatch('error');
-        
     }
 });

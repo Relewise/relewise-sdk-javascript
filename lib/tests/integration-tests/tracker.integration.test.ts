@@ -1,4 +1,5 @@
-import { DataValueFactory, Tracker, UserFactory } from '../../src';
+import { error  } from 'console';
+import { DataValueFactory, ProblemDetailsError, Tracker, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -19,10 +20,10 @@ test('Track Order', async() => {
                 productId: '2',
                 quantity: 1,
                 variantId: 'v1',
-            }        ],
+            }],
         subtotal: {
             amount: 100,
-            currency: 'DKK', 
+            currency: 'DKK',
         },
         orderNumber: '',
         trackingNumber: '',
@@ -50,7 +51,7 @@ test('Track Cart', async() => {
         ],
         subtotal: {
             amount: 100,
-            currency: 'DKK', 
+            currency: 'DKK',
         },
         user: UserFactory.anonymous(),
         data: { 'basketId': DataValueFactory.string('basketid') },
@@ -149,15 +150,49 @@ test('Track Search Term', async() => {
 });
 
 test('Track User Update', async() => {
-    const user = UserFactory.byTemporaryId('tempId', { 
-        email: 'integrationtests@relewise.com', 
+    const user = UserFactory.byTemporaryId('tempId', {
+        email: 'integrationtests@relewise.com',
         identifiers: {
             'emailIntegrationId': 'abc',
-        }});
+        },
+    });
 
     const result = await tracker.trackUserUpdate({
         user: user,
     });
 
     expect(result).toBeUndefined();
+});
+
+test('Track Product View with invalid key', async() => {
+
+    await new Tracker(DATASET_ID!, '12').trackProductView({
+        productId: '2',
+        user: UserFactory.anonymous(),
+    }).catch((e) => {
+        expect(e).toBeDefined();
+        expect((e as ProblemDetailsError).details?.title).toEqual('Unauthorized');
+        expect(e.message).toEqual('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.')
+    });
+});
+
+test('Track Product View without id', async() => {
+    await expect(async() => {
+        return await tracker.trackProductView({
+            productId: null,
+            user: UserFactory.anonymous(),
+        } as any)
+    }).rejects.toThrow();
+});
+
+test('Track Product View without id', async() => {
+    try {
+        await tracker.trackProductView({
+            productId: null,
+            user: UserFactory.anonymous(),
+        } as any);
+    }
+    catch (e) {
+        expect(e).toBeDefined();
+    }
 });

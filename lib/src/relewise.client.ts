@@ -5,6 +5,28 @@ export interface RelewiseClientOptions {
     serverUrl?: string;
 }
 
+export class ProblemDetailsError extends Error {
+    private _details?: HttpProblemDetails;
+
+    public get details(): HttpProblemDetails | undefined {
+        return this._details;
+    }
+
+    constructor(message: string, details?: HttpProblemDetails) {
+        super(message);
+        this._details = details;
+    }
+}
+
+export interface HttpProblemDetails {
+    type: string;
+    title: string;
+    status: number;
+    traceId: string;
+    detail?: string;
+    errors?: Record<string, string>;
+}
+
 export abstract class RelewiseClient {
     private readonly _serverUrl: string = 'https://api.relewise.com';
     private readonly _urlPath: string = 'v1';
@@ -36,9 +58,18 @@ export abstract class RelewiseClient {
             body: JSON.stringify(data),
         });
 
+        if (!response.ok) {
+            let responseMessage = null;
+            try { responseMessage = await response.json(); } catch (_) { console.log(responseMessage)}
+
+            throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);
+        }
+
         try {
-            return await response.json() as TResponse;
-        } catch(err) {
+            const responseMessage = await response.json();
+
+            return responseMessage as TResponse;
+        } catch (err) {
             return undefined;
         }
     }

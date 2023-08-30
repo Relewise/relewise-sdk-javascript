@@ -1,10 +1,12 @@
-import { ProductAttributeSorting, ProductDataSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductSortBySpecification, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '../../models/data-contracts';
+import { ProductAttributeSorting, ProductDataSorting, ProductDataObjectSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductSortBySpecification, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '../../models/data-contracts';
+import { DataObjectValueSelectorBuilder } from './dataObjectValueSelectorBuilder';
 
 export class ProductSortingBuilder {
     private value:
         | ProductAttributeSorting
         | ProductDataSorting
         | ProductPopularitySorting
+        | ProductDataObjectSorting
         | ProductRelevanceSorting
         | ProductVariantAttributeSorting
         | ProductVariantSpecificationSorting
@@ -17,6 +19,22 @@ export class ProductSortingBuilder {
             mode,
             order,
             key,
+            thenBy: this.thenBy(thenBy)?.value,
+        }
+
+        this.value = sort;
+    }
+
+    public sortByProductDataObject(selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', order: 'Ascending' | 'Descending', valueSelector: (valueSelector: DataObjectValueSelectorBuilder) => void, thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
+        const valueSelectorFactory = new DataObjectValueSelectorBuilder();
+        valueSelector(valueSelectorFactory);
+        
+        const sort: ProductDataObjectSorting = {
+            $type: 'Relewise.Client.DataTypes.Search.Sorting.Product.ProductDataObjectSorting, Relewise.Client',
+            dataSelectionStrategy: selectionStrategy,
+            mode,
+            order,
+            valueSelector: valueSelectorFactory.build(),
             thenBy: this.thenBy(thenBy)?.value,
         }
 

@@ -17,6 +17,9 @@ export class DataObjectValueSelectorBuilder {
         fallbackSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null
     })
     {
+        if (!key) 
+            throw new Error('DataObjectValueSelector key can\'t be null or empty')
+
         this.key = key;
         
         if (settings) {
@@ -52,6 +55,9 @@ export class DataObjectValueSelectorBuilder {
     }
 
     public build(): DataObjectValueSelector {
+        if (!this.key) 
+            throw new Error('DataObjectValueSelector key can\'t be null or empty - did you forget to use .select(\'key)?\'')
+    
         return {
             key: this.key,
             filter: this.filter,

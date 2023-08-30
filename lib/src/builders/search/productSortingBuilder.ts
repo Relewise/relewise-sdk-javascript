@@ -1,5 +1,5 @@
 import { ProductAttributeSorting, ProductDataSorting, ProductDataObjectSorting, ProductPopularitySorting, ProductRelevanceSorting, ProductSortBySpecification, ProductVariantAttributeSorting, ProductVariantSpecificationSorting } from '../../models/data-contracts';
-import { DataObjectValueSelectorFactory } from '../../factory/dataObjectValueSelector.factory';
+import { DataObjectValueSelectorBuilder } from './dataObjectValueSelectorBuilder';
 
 export class ProductSortingBuilder {
     private value:
@@ -25,8 +25,8 @@ export class ProductSortingBuilder {
         this.value = sort;
     }
 
-    public sortByProductDataObject(selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', order: 'Ascending' | 'Descending', valueSelector: (valueSelector: DataObjectValueSelectorFactory) => void, thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
-        const valueSelectorFactory = new DataObjectValueSelectorFactory();
+    public sortByProductDataObject(selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', order: 'Ascending' | 'Descending', valueSelector: (valueSelector: DataObjectValueSelectorBuilder) => void, thenBy?: (thenBy: ProductSortingBuilder) => void, mode: 'Auto' | 'Alphabetical' | 'Numerical' = 'Auto') {
+        const valueSelectorFactory = new DataObjectValueSelectorBuilder();
         valueSelector(valueSelectorFactory);
         
         const sort: ProductDataObjectSorting = {

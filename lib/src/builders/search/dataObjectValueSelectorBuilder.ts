@@ -1,7 +1,7 @@
 import { DataObjectFilter, DataObjectValueSelector } from 'src/models/data-contracts';
-import { DataObjectFilterConditionBuilder } from '../builders/dataObjectFilterConditionBuilder';
+import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 
-export class DataObjectValueSelectorFactory {
+export class DataObjectValueSelectorBuilder {
     private key!: string;
     private filter?: DataObjectFilter;
     private childSelector?: DataObjectValueSelector;
@@ -13,8 +13,8 @@ export class DataObjectValueSelectorFactory {
             skip?: number,
             take?: number 
         } | null, 
-        childSelector?: (childSelector: DataObjectValueSelectorFactory) => void | null,
-        fallbackSelector?: (childSelector: DataObjectValueSelectorFactory) => void | null
+        childSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null,
+        fallbackSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null
     })
     {
         this.key = key;
@@ -34,7 +34,7 @@ export class DataObjectValueSelectorFactory {
             }
     
             if (settings.childSelector) {
-                const childSelector = new DataObjectValueSelectorFactory();
+                const childSelector = new DataObjectValueSelectorBuilder();
                 if (settings?.childSelector) {
                     settings?.childSelector(childSelector);
                 }
@@ -42,7 +42,7 @@ export class DataObjectValueSelectorFactory {
             }
 
             if (settings.fallbackSelector) {
-                const fallbackSelector = new DataObjectValueSelectorFactory();
+                const fallbackSelector = new DataObjectValueSelectorBuilder();
                 if (settings?.fallbackSelector) {
                     settings?.fallbackSelector(fallbackSelector);
                 }

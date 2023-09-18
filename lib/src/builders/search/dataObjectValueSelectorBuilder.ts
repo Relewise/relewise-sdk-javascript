@@ -1,4 +1,4 @@
-import { DataObjectFilter, DataObjectValueSelector } from 'src/models/data-contracts';
+import { DataObjectFilter, DataObjectValueSelector } from '../..';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 
 export class DataObjectValueSelectorBuilder {

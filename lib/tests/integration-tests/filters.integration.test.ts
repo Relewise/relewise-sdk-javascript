@@ -41,12 +41,7 @@ test('Product Id filter', async() => {
 
 test('Product Variant Object Path filter', async() => {
 
-    const request: ProductSearchRequest = new ProductSearchBuilder({
-        language: 'en-US',
-        currency: 'USD',
-        displayedAtLocation: 'integration test - object path',
-        user: UserFactory.anonymous(),
-    })
+    const request: ProductSearchRequest = baseBuilder()
         .filters(f => f.addVariantDataFilter('avaliableMarkets', c => c.addGreaterThanCondition(1693526400 - 1), undefined, undefined, undefined,
             {
                 objectPath: ['US', 'ValidFromDate'],

@@ -10,7 +10,6 @@ export class FilterSettingsBuilder {
         return this;
     }
 
-
     public build(): FilterSettings | null {
         const scopes = this.scopesBuilder.build();
         return scopes

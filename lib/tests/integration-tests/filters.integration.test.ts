@@ -29,11 +29,28 @@ test('Product Assortment filter', async() => {
 test('Product Id filter', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .filters(f => f.addProductIdFilter(['1']))
+        .filters(f => f.addProductIdFilter(['1'])
+            .addVariantDataFilter('avaliableMarkets', c => c.addGreaterThanCondition(1693526400 - 1)))
         .pagination(p => p.setPageSize(20))
         .build();
 
     const result = await searcher.searchProducts(request);
 
     expect(result?.results?.length).toBe(1);
+});
+
+test('Product Variant Object Path filter', async() => {
+
+    const request: ProductSearchRequest = baseBuilder()
+        .filters(f => f.addVariantDataFilter('avaliableMarkets', c => c.addGreaterThanCondition(1693526400 - 1), undefined, undefined, undefined,
+            {
+                objectPath: ['US', 'ValidFromDate'],
+                filterSettings: s => s.scopes(sc => sc.fill({ apply: true }).default({ apply: false })),
+            }))
+        .pagination(p => p.setPageSize(20))
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.results?.length).toBe(20);
 });

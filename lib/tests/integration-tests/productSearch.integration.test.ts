@@ -26,14 +26,7 @@ test('ProductSearch: Relevance modifier without conditions', async() => {
 });
 
 test('Product search - data object facets', async() => {
-    var builder = new ProductSearchBuilder({
-        language: 'da',
-        currency: 'DKK',
-        displayedAtLocation: 'integration test - dataobjects',
-        user: UserFactory.anonymous(),
-    });
-
-    const request: ProductSearchRequest = builder
+    const request: ProductSearchRequest = baseProductBuilder()
         .facets(f => f.addProductDataObjectFacet(
             't',
             'Product',

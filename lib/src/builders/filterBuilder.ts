@@ -1,5 +1,11 @@
 import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAndVariantId, ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../models/data-contracts';
+import { FilterSettingsBuilder } from './filterSettingsBuilder';
 import { ConditionBuilder } from './conditionBuilder';
+
+export type EntityDataFilterOptions = {
+    objectPath?: string[],
+    filterSettings?: (builder: FilterSettingsBuilder) => void
+};
 
 export class FilterBuilder {
     private filters: (AndFilter
@@ -463,9 +469,12 @@ export class FilterBuilder {
      * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
-    public addProductDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+    public addProductDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
         conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ProductDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
@@ -474,6 +483,8 @@ export class FilterBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);
 
@@ -488,9 +499,12 @@ export class FilterBuilder {
      * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
-    public addVariantDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+    public addVariantDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
         conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: VariantDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantDataFilter, Relewise.Client',
@@ -499,6 +513,8 @@ export class FilterBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);
 
@@ -513,9 +529,12 @@ export class FilterBuilder {
      * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
-    public addBrandDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+    public addBrandDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
         conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: BrandDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.BrandDataFilter, Relewise.Client',
@@ -524,6 +543,8 @@ export class FilterBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);
 
@@ -563,9 +584,12 @@ export class FilterBuilder {
      * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
-    public addContentCategoryDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+    public addContentCategoryDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
         conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ContentCategoryDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentCategoryDataFilter, Relewise.Client',
@@ -574,6 +598,8 @@ export class FilterBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);
 
@@ -588,9 +614,12 @@ export class FilterBuilder {
      * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
-    public addContentDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+    public addContentDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
         conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ContentDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentDataFilter, Relewise.Client',
@@ -599,6 +628,8 @@ export class FilterBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);
 
@@ -613,9 +644,12 @@ export class FilterBuilder {
      * @param filterOutIfKeyIsNotFound 
      * @param negated 
      */
-    public addProductCategoryDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false): this {
+    public addProductCategoryDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
         conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ProductCategoryDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryDataFilter, Relewise.Client',
@@ -624,6 +658,8 @@ export class FilterBuilder {
             mustMatchAllConditions: mustMatchAllConditions,
             conditions: builder.build(),
             negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);
 
@@ -681,7 +717,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-    
+
         return this;
     }
 
@@ -697,7 +733,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-    
+
         return this;
     }
 
@@ -713,7 +749,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-        
+
         return this;
     }
 
@@ -729,7 +765,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-    
+
         return this;
     }
 
@@ -745,7 +781,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-    
+
         return this;
     }
 
@@ -761,7 +797,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-    
+
         return this;
     }
 
@@ -777,7 +813,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-        
+
         return this;
     }
 
@@ -793,7 +829,7 @@ export class FilterBuilder {
             negated: negated,
         };
         this.filters.push(filter);
-    
+
         return this;
     }
 

@@ -1,4 +1,6 @@
 export * from './settings';
+export * from './filterScopesBuilder';
+export * from './filterSettingsBuilder';
 export * from './dataObjectFilterConditionBuilder';
 export * from './filterBuilder';
 export * from './paginationBuilder';

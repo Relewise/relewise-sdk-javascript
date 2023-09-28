@@ -2,8 +2,8 @@ import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartD
 import { FilterSettingsBuilder } from './filterSettingsBuilder';
 import { ConditionBuilder } from './conditionBuilder';
 
-export type EntityDataFilterOptions =  {
-    objectPath?: string[], 
+export type EntityDataFilterOptions = {
+    objectPath?: string[],
     filterSettings?: (builder: FilterSettingsBuilder) => void
 };
 
@@ -474,7 +474,7 @@ export class FilterBuilder {
         conditionBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        if (options?.filterSettings) options?.filterSettings(internalSettingsBuilder);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ProductDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductDataFilter, Relewise.Client',
@@ -504,7 +504,7 @@ export class FilterBuilder {
         conditionBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        if (options?.filterSettings) options?.filterSettings(internalSettingsBuilder);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: VariantDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantDataFilter, Relewise.Client',
@@ -534,7 +534,7 @@ export class FilterBuilder {
         conditionBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        if (options?.filterSettings) options?.filterSettings(internalSettingsBuilder);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: BrandDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.BrandDataFilter, Relewise.Client',
@@ -589,7 +589,7 @@ export class FilterBuilder {
         conditionBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        if (options?.filterSettings) options?.filterSettings(internalSettingsBuilder);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ContentCategoryDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentCategoryDataFilter, Relewise.Client',
@@ -619,7 +619,7 @@ export class FilterBuilder {
         conditionBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        if (options?.filterSettings) options?.filterSettings(internalSettingsBuilder);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ContentDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentDataFilter, Relewise.Client',
@@ -649,7 +649,7 @@ export class FilterBuilder {
         conditionBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        if (options?.filterSettings) options?.filterSettings(internalSettingsBuilder);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ProductCategoryDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryDataFilter, Relewise.Client',

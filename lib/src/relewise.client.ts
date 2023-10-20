@@ -32,15 +32,14 @@ export abstract class RelewiseClient {
     private requestDictionary: { [requestUrl: string]: AbortController | null } = {};
     
     private ensureAbortSignal(requestUrl: string): AbortSignal {
-        let abortController = this.requestDictionary[requestUrl];
+        const abortController = this.requestDictionary[requestUrl];
         if (abortController) {
             abortController.abort();
         }
 
-        abortController = new AbortController();
-        this.requestDictionary[requestUrl] = abortController;
-
-        return abortController.signal;
+        const newAbortController = new AbortController();
+        this.requestDictionary[requestUrl] = newAbortController;
+        return newAbortController.signal;
     }
 
     private clearAbortSignal(requestUrl: string) {
@@ -81,7 +80,7 @@ export abstract class RelewiseClient {
                 'X-Relewise-Version': version.tag,
             },
             body: JSON.stringify(data),
-            ...(this._useCancellation && { signal: this.ensureAbortSignal(requestUrl) }),
+            signal: this._useCancellation ? this.ensureAbortSignal(requestUrl) : undefined,
         });
 
         if (!response.ok) {
@@ -105,6 +104,10 @@ export abstract class RelewiseClient {
             return responseMessage as TResponse;
         } catch (err) {
             return undefined;
+        } finally {
+            if (this._useCancellation) {
+                this.clearAbortSignal(requestUrl);
+            }
         }
     }
 

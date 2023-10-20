@@ -6,7 +6,14 @@ export interface RelewiseClientOptions {
 }
 
 export interface RelewiseRequestOptions {
-    abortSignal?: AbortSignal
+    /**
+     * Enables cancellation support for this specific request with this specific key.
+     * If multiple requests are made before a response is received, the previous requests
+     * with this key will be cancelled.
+     *
+     * @param {cancellationKey} the unique key that will enable cancellation support for this specific request.
+     */
+    cancellationKey?: string
 }
 
 export class ProblemDetailsError extends Error {
@@ -32,10 +39,27 @@ export interface HttpProblemDetails {
 }
 
 export abstract class RelewiseClient {
+    private requestDictionary: { [key: string]: AbortController | null } = {};
+    
+    private ensureAbortSignal(key: string): AbortSignal {
+        let abortController = this.requestDictionary[key];
+        if (abortController) {
+            abortController.abort();
+        }
+
+        abortController = new AbortController();
+        this.requestDictionary[key] = abortController;
+        return abortController.signal;
+    }
+
+    private clearAbortSignal(key: string) {
+        this.requestDictionary[key] = null;
+        delete this.requestDictionary[key];
+    }
+
     private readonly _serverUrl: string = 'https://api.relewise.com';
     private readonly _urlPath: string = 'v1';
     private readonly _apiKeyHeader: string;
-    private readonly _useCancellation: boolean = false;
 
     constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
         if (!datasetId) throw new Error('Dataset id cannot be null or empty. Please contact Relewise if you don\'t have an account already or would like a free demo license');
@@ -63,7 +87,7 @@ export abstract class RelewiseClient {
                 'X-Relewise-Version': version.tag,
             },
             body: JSON.stringify(data),
-            signal: options?.abortSignal,
+            signal: options?.cancellationKey ? this.ensureAbortSignal(options.cancellationKey) : undefined,
         });
 
         if (!response.ok) {
@@ -72,6 +96,10 @@ export abstract class RelewiseClient {
                 responseMessage = await response.json();
             } catch (_) { 
                 console.log(responseMessage)
+            } finally {
+                if (options?.cancellationKey) {
+                    this.clearAbortSignal(options.cancellationKey);
+                }
             }
 
             throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);
@@ -83,6 +111,10 @@ export abstract class RelewiseClient {
             return responseMessage as TResponse;
         } catch (err) {
             return undefined;
+        } finally {
+            if (options?.cancellationKey) {
+                this.clearAbortSignal(options.cancellationKey);
+            }
         }
     }
 

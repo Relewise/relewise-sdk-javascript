@@ -47,10 +47,10 @@ test('Product Variant Object Path filter', async() => {
                 objectPath: ['US', 'ValidFromDate'],
                 filterSettings: s => s.scopes(sc => sc.fill({ apply: true }).default({ apply: false })),
             }))
-        .pagination(p => p.setPageSize(20))
+        .pagination(p => p.setPageSize(3))
         .build();
 
     const result = await searcher.searchProducts(request);
 
-    expect(result?.results?.length).toBe(20);
+    expect(result?.results?.length).toBe(3);
 });

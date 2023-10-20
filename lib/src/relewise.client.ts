@@ -3,7 +3,10 @@ import version from './version';
 
 export interface RelewiseClientOptions {
     serverUrl?: string;
-    useCancellation?: boolean;
+}
+
+export interface RelewiseRequestOptions {
+    abortSignal?: AbortSignal
 }
 
 export class ProblemDetailsError extends Error {
@@ -29,24 +32,6 @@ export interface HttpProblemDetails {
 }
 
 export abstract class RelewiseClient {
-    private requestDictionary: { [requestUrl: string]: AbortController | null } = {};
-    
-    private ensureAbortSignal(requestUrl: string): AbortSignal {
-        const abortController = this.requestDictionary[requestUrl];
-        if (abortController) {
-            abortController.abort();
-        }
-
-        const newAbortController = new AbortController();
-        this.requestDictionary[requestUrl] = newAbortController;
-        return newAbortController.signal;
-    }
-
-    private clearAbortSignal(requestUrl: string) {
-        this.requestDictionary[requestUrl] = null;
-        delete this.requestDictionary[requestUrl];
-    }
-
     private readonly _serverUrl: string = 'https://api.relewise.com';
     private readonly _urlPath: string = 'v1';
     private readonly _apiKeyHeader: string;
@@ -61,15 +46,13 @@ export abstract class RelewiseClient {
         if (options?.serverUrl) {
             this._serverUrl = options.serverUrl;
         }
-
-        this._useCancellation = options?.useCancellation ?? false;
     }
 
     public get serverUrl(): string {
         return this._serverUrl;
     }
 
-    protected async request<TRequest, TResponse>(name: string, data: TRequest): Promise<TResponse | undefined> {
+    protected async request<TRequest, TResponse>(name: string, data: TRequest, options?: RelewiseRequestOptions): Promise<TResponse | undefined> {
         const requestUrl = this.createRequestUrl(this._serverUrl, this.datasetId, this._urlPath, name);
 
         const response = await fetch(requestUrl, {
@@ -80,7 +63,7 @@ export abstract class RelewiseClient {
                 'X-Relewise-Version': version.tag,
             },
             body: JSON.stringify(data),
-            signal: this._useCancellation ? this.ensureAbortSignal(requestUrl) : undefined,
+            signal: options?.abortSignal,
         });
 
         if (!response.ok) {
@@ -89,10 +72,6 @@ export abstract class RelewiseClient {
                 responseMessage = await response.json();
             } catch (_) { 
                 console.log(responseMessage)
-            } finally {
-                if (this._useCancellation) {
-                    this.clearAbortSignal(requestUrl);
-                }
             }
 
             throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);
@@ -104,10 +83,6 @@ export abstract class RelewiseClient {
             return responseMessage as TResponse;
         } catch (err) {
             return undefined;
-        } finally {
-            if (this._useCancellation) {
-                this.clearAbortSignal(requestUrl);
-            }
         }
     }
 

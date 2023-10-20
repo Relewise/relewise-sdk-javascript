@@ -10,8 +10,6 @@ export interface RelewiseRequestOptions {
      * Enables cancellation support for this specific request with this specific key.
      * If multiple requests are made before a response is received, the previous requests
      * with this key will be cancelled.
-     *
-     * @param {cancellationKey} the unique key that will enable cancellation support for this specific request.
      */
     cancellationKey?: string
 }

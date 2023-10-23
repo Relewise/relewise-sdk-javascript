@@ -1,4 +1,4 @@
-import { RelewiseClient, RelewiseClientOptions } from './relewise.client';
+import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions } from './relewise.client';
 import { 
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
     TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest, DataValue,
@@ -18,7 +18,7 @@ export class Tracker extends RelewiseClient {
         trackingNumber?: string,
         lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], 
         cartName?: string
-    }): Promise<void | undefined> {
+    }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackOrderRequest, Relewise.Client',
             order: {
@@ -37,7 +37,7 @@ export class Tracker extends RelewiseClient {
                 cartName: cartName,
                 user: user,
             },
-        });
+        }, options);
     }
 
     public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: { 
@@ -46,7 +46,7 @@ export class Tracker extends RelewiseClient {
         lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], 
         data?: Record<string, DataValue>, 
         cartName?: string 
-    }): Promise<void | undefined> {
+    }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackCartRequest, void>('TrackCartRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackCartRequest, Relewise.Client',
             cart: {
@@ -64,10 +64,10 @@ export class Tracker extends RelewiseClient {
                 user: user,
                 data: data,
             },
-        });
+        }, options);
     }
 
-    public async trackProductView({ productId, variantId, user }: { productId: string, variantId?: string, user: User }): Promise<void | undefined> {
+    public async trackProductView({ productId, variantId, user }: { productId: string, variantId?: string, user: User }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackProductViewRequest, void>('TrackProductViewRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackProductViewRequest, Relewise.Client',
             productView: {
@@ -78,10 +78,10 @@ export class Tracker extends RelewiseClient {
                 ...(variantId && { variant: { id: variantId }}),
                 user: user,
             },
-        });
+        }, options);
     }
 
-    public async trackProductCategoryView({ idPath, user }: { idPath: string[], user: User }): Promise<void | undefined> {
+    public async trackProductCategoryView({ idPath, user }: { idPath: string[], user: User }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackProductCategoryViewRequest, void>('TrackProductCategoryViewRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackProductCategoryViewRequest, Relewise.Client',
             productCategoryView: {
@@ -89,10 +89,10 @@ export class Tracker extends RelewiseClient {
                 idPath: idPath,
                 user: user,
             },
-        });
+        }, options);
     }
 
-    public async trackContentView({ contentId, user }: { contentId: string, user: User }): Promise<void | undefined> {
+    public async trackContentView({ contentId, user }: { contentId: string, user: User }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackContentViewRequest, void>('TrackContentViewRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackContentViewRequest, Relewise.Client',
             contentView: {
@@ -102,10 +102,10 @@ export class Tracker extends RelewiseClient {
                 },
                 user: user,
             },
-        });
+        }, options);
     }
 
-    public async trackContentCategoryView({ idPath, user }: { idPath: string[], user: User }): Promise<void | undefined> {
+    public async trackContentCategoryView({ idPath, user }: { idPath: string[], user: User }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackContentCategoryViewRequest, void>('TrackContentCategoryViewRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackContentCategoryViewRequest, Relewise.Client',
             contentCategoryView: {
@@ -113,10 +113,10 @@ export class Tracker extends RelewiseClient {
                 idPath: idPath,
                 user: user,
             },
-        });
+        }, options);
     }
 
-    public async trackBrandView({ brandId, user }: { brandId: string, user: User }): Promise<void | undefined> {
+    public async trackBrandView({ brandId, user }: { brandId: string, user: User }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackBrandViewRequest, void>('TrackBrandViewRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackBrandViewRequest, Relewise.Client',
             brandView: {
@@ -126,10 +126,10 @@ export class Tracker extends RelewiseClient {
                 },
                 user: user,
             },
-        });
+        }, options);
     }
 
-    public async trackSearchTerm({ term, language, user }: { term: string, user: User, language: string }): Promise<void | undefined> {
+    public async trackSearchTerm({ term, language, user }: { term: string, user: User, language: string }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackSearchTermRequest, void>('TrackSearchTermRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackSearchTermRequest, Relewise.Client',
             searchTerm: {
@@ -140,10 +140,10 @@ export class Tracker extends RelewiseClient {
                 term: term,
                 user: user,
             },
-        });
+        }, options);
     }
 
-    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }): Promise<void | undefined> {
+    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackUserUpdateRequest, void>('TrackUserUpdateRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackUserUpdateRequest, Relewise.Client',
             userUpdate: {
@@ -151,6 +151,6 @@ export class Tracker extends RelewiseClient {
                 user: user,
                 kind: updateKind,
             },
-        });
+        }, options);
     }
 }

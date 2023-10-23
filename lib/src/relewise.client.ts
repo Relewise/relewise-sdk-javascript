@@ -70,7 +70,6 @@ export abstract class RelewiseClient {
             try { 
                 responseMessage = await response.json();
             } catch (_) { 
-                console.log(responseMessage)
             }
 
             throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);

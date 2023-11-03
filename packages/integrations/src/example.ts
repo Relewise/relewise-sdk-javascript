@@ -7,7 +7,9 @@ async function example() {
     const product: ProductUpdateBuilder = createProduct('1');
 
     const integrator = new Integrator('dataset', 'api-key', { serverUrl: 'url' });
-
+    
+    integrator.batchSize = 5;
+    
     await integrator.updateProduct(product.build())
     await integrator.batch([
         createProduct('2').build(), 

@@ -9,7 +9,7 @@ module.exports = {
     },
     transformIgnorePatterns: [
         'node_modules/(?!(@relewise)/)',
-        '../lib/dist/cjs/relewise-client.js',
+        '../lib/dist/cjs/relewise-integrations.js',
     ],
     globals: {
         'ts-jest': {

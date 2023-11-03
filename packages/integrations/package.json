@@ -1,7 +1,7 @@
 {
   "name": "@relewise/integrations",
-  "version": "1.20.0",
-  "description": "Relewise is a next generation personalization SaaS-platform, which offers functionality within product- and content recommendations and personalized search. This official SDK helps you interact with our API.",
+  "version": "1.0.0-alpha.1",
+  "description": "Helper for updating entities in Relewise",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Relewise/relewise-sdk-javascript.git",
@@ -54,8 +54,5 @@
     "tslib": "^2.4.0",
     "typescript": "^4.6.4",
     "@typescript-eslint/parser": "^5.34.0"
-  },
-  "dependencies": {
-    "cross-fetch": "^3.1.5"
   }
 }

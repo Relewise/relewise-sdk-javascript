@@ -6,6 +6,7 @@ export class ProductUpdateBuilder {
     private variantUpdateKind: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace';
     private brandUpdateKind: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace' | null | undefined;
     private replaceExistingVariants: boolean;
+    private productVariants: ProductVariant[] | null | undefined;
 
     constructor({ id, productUpdateKind, brandUpdateKind, variantUpdateKind = 'UpdateAndAppend', replaceExistingVariants = true }: {
         id: string,
@@ -33,17 +34,47 @@ export class ProductUpdateBuilder {
         return this;
     }
 
-    variants(variants: ProductVariant[]): this { return this; }
-    categoryPaths(categories: CategoryPath[]): this { return this; }
-    assortments(assortments: number[]): this { return this; }
-    listPrice(listPrice: MultiCurrencyDataValue): this { return this; }
-    salesPrice(salesPrice: MultiCurrencyDataValue): this { return this; }
-    brand(brand: Brand): this { return this; }
+    variants(variants: ProductVariant[]): this {
+        this.productVariants = variants;
+
+        return this;
+    }
+
+    categoryPaths(categories: CategoryPath[]): this {
+        this.product.categoryPaths = categories;
+
+        return this;
+    }
+
+    assortments(assortments: number[]): this {
+        this.product.assortments = assortments;
+
+        return this;
+    }
+
+    listPrice(listPrice: MultiCurrencyDataValue): this {
+        this.product.listPrice = listPrice.value;
+
+        return this;
+    }
+
+    salesPrice(salesPrice: MultiCurrencyDataValue): this {
+        this.product.salesPrice = salesPrice.value;
+
+        return this;
+    }
+
+    brand(brand: Brand): this {
+        this.product.brand = brand;
+
+        return this;
+    }
 
     build(): ProductUpdate {
         return {
             $type: 'Relewise.Client.DataTypes.ProductUpdate, Relewise.Client',
             product: this.product,
+            variants: this.productVariants,
             productUpdateKind: this.productUpdateKind,
             variantUpdateKind: this.variantUpdateKind,
             brandUpdateKind: this.brandUpdateKind,

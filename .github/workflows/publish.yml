@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./lib
+        working-directory: ./packages/client
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -20,7 +20,7 @@ jobs:
       - name: Update version
         uses: brettdorrans/write-version-to-file@master
         with:
-          filename: './lib/src/version.ts'
+          filename: './packages/client/src/version.ts'
           placeholder: '${VERSION}'
       - run: npm ci
       - run: npm run publish

@@ -8,7 +8,7 @@ module.exports = {
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         indent: ['error', 4],
         quotes: ['error', 'single'],
-        semi: 0,
+        semi: ['error', 'always'],
         'no-extra-semi': 0,
         'comma-dangle': ['error', 'always-multiline'], // Reasoning behind using dangling commas -> https://github.com/airbnb/javascript#commas--dangling
         'no-useless-constructor': 'off', 
@@ -20,8 +20,7 @@ module.exports = {
         'space-before-function-paren': ['error', 'never'],
     },
     parser: '@typescript-eslint/parser',
-    parserOptions: {
-        
+    parserOptions: {     
         'ecmaVersion': 'latest',
         'sourceType': 'module',
     },

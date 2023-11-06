@@ -1,4 +1,4 @@
-import { Product, MultilingualDataValue, DataValue, ProductVariant, CategoryPath, MultiCurrencyDataValue, Brand, ProductUpdate } from '@relewise/client';
+import { Product, DataValue, ProductVariant, CategoryPath, Brand, ProductUpdate } from '@relewise/client';
 
 export class ProductUpdateBuilder {
     private product: Product;
@@ -22,14 +22,19 @@ export class ProductUpdateBuilder {
         this.brandUpdateKind = brandUpdateKind;
     }
 
-    displayName(name: MultilingualDataValue): this {
-        this.product.displayName = name.value;
+    displayName(values: {
+        value: string;
+        language: string;
+    }[]): this {
+        this.product.displayName = { 
+            values: values.map(x => ({ text: x.value, language: { value: x.language } })), 
+        };
 
         return this;
     }
 
-    data(data: Record<string, DataValue>): this {
-        this.product.data = data;
+    data(data: Record<string, DataValue | null>): this {
+        this.product.data = data as Record<string, DataValue>; // TODO remove dirty hack
 
         return this;
     }
@@ -52,14 +57,20 @@ export class ProductUpdateBuilder {
         return this;
     }
 
-    listPrice(listPrice: MultiCurrencyDataValue): this {
-        this.product.listPrice = listPrice.value;
+    listPrice(values: {
+        amount: number;
+        currency: string;
+    }[]): this {
+        this.product.listPrice = { values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })) };
 
         return this;
     }
 
-    salesPrice(salesPrice: MultiCurrencyDataValue): this {
-        this.product.salesPrice = salesPrice.value;
+    salesPrice(values: {
+        amount: number;
+        currency: string;
+    }[]): this {
+        this.product.salesPrice = { values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })) };
 
         return this;
     }

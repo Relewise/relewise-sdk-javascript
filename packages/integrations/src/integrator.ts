@@ -22,7 +22,7 @@ export class Integrator extends RelewiseClient {
         return this.request<TrackProductAdministrativeActionRequest, void>(
             'TrackProductAdministrativeActionRequest',
             {
-                $type: 'Relewise.Client.Requests.Tracking.ProductAdministrativeAction, Relewise.Client',
+                $type: 'Relewise.Client.Requests.Tracking.TrackProductAdministrativeActionRequest, Relewise.Client',
                 administrativeAction: request,
             },
             options);

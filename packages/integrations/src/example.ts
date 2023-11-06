@@ -13,7 +13,7 @@ async function example() {
     
     integrator.batchSize = 5;
 
-    await integrator.updateProduct(product.build())
+    await integrator.updateProduct(product.build());
     
     const enable = new ProductAdministrativeActionBuilder({
         language: null,
@@ -42,11 +42,12 @@ function createProduct(id: string, unix: number) {
         id: id,
         productUpdateKind: 'ReplaceProvidedProperties',
     })
-        .displayName(DataValueFactory.multilingual([{ language: 'da', value: 'product navn' }]))
+        .displayName([{ language: 'da', value: 'product navn' }])
         .data({
             'ProductType': DataValueFactory.string('Bluse'),
             'Description': DataValueFactory.string('Flot blå bluse som er top nice'),
             'UnixTimeStamp': DataValueFactory.number(unix),
+            'Removed': null,
         })
-        .salesPrice(DataValueFactory.multiCurrency([{ currency: 'DKK', amount: 499.95 }]));
+        .salesPrice([{ currency: 'DKK', amount: 499.95 }]);
 }

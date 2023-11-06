@@ -1,4 +1,4 @@
-import { MultilingualDataValue, DataValue, ProductVariant, MultiCurrencyDataValue } from '@relewise/client';
+import { DataValue, ProductVariant } from '@relewise/client';
 
 export class ProductVariantBuilder {
     private variant: ProductVariant;
@@ -9,14 +9,19 @@ export class ProductVariantBuilder {
         this.variant = { id: id };
     }
 
-    displayName(name: MultilingualDataValue): this {
-        this.variant.displayName = name.value;
+    displayName(values: {
+        value: string;
+        language: string;
+    }[]): this {
+        this.variant.displayName = { 
+            values: values.map(x => ({ text: x.value, language: { value: x.language } })), 
+        };
 
         return this;
     }
 
-    data(data: Record<string, DataValue>): this {
-        this.variant.data = data;
+    data(data: Record<string, DataValue | null>): this {
+        this.variant.data = data as Record<string, DataValue>; // TODO remove dirty hack
 
         return this;
     }
@@ -27,14 +32,20 @@ export class ProductVariantBuilder {
         return this;
     }
 
-    listPrice(listPrice: MultiCurrencyDataValue): this {
-        this.variant.listPrice = listPrice.value;
+    listPrice(values: {
+        amount: number;
+        currency: string;
+    }[]): this {
+        this.variant.listPrice = { values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })) };
 
         return this;
     }
 
-    salesPrice(salesPrice: MultiCurrencyDataValue): this {
-        this.variant.salesPrice = salesPrice.value;
+    salesPrice(values: {
+        amount: number;
+        currency: string;
+    }[]): this {
+        this.variant.salesPrice = { values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })) };
 
         return this;
     }

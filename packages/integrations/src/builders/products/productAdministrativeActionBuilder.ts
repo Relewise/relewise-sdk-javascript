@@ -31,7 +31,7 @@ export class ProductAdministrativeActionBuilder {
     build(): ProductAdministrativeAction {
         const filters = this.filterBuilder.build();
 
-        if (!filters) {
+        if (!filters || !filters.items || filters.items.length === 0) {
             throw new Error('No filters was provided for the product administrative action');
         }
 

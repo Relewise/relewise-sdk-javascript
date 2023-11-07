@@ -10,8 +10,11 @@ async function example() {
     const product: ProductUpdateBuilder = createProduct('1', unix);
 
     const integrator = new Integrator('dataset', 'api-key', { serverUrl: 'url' });
+    const updater = new Integrator('dataset', 'api-key', { serverUrl: 'url' });
+    const cataloger = new Integrator('dataset', 'api-key', { serverUrl: 'url' });
+    const registrar = new Integrator('dataset', 'api-key', { serverUrl: 'url' });
     
-    integrator.batchSize = 5;
+    integrator.batchSize = 1;
 
     await integrator.updateProduct(product.build());
     
@@ -21,13 +24,13 @@ async function example() {
         filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unix))),
         productUpdateKind: 'Enable',
     });
-    integrator.productAdministrativeAction(enable.build());
+    //integrator.productAdministrativeAction(enable.build());
 
     const disable = new ProductAdministrativeActionBuilder({
         filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unix), /* negated: */ true)),
         productUpdateKind: 'Disable',
     });
-    integrator.productAdministrativeAction(disable.build());
+    //integrator.productAdministrativeAction(disable.build());
 
     await integrator.batch([
         createProduct('2', unix).build(), 
@@ -35,6 +38,11 @@ async function example() {
         enable.build(),
         disable.build(),
     ]);
+
+    await integrator.updateProduct(product.build());
+    await updater.updateProduct(product.build());
+    await cataloger.updateProduct(product.build());
+    await registrar.updateProduct(product.build());
 }
 
 function createProduct(id: string, unix: number) {

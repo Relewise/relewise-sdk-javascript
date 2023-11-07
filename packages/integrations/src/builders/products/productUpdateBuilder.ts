@@ -1,4 +1,14 @@
-import { Product, DataValue, ProductVariant, CategoryPath, Brand, ProductUpdate } from '@relewise/client';
+import { Product, DataValue, ProductVariant, Brand, ProductUpdate } from '@relewise/client';
+
+export type ProductCategoryPath = {
+    path: {
+        id: string;
+        displayName: {
+            value: string;
+            language: string;
+        }[]
+    }[]
+};
 
 export class ProductUpdateBuilder {
     private product: Product;
@@ -26,8 +36,8 @@ export class ProductUpdateBuilder {
         value: string;
         language: string;
     }[]): this {
-        this.product.displayName = { 
-            values: values.map(x => ({ text: x.value, language: { value: x.language } })), 
+        this.product.displayName = {
+            values: values.map(x => ({ text: x.value, language: { value: x.language } })),
         };
 
         return this;
@@ -45,8 +55,18 @@ export class ProductUpdateBuilder {
         return this;
     }
 
-    categoryPaths(categories: CategoryPath[]): this {
-        this.product.categoryPaths = categories;
+    /**
+     * Add multiple category paths to a product. Start from the root to the lowest child. Example: Tools -> Outdoor -> Shovel
+     * @param paths 
+     * @returns 
+     */
+    categoryPaths(paths: ProductCategoryPath[]): this {
+        this.product.categoryPaths = paths.map(p => ({
+            breadcrumbPathStartingFromRoot: p.path.map(path => ({
+                id: path.id, 
+                displayName: { values: path.displayName.map(x => ({ text: x.value, language: { value: x.language } })) },
+            })),
+        }));
 
         return this;
     }
@@ -57,19 +77,13 @@ export class ProductUpdateBuilder {
         return this;
     }
 
-    listPrice(values: {
-        amount: number;
-        currency: string;
-    }[]): this {
+    listPrice(values: { amount: number;  currency: string; }[]): this {
         this.product.listPrice = { values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })) };
 
         return this;
     }
 
-    salesPrice(values: {
-        amount: number;
-        currency: string;
-    }[]): this {
+    salesPrice(values: { amount: number; currency: string; }[]): this {
         this.product.salesPrice = { values: values.map(x => ({ amount: x.amount, currency: { value: x.currency } })) };
 
         return this;

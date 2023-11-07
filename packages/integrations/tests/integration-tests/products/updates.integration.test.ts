@@ -12,6 +12,7 @@ test('Create Product', async() => {
         id: '1234',
         productUpdateKind: 'ReplaceProvidedProperties',
         variantUpdateKind: 'ReplaceProvidedProperties',
+        replaceExistingVariants: true,
     })
         .displayName([
             { language: 'da', value: 'Toaster' },
@@ -21,11 +22,26 @@ test('Create Product', async() => {
             'Description': DataValueFactory.string('Really nice product'),
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
+            'Removed': null,
         })
         .assortments([1, 2, 3])
         .brand({ id: '1', displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
-        .salesPrice([{ amount: 50, currency: 'DKK' }]);
+        .salesPrice([{ amount: 50, currency: 'DKK' }])
+        .categoryPaths([{
+            path: [{
+                id: '1',
+                displayName: [{ language: 'da', value: 'Værktøj' }],
+            },
+            {
+                id: '2',
+                displayName: [{ language: 'da', value: 'Udendørs' }],
+            },
+            {
+                id: '3',
+                displayName: [{ language: 'da', value: 'Skovle' }],
+            }],
+        }]);
 
     await integrator.updateProduct(product.build());
 
@@ -44,7 +60,7 @@ test('Create Product', async() => {
 
 test('Batch create products', async() => {
     const product = new ProductUpdateBuilder({
-        id: '1234',
+        id: '12345',
         productUpdateKind: 'ReplaceProvidedProperties',
         variantUpdateKind: 'ReplaceProvidedProperties',
     })

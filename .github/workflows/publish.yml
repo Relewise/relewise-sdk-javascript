@@ -16,7 +16,7 @@ jobs:
           registry-url: https://registry.npmjs.com/
           scope: '@relewise'
 
-     - name: Calculate environment variables
+      - name: Calculate environment variables
         run: |
           echo "TAG_NAME=$(github.event.tag_name)"
           echo "PACKAGE_PATH=$(github.event.tag_name.split('@')[0])" >> $GITHUB_ENV

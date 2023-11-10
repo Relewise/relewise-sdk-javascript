@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "es6",
+    "baseUrl": ".",
+    "lib": ["es5", "es6", "dom", "esnext"],
+    // This causes issues when creating index.d.ts
+    // "paths": {
+    //   "@/*": [
+    //     "src/*"
+    //   ],
+    // }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "environment.d.ts"
+  ],
+  "exclude": [
+    "node_modules", 
+    "build",
+    "dist",
+    "src/models/data-contracts.ts"
+  ],
+}

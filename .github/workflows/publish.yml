@@ -24,7 +24,6 @@ jobs:
         run: |
           echo 'TAG_NAME=${{ steps.get-latest-tag.outputs.tag }}'
           echo 'PACKAGE_PATH=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 1 >> $GITHUB_ENV
-          echo 'PACKAGE_VERSION=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 2 >> $GITHUB_ENV
 
       - uses: brettdorrans/write-version-to-file@master
         if: ${{ env.PACKAGE_PATH == 'client' }} 

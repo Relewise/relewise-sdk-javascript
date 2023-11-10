@@ -55,13 +55,13 @@ test('Create Product', async() => {
         filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
-    await integrator.productAdministrativeAction(enable.build());
+    await integrator.executeProductAdministrativeAction(enable.build());
 
     const disable = new ProductAdministrativeActionBuilder({
         filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
         productUpdateKind: 'Disable',
     });
-    await integrator.productAdministrativeAction(disable.build());
+    await integrator.executeProductAdministrativeAction(disable.build());
 });
 
 test('Batch create products', async() => {

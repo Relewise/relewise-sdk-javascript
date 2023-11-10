@@ -18,7 +18,7 @@ export class Integrator extends RelewiseClient {
             options);
     }
 
-    public async productAdministrativeAction(request: ProductAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+    public async executeProductAdministrativeAction(request: ProductAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackProductAdministrativeActionRequest, void>(
             'TrackProductAdministrativeActionRequest',
             {

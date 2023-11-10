@@ -18,9 +18,9 @@ jobs:
 
       - name: Calculate environment variables
         run: |
-          echo "TAG_NAME=$(github.event.tag_name)"
-          echo "PACKAGE_PATH=$(github.event.tag_name.split('@')[0])" >> $GITHUB_ENV
-          echo "VERSION=$(github.event.tag_name.split('@')[1])" >> $GITHUB_ENV
+          echo "TAG_NAME=$(github.event.release.tag_name)"
+          echo "PACKAGE_PATH=$(github.event.release.tag_name | cut -d '@' -f 1)" >> $GITHUB_ENV
+          echo "VERSION=$(github.event.release.tag_name | cut -d '@' -f 2)" >> $GITHUB_ENV
 
       - uses: brettdorrans/write-version-to-file@master
         if: ${{ env.PACKAGE_PATH == 'client' }} 

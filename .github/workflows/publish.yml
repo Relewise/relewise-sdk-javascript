@@ -32,12 +32,12 @@ jobs:
           placeholder: '${VERSION}'
          
       - run: npm ci
-         env:
-           working-directory: ./packages/${ PACKAGE_PATH }
+        env:
+          working-directory: ./packages/${ PACKAGE_PATH }
 
       - run: npm run publish
-         env:
-           working-directory: ./packages/${ PACKAGE_PATH }
+        env:
+          working-directory: ./packages/${ PACKAGE_PATH }
 
       - run: npm publish --access public
         env:

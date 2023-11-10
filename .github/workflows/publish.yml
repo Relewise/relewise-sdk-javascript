@@ -7,23 +7,36 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/client
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           registry-url: https://registry.npmjs.com/
           scope: '@relewise'
-      - name: Update version
-        uses: brettdorrans/write-version-to-file@master
+
+      - name: Calculate environment variables
+        run: |
+          echo "TAG_NAME=$(github.event.tag_name)"
+          echo "PACKAGE_PATH=$(github.event.tag_name.split('@')[0])" >> $GITHUB_ENV
+          echo "VERSION=$(github.event.tag_name.split('@')[1])" >> $GITHUB_ENV
+
+      - uses: brettdorrans/write-version-to-file@master
+        if: ${{ PACKAGE_PATH == 'client' }} 
+        name: Update version
+        working-directory: ./packages/${ PACKAGE_PATH }
         with:
-          filename: './packages/client/src/version.ts'
+          filename: './src/version.ts'
           placeholder: '${VERSION}'
+         
       - run: npm ci
+        working-directory: ./packages/${ PACKAGE_PATH }
+
       - run: npm run publish
+        working-directory: ./packages/${ PACKAGE_PATH }
+
       - run: npm publish --access public
+        working-directory: ./packages/${ PACKAGE_PATH }
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

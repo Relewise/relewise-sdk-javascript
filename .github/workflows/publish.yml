@@ -1,10 +1,8 @@
 name: Publish to NPM
 
-# on:
-#   release:
-#     types: [published]
-
-on: workflow_dispatch
+on:
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -18,11 +16,15 @@ jobs:
           registry-url: https://registry.npmjs.com/
           scope: '@relewise'
 
+      - name: Get the latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
       - name: Calculate environment variables
         run: |
-          echo "TAG_NAME=${{ github.event.release.tag_name }}"
-          echo "PACKAGE_PATH=$(github.ref_name | cut -d '@' -f 1)" >> $GITHUB_ENV
-          echo "VERSION=$(github.ref_name | cut -d '@' -f 2)" >> $GITHUB_ENV
+          echo 'TAG_NAME=${{ steps.get-latest-tag.outputs.tag }}'
+          echo 'PACKAGE_PATH=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 1 >> $GITHUB_ENV
+          echo 'VERSION=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 2 >> $GITHUB_ENV
 
       - uses: brettdorrans/write-version-to-file@master
         if: ${{ env.PACKAGE_PATH == 'client' }} 

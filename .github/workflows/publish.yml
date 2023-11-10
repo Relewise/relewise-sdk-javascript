@@ -29,9 +29,8 @@ jobs:
       - uses: brettdorrans/write-version-to-file@master
         if: ${{ env.PACKAGE_PATH == 'client' }} 
         name: Update version
-        working-directory: ./packages/${{ env.PACKAGE_PATH }}
         with:
-          filename: './src/version.ts'
+          filename: './packages/${{ env.PACKAGE_PATH }}/src/version.ts'
           placeholder: '${VERSION}'
          
       - run: npm ci

@@ -23,7 +23,7 @@ jobs:
           echo "VERSION=$(github.event.tag_name.split('@')[1])" >> $GITHUB_ENV
 
       - uses: brettdorrans/write-version-to-file@master
-        if: ${{ PACKAGE_PATH == 'client' }} 
+        if: ${{ env.PACKAGE_PATH == 'client' }} 
         name: Update version
         working-directory: ./packages/${ PACKAGE_PATH }
         with:

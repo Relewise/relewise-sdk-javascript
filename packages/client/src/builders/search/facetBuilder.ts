@@ -245,6 +245,33 @@ export class FacetBuilder {
         return this;
     }
 
+    public addSalesPriceRangesFacet(
+        priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
+        predefinedRanges?: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null,
+        expandedRangeSize?: number | null,
+        selectedValues: {
+            lowerBound?: number,
+            upperBound?: number
+        }[] | null = null,
+        facetSettings?: FacetSettings): this {
+
+        const facet: PriceRangesFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangesFacet, Relewise.Client',
+            field: 'SalesPrice',
+            predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
+            expandedRangeSize: expandedRangeSize,
+            selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
+            priceSelectionStrategy,
+            settings: facetSettings,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
     public addListPriceRangeFacet(
         priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         lowerBound?: number,

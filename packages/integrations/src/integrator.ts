@@ -1,4 +1,4 @@
-import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest } from '@relewise/client';
+import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction } from '@relewise/client';
 
 export class Integrator extends RelewiseClient {
 
@@ -23,6 +23,26 @@ export class Integrator extends RelewiseClient {
             'TrackProductAdministrativeActionRequest',
             {
                 $type: 'Relewise.Client.Requests.Tracking.TrackProductAdministrativeActionRequest, Relewise.Client',
+                administrativeAction: request,
+            },
+            options);
+    }
+
+    public async updateProductCategory(request: ProductCategoryUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackProductCategoryUpdateRequest, void>(
+            'TrackProductCategoryUpdateRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackProductCategoryUpdateRequest, Relewise.Client',
+                productCategoryUpdate: request,
+            },
+            options);
+    }
+
+    public async executeProductCategoryAdministrativeAction(request: ProductCategoryAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackProductCategoryAdministrativeActionRequest, void>(
+            'TrackProductCategoryAdministrativeActionRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackProductCategoryAdministrativeActionRequest, Relewise.Client',
                 administrativeAction: request,
             },
             options);

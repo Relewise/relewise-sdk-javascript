@@ -1,16 +1,5 @@
-import { Product, DataValue, ProductVariant, Brand, ProductUpdate, CategoryNameAndId, CategoryPath } from '@relewise/client';
-
-export type ProductCategoryPath = {
-    path: PathNode[]
-};
-
-export type PathNode = {
-    id: string;
-    displayName: {
-        value: string;
-        language: string;
-    }[]
-}
+import { Product, DataValue, ProductVariant, Brand, ProductUpdate } from '@relewise/client';
+import { CategoryPathBuilder } from '../categoryPathBuilder';
 
 export class ProductUpdateBuilder {
     private product: Product;
@@ -62,7 +51,6 @@ export class ProductUpdateBuilder {
      * @param paths 
      * @returns 
      */
-
     categoryPaths(builder: (b: CategoryPathBuilder) => void): this {
         const b = new CategoryPathBuilder();
         builder(b);
@@ -70,16 +58,6 @@ export class ProductUpdateBuilder {
         
         return this;
     }
-    // categoryPaths(paths: ProductCategoryPath[]): this {
-    //     this.product.categoryPaths = paths.map(p => ({
-    //         breadcrumbPathStartingFromRoot: p.path.map(path => ({
-    //             id: path.id, 
-    //             displayName: { values: path.displayName.map(x => ({ text: x.value, language: { value: x.language } })) },
-    //         })),
-    //     }));
-
-    //     return this;
-    // }
 
     assortments(assortments: number[]): this {
         this.product.assortments = assortments;
@@ -115,45 +93,5 @@ export class ProductUpdateBuilder {
             brandUpdateKind: this.brandUpdateKind,
             replaceExistingVariants: this.replaceExistingVariants,
         };
-    }
-}
-
-export class CategoryPathBuilder {
-    private paths: CategoryPath[] = [];
-
-    path(builder: (builder: PathBuilder) => void): this {
-        const b = new PathBuilder();
-        builder(b);
-        this.paths.push({ breadcrumbPathStartingFromRoot: b.build() });
-
-        return this;    
-    }
-
-    build(): CategoryPath[] {
-        return this.paths;
-    }
-}
-
-export class PathBuilder {
-    private path: PathNode[] = [];
-
-    category(categoryIdAndName: {
-        id: string;
-        displayName: {
-            value: string;
-            language: string;
-        }[]
-    }): this {
-
-        this.path.push(categoryIdAndName);
-        
-        return this;    
-    }
-
-    build(): CategoryNameAndId[] {
-        return this.path.map(x=> ({
-            id: x.id, 
-            displayName: { values: x.displayName.map(d => ({ text: d.value, language: { value: d.language } })) },
-        }));
     }
 }

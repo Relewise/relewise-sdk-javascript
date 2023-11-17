@@ -1,4 +1,4 @@
-import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction } from '@relewise/client';
+import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest } from '@relewise/client';
 
 export class Integrator extends RelewiseClient {
 
@@ -43,6 +43,46 @@ export class Integrator extends RelewiseClient {
             'TrackProductCategoryAdministrativeActionRequest',
             {
                 $type: 'Relewise.Client.Requests.Tracking.TrackProductCategoryAdministrativeActionRequest, Relewise.Client',
+                administrativeAction: request,
+            },
+            options);
+    }
+
+    public async updateContentCategory(request: ContentCategoryUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackContentCategoryUpdateRequest, void>(
+            'TrackContentCategoryUpdateRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackContentCategoryUpdateRequest, Relewise.Client',
+                contentCategoryUpdate: request,
+            },
+            options);
+    }
+
+    public async executeContentCategoryAdministrativeAction(request: ContentCategoryAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackContentCategoryAdministrativeActionRequest, void>(
+            'TrackContentCategoryAdministrativeActionRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackContentCategoryAdministrativeActionRequest, Relewise.Client',
+                administrativeAction: request,
+            },
+            options);
+    }
+
+    public async updateContent(request: ContentUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackContentUpdateRequest, void>(
+            'TrackContentUpdateRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackContentUpdateRequest, Relewise.Client',
+                contentUpdate: request,
+            },
+            options);
+    }
+
+    public async executeContentAdministrativeAction(request: ContentAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackContentAdministrativeActionRequest, void>(
+            'TrackContentAdministrativeActionRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackContentAdministrativeActionRequest, Relewise.Client',
                 administrativeAction: request,
             },
             options);

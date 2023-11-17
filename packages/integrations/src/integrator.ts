@@ -1,4 +1,4 @@
-import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest } from '@relewise/client';
+import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest, BrandUpdate, BrandAdministrativeAction, TrackBrandAdministrativeActionRequest, TrackBrandUpdateRequest } from '@relewise/client';
 
 export class Integrator extends RelewiseClient {
 
@@ -83,6 +83,26 @@ export class Integrator extends RelewiseClient {
             'TrackContentAdministrativeActionRequest',
             {
                 $type: 'Relewise.Client.Requests.Tracking.TrackContentAdministrativeActionRequest, Relewise.Client',
+                administrativeAction: request,
+            },
+            options);
+    }
+
+    public async updateBrand(request: BrandUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackBrandUpdateRequest, void>(
+            'TrackBrandUpdateRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackBrandUpdateRequest, Relewise.Client',
+                brandUpdate: request,
+            },
+            options);
+    }
+
+    public async executeBrandAdministrativeAction(request: BrandAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackBrandAdministrativeActionRequest, void>(
+            'TrackBrandAdministrativeActionRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackBrandAdministrativeActionRequest, Relewise.Client',
                 administrativeAction: request,
             },
             options);

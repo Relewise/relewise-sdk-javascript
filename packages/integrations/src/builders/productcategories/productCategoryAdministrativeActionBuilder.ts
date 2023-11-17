@@ -30,7 +30,7 @@ export class ProductCategoryAdministrativeActionBuilder {
         const filters = this.filterBuilder.build();
 
         if (!filters || !filters.items || filters.items.length === 0) {
-            throw new Error('No filters was provided for the product category administrative action');
+            throw new Error('No filters were provided for the product category administrative action');
         }
 
         return {

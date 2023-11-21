@@ -1,5 +1,12 @@
 # relewise-sdk-javascript [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![npm version](https://badge.fury.io/js/@relewise%2Fclient.svg)](https://badge.fury.io/js/@relewise%2Fclient) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Relewise/relewise-sdk-javascript/pulls)
 
+## Packages
+
+| Package | Version | Description |
+| --- | --- | --- |
+| [`@relewise/client`](packages/client) | [![npm version](https://img.shields.io/npm/v/@relewise%2Fclient.svg)](https://badge.fury.io/js/@relewise%2Fclient) | The official Relewise JS SDK |
+| [`@relewise/integrations`](packages/integrations) | [![npm version](https://img.shields.io/npm/v/@relewise%2Fintegrations.svg)](https://badge.fury.io/js/@relewise%2Fintegrations) | Helper package for managing entities |
+
 ## Installation 
 
 Install via NPM or you preferred package manager: 

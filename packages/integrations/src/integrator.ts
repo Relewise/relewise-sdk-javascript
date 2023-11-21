@@ -1,4 +1,4 @@
-import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest, BrandUpdate, BrandAdministrativeAction, TrackBrandAdministrativeActionRequest, TrackBrandUpdateRequest } from '@relewise/client';
+import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest, BrandUpdate, BrandAdministrativeAction, TrackBrandAdministrativeActionRequest, TrackBrandUpdateRequest, CompanyUpdate, TrackCompanyUpdateRequest, CompanyAdministrativeAction, TrackCompanyAdministrativeActionRequest } from '@relewise/client';
 
 export class Integrator extends RelewiseClient {
 
@@ -88,21 +88,21 @@ export class Integrator extends RelewiseClient {
             options);
     }
 
-    public async updateBrand(request: BrandUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
-        return this.request<TrackBrandUpdateRequest, void>(
-            'TrackBrandUpdateRequest',
+    public async updateCompany(request: CompanyUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackCompanyUpdateRequest, void>(
+            'TrackCompanyUpdateRequest',
             {
-                $type: 'Relewise.Client.Requests.Tracking.TrackBrandUpdateRequest, Relewise.Client',
-                brandUpdate: request,
+                $type: 'Relewise.Client.Requests.Tracking.TrackCompanyUpdateRequest, Relewise.Client',
+                companyUpdate: request,
             },
             options);
     }
 
-    public async executeBrandAdministrativeAction(request: BrandAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
-        return this.request<TrackBrandAdministrativeActionRequest, void>(
-            'TrackBrandAdministrativeActionRequest',
+    public async executeCompanyAdministrativeAction(request: CompanyAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackCompanyAdministrativeActionRequest, void>(
+            'TrackCompanyAdministrativeActionRequest',
             {
-                $type: 'Relewise.Client.Requests.Tracking.TrackBrandAdministrativeActionRequest, Relewise.Client',
+                $type: 'Relewise.Client.Requests.Tracking.TrackCompanyAdministrativeActionRequest, Relewise.Client',
                 administrativeAction: request,
             },
             options);

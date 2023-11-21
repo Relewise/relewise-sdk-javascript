@@ -88,6 +88,26 @@ export class Integrator extends RelewiseClient {
             options);
     }
 
+    public async updateBrand(request: BrandUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackBrandUpdateRequest, void>(
+            'TrackBrandUpdateRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackBrandUpdateRequest, Relewise.Client',
+                brandUpdate: request,
+            },
+            options);
+    }
+
+    public async executeBrandAdministrativeAction(request: BrandAdministrativeAction, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackBrandAdministrativeActionRequest, void>(
+            'TrackBrandAdministrativeActionRequest',
+            {
+                $type: 'Relewise.Client.Requests.Tracking.TrackBrandAdministrativeActionRequest, Relewise.Client',
+                administrativeAction: request,
+            },
+            options);
+    }
+
     public async updateCompany(request: CompanyUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackCompanyUpdateRequest, void>(
             'TrackCompanyUpdateRequest',

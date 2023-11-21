@@ -1,5 +1,5 @@
 import { test } from '@jest/globals';
-import { CompanyUpdateBuilder, CompanyAdministrativeActionBuilder, Integrator, CompanyUpdateBuilder } from '../../../src';
+import { CompanyUpdateBuilder, CompanyAdministrativeActionBuilder, Integrator } from '../../../src';
 import { DataValueFactory } from '@relewise/client';
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 

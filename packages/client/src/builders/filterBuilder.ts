@@ -11,7 +11,7 @@ export type EntityDataFilterOptions = FilterOptions & {
 };
 
 export class FilterBuilder {
-    private filters: (| AndFilter
+    private filters: (AndFilter
         | BrandAssortmentFilter
         | BrandDataFilter
         | BrandIdFilter

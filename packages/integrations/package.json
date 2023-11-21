@@ -1,6 +1,6 @@
 {
   "name": "@relewise/integrations",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Helper for updating entities in Relewise",
   "repository": {
     "type": "git",

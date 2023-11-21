@@ -1,4 +1,4 @@
-import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAndVariantId, ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../models/data-contracts';
+import { AndFilter, BrandAssortmentFilter, BrandDataFilter, BrandIdFilter, CartDataFilter, CompanyDataFilter, CompanyIdFilter, ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryDataFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentDataFilter, ContentIdFilter, Filter, FilterCollection, OrFilter, ProductAndVariantId, ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryDataFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../models/data-contracts';
 import { FilterSettingsBuilder } from './filterSettingsBuilder';
 import { ConditionBuilder } from './conditionBuilder';
 
@@ -16,20 +16,30 @@ export class FilterBuilder {
         | BrandDataFilter
         | BrandIdFilter
         | CartDataFilter
+        | CompanyDataFilter
+        | CompanyIdFilter
+        | ContentAssortmentFilter
         | ContentCategoryAssortmentFilter
         | ContentCategoryDataFilter
+        | ContentCategoryHasAncestorFilter
+        | ContentCategoryHasChildFilter
+        | ContentCategoryHasContentsFilter
+        | ContentCategoryHasParentFilter
         | ContentCategoryIdFilter
+        | ContentCategoryLevelFilter
         | ContentDataFilter
         | ContentIdFilter
-        | ContentCategoryLevelFilter
-        | ContentCategoryHasParentFilter
-        | ContentCategoryHasChildFilter
-        | ContentCategoryHasAncestorFilter
         | OrFilter
+        | ProductAndVariantIdFilter
         | ProductAssortmentFilter
         | ProductCategoryAssortmentFilter
         | ProductCategoryDataFilter
+        | ProductCategoryHasAncestorFilter
+        | ProductCategoryHasChildFilter
+        | ProductCategoryHasParentFilter
+        | ProductCategoryHasProductsFilter
         | ProductCategoryIdFilter
+        | ProductCategoryLevelFilter
         | ProductDataFilter
         | ProductDisplayNameFilter
         | ProductHasVariantsFilter
@@ -43,12 +53,7 @@ export class FilterBuilder {
         | VariantIdFilter
         | VariantListPriceFilter
         | VariantSalesPriceFilter
-        | VariantSpecificationFilter
-        | ProductAndVariantIdFilter
-        | ProductCategoryLevelFilter
-        | ProductCategoryHasParentFilter
-        | ProductCategoryHasChildFilter
-        | ProductCategoryHasAncestorFilter)[] = [];
+        | VariantSpecificationFilter)[] = [];
 
     /**
      * Adds a product assortment filter to the request
@@ -113,6 +118,30 @@ export class FilterBuilder {
                 
         const filter: BrandAssortmentFilter = {
             $type: 'Relewise.Client.Requests.Filters.BrandAssortmentFilter, Relewise.Client',
+            assortments: assortments,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+    
+    /**
+     * Adds a content assortment filter to the request
+     * @param assortmentIds 
+     * @param negated 
+     */
+    public addContentAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false, options?: FilterOptions): this {
+        const assortments: number[] = Array.isArray(assortmentIds)
+            ? assortmentIds
+            : [assortmentIds];
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+                
+        const filter: ContentAssortmentFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentAssortmentFilter, Relewise.Client',
             assortments: assortments,
             negated: negated,
             settings: internalSettingsBuilder.build(),
@@ -310,6 +339,30 @@ export class FilterBuilder {
         const filter: ContentIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentIdFilter, Relewise.Client',
             contentIds: ids,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Filters the request to only return the specificied contents
+     * @param companyIds 
+     * @param negated 
+     */
+    public addCompanyIdFilter(companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        const ids: string[] = Array.isArray(companyIds)
+            ? companyIds
+            : [companyIds];
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+                
+        const filter: CompanyIdFilter = {
+            $type: 'Relewise.Client.Requests.Filters.CompanyIdFilter, Relewise.Client',
+            companyIds: ids,
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };
@@ -758,6 +811,36 @@ export class FilterBuilder {
     }
 
     /**
+     * Adds a compnany data filter to the request
+     * @param key 
+     * @param conditionBuilder 
+     * @param mustMatchAllConditions 
+     * @param filterOutIfKeyIsNotFound 
+     * @param negated 
+     */
+    public addCompanyDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
+        const builder = new ConditionBuilder();
+        conditionBuilder(builder);
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: CompanyDataFilter = {
+            $type: 'Relewise.Client.Requests.Filters.CompanyDataFilter, Relewise.Client',
+            key: key,
+            filterOutIfKeyIsNotFound: filterOutIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: builder.build(),
+            negated: negated,
+            objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
     * Adds a product display name filter to the request
     * @param key 
     * @param conditionBuilder 
@@ -961,6 +1044,46 @@ export class FilterBuilder {
         };
         this.filters.push(filter);
 
+        return this;
+    }
+
+    /**
+    * Adds a product category has products filter to the request ensuring that only categories with products in them are returned
+    * @param categoryIds 
+    * @param negated 
+    */
+    public addProductCategoryHasProductsFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+            
+        const filter: ProductCategoryHasProductsFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasProductsFilter, Relewise.Client',
+            
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+    * Adds a content category has contents filter to the request ensuring that only categories with content in them are returned
+    * @param categoryIds 
+    * @param negated 
+    */
+    public addContentCategoryHasContentsFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+                
+        const filter: ContentCategoryHasContentsFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentCategoryHasContentsFilter, Relewise.Client',
+                
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
         return this;
     }
 

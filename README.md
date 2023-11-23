@@ -19,17 +19,27 @@ npm install @relewise/client
 
 ### Bootstrapping
 
-Whether you need to track or search, you need to start by bootstrapping either the `Tracker` or `Searcher`.
+Whether you need to track, search or recommend, you need to start by bootstrapping either the `Tracker`, `Searcher` or `Recommender`.
 
 ```ts
-const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
-const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const tracker = new Tracker(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+});
+
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+});
+        
+const recommeder = new Recommender(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+});
 ```
 
-Replace the `RELEWISE_DATASET_ID` and `RELEWISE_API_KEY` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
+Replace the `RELEWISE_DATASET_ID`, `RELEWISE_API_KEY` and `RELEWISE_SERVER_URL` parameters with your dataset & api key found at [My.Relewise](https://my.relewise.com/developer-settings). 
 
 After which you have access to various methods depending on the client you've bootstrapped.
 
+***Note: serverUrl is not required and will default to https://api.relewise.com/*** 
 ### Tracking
 
 If you need to track e.g. Product-, Category or Content Views, track Cart Updates or Completed Orders in your solution, you need to use the `Tracker` 
@@ -93,7 +103,9 @@ To use our fully-fledged search engine, start by bootstraping the `Searcher`-cla
 Here is a basic usage example for selecting product properties, paging, facets and filters.
 
 ```ts
-const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+});
 
 const settings = {
     language: 'da-DK',
@@ -132,7 +144,9 @@ You can use the `*` in `dataKeys` to extract properties by conventions - if you 
 You can also use the `Searcher` for category pages without specifying the `term`:
 
 ```ts
-const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+});
 
 const settings = {
     language: 'da-DK',
@@ -174,7 +188,9 @@ When using sorting, it is important to also sort by relevance after sorting by s
 You can also batch requests in one HTTP requests to reduce latency.
 
 ```ts
-const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY);
+const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+});
 
 const searchCollectionBuilder = new SearchCollectionBuilder(settings)
     .addRequest(productSearchBuilder.build())

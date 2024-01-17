@@ -50,12 +50,6 @@ test('Create Product', async() => {
                     displayName: [{ language: 'da', value: 'Tilbud' }],
                 })));
 
-    console.log('*******************************************');
-    console.log(product.build().product?.data);
-    console.log('*******************************************');
-    console.log( await integrator.updateProduct(product.build()).catch((e) => console.log(e)));
-    console.log('*******************************************');
-
     await integrator.updateProduct(product.build());
 
     const enable = new ProductAdministrativeActionBuilder({

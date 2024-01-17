@@ -19,6 +19,11 @@ export interface CollectionWithType<T> {
     $values: T[];
 }
 
+export interface MultilingualCollectionWithType<T> {
+    $type: string;
+    values: T[];
+}
+
 export interface MultiCurrencyWithType extends MultiCurrency {
     $type: string;
 }
@@ -51,12 +56,12 @@ export class StringCollectionDataValue extends DataValueBase<CollectionWithType<
     readonly isCollection = true;
 }
 
-export class MultilingualCollectionDataValue extends DataValueBase<CollectionWithType<MultilingualCollectionValue>> {
+export class MultilingualCollectionDataValue extends DataValueBase<MultilingualCollectionWithType<MultilingualCollectionValue>> {
     constructor(values: { values: string[], language: string }[]) {
         super('MultilingualCollection',
             {
-                $type: 'System.Collections.Generic.List`1[[Relewise.Client.DataTypes.Multilingual, Relewise.Client]], System.Private.CoreLib',
-                $values: values.map(x => ({ values: x.values, language: { value: x.language } })),
+                $type: 'Relewise.Client.DataTypes.MultilingualCollection, Relewise.Client',
+                values: values.map(x => ({ values: x.values, language: { value: x.language } })),
             });
     }
 

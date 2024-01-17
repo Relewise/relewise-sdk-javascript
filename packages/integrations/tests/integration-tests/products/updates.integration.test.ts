@@ -21,6 +21,7 @@ test('Create Product', async() => {
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
             'Removed': null,
+            'Materials': DataValueFactory.multilingualCollection([{ values: ['Wood', 'Metal'], language: 'da' }]),
             'Complex': DataValueFactory.object({
                 'nestedDataKey': DataValueFactory.string('Key'),
             }),

@@ -21,6 +21,7 @@ test('Create Product', async() => {
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
             'Removed': null,
+            'Materials': DataValueFactory.multilingualCollection([{ values: ['Wood', 'Metal'], language: 'da' }]),
             'Complex': DataValueFactory.object({
                 'nestedDataKey': DataValueFactory.string('Key'),
             }),
@@ -48,6 +49,12 @@ test('Create Product', async() => {
                     id: '4',
                     displayName: [{ language: 'da', value: 'Tilbud' }],
                 })));
+
+    console.log('*******************************************');
+    console.log(product.build().product?.data);
+    console.log('*******************************************');
+    console.log( await integrator.updateProduct(product.build()).catch((e) => console.log(e)));
+    console.log('*******************************************');
 
     await integrator.updateProduct(product.build());
 

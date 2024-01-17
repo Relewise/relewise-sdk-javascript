@@ -19,7 +19,7 @@ export interface CollectionWithType<T> {
     $values: T[];
 }
 
-export interface CollectionWithTypeNo$values<T> {
+export interface MultilingualCollectionWithType<T> {
     $type: string;
     values: T[];
 }
@@ -56,7 +56,7 @@ export class StringCollectionDataValue extends DataValueBase<CollectionWithType<
     readonly isCollection = true;
 }
 
-export class MultilingualCollectionDataValue extends DataValueBase<CollectionWithTypeNo$values<MultilingualCollectionValue>> {
+export class MultilingualCollectionDataValue extends DataValueBase<MultilingualCollectionWithType<MultilingualCollectionValue>> {
     constructor(values: { values: string[], language: string }[]) {
         super('MultilingualCollection',
             {

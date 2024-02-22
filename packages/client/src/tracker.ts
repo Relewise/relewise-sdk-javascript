@@ -16,7 +16,7 @@ export class Tracker extends RelewiseClient {
         orderNumber: string,
         /** @deprecated Use orderNumber instead. */
         trackingNumber?: string,
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], 
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], 
         cartName?: string
     }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
@@ -30,6 +30,7 @@ export class Tracker extends RelewiseClient {
                     ...(l.variantId && { variant: { id: l.variantId }}),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
+                    data: l.data,
                 })),
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
                 orderNumber: orderNumber,
@@ -43,7 +44,7 @@ export class Tracker extends RelewiseClient {
     public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: { 
         user?: User, 
         subtotal: { currency: string, amount: number }, 
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number }[], 
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], 
         data?: Record<string, DataValue>, 
         cartName?: string 
     }, options?: RelewiseRequestOptions): Promise<void | undefined> {
@@ -58,6 +59,7 @@ export class Tracker extends RelewiseClient {
                     ...(l.variantId && { variant: { id: l.variantId }}),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
+                    data: l.data,
                 })),
                 subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
                 name: cartName,

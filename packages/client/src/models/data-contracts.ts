@@ -112,7 +112,11 @@ export type AndFilter = Filter & {
     | ProductHasVariantsFilter
     | ProductIdFilter
     | ProductListPriceFilter
+    | ProductRecentlyPurchasedByCompanyFilter
+    | ProductRecentlyPurchasedByUserCompanyFilter
     | ProductRecentlyPurchasedByUserFilter
+    | ProductRecentlyViewedByCompanyFilter
+    | ProductRecentlyViewedByUserCompanyFilter
     | ProductRecentlyViewedByUserFilter
     | ProductSalesPriceFilter
     | VariantAssortmentFilter
@@ -1266,6 +1270,7 @@ export interface DataObjectFilter {
         | ObjectValueLessThanCondition
         | ObjectValueMaxByCondition
         | ObjectValueMinByCondition
+        | ObjectValueRelativeDateTimeCondition
       )[]
     | null;
   /** @format int32 */
@@ -1702,121 +1707,6 @@ export interface DoubleRange {
   upperBoundInclusive: number;
 }
 
-export type EntityPropertyChangedTriggerConfiguration = EntityPropertyChangedTriggerResultTriggerConfiguration & {
-  entityType: "Product" | "Variant" | "ProductCategory" | "Brand" | "Content" | "ContentCategory";
-  entityPropertySelector: IEntityPropertySelector;
-  beforeChangeFilter:
-    | AndFilter
-    | BrandAssortmentFilter
-    | BrandDataFilter
-    | BrandIdFilter
-    | CartDataFilter
-    | CompanyDataFilter
-    | CompanyIdFilter
-    | ContentAssortmentFilter
-    | ContentCategoryAssortmentFilter
-    | ContentCategoryDataFilter
-    | ContentCategoryHasAncestorFilter
-    | ContentCategoryHasChildFilter
-    | ContentCategoryHasContentsFilter
-    | ContentCategoryHasParentFilter
-    | ContentCategoryIdFilter
-    | ContentCategoryLevelFilter
-    | ContentDataFilter
-    | ContentIdFilter
-    | OrFilter
-    | ProductAndVariantIdFilter
-    | ProductAssortmentFilter
-    | ProductCategoryAssortmentFilter
-    | ProductCategoryDataFilter
-    | ProductCategoryHasAncestorFilter
-    | ProductCategoryHasChildFilter
-    | ProductCategoryHasParentFilter
-    | ProductCategoryHasProductsFilter
-    | ProductCategoryIdFilter
-    | ProductCategoryLevelFilter
-    | ProductDataFilter
-    | ProductDisplayNameFilter
-    | ProductHasVariantsFilter
-    | ProductIdFilter
-    | ProductListPriceFilter
-    | ProductRecentlyPurchasedByUserFilter
-    | ProductRecentlyViewedByUserFilter
-    | ProductSalesPriceFilter
-    | VariantAssortmentFilter
-    | VariantDataFilter
-    | VariantIdFilter
-    | VariantListPriceFilter
-    | VariantSalesPriceFilter
-    | VariantSpecificationFilter;
-  afterChangeFilter:
-    | AndFilter
-    | BrandAssortmentFilter
-    | BrandDataFilter
-    | BrandIdFilter
-    | CartDataFilter
-    | CompanyDataFilter
-    | CompanyIdFilter
-    | ContentAssortmentFilter
-    | ContentCategoryAssortmentFilter
-    | ContentCategoryDataFilter
-    | ContentCategoryHasAncestorFilter
-    | ContentCategoryHasChildFilter
-    | ContentCategoryHasContentsFilter
-    | ContentCategoryHasParentFilter
-    | ContentCategoryIdFilter
-    | ContentCategoryLevelFilter
-    | ContentDataFilter
-    | ContentIdFilter
-    | OrFilter
-    | ProductAndVariantIdFilter
-    | ProductAssortmentFilter
-    | ProductCategoryAssortmentFilter
-    | ProductCategoryDataFilter
-    | ProductCategoryHasAncestorFilter
-    | ProductCategoryHasChildFilter
-    | ProductCategoryHasParentFilter
-    | ProductCategoryHasProductsFilter
-    | ProductCategoryIdFilter
-    | ProductCategoryLevelFilter
-    | ProductDataFilter
-    | ProductDisplayNameFilter
-    | ProductHasVariantsFilter
-    | ProductIdFilter
-    | ProductListPriceFilter
-    | ProductRecentlyPurchasedByUserFilter
-    | ProductRecentlyViewedByUserFilter
-    | ProductSalesPriceFilter
-    | VariantAssortmentFilter
-    | VariantDataFilter
-    | VariantIdFilter
-    | VariantListPriceFilter
-    | VariantSalesPriceFilter
-    | VariantSpecificationFilter;
-  changeType: "Changed" | "Decreased" | "Increased";
-};
-
-export interface EntityPropertyChangedTriggerResultTriggerConfiguration {
-  $type: string;
-  custom?: Record<string, string | null>;
-  /** @format uuid */
-  id: string;
-  name?: string | null;
-  description?: string | null;
-  group?: string | null;
-  enabled: boolean;
-  /** @format date-time */
-  created: string;
-  createdBy?: string | null;
-  /** @format date-time */
-  modified: string;
-  modifiedBy?: string | null;
-  /** @format int32 */
-  withinTimeSpanMinutes: number;
-  settings?: Record<string, string | null>;
-  userConditions?: UserConditionCollection | null;
-}
-
 export type EqualsCondition = ValueCondition & {
   value?: DataValue | null;
 };
@@ -1900,7 +1790,11 @@ export interface FilterCollection {
         | ProductHasVariantsFilter
         | ProductIdFilter
         | ProductListPriceFilter
+        | ProductRecentlyPurchasedByCompanyFilter
+        | ProductRecentlyPurchasedByUserCompanyFilter
         | ProductRecentlyPurchasedByUserFilter
+        | ProductRecentlyViewedByCompanyFilter
+        | ProductRecentlyViewedByUserCompanyFilter
         | ProductRecentlyViewedByUserFilter
         | ProductSalesPriceFilter
         | VariantAssortmentFilter
@@ -2041,7 +1935,7 @@ export type HasRecentlyReceivedTriggerCondition = UserCondition & {
 
 export type HtmlParser = Parser;
 
-export type IEntityPropertySelector = object;
+export type IChange = object;
 
 export type ITriggerResult = object;
 
@@ -2150,6 +2044,7 @@ export interface LineItem {
   quantity: number;
   /** @format double */
   lineTotal: number;
+  data?: Record<string, DataValue>;
 }
 
 export interface MatchTypeSettings {
@@ -2277,6 +2172,29 @@ export type ObjectValueMaxByCondition = ObjectValueCondition;
 
 export type ObjectValueMinByCondition = ObjectValueCondition;
 
+export type ObjectValueRelativeDateTimeCondition = ObjectValueCondition & {
+  comparison: "Before" | "After";
+  unit: "UnixMilliseconds" | "UnixSeconds" | "UnixMinutes";
+  /** @format int64 */
+  currentTimeOffset: number;
+};
+
+export type ObservableProductAttributeSelector = ProductPropertySelector & {
+  attribute: "ListPrice" | "SalesPrice";
+};
+
+export type ObservableProductDataValueSelector = ProductPropertySelector & {
+  dataObjectValueSelector?: DataObjectValueSelector | null;
+};
+
+export type ObservableVariantAttributeSelector = VariantPropertySelector & {
+  attribute: "ListPrice" | "SalesPrice";
+};
+
+export type ObservableVariantDataValueSelector = VariantPropertySelector & {
+  dataObjectValueSelector?: DataObjectValueSelector | null;
+};
+
 export type OrCondition = UserCondition & {
   conditions?: UserConditionCollection | null;
 };
@@ -2317,7 +2235,11 @@ export type OrFilter = Filter & {
     | ProductHasVariantsFilter
     | ProductIdFilter
     | ProductListPriceFilter
+    | ProductRecentlyPurchasedByCompanyFilter
+    | ProductRecentlyPurchasedByUserCompanyFilter
     | ProductRecentlyPurchasedByUserFilter
+    | ProductRecentlyViewedByCompanyFilter
+    | ProductRecentlyViewedByUserCompanyFilter
     | ProductRecentlyViewedByUserFilter
     | ProductSalesPriceFilter
     | VariantAssortmentFilter
@@ -2339,6 +2261,7 @@ export type Order = Trackable & {
   channel?: Channel | null;
   /** @deprecated */
   subChannel?: string | null;
+  data?: Record<string, DataValue>;
   /** @deprecated */
   trackingNumber?: string | null;
 };
@@ -2982,6 +2905,40 @@ export type ProductCategoryView = Trackable & {
   channel?: Channel | null;
 };
 
+export type ProductChangeTriggerConfiguration =
+  ProductChangeTriggerResultProductChangeTriggerResultSettingsProductPropertySelectorEntityChangeTriggerConfiguration;
+
+export interface ProductChangeTriggerResultProductChangeTriggerResultSettingsProductPropertySelectorEntityChangeTriggerConfiguration {
+  $type: string;
+  entityPropertySelector: ObservableProductAttributeSelector | ObservableProductDataValueSelector;
+  beforeChangeFilters: FilterCollection;
+  afterChangeFilters: FilterCollection;
+  change: IChange;
+  resultSettings: ProductChangeTriggerResultSettings;
+  custom?: Record<string, string | null>;
+  /** @format uuid */
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  group?: string | null;
+  enabled: boolean;
+  /** @format date-time */
+  created: string;
+  createdBy?: string | null;
+  /** @format date-time */
+  modified: string;
+  modifiedBy?: string | null;
+  /** @format int32 */
+  withinTimeSpanMinutes: number;
+  settings?: Record<string, string | null>;
+  userConditions?: UserConditionCollection | null;
+}
+
+export interface ProductChangeTriggerResultSettings {
+  selectedProductProperties?: SelectedProductPropertiesSettings | null;
+  selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
+}
+
 export type ProductDataBooleanValueFacet = BooleanProductDataValueFacet;
 
 export type ProductDataBooleanValueFacetResult = BooleanProductDataValueFacetResult;
@@ -3314,6 +3271,10 @@ export interface ProductPerformanceResultViewsMetrics {
 
 export type ProductPopularitySorting = ProductSorting;
 
+export interface ProductPropertySelector {
+  $type: string;
+}
+
 export type ProductQuery = LicensedRequest & {
   filters: FilterCollection;
   /** @format int32 */
@@ -3328,6 +3289,17 @@ export type ProductQuery = LicensedRequest & {
   excludeProductsWithNoVariants: boolean;
 };
 
+export type ProductRecentlyPurchasedByCompanyFilter = Filter & {
+  /** @format date-time */
+  sinceUtc: string;
+  companyIds: string[];
+};
+
+export type ProductRecentlyPurchasedByUserCompanyFilter = Filter & {
+  /** @format date-time */
+  sinceUtc: string;
+};
+
 export type ProductRecentlyPurchasedByUserFilter = Filter & {
   /** @format date-time */
   sinceUtc: string;
@@ -3340,6 +3312,17 @@ export type ProductRecentlyPurchasedByUserRelevanceModifier = RelevanceModifier 
   ifPreviouslyPurchasedByUserMultiplyWeightBy: number;
   /** @format double */
   ifNotPreviouslyPurchasedByUserMultiplyWeightBy: number;
+};
+
+export type ProductRecentlyViewedByCompanyFilter = Filter & {
+  /** @format date-time */
+  sinceUtc: string;
+  companyIds: string[];
+};
+
+export type ProductRecentlyViewedByUserCompanyFilter = Filter & {
+  /** @format date-time */
+  sinceUtc: string;
 };
 
 export type ProductRecentlyViewedByUserFilter = Filter & {
@@ -3691,7 +3674,7 @@ export interface RedirectRulesRequestSortBySorting {
 export type RedirectRulesResponse = RedirectRuleSearchRulesResponse;
 
 export type RelativeDateTimeCondition = ValueCondition & {
-  comparison: "BeforeNow" | "AfterNow";
+  comparison: "Before" | "After";
   unit: "UnixMilliseconds" | "UnixSeconds" | "UnixMinutes";
   /** @format int64 */
   currentTimeOffset: number;
@@ -3802,10 +3785,11 @@ export type SaveTriggerConfigurationRequest = LicensedRequest & {
     | AbandonedCartTriggerConfiguration
     | AbandonedSearchTriggerConfiguration
     | ContentCategoryInterestTriggerConfiguration
-    | EntityPropertyChangedTriggerConfiguration
     | ProductCategoryInterestTriggerConfiguration
+    | ProductChangeTriggerConfiguration
     | ProductInterestTriggerConfiguration
     | UserActivityTriggerConfiguration
+    | VariantChangeTriggerConfiguration
     | null;
   modifiedBy?: string | null;
 };
@@ -4555,10 +4539,11 @@ export type TriggerConfigurationCollectionResponse = TimedResponse & {
         | AbandonedCartTriggerConfiguration
         | AbandonedSearchTriggerConfiguration
         | ContentCategoryInterestTriggerConfiguration
-        | EntityPropertyChangedTriggerConfiguration
         | ProductCategoryInterestTriggerConfiguration
+        | ProductChangeTriggerConfiguration
         | ProductInterestTriggerConfiguration
         | UserActivityTriggerConfiguration
+        | VariantChangeTriggerConfiguration
       )[]
     | null;
 };
@@ -4575,10 +4560,11 @@ export type TriggerConfigurationResponse = TimedResponse & {
     | AbandonedCartTriggerConfiguration
     | AbandonedSearchTriggerConfiguration
     | ContentCategoryInterestTriggerConfiguration
-    | EntityPropertyChangedTriggerConfiguration
     | ProductCategoryInterestTriggerConfiguration
+    | ProductChangeTriggerConfiguration
     | ProductInterestTriggerConfiguration
     | UserActivityTriggerConfiguration
+    | VariantChangeTriggerConfiguration
     | null;
 };
 
@@ -4610,6 +4596,7 @@ export interface User {
   fingerprint?: string | null;
   channel?: Channel | null;
   company?: Company | null;
+  custom?: Record<string, string>;
 }
 
 export type UserActivityTriggerConfiguration = UserActivityTriggerResultTriggerConfiguration;
@@ -4765,6 +4752,40 @@ export type VariantAssortmentRelevanceModifier = RelevanceModifier & {
   multiplyWeightBy: number;
 };
 
+export type VariantChangeTriggerConfiguration =
+  VariantChangeTriggerResultVariantChangeTriggerResultSettingsVariantPropertySelectorEntityChangeTriggerConfiguration;
+
+export interface VariantChangeTriggerResultSettings {
+  selectedProductProperties?: SelectedProductPropertiesSettings | null;
+  selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
+}
+
+export interface VariantChangeTriggerResultVariantChangeTriggerResultSettingsVariantPropertySelectorEntityChangeTriggerConfiguration {
+  $type: string;
+  entityPropertySelector: ObservableVariantAttributeSelector | ObservableVariantDataValueSelector;
+  beforeChangeFilters: FilterCollection;
+  afterChangeFilters: FilterCollection;
+  change: IChange;
+  resultSettings: VariantChangeTriggerResultSettings;
+  custom?: Record<string, string | null>;
+  /** @format uuid */
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  group?: string | null;
+  enabled: boolean;
+  /** @format date-time */
+  created: string;
+  createdBy?: string | null;
+  /** @format date-time */
+  modified: string;
+  modifiedBy?: string | null;
+  /** @format int32 */
+  withinTimeSpanMinutes: number;
+  settings?: Record<string, string | null>;
+  userConditions?: UserConditionCollection | null;
+}
+
 export type VariantDataFilter = DataFilter;
 
 export type VariantDataRelevanceModifier = RelevanceModifier & {
@@ -4819,6 +4840,10 @@ export type VariantListPriceRelevanceModifier = RelevanceModifier & {
   multiplyWeightBy: number;
   negated: boolean;
 };
+
+export interface VariantPropertySelector {
+  $type: string;
+}
 
 export interface VariantResult {
   variantId?: string | null;

@@ -1,3 +1,4 @@
+import { deprecate } from 'util';
 import { Settings } from '../../../builders/settings';
 import { SimilarProductsRequest, SimilarProductsEvaluationSettings, Product } from '../../../models/data-contracts';
 import { BySingleProductRecommendationBuilder } from './bySingleProductRecommendationBuilder';
@@ -13,8 +14,33 @@ export class SimilarProductsProductBuilder extends BySingleProductRecommendation
         super(settings);
     }
 
+    /** @deprecated
+     * Use setEvaluationSettings instead
+     */
     public setSimilarProductsEvaluationSettings(settings: SimilarProductsEvaluationSettings): this {
-        this.evaluationSettings = settings;
+        this.evaluationSettings = settings as SimilarProductsEvaluationSettings;
+
+        return this;
+    }
+
+    public setEvaluationSettings(builder: (settings: Partial<SimilarProductsEvaluationSettings>) => void): this {
+        const cleanSettings: SimilarProductsEvaluationSettings = {
+            significanceOfSimilaritiesInDisplayName: 0,
+            productDisplayNameTransformer: null,
+            significanceOfSimilarListPrice: 0,
+            significanceOfCommonImmediateParentCategories: 0,
+            significanceOfCommonParentsParentCategories: 0,
+            significanceOfCommonAncestorCategories: 0,
+            significanceOfCommonProductDataKeys: 0,
+            significanceOfIdenticalProductDataValues: 0,
+            significantProductDataFields: null,
+            significanceOfSimilarSalesPrice: 0,
+            significanceOfSimilarBrand: 0,
+            variantEvaluationSettings: null,
+        };
+
+        builder(cleanSettings);
+        this.evaluationSettings = cleanSettings;
 
         return this;
     }

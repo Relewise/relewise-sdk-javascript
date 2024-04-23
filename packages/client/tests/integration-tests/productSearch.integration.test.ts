@@ -39,6 +39,33 @@ test('Product search - data object facets', async() => {
                 skip: 2,
             },
             { alwaysIncludeSelectedInAvailable: true, includeZeroHitsInAvailable: false }))
+
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('Retail Media search', async() => {
+    const request: ProductSearchRequest = baseProductBuilder()
+        .setRetailMediaSettings({
+            selectors: [
+                { locationSlug: 'SEARCH_RESULTS_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
+            ],
+        })
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('Retail Media search', async() => {
+    const request: ProductSearchRequest = baseProductBuilder()
+        .setRetailMediaSelectors([
+            { locationSlug: 'SEARCH_RESULTS_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
+        ])
         .build();
 
     const result = await searcher.searchProducts(request);

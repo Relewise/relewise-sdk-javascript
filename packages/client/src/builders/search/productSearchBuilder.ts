@@ -1,4 +1,4 @@
-import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
+import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, RetailMediaSettings, RetailMediaSettingsSelector, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { FacetBuilder } from './facetBuilder';
@@ -53,6 +53,18 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
 
     public setRecommendationSettings(settings: RecommendationSettings): this {
         this.searchSettings.recommendations = settings;
+
+        return this;
+    }
+
+    public setRetailMediaSettings(settings: RetailMediaSettings): this {
+        this.searchSettings.retailMediaSettings = settings;
+
+        return this;
+    }
+
+    public setRetailMediaSelectors(selectors: RetailMediaSettingsSelector[] ): this {
+        this.searchSettings.retailMediaSettings = { selectors: selectors };
 
         return this;
     }

@@ -65,6 +65,68 @@ export interface AbandonedSearchTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
+export type Advertiser = RetailMediaEntity & {
+  name: string;
+  description?: string | null;
+  allowedPromotions?: PromotionSpecificationCollection | null;
+  allowedPlacements?: PromotionPlacementCollection | null;
+};
+
+export interface AdvertiserEntityResponse {
+  $type: string;
+  entities?: Advertiser[] | null;
+  /** @format int32 */
+  hits: number;
+  hitsPerState?: {
+    /** @format int32 */
+    Draft: number;
+    /** @format int32 */
+    Approved: number;
+    /** @format int32 */
+    Disapproved: number;
+    /** @format int32 */
+    Archived: number;
+  } | null;
+  statistics?: Statistics | null;
+}
+
+export interface AdvertiserSaveEntitiesRequest {
+  $type: string;
+  entities: Advertiser[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface AdvertiserSaveEntitiesResponse {
+  $type: string;
+  entities?: Advertiser[] | null;
+  statistics?: Statistics | null;
+}
+
+export type AdvertisersRequest = AdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest;
+
+export type AdvertisersRequestEntityFilters = RetailMediaEntityEntityFilters & {
+  ids?: string[] | null;
+};
+
+export interface AdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: AdvertisersRequestEntityFilters | null;
+  sorting?: AdvertisersRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface AdvertisersRequestSortBySorting {
+  sortBy: "Created" | "Modified" | "Name";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type AdvertisersResponse = AdvertiserEntityResponse;
+
 export interface AnalyzerRequest {
   $type: string;
   language?: Language | null;
@@ -94,8 +156,10 @@ export type AndFilter = Filter & {
     | ContentCategoryHasParentFilter
     | ContentCategoryIdFilter
     | ContentCategoryLevelFilter
+    | ContentCategoryRecentlyViewedByUserFilter
     | ContentDataFilter
     | ContentIdFilter
+    | ContentRecentlyViewedByUserFilter
     | OrFilter
     | ProductAndVariantIdFilter
     | ProductAssortmentFilter
@@ -107,6 +171,7 @@ export type AndFilter = Filter & {
     | ProductCategoryHasProductsFilter
     | ProductCategoryIdFilter
     | ProductCategoryLevelFilter
+    | ProductCategoryRecentlyViewedByUserFilter
     | ProductDataFilter
     | ProductDisplayNameFilter
     | ProductHasVariantsFilter
@@ -115,9 +180,11 @@ export type AndFilter = Filter & {
     | ProductRecentlyPurchasedByCompanyFilter
     | ProductRecentlyPurchasedByUserCompanyFilter
     | ProductRecentlyPurchasedByUserFilter
+    | ProductRecentlyPurchasedByUserParentCompanyFilter
     | ProductRecentlyViewedByCompanyFilter
     | ProductRecentlyViewedByUserCompanyFilter
     | ProductRecentlyViewedByUserFilter
+    | ProductRecentlyViewedByUserParentCompanyFilter
     | ProductSalesPriceFilter
     | VariantAssortmentFilter
     | VariantDataFilter
@@ -423,6 +490,68 @@ export type BrandView = Trackable & {
   channel?: Channel | null;
 };
 
+export type Campaign = RetailMediaEntity & {
+  name: string;
+  description?: string | null;
+  schedule?: ISchedule | null;
+  promotions: PromotionCollection;
+};
+
+export interface CampaignEntityResponse {
+  $type: string;
+  entities?: Campaign[] | null;
+  /** @format int32 */
+  hits: number;
+  hitsPerState?: {
+    /** @format int32 */
+    Draft: number;
+    /** @format int32 */
+    Approved: number;
+    /** @format int32 */
+    Disapproved: number;
+    /** @format int32 */
+    Archived: number;
+  } | null;
+  statistics?: Statistics | null;
+}
+
+export interface CampaignSaveEntitiesRequest {
+  $type: string;
+  entities: Campaign[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface CampaignSaveEntitiesResponse {
+  $type: string;
+  entities?: Campaign[] | null;
+  statistics?: Statistics | null;
+}
+
+export type CampaignsRequest = CampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest;
+
+export type CampaignsRequestEntityFilters = RetailMediaEntityEntityFilters & {
+  ids?: string[] | null;
+};
+
+export interface CampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: CampaignsRequestEntityFilters | null;
+  sorting?: CampaignsRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface CampaignsRequestSortBySorting {
+  sortBy: "Created" | "Modified" | "Name";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type CampaignsResponse = CampaignEntityResponse;
+
 export type Cart = Trackable & {
   user?: User | null;
   name?: string | null;
@@ -670,6 +799,8 @@ export type ContentCategoryAssortmentFilter = Filter & {
 
 export type ContentCategoryDataFilter = DataFilter;
 
+export type ContentCategoryDataRelevanceModifier = DataRelevanceModifier;
+
 export type ContentCategoryDetailsCollectionResponse = TimedResponse & {
   categories?: ContentCategoryResultDetails[] | null;
   /** @format int32 */
@@ -734,6 +865,15 @@ export interface ContentCategoryInterestTriggerResultTriggerConfiguration {
 export type ContentCategoryLevelFilter = CategoryLevelFilter;
 
 export type ContentCategoryQuery = ContentCategoryIdFilterCategoryQuery;
+
+export type ContentCategoryRecentlyViewedByUserFilter = Filter & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ContentCategoryRecentlyViewedByUserRelevanceModifier = RecentlyViewedByUserRelevanceModifier;
 
 export interface ContentCategoryRecommendationRequest {
   $type: string;
@@ -856,6 +996,8 @@ export type ContentDataObjectFacet = DataObjectFacet;
 
 export type ContentDataObjectFacetResult = DataObjectFacetResult;
 
+export type ContentDataRelevanceModifier = DataRelevanceModifier;
+
 export type ContentDataSorting = ContentSorting & {
   key?: string | null;
   mode: "Auto" | "Alphabetical" | "Numerical";
@@ -977,6 +1119,15 @@ export type ContentQuery = LicensedRequest & {
   returnTotalNumberOfResults: boolean;
   includeDisabledContents: boolean;
 };
+
+export type ContentRecentlyViewedByUserFilter = Filter & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ContentRecentlyViewedByUserRelevanceModifier = RecentlyViewedByUserRelevanceModifier;
 
 export interface ContentRecommendationRequest {
   $type: string;
@@ -1288,6 +1439,31 @@ export interface DataObjectValueSelector {
   filter?: DataObjectFilter | null;
   childSelector?: DataObjectValueSelector | null;
   fallbackSelector?: DataObjectValueSelector | null;
+}
+
+export interface DataRelevanceModifier {
+  $type: string;
+  key?: string | null;
+  considerAsMatchIfKeyIsNotFound: boolean;
+  /**
+   * @deprecated
+   * @format double
+   */
+  multiplyWeightBy: number;
+  mustMatchAllConditions: boolean;
+  conditions?:
+    | (
+        | ContainsCondition
+        | DistinctCondition
+        | EqualsCondition
+        | GreaterThanCondition
+        | LessThanCondition
+        | RelativeDateTimeCondition
+      )[]
+    | null;
+  multiplierSelector?: DataDoubleSelector | FixedDoubleValueSelector | null;
+  filters?: FilterCollection | null;
+  custom?: Record<string, string | null>;
 }
 
 export interface DataValue {
@@ -1772,8 +1948,10 @@ export interface FilterCollection {
         | ContentCategoryHasParentFilter
         | ContentCategoryIdFilter
         | ContentCategoryLevelFilter
+        | ContentCategoryRecentlyViewedByUserFilter
         | ContentDataFilter
         | ContentIdFilter
+        | ContentRecentlyViewedByUserFilter
         | OrFilter
         | ProductAndVariantIdFilter
         | ProductAssortmentFilter
@@ -1785,6 +1963,7 @@ export interface FilterCollection {
         | ProductCategoryHasProductsFilter
         | ProductCategoryIdFilter
         | ProductCategoryLevelFilter
+        | ProductCategoryRecentlyViewedByUserFilter
         | ProductDataFilter
         | ProductDisplayNameFilter
         | ProductHasVariantsFilter
@@ -1793,9 +1972,11 @@ export interface FilterCollection {
         | ProductRecentlyPurchasedByCompanyFilter
         | ProductRecentlyPurchasedByUserCompanyFilter
         | ProductRecentlyPurchasedByUserFilter
+        | ProductRecentlyPurchasedByUserParentCompanyFilter
         | ProductRecentlyViewedByCompanyFilter
         | ProductRecentlyViewedByUserCompanyFilter
         | ProductRecentlyViewedByUserFilter
+        | ProductRecentlyViewedByUserParentCompanyFilter
         | ProductSalesPriceFilter
         | VariantAssortmentFilter
         | VariantDataFilter
@@ -1820,6 +2001,11 @@ export interface FilterScopes {
 
 export interface FilterSettings {
   scopes?: FilterScopes | null;
+}
+
+export interface FilteredVariantsSettings {
+  filters?: FilterCollection | null;
+  inheritFiltersFromRequest?: boolean | null;
 }
 
 export type FixedDoubleValueSelector = ValueSelector & {
@@ -1937,6 +2123,8 @@ export type HtmlParser = Parser;
 
 export type IChange = object;
 
+export type ISchedule = object;
+
 export type ITriggerResult = object;
 
 export interface IndexConfiguration {
@@ -2047,6 +2235,88 @@ export interface LineItem {
   data?: Record<string, DataValue>;
 }
 
+export type Location = RetailMediaEntity & {
+  name: string;
+  slug?: string | null;
+  placeholders?: LocationPlaceholderCollection | null;
+};
+
+export interface LocationEntityResponse {
+  $type: string;
+  entities?: Location[] | null;
+  /** @format int32 */
+  hits: number;
+  hitsPerState?: {
+    /** @format int32 */
+    Draft: number;
+    /** @format int32 */
+    Approved: number;
+    /** @format int32 */
+    Disapproved: number;
+    /** @format int32 */
+    Archived: number;
+  } | null;
+  statistics?: Statistics | null;
+}
+
+export interface LocationPlaceholder {
+  name: string;
+  slug?: string | null;
+  variations?: LocationPlaceholderVariationCollection | null;
+}
+
+export interface LocationPlaceholderCollection {
+  items: LocationPlaceholder[];
+}
+
+export interface LocationPlaceholderVariation {
+  name: string;
+  slug?: string | null;
+  supportedPromotions?: PromotionSpecificationCollection | null;
+}
+
+export interface LocationPlaceholderVariationCollection {
+  items: LocationPlaceholderVariation[];
+}
+
+export interface LocationSaveEntitiesRequest {
+  $type: string;
+  entities: Location[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface LocationSaveEntitiesResponse {
+  $type: string;
+  entities?: Location[] | null;
+  statistics?: Statistics | null;
+}
+
+export type LocationsRequest = LocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest;
+
+export type LocationsRequestEntityFilters = RetailMediaEntityEntityFilters & {
+  ids?: string[] | null;
+  slugs?: string[] | null;
+};
+
+export interface LocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: LocationsRequestEntityFilters | null;
+  sorting?: LocationsRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface LocationsRequestSortBySorting {
+  sortBy: "Created" | "Modified" | "Name";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type LocationsResponse = LocationEntityResponse;
+
 export interface MatchTypeSettings {
   compound: boolean;
   exact: boolean;
@@ -2096,6 +2366,27 @@ export type MerchandisingRulesRequest = LicensedRequest & {
   /** @format int32 */
   type?: number | null;
 };
+
+export interface Metadata {
+  /** @format date-time */
+  created: string;
+  createdBy: string;
+  /** @format date-time */
+  drafted?: string | null;
+  draftedBy?: string | null;
+  /** @format date-time */
+  modified: string;
+  modifiedBy: string;
+  /** @format date-time */
+  approved?: string | null;
+  approvedBy?: string | null;
+  /** @format date-time */
+  disapproved?: string | null;
+  disapprovedBy?: string | null;
+  /** @format date-time */
+  archived?: string | null;
+  archivedBy?: string | null;
+}
 
 export type MixedRecommendationResponseCollection = TimedResponse & {
   responses?:
@@ -2217,8 +2508,10 @@ export type OrFilter = Filter & {
     | ContentCategoryHasParentFilter
     | ContentCategoryIdFilter
     | ContentCategoryLevelFilter
+    | ContentCategoryRecentlyViewedByUserFilter
     | ContentDataFilter
     | ContentIdFilter
+    | ContentRecentlyViewedByUserFilter
     | OrFilter
     | ProductAndVariantIdFilter
     | ProductAssortmentFilter
@@ -2230,6 +2523,7 @@ export type OrFilter = Filter & {
     | ProductCategoryHasProductsFilter
     | ProductCategoryIdFilter
     | ProductCategoryLevelFilter
+    | ProductCategoryRecentlyViewedByUserFilter
     | ProductDataFilter
     | ProductDisplayNameFilter
     | ProductHasVariantsFilter
@@ -2238,9 +2532,11 @@ export type OrFilter = Filter & {
     | ProductRecentlyPurchasedByCompanyFilter
     | ProductRecentlyPurchasedByUserCompanyFilter
     | ProductRecentlyPurchasedByUserFilter
+    | ProductRecentlyPurchasedByUserParentCompanyFilter
     | ProductRecentlyViewedByCompanyFilter
     | ProductRecentlyViewedByUserCompanyFilter
     | ProductRecentlyViewedByUserFilter
+    | ProductRecentlyViewedByUserParentCompanyFilter
     | ProductSalesPriceFilter
     | VariantAssortmentFilter
     | VariantDataFilter
@@ -2609,6 +2905,8 @@ export type ProductCategoryDataObjectFacet = DataObjectFacet;
 
 export type ProductCategoryDataObjectFacetResult = DataObjectFacetResult;
 
+export type ProductCategoryDataRelevanceModifier = DataRelevanceModifier;
+
 export type ProductCategoryDataSorting = ProductCategorySorting & {
   key?: string | null;
   mode: "Auto" | "Alphabetical" | "Numerical";
@@ -2776,6 +3074,15 @@ export type ProductCategoryLevelFilter = CategoryLevelFilter;
 export type ProductCategoryPopularitySorting = ProductCategorySorting;
 
 export type ProductCategoryQuery = ProductCategoryIdFilterCategoryQuery;
+
+export type ProductCategoryRecentlyViewedByUserFilter = Filter & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ProductCategoryRecentlyViewedByUserRelevanceModifier = RecentlyViewedByUserRelevanceModifier;
 
 export interface ProductCategoryRecommendationRequest {
   $type: string;
@@ -2975,27 +3282,7 @@ export type ProductDataObjectSorting = ProductSorting & {
   valueSelector: DataObjectValueSelector;
 };
 
-export type ProductDataRelevanceModifier = RelevanceModifier & {
-  key?: string | null;
-  considerAsMatchIfKeyIsNotFound: boolean;
-  /**
-   * @deprecated
-   * @format double
-   */
-  multiplyWeightBy: number;
-  mustMatchAllConditions: boolean;
-  conditions?:
-    | (
-        | ContainsCondition
-        | DistinctCondition
-        | EqualsCondition
-        | GreaterThanCondition
-        | LessThanCondition
-        | RelativeDateTimeCondition
-      )[]
-    | null;
-  multiplierSelector?: DataDoubleSelector | FixedDoubleValueSelector | null;
-};
+export type ProductDataRelevanceModifier = DataRelevanceModifier;
 
 export type ProductDataSorting = ProductSorting & {
   key?: string | null;
@@ -3011,6 +3298,8 @@ export type ProductDetailsCollectionResponse = TimedResponse & {
   products?: ProductResultDetails[] | null;
   /** @format int32 */
   totalNumberOfResults?: number | null;
+  /** @format uuid */
+  nextPageToken?: string | null;
 };
 
 export type ProductDisplayNameFilter = Filter & {
@@ -3271,73 +3560,172 @@ export interface ProductPerformanceResultViewsMetrics {
 
 export type ProductPopularitySorting = ProductSorting;
 
+export type ProductPromotion = Promotion & {
+  filters: FilterCollection;
+};
+
+export type ProductPromotionResult = PromotionResult & {
+  entries?: ProductPromotionResultEntry[] | null;
+};
+
+export interface ProductPromotionResultEntry {
+  product?: ProductResult | null;
+}
+
+export type ProductPromotionSpecification = PromotionSpecification & {
+  /** @format int32 */
+  maxCount?: number | null;
+  promotableProducts?: FilterCollection | null;
+};
+
 export interface ProductPropertySelector {
   $type: string;
 }
 
 export type ProductQuery = LicensedRequest & {
   filters: FilterCollection;
-  /** @format int32 */
+  /**
+   * @deprecated
+   * @format int32
+   */
   numberOfResults: number;
   language?: Language | null;
   currency?: Currency | null;
-  /** @format int32 */
+  /**
+   * @deprecated
+   * @format int32
+   */
   skipNumberOfResults: number;
   returnTotalNumberOfResults: boolean;
   includeDisabledProducts: boolean;
   includeDisabledVariants: boolean;
   excludeProductsWithNoVariants: boolean;
+  /** @format uuid */
+  nextPageToken?: string | null;
+  /** @format int32 */
+  pageSize?: number | null;
 };
 
 export type ProductRecentlyPurchasedByCompanyFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
   companyIds: string[];
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ProductRecentlyPurchasedByCompanyRelevanceModifier = RelevanceModifier & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  companyIds?: string[] | null;
+  /** @format double */
+  ifPurchasedByCompanyMultiplyWeightBy: number;
+  /** @format double */
+  elseIfNotPurchasedByCompanyMultiplyWeightBy: number;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
 export type ProductRecentlyPurchasedByUserCompanyFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ProductRecentlyPurchasedByUserCompanyRelevanceModifier = RelevanceModifier & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format double */
+  ifPurchasedByCompanyMultiplyWeightBy: number;
+  /** @format double */
+  elseIfPurchasedByParentCompanyMultiplyWeightBy: number;
+  /** @format double */
+  elseIfNotPurchasedByEitherCompanyMultiplyWeightBy: number;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
 export type ProductRecentlyPurchasedByUserFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ProductRecentlyPurchasedByUserParentCompanyFilter = Filter & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
 export type ProductRecentlyPurchasedByUserRelevanceModifier = RelevanceModifier & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
   /** @format double */
   ifPreviouslyPurchasedByUserMultiplyWeightBy: number;
   /** @format double */
   ifNotPreviouslyPurchasedByUserMultiplyWeightBy: number;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
 export type ProductRecentlyViewedByCompanyFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
   companyIds: string[];
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ProductRecentlyViewedByCompanyRelevanceModifier = RelevanceModifier & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  companyIds?: string[] | null;
+  /** @format double */
+  ifViewedByCompanyMultiplyWeightBy: number;
+  /** @format double */
+  elseIfNotViewedByCompanyMultiplyWeightBy: number;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
 export type ProductRecentlyViewedByUserCompanyFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+};
+
+export type ProductRecentlyViewedByUserCompanyRelevanceModifier = RelevanceModifier & {
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format double */
+  ifViewedByUserCompanyMultiplyWeightBy: number;
+  /** @format double */
+  elseIfViewedByUserParentCompanyMultiplyWeightBy: number;
+  /** @format double */
+  elseIfNotViewedByEitherCompanyMultiplyWeightBy: number;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
 export type ProductRecentlyViewedByUserFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
 
-export type ProductRecentlyViewedByUserRelevanceModifier = RelevanceModifier & {
+export type ProductRecentlyViewedByUserParentCompanyFilter = Filter & {
   /** @format date-time */
-  sinceUtc: string;
-  /** @format double */
-  ifPreviouslyViewedByUserMultiplyWeightBy: number;
-  /** @format double */
-  ifNotPreviouslyViewedByUserMultiplyWeightBy: number;
+  sinceUtc?: string | null;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
 };
+
+export type ProductRecentlyViewedByUserRelevanceModifier = RecentlyViewedByUserRelevanceModifier;
 
 export interface ProductRecommendationRequest {
   $type: string;
@@ -3418,6 +3806,9 @@ export interface ProductResult {
   salesPrice?: number | null;
   brand?: BrandResult | null;
   allVariants?: VariantResult[] | null;
+  purchasedByUserCompany?: PurchasedByUserCompanyInfo | null;
+  viewedByUserCompany?: ViewedByUserCompanyInfo | null;
+  filteredVariants?: VariantResult[] | null;
   position?: string | null;
 }
 
@@ -3451,6 +3842,7 @@ export interface ProductResultDetails {
   listPrice?: MultiCurrency | null;
   salesPrice?: MultiCurrency | null;
   brand?: BrandResultDetails | null;
+  filteredVariants?: VariantResultDetails[] | null;
 }
 
 export type ProductSalesPriceFilter = Filter & {
@@ -3474,11 +3866,12 @@ export type ProductSearchRequest = PaginatedSearchRequest & {
 };
 
 export type ProductSearchResponse = PaginatedSearchResponse & {
-  presorterIsReady: boolean;
   results?: ProductResult[] | null;
   facets?: ProductFacetResult | null;
   recommendations?: ProductResult[] | null;
   redirects?: RedirectResult[] | null;
+  promotions?: RetailMediaResult | null;
+  presorterIsReady: boolean;
 };
 
 export type ProductSearchSettings = SearchSettings & {
@@ -3490,6 +3883,7 @@ export type ProductSearchSettings = SearchSettings & {
   recommendations: RecommendationSettings;
   selectedBrandProperties?: SelectedBrandPropertiesSettings | null;
   variantSettings?: VariantSearchSettings | null;
+  retailMediaSettings?: RetailMediaSettings | null;
 };
 
 export interface ProductSortBySpecification {
@@ -3564,6 +3958,63 @@ export type ProductsViewedAfterViewingProductRequest = ProductRecommendationRequ
   productAndVariantId: ProductAndVariantId;
 };
 
+export interface Promotion {
+  $type: string;
+  name: string;
+  description?: string | null;
+  placements?: PromotionPlacementCollection | null;
+}
+
+export interface PromotionCollection {
+  promotions: ProductPromotion[];
+}
+
+export interface PromotionPlacement {
+  locationSlug: string;
+  placeholders?: PromotionPlacementPlaceholderCollection | null;
+}
+
+export interface PromotionPlacementCollection {
+  items: PromotionPlacement[];
+}
+
+export interface PromotionPlacementPlaceholder {
+  slug: string;
+  variations?: PromotionPlacementPlaceholderVariationCollection | null;
+}
+
+export interface PromotionPlacementPlaceholderCollection {
+  items?: PromotionPlacementPlaceholder[] | null;
+}
+
+export interface PromotionPlacementPlaceholderVariation {
+  slug?: string | null;
+}
+
+export interface PromotionPlacementPlaceholderVariationCollection {
+  items?: PromotionPlacementPlaceholderVariation[] | null;
+}
+
+export interface PromotionResult {
+  $type: string;
+}
+
+export interface PromotionSpecification {
+  $type: string;
+}
+
+export interface PromotionSpecificationCollection {
+  productPromotion?: ProductPromotionSpecification | null;
+}
+
+export interface PurchasedByUserCompanyInfo {
+  /** @format date-time */
+  mostRecentPurchasedUtc: string;
+  /** @format int64 */
+  totalNumberOfTimesPurchased: number;
+  purchasedByParentCompany?: PurchasedByUserCompanyInfo | null;
+}
+
 export interface PurchasedByUserInfo {
   /** @format date-time */
   mostRecentPurchasedUtc: string;
@@ -3580,6 +4031,20 @@ export type PurchasedWithMultipleProductsRequest = ProductRecommendationRequest 
 export type PurchasedWithProductRequest = ProductRecommendationRequest & {
   productAndVariantId: ProductAndVariantId;
 };
+
+export interface RecentlyViewedByUserRelevanceModifier {
+  $type: string;
+  /** @format date-time */
+  sinceUtc?: string | null;
+  /** @format double */
+  ifPreviouslyViewedByUserMultiplyWeightBy: number;
+  /** @format double */
+  ifNotPreviouslyViewedByUserMultiplyWeightBy: number;
+  /** @format int32 */
+  sinceMinutesAgo?: number | null;
+  filters?: FilterCollection | null;
+  custom?: Record<string, string | null>;
+}
 
 export type RecentlyViewedProductsRequest = ProductRecommendationRequest;
 
@@ -3690,12 +4155,22 @@ export interface RelevanceModifierCollection {
   items?:
     | (
         | BrandIdRelevanceModifier
+        | ContentCategoryDataRelevanceModifier
+        | ContentCategoryRecentlyViewedByUserRelevanceModifier
+        | ContentDataRelevanceModifier
+        | ContentRecentlyViewedByUserRelevanceModifier
         | ProductAssortmentRelevanceModifier
+        | ProductCategoryDataRelevanceModifier
         | ProductCategoryIdRelevanceModifier
+        | ProductCategoryRecentlyViewedByUserRelevanceModifier
         | ProductDataRelevanceModifier
         | ProductIdRelevanceModifier
         | ProductListPriceRelevanceModifier
+        | ProductRecentlyPurchasedByCompanyRelevanceModifier
+        | ProductRecentlyPurchasedByUserCompanyRelevanceModifier
         | ProductRecentlyPurchasedByUserRelevanceModifier
+        | ProductRecentlyViewedByCompanyRelevanceModifier
+        | ProductRecentlyViewedByUserCompanyRelevanceModifier
         | ProductRecentlyViewedByUserRelevanceModifier
         | ProductSalesPriceRelevanceModifier
         | UserFavoriteProductRelevanceModifier
@@ -3732,6 +4207,54 @@ export interface RequestFilterCriteria {
   count?: Int32NullableRange | null;
 }
 
+export interface RetailMediaEntity {
+  $type: string;
+  /** @format uuid */
+  id?: string | null;
+  state: "Draft" | "Approved" | "Disapproved" | "Archived";
+  metadata: Metadata;
+}
+
+export interface RetailMediaEntityEntityFilters {
+  $type: string;
+  term?: string | null;
+  states?: ("Draft" | "Approved" | "Disapproved" | "Archived")[] | null;
+}
+
+export interface RetailMediaResult {
+  locations?: Record<string, RetailMediaResultLocation>;
+}
+
+export interface RetailMediaResultLocation {
+  placeholders?: Record<string, RetailMediaResultLocationPlaceholder>;
+}
+
+export interface RetailMediaResultLocationPlaceholder {
+  variations?: Record<string, RetailMediaResultLocationPlaceholderVariation>;
+}
+
+export interface RetailMediaResultLocationPlaceholderVariation {
+  products?: ProductPromotionResult[] | null;
+}
+
+export interface RetailMediaSettings {
+  selectors: RetailMediaSettingsSelector[];
+}
+
+export interface RetailMediaSettingsSelector {
+  locationSlug: string;
+  placeholderSlug?: string | null;
+  variationSlug?: string | null;
+}
+
+export type SaveAdvertisersRequest = AdvertiserSaveEntitiesRequest;
+
+export type SaveAdvertisersResponse = AdvertiserSaveEntitiesResponse;
+
+export type SaveCampaignsRequest = CampaignSaveEntitiesRequest;
+
+export type SaveCampaignsResponse = CampaignSaveEntitiesResponse;
+
 export type SaveDecompoundRulesRequest = DecompoundRuleSaveSearchRulesRequest;
 
 export type SaveDecompoundRulesResponse = DecompoundRuleSaveSearchRulesResponse;
@@ -3740,6 +4263,10 @@ export type SaveGlobalTriggerConfigurationRequest = LicensedRequest & {
   configuration?: GlobalTriggerConfiguration | null;
   modifiedBy?: string | null;
 };
+
+export type SaveLocationsRequest = LocationSaveEntitiesRequest;
+
+export type SaveLocationsResponse = LocationSaveEntitiesResponse;
 
 export type SaveMerchandisingRuleRequest = LicensedRequest & {
   rule?: BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule | null;
@@ -4133,6 +4660,9 @@ export interface SelectedProductPropertiesSettings {
   brand: boolean;
   allVariants: boolean;
   dataKeys?: string[] | null;
+  viewedByUserCompanyInfo: boolean;
+  purchasedByUserCompanyInfo: boolean;
+  filteredVariants?: FilteredVariantsSettings | null;
 }
 
 export interface SelectedVariantPropertiesSettings {
@@ -4788,27 +5318,7 @@ export interface VariantChangeTriggerResultVariantChangeTriggerResultSettingsVar
 
 export type VariantDataFilter = DataFilter;
 
-export type VariantDataRelevanceModifier = RelevanceModifier & {
-  key?: string | null;
-  considerAsMatchIfKeyIsNotFound: boolean;
-  /**
-   * @deprecated
-   * @format double
-   */
-  multiplyWeightBy: number;
-  mustMatchAllConditions: boolean;
-  conditions?:
-    | (
-        | ContainsCondition
-        | DistinctCondition
-        | EqualsCondition
-        | GreaterThanCondition
-        | LessThanCondition
-        | RelativeDateTimeCondition
-      )[]
-    | null;
-  multiplierSelector?: DataDoubleSelector | FixedDoubleValueSelector | null;
-};
+export type VariantDataRelevanceModifier = DataRelevanceModifier;
 
 export type VariantIdFilter = Filter & {
   variantIds: string[];
@@ -4916,6 +5426,14 @@ export type VariantSpecificationValueRelevanceModifier = RelevanceModifier & {
 export type VariantSpecificationsInCommonRelevanceModifier = RelevanceModifier & {
   specificationKeysAndMultipliers?: KeyMultiplier[] | null;
 };
+
+export interface ViewedByUserCompanyInfo {
+  /** @format date-time */
+  mostRecentlyViewedUtc: string;
+  /** @format int64 */
+  totalNumberOfTimesViewed: number;
+  viewedByParentCompany?: ViewedByUserCompanyInfo | null;
+}
 
 export interface ViewedByUserInfo {
   /** @format date-time */

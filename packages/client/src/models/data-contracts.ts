@@ -490,11 +490,23 @@ export type BrandView = Trackable & {
   channel?: Channel | null;
 };
 
+export interface Budget {
+  $type: string;
+  maxTotalCost?: MultiCurrency | null;
+}
+
+export type CPMBudget = Budget & {
+  costPerMille?: MultiCurrency | null;
+};
+
 export type Campaign = RetailMediaEntity & {
   name: string;
   description?: string | null;
   schedule?: ISchedule | null;
   promotions: PromotionCollection;
+  /** @format uuid */
+  advertiserId: string;
+  budget: CPMBudget;
 };
 
 export interface CampaignEntityResponse {
@@ -3809,7 +3821,6 @@ export interface ProductResult {
   purchasedByUserCompany?: PurchasedByUserCompanyInfo | null;
   viewedByUserCompany?: ViewedByUserCompanyInfo | null;
   filteredVariants?: VariantResult[] | null;
-  position?: string | null;
 }
 
 export interface ProductResultDetails {
@@ -3871,7 +3882,6 @@ export type ProductSearchResponse = PaginatedSearchResponse & {
   recommendations?: ProductResult[] | null;
   redirects?: RedirectResult[] | null;
   promotions?: RetailMediaResult | null;
-  presorterIsReady: boolean;
 };
 
 export type ProductSearchSettings = SearchSettings & {

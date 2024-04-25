@@ -65,6 +65,7 @@ test('Retail Media search', async() => {
     const request: ProductSearchRequest = baseProductBuilder()
         .setRetailMediaSelectors([
             { locationSlug: 'SEARCH_RESULTS_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
+            { locationSlug: 'CATEGORY_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
         ])
         .build();
 

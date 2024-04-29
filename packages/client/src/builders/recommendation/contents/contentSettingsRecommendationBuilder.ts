@@ -15,8 +15,12 @@ export class ContentSettingsRecommendationBuilder extends RecommendationRequestB
         super(settings);
     }
 
-    public setSelectedContentProperties(contentProperties: Partial<SelectedContentPropertiesSettings>): this {
-        this.recommendationSettings.selectedContentProperties = contentProperties as SelectedContentPropertiesSettings;
+    /**
+     * Select the properties of the content to be returned, by default only the content id is returned.
+     * @param contentProperties  
+     */
+    public setSelectedContentProperties(contentProperties: Partial<SelectedContentPropertiesSettings> | null): this {
+        this.recommendationSettings.selectedContentProperties = contentProperties as SelectedContentPropertiesSettings | null;
 
         return this;
     }

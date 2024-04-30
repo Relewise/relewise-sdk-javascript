@@ -21,8 +21,12 @@ export class ProductCategorySearchBuilder extends SearchRequestBuilder implement
         super(settings)
     }
 
-    public setSelectedCategoryProperties(productCategoryProperties: Partial<SelectedProductCategoryPropertiesSettings>): this {
-        this.searchSettings.selectedCategoryProperties = productCategoryProperties as SelectedProductCategoryPropertiesSettings;
+    /**
+     * Select the properties of the product category to be returned, by default only the product category id is returned.
+     * @param productCategoryProperties  
+     */
+    public setSelectedCategoryProperties(productCategoryProperties: Partial<SelectedProductCategoryPropertiesSettings> | null): this {
+        this.searchSettings.selectedCategoryProperties = productCategoryProperties as SelectedProductCategoryPropertiesSettings | null;
 
         return this;
     }

@@ -15,12 +15,16 @@ export class ContentCategorySettingsRecommendationBuilder extends Recommendation
         super(settings);
     }
 
-    public setSelectedContentCategoryProperties(ContentCategoryProperties: Partial<SelectedContentCategoryPropertiesSettings>): this {
-        this.recommendationSettings.selectedContentCategoryProperties = ContentCategoryProperties as SelectedContentCategoryPropertiesSettings;
+    /**
+     * Select the properties of the content category to be returned, by default only the content category id is returned.
+     * @param contentCategoryProperties  
+     */
+    public setSelectedContentCategoryProperties(contentCategoryProperties: Partial<SelectedContentCategoryPropertiesSettings> | null): this {
+        this.recommendationSettings.selectedContentCategoryProperties = contentCategoryProperties as SelectedContentCategoryPropertiesSettings | null;
 
         return this;
     }
-
+    
     public setNumberOfRecommendations(count: number): this {
         this.recommendationSettings.numberOfRecommendations = count;
 

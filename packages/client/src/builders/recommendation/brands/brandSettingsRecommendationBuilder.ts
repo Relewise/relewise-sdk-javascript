@@ -15,8 +15,12 @@ export class BrandSettingsRecommendationBuilder extends RecommendationRequestBui
         super(settings);
     }
 
-    public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings>): this {
-        this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings;
+    /**
+     * Select the properties of the brand to be returned, by default only the brand id is returned.
+     * @param brandProperties  
+     */
+    public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings> | null): this {
+        this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings | null;
 
         return this;
     }

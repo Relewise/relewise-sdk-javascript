@@ -1,4 +1,4 @@
-import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, RetailMediaSettings, RetailMediaSettingsSelector, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
+import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, RetailMediaQuery, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { FacetBuilder } from './facetBuilder';
@@ -8,6 +8,7 @@ import { SearchRequestBuilder } from './searchRequestBuilder';
 
 export class ProductSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
     private facetBuilder: FacetBuilder = new FacetBuilder();
+    private retailMediaQuery: RetailMediaQuery | null = null;
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private sortingBuilder: ProductSortingBuilder = new ProductSortingBuilder();
     private term: string | null | undefined;
@@ -57,14 +58,8 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    public setRetailMediaSettings(settings: RetailMediaSettings): this {
-        this.searchSettings.retailMediaSettings = settings;
-
-        return this;
-    }
-
-    public setRetailMediaSelectors(selectors: RetailMediaSettingsSelector[] ): this {
-        this.searchSettings.retailMediaSettings = { selectors: selectors };
+    public setRetailMedia(query: RetailMediaQuery): this {
+        this.retailMediaQuery = query;
 
         return this;
     }
@@ -110,6 +105,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
             facets: this.facetBuilder.build(),
             settings: this.searchSettings,
             sorting: this.sortingBuilder.build(),
+            retailMediaQuery: this.retailMediaQuery,
         } as ProductSearchRequest;
     }
 }

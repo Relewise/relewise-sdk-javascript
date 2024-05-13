@@ -49,24 +49,11 @@ test('Product search - data object facets', async() => {
 
 test('Retail Media search', async() => {
     const request: ProductSearchRequest = baseProductBuilder()
-        .setRetailMediaSettings({
-            selectors: [
-                { locationSlug: 'SEARCH_RESULTS_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
-            ],
+        .setRetailMedia({
+            location: {
+                key: 'SEARCH_RESULTS_PAGE', placements: [{ key: 'TOP' }], variation: { key: 'DESKTOP' },
+            },
         })
-        .build();
-
-    const result = await searcher.searchProducts(request);
-
-    expect(result?.hits).toBeGreaterThan(0);
-});
-
-test('Retail Media search', async() => {
-    const request: ProductSearchRequest = baseProductBuilder()
-        .setRetailMediaSelectors([
-            { locationSlug: 'SEARCH_RESULTS_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
-            { locationSlug: 'CATEGORY_PAGE', placeholderSlug: 'TOP', variationSlug: 'DESKTOP' },
-        ])
         .build();
 
     const result = await searcher.searchProducts(request);

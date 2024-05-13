@@ -105,7 +105,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
             facets: this.facetBuilder.build(),
             settings: this.searchSettings,
             sorting: this.sortingBuilder.build(),
-            retailMediaQuery: this.retailMediaQuery,
+            retailMedia: this.retailMediaQuery,
         } as ProductSearchRequest;
     }
 }

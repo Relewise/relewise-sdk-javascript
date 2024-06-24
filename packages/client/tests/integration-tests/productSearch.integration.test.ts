@@ -39,6 +39,21 @@ test('Product search - data object facets', async() => {
                 skip: 2,
             },
             { alwaysIncludeSelectedInAvailable: true, includeZeroHitsInAvailable: false }))
+
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('Retail Media search', async() => {
+    const request: ProductSearchRequest = baseProductBuilder()
+        .setRetailMedia({
+            location: {
+                key: 'SEARCH_RESULTS_PAGE', placements: [{ key: 'TOP' }], variation: { key: 'DESKTOP' },
+            },
+        })
         .build();
 
     const result = await searcher.searchProducts(request);

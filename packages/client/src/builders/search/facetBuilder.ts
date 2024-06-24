@@ -45,7 +45,7 @@ export class FacetBuilder {
         return this;
     }
 
-    public addProductCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedProductCategoryPropertiesSettings>, facetSettings?: FacetSettings): this {
+    public addProductCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedProductCategoryPropertiesSettings>, facetSettings?: FacetSettings): this {
         const facet: CategoryHierarchyFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryHierarchyFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,
@@ -62,7 +62,7 @@ export class FacetBuilder {
         return this;
     }
 
-    public addContentCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedContentCategoryPropertiesSettings>, facetSettings?: FacetSettings): this {
+    public addContentCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedContentCategoryPropertiesSettings>, facetSettings?: FacetSettings): this {
         const facet: CategoryHierarchyFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryHierarchyFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,

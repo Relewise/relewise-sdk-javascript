@@ -16,20 +16,32 @@ export class ProductSettingsRecommendationBuilder extends RecommendationRequestB
         super(settings);
     }
 
-    public setSelectedProductProperties(productProperties: Partial<SelectedProductPropertiesSettings>): this {
-        this.recommendationSettings.selectedProductProperties = productProperties as SelectedProductPropertiesSettings;
+    /**
+     * Select the properties of the product to be returned, by default only the product id is returned.
+     * @param productProperties  
+     */
+    public setSelectedProductProperties(productProperties: Partial<SelectedProductPropertiesSettings> | null): this {
+        this.recommendationSettings.selectedProductProperties = productProperties as SelectedProductPropertiesSettings | null;
 
         return this;
     }
 
-    public setSelectedVariantProperties(variantProperties: Partial<SelectedVariantPropertiesSettings>): this {
-        this.recommendationSettings.selectedVariantProperties = variantProperties as SelectedVariantPropertiesSettings;
+    /**
+    * Select the properties of the variant to be returned, by default only the variant id is returned.  
+    * @param variantProperties  
+    */
+    public setSelectedVariantProperties(variantProperties: Partial<SelectedVariantPropertiesSettings> | null): this {
+        this.recommendationSettings.selectedVariantProperties = variantProperties as SelectedVariantPropertiesSettings | null;
 
         return this;
     }
 
-    public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings>): this {
-        this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings;
+    /**
+     * Select the properties of the brand to be returned, by default only the brand id is returned.
+     * @param brandProperties  
+     */
+    public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings> | null): this {
+        this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings | null;
 
         return this;
     }

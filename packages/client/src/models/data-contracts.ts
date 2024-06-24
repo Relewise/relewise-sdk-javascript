@@ -65,7 +65,7 @@ export interface AbandonedSearchTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
-export type Advertiser = AdvertiserEntityStateAdvertiserMetadataCollectionRetailMediaEntity & {
+export type Advertiser = AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity & {
   name: string;
   allowedPromotions?: PromotionSpecificationCollection | null;
   allowedLocations?: PromotionLocationCollection | null;
@@ -87,7 +87,7 @@ export interface AdvertiserAdvertiserEntityStateEntityResponse {
   statistics?: Statistics | null;
 }
 
-export interface AdvertiserEntityStateAdvertiserMetadataCollectionAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest {
+export interface AdvertiserEntityStateAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest {
   $type: string;
   filters?: AdvertisersRequestEntityFilters | null;
   sorting?: AdvertisersRequestSortBySorting | null;
@@ -98,15 +98,15 @@ export interface AdvertiserEntityStateAdvertiserMetadataCollectionAdvertisersReq
   custom?: Record<string, string | null>;
 }
 
-export interface AdvertiserEntityStateAdvertiserMetadataCollectionRetailMediaEntity {
+export interface AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity {
   $type: string;
   state: "Active" | "Inactive" | "Archived";
-  metadata: AdvertiserMetadataCollection;
+  metadata: AdvertiserMetadataValues;
   /** @format uuid */
   id?: string | null;
 }
 
-export type AdvertiserMetadataCollection = MetadataCollection & {
+export type AdvertiserMetadataValues = MetadataValues & {
   /** @format date-time */
   inactivated?: string | null;
   inactivatedBy?: string | null;
@@ -132,10 +132,10 @@ export interface AdvertiserSaveEntitiesResponse {
 }
 
 export type AdvertisersRequest =
-  AdvertiserEntityStateAdvertiserMetadataCollectionAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest;
+  AdvertiserEntityStateAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest;
 
 export type AdvertisersRequestEntityFilters =
-  RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataCollectionRetailMediaEntity2EntityFilters & {
+  RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters & {
     ids?: string[] | null;
   };
 
@@ -162,13 +162,19 @@ export type AndFilter = Filter & {
     | AndFilter
     | BrandAssortmentFilter
     | BrandDataFilter
+    | BrandDataHasKeyFilter
+    | BrandDisabledFilter
     | BrandIdFilter
     | CartDataFilter
     | CompanyDataFilter
+    | CompanyDataHasKeyFilter
+    | CompanyDisabledFilter
     | CompanyIdFilter
     | ContentAssortmentFilter
     | ContentCategoryAssortmentFilter
     | ContentCategoryDataFilter
+    | ContentCategoryDataHasKeyFilter
+    | ContentCategoryDisabledFilter
     | ContentCategoryHasAncestorFilter
     | ContentCategoryHasChildFilter
     | ContentCategoryHasContentsFilter
@@ -177,6 +183,9 @@ export type AndFilter = Filter & {
     | ContentCategoryLevelFilter
     | ContentCategoryRecentlyViewedByUserFilter
     | ContentDataFilter
+    | ContentDataHasKeyFilter
+    | ContentDisabledFilter
+    | ContentHasCategoriesFilter
     | ContentIdFilter
     | ContentRecentlyViewedByUserFilter
     | OrFilter
@@ -184,6 +193,8 @@ export type AndFilter = Filter & {
     | ProductAssortmentFilter
     | ProductCategoryAssortmentFilter
     | ProductCategoryDataFilter
+    | ProductCategoryDataHasKeyFilter
+    | ProductCategoryDisabledFilter
     | ProductCategoryHasAncestorFilter
     | ProductCategoryHasChildFilter
     | ProductCategoryHasParentFilter
@@ -192,7 +203,10 @@ export type AndFilter = Filter & {
     | ProductCategoryLevelFilter
     | ProductCategoryRecentlyViewedByUserFilter
     | ProductDataFilter
+    | ProductDataHasKeyFilter
+    | ProductDisabledFilter
     | ProductDisplayNameFilter
+    | ProductHasCategoriesFilter
     | ProductHasVariantsFilter
     | ProductIdFilter
     | ProductListPriceFilter
@@ -207,6 +221,8 @@ export type AndFilter = Filter & {
     | ProductSalesPriceFilter
     | VariantAssortmentFilter
     | VariantDataFilter
+    | VariantDataHasKeyFilter
+    | VariantDisabledFilter
     | VariantIdFilter
     | VariantListPriceFilter
     | VariantSalesPriceFilter
@@ -375,11 +391,17 @@ export type BrandAssortmentFilter = Filter & {
 
 export type BrandDataFilter = DataFilter;
 
+export type BrandDataHasKeyFilter = Filter & {
+  key: string;
+};
+
 export type BrandDetailsCollectionResponse = TimedResponse & {
   brands?: BrandResultDetails[] | null;
   /** @format int32 */
   totalNumberOfResults?: number | null;
 };
+
+export type BrandDisabledFilter = Filter;
 
 export type BrandFacet = StringValueFacet;
 
@@ -513,6 +535,8 @@ export interface Budget {
   $type: string;
   /** @format double */
   maxTotalCost?: number | null;
+  /** @format double */
+  totalCost: number;
 }
 
 export type CPMBudget = Budget & {
@@ -520,13 +544,58 @@ export type CPMBudget = Budget & {
   costPerMille: number;
 };
 
-export type Campaign = CampaignEntityStateCampaignMetadataCollectionRetailMediaEntity & {
+export type Campaign = CampaignEntityStateCampaignMetadataValuesRetailMediaEntity & {
   name: string;
   schedule?: ISchedule | null;
   promotions: PromotionCollection;
   /** @format uuid */
   advertiserId: string;
   budget: CPMBudget;
+  status: CampaignStatusWithHistory;
+};
+
+export interface CampaignAnalytics {
+  products?: CampaignAnalyticsProductAnalytics | null;
+}
+
+export interface CampaignAnalyticsProductAnalytics {
+  timeSeries?: CampaignAnalyticsProductAnalyticsPeriodMetrics[] | null;
+  /** @format int32 */
+  promotions: number;
+  promotedProducts?: CampaignAnalyticsProductAnalyticsPromotedProductMetrics[] | null;
+}
+
+export interface CampaignAnalyticsProductAnalyticsPeriodMetrics {
+  /** @format date-time */
+  periodFromUtc: string;
+  /** @format int32 */
+  views: number;
+  /** @format int32 */
+  salesQuantity: number;
+  currencies?: CampaignAnalyticsProductAnalyticsPeriodMetricsCurrencyMetrics[] | null;
+}
+
+export interface CampaignAnalyticsProductAnalyticsPeriodMetricsCurrencyMetrics {
+  currency?: string | null;
+  /** @format double */
+  revenue: number;
+}
+
+export interface CampaignAnalyticsProductAnalyticsPromotedProductMetrics {
+  productId?: string | null;
+  /** @format int32 */
+  promotions: number;
+}
+
+export type CampaignAnalyticsRequest = LicensedRequest & {
+  /** @format uuid */
+  id: string;
+  periodUtc: DateTimeRange;
+  filters?: FilterCollection | null;
+};
+
+export type CampaignAnalyticsResponse = TimedResponse & {
+  analytics?: CampaignAnalytics | null;
 };
 
 export interface CampaignCampaignEntityStateEntityResponse {
@@ -545,7 +614,7 @@ export interface CampaignCampaignEntityStateEntityResponse {
   statistics?: Statistics | null;
 }
 
-export interface CampaignEntityStateCampaignMetadataCollectionCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest {
+export interface CampaignEntityStateCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest {
   $type: string;
   filters?: CampaignsRequestEntityFilters | null;
   sorting?: CampaignsRequestSortBySorting | null;
@@ -556,15 +625,15 @@ export interface CampaignEntityStateCampaignMetadataCollectionCampaignsRequestSo
   custom?: Record<string, string | null>;
 }
 
-export interface CampaignEntityStateCampaignMetadataCollectionRetailMediaEntity {
+export interface CampaignEntityStateCampaignMetadataValuesRetailMediaEntity {
   $type: string;
   state: "Proposed" | "Approved" | "Archived";
-  metadata: CampaignMetadataCollection;
+  metadata: CampaignMetadataValues;
   /** @format uuid */
   id?: string | null;
 }
 
-export type CampaignMetadataCollection = MetadataCollection & {
+export type CampaignMetadataValues = MetadataValues & {
   /** @format date-time */
   proposed?: string | null;
   proposedBy?: string | null;
@@ -589,11 +658,22 @@ export interface CampaignSaveEntitiesResponse {
   statistics?: Statistics | null;
 }
 
+export interface CampaignStatusWithHistory {
+  current: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached";
+  history: CampaignStatusWithHistoryChange[];
+}
+
+export interface CampaignStatusWithHistoryChange {
+  /** @format date-time */
+  utcTime: string;
+  status: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached";
+}
+
 export type CampaignsRequest =
-  CampaignEntityStateCampaignMetadataCollectionCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest;
+  CampaignEntityStateCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest;
 
 export type CampaignsRequestEntityFilters =
-  RetailMediaEntity2CampaignEntityStateCampaignMetadataCollectionRetailMediaEntity2EntityFilters & {
+  RetailMediaEntity2CampaignEntityStateCampaignMetadataValuesRetailMediaEntity2EntityFilters & {
     ids?: string[] | null;
     advertiserIds?: string[] | null;
   };
@@ -653,15 +733,15 @@ export interface CategoryAdministrativeAction {
 }
 
 export type CategoryFacet = StringValueFacet & {
-  categorySelectionStrategy: "ImmediateParent" | "Ancestors";
+  categorySelectionStrategy: "ImmediateParent" | "Ancestors" | "Descendants";
 };
 
 export type CategoryFacetResult = StringCategoryNameAndIdResultValueFacetResult & {
-  categorySelectionStrategy: "ImmediateParent" | "Ancestors";
+  categorySelectionStrategy: "ImmediateParent" | "Ancestors" | "Descendants";
 };
 
 export type CategoryHierarchyFacet = CategoryPathValueFacet & {
-  categorySelectionStrategy: "ImmediateParent" | "Ancestors";
+  categorySelectionStrategy: "ImmediateParent" | "Ancestors" | "Descendants";
   selectedPropertiesSettings?:
     | SelectedContentCategoryPropertiesSettings
     | SelectedProductCategoryPropertiesSettings
@@ -669,7 +749,7 @@ export type CategoryHierarchyFacet = CategoryPathValueFacet & {
 };
 
 export type CategoryHierarchyFacetResult = FacetResult & {
-  categorySelectionStrategy: "ImmediateParent" | "Ancestors";
+  categorySelectionStrategy: "ImmediateParent" | "Ancestors" | "Descendants";
   nodes: CategoryHierarchyFacetResultCategoryNode[];
 };
 
@@ -789,6 +869,12 @@ export type CompanyAdministrativeAction = Trackable & {
 
 export type CompanyDataFilter = DataFilter;
 
+export type CompanyDataHasKeyFilter = Filter & {
+  key: string;
+};
+
+export type CompanyDisabledFilter = Filter;
+
 export type CompanyIdFilter = Filter & {
   companyIds: string[];
 };
@@ -852,6 +938,10 @@ export type ContentCategoryAssortmentFilter = Filter & {
 
 export type ContentCategoryDataFilter = DataFilter;
 
+export type ContentCategoryDataHasKeyFilter = Filter & {
+  key: string;
+};
+
 export type ContentCategoryDataRelevanceModifier = DataRelevanceModifier;
 
 export type ContentCategoryDetailsCollectionResponse = TimedResponse & {
@@ -859,6 +949,8 @@ export type ContentCategoryDetailsCollectionResponse = TimedResponse & {
   /** @format int32 */
   totalNumberOfResults?: number | null;
 };
+
+export type ContentCategoryDisabledFilter = Filter;
 
 export type ContentCategoryHasAncestorFilter = HasAncestorCategoryFilter;
 
@@ -1041,6 +1133,10 @@ export type ContentDataDoubleValueFacetResult = DoubleContentDataValueFacetResul
 
 export type ContentDataFilter = DataFilter;
 
+export type ContentDataHasKeyFilter = Filter & {
+  key: string;
+};
+
 export type ContentDataIntegerValueFacet = Int32ContentDataValueFacet;
 
 export type ContentDataIntegerValueFacetResult = Int32ContentDataValueFacetResult;
@@ -1065,6 +1161,8 @@ export type ContentDetailsCollectionResponse = TimedResponse & {
   /** @format int32 */
   totalNumberOfResults?: number | null;
 };
+
+export type ContentDisabledFilter = Filter;
 
 export type ContentFacetQuery = FacetQuery & {
   items: (
@@ -1147,6 +1245,8 @@ export interface ContentFacetResult {
       )[]
     | null;
 }
+
+export type ContentHasCategoriesFilter = Filter;
 
 export type ContentIdFilter = Filter & {
   contentIds: string[];
@@ -1356,6 +1456,10 @@ export interface DataIndexConfiguration {
   unspecified?: FieldIndexConfiguration | null;
 }
 
+export type DataKeyPopularityMultiplierSelector = PopularityMultiplierSelector & {
+  key?: string | null;
+};
+
 export interface DataObject {
   data: Record<string, DataValue>;
 }
@@ -1510,6 +1614,7 @@ export interface DataRelevanceModifier {
         | DistinctCondition
         | EqualsCondition
         | GreaterThanCondition
+        | HasValueCondition
         | LessThanCondition
         | RelativeDateTimeCondition
       )[]
@@ -1535,6 +1640,13 @@ export interface DataValue {
     | "ObjectList";
   value?: any;
   isCollection: boolean;
+}
+
+export interface DateTimeRange {
+  /** @format date-time */
+  lowerBoundInclusive: string;
+  /** @format date-time */
+  upperBoundInclusive: string;
 }
 
 export interface DecimalNullableChainableRange {
@@ -1988,13 +2100,19 @@ export interface FilterCollection {
         | AndFilter
         | BrandAssortmentFilter
         | BrandDataFilter
+        | BrandDataHasKeyFilter
+        | BrandDisabledFilter
         | BrandIdFilter
         | CartDataFilter
         | CompanyDataFilter
+        | CompanyDataHasKeyFilter
+        | CompanyDisabledFilter
         | CompanyIdFilter
         | ContentAssortmentFilter
         | ContentCategoryAssortmentFilter
         | ContentCategoryDataFilter
+        | ContentCategoryDataHasKeyFilter
+        | ContentCategoryDisabledFilter
         | ContentCategoryHasAncestorFilter
         | ContentCategoryHasChildFilter
         | ContentCategoryHasContentsFilter
@@ -2003,6 +2121,9 @@ export interface FilterCollection {
         | ContentCategoryLevelFilter
         | ContentCategoryRecentlyViewedByUserFilter
         | ContentDataFilter
+        | ContentDataHasKeyFilter
+        | ContentDisabledFilter
+        | ContentHasCategoriesFilter
         | ContentIdFilter
         | ContentRecentlyViewedByUserFilter
         | OrFilter
@@ -2010,6 +2131,8 @@ export interface FilterCollection {
         | ProductAssortmentFilter
         | ProductCategoryAssortmentFilter
         | ProductCategoryDataFilter
+        | ProductCategoryDataHasKeyFilter
+        | ProductCategoryDisabledFilter
         | ProductCategoryHasAncestorFilter
         | ProductCategoryHasChildFilter
         | ProductCategoryHasParentFilter
@@ -2018,7 +2141,10 @@ export interface FilterCollection {
         | ProductCategoryLevelFilter
         | ProductCategoryRecentlyViewedByUserFilter
         | ProductDataFilter
+        | ProductDataHasKeyFilter
+        | ProductDisabledFilter
         | ProductDisplayNameFilter
+        | ProductHasCategoriesFilter
         | ProductHasVariantsFilter
         | ProductIdFilter
         | ProductListPriceFilter
@@ -2033,6 +2159,8 @@ export interface FilterCollection {
         | ProductSalesPriceFilter
         | VariantAssortmentFilter
         | VariantDataFilter
+        | VariantDataHasKeyFilter
+        | VariantDisabledFilter
         | VariantIdFilter
         | VariantListPriceFilter
         | VariantSalesPriceFilter
@@ -2172,6 +2300,8 @@ export type HasRecentlyReceivedTriggerCondition = UserCondition & {
   type?: number | null;
 };
 
+export type HasValueCondition = ValueCondition;
+
 export type HtmlParser = Parser;
 
 export type IChange = object;
@@ -2288,13 +2418,14 @@ export interface LineItem {
   data?: Record<string, DataValue>;
 }
 
-export type Location = LocationEntityStateLocationMetadataCollectionRetailMediaEntity & {
+export type Location = LocationEntityStateLocationMetadataValuesRetailMediaEntity & {
   name: string;
   key?: string | null;
   placements?: LocationPlacementCollection | null;
+  supportedPromotions?: PromotionSpecificationCollection | null;
 };
 
-export interface LocationEntityStateLocationMetadataCollectionLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest {
+export interface LocationEntityStateLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest {
   $type: string;
   filters?: LocationsRequestEntityFilters | null;
   sorting?: LocationsRequestSortBySorting | null;
@@ -2305,10 +2436,10 @@ export interface LocationEntityStateLocationMetadataCollectionLocationsRequestSo
   custom?: Record<string, string | null>;
 }
 
-export interface LocationEntityStateLocationMetadataCollectionRetailMediaEntity {
+export interface LocationEntityStateLocationMetadataValuesRetailMediaEntity {
   $type: string;
   state: "Active" | "Inactive" | "Archived";
-  metadata: LocationMetadataCollection;
+  metadata: LocationMetadataValues;
   /** @format uuid */
   id?: string | null;
 }
@@ -2329,7 +2460,7 @@ export interface LocationLocationEntityStateEntityResponse {
   statistics?: Statistics | null;
 }
 
-export type LocationMetadataCollection = MetadataCollection & {
+export type LocationMetadataValues = MetadataValues & {
   /** @format date-time */
   inactivated?: string | null;
   inactivatedBy?: string | null;
@@ -2354,7 +2485,7 @@ export interface LocationPlacementCollection {
 export interface LocationPlacementVariation {
   name: string;
   key?: string | null;
-  supportedPromotions?: PromotionSpecificationCollection | null;
+  supportedPromotions?: PromotionSpecificationVariationCollection | null;
 }
 
 export interface LocationPlacementVariationCollection {
@@ -2375,10 +2506,10 @@ export interface LocationSaveEntitiesResponse {
 }
 
 export type LocationsRequest =
-  LocationEntityStateLocationMetadataCollectionLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest;
+  LocationEntityStateLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest;
 
 export type LocationsRequestEntityFilters =
-  RetailMediaEntity2LocationEntityStateLocationMetadataCollectionRetailMediaEntity2EntityFilters & {
+  RetailMediaEntity2LocationEntityStateLocationMetadataValuesRetailMediaEntity2EntityFilters & {
     ids?: string[] | null;
     keys?: string[] | null;
   };
@@ -2440,7 +2571,7 @@ export type MerchandisingRulesRequest = LicensedRequest & {
   type?: number | null;
 };
 
-export interface MetadataCollection {
+export interface MetadataValues {
   $type: string;
   /** @format date-time */
   created: string;
@@ -2557,13 +2688,19 @@ export type OrFilter = Filter & {
     | AndFilter
     | BrandAssortmentFilter
     | BrandDataFilter
+    | BrandDataHasKeyFilter
+    | BrandDisabledFilter
     | BrandIdFilter
     | CartDataFilter
     | CompanyDataFilter
+    | CompanyDataHasKeyFilter
+    | CompanyDisabledFilter
     | CompanyIdFilter
     | ContentAssortmentFilter
     | ContentCategoryAssortmentFilter
     | ContentCategoryDataFilter
+    | ContentCategoryDataHasKeyFilter
+    | ContentCategoryDisabledFilter
     | ContentCategoryHasAncestorFilter
     | ContentCategoryHasChildFilter
     | ContentCategoryHasContentsFilter
@@ -2572,6 +2709,9 @@ export type OrFilter = Filter & {
     | ContentCategoryLevelFilter
     | ContentCategoryRecentlyViewedByUserFilter
     | ContentDataFilter
+    | ContentDataHasKeyFilter
+    | ContentDisabledFilter
+    | ContentHasCategoriesFilter
     | ContentIdFilter
     | ContentRecentlyViewedByUserFilter
     | OrFilter
@@ -2579,6 +2719,8 @@ export type OrFilter = Filter & {
     | ProductAssortmentFilter
     | ProductCategoryAssortmentFilter
     | ProductCategoryDataFilter
+    | ProductCategoryDataHasKeyFilter
+    | ProductCategoryDisabledFilter
     | ProductCategoryHasAncestorFilter
     | ProductCategoryHasChildFilter
     | ProductCategoryHasParentFilter
@@ -2587,7 +2729,10 @@ export type OrFilter = Filter & {
     | ProductCategoryLevelFilter
     | ProductCategoryRecentlyViewedByUserFilter
     | ProductDataFilter
+    | ProductDataHasKeyFilter
+    | ProductDisabledFilter
     | ProductDisplayNameFilter
+    | ProductHasCategoriesFilter
     | ProductHasVariantsFilter
     | ProductIdFilter
     | ProductListPriceFilter
@@ -2602,6 +2747,8 @@ export type OrFilter = Filter & {
     | ProductSalesPriceFilter
     | VariantAssortmentFilter
     | VariantDataFilter
+    | VariantDataHasKeyFilter
+    | VariantDisabledFilter
     | VariantIdFilter
     | VariantListPriceFilter
     | VariantSalesPriceFilter
@@ -2768,15 +2915,20 @@ export type PopularProductCategoriesRecommendationRequest = ProductCategoryRecom
 };
 
 export type PopularProductsRequest = ProductRecommendationRequest & {
-  basedOn: "MostPurchased" | "MostViewed";
+  basedOn: "MostPurchased" | "MostViewed" | "LineRevenue";
   /** @format int32 */
   sinceMinutesAgo: number;
+  popularityMultiplier?: DataKeyPopularityMultiplierSelector | null;
 };
 
 export type PopularSearchTermsRecommendationRequest = RecommendationRequest & {
   term?: string | null;
   settings?: RecommendPopularSearchTermSettings | null;
 };
+
+export interface PopularityMultiplierSelector {
+  $type: string;
+}
 
 export type PredictionRule = SearchRule & {
   condition: SearchTermCondition;
@@ -2963,6 +3115,10 @@ export type ProductCategoryDataDoubleValueFacetResult = DoubleProductCategoryDat
 
 export type ProductCategoryDataFilter = DataFilter;
 
+export type ProductCategoryDataHasKeyFilter = Filter & {
+  key: string;
+};
+
 export type ProductCategoryDataObjectFacet = DataObjectFacet;
 
 export type ProductCategoryDataObjectFacetResult = DataObjectFacetResult;
@@ -2983,6 +3139,8 @@ export type ProductCategoryDetailsCollectionResponse = TimedResponse & {
   /** @format int32 */
   totalNumberOfResults?: number | null;
 };
+
+export type ProductCategoryDisabledFilter = Filter;
 
 export type ProductCategoryFacetQuery = FacetQuery & {
   items: (
@@ -3326,6 +3484,10 @@ export type ProductDataDoubleValueFacetResult = DoubleProductDataValueFacetResul
 
 export type ProductDataFilter = DataFilter;
 
+export type ProductDataHasKeyFilter = Filter & {
+  key: string;
+};
+
 export type ProductDataIntegerValueFacet = Int32ProductDataValueFacet;
 
 export type ProductDataIntegerValueFacetResult = Int32ProductDataValueFacetResult;
@@ -3363,6 +3525,8 @@ export type ProductDetailsCollectionResponse = TimedResponse & {
   /** @format uuid */
   nextPageToken?: string | null;
 };
+
+export type ProductDisabledFilter = Filter;
 
 export type ProductDisplayNameFilter = Filter & {
   language?: Language | null;
@@ -3451,6 +3615,8 @@ export interface ProductFacetResult {
       )[]
     | null;
 }
+
+export type ProductHasCategoriesFilter = Filter;
 
 export type ProductHasVariantsFilter = Filter & {
   numberOfVariants: Int32NullableRange;
@@ -3627,9 +3793,12 @@ export type ProductPromotion = Promotion & {
 };
 
 export type ProductPromotionSpecification = PromotionSpecification & {
-  /** @format int32 */
-  maxCount?: number | null;
   promotableProducts?: FilterCollection | null;
+};
+
+export type ProductPromotionSpecificationVariation = PromotionSpecificationVariation & {
+  /** @format int32 */
+  maxCount: number;
 };
 
 export interface ProductPropertySelector {
@@ -3637,7 +3806,7 @@ export interface ProductPropertySelector {
 }
 
 export type ProductQuery = LicensedRequest & {
-  filters: FilterCollection;
+  filters?: FilterCollection | null;
   /**
    * @deprecated
    * @format int32
@@ -3927,6 +4096,10 @@ export type ProductSearchResponse = PaginatedSearchResponse & {
   retailMedia?: RetailMediaResult | null;
 };
 
+export interface ProductSearchResultConstraint {
+  $type: string;
+}
+
 export type ProductSearchSettings = SearchSettings & {
   selectedProductProperties?: SelectedProductPropertiesSettings | null;
   selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
@@ -3936,6 +4109,7 @@ export type ProductSearchSettings = SearchSettings & {
   recommendations: RecommendationSettings;
   selectedBrandProperties?: SelectedBrandPropertiesSettings | null;
   variantSettings?: VariantSearchSettings | null;
+  resultConstraint?: ResultMustHaveVariantConstraint | null;
 };
 
 export interface ProductSortBySpecification {
@@ -4031,19 +4205,10 @@ export interface PromotionLocationCollection {
 
 export interface PromotionLocationPlacement {
   key?: string | null;
-  variations?: PromotionLocationPlacementVariationCollection | null;
 }
 
 export interface PromotionLocationPlacementCollection {
   items?: PromotionLocationPlacement[] | null;
-}
-
-export interface PromotionLocationPlacementVariation {
-  key?: string | null;
-}
-
-export interface PromotionLocationPlacementVariationCollection {
-  items?: PromotionLocationPlacementVariation[] | null;
 }
 
 export interface PromotionSpecification {
@@ -4052,6 +4217,14 @@ export interface PromotionSpecification {
 
 export interface PromotionSpecificationCollection {
   productPromotion?: ProductPromotionSpecification | null;
+}
+
+export interface PromotionSpecificationVariation {
+  $type: string;
+}
+
+export interface PromotionSpecificationVariationCollection {
+  productPromotion?: ProductPromotionSpecificationVariation | null;
 }
 
 export interface PurchasedByUserCompanyInfo {
@@ -4254,19 +4427,23 @@ export interface RequestFilterCriteria {
   count?: Int32NullableRange | null;
 }
 
-export interface RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataCollectionRetailMediaEntity2EntityFilters {
+export type ResultMustHaveVariantConstraint = ProductSearchResultConstraint & {
+  exceptWhenProductHasNoVariants: boolean;
+};
+
+export interface RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters {
   $type: string;
   term?: string | null;
   states?: ("Active" | "Inactive" | "Archived")[] | null;
 }
 
-export interface RetailMediaEntity2CampaignEntityStateCampaignMetadataCollectionRetailMediaEntity2EntityFilters {
+export interface RetailMediaEntity2CampaignEntityStateCampaignMetadataValuesRetailMediaEntity2EntityFilters {
   $type: string;
   term?: string | null;
   states?: ("Proposed" | "Approved" | "Archived")[] | null;
 }
 
-export interface RetailMediaEntity2LocationEntityStateLocationMetadataCollectionRetailMediaEntity2EntityFilters {
+export interface RetailMediaEntity2LocationEntityStateLocationMetadataValuesRetailMediaEntity2EntityFilters {
   $type: string;
   term?: string | null;
   states?: ("Active" | "Inactive" | "Archived")[] | null;
@@ -4294,12 +4471,16 @@ export interface RetailMediaResult {
   placements?: Record<string, RetailMediaResultPlacement>;
 }
 
-export interface RetailMediaResultEntity {
-  product?: ProductResult | null;
+export interface RetailMediaResultPlacement {
+  results?: RetailMediaResultPlacementResultEntity[] | null;
 }
 
-export interface RetailMediaResultPlacement {
-  results?: RetailMediaResultEntity[] | null;
+export interface RetailMediaResultPlacementResultEntity {
+  promotedProduct?: RetailMediaResultPlacementResultEntityProduct | null;
+}
+
+export interface RetailMediaResultPlacementResultEntityProduct {
+  result: ProductResult;
 }
 
 export type SaveAdvertisersRequest = AdvertiserSaveEntitiesRequest;
@@ -5317,6 +5498,7 @@ export interface ValueConditionCollection {
         | DistinctCondition
         | EqualsCondition
         | GreaterThanCondition
+        | HasValueCondition
         | LessThanCondition
         | RelativeDateTimeCondition
       )[]
@@ -5373,7 +5555,13 @@ export interface VariantChangeTriggerResultVariantChangeTriggerResultSettingsVar
 
 export type VariantDataFilter = DataFilter;
 
+export type VariantDataHasKeyFilter = Filter & {
+  key: string;
+};
+
 export type VariantDataRelevanceModifier = DataRelevanceModifier;
+
+export type VariantDisabledFilter = Filter;
 
 export type VariantIdFilter = Filter & {
   variantIds: string[];
@@ -5451,6 +5639,7 @@ export type VariantSalesPriceRelevanceModifier = RelevanceModifier & {
 };
 
 export interface VariantSearchSettings {
+  /** @deprecated */
   excludeResultsWithoutVariant: boolean;
 }
 

@@ -70,7 +70,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    public setRetailMedia(query: RetailMediaQuery): this {
+    public setRetailMedia(query: RetailMediaQuery | null): this {
         this.retailMediaQuery = query;
 
         return this;

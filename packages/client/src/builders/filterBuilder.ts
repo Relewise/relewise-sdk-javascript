@@ -8,6 +8,11 @@ import { ProductFilterBuilder } from './filters/productFilterBuilder';
 import { VariantFilterBuilder } from './filters/variantFilterBuilder';
 import { AllFilters, FilterOptions, EntityDataFilterOptions } from './filters/filters.types.shared';
 
+export { // Needed for backwards compatibility
+    FilterOptions,
+    EntityDataFilterOptions,
+};
+
 export class FilterBuilder {
     private filters: AllFilters[] = [];
 

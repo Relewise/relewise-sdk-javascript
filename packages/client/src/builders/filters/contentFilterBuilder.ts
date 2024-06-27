@@ -265,7 +265,7 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
     }
 
     /**
-     * Adds a contentCategory has key filter to the request
+     * Adds a content category has key filter to the request
      * @param key 
      * @param negated 
      * @param options
@@ -286,7 +286,7 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
     }
     
     /**
-     * Adds a contentCategory is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * Adds a content category is disabled filter to the request - only works for product queries, not in searches or recommendations
      * @param key 
      * @param negated 
      * @param options

@@ -2,7 +2,7 @@ import { AndFilter, FilterCollection, OrFilter } from 'src/models/data-contracts
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
 import { AllFilters, FilterOptions } from './filters.types.shared';
 
-type Constructor<T> = new () => T;
+export type Constructor<T> = new () => T;
 
 export abstract class FilterBuilderBase<TFilterBuilder extends FilterBuilderBase<any>> {
     constructor(private TFilterBuilderCtor: Constructor<TFilterBuilder>) {

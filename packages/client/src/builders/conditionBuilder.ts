@@ -1,6 +1,6 @@
-import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection, DataValueBase, DataObjectFilter, DataObjectFilterConditionBuilder } from '..';
+import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection, DataValueBase, DataObjectFilterConditionBuilder, HasValueCondition, RelativeDateTimeCondition } from '..';
 
-export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition;
+export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition | HasValueCondition | RelativeDateTimeCondition;
 
 export class ConditionBuilder {
     conditions: Conditions[] = [];
@@ -67,12 +67,35 @@ export class ConditionBuilder {
 
         const condition: ContainsCondition = {
             $type: 'Relewise.Client.Requests.Conditions.ContainsCondition, Relewise.Client',
-            objectFilter: { 
-                conditions: conditionsBuilder.build(), 
-                skip: skip, 
+            objectFilter: {
+                conditions: conditionsBuilder.build(),
+                skip: skip,
                 take: take,
             },
             valueCollectionEvaluationMode: 'All',
+            negated: negated,
+        };
+        this.conditions.push(condition);
+
+        return this;
+    }
+
+    public addHasValueCondition(negated: boolean = false) {
+        const condition: HasValueCondition = {
+            $type: 'Relewise.Client.Requests.Conditions.HasValueCondition, Relewise.Client',
+            negated: negated,
+        };
+        this.conditions.push(condition);
+
+        return this;
+    }
+
+    public addRelativeDateTimeCondition(comparison: 'Before' | 'After', unit: 'UnixMilliseconds' | 'UnixSeconds' | 'UnixMinutes', currentTimeOffset: number = 0, negated: boolean = false) {
+        const condition: RelativeDateTimeCondition = {
+            $type: 'Relewise.Client.Requests.Conditions.RelativeDateTimeCondition, Relewise.Client',
+            comparison: comparison,
+            currentTimeOffset: currentTimeOffset,
+            unit: unit,
             negated: negated,
         };
         this.conditions.push(condition);

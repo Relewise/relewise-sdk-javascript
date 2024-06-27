@@ -242,7 +242,7 @@ export class FilterBuilder {
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
-            
+
         const filters = builder.build();
         if (filters === null || filters.items === undefined || filters.items === null || filters.items.length <= 0) {
             throw new Error('And-filters must contain at least 1 filter');
@@ -265,7 +265,7 @@ export class FilterBuilder {
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
-            
+
         const filters = builder.build();
         if (filters === null || filters.items === undefined || filters.items === null || filters.items.length <= 0) {
             throw new Error('Or-filters must contain at least 1 filter');
@@ -335,7 +335,7 @@ export class FilterBuilder {
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
-            
+
         const filter: CartDataFilter = {
             $type: 'Relewise.Client.Requests.Filters.CartDataFilter, Relewise.Client',
             key: key,
@@ -522,6 +522,99 @@ export class FilterBuilder {
      */
     public addContentCategoryHasContentsFilter(negated: boolean = false, options?: FilterOptions): this {
         this.contentFilterBuilder.addContentCategoryHasContentsFilter(negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a brand has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addBrandDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        this.brandFilterBuilder.addBrandDataHasKeyFilter(key, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a brand is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addBrandDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.brandFilterBuilder.addBrandDisabledFilter(negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a company has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addCompanyDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        this.companyFilterBuilder.addCompanyDataHasKeyFilter(key, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a company is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addCompanyDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.companyFilterBuilder.addCompanyDisabledFilter(negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a variant has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addVariantDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        this.variantFilterBuilder.addVariantDataHasKeyFilter(key, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a variant is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addVariantDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.variantFilterBuilder.addVariantDisabledFilter(negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a content category has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentCategoryDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentCategoryDataHasKeyFilter(key, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a content category is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentCategoryDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentCategoryDisabledFilter(negated, options);
+        return this;
+    }
+
+    public addContentCategoryRecentlyViewedByUserFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentCategoryRecentlyViewedByUserFilter(sinceMinutesAgo, negated, options);
         return this;
     }
 

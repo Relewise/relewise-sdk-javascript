@@ -1,4 +1,4 @@
-import { BrandAssortmentFilter, BrandDataFilter, BrandIdFilter } from 'src/models/data-contracts';
+import { BrandAssortmentFilter, BrandDataFilter, BrandDataHasKeyFilter, BrandDisabledFilter, BrandIdFilter } from 'src/models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -78,6 +78,47 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
             conditions: builder.build(),
             negated: negated,
             objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a brand has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addBrandDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: BrandDataHasKeyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.BrandDataHasKeyFilter, Relewise.Client',
+            key: key,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a brand is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addBrandDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: BrandDisabledFilter = {
+            $type: 'Relewise.Client.Requests.Filters.BrandDisabledFilter, Relewise.Client',
+            negated: negated,
             settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);

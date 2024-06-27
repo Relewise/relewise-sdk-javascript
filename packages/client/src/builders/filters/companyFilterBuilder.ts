@@ -1,4 +1,4 @@
-import { CompanyDataFilter, CompanyIdFilter } from 'src/models/data-contracts';
+import { CompanyDataFilter, CompanyDataHasKeyFilter, CompanyDisabledFilter, CompanyIdFilter } from 'src/models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
 import { FilterBuilderBase } from './filterBuilderBase';
@@ -54,6 +54,47 @@ export class CompanyFilterBuilder extends FilterBuilderBase<CompanyFilterBuilder
             conditions: builder.build(),
             negated: negated,
             objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a company has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addCompanyDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: CompanyDataHasKeyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.CompanyDataHasKeyFilter, Relewise.Client',
+            key: key,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a company is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addCompanyDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: CompanyDisabledFilter = {
+            $type: 'Relewise.Client.Requests.Filters.CompanyDisabledFilter, Relewise.Client',
+            negated: negated,
             settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);

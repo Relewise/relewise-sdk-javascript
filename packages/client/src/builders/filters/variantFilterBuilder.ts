@@ -1,4 +1,4 @@
-import { VariantAssortmentFilter, VariantDataFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from 'src/models/data-contracts';
+import { VariantAssortmentFilter, VariantDataFilter, VariantDataHasKeyFilter, VariantDisabledFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from 'src/models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -150,6 +150,47 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
             conditions: builder.build(),
             negated: negated,
             objectPath: options?.objectPath,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a variant has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addVariantDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: VariantDataHasKeyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.VariantDataHasKeyFilter, Relewise.Client',
+            key: key,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a variant is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addVariantDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: VariantDisabledFilter = {
+            $type: 'Relewise.Client.Requests.Filters.VariantDisabledFilter, Relewise.Client',
+            negated: negated,
             settings: internalSettingsBuilder.build(),
         };
         this.filters.push(filter);

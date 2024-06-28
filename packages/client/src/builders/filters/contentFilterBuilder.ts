@@ -1,4 +1,4 @@
-import { ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentCategoryDataFilter, ContentDataFilter, ContentIdFilter } from 'src/models/data-contracts';
+import { ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentCategoryDataFilter, ContentDataFilter, ContentIdFilter, ContentCategoryDataHasKeyFilter, ContentCategoryDisabledFilter, ContentCategoryRecentlyViewedByUserFilter } from 'src/models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -261,6 +261,62 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
         };
         this.filters.push(filter);
 
+        return this;
+    }
+
+    /**
+     * Adds a content category has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentCategoryDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+    
+        const filter: ContentCategoryDataHasKeyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentCategoryDataHasKeyFilter, Relewise.Client',
+            key: key,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+    
+    /**
+     * Adds a content category is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentCategoryDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+    
+        const filter: ContentCategoryDisabledFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentCategoryDisabledFilter, Relewise.Client',
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+
+    public addContentCategoryRecentlyViewedByUserFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ContentCategoryRecentlyViewedByUserFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentCategoryRecentlyViewedByUserFilter, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
         return this;
     }
 }

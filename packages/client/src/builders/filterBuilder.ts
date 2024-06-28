@@ -660,7 +660,6 @@ export class FilterBuilder {
         return this;
     }
 
-
     public addProductHasCategoriesFilter(negated: boolean = false, options?: FilterOptions): this {
         this.productFilterBuilder.addProductHasCategoriesFilter(negated, options);
         return this;

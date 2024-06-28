@@ -4,12 +4,12 @@ import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBu
 
 export class DataObjectFacetBuilder {
     private facets: (
-        DataObjectFacet |
-        DataObjectDoubleRangeFacet |
-        DataObjectDoubleRangesFacet |
-        DataObjectStringValueFacet |
-        DataObjectBooleanValueFacet |
-        DataObjectDoubleValueFacet)[] = [];
+        | DataObjectFacet
+        | DataObjectDoubleRangeFacet
+        | DataObjectDoubleRangesFacet
+        | DataObjectStringValueFacet
+        | DataObjectBooleanValueFacet
+        | DataObjectDoubleValueFacet)[] = [];
 
     public addDataObjectFacet(
         key: string,

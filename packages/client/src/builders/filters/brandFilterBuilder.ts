@@ -107,7 +107,7 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
     }
 
     /**
-     * Adds a brand is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * Adds a brand is disabled filter to the request - only works for brand queries, not in searches or recommendations
      * @param key 
      * @param negated 
      * @param options

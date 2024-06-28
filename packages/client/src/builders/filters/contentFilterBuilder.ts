@@ -1,4 +1,4 @@
-import { ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentCategoryDataFilter, ContentDataFilter, ContentIdFilter, ContentCategoryDataHasKeyFilter, ContentCategoryDisabledFilter, ContentCategoryRecentlyViewedByUserFilter } from 'src/models/data-contracts';
+import { ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentCategoryDataFilter, ContentDataFilter, ContentIdFilter, ContentCategoryDataHasKeyFilter, ContentCategoryDisabledFilter, ContentCategoryRecentlyViewedByUserFilter, ContentDataHasKeyFilter, ContentDisabledFilter, ContentRecentlyViewedByUserFilter, ContentHasCategoriesFilter } from 'src/models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -286,7 +286,7 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
     }
     
     /**
-     * Adds a content category is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * Adds a content category is disabled filter to the request - only works for content queries, not in searches or recommendations
      * @param key 
      * @param negated 
      * @param options
@@ -312,6 +312,76 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
         const filter: ContentCategoryRecentlyViewedByUserFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentCategoryRecentlyViewedByUserFilter, Relewise.Client',
             sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+
+    /**
+     * Adds a content has key filter to the request
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+    
+        const filter: ContentDataHasKeyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentDataHasKeyFilter, Relewise.Client',
+            key: key,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+    
+    /**
+     * Adds a content is disabled filter to the request - only works for content queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+    
+        const filter: ContentDisabledFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentDisabledFilter, Relewise.Client',
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+
+    public addContentRecentlyViewedByUserFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ContentRecentlyViewedByUserFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentRecentlyViewedByUserFilter, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+    
+        return this;
+    }
+
+    public addContentHasCategoriesFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ContentHasCategoriesFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentHasCategoriesFilter, Relewise.Client',
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };

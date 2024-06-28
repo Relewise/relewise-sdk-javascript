@@ -537,7 +537,7 @@ export class FilterBuilder {
     }
 
     /**
-     * Adds a brand is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * Adds a brand is disabled filter to the request - only works for brand queries, not in searches or recommendations
      * @param key 
      * @param negated 
      * @param options
@@ -559,7 +559,7 @@ export class FilterBuilder {
     }
 
     /**
-     * Adds a company is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * Adds a company is disabled filter to the request - only works for company queries, not in searches or recommendations
      * @param key 
      * @param negated 
      * @param options
@@ -603,7 +603,7 @@ export class FilterBuilder {
     }
 
     /**
-     * Adds a content category is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * Adds a content category is disabled filter to the request - only works for content queries, not in searches or recommendations
      * @param key 
      * @param negated 
      * @param options
@@ -615,6 +615,83 @@ export class FilterBuilder {
 
     public addContentCategoryRecentlyViewedByUserFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
         this.contentFilterBuilder.addContentCategoryRecentlyViewedByUserFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
+    public addContentDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentDataHasKeyFilter(key, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a content is disabled filter to the request - only works for content queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addContentDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentDisabledFilter(negated, options);
+        return this;
+    }
+
+    public addContentRecentlyViewedByUserFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentRecentlyViewedByUserFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
+    public addContentHasCategoriesFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentHasCategoriesFilter(negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a product is disabled filter to the request - only works for product queries, not in searches or recommendations
+     * @param key 
+     * @param negated 
+     * @param options
+     */
+    public addProductDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductDisabledFilter(negated, options);
+        return this;
+    }
+
+    public addProductDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductDataHasKeyFilter(key, negated, options);
+        return this;
+    }
+
+    public addProductHasCategoriesFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductHasCategoriesFilter(negated, options);
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByCompanyFilter(sinceMinutesAgo: number, companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyPurchasedByCompanyFilter(sinceMinutesAgo, companyIds, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyPurchasedByUserCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+    
+    public addProductRecentlyViewedByCompanyFilter(sinceMinutesAgo: number, companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyViewedByCompanyFilter(sinceMinutesAgo, companyIds, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyViewedByUserCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyViewedByUserParentCompanyFilter(sinceMinutesAgo, negated, options);
         return this;
     }
 

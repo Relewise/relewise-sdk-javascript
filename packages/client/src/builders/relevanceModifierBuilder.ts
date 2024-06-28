@@ -1,19 +1,30 @@
-import { BrandIdRelevanceModifier, ConditionBuilder, DataDoubleSelector, FilterBuilder, FixedDoubleValueSelector, ProductAssortmentRelevanceModifier, ProductCategoryIdRelevanceModifier, ProductDataRelevanceModifier, ProductIdRelevanceModifier, ProductListPriceRelevanceModifier, ProductRecentlyPurchasedByUserRelevanceModifier, ProductRecentlyViewedByUserRelevanceModifier, ProductSalesPriceRelevanceModifier, RelevanceModifierCollection, UserFavoriteProductRelevanceModifier, VariantAssortmentRelevanceModifier, VariantDataRelevanceModifier, VariantListPriceRelevanceModifier, VariantSalesPriceRelevanceModifier, VariantSpecificationsInCommonRelevanceModifier, VariantSpecificationValueRelevanceModifier } from '..';
+import { BrandIdRelevanceModifier, ConditionBuilder, ContentCategoryDataRelevanceModifier, ContentCategoryRecentlyViewedByUserRelevanceModifier, ContentDataRelevanceModifier, ContentRecentlyViewedByUserRelevanceModifier, DataDoubleSelector, FilterBuilder, FixedDoubleValueSelector, ProductAssortmentRelevanceModifier, ProductCategoryDataRelevanceModifier, ProductCategoryIdRelevanceModifier, ProductCategoryRecentlyViewedByUserRelevanceModifier, ProductDataRelevanceModifier, ProductIdRelevanceModifier, ProductListPriceRelevanceModifier, ProductRecentlyPurchasedByCompanyRelevanceModifier, ProductRecentlyPurchasedByUserCompanyRelevanceModifier, ProductRecentlyPurchasedByUserRelevanceModifier, ProductRecentlyViewedByCompanyRelevanceModifier, ProductRecentlyViewedByUserCompanyRelevanceModifier, ProductRecentlyViewedByUserRelevanceModifier, ProductSalesPriceRelevanceModifier, RelevanceModifierCollection, UserFavoriteProductRelevanceModifier, VariantAssortmentRelevanceModifier, VariantDataRelevanceModifier, VariantIdRelevanceModifier, VariantListPriceRelevanceModifier, VariantSalesPriceRelevanceModifier, VariantSpecificationsInCommonRelevanceModifier, VariantSpecificationValueRelevanceModifier } from '..';
 
 export class RelevanceModifierBuilder {
     private modifiers: (
         | BrandIdRelevanceModifier
+        | ContentCategoryDataRelevanceModifier
+        | ContentCategoryRecentlyViewedByUserRelevanceModifier
+        | ContentDataRelevanceModifier
+        | ContentRecentlyViewedByUserRelevanceModifier
         | ProductAssortmentRelevanceModifier
+        | ProductCategoryDataRelevanceModifier
         | ProductCategoryIdRelevanceModifier
+        | ProductCategoryRecentlyViewedByUserRelevanceModifier
         | ProductDataRelevanceModifier
         | ProductIdRelevanceModifier
         | ProductListPriceRelevanceModifier
+        | ProductRecentlyPurchasedByCompanyRelevanceModifier
+        | ProductRecentlyPurchasedByUserCompanyRelevanceModifier
         | ProductRecentlyPurchasedByUserRelevanceModifier
+        | ProductRecentlyViewedByCompanyRelevanceModifier
+        | ProductRecentlyViewedByUserCompanyRelevanceModifier
         | ProductRecentlyViewedByUserRelevanceModifier
         | ProductSalesPriceRelevanceModifier
         | UserFavoriteProductRelevanceModifier
         | VariantAssortmentRelevanceModifier
         | VariantDataRelevanceModifier
+        | VariantIdRelevanceModifier
         | VariantListPriceRelevanceModifier
         | VariantSalesPriceRelevanceModifier
         | VariantSpecificationsInCommonRelevanceModifier
@@ -165,6 +176,122 @@ export class RelevanceModifierBuilder {
             conditions: conditionBuilder.build()?.items,
             multiplierSelector: multiplierSelector,
             multiplyWeightBy: 0, // Obsolete, but required property
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addContentCategoryDataRelevanceModifier(
+        key: string,
+        conditions: (builder: ConditionBuilder) => void,
+        multiplierSelector: DataDoubleSelector | FixedDoubleValueSelector,
+        mustMatchAllConditions: boolean = true,
+        considerAsMatchIfKeyIsNotFound: boolean = false,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const conditionBuilder = new ConditionBuilder();
+        conditions(conditionBuilder);
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ContentCategoryDataRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ContentCategoryDataRelevanceModifier, Relewise.Client',
+            key: key,
+            considerAsMatchIfKeyIsNotFound: considerAsMatchIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: conditionBuilder.build()?.items,
+            multiplierSelector: multiplierSelector,
+            multiplyWeightBy: 0, // Obsolete, but required property
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addContentDataRelevanceModifier(
+        key: string,
+        conditions: (builder: ConditionBuilder) => void,
+        multiplierSelector: DataDoubleSelector | FixedDoubleValueSelector,
+        mustMatchAllConditions: boolean = true,
+        considerAsMatchIfKeyIsNotFound: boolean = false,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const conditionBuilder = new ConditionBuilder();
+        conditions(conditionBuilder);
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ContentDataRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ContentDataRelevanceModifier, Relewise.Client',
+            key: key,
+            considerAsMatchIfKeyIsNotFound: considerAsMatchIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: conditionBuilder.build()?.items,
+            multiplierSelector: multiplierSelector,
+            multiplyWeightBy: 0, // Obsolete, but required property
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addProductCategoryDataRelevanceModifier(
+        key: string,
+        conditions: (builder: ConditionBuilder) => void,
+        multiplierSelector: DataDoubleSelector | FixedDoubleValueSelector,
+        mustMatchAllConditions: boolean = true,
+        considerAsMatchIfKeyIsNotFound: boolean = false,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const conditionBuilder = new ConditionBuilder();
+        conditions(conditionBuilder);
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ProductCategoryDataRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductCategoryDataRelevanceModifier, Relewise.Client',
+            key: key,
+            considerAsMatchIfKeyIsNotFound: considerAsMatchIfKeyIsNotFound,
+            mustMatchAllConditions: mustMatchAllConditions,
+            conditions: conditionBuilder.build()?.items,
+            multiplierSelector: multiplierSelector,
+            multiplyWeightBy: 0, // Obsolete, but required property
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addVariantIdRelevanceModifier(
+        variantIds: string[],
+        multiplyWeightBy: number = 1,
+        negated: boolean = false,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: VariantIdRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.VariantIdRelevanceModifier, Relewise.Client',
+            variantIds: variantIds,
+            negated: negated,
+            multiplyWeightBy: multiplyWeightBy,
             filters: filterBuilder.build(),
         };
         this.modifiers.push(modifier);
@@ -369,6 +496,56 @@ export class RelevanceModifierBuilder {
         return this;
     }
 
+    public addProductRecentlyPurchasedByCompanyRelevanceModifier(
+        sinceMinutesAgo: number,
+        companyIds: string[],
+        ifPurchasedByCompanyMultiplyWeightBy: number = 1,
+        elseIfNotPurchasedByCompanyMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ProductRecentlyPurchasedByCompanyRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductRecentlyPurchasedByCompanyRelevanceModifier, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            companyIds: companyIds,
+            ifPurchasedByCompanyMultiplyWeightBy,
+            elseIfNotPurchasedByCompanyMultiplyWeightBy,
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserCompanyRelevanceModifier(
+        sinceMinutesAgo: number,
+        ifPurchasedByCompanyMultiplyWeightBy: number = 1,
+        elseIfPurchasedByParentCompanyMultiplyWeightBy: number = 1,
+        elseIfNotPurchasedByEitherCompanyMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ProductRecentlyPurchasedByUserCompanyRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductRecentlyPurchasedByUserCompanyRelevanceModifier, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            ifPurchasedByCompanyMultiplyWeightBy,
+            elseIfPurchasedByParentCompanyMultiplyWeightBy,
+            elseIfNotPurchasedByEitherCompanyMultiplyWeightBy,
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
     public addProductRecentlyViewedByUserRelevanceModifier(
         sinceUtc: Date,
         ifNotPreviouslyViewedByUserMultiplyWeightBy: number = 1,
@@ -382,6 +559,125 @@ export class RelevanceModifierBuilder {
 
         const modifier: ProductRecentlyViewedByUserRelevanceModifier = {
             $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductRecentlyViewedByUserRelevanceModifier, Relewise.Client',
+            ifNotPreviouslyViewedByUserMultiplyWeightBy,
+            ifPreviouslyViewedByUserMultiplyWeightBy,
+            sinceUtc: sinceUtc.toJSON(),
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addProductRecentlyViewedByCompanyRelevanceModifier(
+        sinceMinutesAgo: number,
+        companyIds: string[],
+        ifViewedByCompanyMultiplyWeightBy: number = 1,
+        elseIfNotViewedByCompanyMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ProductRecentlyViewedByCompanyRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductRecentlyViewedByCompanyRelevanceModifier, Relewise.Client',
+            companyIds,
+            ifViewedByCompanyMultiplyWeightBy,
+            elseIfNotViewedByCompanyMultiplyWeightBy,
+            sinceMinutesAgo: sinceMinutesAgo,
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserCompanyRelevanceModifier(
+        sinceMinutesAgo: number,
+        ifViewedByUserCompanyMultiplyWeightBy: number = 1,
+        elseIfViewedByUserParentCompanyMultiplyWeightBy: number = 1,
+        elseIfNotViewedByEitherCompanyMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ProductRecentlyViewedByUserCompanyRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductRecentlyViewedByUserCompanyRelevanceModifier, Relewise.Client',
+            ifViewedByUserCompanyMultiplyWeightBy,
+            elseIfViewedByUserParentCompanyMultiplyWeightBy,
+            elseIfNotViewedByEitherCompanyMultiplyWeightBy,
+            sinceMinutesAgo: sinceMinutesAgo,
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addProductCategoryRecentlyViewedByUserRelevanceModifier(
+        sinceUtc: Date,
+        ifNotPreviouslyViewedByUserMultiplyWeightBy: number = 1,
+        ifPreviouslyViewedByUserMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ProductCategoryRecentlyViewedByUserRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ProductCategoryRecentlyViewedByUserRelevanceModifier, Relewise.Client',
+            ifNotPreviouslyViewedByUserMultiplyWeightBy,
+            ifPreviouslyViewedByUserMultiplyWeightBy,
+            sinceUtc: sinceUtc.toJSON(),
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addContentRecentlyViewedByUserRelevanceModifier(
+        sinceUtc: Date,
+        ifNotPreviouslyViewedByUserMultiplyWeightBy: number = 1,
+        ifPreviouslyViewedByUserMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ContentRecentlyViewedByUserRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ContentRecentlyViewedByUserRelevanceModifier, Relewise.Client',
+            ifNotPreviouslyViewedByUserMultiplyWeightBy,
+            ifPreviouslyViewedByUserMultiplyWeightBy,
+            sinceUtc: sinceUtc.toJSON(),
+            filters: filterBuilder.build(),
+        };
+        this.modifiers.push(modifier);
+
+        return this;
+    }
+
+    public addContentCategoryRecentlyViewedByUserRelevanceModifier(
+        sinceUtc: Date,
+        ifNotPreviouslyViewedByUserMultiplyWeightBy: number = 1,
+        ifPreviouslyViewedByUserMultiplyWeightBy: number = 1,
+        filter?: (builder: FilterBuilder) => void): this {
+
+        const filterBuilder = new FilterBuilder();
+        if (filter) {
+            filter(filterBuilder);
+        }
+
+        const modifier: ContentCategoryRecentlyViewedByUserRelevanceModifier = {
+            $type: 'Relewise.Client.Requests.RelevanceModifiers.ContentCategoryRecentlyViewedByUserRelevanceModifier, Relewise.Client',
             ifNotPreviouslyViewedByUserMultiplyWeightBy,
             ifPreviouslyViewedByUserMultiplyWeightBy,
             sinceUtc: sinceUtc.toJSON(),

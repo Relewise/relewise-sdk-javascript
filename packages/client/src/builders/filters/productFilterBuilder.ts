@@ -1,4 +1,4 @@
-import { ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, ProductAndVariantId, ProductCategoryDataFilter, ProductCategoryDataHasKeyFilter, ProductCategoryDisabledFilter, ProductCategoryRecentlyViewedByUserFilter, ProductDataHasKeyFilter, ProductDisabledFilter, ProductHasCategoriesFilter } from 'src/models/data-contracts';
+import { ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, ProductAndVariantId, ProductCategoryDataFilter, ProductCategoryDataHasKeyFilter, ProductCategoryDisabledFilter, ProductCategoryRecentlyViewedByUserFilter, ProductDataHasKeyFilter, ProductDisabledFilter, ProductHasCategoriesFilter, ProductRecentlyPurchasedByCompanyFilter, ProductRecentlyPurchasedByUserCompanyFilter, ProductRecentlyPurchasedByUserParentCompanyFilter, ProductRecentlyViewedByCompanyFilter, ProductRecentlyViewedByUserCompanyFilter, ProductRecentlyViewedByUserParentCompanyFilter } from 'src/models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -527,6 +527,106 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
 
         const filter: ProductHasCategoriesFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductHasCategoriesFilter, Relewise.Client',
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByCompanyFilter(sinceMinutesAgo: number, companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        const companies: string[] = Array.isArray(companyIds)
+            ? companyIds
+            : [companyIds];
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductRecentlyPurchasedByCompanyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductRecentlyPurchasedByCompanyFilter, Relewise.Client',
+            companyIds: companies,
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductRecentlyPurchasedByUserCompanyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductRecentlyPurchasedByUserCompanyFilter, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductRecentlyPurchasedByUserParentCompanyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductRecentlyPurchasedByUserParentCompanyFilter, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+    
+    public addProductRecentlyViewedByCompanyFilter(sinceMinutesAgo: number, companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        const companies: string[] = Array.isArray(companyIds)
+            ? companyIds
+            : [companyIds];
+
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductRecentlyViewedByCompanyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductRecentlyViewedByCompanyFilter, Relewise.Client',
+            companyIds: companies,
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductRecentlyViewedByUserCompanyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductRecentlyViewedByUserCompanyFilter, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductRecentlyViewedByUserParentCompanyFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductRecentlyViewedByUserParentCompanyFilter, Relewise.Client',
+            sinceMinutesAgo: sinceMinutesAgo,
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };

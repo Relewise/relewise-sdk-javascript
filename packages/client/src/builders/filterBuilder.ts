@@ -666,6 +666,36 @@ export class FilterBuilder {
         return this;
     }
 
+    public addProductRecentlyPurchasedByCompanyFilter(sinceMinutesAgo: number, companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyPurchasedByCompanyFilter(sinceMinutesAgo, companyIds, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyPurchasedByUserCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+    
+    public addProductRecentlyViewedByCompanyFilter(sinceMinutesAgo: number, companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyViewedByCompanyFilter(sinceMinutesAgo, companyIds, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyViewedByUserCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
+    public addProductRecentlyViewedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductRecentlyViewedByUserParentCompanyFilter(sinceMinutesAgo, negated, options);
+        return this;
+    }
+
     public reset(): this {
         this.filters = [];
         this.productFilterBuilder.reset();

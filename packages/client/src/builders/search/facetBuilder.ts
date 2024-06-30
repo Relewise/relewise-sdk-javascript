@@ -1,4 +1,4 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange, ContentDataObjectFacet, ProductCategoryDataObjectFacet } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 
@@ -6,30 +6,31 @@ export class FacetBuilder {
     private facets: (
         | ContentAssortmentFacet
         | ProductAssortmentFacet
+        | ProductCategoryAssortmentFacet
         | BrandFacet
         | CategoryFacet
         | CategoryHierarchyFacet
+        | ContentDataObjectFacet
         | ContentDataDoubleRangeFacet
+        | ContentDataDoubleRangesFacet
         | ContentDataStringValueFacet
         | ContentDataBooleanValueFacet
         | ContentDataDoubleValueFacet
-        | ContentDataDoubleRangesFacet
         | PriceRangeFacet
         | PriceRangesFacet
-        | ProductDataDoubleRangeFacet
-        | ProductDataStringValueFacet
-        | ProductDataBooleanValueFacet
-        | ProductDataDoubleValueFacet
-        | VariantSpecificationFacet
-        | ProductDataDoubleRangesFacet
-        | ProductCategoryAssortmentFacet
+        | ProductCategoryDataObjectFacet
         | ProductCategoryDataDoubleRangeFacet
+        | ProductCategoryDataDoubleRangesFacet
         | ProductCategoryDataStringValueFacet
         | ProductCategoryDataBooleanValueFacet
         | ProductCategoryDataDoubleValueFacet
-        | ProductCategoryDataDoubleRangesFacet
         | ProductDataObjectFacet
-    )[] = [];
+        | ProductDataDoubleRangeFacet
+        | ProductDataDoubleRangesFacet
+        | ProductDataStringValueFacet
+        | ProductDataBooleanValueFacet
+        | ProductDataDoubleValueFacet
+        | VariantSpecificationFacet)[] = [];
 
     //#region Product
     public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null, facetSettings?: FacetSettings): this {
@@ -336,7 +337,7 @@ export class FacetBuilder {
 
         const conditionsBuilder = new DataObjectFilterConditionBuilder();
         if (filter?.conditions) {
-            filter?.conditions(conditionsBuilder);
+            filter.conditions(conditionsBuilder);
         }
 
         const facet: ProductDataObjectFacet = {
@@ -455,6 +456,43 @@ export class FacetBuilder {
 
         return this;
     }
+
+    public addContentDataObjectFacet(
+        key: string,
+        builder?: (facets: DataObjectFacetBuilder) => void,
+        filter?: {
+            conditions?: (builder: DataObjectFilterConditionBuilder) => void,
+            skip?: number,
+            take?: number
+        },
+        facetSettings?: FacetSettings): this {
+
+        const facetBuilder = new DataObjectFacetBuilder();
+        if (builder) {
+            builder(facetBuilder);
+        }
+
+        const conditionsBuilder = new DataObjectFilterConditionBuilder();
+        if (filter?.conditions) {
+            filter.conditions(conditionsBuilder);
+        }
+
+        const facet: ContentDataObjectFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataObjectFacet, Relewise.Client',
+            field: 'Data',
+            items: facetBuilder.build() ?? [],
+            filter: {
+                conditions: conditionsBuilder.build() ?? [],
+                take: filter?.take,
+                skip: filter?.skip,
+            },
+            settings: facetSettings,
+            key: key,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
     //#endregion
 
     //#region ProductCategories
@@ -553,6 +591,43 @@ export class FacetBuilder {
 
         return this;
     }
+
+    public addProductCategoryDataObjectFacet(
+        key: string,
+        builder?: (facets: DataObjectFacetBuilder) => void,
+        filter?: {
+            conditions?: (builder: DataObjectFilterConditionBuilder) => void,
+            skip?: number,
+            take?: number
+        },
+        facetSettings?: FacetSettings): this {
+
+        const facetBuilder = new DataObjectFacetBuilder();
+        if (builder) {
+            builder(facetBuilder);
+        }
+
+        const conditionsBuilder = new DataObjectFilterConditionBuilder();
+        if (filter?.conditions) {
+            filter.conditions(conditionsBuilder);
+        }
+
+        const facet: ProductCategoryDataObjectFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataObjectFacet, Relewise.Client',
+            field: 'Data',
+            items: facetBuilder.build() ?? [],
+            filter: {
+                conditions: conditionsBuilder.build() ?? [],
+                take: filter?.take,
+                skip: filter?.skip,
+            },
+            settings: facetSettings,
+            key: key,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
     //#endregion
 
     build(): ProductFacetQuery | null {
@@ -564,7 +639,7 @@ export class FacetBuilder {
             }
     }
 
-    private mapSelectedDoubleRange(lowerBound: number | undefined | null, upperBound: number | undefined| null) {
+    private mapSelectedDoubleRange(lowerBound: number | undefined | null, upperBound: number | undefined | null) {
         let selected: DoubleNullableRange | null = null;
         const lowerBoundHasValue = lowerBound !== null && lowerBound !== undefined;
         const upperBoundHasValue = upperBound !== null && upperBound !== undefined;

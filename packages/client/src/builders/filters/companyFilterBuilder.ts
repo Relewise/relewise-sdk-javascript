@@ -8,9 +8,11 @@ export class CompanyFilterBuilder extends FilterBuilderBase<CompanyFilterBuilder
     constructor() { super(CompanyFilterBuilder); }
 
     /**
-     * Filters the request to only return the specificied contents
-     * @param companyIds 
-     * @param negated 
+     * Filters the request to only return the specified companies.
+     * @param companyIds - Array of company IDs or a single ID.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The CompanyFilterBuilder instance for chaining.
      */
     public addCompanyIdFilter(companyIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
         const ids: string[] = Array.isArray(companyIds)
@@ -32,12 +34,14 @@ export class CompanyFilterBuilder extends FilterBuilderBase<CompanyFilterBuilder
     }
 
     /**
-     * Adds a compnany data filter to the request
-     * @param key 
-     * @param conditionBuilder 
-     * @param mustMatchAllConditions 
-     * @param filterOutIfKeyIsNotFound 
-     * @param negated 
+     * Adds a company data filter to the request.
+     * @param key - Data key.
+     * @param conditionBuilder - Function to build the condition.
+     * @param mustMatchAllConditions - If true, all conditions must be met (default is true).
+     * @param filterOutIfKeyIsNotFound - If true, filters out companies without the key (default is true).
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The CompanyFilterBuilder instance for chaining.
      */
     public addCompanyDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
@@ -62,10 +66,11 @@ export class CompanyFilterBuilder extends FilterBuilderBase<CompanyFilterBuilder
     }
 
     /**
-     * Adds a company has key filter to the request
-     * @param key 
-     * @param negated 
-     * @param options
+     * Adds a company has key filter to the request.
+     * @param key - Data key.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The CompanyFilterBuilder instance for chaining.
      */
     public addCompanyDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
@@ -83,10 +88,10 @@ export class CompanyFilterBuilder extends FilterBuilderBase<CompanyFilterBuilder
     }
 
     /**
-     * Adds a company is disabled filter to the request - only works for company queries, not in searches or recommendations
-     * @param key 
-     * @param negated 
-     * @param options
+     * Adds a company is disabled filter to the request. Only works for company queries, not in searches or recommendations.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The CompanyFilterBuilder instance for chaining.
      */
     public addCompanyDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();

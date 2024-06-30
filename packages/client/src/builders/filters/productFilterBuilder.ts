@@ -414,9 +414,7 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
      */
     public addProductCategoryHasProductsFilter(negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
-        options?.filterSettings?.(internalSettingsBuilder
-
-);
+        options?.filterSettings?.(internalSettingsBuilder);
 
         const filter: ProductCategoryHasProductsFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductCategoryHasProductsFilter, Relewise.Client',
@@ -643,9 +641,7 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
      * @param options - Optional settings for the filter.
      * @returns The ProductFilterBuilder instance for chaining.
      */
-    public addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo: number, neg
-
-ated: boolean = false, options?: FilterOptions): this {
+    public addProductRecentlyPurchasedByUserParentCompanyFilter(sinceMinutesAgo: number, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
 

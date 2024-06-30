@@ -26,7 +26,7 @@ export class DataObjectValueSelectorBuilder {
             if (settings.filter) {
                 const conditionsBuilder = new DataObjectFilterConditionBuilder();
                 if (settings.filter?.conditions) {
-                    settings.filter?.conditions(conditionsBuilder);
+                    settings.filter.conditions(conditionsBuilder);
                 }
     
                 this.filter = {

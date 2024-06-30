@@ -337,7 +337,7 @@ export class FacetBuilder {
 
         const conditionsBuilder = new DataObjectFilterConditionBuilder();
         if (filter?.conditions) {
-            filter?.conditions(conditionsBuilder);
+            filter.conditions(conditionsBuilder);
         }
 
         const facet: ProductDataObjectFacet = {
@@ -474,7 +474,7 @@ export class FacetBuilder {
 
         const conditionsBuilder = new DataObjectFilterConditionBuilder();
         if (filter?.conditions) {
-            filter?.conditions(conditionsBuilder);
+            filter.conditions(conditionsBuilder);
         }
 
         const facet: ContentDataObjectFacet = {
@@ -609,7 +609,7 @@ export class FacetBuilder {
 
         const conditionsBuilder = new DataObjectFilterConditionBuilder();
         if (filter?.conditions) {
-            filter?.conditions(conditionsBuilder);
+            filter.conditions(conditionsBuilder);
         }
 
         const facet: ProductCategoryDataObjectFacet = {

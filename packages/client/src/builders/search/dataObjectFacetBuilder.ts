@@ -28,7 +28,7 @@ export class DataObjectFacetBuilder {
             
         const conditionsBuilder = new DataObjectFilterConditionBuilder();
         if (filter?.conditions) {
-            filter?.conditions(conditionsBuilder);
+            filter.conditions(conditionsBuilder);
         }
 
         const facet: DataObjectFacet = {

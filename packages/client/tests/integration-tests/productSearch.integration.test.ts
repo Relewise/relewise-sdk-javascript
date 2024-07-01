@@ -1,4 +1,4 @@
-import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory } from '../../src';
+import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -57,6 +57,20 @@ test('Retail Media search', async() => {
         .build();
 
     const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('Facet result', async() => {
+    const request: ProductSearchRequest = baseProductBuilder()
+        .facets(f => f.addProductAssortmentFacet('Product'))
+        
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    const facet: ProductAssortmentFacet = GetProductFacet.productAssortment(result?.facets, 'Product');
+    const facet2: ProductAssortmentFacet = GetProductFacet.brand(result?.facets);
 
     expect(result?.hits).toBeGreaterThan(0);
 });

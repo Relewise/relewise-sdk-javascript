@@ -8,9 +8,11 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
     constructor() { super(BrandFilterBuilder); }
 
     /**
-     * Adds a brand assortment filter to the request
-     * @param assortmentIds 
-     * @param negated 
+     * Adds a brand assortment filter to the request.
+     * @param assortmentIds - Array of assortment IDs or a single ID.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The BrandFilterBuilder instance for chaining.
      */
     public addBrandAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false, options?: FilterOptions): this {
         const assortments: number[] = Array.isArray(assortmentIds)
@@ -32,9 +34,11 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
     }
 
     /**
-     * Filters the request to only return the specificied brands
-     * @param brandIds 
-     * @param negated 
+     * Filters the request to only return the specified brands.
+     * @param brandIds - Array of brand IDs or a single ID.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The BrandFilterBuilder instance for chaining.
      */
     public addBrandIdFilter(brandIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
         const ids: string[] = Array.isArray(brandIds)
@@ -56,12 +60,14 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
     }
 
     /**
-     * Adds a brand data filter to the request
-     * @param key 
-     * @param conditionBuilder 
-     * @param mustMatchAllConditions 
-     * @param filterOutIfKeyIsNotFound 
-     * @param negated 
+     * Adds a brand data filter to the request.
+     * @param key - Data key.
+     * @param conditionBuilder - Function to build the condition.
+     * @param mustMatchAllConditions - If true, all conditions must be met (default is true).
+     * @param filterOutIfKeyIsNotFound - If true, filters out brands without the key (default is true).
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The BrandFilterBuilder instance for chaining.
      */
     public addBrandDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
@@ -86,10 +92,11 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
     }
 
     /**
-     * Adds a brand has key filter to the request
-     * @param key 
-     * @param negated 
-     * @param options
+     * Adds a brand has key filter to the request.
+     * @param key - Data key.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The BrandFilterBuilder instance for chaining.
      */
     public addBrandDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
@@ -107,10 +114,10 @@ export class BrandFilterBuilder extends FilterBuilderBase<BrandFilterBuilder> {
     }
 
     /**
-     * Adds a brand is disabled filter to the request - only works for brand queries, not in searches or recommendations
-     * @param key 
-     * @param negated 
-     * @param options
+     * Adds a brand is disabled filter to the request. Only works for brand queries, not in searches or recommendations.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The BrandFilterBuilder instance for chaining.
      */
     public addBrandDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();

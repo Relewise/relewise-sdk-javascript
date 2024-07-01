@@ -8,9 +8,11 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     constructor() { super(VariantFilterBuilder); }
 
     /**
-     * Adds a variant assortment filter to the request
-     * @param assortmentIds 
-     * @param negated 
+     * Adds a variant assortment filter to the request.
+     * @param assortmentIds - Array of assortment IDs or a single ID.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantAssortmentFilter(assortmentIds: number[] | number, negated: boolean = false, options?: FilterOptions): this {
         const assortments: number[] = Array.isArray(assortmentIds)
@@ -32,9 +34,11 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Filters the request to only return the specificied variants
-     * @param variantIds 
-     * @param negated 
+     * Filters the request to only return the specified variants.
+     * @param variantIds - Array of variant IDs or a single ID.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantIdFilter(variantIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
         const ids: string[] = Array.isArray(variantIds)
@@ -56,10 +60,12 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Filters the request to only return variants within a certain ListPice-range
-     * @param lowerBound 
-     * @param upperBound 
-     * @param negated 
+     * Filters the request to only return variants within a certain list price range.
+     * @param lowerBound - Lower bound of the price range (inclusive).
+     * @param upperBound - Upper bound of the price range (inclusive).
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantListPriceFilter(lowerBound?: number, upperBound?: number, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
@@ -80,10 +86,12 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Filters the request to only return variants within a certain SalesPrice-range
-     * @param lowerBound 
-     * @param upperBound 
-     * @param negated 
+     * Filters the request to only return variants within a certain sales price range.
+     * @param lowerBound - Lower bound of the price range (inclusive).
+     * @param upperBound - Upper bound of the price range (inclusive).
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantSalesPriceFilter(lowerBound?: number, upperBound?: number, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
@@ -104,11 +112,13 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Filters the request to only return variants with a certain specification
-     * @param key 
-     * @param equalTo 
-     * @param filterOutIfKeyIsNotFound controls if variants with or without the key should be returned
-     * @param negated 
+     * Filters the request to only return variants with a certain specification.
+     * @param key - Specification key.
+     * @param equalTo - Specification value to match.
+     * @param filterOutIfKeyIsNotFound - If true, filters out variants without the key (default is true).
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantSpecificationFilter(key: string, equalTo: string, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
@@ -128,12 +138,14 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Adds a variant data filter to the request
-     * @param key 
-     * @param conditionBuilder 
-     * @param mustMatchAllConditions 
-     * @param filterOutIfKeyIsNotFound 
-     * @param negated 
+     * Adds a variant data filter to the request.
+     * @param key - Data key.
+     * @param conditionBuilder - Function to build the condition.
+     * @param mustMatchAllConditions - If true, all conditions must be met (default is true).
+     * @param filterOutIfKeyIsNotFound - If true, filters out variants without the key (default is true).
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantDataFilter(key: string, conditionBuilder: (builder: ConditionBuilder) => void, mustMatchAllConditions: boolean = true, filterOutIfKeyIsNotFound: boolean = true, negated: boolean = false, options?: EntityDataFilterOptions): this {
         const builder = new ConditionBuilder();
@@ -158,10 +170,11 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Adds a variant has key filter to the request
-     * @param key 
-     * @param negated 
-     * @param options
+     * Adds a variant has key filter to the request.
+     * @param key - Data key.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantDataHasKeyFilter(key: string, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
@@ -179,10 +192,10 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
     }
 
     /**
-     * Adds a variant is disabled filter to the request - only works for product queries, not in searches or recommendations
-     * @param key 
-     * @param negated 
-     * @param options
+     * Adds a variant is disabled filter to the request. Only works for product queries, not in searches or recommendations.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
      */
     public addVariantDisabledFilter(negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();

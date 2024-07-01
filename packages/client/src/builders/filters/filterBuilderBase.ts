@@ -5,21 +5,27 @@ import { AllFilters, FilterOptions } from './filters.types.shared';
 export type Constructor<T> = new () => T;
 
 export abstract class FilterBuilderBase<TFilterBuilder extends FilterBuilderBase<any>> {
-    constructor(private TFilterBuilderCtor: Constructor<TFilterBuilder>) {
-    }
+    constructor(private TFilterBuilderCtor: Constructor<TFilterBuilder>) {}
 
     protected filters: AllFilters[] = [];
 
+    /**
+     * Adds an AND filter to the request.
+     * @param filterBuilder - Function to build the AND filter.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The FilterBuilderBase instance for chaining.
+     */
     public and(filterBuilder: (builder: TFilterBuilder) => void, negated: boolean = false, options?: FilterOptions): this {
         const builder = new this.TFilterBuilderCtor();
         filterBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
-            
+
         const filters = builder.build();
-        if (filters === null || filters.items === undefined || filters.items === null || filters.items.length <= 0) {
-            throw new Error('And-filters must contain atleast 1 filter');
+        if (filters === null || !filters.items || filters.items.length <= 0) {
+            throw new Error('And-filters must contain at least 1 filter');
         }
 
         const filter: AndFilter = {
@@ -33,16 +39,23 @@ export abstract class FilterBuilderBase<TFilterBuilder extends FilterBuilderBase
         return this;
     }
 
+    /**
+     * Adds an OR filter to the request.
+     * @param filterBuilder - Function to build the OR filter.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The FilterBuilderBase instance for chaining.
+     */
     public or(filterBuilder: (builder: TFilterBuilder) => void, negated: boolean = false, options?: FilterOptions): this {
         const builder = new this.TFilterBuilderCtor();
         filterBuilder(builder);
 
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
-            
+
         const filters = builder.build();
-        if (filters === null || filters.items === undefined || filters.items === null || filters.items.length <= 0) {
-            throw new Error('Or-filters must contain atleast 1 filter');
+        if (filters === null || !filters.items || filters.items.length <= 0) {
+            throw new Error('Or-filters must contain at least 1 filter');
         }
 
         const filter: OrFilter = {
@@ -56,15 +69,20 @@ export abstract class FilterBuilderBase<TFilterBuilder extends FilterBuilderBase
         return this;
     }
 
+    /**
+     * Resets the filters.
+     * @returns The FilterBuilderBase instance for chaining.
+     */
     public reset(): this {
         this.filters = [];
-
         return this;
     }
 
+    /**
+     * Builds the filter collection.
+     * @returns The FilterCollection or null if no filters are added.
+     */
     public build(): FilterCollection | null {
-        return this.filters.length === 0
-            ? null
-            : { items: this.filters }
+        return this.filters.length === 0 ? null : { items: this.filters };
     }
 }

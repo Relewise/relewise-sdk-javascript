@@ -1,7 +1,7 @@
 import { BrandFacetResult, CategoryFacetResult, CategoryHierarchyFacetResult, PriceRangeFacetResult, PriceRangesFacetResult, ProductAssortmentFacetResult, ProductDataBooleanValueFacetResult, ProductDataDoubleRangeFacetResult, ProductDataDoubleRangesFacetResult, ProductDataDoubleValueFacetResult, ProductDataObjectFacetResult, ProductDataStringValueFacetResult, ProductFacetResult, VariantSpecificationFacetResult } from 'src/models/data-contracts';
 
-export type DataSelectionStrategy = 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant';
-export type PriceSelectionStrategy = 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant';
+export type DataSelectionStrategy = ProductDataDoubleRangeFacetResult['dataSelectionStrategy'];
+export type PriceSelectionStrategy = PriceRangeFacetResult['priceSelectionStrategy'];
 
 export class GetProductFacet {
     public static productAssortment(facets: ProductFacetResult, selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'): ProductAssortmentFacetResult | null {

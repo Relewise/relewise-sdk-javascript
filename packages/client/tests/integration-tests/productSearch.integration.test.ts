@@ -70,14 +70,14 @@ test('Facet result', async() => {
 
     const result = await searcher.searchProducts(request);
 
-    if (result) {
+    if (result && result.facets) {
         const facet: ProductAssortmentFacet | null = GetProductFacet.productAssortment(result.facets, 'Product');
         expect(facet).toBeDefined();
 
-        const facet2: ProductDataStringValueFacetResult | null = GetProductFacet.dataString(result?.facets, 'AnyString', 'Product');
+        const facet2: ProductDataStringValueFacetResult | null = GetProductFacet.dataString(result.facets, 'AnyString', 'Product');
         expect(facet2).toBeDefined();
 
-        const facet3: CategoryFacetResult | null = GetProductFacet.category(result?.facets, 'ImmediateParent');
+        const facet3: CategoryFacetResult | null = GetProductFacet.category(result.facets, 'ImmediateParent');
         expect(facet3).toBeDefined();
     }
 

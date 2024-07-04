@@ -1,5 +1,5 @@
-import { DataValue } from 'src/models/data-contracts';
-import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue, MultilingualCollectionDataValue, ObjectDataValue, ObjectCollectionDataValue } from 'src/models/dataValue';
+import { DataValue } from '../models/data-contracts';
+import { StringDataValue, StringCollectionDataValue, NumberDataValue, DoubleCollectionDataValue, BooleanDataValue, BooleanCollectionDataValue, MultiCurrencyDataValue, MultilingualDataValue, MultilingualCollectionDataValue, ObjectDataValue, ObjectCollectionDataValue } from '../models/dataValue';
 
 export class DataValueFactory {
     static string(value: string): StringDataValue {

@@ -1,4 +1,6 @@
-import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, ValueConditionCollection, DataValueBase, DataObjectFilterConditionBuilder, HasValueCondition, RelativeDateTimeCondition } from '..';
+import { ContainsCondition, DistinctCondition, EqualsCondition, GreaterThanCondition, LessThanCondition, HasValueCondition, RelativeDateTimeCondition, ValueConditionCollection } from '../models/data-contracts';
+import { DataValueBase } from '../models/dataValue';
+import { DataObjectFilterConditionBuilder } from './dataObjectFilterConditionBuilder';
 
 export type Conditions = ContainsCondition | DistinctCondition | EqualsCondition | GreaterThanCondition | LessThanCondition | HasValueCondition | RelativeDateTimeCondition;
 

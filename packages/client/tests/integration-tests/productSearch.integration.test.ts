@@ -1,4 +1,4 @@
-import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet } from '../../src';
+import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -64,13 +64,22 @@ test('Retail Media search', async() => {
 test('Facet result', async() => {
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f => f.addProductAssortmentFacet('Product'))
-        
+        .facets(f => f.addProductDataStringValueFacet('AnyString', 'Product'))
+        .facets(f => f.addCategoryFacet('ImmediateParent'))
         .build();
 
     const result = await searcher.searchProducts(request);
 
-    const facet: ProductAssortmentFacet = GetProductFacet.productAssortment(result?.facets, 'Product');
-    const facet2: ProductAssortmentFacet = GetProductFacet.brand(result?.facets);
+    if (result) {
+        const facet: ProductAssortmentFacet | null = GetProductFacet.productAssortment(result.facets, 'Product');
+        expect(facet).toBeDefined();
+
+        const facet2: ProductDataStringValueFacetResult | null = GetProductFacet.dataString(result?.facets, 'AnyString', 'Product');
+        expect(facet2).toBeDefined();
+
+        const facet3: CategoryFacetResult | null = GetProductFacet.category(result?.facets, 'ImmediateParent');
+        expect(facet3).toBeDefined();
+    }
 
     expect(result?.hits).toBeGreaterThan(0);
 });

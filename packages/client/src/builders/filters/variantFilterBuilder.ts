@@ -1,4 +1,4 @@
-import { VariantAssortmentFilter, VariantDataFilter, VariantDataHasKeyFilter, VariantDisabledFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from 'src/models/data-contracts';
+import { VariantAssortmentFilter, VariantDataFilter, VariantDataHasKeyFilter, VariantDisabledFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../../models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';

@@ -1,4 +1,4 @@
-import { BrandFacetResult, CategoryFacetResult, CategoryHierarchyFacetResult, PriceRangeFacetResult, PriceRangesFacetResult, ProductAssortmentFacetResult, ProductDataBooleanValueFacetResult, ProductDataDoubleRangeFacetResult, ProductDataDoubleRangesFacetResult, ProductDataDoubleValueFacetResult, ProductDataObjectFacetResult, ProductDataStringValueFacetResult, ProductFacetResult, VariantSpecificationFacetResult } from 'src/models/data-contracts';
+import { BrandFacetResult, CategoryFacetResult, CategoryHierarchyFacetResult, PriceRangeFacetResult, PriceRangesFacetResult, ProductAssortmentFacetResult, ProductDataBooleanValueFacetResult, ProductDataDoubleRangeFacetResult, ProductDataDoubleRangesFacetResult, ProductDataDoubleValueFacetResult, ProductDataObjectFacetResult, ProductDataStringValueFacetResult, ProductFacetResult, VariantSpecificationFacetResult } from '../../models/data-contracts';
 
 export type DataSelectionStrategy = ProductDataDoubleRangeFacetResult['dataSelectionStrategy'];
 export type PriceSelectionStrategy = PriceRangeFacetResult['priceSelectionStrategy'];

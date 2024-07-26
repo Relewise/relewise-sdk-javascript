@@ -1,4 +1,4 @@
-import { FilterCollection } from 'src/models/data-contracts';
+import { FilterCollection } from '../../models/data-contracts';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
 
 export type FilterOptions = {

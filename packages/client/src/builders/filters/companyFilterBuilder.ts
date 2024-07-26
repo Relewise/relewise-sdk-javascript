@@ -1,4 +1,4 @@
-import { CompanyDataFilter, CompanyDataHasKeyFilter, CompanyDisabledFilter, CompanyIdFilter } from 'src/models/data-contracts';
+import { CompanyDataFilter, CompanyDataHasKeyFilter, CompanyDisabledFilter, CompanyIdFilter } from '../../models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
 import { FilterBuilderBase } from './filterBuilderBase';

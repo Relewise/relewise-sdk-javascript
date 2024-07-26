@@ -1,4 +1,5 @@
-import { BrandAssortmentFilter, BrandDataFilter, BrandDataHasKeyFilter, BrandDisabledFilter, BrandIdFilter } from 'src/models/data-contracts';
+import { BrandAssortmentFilter, BrandDataFilter, BrandDataHasKeyFilter, BrandDisabledFilter, BrandIdFilter } from '../../models/data-contracts';
+
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';

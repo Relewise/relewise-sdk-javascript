@@ -1,4 +1,4 @@
-import { AndFilter, FilterCollection, OrFilter } from 'src/models/data-contracts';
+import { AndFilter, FilterCollection, OrFilter } from '../../models/data-contracts';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
 import { AllFilters, FilterOptions } from './filters.types.shared';
 

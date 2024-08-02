@@ -12,3 +12,5 @@ export * from './searchCollectionBuilder';
 export * from './searchTermPredictionBuilder';
 export * from './dataObjectValueSelectorBuilder';
 export * from './getProductFacet';
+export * from './getContentFacet';
+export * from './getProductCategoryFacet';

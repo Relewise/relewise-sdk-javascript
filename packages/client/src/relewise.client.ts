@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import version from './version';
 
 export interface RelewiseClientOptions {
@@ -67,9 +66,9 @@ export abstract class RelewiseClient {
 
         if (!response.ok) {
             let responseMessage = null;
-            try { 
+            try {
                 responseMessage = await response.json();
-            } catch (_) { 
+            } catch (_) {
             }
 
             throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);

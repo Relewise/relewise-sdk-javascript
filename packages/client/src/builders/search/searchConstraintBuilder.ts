@@ -4,10 +4,12 @@ export class SearchConstraintBuilder {
     private resultConstraint: ProductSearchResultConstraint | null = null;
 
     public setResultMustHaveVariantConstraint(constaint: { exceptWhenProductHasNoVariants: boolean }): this {
-        this.resultConstraint = {
+        const constraint: ResultMustHaveVariantConstraint = {
             $type: 'Relewise.Client.Requests.Search.Settings.ResultMustHaveVariantConstraint, Relewise.Client',
             ...constaint,
-        } as ResultMustHaveVariantConstraint;
+        };
+
+        this.resultConstraint = constraint;
         return this;
     }
 

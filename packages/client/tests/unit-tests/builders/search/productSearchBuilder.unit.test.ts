@@ -95,3 +95,13 @@ test('variantSearchSettings', () => {
 
     expect(subject.settings?.variantSettings?.excludeResultsWithoutVariant).toBe(true);
 });
+
+test('resultMustHaveVariantConstraint', () => {
+    const subject: ProductSearchRequest = baseBuilder()
+        .searchConstraints(s => s.setResultMustHaveVariantConstraint({
+            exceptWhenProductHasNoVariants: true,
+        }))
+        .build();
+
+    expect(subject.settings?.resultConstraint?.exceptWhenProductHasNoVariants).toBe(true);
+});

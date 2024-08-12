@@ -83,3 +83,14 @@ test('Facet result', async() => {
 
     expect(result?.hits).toBeGreaterThan(0);
 });
+
+test('ProductSearch with search constraint', async() => {
+
+    const request: ProductSearchRequest = baseProductBuilder()
+        .searchConstraints(constraints => constraints.setResultMustHaveVariantConstraint({ exceptWhenProductHasNoVariants: true }))
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+});

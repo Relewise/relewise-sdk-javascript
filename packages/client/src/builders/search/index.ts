@@ -14,3 +14,4 @@ export * from './dataObjectValueSelectorBuilder';
 export * from './getProductFacet';
 export * from './getContentFacet';
 export * from './getProductCategoryFacet';
+export * from './searchConstraintBuilder';

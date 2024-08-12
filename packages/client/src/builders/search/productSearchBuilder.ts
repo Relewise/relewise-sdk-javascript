@@ -1,9 +1,10 @@
-import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, RetailMediaQuery, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
+import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, ResultMustHaveVariantConstraint, RetailMediaQuery, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { FacetBuilder } from './facetBuilder';
 import { ProductSortingBuilder } from './productSortingBuilder';
 import { SearchBuilder } from './searchBuilder';
+import { SearchConstraintBuilder } from './searchConstraintBuilder';
 import { SearchRequestBuilder } from './searchRequestBuilder';
 
 export class ProductSearchBuilder extends SearchRequestBuilder implements SearchBuilder {
@@ -11,6 +12,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     private retailMediaQuery: RetailMediaQuery | null = null;
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private sortingBuilder: ProductSortingBuilder = new ProductSortingBuilder();
+    private searchConstraintBuilder: SearchConstraintBuilder = new SearchConstraintBuilder();
     private term: string | null | undefined;
 
     private searchSettings: ProductSearchSettings = {
@@ -100,6 +102,14 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
 
     public sorting(sorting: (sortingBuilder: ProductSortingBuilder) => void): this {
         sorting(this.sortingBuilder);
+
+        return this;
+    }
+
+    public searchConstraints(searchConstraintbuilder: (searchConstraintBuilder: SearchConstraintBuilder) => void): this {
+        searchConstraintbuilder(this.searchConstraintBuilder);
+
+        this.searchSettings.resultConstraint = this.searchConstraintBuilder.build();
 
         return this;
     }

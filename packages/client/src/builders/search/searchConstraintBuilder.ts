@@ -1,4 +1,4 @@
-import { ProductSearchResultConstraint, ResultMustHaveVariantConstraint } from 'src/models/data-contracts';
+import { ProductSearchResultConstraint, ResultMustHaveVariantConstraint } from '../../models/data-contracts';
 
 export class SearchConstraintBuilder {
     private resultConstraint: ProductSearchResultConstraint | null = null;

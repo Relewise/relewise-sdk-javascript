@@ -109,7 +109,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     public searchConstraints(searchConstraintbuilder: (searchConstraintBuilder: SearchConstraintBuilder) => void): this {
         searchConstraintbuilder(this.searchConstraintBuilder);
 
-        this.searchSettings.resultConstraint = this.searchConstraintBuilder.build()
+        this.searchSettings.resultConstraint = this.searchConstraintBuilder.build();
 
         return this;
     }

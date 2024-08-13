@@ -1,11 +1,13 @@
 import { Settings } from '../../../builders/settings';
 import { PopularProductsRequest } from '../../../models/data-contracts';
+import { PopularityMultiplierBuilder } from './popularityMultiplierBuilder';
 import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 
 export class PopularProductsBuilder extends ProductSettingsRecommendationBuilder implements ProductsRecommendationBuilder<PopularProductsRequest> {
     private since: number = 0;
     private basedOnSelection: 'MostPurchased' | 'MostViewed' = 'MostPurchased';
+    private popularityMultiplierBuilder: PopularityMultiplierBuilder = new PopularityMultiplierBuilder();
 
     constructor(
         settings: Settings) {
@@ -24,6 +26,12 @@ export class PopularProductsBuilder extends ProductSettingsRecommendationBuilder
         return this;
     }
 
+    public setPopularityMultiplier(popularityMultiplierBuilder: (popularityMultiplierBuilder: PopularityMultiplierBuilder) => void) {
+        popularityMultiplierBuilder(this.popularityMultiplierBuilder);
+
+        return this;
+    }
+
     public build() {
         const request: PopularProductsRequest = {
             $type: 'Relewise.Client.Requests.Recommendations.PopularProductsRequest, Relewise.Client',
@@ -31,6 +39,7 @@ export class PopularProductsBuilder extends ProductSettingsRecommendationBuilder
             settings: this.recommendationSettings,
             basedOn: this.basedOnSelection,
             sinceMinutesAgo: this.since,
+            popularityMultiplier: this.popularityMultiplierBuilder.build(),
         };
 
         return request;

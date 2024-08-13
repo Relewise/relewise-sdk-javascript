@@ -14,3 +14,4 @@ export * from './purchasedWithProductBuilder';
 export * from './searchTermBasedProductRecommendationBuilder';
 export * from './sortProductsBuilder';
 export * from './similarProductsProductBuilder';
+export * from './popularityMultiplierBuilder';

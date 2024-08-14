@@ -72,8 +72,6 @@ export abstract class RelewiseClient {
             } catch (_) { 
             }
 
-            console.error(responseMessage);
-
             throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}.\n\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
         }
 

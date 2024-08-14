@@ -63,6 +63,7 @@ export abstract class RelewiseClient {
             },
             body: JSON.stringify(data),
             signal: options?.abortSignal,
+            cache: 'no-cache',
         });
 
         if (!response.ok) {

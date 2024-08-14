@@ -72,14 +72,16 @@ export abstract class RelewiseClient {
             } catch (_) { 
             }
 
+            console.error(responseMessage);
+
             throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);
         }
 
         try {
             const responseMessage = await response.json();
-
             return responseMessage as TResponse;
         } catch (err) {
+            console.error(err);
             return undefined;
         }
     }

@@ -79,7 +79,6 @@ export abstract class RelewiseClient {
             const responseMessage = await response.json();
             return responseMessage as TResponse;
         } catch (err) {
-            console.error(err);
             return undefined;
         }
     }

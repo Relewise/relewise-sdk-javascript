@@ -10,13 +10,13 @@ export interface RelewiseRequestOptions {
 }
 
 export class ProblemDetailsError extends Error {
-    private _details?: HttpProblemDetails;
+    private _details?: HttpProblemDetails | null;
 
-    public get details(): HttpProblemDetails | undefined {
+    public get details(): HttpProblemDetails | undefined | null {
         return this._details;
     }
 
-    constructor(message: string, details?: HttpProblemDetails) {
+    constructor(message: string, details?: HttpProblemDetails | null) {
         super(message);
         this._details = details;
     }
@@ -67,18 +67,20 @@ export abstract class RelewiseClient {
         });
 
         if (!response.ok) {
-            let responseMessage = null;
+            let responseMessage: HttpProblemDetails | null = null;
+
             try { 
                 responseMessage = await response.json();
             } catch (_) { 
             }
 
-            throw new ProblemDetailsError('Error when calling the Relewise API. Read more in the details property if there is error response or look in the network tab.', responseMessage);
+            const details = responseMessage?.detail ? `Details: ${responseMessage.detail}\n` : '';
+
+            throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
         }
 
         try {
             const responseMessage = await response.json();
-
             return responseMessage as TResponse;
         } catch (err) {
             return undefined;

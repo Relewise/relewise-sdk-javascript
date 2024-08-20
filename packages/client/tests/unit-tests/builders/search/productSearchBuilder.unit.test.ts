@@ -45,7 +45,6 @@ test('productProperties', () => {
     const subject: ProductSearchRequest = baseBuilder()
         .setSelectedProductProperties({
             displayName: true,
-            categoryPaths: true,
             assortments: true,
             pricing: true,
             allData: true,

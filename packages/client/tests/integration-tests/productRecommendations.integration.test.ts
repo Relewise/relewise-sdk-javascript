@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { DataValueFactory, PopularProductsBuilder, ProductRecommendationResponse, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -56,6 +57,28 @@ test('ProductsViewedAfterViewingProduct with all conditions', async() => {
 
     const recommendationBuilder = new PopularProductsBuilder(settings)
         .setPopularityMultiplier(pm => pm.setDataKeyPopularityMultiplierSelector({ key: 'some-data-key' }));
+
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
+
+    expect(result).not.toBe(undefined);
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
+});
+
+test('Filter on products in cart', async() => {
+    settings.user = UserFactory.byTemporaryId(randomUUID());
+    const recommendationBuilder = new PopularProductsBuilder(settings)
+        .filters(f => f.addProductInCartFilter());
+
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
+
+    expect(result).not.toBe(undefined);
+    expect(result!.recommendations?.length).toEqual(0);
+});
+
+test('Filter on products in cart negated', async() => {
+    settings.user = UserFactory.byTemporaryId(randomUUID());
+    const recommendationBuilder = new PopularProductsBuilder(settings)
+        .filters(f => f.addProductInCartFilter(true));
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
 

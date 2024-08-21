@@ -878,6 +878,17 @@ export class FilterBuilder {
     }
 
     /**
+     * Adds a filter to only return products in the user's cart.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The ProductFilterBuilder instance for chaining.
+     */
+    public addProductInCartFilter(negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductInCartFilter(negated, options);
+        return this;
+    }
+
+    /**
      * Resets all filters and filter builders.
      * @returns The FilterBuilder instance for chaining.
      */

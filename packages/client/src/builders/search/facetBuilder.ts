@@ -370,10 +370,10 @@ export class FacetBuilder {
             settings: facetSettings,
             selected: selectedValues,
             purchaseQualifiers: {
-                byUser: purchaseQualifiers.byUser ?? false,
-                byUserCompany: purchaseQualifiers.byUserCompany ?? false,
-                byUserParentCompany: purchaseQualifiers.byUserParentCompany ?? false,
-                sinceMinutesAgo: purchaseQualifiers.sinceMinutesAgo ?? 1234,
+                byUser: purchaseQualifiers.byUser,
+                byUserCompany: purchaseQualifiers.byUserCompany,
+                byUserParentCompany: purchaseQualifiers.byUserParentCompany,
+                sinceMinutesAgo: purchaseQualifiers.sinceMinutesAgo,
             },
         };
 

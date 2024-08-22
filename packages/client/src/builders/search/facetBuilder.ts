@@ -369,12 +369,7 @@ export class FacetBuilder {
             field: 'Data',
             settings: facetSettings,
             selected: selectedValues,
-            purchaseQualifiers: {
-                byUser: purchaseQualifiers.byUser,
-                byUserCompany: purchaseQualifiers.byUserCompany,
-                byUserParentCompany: purchaseQualifiers.byUserParentCompany,
-                sinceMinutesAgo: purchaseQualifiers.sinceMinutesAgo,
-            },
+            purchaseQualifiers: purchaseQualifiers,
         };
 
         this.facets.push(facet);

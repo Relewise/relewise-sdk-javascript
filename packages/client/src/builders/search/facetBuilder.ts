@@ -1,4 +1,4 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange, ContentDataObjectFacet, ProductCategoryDataObjectFacet } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange, ContentDataObjectFacet, ProductCategoryDataObjectFacet, RecentlyPurchasedFacet, PurchaseQualifiers } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 
@@ -30,7 +30,8 @@ export class FacetBuilder {
         | ProductDataStringValueFacet
         | ProductDataBooleanValueFacet
         | ProductDataDoubleValueFacet
-        | VariantSpecificationFacet)[] = [];
+        | VariantSpecificationFacet
+        | RecentlyPurchasedFacet)[] = [];
 
     //#region Product
     public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null, facetSettings?: FacetSettings): this {
@@ -353,6 +354,24 @@ export class FacetBuilder {
             settings: facetSettings,
             key: key,
         };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addRecentlyPurchasedFacet(
+        purchaseQualifiers: PurchaseQualifiers,
+        selectedValues: boolean[] | null = null,
+        facetSettings?: FacetSettings): this {
+
+        const facet: RecentlyPurchasedFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.RecentlyPurchasedFacet, Relewise.Client',
+            field: 'Data',
+            settings: facetSettings,
+            selected: selectedValues,
+            purchaseQualifiers: purchaseQualifiers,
+        };
+
         this.facets.push(facet);
 
         return this;

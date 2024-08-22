@@ -1,6 +1,6 @@
-import { DoubleRange, DataValueBase, ObjectValueMinByCondition, ObjectValueMaxByCondition, ObjectValueContainsCondition, ObjectValueEqualsCondition, ObjectValueGreaterThanCondition, ObjectValueLessThanCondition, ObjectValueInRangeCondition, ObjectValueCondition } from '..';
+import { DoubleRange, DataValueBase, ObjectValueMinByCondition, ObjectValueMaxByCondition, ObjectValueContainsCondition, ObjectValueEqualsCondition, ObjectValueGreaterThanCondition, ObjectValueLessThanCondition, ObjectValueInRangeCondition, ObjectValueCondition, ObjectValueIsSubsetOfCondition } from '..';
 
-export type DataObjectFilterConditions = 
+export type DataObjectFilterConditions =
     | ObjectValueContainsCondition
     | ObjectValueEqualsCondition
     | ObjectValueGreaterThanCondition
@@ -96,6 +96,19 @@ export class DataObjectFilterConditionBuilder {
             negated: negated,
             key: key,
             objectPath: objectPath,
+        };
+        this.conditions.push(condition);
+
+        return this;
+    }
+
+    public addObjectValueIsSubsetOfCondition<T>(key: string, value: DataValueBase<T>, objectPath?: string[], negated: boolean = false): this {
+        const condition: ObjectValueIsSubsetOfCondition = {
+            $type: 'Relewise.Client.Requests.Filters.DataObjects.Conditions.ObjectValueIsSubsetOfCondition, Relewise.Client',
+            value: value,
+            key: key,
+            objectPath: objectPath,
+            negated: negated,
         };
         this.conditions.push(condition);
 

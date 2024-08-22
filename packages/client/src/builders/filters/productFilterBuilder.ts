@@ -1,4 +1,4 @@
-import { ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, ProductAndVariantId, ProductCategoryDataFilter, ProductCategoryDataHasKeyFilter, ProductCategoryDisabledFilter, ProductCategoryRecentlyViewedByUserFilter, ProductDataHasKeyFilter, ProductDisabledFilter, ProductHasCategoriesFilter, ProductRecentlyPurchasedByCompanyFilter, ProductRecentlyPurchasedByUserCompanyFilter, ProductRecentlyPurchasedByUserParentCompanyFilter, ProductRecentlyViewedByCompanyFilter, ProductRecentlyViewedByUserCompanyFilter, ProductRecentlyViewedByUserParentCompanyFilter } from '../../models/data-contracts';
+import { ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, ProductAndVariantId, ProductCategoryDataFilter, ProductCategoryDataHasKeyFilter, ProductCategoryDisabledFilter, ProductCategoryRecentlyViewedByUserFilter, ProductDataHasKeyFilter, ProductDisabledFilter, ProductHasCategoriesFilter, ProductRecentlyPurchasedByCompanyFilter, ProductRecentlyPurchasedByUserCompanyFilter, ProductRecentlyPurchasedByUserParentCompanyFilter, ProductRecentlyViewedByCompanyFilter, ProductRecentlyViewedByUserCompanyFilter, ProductRecentlyViewedByUserParentCompanyFilter, ProductInCartFilter } from '../../models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -723,6 +723,27 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a filter to only return products in the user's cart.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The ProductFilterBuilder instance for chaining.
+     */
+    public addProductInCartFilter(negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductInCartFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductInCartFilter, Relewise.Client',
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+
         this.filters.push(filter);
 
         return this;

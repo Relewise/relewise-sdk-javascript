@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import version from './version';
 
 export interface RelewiseClientOptions {

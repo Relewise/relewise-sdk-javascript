@@ -3,8 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import pkg from './package.json';
-import { terser } from 'rollup-plugin-terser';
-import externalGlobals from 'rollup-plugin-external-globals';
+import terser from '@rollup/plugin-terser';
 
 export default [
     // browser-friendly UMD build
@@ -16,7 +15,6 @@ export default [
             format: 'umd',
             sourcemap: true,
         },
-        external: ['cross-fetch', 'cross-fetch/polyfill'],
         plugins: [
             typescript({ tsconfig: './tsconfig.json' }),
             json(),
@@ -34,20 +32,13 @@ export default [
 	        { file: 'dist/relewise.min.js', format: 'umd', name: 'Relewise', plugins: [terser()] },
         ],
         plugins: [
-            typescript({ tsconfig: './tsconfig.json' }),
-            externalGlobals({
-                'cross-fetch': 'fetch',
-            })],
+            typescript({ tsconfig: './tsconfig.json' })],
     },
     {
         input: 'src/tracker-minification.ts',
         output: [
-	    { file: 'dist/tracker.min.js', format: 'umd', name: 'Relewise', plugins: [terser()] },
+	        { file: 'dist/tracker.min.js', format: 'umd', name: 'Relewise', plugins: [terser()] },
         ],
-        plugins: [
-            typescript({ tsconfig: './tsconfig.json' }),
-            externalGlobals({
-                'cross-fetch': 'fetch',
-            })],
+        plugins: [typescript({ tsconfig: './tsconfig.json' })],
     },
 ];

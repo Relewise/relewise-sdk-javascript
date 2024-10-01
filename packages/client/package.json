@@ -33,8 +33,8 @@
     "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
     "clean": "rimraf ./build ./dist ./docs",
     "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --no-client --enum-names-as-values",
-    "gen-api-dev": "swagger-typescript-api -p swagger.json -o src/models --modular --no-client --enum-names-as-values",
-    "publish": "npm run gen-api && npm run build && npm run build:types"
+    "gen-api-dev": "swagger-typescript-api -p swagger.json -o src/models --modular --no-client --enum-names-as-values --custom-config ./swagger-custom-config.j",
+    "publish": "npm run gen-api && node fix-exports.js && npm run build && npm run build:types"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.47.9",

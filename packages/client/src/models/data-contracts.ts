@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-type UtilRequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+export type UtilRequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 
 export type AbandonedCartTriggerConfiguration = AbandonedCartTriggerResultTriggerConfiguration & {
   cartName?: string | null;

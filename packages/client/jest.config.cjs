@@ -5,17 +5,16 @@ module.exports = {
     extensionsToTreatAsEsm: ['.ts'],
     moduleDirectories: ['node_modules'],
     transform: {
-        '^.+\\.[tj]s$': 'ts-jest',
+        '^.+\\.[tj]s$': ['ts-jest', {
+            'ts-jest': {
+                tsconfig: {
+                    allowJs: true,
+                },
+            },
+        }]
     },
     transformIgnorePatterns: [
         'node_modules/(?!(@relewise)/)',
         '../lib/dist/cjs/relewise-client.js',
     ],
-    globals: {
-        'ts-jest': {
-            tsconfig: {
-                allowJs: true,
-            },
-        },
-    },
 };

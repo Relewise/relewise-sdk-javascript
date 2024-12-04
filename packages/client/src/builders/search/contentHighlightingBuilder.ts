@@ -1,4 +1,4 @@
-import { ContentHighlightProps, ContentSearchSettingsHighlightSettings, HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits, HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape } from "src/models/data-contracts";
+import { ContentHighlightProps, ContentSearchSettingsHighlightSettings, HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits, HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape } from '../../models/data-contracts';
 
 export class ContentHighlightingBuilder {
     private enabled: boolean = true;

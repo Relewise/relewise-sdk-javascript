@@ -1,4 +1,4 @@
-import { HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits, HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape, ProductHighlightProps, ProductSearchSettingsHighlightSettings } from "src/models/data-contracts";
+import { HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits, HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape, ProductHighlightProps, ProductSearchSettingsHighlightSettings } from '../../models/data-contracts';
 
 export class ProductHighlightingBuilder {
     private enabled: boolean = true;

@@ -1,6 +1,7 @@
 import { ContentSearchRequest, ContentSearchSettings, RecommendationSettings, SelectedContentPropertiesSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
+import { ContentHighlightingBuilder } from './contentHighlightingBuilder';
 import { ContentSortingBuilder } from './contentSortingBuilder';
 import { FacetBuilder } from './facetBuilder';
 import { SearchBuilder } from './searchBuilder';
@@ -11,6 +12,7 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
     private paginationBuilder: PaginationBuilder = new PaginationBuilder();
     private sortingBuilder: ContentSortingBuilder = new ContentSortingBuilder();
     private term: string | null | undefined;
+    private highlightingBuilder = new ContentHighlightingBuilder();
 
     private searchSettings: ContentSearchSettings = {
         $type: 'Relewise.Client.Requests.Search.Settings.ContentSearchSettings, Relewise.Client',
@@ -53,6 +55,14 @@ export class ContentSearchBuilder extends SearchRequestBuilder implements Search
 
     public sorting(sorting: (sortingBuilder: ContentSortingBuilder) => void): this {
         sorting(this.sortingBuilder);
+
+        return this;
+    }
+
+    public highlighting(highlightingBuilder: (highlightingBuilder: ContentHighlightingBuilder) => void): this {
+        highlightingBuilder(this.highlightingBuilder);
+
+        this.searchSettings.highlight = this.highlightingBuilder.build();
 
         return this;
     }

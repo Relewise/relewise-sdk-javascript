@@ -1130,6 +1130,14 @@ export type ContentCategoryView = Trackable & {
   channel?: Channel | null;
 };
 
+export interface ContentContentHighlightPropsHighlightSettings {
+  $type: string;
+  enabled: boolean;
+  limit: HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits;
+  highlightable: ContentHighlightProps;
+  shape: HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape;
+}
+
 export type ContentDataBooleanValueFacet = BooleanContentDataValueFacet;
 
 export type ContentDataBooleanValueFacetResult = BooleanContentDataValueFacetResult;
@@ -1265,6 +1273,14 @@ export interface ContentFacetResult {
 
 export type ContentHasCategoriesFilter = Filter;
 
+export interface ContentHighlightProperties {
+  $type: string;
+  displayName: boolean;
+  dataKeys?: string[] | null;
+}
+
+export type ContentHighlightProps = ContentHighlightProperties;
+
 export type ContentIdFilter = Filter & {
   contentIds: string[];
 };
@@ -1359,6 +1375,7 @@ export interface ContentResult {
   categoryPaths?: CategoryPathResult[] | null;
   viewedByUser?: ViewedByUserInfo | null;
   custom?: Record<string, string | null>;
+  highlight?: HighlightResult | null;
 }
 
 export interface ContentResultDetails {
@@ -1397,7 +1414,10 @@ export type ContentSearchResponse = PaginatedSearchResponse & {
 export type ContentSearchSettings = SearchSettings & {
   selectedContentProperties?: SelectedContentPropertiesSettings | null;
   recommendations: RecommendationSettings;
+  highlight?: ContentSearchSettingsHighlightSettings | null;
 };
+
+export type ContentSearchSettingsHighlightSettings = ContentContentHighlightPropsHighlightSettings;
 
 export interface ContentSortBySpecification {
   value?: ContentAttributeSorting | ContentDataSorting | ContentPopularitySorting | ContentRelevanceSorting | null;
@@ -2323,6 +2343,41 @@ export type HasRecentlyReceivedTriggerCondition = UserCondition & {
 
 export type HasValueCondition = ValueCondition;
 
+export interface HighlightResult {
+  offsets?: HighlightResultOffset | null;
+}
+
+export interface HighlightResultOffset {
+  displayName: Int32Range[];
+  data: StringRange1ArrayKeyValuePair[];
+}
+
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits {
+  /** @format int32 */
+  maxEntryLimit?: number | null;
+  /** @format int32 */
+  maxSnippetsPerEntry?: number | null;
+  /** @format int32 */
+  maxSnippetsPerField?: number | null;
+}
+
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape {
+  includeOffsets: boolean;
+}
+
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits {
+  /** @format int32 */
+  maxEntryLimit?: number | null;
+  /** @format int32 */
+  maxSnippetsPerEntry?: number | null;
+  /** @format int32 */
+  maxSnippetsPerField?: number | null;
+}
+
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape {
+  includeOffsets: boolean;
+}
+
 export type HtmlParser = Parser;
 
 export type IChange = object;
@@ -2396,6 +2451,13 @@ export interface Int32ProductDataValueFacetResult {
   selected?: number[] | null;
   available?: Int32AvailableFacetValue[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification" | "User";
+}
+
+export interface Int32Range {
+  /** @format int32 */
+  lowerBoundInclusive: number;
+  /** @format int32 */
+  upperBoundInclusive: number;
 }
 
 export interface KeyMultiplier {
@@ -3652,6 +3714,14 @@ export type ProductHasVariantsFilter = Filter & {
   numberOfVariants: Int32NullableRange;
 };
 
+export interface ProductHighlightProperties {
+  $type: string;
+  displayName: boolean;
+  dataKeys?: string[] | null;
+}
+
+export type ProductHighlightProps = ProductHighlightProperties;
+
 export type ProductIdFilter = Filter & {
   productIds: string[];
 };
@@ -3819,6 +3889,14 @@ export interface ProductPerformanceResultViewsMetrics {
 }
 
 export type ProductPopularitySorting = ProductSorting;
+
+export interface ProductProductHighlightPropsHighlightSettings {
+  $type: string;
+  enabled: boolean;
+  limit: HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits;
+  highlightable: ProductHighlightProps;
+  shape: HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape;
+}
 
 export type ProductPromotion = Promotion & {
   filters?: FilterCollection | null;
@@ -4070,6 +4148,7 @@ export interface ProductResult {
   purchasedByUserCompany?: PurchasedByUserCompanyInfo | null;
   viewedByUserCompany?: ViewedByUserCompanyInfo | null;
   filteredVariants?: VariantResult[] | null;
+  highlight?: HighlightResult | null;
 }
 
 export interface ProductResultDetails {
@@ -4149,7 +4228,10 @@ export type ProductSearchSettings = SearchSettings & {
   selectedBrandProperties?: SelectedBrandPropertiesSettings | null;
   variantSettings?: VariantSearchSettings | null;
   resultConstraint?: ResultMustHaveVariantConstraint | null;
+  highlight?: ProductSearchSettingsHighlightSettings | null;
 };
+
+export type ProductSearchSettingsHighlightSettings = ProductProductHighlightPropsHighlightSettings;
 
 export interface ProductSortBySpecification {
   value?:
@@ -5204,6 +5286,11 @@ export interface StringProductDataValueFacetResult {
   selected?: string[] | null;
   available?: StringAvailableFacetValue[] | null;
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification" | "User";
+}
+
+export interface StringRange1ArrayKeyValuePair {
+  key: string;
+  value: Int32Range[];
 }
 
 export interface StringStringKeyValuePair {

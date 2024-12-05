@@ -1,7 +1,7 @@
 import { ContentHighlightProps, ContentSearchSettingsHighlightSettings, HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits, HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape } from '../../models/data-contracts';
 
 export class ContentHighlightingBuilder {
-    private enabled: boolean = true;
+    private enabledState: boolean = true;
     private highlightable: ContentHighlightProps = {
         $type: 'Relewise.Client.Requests.Shared.Highlighting.ContentHighlightProps, Relewise.Client',
         displayName: false
@@ -11,8 +11,8 @@ export class ContentHighlightingBuilder {
         includeOffsets: false
     };
 
-    public enable(enabled: boolean): this {
-        this.enabled = enabled;
+    public enabled(enabled: boolean): this {
+        this.enabledState = enabled;
         
         return this;
     }
@@ -41,10 +41,10 @@ export class ContentHighlightingBuilder {
     public build(): ContentSearchSettingsHighlightSettings {
         return {
             $type: 'Relewise.Client.Requests.Search.Settings.ContentSearchSettings+HighlightSettings, Relewise.Client',
-            enabled: this.enabled,
+            enabled: this.enabledState,
             highlightable: this.highlightable,
             limit: this.limit,
             shape: this.shape
-        } as ContentSearchSettingsHighlightSettings;
+        };
     }
 }

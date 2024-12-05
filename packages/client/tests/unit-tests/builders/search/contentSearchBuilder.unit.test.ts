@@ -15,7 +15,7 @@ function baseBuilder() {
 test('searchHightlighting', () => {
     const subject: ContentSearchRequest = baseBuilder()
         .highlighting(h => {
-            h.enable(false);
+            h.enabled(false);
             h.setHighlightable({
                 displayName: true,
                 dataKeys: ['datakey-1', 'datakey-2']

@@ -105,3 +105,31 @@ test('resultMustHaveVariantConstraint', () => {
 
     expect(subject.settings?.resultConstraint?.exceptWhenProductHasNoVariants).toBe(true);
 });
+
+test('searchHightlighting', () => {
+    const subject: ProductSearchRequest = baseBuilder()
+        .highlighting(h => {
+            h.enabled(false);
+            h.setHighlightable({
+                displayName: true,
+                dataKeys: ['datakey-1', 'datakey-2']
+            });
+            h.setLimit({
+                maxEntryLimit: 1,
+                maxSnippetsPerEntry: 2,
+                maxSnippetsPerField: 3
+            });
+            h.setShape({
+                includeOffsets: true
+            });
+        }).build();
+
+    expect(subject.settings?.highlight?.enabled).toBe(false);
+    expect(subject.settings?.highlight?.highlightable.displayName).toBe(true);
+    expect(subject.settings?.highlight?.highlightable.dataKeys![0]).toBe('datakey-1');
+    expect(subject.settings?.highlight?.highlightable.dataKeys![1]).toBe('datakey-2');
+    expect(subject.settings?.highlight?.limit.maxEntryLimit).toBe(1);
+    expect(subject.settings?.highlight?.limit.maxSnippetsPerEntry).toBe(2);
+    expect(subject.settings?.highlight?.limit.maxSnippetsPerField).toBe(3);
+    expect(subject.settings?.highlight?.shape.includeOffsets).toBe(true);
+});

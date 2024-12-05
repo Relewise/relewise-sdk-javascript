@@ -2,6 +2,7 @@ import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, Re
 import { PaginationBuilder } from '../paginationBuilder';
 import { Settings } from '../settings';
 import { FacetBuilder } from './facetBuilder';
+import { ProductHighlightingBuilder } from './productHighlightingBuilder';
 import { ProductSortingBuilder } from './productSortingBuilder';
 import { SearchBuilder } from './searchBuilder';
 import { SearchConstraintBuilder } from './searchConstraintBuilder';
@@ -14,6 +15,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     private sortingBuilder: ProductSortingBuilder = new ProductSortingBuilder();
     private searchConstraintBuilder: SearchConstraintBuilder = new SearchConstraintBuilder();
     private term: string | null | undefined;
+    private highlightingBuilder = new ProductHighlightingBuilder();
 
     private searchSettings: ProductSearchSettings = {
         $type: 'Relewise.Client.Requests.Search.Settings.ProductSearchSettings, Relewise.Client',
@@ -114,6 +116,14 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
+    public highlighting(highlightingBuilder: (highlightingBuilder: ProductHighlightingBuilder) => void): this {
+        highlightingBuilder(this.highlightingBuilder);
+
+        this.searchSettings.highlight = this.highlightingBuilder.build();
+
+        return this;
+    }
+
     public build(): ProductSearchRequest {
         const { take, skip } = this.paginationBuilder.build();
         return {
@@ -121,9 +131,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
             ...this.baseBuild(),
             take,
             skip,
-
             term: this.term,
-
             facets: this.facetBuilder.build(),
             settings: this.searchSettings,
             sorting: this.sortingBuilder.build(),

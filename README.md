@@ -206,7 +206,7 @@ For more information about how to use the SDK via CDN - go to our [docs site](ht
 
 ## Running integration tests
 
-You can read about running the integration tests [here](/lib/dev.guide.md#testing).
+You can read about running the integration tests [here](/packages/client/dev.guide.md#testing).
 
 ## Contributing
 

@@ -2345,11 +2345,17 @@ export type HasValueCondition = ValueCondition;
 
 export interface HighlightResult {
   offsets?: HighlightResultOffset | null;
+  snippets?: HighlightResultSnippet | null;
 }
 
 export interface HighlightResultOffset {
   displayName: Int32Range[];
   data: StringRange1ArrayKeyValuePair[];
+}
+
+export interface HighlightResultSnippet {
+  displayName: string[];
+  data: StringStringArrayKeyValuePair[];
 }
 
 export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits {
@@ -2363,6 +2369,11 @@ export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings
 
 export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape {
   includeOffsets: boolean;
+  textSnippets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings | null;
+}
+
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings {
+  includeTextSnippets: boolean;
 }
 
 export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits {
@@ -2376,6 +2387,11 @@ export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings
 
 export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape {
   includeOffsets: boolean;
+  textSnippets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings | null;
+}
+
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings {
+  includeTextSnippets: boolean;
 }
 
 export type HtmlParser = Parser;
@@ -3712,6 +3728,7 @@ export type ProductHasCategoriesFilter = Filter;
 
 export type ProductHasVariantsFilter = Filter & {
   numberOfVariants: Int32NullableRange;
+  includeDisabled: boolean;
 };
 
 export interface ProductHighlightProperties {
@@ -5291,6 +5308,11 @@ export interface StringProductDataValueFacetResult {
 export interface StringRange1ArrayKeyValuePair {
   key: string;
   value: Int32Range[];
+}
+
+export interface StringStringArrayKeyValuePair {
+  key: string;
+  value: string[];
 }
 
 export interface StringStringKeyValuePair {

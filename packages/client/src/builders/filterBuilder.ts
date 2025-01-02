@@ -183,7 +183,7 @@ export class FilterBuilder {
      * @param options - Optional settings for the filter.
      * @returns The FilterBuilder instance for chaining.
      */
-    public addProductHasVariantsFilter(lowerBound?: number, upperBound?: number, negated: boolean = false, options?: FilterOptions): this {
+    public addProductHasVariantsFilter(lowerBound?: number, upperBound?: number, negated: boolean = false, options?: FilterOptions & { includeDisabled?: boolean }): this {
         this.productFilterBuilder.addProductHasVariantsFilter(lowerBound, upperBound, negated, options);
         return this;
     }

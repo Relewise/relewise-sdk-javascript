@@ -1,7 +1,7 @@
 import { UserFactory } from '../../../../src/factory';
 import { ProductSearchBuilder } from '../../../../src/builders/search';
 import { test, expect } from '@jest/globals'
-import { ProductSearchRequest } from '../../../../src/models/data-contracts';
+import { ProductHasVariantsFilter, ProductSearchRequest } from '../../../../src/models/data-contracts';
 
 function baseBuilder() {
     return new ProductSearchBuilder({
@@ -132,4 +132,14 @@ test('searchHightlighting', () => {
     expect(subject.settings?.highlight?.limit.maxSnippetsPerEntry).toBe(2);
     expect(subject.settings?.highlight?.limit.maxSnippetsPerField).toBe(3);
     expect(subject.settings?.highlight?.shape.includeOffsets).toBe(true);
+});
+
+test('includeDisabled in ProductHasVariantsFilter', () => {
+    const subject: ProductSearchRequest = baseBuilder()
+        .filters(f => f.addProductHasVariantsFilter(1, 9999, false, { includeDisabled: true }))
+        .build();
+
+    const filterFromRequest = (subject.filters?.items?.[0] as ProductHasVariantsFilter) ?? null;
+    expect(filterFromRequest).not.toBeNull();
+    expect(filterFromRequest!.includeDisabled).toBe(true);
 });

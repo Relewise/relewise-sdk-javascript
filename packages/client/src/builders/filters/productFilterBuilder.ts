@@ -153,7 +153,7 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
      * @param options - Optional settings for the filter.
      * @returns The ProductFilterBuilder instance for chaining.
      */
-    public addProductHasVariantsFilter(lowerBound?: number, upperBound?: number, negated: boolean = false, options?: FilterOptions): this {
+    public addProductHasVariantsFilter(lowerBound?: number, upperBound?: number, negated: boolean = false, options?: FilterOptions & { includeDisabled?: boolean }): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
 
@@ -165,7 +165,9 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
             },
             negated: negated,
             settings: internalSettingsBuilder.build(),
+            includeDisabled: options?.includeDisabled ?? false
         };
+        
         this.filters.push(filter);
 
         return this;

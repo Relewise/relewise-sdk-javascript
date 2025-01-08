@@ -1,4 +1,4 @@
-import { HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits, HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape, ProductHighlightProps, ProductSearchSettingsHighlightSettings } from '../../models/data-contracts';
+import { HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits, HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape, HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings, ProductHighlightProps, ProductSearchSettingsHighlightSettings } from '../../models/data-contracts';
 
 export class ProductHighlightingBuilder {
     private enabledState: boolean = true;
@@ -32,8 +32,9 @@ export class ProductHighlightingBuilder {
         return this;
     }
 
-    public setShape(shape: { includeOffsets: boolean }): this {
+    public setShape(shape: { includeOffsets: boolean, textSnippets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings }): this {
         this.shape.includeOffsets = shape.includeOffsets;
+        this.shape.textSnippets = shape.textSnippets;
 
         return this;
     }

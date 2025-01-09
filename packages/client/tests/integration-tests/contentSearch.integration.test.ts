@@ -44,10 +44,11 @@ test('Highlighting', async() => {
             h.setHighlightable({ dataKeys: ['Description'] })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
-            h.setShape({ includeOffsets: true })
+            h.setShape({ includeOffsets: true, textSnippets: { includeTextSnippets: true } })
         }).build();
     
     const result = await searcher.searchContents(request);
 
     expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
+    expect(result?.results![0].highlight?.snippets?.data[0].value[0]).toBe("...word should be highlighted");
 })

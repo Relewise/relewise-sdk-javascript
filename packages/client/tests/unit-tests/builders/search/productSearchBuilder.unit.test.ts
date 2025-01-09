@@ -120,7 +120,10 @@ test('searchHightlighting', () => {
                 maxSnippetsPerField: 3
             });
             h.setShape({
-                includeOffsets: true
+                includeOffsets: true,
+                textSnippets: {
+                    includeTextSnippets: true,
+                }
             });
         }).build();
 
@@ -132,6 +135,7 @@ test('searchHightlighting', () => {
     expect(subject.settings?.highlight?.limit.maxSnippetsPerEntry).toBe(2);
     expect(subject.settings?.highlight?.limit.maxSnippetsPerField).toBe(3);
     expect(subject.settings?.highlight?.shape.includeOffsets).toBe(true);
+    expect(subject.settings?.highlight?.shape.textSnippets?.includeTextSnippets).toBe(true);
 });
 
 test('includeDisabled in ProductHasVariantsFilter', () => {

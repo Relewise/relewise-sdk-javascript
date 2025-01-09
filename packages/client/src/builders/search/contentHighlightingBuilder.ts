@@ -39,7 +39,6 @@ export class ContentHighlightingBuilder {
         return this;
     }
 
-
     public build(): ContentSearchSettingsHighlightSettings {
         return {
             $type: 'Relewise.Client.Requests.Search.Settings.ContentSearchSettings+HighlightSettings, Relewise.Client',

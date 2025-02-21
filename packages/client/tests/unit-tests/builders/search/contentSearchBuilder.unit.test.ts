@@ -26,11 +26,8 @@ test('searchHightlighting', () => {
                 maxSnippetsPerField: 3
             });
             h.setShape({
-                includeOffsets: true,
-                textSnippets: {
-                    includeEllipses: true,
-                    includeTextSnippets: true
-                }
+                offsets: { include: true },
+                snippets: { include: true, includeMatchedWords: true, useEllipses: true }
             });
         }).build();
 
@@ -41,6 +38,6 @@ test('searchHightlighting', () => {
     expect(subject.settings?.highlight?.limit.maxEntryLimit).toBe(1);
     expect(subject.settings?.highlight?.limit.maxSnippetsPerEntry).toBe(2);
     expect(subject.settings?.highlight?.limit.maxSnippetsPerField).toBe(3);
-    expect(subject.settings?.highlight?.shape.includeOffsets).toBe(true);
-    expect(subject.settings?.highlight?.shape.textSnippets?.includeTextSnippets).toBe(true);
+    expect(subject.settings?.highlight?.shape.offsets?.include).toBe(true);
+    expect(subject.settings?.highlight?.shape.snippets?.include).toBe(true);
 });

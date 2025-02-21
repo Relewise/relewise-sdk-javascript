@@ -102,7 +102,10 @@ test('Highlighting', async() => {
             h.setHighlightable({ dataKeys: ['SomeString'] })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
-            h.setShape({ includeOffsets: true, textSnippets: { includeTextSnippets: true, includeEllipses: true } })
+            h.setShape({  
+                offsets: { include: true },
+                snippets: { include: true, includeMatchedWords: true, useEllipses: true } 
+            })
         }).build();
     const result = await searcher.searchProducts(request);
 

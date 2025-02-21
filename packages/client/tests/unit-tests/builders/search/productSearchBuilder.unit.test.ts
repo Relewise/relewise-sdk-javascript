@@ -122,6 +122,7 @@ test('searchHightlighting', () => {
             h.setShape({
                 includeOffsets: true,
                 textSnippets: {
+                    includeEllipses: true,
                     includeTextSnippets: true,
                 }
             });

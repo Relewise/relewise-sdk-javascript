@@ -24,10 +24,8 @@ export class ProductHighlightingBuilder {
         return this;
     }
 
-    public setLimit(limit: { maxEntryLimit?: number | null; maxSnippetsPerEntry?: number | null; maxSnippetsPerField?: number | null; }): this {
-        this.limit.maxEntryLimit = limit.maxEntryLimit;
-        this.limit.maxSnippetsPerEntry = limit.maxSnippetsPerEntry;
-        this.limit.maxSnippetsPerField = limit.maxSnippetsPerField;
+    public setLimit(limit: HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits): this {
+        this.limit = limit;
 
         return this;
     }

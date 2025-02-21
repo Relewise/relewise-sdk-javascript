@@ -5,7 +5,7 @@ export class ContentHighlightingBuilder {
     private highlightable: ContentHighlightProps = {
         $type: 'Relewise.Client.Requests.Shared.Highlighting.ContentHighlightProps, Relewise.Client',
         displayName: false
-    }; 
+    };
     private limit: HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits = {};
     private shape: HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape = {
         includeOffsets: false
@@ -13,7 +13,7 @@ export class ContentHighlightingBuilder {
 
     public enabled(enabled: boolean): this {
         this.enabledState = enabled;
-        
+
         return this;
     }
 
@@ -24,10 +24,8 @@ export class ContentHighlightingBuilder {
         return this;
     }
 
-    public setLimit(limit: { maxEntryLimit?: number | null; maxSnippetsPerEntry?: number | null; maxSnippetsPerField?: number | null; }): this {
-        this.limit.maxEntryLimit = limit.maxEntryLimit;
-        this.limit.maxSnippetsPerEntry = limit.maxSnippetsPerEntry;
-        this.limit.maxSnippetsPerField = limit.maxSnippetsPerField;
+    public setLimit(limit: HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits): this {
+        this.limit = limit;
 
         return this;
     }

@@ -38,7 +38,7 @@ export interface AbandonedCartTriggerResultTriggerConfiguration {
 
 export type AbandonedSearchTriggerConfiguration = AbandonedSearchTriggerResultTriggerConfiguration & {
   searchTypesInPrioritizedOrder: ("Product" | "ProductCategory" | "Content")[];
-  searchTermCondition?: SearchTermCondition | null;
+  searchTermCondition?: SearchTermCondition | RetailMediaSearchTermCondition | null;
   suppressOnEntityFromSearchResultViewed: boolean;
   /** @format int32 */
   considerAbandonedAfterMinutes: number;
@@ -423,7 +423,7 @@ export type BrandFacet = StringValueFacet;
 export type BrandFacetResult = StringBrandNameAndIdResultValueFacetResult;
 
 export type BrandIdFilter = Filter & {
-  brandIds: string[];
+  brandIds?: string[] | null;
 };
 
 export type BrandIdRelevanceModifier = RelevanceModifier & {
@@ -567,6 +567,7 @@ export type Campaign = CampaignEntityStateCampaignMetadataValuesRetailMediaEntit
   advertiserId: string;
   budget: CPMBudget;
   status: CampaignStatusWithHistory;
+  conditions?: RetailMediaConditions | null;
 };
 
 export interface CampaignAnalytics {
@@ -2122,9 +2123,11 @@ export interface FieldIndexConfiguration {
   included: boolean;
   /** @format int32 */
   weight: number;
+  /** @deprecated */
   predictionSourceType: "Disabled" | "IndividualWords" | "PartialWordSequences" | "CompleteWordSequence";
   parser?: ClearTextParser | HtmlParser | null;
   matchTypeSettings?: MatchTypeSettings | null;
+  predictionConfiguration?: PredictionConfiguration | null;
 }
 
 export interface Filter {
@@ -2354,8 +2357,22 @@ export interface HighlightResultOffset {
 }
 
 export interface HighlightResultSnippet {
-  displayName: string[];
-  data: StringStringArrayKeyValuePair[];
+  displayName: HighlightResultSnippetDisplayNameSnippetMatch[];
+  data: StringFieldSnippetMatchArrayKeyValuePair[];
+}
+
+export type HighlightResultSnippetDisplayNameSnippetMatch = HighlightResultSnippetSnippetMatch;
+
+export type HighlightResultSnippetFieldSnippetMatch = HighlightResultSnippetSnippetMatch;
+
+export interface HighlightResultSnippetMatchMatchedWord {
+  offset?: Int32Range | null;
+}
+
+export interface HighlightResultSnippetSnippetMatch {
+  $type: string;
+  text: string;
+  matchedWords?: HighlightResultSnippetMatchMatchedWord[] | null;
 }
 
 export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits {
@@ -2365,15 +2382,29 @@ export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings
   maxSnippetsPerEntry?: number | null;
   /** @format int32 */
   maxSnippetsPerField?: number | null;
+  /** @format int32 */
+  maxWordsBeforeMatch?: number | null;
+  /** @format int32 */
+  maxWordsAfterMatch?: number | null;
+  /** @format int32 */
+  maxSentencesToIncludeBeforeMatch?: number | null;
+  /** @format int32 */
+  maxSentencesToIncludeAfterMatch?: number | null;
+}
+
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2OffsetSettings {
+  include: boolean;
 }
 
 export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape {
-  includeOffsets: boolean;
-  textSnippets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings | null;
+  offsets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2OffsetSettings | null;
+  snippets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2SnippetsSettings | null;
 }
 
-export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings {
-  includeTextSnippets: boolean;
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2SnippetsSettings {
+  include: boolean;
+  useEllipses: boolean;
+  includeMatchedWords: boolean;
 }
 
 export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits {
@@ -2383,15 +2414,29 @@ export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings
   maxSnippetsPerEntry?: number | null;
   /** @format int32 */
   maxSnippetsPerField?: number | null;
+  /** @format int32 */
+  maxWordsBeforeMatch?: number | null;
+  /** @format int32 */
+  maxWordsAfterMatch?: number | null;
+  /** @format int32 */
+  maxSentencesToIncludeBeforeMatch?: number | null;
+  /** @format int32 */
+  maxSentencesToIncludeAfterMatch?: number | null;
+}
+
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2OffsetSettings {
+  include: boolean;
 }
 
 export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape {
-  includeOffsets: boolean;
-  textSnippets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings | null;
+  offsets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2OffsetSettings | null;
+  snippets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2SnippetsSettings | null;
 }
 
-export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings {
-  includeTextSnippets: boolean;
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2SnippetsSettings {
+  include: boolean;
+  useEllipses: boolean;
+  includeMatchedWords: boolean;
 }
 
 export type HtmlParser = Parser;
@@ -3034,10 +3079,14 @@ export interface PopularityMultiplierSelector {
   $type: string;
 }
 
+export interface PredictionConfiguration {
+  includeInPredictions: boolean;
+}
+
 export type PredictionRule = SearchRule & {
-  condition: SearchTermCondition;
-  promote: PredictionRulePromotion;
-  suppress: PredictionRuleSuppression;
+  condition: SearchTermCondition | RetailMediaSearchTermCondition;
+  promote?: PredictionRulePromotion | null;
+  suppress?: PredictionRuleSuppression | null;
 };
 
 export interface PredictionRulePromotion {
@@ -3917,6 +3966,7 @@ export interface ProductProductHighlightPropsHighlightSettings {
 
 export type ProductPromotion = Promotion & {
   filters?: FilterCollection | null;
+  conditions?: RetailMediaConditions | null;
 };
 
 export type ProductPromotionSpecification = PromotionSpecification & {
@@ -4398,6 +4448,27 @@ export type PurchasedWithProductRequest = ProductRecommendationRequest & {
   productAndVariantId: ProductAndVariantId;
 };
 
+export interface RebuildStatus {
+  isRebuilding: boolean;
+  isStale: boolean;
+  /** @format date-time */
+  lastRebuildStarted: string;
+  /** @format date-time */
+  lastRebuildCompleted: string;
+  /** @format date-time */
+  lastRebuildOpportunity: string;
+  /** @format date-span */
+  lastRebuildDuration: string;
+  isBuilt: boolean;
+  isPartial: boolean;
+  /** @format date-time */
+  lastMarkedAsStale: string;
+  /** @format date-span */
+  staleDuration: string;
+  /** @format date-span */
+  lastStaleDuration: string;
+}
+
 export type RecentlyPurchasedFacet = BooleanValueFacet & {
   purchaseQualifiers: PurchaseQualifiers;
 };
@@ -4460,13 +4531,13 @@ export interface RecommendationTypeCollection {
 export interface RedirectResult {
   /** @format uuid */
   id: string;
-  condition: SearchTermCondition;
+  condition: SearchTermCondition | RetailMediaSearchTermCondition;
   destination?: string | null;
   data?: Record<string, string>;
 }
 
 export type RedirectRule = SearchRule & {
-  condition: SearchTermCondition;
+  condition: SearchTermCondition | RetailMediaSearchTermCondition;
   destination?: string | null;
   data?: Record<string, string>;
 };
@@ -4585,6 +4656,10 @@ export type ResultMustHaveVariantConstraint = ProductSearchResultConstraint & {
   exceptWhenProductHasNoVariants: boolean;
 };
 
+export interface RetailMediaConditions {
+  searchTerm?: RetailMediaSearchTermCondition | null;
+}
+
 export interface RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters {
   $type: string;
   term?: string | null;
@@ -4636,6 +4711,8 @@ export interface RetailMediaResultPlacementResultEntity {
 export interface RetailMediaResultPlacementResultEntityProduct {
   result: ProductResult;
 }
+
+export type RetailMediaSearchTermCondition = SearchTermCondition;
 
 export type SaveAdvertisersRequest = AdvertiserSaveEntitiesRequest;
 
@@ -4724,6 +4801,7 @@ export interface SearchIndex {
   modifiedBy?: string | null;
   custom?: Record<string, string | null>;
   configuration?: IndexConfiguration | null;
+  rebuildStatus?: RebuildStatus | null;
 }
 
 export type SearchIndexCollectionResponse = TimedResponse & {
@@ -4789,7 +4867,7 @@ export type SearchResponseCollection = SearchResponse & {
 };
 
 export type SearchResultModifierRule = SearchRule & {
-  condition: SearchTermCondition;
+  condition: SearchTermCondition | RetailMediaSearchTermCondition;
   actions: (SearchResultModifierRuleAddFiltersAction | SearchResultModifierRuleAddTermFilterAction)[];
 };
 
@@ -4889,16 +4967,18 @@ export type SearchTermBasedProductRecommendationRequest = ProductRecommendationR
 };
 
 export interface SearchTermCondition {
+  $type: string;
   kind?: "Equals" | "StartsWith" | "EndsWith" | "Contains" | null;
   value?: string | null;
-  andConditions?: SearchTermCondition[] | null;
-  orConditions?: SearchTermCondition[] | null;
+  andConditions?: (SearchTermCondition | RetailMediaSearchTermCondition)[] | null;
+  orConditions?: (SearchTermCondition | RetailMediaSearchTermCondition)[] | null;
   /** @format int32 */
   minimumLength?: number | null;
+  negated: boolean;
 }
 
 export type SearchTermModifierRule = SearchRule & {
-  condition: SearchTermCondition;
+  condition: SearchTermCondition | RetailMediaSearchTermCondition;
   actions: (
     | SearchTermModifierRuleAppendToTermAction
     | SearchTermModifierRuleRemoveFromTermAction
@@ -4985,6 +5065,7 @@ export interface SearchTermPredictionResult {
   /** @format int32 */
   rank: number;
   expectedResultTypes?: ExpectedSearchTermResult[] | null;
+  /** @deprecated */
   type: "Match" | "WordContinuation" | "Word" | "WordSequence";
   correctedWordsMask?: boolean[] | null;
 }
@@ -5267,6 +5348,11 @@ export interface StringDataObjectValueFacetResult {
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification" | "User";
 }
 
+export interface StringFieldSnippetMatchArrayKeyValuePair {
+  key: string;
+  value: HighlightResultSnippetFieldSnippetMatch[];
+}
+
 export interface StringProductCategoryDataValueFacet {
   $type: string;
   key: string;
@@ -5308,11 +5394,6 @@ export interface StringProductDataValueFacetResult {
 export interface StringRange1ArrayKeyValuePair {
   key: string;
   value: Int32Range[];
-}
-
-export interface StringStringArrayKeyValuePair {
-  key: string;
-  value: string[];
 }
 
 export interface StringStringKeyValuePair {

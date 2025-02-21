@@ -97,9 +97,9 @@ test('ProductSearch with search constraint', async() => {
 
 test('Highlighting', async() => {
     const request: ProductSearchRequest = baseProductBuilder()
-        .setTerm('highlighted')    
+        .setTerm('SomeValue')    
         .highlighting(h => {
-            h.setHighlightable({ dataKeys: ['Description'] })
+            h.setHighlightable({ dataKeys: ['SomeString'] })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
             h.setShape({ includeOffsets: true, textSnippets: { includeTextSnippets: true, includeEllipses: true } })
@@ -107,5 +107,5 @@ test('Highlighting', async() => {
     const result = await searcher.searchProducts(request);
 
     expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
-    expect(result?.results![0].highlight?.snippets?.data[0].value[0]).toBe("...last word is highlighted");
+    expect(result?.results![0].highlight?.snippets?.data[0].value[0]).toBe("SomeValue");
 })

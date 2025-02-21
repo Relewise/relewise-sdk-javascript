@@ -42,6 +42,7 @@ test('Highlighting', async() => {
         .setTerm('highlighted')    
         .highlighting(h => {
             h.setHighlightable({ dataKeys: ['Description'] })
+            h.setLimit({ maxWordsBeforeMatch: 3 })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
             h.setShape({ includeOffsets: true, textSnippets: { includeTextSnippets: true, includeEllipses: true } })

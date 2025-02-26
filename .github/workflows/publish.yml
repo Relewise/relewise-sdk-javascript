@@ -22,8 +22,8 @@ jobs:
 
       - name: Calculate environment variables
         run: |
-          echo "TAG_NAME=${{ steps.get-latest-tag.outputs.tag }}" >> $GITHUB_ENV
-          echo "PACKAGE_PATH=$(echo '${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 1)" >> $GITHUB_ENV
+          echo 'TAG_NAME=${{ steps.get-latest-tag.outputs.tag }}'
+          echo 'PACKAGE_PATH=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 1 >> $GITHUB_ENV
 
       - uses: brettdorrans/write-version-to-file@master
         if: ${{ env.PACKAGE_PATH == 'client' }} 

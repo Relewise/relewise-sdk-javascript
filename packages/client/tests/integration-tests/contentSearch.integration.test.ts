@@ -45,11 +45,14 @@ test('Highlighting', async() => {
             h.setLimit({ maxWordsBeforeMatch: 3 })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
-            h.setShape({ includeOffsets: true, textSnippets: { includeTextSnippets: true, includeEllipses: true } })
+            h.setShape({  
+                offsets: { include: true },
+                snippets: { include: true, includeMatchedWords: true, useEllipses: true } 
+            })
         }).build();
     
     const result = await searcher.searchContents(request);
 
     expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
-    expect(result?.results![0].highlight?.snippets?.data[0].value[0]).toBe("...word should be highlighted");
+    expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("...word should be highlighted");
 })

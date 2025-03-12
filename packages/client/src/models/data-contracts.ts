@@ -423,7 +423,7 @@ export type BrandFacet = StringValueFacet;
 export type BrandFacetResult = StringBrandNameAndIdResultValueFacetResult;
 
 export type BrandIdFilter = Filter & {
-  brandIds: string[];
+  brandIds?: string[] | null;
 };
 
 export type BrandIdRelevanceModifier = RelevanceModifier & {
@@ -2357,8 +2357,22 @@ export interface HighlightResultOffset {
 }
 
 export interface HighlightResultSnippet {
-  displayName: string[];
-  data: StringStringArrayKeyValuePair[];
+  displayName: HighlightResultSnippetDisplayNameSnippetMatch[];
+  data: StringFieldSnippetMatchArrayKeyValuePair[];
+}
+
+export type HighlightResultSnippetDisplayNameSnippetMatch = HighlightResultSnippetSnippetMatch;
+
+export type HighlightResultSnippetFieldSnippetMatch = HighlightResultSnippetSnippetMatch;
+
+export interface HighlightResultSnippetMatchMatchedWord {
+  offset?: Int32Range | null;
+}
+
+export interface HighlightResultSnippetSnippetMatch {
+  $type: string;
+  text: string;
+  matchedWords?: HighlightResultSnippetMatchMatchedWord[] | null;
 }
 
 export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits {
@@ -2378,14 +2392,19 @@ export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings
   maxSentencesToIncludeAfterMatch?: number | null;
 }
 
-export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape {
-  includeOffsets: boolean;
-  textSnippets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings | null;
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2OffsetSettings {
+  include: boolean;
 }
 
-export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings {
-  includeTextSnippets: boolean;
-  includeEllipses: boolean;
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape {
+  offsets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2OffsetSettings | null;
+  snippets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2SnippetsSettings | null;
+}
+
+export interface HighlightSettings2ContentContentHighlightPropsHighlightSettings2SnippetsSettings {
+  include: boolean;
+  useEllipses: boolean;
+  includeMatchedWords: boolean;
 }
 
 export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits {
@@ -2405,14 +2424,19 @@ export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings
   maxSentencesToIncludeAfterMatch?: number | null;
 }
 
-export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape {
-  includeOffsets: boolean;
-  textSnippets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings | null;
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2OffsetSettings {
+  include: boolean;
 }
 
-export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2TextSnippetsSettings {
-  includeTextSnippets: boolean;
-  includeEllipses: boolean;
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape {
+  offsets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2OffsetSettings | null;
+  snippets?: HighlightSettings2ProductProductHighlightPropsHighlightSettings2SnippetsSettings | null;
+}
+
+export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings2SnippetsSettings {
+  include: boolean;
+  useEllipses: boolean;
+  includeMatchedWords: boolean;
 }
 
 export type HtmlParser = Parser;
@@ -5324,6 +5348,11 @@ export interface StringDataObjectValueFacetResult {
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification" | "User";
 }
 
+export interface StringFieldSnippetMatchArrayKeyValuePair {
+  key: string;
+  value: HighlightResultSnippetFieldSnippetMatch[];
+}
+
 export interface StringProductCategoryDataValueFacet {
   $type: string;
   key: string;
@@ -5365,11 +5394,6 @@ export interface StringProductDataValueFacetResult {
 export interface StringRange1ArrayKeyValuePair {
   key: string;
   value: Int32Range[];
-}
-
-export interface StringStringArrayKeyValuePair {
-  key: string;
-  value: string[];
 }
 
 export interface StringStringKeyValuePair {

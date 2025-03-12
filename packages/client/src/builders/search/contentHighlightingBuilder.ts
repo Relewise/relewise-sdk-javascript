@@ -1,4 +1,4 @@
-import { ContentHighlightProps, ContentSearchSettingsHighlightSettings, HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits, HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape, HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings } from '../../models/data-contracts';
+import { ContentHighlightProps, ContentSearchSettingsHighlightSettings, HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits, HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape } from '../../models/data-contracts';
 
 export class ContentHighlightingBuilder {
     private enabledState: boolean = true;
@@ -7,9 +7,7 @@ export class ContentHighlightingBuilder {
         displayName: false
     };
     private limit: HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits = {};
-    private shape: HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape = {
-        includeOffsets: false
-    };
+    private shape: HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape = { };
 
     public enabled(enabled: boolean): this {
         this.enabledState = enabled;
@@ -30,9 +28,8 @@ export class ContentHighlightingBuilder {
         return this;
     }
 
-    public setShape(shape: { includeOffsets: boolean, textSnippets?: HighlightSettings2ContentContentHighlightPropsHighlightSettings2TextSnippetsSettings }): this {
-        this.shape.includeOffsets = shape.includeOffsets;
-        this.shape.textSnippets = shape.textSnippets;
+    public setShape(shape: HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape): this {
+        this.shape = shape;
 
         return this;
     }

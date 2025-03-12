@@ -54,5 +54,5 @@ test('Highlighting', async() => {
     const result = await searcher.searchContents(request);
 
     expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
-    expect(result?.results![0].highlight?.snippets?.data[0].value[0]).toBe("...word should be highlighted");
+    expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("...word should be highlighted");
 })

@@ -166,7 +166,7 @@ test('Track User Update', async() => {
 
 test('Track Product View with invalid key', async() => {
 
-    await new Tracker(DATASET_ID!, '12').trackProductView({
+    await new Tracker(DATASET_ID!, '12', { serverUrl: SERVER_URL }).trackProductView({
         productId: '2',
         user: UserFactory.anonymous(),
     }).catch((e) => {

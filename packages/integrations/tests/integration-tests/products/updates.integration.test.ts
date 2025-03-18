@@ -9,7 +9,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Product', async() => {
     const product = new ProductUpdateBuilder({
-        id: '1234',
+        id: '1',
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -25,6 +25,13 @@ test('Create Product', async() => {
             'Complex': DataValueFactory.object({
                 'nestedDataKey': DataValueFactory.string('Key'),
             }),
+            'avaliableMarkets': DataValueFactory.object({
+                'US': DataValueFactory.object({
+                    'ValidFromDate': DataValueFactory.number(1693526400),
+                }),
+            }),
+            'some-data-key': DataValueFactory.number(10000),
+            'SomeString': DataValueFactory.string('SomeValue'),
         })
         .assortments([1, 2, 3])
         .brand({ id: '1', displayName: 'Relewise' })
@@ -67,7 +74,7 @@ test('Create Product', async() => {
 
 test('Batch create products', async() => {
     const product = new ProductUpdateBuilder({
-        id: '12345',
+        id: '1',
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -78,6 +85,9 @@ test('Batch create products', async() => {
             'Description': DataValueFactory.string('Really nice product'),
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
+            'objects': DataValueFactory.objectCollection([{
+                'list': DataValueFactory.stringCollection(['123', '456', '789']),
+            }]),
         })
         .assortments([1, 2, 3])
         .brand({ id: '1', displayName: 'Relewise' })
@@ -85,7 +95,7 @@ test('Batch create products', async() => {
         .salesPrice([{ amount: 50, currency: 'DKK' }]);
 
     const product2 = new ProductUpdateBuilder({
-        id: '4321',
+        id: '2',
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -96,11 +106,23 @@ test('Batch create products', async() => {
             'Description': DataValueFactory.string('Really nice product'),
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
+            'objects': DataValueFactory.objectCollection([{
+                'list': DataValueFactory.stringCollection(['123', '456', '789']),
+            }]),
         })
         .assortments([1, 2, 3])
         .brand({ id: '1', displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }]);
+
+    const product3 = new ProductUpdateBuilder({
+        id: '3',
+        productUpdateKind: 'ReplaceProvidedProperties',
+    }).data({
+        'objects': DataValueFactory.objectCollection([{
+            'list': DataValueFactory.stringCollection(['123', '456', '789']),
+        }]),
+    });
 
     const enable = new ProductAdministrativeActionBuilder({
         filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
@@ -112,7 +134,7 @@ test('Batch create products', async() => {
         productUpdateKind: 'Disable',
     });
 
-    await integrator.batch([product.build(), product2.build(), enable.build(), disable.build()]);
+    await integrator.batch([product.build(), product2.build(), product3.build(), enable.build(), disable.build()]);
 });
 
 test('Create Product with variants', async() => {
@@ -124,6 +146,7 @@ test('Create Product with variants', async() => {
             'Description': DataValueFactory.string('Really nice product'),
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
+            'avaliableMarkets': DataValueFactory.number(1693526400),
         })
         .specifications({ Size: 'S' })
         .build();
@@ -140,7 +163,7 @@ test('Create Product with variants', async() => {
         .build();
 
     const product = new ProductUpdateBuilder({
-        id: '12345',
+        id: '1',
         productUpdateKind: 'ReplaceProvidedProperties',
         variantUpdateKind: 'ReplaceProvidedProperties',
         replaceExistingVariants: true,

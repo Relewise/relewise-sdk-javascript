@@ -7,7 +7,7 @@ const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
 function baseBuilder() {
     return new SearchTermPredictionBuilder({
-        language: 'en-US',
+        language: 'da',
         currency: 'USD',
         displayedAtLocation: 'integration test',
         user: UserFactory.anonymous(),

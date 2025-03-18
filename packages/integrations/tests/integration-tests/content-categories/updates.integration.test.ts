@@ -9,7 +9,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Content Category', async() => {
     const category = new ContentCategoryUpdateBuilder({
-        id: '1234',
+        id: '1',
         kind: 'ReplaceProvidedProperties',
     })
         .displayName([

@@ -9,7 +9,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Content', async() => {
     const Content = new ContentUpdateBuilder({
-        id: '1234',
+        id: '1',
         updateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -17,7 +17,7 @@ test('Create Content', async() => {
         ])
         .data({
             'UnixTimestamp': DataValueFactory.number(unixTimeStamp),
-            'Description': DataValueFactory.string('Really nice Content'),
+            'Description': DataValueFactory.multilingual([{language: 'da', value: 'The last word should be highlighted'}]),
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
             'Removed': null,

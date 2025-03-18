@@ -79,3 +79,6 @@ SERVER_URL - This is an optional parameter for changing the API url. e.g. https:
 
     npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://api.relewise.com
 
+Some tests are dependent on data therefore one must run the integration tests in the integrations package first.
+
+Those tests will create all data needed for these tests to pass.

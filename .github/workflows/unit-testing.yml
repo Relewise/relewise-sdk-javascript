@@ -37,6 +37,7 @@ jobs:
         env:
           npm_config_DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
           npm_config_API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}
+          npm_config_SERVER_URL: ${{secrets.INTEGRATIONTESTS_SERVER_URL}}
         name: Integration tests
   
   test-integrations:
@@ -62,4 +63,5 @@ jobs:
         env:
           npm_config_DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
           npm_config_API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}
+          npm_config_SERVER_URL: ${{secrets.INTEGRATIONTESTS_SERVER_URL}}
         name: Integration tests

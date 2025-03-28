@@ -1,11 +1,11 @@
 import { Settings } from '../../../builders/settings';
 import { PopularContentsRequest } from '../../../models/data-contracts';
+import { DefaultSinceMinutesAgo } from '../DefaultSinceMinutesAgo';
 import { ContentSettingsRecommendationBuilder } from './contentSettingsRecommendationBuilder';
 import { ContentsRecommendationBuilder } from './contentsRecommendationBuilder';
 
 export class PopularContentsBuilder extends ContentSettingsRecommendationBuilder implements ContentsRecommendationBuilder<PopularContentsRequest> {
-    private since: number = 20160; // 14 days
-
+    private since: number = DefaultSinceMinutesAgo;
     constructor(
         settings: Settings) {
         super(settings);

@@ -1,10 +1,11 @@
 import { Settings } from '../../../builders/settings';
 import { PopularBrandsRecommendationRequest, BrandRecommendationWeights } from '../../../models/data-contracts';
+import { DefaultSinceMinutesAgo } from '../DefaultSinceMinutesAgo';
 import { BrandSettingsRecommendationBuilder } from './brandSettingsRecommendationBuilder';
 import { BrandsRecommendationBuilder } from './brandsRecommendationBuilder';
 
 export class PopularBrandsRecommendationBuilder extends BrandSettingsRecommendationBuilder implements BrandsRecommendationBuilder<PopularBrandsRecommendationRequest> {
-    private since: number = 20160; // 14 days
+    private since: number = DefaultSinceMinutesAgo;
     private weights: BrandRecommendationWeights = { brandViews: 1.0, productViews: 1.0, productPurchases: 1.0 };
 
     constructor(

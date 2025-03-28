@@ -1,11 +1,12 @@
 import { Settings } from '../../../builders/settings';
 import { PopularProductsRequest } from '../../../models/data-contracts';
+import { DefaultSinceMinutesAgo } from '../DefaultSinceMinutesAgo';
 import { PopularityMultiplierBuilder } from './popularityMultiplierBuilder';
 import { ProductSettingsRecommendationBuilder } from './productSettingsRecommendationBuilder';
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 
 export class PopularProductsBuilder extends ProductSettingsRecommendationBuilder implements ProductsRecommendationBuilder<PopularProductsRequest> {
-    private since: number = 20160; // 14 days
+    private since: number = DefaultSinceMinutesAgo;
     private basedOnSelection: 'MostPurchased' | 'MostViewed' = 'MostPurchased';
     private popularityMultiplierBuilder: PopularityMultiplierBuilder = new PopularityMultiplierBuilder();
 

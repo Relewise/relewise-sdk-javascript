@@ -1,10 +1,11 @@
 import { Settings } from '../../../builders/settings';
 import { PersonalProductCategoryRecommendationRequest, ProductCategoryRecommendationWeights } from '../../../models/data-contracts';
+import { DefaultSinceMinutesAgo } from '../DefaultSinceMinutesAgo';
 import { ProductCategoriesRecommendationBuilder } from './productCategoriesRecommendationBuilder';
 import { ProductCategorySettingsRecommendationBuilder } from './productCategorySettingsRecommendationBuilder';
 
 export class PersonalProductCategoryRecommendationBuilder extends ProductCategorySettingsRecommendationBuilder implements ProductCategoriesRecommendationBuilder<PersonalProductCategoryRecommendationRequest> {
-    private since: number = 0;
+    private since: number = DefaultSinceMinutesAgo;
     private weights: ProductCategoryRecommendationWeights = { categoryViews: 1.0, productViews: 1.0, productPurchases: 1.0 };
 
     constructor(

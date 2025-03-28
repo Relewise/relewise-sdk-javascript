@@ -21,3 +21,20 @@ test('setPopularityMultiplier', () => {
 
     expect(subject.popularityMultiplier?.key).toBe(key);
 });
+
+test('do not set since minutes ago', () => {
+    const subject: PopularProductsRequest = baseBuilder()
+        .build();
+
+    expect(subject.sinceMinutesAgo).toBe(20160);
+});
+
+test('set since minutes ago', () => {
+    const since = 10; 
+
+    const subject: PopularProductsRequest = baseBuilder()
+        .sinceMinutesAgo(since)
+        .build();
+
+    expect(subject.sinceMinutesAgo).toBe(since);
+});

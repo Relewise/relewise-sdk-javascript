@@ -4,7 +4,7 @@ import { ContentCategoriesRecommendationBuilder } from './contentCategoriesRecom
 import { ContentCategorySettingsRecommendationBuilder } from './contentCategorySettingsRecommendationBuilder';
 
 export class PopularContentCategoriesRecommendationBuilder extends ContentCategorySettingsRecommendationBuilder implements ContentCategoriesRecommendationBuilder<PopularContentCategoriesRecommendationRequest> {
-    private since: number = 0;
+    private since: number = 20160; // 14 days
     private weights: ContentCategoryRecommendationWeights = { categoryViews: 1.0, contentViews: 1.0 };
 
     constructor(

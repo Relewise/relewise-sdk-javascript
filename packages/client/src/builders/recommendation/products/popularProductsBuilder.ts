@@ -5,7 +5,7 @@ import { ProductSettingsRecommendationBuilder } from './productSettingsRecommend
 import { ProductsRecommendationBuilder } from './productsRecommendationBuilder';
 
 export class PopularProductsBuilder extends ProductSettingsRecommendationBuilder implements ProductsRecommendationBuilder<PopularProductsRequest> {
-    private since: number = 0;
+    private since: number = 20160; // 14 days
     private basedOnSelection: 'MostPurchased' | 'MostViewed' = 'MostPurchased';
     private popularityMultiplierBuilder: PopularityMultiplierBuilder = new PopularityMultiplierBuilder();
 

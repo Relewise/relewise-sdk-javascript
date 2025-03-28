@@ -4,7 +4,7 @@ import { ContentSettingsRecommendationBuilder } from './contentSettingsRecommend
 import { ContentsRecommendationBuilder } from './contentsRecommendationBuilder';
 
 export class PopularContentsBuilder extends ContentSettingsRecommendationBuilder implements ContentsRecommendationBuilder<PopularContentsRequest> {
-    private since: number = 0;
+    private since: number = 20160; // 14 days
 
     constructor(
         settings: Settings) {

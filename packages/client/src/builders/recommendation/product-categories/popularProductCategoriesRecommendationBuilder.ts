@@ -4,7 +4,7 @@ import { ProductCategoriesRecommendationBuilder } from './productCategoriesRecom
 import { ProductCategorySettingsRecommendationBuilder } from './productCategorySettingsRecommendationBuilder';
 
 export class PopularProductCategoriesRecommendationBuilder extends ProductCategorySettingsRecommendationBuilder implements ProductCategoriesRecommendationBuilder<PopularProductCategoriesRecommendationRequest> {
-    private since: number = 0;
+    private since: number = 20160; // 14 days
     private weights: ProductCategoryRecommendationWeights = { categoryViews: 1.0, productViews: 1.0, productPurchases: 1.0 };
 
     constructor(

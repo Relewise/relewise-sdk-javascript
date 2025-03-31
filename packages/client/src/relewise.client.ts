@@ -53,35 +53,36 @@ export abstract class RelewiseClient {
     protected async request<TRequest, TResponse>(name: string, data: TRequest, options?: RelewiseRequestOptions): Promise<TResponse | undefined> {
         const requestUrl = this.createRequestUrl(this._serverUrl, this.datasetId, this._urlPath, name);
 
-        const response = await fetch(requestUrl, {
-            method: 'POST',
-            headers: {
-                Authorization: this._apiKeyHeader,
-                'Content-Type': 'application/json',
-                'X-Relewise-Version': version.tag,
-            },
-            body: JSON.stringify(data),
-            signal: options?.abortSignal,
-            cache: 'no-cache',
-        });
+        try {
+            const response = await fetch(requestUrl, {
+                method: 'POST',
+                headers: {
+                    Authorization: this._apiKeyHeader,
+                    'Content-Type': 'application/json',
+                    'X-Relewise-Version': version.tag,
+                },
+                body: JSON.stringify(data),
+                signal: options?.abortSignal,
+                cache: 'no-cache',
+            });
 
-        if (!response.ok) {
-            let responseMessage: HttpProblemDetails | null = null;
-
-            try { 
-                responseMessage = await response.json();
-            } catch (_) { 
+            if (!response.ok) {
+                let responseMessage: HttpProblemDetails | null = null;
+    
+                try { 
+                    responseMessage = await response.json();
+                } catch (_) { 
+                }
+    
+                const details = responseMessage?.detail ? `Details: ${responseMessage.detail}\n` : '';
+    
+                throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
             }
 
-            const details = responseMessage?.detail ? `Details: ${responseMessage.detail}\n` : '';
-
-            throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
-        }
-
-        try {
             const responseMessage = await response.json();
             return responseMessage as TResponse;
         } catch (err) {
+            console.error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
             return undefined;
         }
     }

@@ -85,10 +85,10 @@ export abstract class RelewiseClient {
             } catch (err) {
                 return undefined;
             }
-            
+
         } catch (err) {
             console.error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
-            return undefined;
+            throw new Error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
         }
     }
 

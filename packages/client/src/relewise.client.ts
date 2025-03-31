@@ -79,11 +79,13 @@ export abstract class RelewiseClient {
                 throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
             }
 
-            if (response.headers.get("Content-Length") === "0")
+            try {
+                const responseMessage = await response.json();
+                return responseMessage as TResponse;
+            } catch (err) {
                 return undefined;
-
-            const responseMessage = await response.json();
-            return responseMessage as TResponse;
+            }
+            
         } catch (err) {
             console.error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
             return undefined;

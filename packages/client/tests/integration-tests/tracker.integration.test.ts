@@ -198,3 +198,14 @@ test('Track Product View without id', async() => {
         expect(e).toBeDefined();
     }
 });
+
+test('Track Product View on a Dataset that does not exist', async() => {
+    await expect(async() => {
+        const tracker = new Tracker("00000000-0000-0000-0000-000000000000", API_KEY!, { serverUrl: SERVER_URL });
+
+        return await tracker.trackProductView({
+            productId: null,
+            user: UserFactory.anonymous(),
+        } as any)
+    }).rejects.toThrow();
+});

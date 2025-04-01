@@ -1,3 +1,4 @@
+import { error } from 'console';
 import version from './version';
 
 export interface RelewiseClientOptions {
@@ -87,6 +88,10 @@ export abstract class RelewiseClient {
             }
 
         } catch (err) {
+            
+            if (typeof err === 'object' && err !== null && 'details' in err) 
+                throw err;
+
             console.error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
             throw new Error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
         }

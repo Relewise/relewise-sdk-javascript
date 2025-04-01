@@ -51,9 +51,13 @@ export abstract class RelewiseClient {
         return this._serverUrl;
     }
 
-    protected async request<TRequest, TResponse>(name: string, data: TRequest, options?: RelewiseRequestOptions): Promise<TResponse | undefined> {
+    protected async request<TRequest, TResponse>(
+        name: string,
+        data: TRequest,
+        options?: RelewiseRequestOptions
+    ): Promise<TResponse | undefined> {
         const requestUrl = this.createRequestUrl(this._serverUrl, this.datasetId, this._urlPath, name);
-
+    
         try {
             const response = await fetch(requestUrl, {
                 method: 'POST',
@@ -66,35 +70,44 @@ export abstract class RelewiseClient {
                 signal: options?.abortSignal,
                 cache: 'no-cache',
             });
-
-            if (!response.ok) {
-                let responseMessage: HttpProblemDetails | null = null;
     
-                try { 
-                    responseMessage = await response.json();
-                } catch (_) { 
-                }
+            this.ensureResponseOk(response);
     
-                const details = responseMessage?.detail ? `Details: ${responseMessage.detail}\n` : '';
-    
-                throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
-            }
-
-            try {
-                const responseMessage = await response.json();
-                return responseMessage as TResponse;
-            } catch (err) {
-                return undefined;
-            }
-
+            return await this.parseJson<TResponse>(response);
         } catch (err) {
-            
-            if (typeof err === 'object' && err !== null && 'details' in err) 
-                throw err;
-
-            console.error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
-            throw new Error("Network error or preflight request failed. This could be because the Api Key or Dataset Id is incorrect.");
+            this.handleRequestError(err);
         }
+    }
+    
+    private async ensureResponseOk(response: Response) {
+        if (response.ok) return;
+    
+        let problemDetails: HttpProblemDetails | null = null;
+        
+        try {
+            problemDetails = await response.json();
+        } catch (_) { /* Ignore JSON parsing errors */ }
+    
+        const details = problemDetails?.detail ? `Details: ${problemDetails.detail}\n` : '';
+    
+        throw new ProblemDetailsError(
+            `Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, 
+            problemDetails);
+    }
+    
+    private async parseJson<T>(response: Response): Promise<T | undefined> {
+        try {
+            return await response.json();
+        } catch {
+            return undefined;
+        }
+    }
+    
+    private handleRequestError(err: unknown): never {
+        if (err instanceof ProblemDetailsError) throw err;
+    
+        console.error("Network error or preflight request failed. Check API Key and Dataset Id.");
+        throw new Error("Network error or preflight request failed. Check API Key and Dataset Id.");
     }
 
     private createRequestUrl(baseUrl: string, ...segments: string[]) {

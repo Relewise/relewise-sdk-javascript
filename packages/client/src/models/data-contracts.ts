@@ -567,7 +567,7 @@ export type Campaign = CampaignEntityStateCampaignMetadataValuesRetailMediaEntit
   advertiserId: string;
   budget: CPMBudget;
   status: CampaignStatusWithHistory;
-  conditions?: RetailMediaConditions | null;
+  conditions?: CampaignCampaignConditions | null;
 };
 
 export interface CampaignAnalytics {
@@ -612,6 +612,10 @@ export type CampaignAnalyticsRequest = LicensedRequest & {
 
 export type CampaignAnalyticsResponse = TimedResponse & {
   analytics?: CampaignAnalytics | null;
+};
+
+export type CampaignCampaignConditions = RetailMediaConditions & {
+  searchTerm?: RetailMediaSearchTermConditionCollection | null;
 };
 
 export interface CampaignCampaignEntityStateEntityResponse {
@@ -3966,7 +3970,11 @@ export interface ProductProductHighlightPropsHighlightSettings {
 
 export type ProductPromotion = Promotion & {
   filters?: FilterCollection | null;
-  conditions?: RetailMediaConditions | null;
+  conditions?: ProductPromotionPromotionConditions | null;
+};
+
+export type ProductPromotionPromotionConditions = RetailMediaConditions & {
+  searchTerm?: RetailMediaSearchTermConditionCollection | null;
 };
 
 export type ProductPromotionSpecification = PromotionSpecification & {
@@ -4216,6 +4224,7 @@ export interface ProductResult {
   viewedByUserCompany?: ViewedByUserCompanyInfo | null;
   filteredVariants?: VariantResult[] | null;
   highlight?: HighlightResult | null;
+  score: Score;
 }
 
 export interface ProductResultDetails {
@@ -4657,7 +4666,7 @@ export type ResultMustHaveVariantConstraint = ProductSearchResultConstraint & {
 };
 
 export interface RetailMediaConditions {
-  searchTerm?: RetailMediaSearchTermCondition | null;
+  $type: string;
 }
 
 export interface RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters {
@@ -4712,7 +4721,13 @@ export interface RetailMediaResultPlacementResultEntityProduct {
   result: ProductResult;
 }
 
-export type RetailMediaSearchTermCondition = SearchTermCondition;
+export type RetailMediaSearchTermCondition = SearchTermCondition & {
+  language?: Language | null;
+};
+
+export interface RetailMediaSearchTermConditionCollection {
+  values?: RetailMediaSearchTermCondition[] | null;
+}
 
 export type SaveAdvertisersRequest = AdvertiserSaveEntitiesRequest;
 
@@ -4787,6 +4802,13 @@ export type SaveTriggerConfigurationRequest = LicensedRequest & {
     | null;
   modifiedBy?: string | null;
 };
+
+export interface Score {
+  /** @format float */
+  base: number;
+  /** @format float */
+  adjusted: number;
+}
 
 export interface SearchIndex {
   id?: string | null;

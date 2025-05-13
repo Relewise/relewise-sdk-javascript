@@ -2247,6 +2247,19 @@ export type FixedPositionRule = MerchandisingRule & {
   position: number;
 };
 
+export interface GlobalRetailMediaConfiguration {
+  /** @format date-time */
+  modified: string;
+  modifiedBy?: string | null;
+  thresholds?: ScoreThresholds | null;
+}
+
+export type GlobalRetailMediaConfigurationRequest = LicensedRequest;
+
+export type GlobalRetailMediaConfigurationResponse = TimedResponse & {
+  configuration?: GlobalRetailMediaConfiguration | null;
+};
+
 export interface GlobalTriggerConfiguration {
   /** @format date-time */
   modified: string;
@@ -2624,6 +2637,7 @@ export interface LocationPlacement {
   name: string;
   key?: string | null;
   variations?: LocationPlacementVariationCollection | null;
+  thresholds?: ScoreThresholds | null;
 }
 
 export interface LocationPlacementCollection {
@@ -2980,6 +2994,7 @@ export interface OverriddenSelectedProductPropertiesSettings {
   brand?: boolean | null;
   allVariants?: boolean | null;
   dataKeys?: string[] | null;
+  score?: SelectedScorePropertiesSettings | null;
 }
 
 export interface OverriddenSelectedVariantPropertiesSettings {
@@ -4224,7 +4239,7 @@ export interface ProductResult {
   viewedByUserCompany?: ViewedByUserCompanyInfo | null;
   filteredVariants?: VariantResult[] | null;
   highlight?: HighlightResult | null;
-  score: Score;
+  score?: Score | null;
 }
 
 export interface ProductResultDetails {
@@ -4402,6 +4417,7 @@ export interface PromotionLocationCollection {
 
 export interface PromotionLocationPlacement {
   key?: string | null;
+  thresholds?: ScoreThresholds | null;
 }
 
 export interface PromotionLocationPlacementCollection {
@@ -4741,6 +4757,11 @@ export type SaveDecompoundRulesRequest = DecompoundRuleSaveSearchRulesRequest;
 
 export type SaveDecompoundRulesResponse = DecompoundRuleSaveSearchRulesResponse;
 
+export type SaveGlobalRetailMediaConfigurationRequest = LicensedRequest & {
+  configuration?: GlobalRetailMediaConfiguration | null;
+  modifiedBy?: string | null;
+};
+
 export type SaveGlobalTriggerConfigurationRequest = LicensedRequest & {
   configuration?: GlobalTriggerConfiguration | null;
   modifiedBy?: string | null;
@@ -4805,9 +4826,16 @@ export type SaveTriggerConfigurationRequest = LicensedRequest & {
 
 export interface Score {
   /** @format float */
-  base: number;
+  relevance?: number | null;
   /** @format float */
-  adjusted: number;
+  adjusted?: number | null;
+}
+
+export interface ScoreThresholds {
+  /** @format float */
+  relevance?: number | null;
+  /** @format float */
+  adjusted?: number | null;
 }
 
 export interface SearchIndex {
@@ -5172,6 +5200,12 @@ export interface SelectedProductPropertiesSettings {
   viewedByUserCompanyInfo: boolean;
   purchasedByUserCompanyInfo: boolean;
   filteredVariants?: FilteredVariantsSettings | null;
+  score?: SelectedScorePropertiesSettings | null;
+}
+
+export interface SelectedScorePropertiesSettings {
+  relevance: boolean;
+  adjusted: boolean;
 }
 
 export interface SelectedVariantDetailsPropertiesSettings {

@@ -5,12 +5,12 @@ module.exports = {
     extensionsToTreatAsEsm: ['.ts'],
     moduleDirectories: ['node_modules'],
     transform: {
-        '^.+\\.[tj]s$': ['ts-jest', {
-            'ts-jest': {
-                tsconfig: {
-                    allowJs: true,
-                },
-            },
+        '^.+\\.[tj]sx?$': ['ts-jest', {
+            useESM: true,
+            tsconfig: {
+                allowJs: true,
+                esModuleInterop: true
+            }
         }]
     },
     transformIgnorePatterns: [

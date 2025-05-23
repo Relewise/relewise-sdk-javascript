@@ -1,7 +1,5 @@
 import { 
     ProductCategoryAssortmentFacetResult, 
-    CategoryFacetResult, 
-    CategoryHierarchyFacetResult, 
     ProductCategoryDataDoubleRangeFacetResult, 
     ProductCategoryDataDoubleRangesFacetResult, 
     ProductCategoryDataStringValueFacetResult, 
@@ -26,7 +24,7 @@ export class GetProductCategoryFacet {
 
         return facets.items.find((item): item is ProductCategoryAssortmentFacetResult =>
             item.field === 'Assortment' && 
-            item.$type === 'ProductCategoryAssortmentFacetResult',
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductCategoryAssortmentFacetResult, Relewise.Client',
         ) || null;
     }
 
@@ -38,7 +36,7 @@ export class GetProductCategoryFacet {
 
         return facets.items.find((item): item is ProductCategoryDataDoubleRangeFacetResult =>
             item.field === 'Data' && 
-            item.$type === 'ProductCategoryDataDoubleRangeFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductCategoryDataDoubleRangeFacetResult, Relewise.Client' && 
             'key' in item &&
             item.key === key,
         ) || null;
@@ -52,7 +50,7 @@ export class GetProductCategoryFacet {
 
         return facets.items.find((item): item is ProductCategoryDataDoubleRangesFacetResult =>
             item.field === 'Data' && 
-            item.$type === 'ProductCategoryDataDoubleRangesFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductDataDoubleRangesFacetResult, Relewise.Client' && 
             'key' in item &&
             item.key === key,
         ) || null;
@@ -87,7 +85,7 @@ export class GetProductCategoryFacet {
 
         return facets.items.find((item): item is ProductCategoryDataObjectFacetResult =>
             item.field === 'Data' && 
-            item.$type === 'ProductCategoryDataObjectFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductCategoryDataObjectFacetResult, Relewise.Client' && 
             'key' in item &&
             item.key === key,
         ) || null;

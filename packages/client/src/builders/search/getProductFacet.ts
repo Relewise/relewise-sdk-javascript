@@ -25,7 +25,7 @@ export class GetProductFacet {
             .items
             .find((item): item is BrandFacetResult =>
                 '$type' in item &&
-                item.$type === 'Relewise.Client.DataTypes.Search.items.Result.BrandFacetResult, Relewise.Client' &&
+                item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.BrandFacetResult, Relewise.Client' &&
                 'field' in item &&
                 item.field === 'Brand') || null;
     }
@@ -37,7 +37,7 @@ export class GetProductFacet {
             .items
             .find((item): item is CategoryFacetResult =>
                 '$type' in item &&
-                item.$type === 'Relewise.Client.DataTypes.Search.items.Result.CategoryFacetResult, Relewise.Client' &&
+                item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.CategoryFacetResult, Relewise.Client' &&
                 'categorySelectionStrategy' in item
                 && item.categorySelectionStrategy === selectionStrategy) || null;
     }
@@ -49,7 +49,7 @@ export class GetProductFacet {
             .items
             .find((item): item is CategoryHierarchyFacetResult =>
                 '$type' in item &&
-                item.$type === 'Relewise.Client.DataTypes.Search.items.Result.CategoryHierarchyFacet, Relewise.Client' &&
+                item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.CategoryHierarchyFacetResult, Relewise.Client' &&
                 'categorySelectionStrategy' in item &&
                 item.categorySelectionStrategy === selectionStrategy) || null;
     }
@@ -62,7 +62,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is PriceRangeFacetResult =>
             item.field === 'ListPrice' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.PriceRangeFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.PriceRangeFacetResult, Relewise.Client' &&
             'priceSelectionStrategy' in item &&
             item.priceSelectionStrategy === selectionStrategy,
         ) || null;
@@ -76,7 +76,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is PriceRangeFacetResult =>
             item.field === 'SalesPrice' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.PriceRangeFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.PriceRangeFacetResult, Relewise.Client' &&
             'priceSelectionStrategy' in item &&
             item.priceSelectionStrategy === selectionStrategy,
         ) || null;
@@ -90,7 +90,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is PriceRangesFacetResult =>
             item.field === 'ListPrice' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.PriceRangesFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.PriceRangesFacetResult, Relewise.Client' &&
             'priceSelectionStrategy' in item &&
             item.priceSelectionStrategy === selectionStrategy,
         ) || null;
@@ -105,7 +105,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is PriceRangesFacetResult =>
             item.field === 'ListPrice' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.PriceRangesFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.PriceRangesFacetResult, Relewise.Client' &&
             'priceSelectionStrategy' in item &&
             item.priceSelectionStrategy === selectionStrategy &&
             'expandedRangeSize' in item &&
@@ -121,7 +121,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is PriceRangesFacetResult =>
             item.field === 'SalesPrice' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.PriceRangesFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.PriceRangesFacetResult, Relewise.Client' &&
             'priceSelectionStrategy' in item &&
             item.priceSelectionStrategy === selectionStrategy,
         ) || null;
@@ -136,7 +136,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is PriceRangesFacetResult =>
             item.field === 'SalesPrice' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.PriceRangesFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.PriceRangesFacetResult, Relewise.Client' &&
             'priceSelectionStrategy' in item &&
             item.priceSelectionStrategy === selectionStrategy &&
             'expandedRangeSize' in item &&
@@ -153,7 +153,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is ProductDataDoubleRangeFacetResult =>
             item.field === 'Data' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.ProductDataDoubleRangeFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductDataDoubleRangeFacetResult, Relewise.Client' &&
             'dataSelectionStrategy' in item &&
             item.dataSelectionStrategy === selectionStrategy &&
             'key' in item &&
@@ -170,7 +170,7 @@ export class GetProductFacet {
 
         return facets.items.find((item): item is ProductDataDoubleRangesFacetResult =>
             item.field === 'Data' &&
-            item.$type === 'Relewise.Client.DataTypes.Search.items.Result.ProductDataDoubleRangesFacetResult, Relewise.Client' &&
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductDataDoubleRangesFacetResult, Relewise.Client' &&
             'dataSelectionStrategy' in item &&
             item.dataSelectionStrategy === selectionStrategy &&
             'key' in item &&
@@ -185,7 +185,7 @@ export class GetProductFacet {
             .items
             .find((item): item is VariantSpecificationFacetResult =>
                 '$type' in item &&
-                item.$type === 'Relewise.Client.DataTypes.Search.items.Result.VariantSpecificationFacetResult, Relewise.Client' &&
+                item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.VariantSpecificationFacetResult, Relewise.Client' &&
                 'field' in item &&
                 item.field === 'VariantSpecification' &&
                 'key' in item && item.key === key) || null;

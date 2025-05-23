@@ -1,9 +1,11 @@
-import { Searcher, GetContentFacet, UserFactory, CategoryFacetResult, ContentSearchBuilder, ContentSearchRequest, ContentAssortmentFacet, ContentDataStringValueFacetResult } from '../../src';
+import { ContentUpdateBuilder, Integrator } from '@relewise/integrations';
+import { Searcher, GetContentFacet, UserFactory, CategoryFacetResult, ContentSearchBuilder, ContentSearchRequest, ContentAssortmentFacet, ContentDataStringValueFacetResult, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
 const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
+const integrator = new Integrator(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
 function baseContentBuilder() {
     return new ContentSearchBuilder({
@@ -15,23 +17,62 @@ function baseContentBuilder() {
 };
 
 test('Facet result', async() => {
+    const content = new ContentUpdateBuilder({
+        id: 'GetContentFacet test content',
+        updateKind: 'ReplaceProvidedProperties'
+    })
+        .data({
+            'SomeString': DataValueFactory.string('Really nice product'),
+            'SomeDouble': DataValueFactory.number(1),   
+            'SomeBoolean': DataValueFactory.boolean(true),
+            'SomeObject': DataValueFactory.object({ })   
+        })
+        .assortments([1, 2, 3]);
+
+    await integrator.updateContent(content.build());
+    
     const request: ContentSearchRequest = baseContentBuilder()
-        .facets(f => f.addContentAssortmentFacet())
-        .facets(f => f.addContentDataStringValueFacet('AnyString'))
-        .facets(f => f.addCategoryFacet('ImmediateParent'))
+        .facets(f => f
+            .addContentAssortmentFacet()
+            .addContentDataStringValueFacet('SomeString')
+            .addContentDataBooleanValueFacet('SomeBoolean')
+            .addContentDataDoubleValueFacet('SomeDouble')
+            .addCategoryFacet('ImmediateParent')
+            .addContentCategoryHierarchyFacet('Ancestors')
+            .addContentDataDoubleRangeFacet('SomeDouble')
+            .addContentDataDoubleRangesFacet('SomeDouble')
+            .addContentDataObjectFacet('SomeObject'))
         .build();
 
     const result = await searcher.searchContents(request);
 
-    if (result && result.facets) {
-        const facet: ContentAssortmentFacet | null = GetContentFacet.assortment(result.facets);
-        expect(facet).toBeDefined();
+    if (result?.facets) {
+        const assortmentFacet = GetContentFacet.assortment(result.facets);
+        expect(assortmentFacet).not.toBeNull();
 
-        const facet2: ContentDataStringValueFacetResult | null = GetContentFacet.dataString(result.facets, 'AnyString');
-        expect(facet2).toBeDefined();
+        const dataStringFacet = GetContentFacet.dataString(result.facets, 'SomeString');
+        expect(dataStringFacet).not.toBeNull();
 
-        const facet3: CategoryFacetResult | null = GetContentFacet.category(result.facets, 'ImmediateParent');
-        expect(facet3).toBeDefined();
+        const dataBooleanFacet = GetContentFacet.dataBoolean(result.facets, 'SomeBoolean');
+        expect(dataBooleanFacet).not.toBeNull();
+
+        const dataNumberFacet = GetContentFacet.dataNumber(result.facets, 'SomeDouble');
+        expect(dataNumberFacet).not.toBeNull();
+
+        const categoryFacet = GetContentFacet.category(result.facets, 'ImmediateParent');
+        expect(categoryFacet).not.toBeNull();
+
+        const categoryHierarchyFacet = GetContentFacet.categoryHierarchy(result.facets, 'Ancestors');
+        expect(categoryHierarchyFacet).not.toBeNull();
+
+        const dataDoubleRangeFacet = GetContentFacet.dataDoubleRange(result.facets, 'SomeDouble');
+        expect(dataDoubleRangeFacet).not.toBeNull();
+
+        const dataDoubleRangesFacet = GetContentFacet.dataDoubleRanges(result.facets, 'SomeDouble');
+        expect(dataDoubleRangesFacet).not.toBeNull();
+
+        const dataObjectFacet = GetContentFacet.dataObject(result.facets, 'SomeObject');
+        expect(dataObjectFacet).not.toBeNull();
     }
 
     expect(result?.hits).toBeGreaterThan(0);

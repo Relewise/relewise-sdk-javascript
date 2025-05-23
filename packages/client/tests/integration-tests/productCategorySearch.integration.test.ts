@@ -1,5 +1,5 @@
-import { ProductCategoryUpdateBuilder } from '../../../integrations/src';
-import { Integrator } from '../../../integrations/src/integrator';
+
+import { Integrator, ProductCategoryUpdateBuilder } from '@relewise/integrations';
 import { Searcher, ProductCategorySearchBuilder, ProductCategorySearchRequest, UserFactory, GetProductCategoryFacet, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 

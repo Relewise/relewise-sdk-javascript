@@ -1,5 +1,4 @@
-import { ContentUpdateBuilder } from '../../../integrations/src';
-import { Integrator } from '../../../integrations/src/integrator';
+import { ContentUpdateBuilder, Integrator } from '@relewise/integrations';
 import { Searcher, GetContentFacet, UserFactory, CategoryFacetResult, ContentSearchBuilder, ContentSearchRequest, ContentAssortmentFacet, ContentDataStringValueFacetResult, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 

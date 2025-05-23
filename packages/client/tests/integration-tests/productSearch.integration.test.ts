@@ -106,7 +106,6 @@ test('Facet result', async() => {
     const result = await searcher.searchProducts(request);
 
     if (result && result.facets) {
-        // Test all GetProductFacet methods
         const assortmentFacet = GetProductFacet.productAssortment(result.facets, 'Product');
         expect(assortmentFacet).toBeDefined();
 

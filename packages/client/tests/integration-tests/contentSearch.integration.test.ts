@@ -74,7 +74,6 @@ test('Facet result', async() => {
 
         const dataObjectFacet = GetContentFacet.dataObject(result.facets, 'SomeObject');
         expect(dataObjectFacet).not.toBeNull();
-        expect(dataObjectFacet).not.toBeNull();
     }
 
     expect(result?.hits).toBeGreaterThan(0);

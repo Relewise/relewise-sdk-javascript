@@ -27,7 +27,7 @@ export class GetContentFacet {
 
         return facets.items.find((item): item is CategoryFacetResult =>
             item.field === 'Category' && 
-            item.$type === 'CategoryFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.CategoryFacetResult, Relewise.Client' && 
             'categorySelectionStrategy' in item &&
             item.categorySelectionStrategy === selectionStrategy,
         ) || null;
@@ -41,7 +41,7 @@ export class GetContentFacet {
 
         return facets.items.find((item): item is CategoryHierarchyFacetResult =>
             item.field === 'Category' && 
-            item.$type === 'CategoryHierarchyFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.CategoryHierarchyFacetResult, Relewise.Client' && 
             'categorySelectionStrategy' in item &&
             item.categorySelectionStrategy === selectionStrategy,
         ) || null;
@@ -54,7 +54,7 @@ export class GetContentFacet {
 
         return facets.items.find((item): item is ContentAssortmentFacetResult =>
             item.field === 'Assortment' && 
-            item.$type === 'ContentAssortmentFacetResult',
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ContentAssortmentFacetResult, Relewise.Client',
         ) || null;
     }
 
@@ -66,7 +66,7 @@ export class GetContentFacet {
 
         return facets.items.find((item): item is ContentDataDoubleRangeFacetResult =>
             item.field === 'Data' && 
-            item.$type === 'ContentDataDoubleRangeFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ContentDataDoubleRangeFacetResult, Relewise.Client' && 
             'key' in item &&
             item.key === key,
         ) || null;
@@ -80,7 +80,7 @@ export class GetContentFacet {
 
         return facets.items.find((item): item is ContentDataDoubleRangesFacetResult =>
             item.field === 'Data' && 
-            item.$type === 'ContentDataDoubleRangesFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ProductDataDoubleRangesFacetResult, Relewise.Client' && 
             'key' in item &&
             item.key === key,
         ) || null;
@@ -115,7 +115,7 @@ export class GetContentFacet {
 
         return facets.items.find((item): item is ContentDataObjectFacetResult =>
             item.field === 'Data' && 
-            item.$type === 'ContentDataObjectFacetResult' && 
+            item.$type === 'Relewise.Client.DataTypes.Search.Facets.Result.ContentDataObjectFacetResult, Relewise.Client' && 
             'key' in item &&
             item.key === key,
         ) || null;

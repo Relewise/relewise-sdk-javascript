@@ -14,7 +14,7 @@ export class CriteriaBuilder {
         return this;
     }
 
-    public beTemporaryId(temporaryId: string): this {
+    public byTemporaryId(temporaryId: string): this {
         this.userQueryCriteria.temporaryId = temporaryId;
 
         return this;
@@ -22,6 +22,28 @@ export class CriteriaBuilder {
 
     public byEmail(email: string): this {
         this.userQueryCriteria.email = email;
+
+        return this;
+    }
+
+    public byIdentifier(key: string, value: string): this {
+        if (!this.userQueryCriteria.identifiers)
+            this.userQueryCriteria.identifiers = {};
+
+        this.userQueryCriteria.identifiers[key] = value;
+
+        return this;
+    }
+
+    public byIdentifiers(identifiers: Record<string, string>): this {
+        if (!this.userQueryCriteria.identifiers) {
+            this.userQueryCriteria.identifiers = {};
+        }
+        
+        this.userQueryCriteria.identifiers = {
+            ...this.userQueryCriteria.identifiers,
+            ...identifiers
+        };
 
         return this;
     }
@@ -38,20 +60,6 @@ export class CriteriaBuilder {
         return this;
     }
 
-    public byIdentifier(key: string, value: string): this {
-        if (!this.userQueryCriteria.identifiers)
-            this.userQueryCriteria.identifiers = {};
-
-        this.userQueryCriteria.identifiers[key] = value;
-
-        return this;
-    }
-
-    public byIdentifiers(identifiers: Record<string, string>): this {
-        this.userQueryCriteria.identifiers = identifiers;
-
-        return this;
-    }
 
     build(): UserQueryCriteria {
         return this.userQueryCriteria;

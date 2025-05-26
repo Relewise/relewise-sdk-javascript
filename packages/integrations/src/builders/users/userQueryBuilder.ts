@@ -13,7 +13,6 @@ export class UserQueryBuilder {
     }
 
     public criteria(criteria: (criteria: CriteriaBuilder) => void): this {
-
         const localCriteriaBuilder = new CriteriaBuilder();
 
         criteria(localCriteriaBuilder);

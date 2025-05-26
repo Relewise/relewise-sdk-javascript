@@ -44,7 +44,7 @@ test('Query Users when user found by temporary id', async() => {
     await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byTemporaryId(temporaryId)});
 
     const query = new UserQueryBuilder()
-        .criteria(c => c.beTemporaryId(temporaryId))
+        .criteria(c => c.byTemporaryId(temporaryId))
         .build();
     
     const result = await dataAccessor.queryUsers(query);
@@ -127,7 +127,7 @@ test('Query Users when user found by authenticated id', async() => {
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))
-        .criteria(c => c.beTemporaryId(temporaryId))
+        .criteria(c => c.byTemporaryId(temporaryId))
         .build();
     
     const result = await dataAccessor.queryUsers(query);

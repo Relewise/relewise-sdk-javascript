@@ -5,3 +5,4 @@ export * from './contentcategories';
 export * from './content';
 export * from './brands';
 export * from './companies';
+export * from './users';

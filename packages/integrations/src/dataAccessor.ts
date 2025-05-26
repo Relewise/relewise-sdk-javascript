@@ -6,7 +6,7 @@ export class DataAccessor extends RelewiseClient {
         super(datasetId, apiKey, options);
     }
 
-    public async queryUser(request: UserQuery, options?: RelewiseRequestOptions): Promise<UserDetailsCollectionResponse | undefined> {
+    public async queryUsers(request: UserQuery, options?: RelewiseRequestOptions): Promise<UserDetailsCollectionResponse | undefined> {
         return this.request<UserQuery, UserDetailsCollectionResponse>('UserQuery', request, options);
     }
 }

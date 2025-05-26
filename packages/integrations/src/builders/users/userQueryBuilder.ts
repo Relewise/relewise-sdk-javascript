@@ -1,4 +1,4 @@
-import { Currency, Language, UserQuery, UserQueryCriteria } from "@relewise/client";
+import { Currency, Language, UserQuery } from "@relewise/client";
 import { CriteriaBuilder } from "./criteriaBuilder";
 
 export class UserQueryBuilder {
@@ -23,14 +23,14 @@ export class UserQueryBuilder {
         return this;
     }
 
-    public language(language: Language): this {
-        this.userQuery.language = language;
+    public language(language: string): this {
+        this.userQuery.language = { value: language };
 
         return this;
     }
 
-    public currency(currency: Currency): this {
-        this.userQuery.currency = currency;
+    public currency(currency: string): this {
+        this.userQuery.currency = { value: currency };
 
         return this;
     }

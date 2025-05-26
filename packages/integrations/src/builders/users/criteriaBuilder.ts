@@ -8,41 +8,47 @@ export class CriteriaBuilder {
         this.userQueryCriteria = {};
     }
 
-    public authenticatedId(authenticatedId: string): this {
+    public byAuthenticatedId(authenticatedId: string): this {
         this.userQueryCriteria.authenticatedId = authenticatedId;
 
         return this;
     }
 
-    public temporaryId(temporaryId: string): this {
+    public beTemporaryId(temporaryId: string): this {
         this.userQueryCriteria.temporaryId = temporaryId;
 
         return this;
     }
 
-    public email(email: string): this {
+    public byEmail(email: string): this {
         this.userQueryCriteria.email = email;
 
         return this;
     }
 
-    public language(language: Language): this {
-        this.userQueryCriteria.language = language;
+    public language(language: string): this {
+        this.userQueryCriteria.language = { value: language };
 
         return this;
     }
 
-    public currency(currency: Currency): this {
-        this.userQueryCriteria.currency = currency;
+    public currency(currency: string): this {
+        this.userQueryCriteria.currency = { value: currency };
 
         return this;
     }
 
-    public identifier(key: string, value: string): this {
+    public byIdentifier(key: string, value: string): this {
         if (!this.userQueryCriteria.identifiers)
             this.userQueryCriteria.identifiers = {};
 
         this.userQueryCriteria.identifiers[key] = value;
+
+        return this;
+    }
+
+    public byIdentifiers(identifiers: Record<string, string>): this {
+        this.userQueryCriteria.identifiers = identifiers;
 
         return this;
     }

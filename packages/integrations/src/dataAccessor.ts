@@ -1,4 +1,4 @@
-import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest, BrandUpdate, BrandAdministrativeAction, TrackBrandAdministrativeActionRequest, TrackBrandUpdateRequest, CompanyUpdate, TrackCompanyUpdateRequest, CompanyAdministrativeAction, TrackCompanyAdministrativeActionRequest, UserQuery, UserDetailsCollectionResponse } from '@relewise/client';
+import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions, UserQuery, UserDetailsCollectionResponse } from '@relewise/client';
 
 export class DataAccessor extends RelewiseClient {
 

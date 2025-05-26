@@ -1,4 +1,4 @@
-import { Currency, Language, UserQueryCriteria } from "@relewise/client";
+import { UserQueryCriteria } from "@relewise/client";
 
 export class CriteriaBuilder {
     

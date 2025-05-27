@@ -54,19 +54,19 @@ export abstract class RelewiseClient {
     protected async request<TRequest, TResponse>(name: string, data: TRequest, options?: RelewiseRequestOptions): Promise<TResponse | undefined> {
         const requestUrl = this.createRequestUrl(this._serverUrl, this.datasetId, this._urlPath, name);
 
-        try {
-            const response = await fetch(requestUrl, {
-                method: 'POST',
-                headers: {
-                    Authorization: this._apiKeyHeader,
-                    'Content-Type': 'application/json',
-                    'X-Relewise-Version': version.tag,
-                },
-                body: JSON.stringify(data),
-                signal: options?.abortSignal,
-                cache: 'no-cache',
-            });
+        const response = await fetch(requestUrl, {
+            method: 'POST',
+            headers: {
+                Authorization: this._apiKeyHeader,
+                'Content-Type': 'application/json',
+                'X-Relewise-Version': version.tag,
+            },
+            body: JSON.stringify(data),
+            signal: options?.abortSignal,
+            cache: 'no-cache',
+        });
 
+        try {
             if (!response.ok) {
                 let responseMessage: HttpProblemDetails | null = null;
     

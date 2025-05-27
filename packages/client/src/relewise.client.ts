@@ -54,19 +54,19 @@ export abstract class RelewiseClient {
     protected async request<TRequest, TResponse>(name: string, data: TRequest, options?: RelewiseRequestOptions): Promise<TResponse | undefined> {
         const requestUrl = this.createRequestUrl(this._serverUrl, this.datasetId, this._urlPath, name);
 
-        const response = await fetch(requestUrl, {
-            method: 'POST',
-            headers: {
-                Authorization: this._apiKeyHeader,
-                'Content-Type': 'application/json',
-                'X-Relewise-Version': version.tag,
-            },
-            body: JSON.stringify(data),
-            signal: options?.abortSignal,
-            cache: 'no-cache',
-        });
-
         try {
+            const response = await fetch(requestUrl, {
+                method: 'POST',
+                headers: {
+                    Authorization: this._apiKeyHeader,
+                    'Content-Type': 'application/json',
+                    'X-Relewise-Version': version.tag,
+                },
+                body: JSON.stringify(data),
+                signal: options?.abortSignal,
+                cache: 'no-cache',
+            });
+
             if (!response.ok) {
                 let responseMessage: HttpProblemDetails | null = null;
     
@@ -96,7 +96,8 @@ export abstract class RelewiseClient {
 
     private handleRequestError(err: unknown): never {
         if (err instanceof ProblemDetailsError) throw err;
-    
+        if (err instanceof DOMException) throw err;
+        
         console.error("Network error or preflight request failed. Check API Key and Dataset ID.");
         throw new Error("Network error or preflight request failed. Check API Key and Dataset ID.");
     }

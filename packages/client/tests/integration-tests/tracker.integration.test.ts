@@ -200,12 +200,17 @@ test('Track Product View without id', async() => {
 });
 
 test('Track Product View on a Dataset that does not exist', async() => {
-    await expect(async() => {
-        const tracker = new Tracker("00000000-0000-0000-0000-000000000000", API_KEY!, { serverUrl: SERVER_URL });
+    const tracker = new Tracker("00000000-0000-0000-0000-000000000000", API_KEY!, { serverUrl: SERVER_URL });
 
-        return await tracker.trackProductView({
+    try {
+        await tracker.trackProductView({
             productId: null,
             user: UserFactory.anonymous(),
-        } as any)
-    }).rejects.toThrow();
+        } as any);
+    } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof ProblemDetailsError).toBe(true);
+        expect((e as ProblemDetailsError).message).toContain('404');
+        expect((e as ProblemDetailsError).message).toContain('Error when calling the Relewise API.');
+    }
 });

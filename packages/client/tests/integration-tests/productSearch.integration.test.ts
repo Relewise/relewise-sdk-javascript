@@ -1,6 +1,7 @@
 import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult, BrandFacetResult, Tracker } from '../../src';
 import { Integrator, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { test, expect } from '@jest/globals'
+import { fail } from 'assert';
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
@@ -189,3 +190,23 @@ test('Highlighting', async() => {
     expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
     expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("SomeValue");
 })
+
+test('Aborting a search throws the expected error', async() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const request: ProductSearchRequest = baseProductBuilder()
+        .setTerm('SomeValue')
+        .build();
+
+    controller.abort()
+
+    try {
+        await searcher.searchProducts(request, { abortSignal:  signal });
+        fail('Expected an AbortError to be thrown');
+    } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof DOMException).toBe(true);
+        expect((e as DOMException).name).toBe('AbortError');
+    }
+});

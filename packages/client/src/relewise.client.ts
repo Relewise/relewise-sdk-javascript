@@ -96,7 +96,8 @@ export abstract class RelewiseClient {
 
     private handleRequestError(err: unknown): never {
         if (err instanceof ProblemDetailsError) throw err;
-    
+        if (err instanceof DOMException) throw err;
+        
         console.error("Network error or preflight request failed. Check API Key and Dataset ID.");
         throw new Error("Network error or preflight request failed. Check API Key and Dataset ID.");
     }

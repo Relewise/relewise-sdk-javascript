@@ -49,13 +49,13 @@ export class FacetBuilder {
         return this;
     }
 
-    public addProductCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedProductCategoryPropertiesSettings>, facetSettings?: FacetSettings): this {
+    public addProductCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedProductCategoryPropertiesSettings>, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: CategoryHierarchyFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryHierarchyFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
             selectedPropertiesSettings: selectedPropertiesSettings ? ({
                 $type: 'Relewise.Client.Requests.Shared.SelectedProductCategoryPropertiesSettings, Relewise.Client',
                 ...selectedPropertiesSettings,
@@ -66,13 +66,13 @@ export class FacetBuilder {
         return this;
     }
 
-    public addContentCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedContentCategoryPropertiesSettings>, facetSettings?: FacetSettings): this {
+    public addContentCategoryHierarchyFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: CategoryPath[] | null = null, selectedPropertiesSettings?: Partial<SelectedContentCategoryPropertiesSettings>, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: CategoryHierarchyFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryHierarchyFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
             selectedPropertiesSettings: selectedPropertiesSettings ? ({
                 $type: 'Relewise.Client.Requests.Shared.SelectedContentCategoryPropertiesSettings, Relewise.Client',
                 ...selectedPropertiesSettings,
@@ -83,46 +83,46 @@ export class FacetBuilder {
         return this;
     }
 
-    public addBrandFacet(selectedValues: string[] | null = null, facetSettings?: FacetSettings): this {
+    public addBrandFacet(selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: BrandFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.BrandFacet, Relewise.Client',
             field: 'Brand',
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductAssortmentFacet(selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', selectedValues: number[] | null = null, facetSettings?: FacetSettings): this {
+    public addProductAssortmentFacet(selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', selectedValues: number[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ProductAssortmentFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductAssortmentFacet, Relewise.Client',
             field: 'Assortment',
             assortmentFilterType: 'Or',
             assortmentSelectionStrategy: selectionStrategy,
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addVariantSpecificationFacet(key: string, selectedValues: string[] | null = null, facetSettings?: FacetSettings): this {
+    public addVariantSpecificationFacet(key: string, selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: VariantSpecificationFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.VariantSpecificationFacet, Relewise.Client',
             field: 'VariantSpecification',
             key: key,
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductDataDoubleRangeFacet(key: string, selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', lowerBound?: number, upperBound?: number, facetSettings?: FacetSettings): this {
+    public addProductDataDoubleRangeFacet(key: string, selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant', lowerBound?: number, upperBound?: number, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
 
         const facet: ProductDataDoubleRangeFacet = {
@@ -131,7 +131,7 @@ export class FacetBuilder {
             key: key,
             dataSelectionStrategy: selectionStrategy,
             selected: selected,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -150,7 +150,7 @@ export class FacetBuilder {
             lowerBound?: number,
             upperBound?: number
         }[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: ProductDataDoubleRangesFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangesFacet, Relewise.Client',
@@ -160,7 +160,7 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             dataSelectionStrategy: selectionStrategy,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -172,7 +172,7 @@ export class FacetBuilder {
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         selectedValues: string[] | null = null,
         collectionFilterType?: 'Or' | 'And',
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: ProductDataStringValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataStringValueFacet, Relewise.Client',
@@ -181,7 +181,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -193,7 +193,7 @@ export class FacetBuilder {
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         selectedValues: boolean[] | null = null,
         collectionFilterType?: 'Or' | 'And',
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: ProductDataBooleanValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataBooleanValueFacet, Relewise.Client',
@@ -202,7 +202,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -214,7 +214,7 @@ export class FacetBuilder {
         selectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         selectedValues: number[] | null = null,
         collectionFilterType?: 'Or' | 'And',
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: ProductDataDoubleValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleValueFacet, Relewise.Client',
@@ -223,7 +223,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -234,7 +234,7 @@ export class FacetBuilder {
         priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         lowerBound?: number,
         upperBound?: number,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
         const facet: PriceRangeFacet = {
@@ -242,7 +242,7 @@ export class FacetBuilder {
             field: 'SalesPrice',
             selected: selected,
             priceSelectionStrategy,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -260,7 +260,7 @@ export class FacetBuilder {
             lowerBound?: number,
             upperBound?: number
         }[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: PriceRangesFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangesFacet, Relewise.Client',
@@ -269,7 +269,7 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             priceSelectionStrategy,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -280,7 +280,7 @@ export class FacetBuilder {
         priceSelectionStrategy: 'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant',
         lowerBound?: number,
         upperBound?: number,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
         const facet: PriceRangeFacet = {
@@ -288,7 +288,7 @@ export class FacetBuilder {
             field: 'ListPrice',
             selected: selected,
             priceSelectionStrategy,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -306,7 +306,7 @@ export class FacetBuilder {
             lowerBound?: number,
             upperBound?: number
         }[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: PriceRangesFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.PriceRangesFacet, Relewise.Client',
@@ -315,7 +315,7 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             priceSelectionStrategy,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -331,7 +331,7 @@ export class FacetBuilder {
             skip?: number,
             take?: number
         },
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -353,7 +353,7 @@ export class FacetBuilder {
                 skip: filter?.skip,
             },
             dataSelectionStrategy: selectionStrategy,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
             key: key,
         };
         this.facets.push(facet);
@@ -364,12 +364,12 @@ export class FacetBuilder {
     public addRecentlyPurchasedFacet(
         purchaseQualifiers: PurchaseQualifiers,
         selectedValues: boolean[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: RecentlyPurchasedFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.RecentlyPurchasedFacet, Relewise.Client',
             field: 'Data',
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
             selected: selectedValues,
             purchaseQualifiers: purchaseQualifiers,
         };

@@ -381,20 +381,20 @@ export class FacetBuilder {
     //#endregion
 
     //#region Content
-    public addContentAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings): this {
+    public addContentAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ContentAssortmentFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentAssortmentFacet, Relewise.Client',
             field: 'Assortment',
             assortmentFilterType: 'Or',
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addContentDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings): this {
+    public addContentDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
 
         const facet: ContentDataDoubleRangeFacet = {
@@ -402,7 +402,7 @@ export class FacetBuilder {
             field: 'Data',
             selected: selected,
             key: key,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -420,7 +420,7 @@ export class FacetBuilder {
             lowerBound?: number,
             upperBound?: number
         }[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: ContentDataDoubleRangesFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangesFacet, Relewise.Client',
@@ -429,49 +429,49 @@ export class FacetBuilder {
             predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addContentDataStringValueFacet(key: string, selectedValues: string[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+    public addContentDataStringValueFacet(key: string, selectedValues: string[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ContentDataStringValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataStringValueFacet, Relewise.Client',
             field: 'Data',
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addContentDataBooleanValueFacet(key: string, selectedValues: boolean[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+    public addContentDataBooleanValueFacet(key: string, selectedValues: boolean[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ContentDataBooleanValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataBooleanValueFacet, Relewise.Client',
             field: 'Data',
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addContentDataDoubleValueFacet(key: string, selectedValues: number[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+    public addContentDataDoubleValueFacet(key: string, selectedValues: number[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ContentDataDoubleValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ContentDataDoubleValueFacet, Relewise.Client',
             field: 'Data',
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -486,7 +486,7 @@ export class FacetBuilder {
             skip?: number,
             take?: number
         },
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -507,7 +507,7 @@ export class FacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
             key: key,
         };
         this.facets.push(facet);

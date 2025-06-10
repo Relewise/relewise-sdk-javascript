@@ -17,3 +17,4 @@ export * from './getProductCategoryFacet';
 export * from './searchConstraintBuilder';
 export * from './productHighlightingBuilder';
 export * from './contentHighlightingBuilder';
+export * from './facetSettingsBuilder';

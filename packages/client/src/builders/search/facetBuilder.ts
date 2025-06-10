@@ -517,27 +517,27 @@ export class FacetBuilder {
     //#endregion
 
     //#region ProductCategories
-    public addProductCategoryAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings): this {
+    public addProductCategoryAssortmentFacet(selectedValues: number[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ProductCategoryAssortmentFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryAssortmentFacet, Relewise.Client',
             field: 'Assortment',
             assortmentFilterType: 'Or',
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductCategoryDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings): this {
+    public addProductCategoryDataDoubleRangeFacet(key: string, lowerBound?: number | null, upperBound?: number | null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const selected: DoubleNullableRange | null = this.mapSelectedDoubleRange(lowerBound, upperBound);
         const facet: ProductCategoryDataDoubleRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataDoubleRangeFacet, Relewise.Client',
             field: 'Data',
             selected: selected,
             key: key,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -555,7 +555,7 @@ export class FacetBuilder {
             lowerBound?: number,
             upperBound?: number
         }[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: ProductCategoryDataDoubleRangesFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductDataDoubleRangesFacet, Relewise.Client',
@@ -564,49 +564,49 @@ export class FacetBuilder {
             predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductCategoryDataStringValueFacet(key: string, selectedValues: string[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+    public addProductCategoryDataStringValueFacet(key: string, selectedValues: string[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ProductCategoryDataStringValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataStringValueFacet, Relewise.Client',
             field: 'Data',
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductCategoryDataBooleanValueFacet(key: string, selectedValues: boolean[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+    public addProductCategoryDataBooleanValueFacet(key: string, selectedValues: boolean[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ProductCategoryDataBooleanValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataBooleanValueFacet, Relewise.Client',
             field: 'Data',
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
         return this;
     }
 
-    public addProductCategoryDataDoubleValueFacet(key: string, selectedValues: number[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings): this {
+    public addProductCategoryDataDoubleValueFacet(key: string, selectedValues: number[] | null = null, collectionFilterType?: 'Or' | 'And', facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: ProductCategoryDataDoubleValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.ProductCategoryDataDoubleValueFacet, Relewise.Client',
             field: 'Data',
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -621,7 +621,7 @@ export class FacetBuilder {
             skip?: number,
             take?: number
         },
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -642,7 +642,7 @@ export class FacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
             key: key,
         };
         this.facets.push(facet);

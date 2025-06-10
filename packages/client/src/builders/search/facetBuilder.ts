@@ -1,6 +1,7 @@
 import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange, ContentDataObjectFacet, ProductCategoryDataObjectFacet, RecentlyPurchasedFacet, PurchaseQualifiers } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
+import { FacetSettingsBuilder } from './facetSettingsBuilder';
 
 export class FacetBuilder {
     private facets: (
@@ -34,13 +35,14 @@ export class FacetBuilder {
         | RecentlyPurchasedFacet)[] = [];
 
     //#region Product
-    public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null, facetSettings?: FacetSettings): this {
+    public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        
         const facet: CategoryFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
-            settings: facetSettings,
+            settings: this.handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -668,6 +670,16 @@ export class FacetBuilder {
             if (upperBoundHasValue) selected.upperBoundInclusive = upperBound;
         }
         return selected;
+    }
+
+    private handleFacetSettings(facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)) {
+        if (typeof facetSettings === 'function') {
+            const builder = new FacetSettingsBuilder();
+            facetSettings(builder);
+            facetSettings = builder.build();
+        }
+
+        return facetSettings;
     }
 }
 

@@ -17,7 +17,7 @@ function baseProductBuilder() {
     });
 };
 
-test('ProductSearch: Relevance modifier without conditions', async() => {
+test('ProductSearch: Relevance modifier without conditions', async () => {
 
     const request: ProductSearchRequest = baseProductBuilder()
         .relevanceModifiers(b => b.addProductDataRelevanceModifier('NoveltyBoostModifier', conditions => conditions, ValueSelectorFactory.dataDoubleSelector('NoveltyBoostModifier')))
@@ -28,7 +28,7 @@ test('ProductSearch: Relevance modifier without conditions', async() => {
     expect(result?.hits).toBeGreaterThan(0);
 });
 
-test('Product search - data object facets', async() => {
+test('Product search - data object facets', async () => {
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f => f.addProductDataObjectFacet(
             't',
@@ -50,7 +50,7 @@ test('Product search - data object facets', async() => {
     expect(result?.hits).toBeGreaterThan(0);
 });
 
-test('Retail Media search', async() => {
+test('Retail Media search', async () => {
     const request: ProductSearchRequest = baseProductBuilder()
         .setRetailMedia({
             location: {
@@ -64,27 +64,27 @@ test('Retail Media search', async() => {
     expect(result?.hits).toBeGreaterThan(0);
 });
 
-test('Facet result', async() => {
+test('Facet result', async () => {
     const variant = new ProductVariantBuilder({ id: 'GetProductFacet test variant' })
         .specifications({ SomeSpecification: 'S' })
         .build();
 
     const product = new ProductUpdateBuilder({
-            id: 'GetProductFacet test product',
-            productUpdateKind: 'ReplaceProvidedProperties',
-        })
+        id: 'GetProductFacet test product',
+        productUpdateKind: 'ReplaceProvidedProperties',
+    })
         .data({
             'SomeString': DataValueFactory.string('Really nice product'),
-            'SomeDouble': DataValueFactory.number(1),   
+            'SomeDouble': DataValueFactory.number(1),
             'SomeBoolean': DataValueFactory.boolean(true),
-            'SomeObject': DataValueFactory.object({ })   
+            'SomeObject': DataValueFactory.object({})
         })
         .variants([variant]);
 
     await integrator.updateProduct(product.build());
 
     const request: ProductSearchRequest = baseProductBuilder()
-    .setSelectedProductProperties({ allData: true })
+        .setSelectedProductProperties({ allData: true })
         .facets(f => f
             .addProductAssortmentFacet('Product')
             .addBrandFacet()
@@ -162,7 +162,7 @@ test('Facet result', async() => {
     expect(result?.hits).toBeGreaterThan(0);
 });
 
-test('ProductSearch with search constraint', async() => {
+test('ProductSearch with search constraint', async () => {
 
     const request: ProductSearchRequest = baseProductBuilder()
         .searchConstraints(constraints => constraints.setResultMustHaveVariantConstraint({ exceptWhenProductHasNoVariants: true }))
@@ -173,16 +173,16 @@ test('ProductSearch with search constraint', async() => {
     expect(result?.hits).toBeGreaterThan(0);
 });
 
-test('Highlighting', async() => {
+test('Highlighting', async () => {
     const request: ProductSearchRequest = baseProductBuilder()
-        .setTerm('SomeValue')    
+        .setTerm('SomeValue')
         .highlighting(h => {
             h.setHighlightable({ dataKeys: ['SomeString'] })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
-            h.setShape({  
+            h.setShape({
                 offsets: { include: true },
-                snippets: { include: true, includeMatchedWords: true, useEllipses: true } 
+                snippets: { include: true, includeMatchedWords: true, useEllipses: true }
             })
         }).build();
     const result = await searcher.searchProducts(request);
@@ -191,7 +191,7 @@ test('Highlighting', async() => {
     expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("SomeValue");
 })
 
-test('Aborting a search throws the expected error', async() => {
+test('Aborting a search throws the expected error', async () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
@@ -202,11 +202,29 @@ test('Aborting a search throws the expected error', async() => {
     controller.abort()
 
     try {
-        await searcher.searchProducts(request, { abortSignal:  signal });
+        await searcher.searchProducts(request, { abortSignal: signal });
         fail('Expected an AbortError to be thrown');
     } catch (e) {
         expect(e).toBeDefined();
         expect(e instanceof DOMException).toBe(true);
         expect((e as DOMException).name).toBe('AbortError');
     }
+});
+
+test('ProductSearch with sorted facet', async () => {
+
+    const request: ProductSearchRequest = baseProductBuilder()
+        .facets(f =>
+            f.addCategoryFacet("ImmediateParent", null, b => b.take(1).sortByHits())
+        )
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBeGreaterThan(0);
+    expect(result?.facets).not.toBeNull();
+
+    const categoryFacet = GetProductFacet.category(result!.facets!, 'ImmediateParent');
+    expect(categoryFacet).not.toBeNull();
+    expect(categoryFacet?.available?.length).toBe(1)
 });

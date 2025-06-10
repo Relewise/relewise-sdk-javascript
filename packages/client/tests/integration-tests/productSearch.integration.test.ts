@@ -213,6 +213,24 @@ test('Aborting a search throws the expected error', async () => {
 
 test('ProductSearch with sorted facet', async () => {
 
+    const product = new ProductUpdateBuilder({
+        id: 'Cat Product #1',
+        productUpdateKind: 'ReplaceProvidedProperties',
+    }).categoryPaths(c => c.path(p => p.category({ id: "1", displayName: [{ language: 'da', value: "name" }] })));
+    await integrator.updateProduct(product.build());
+
+    const product2 = new ProductUpdateBuilder({
+        id: 'Cat Product #2',
+        productUpdateKind: 'ReplaceProvidedProperties',
+    }).categoryPaths(c => c.path(p => p.category({ id: "1", displayName: [{ language: 'da', value: "name" }] })));
+    await integrator.updateProduct(product2.build());
+
+    const product3 = new ProductUpdateBuilder({
+        id: 'Cat Product #3',
+        productUpdateKind: 'ReplaceProvidedProperties',
+    }).categoryPaths(c => c.path(p => p.category({ id: "2", displayName: [{ language: 'da', value: "name 2" }] })));
+    await integrator.updateProduct(product3.build());
+
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f =>
             f.addCategoryFacet("ImmediateParent", null, b => b.take(2).sortByHits())
@@ -227,8 +245,8 @@ test('ProductSearch with sorted facet', async () => {
     const categoryFacet = GetProductFacet.category(result!.facets!, 'ImmediateParent');
     expect(categoryFacet).not.toBeNull();
     expect(categoryFacet?.available?.length).toBe(2)
-    
+
     if (!categoryFacet?.available![0]) fail();
-    
+
     expect(categoryFacet?.available![0]?.hits).toBeGreaterThan(categoryFacet?.available![1]!.hits!)
 });

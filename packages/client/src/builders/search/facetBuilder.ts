@@ -671,15 +671,4 @@ export class FacetBuilder {
         }
         return selected;
     }
-
-    private handleFacetSettings(facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)) {
-        if (typeof facetSettings === 'function') {
-            const builder = new FacetSettingsBuilder();
-            facetSettings(builder);
-            facetSettings = builder.build();
-        }
-
-        return facetSettings;
-    }
 }
-

@@ -215,7 +215,7 @@ test('ProductSearch with sorted facet', async () => {
 
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f =>
-            f.addCategoryFacet("ImmediateParent", null, b => b.sortByHits())
+            f.addCategoryFacet("ImmediateParent", null, b => b.take(1).sortByHits())
         )
         .build();
 

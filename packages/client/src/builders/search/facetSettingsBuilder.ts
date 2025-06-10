@@ -25,8 +25,7 @@ export class FacetSettingsBuilder {
     }
 
     /**
-     * Sorts facet values in descending order by hit count,
-     * so that the values with the most hits appear first in the list.
+     * Sorts facet values in descending order by hit count, so that the values with the most hits appear first in the list.
     */
     public sortByHits(): this {
         this.settings.sorting = {

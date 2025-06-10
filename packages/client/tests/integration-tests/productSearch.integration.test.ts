@@ -215,7 +215,7 @@ test('ProductSearch with sorted facet', async () => {
 
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f =>
-            f.addCategoryFacet("ImmediateParent", null, b => b.take(1).sortByHits())
+            f.addCategoryFacet("ImmediateParent", null, b => b.take(2).sortByHits())
         )
         .build();
 
@@ -226,5 +226,9 @@ test('ProductSearch with sorted facet', async () => {
 
     const categoryFacet = GetProductFacet.category(result!.facets!, 'ImmediateParent');
     expect(categoryFacet).not.toBeNull();
-    expect(categoryFacet?.available?.length).toBe(1)
+    expect(categoryFacet?.available?.length).toBe(2)
+    
+    if (!categoryFacet?.available![0]) fail();
+    
+    expect(categoryFacet?.available![0]?.hits).toBeGreaterThan(categoryFacet?.available![1]!.hits!)
 });

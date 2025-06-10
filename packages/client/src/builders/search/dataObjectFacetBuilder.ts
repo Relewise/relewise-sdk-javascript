@@ -1,6 +1,7 @@
 import { DataObjectFacet, DataObjectBooleanValueFacet, DataObjectDoubleRangeFacet, DataObjectDoubleRangesFacet, DataObjectDoubleValueFacet, DataObjectStringValueFacet, FacetSettings } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { FacetSettingsBuilder } from './facetSettingsBuilder';
+import { handleFacetSettings } from './handleFacetSettings';
 
 
 export class DataObjectFacetBuilder {
@@ -42,7 +43,7 @@ export class DataObjectFacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -61,7 +62,7 @@ export class DataObjectFacetBuilder {
             key: key,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -80,7 +81,7 @@ export class DataObjectFacetBuilder {
             key: key,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -99,7 +100,7 @@ export class DataObjectFacetBuilder {
             key: key,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -120,7 +121,7 @@ export class DataObjectFacetBuilder {
                 lowerBoundInclusive: lowerBound,
                 upperBoundInclusive: upperBound,
             },
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -144,7 +145,7 @@ export class DataObjectFacetBuilder {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectDoubleRangesFacet, Relewise.Client',
             field: 'Data',
             key: key,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
@@ -158,15 +159,5 @@ export class DataObjectFacetBuilder {
         return this.facets.length === 0
             ? null
             : this.facets;
-    }
-
-    private handleFacetSettings(facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)) {
-        if (typeof facetSettings === 'function') {
-            const builder = new FacetSettingsBuilder();
-            facetSettings(builder);
-            facetSettings = builder.build();
-        }
-
-        return facetSettings;
     }
 }

@@ -2,6 +2,7 @@ import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 import { FacetSettingsBuilder } from './facetSettingsBuilder';
+import { handleFacetSettings } from './handleFacetSettings';
 
 export class FacetBuilder {
     private facets: (
@@ -41,7 +42,7 @@ export class FacetBuilder {
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -54,7 +55,7 @@ export class FacetBuilder {
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             selectedPropertiesSettings: selectedPropertiesSettings ? ({
                 $type: 'Relewise.Client.Requests.Shared.SelectedProductCategoryPropertiesSettings, Relewise.Client',
                 ...selectedPropertiesSettings,
@@ -71,7 +72,7 @@ export class FacetBuilder {
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             selectedPropertiesSettings: selectedPropertiesSettings ? ({
                 $type: 'Relewise.Client.Requests.Shared.SelectedContentCategoryPropertiesSettings, Relewise.Client',
                 ...selectedPropertiesSettings,
@@ -87,7 +88,7 @@ export class FacetBuilder {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.BrandFacet, Relewise.Client',
             field: 'Brand',
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -101,7 +102,7 @@ export class FacetBuilder {
             assortmentFilterType: 'Or',
             assortmentSelectionStrategy: selectionStrategy,
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -114,7 +115,7 @@ export class FacetBuilder {
             field: 'VariantSpecification',
             key: key,
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -130,7 +131,7 @@ export class FacetBuilder {
             key: key,
             dataSelectionStrategy: selectionStrategy,
             selected: selected,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -159,7 +160,7 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             dataSelectionStrategy: selectionStrategy,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -180,7 +181,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -201,7 +202,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -222,7 +223,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -241,7 +242,7 @@ export class FacetBuilder {
             field: 'SalesPrice',
             selected: selected,
             priceSelectionStrategy,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -268,7 +269,7 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             priceSelectionStrategy,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -287,7 +288,7 @@ export class FacetBuilder {
             field: 'ListPrice',
             selected: selected,
             priceSelectionStrategy,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -314,7 +315,7 @@ export class FacetBuilder {
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             priceSelectionStrategy,
-            settings: this.handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -352,7 +353,7 @@ export class FacetBuilder {
                 skip: filter?.skip,
             },
             dataSelectionStrategy: selectionStrategy,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             key: key,
         };
         this.facets.push(facet);
@@ -368,7 +369,7 @@ export class FacetBuilder {
         const facet: RecentlyPurchasedFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.RecentlyPurchasedFacet, Relewise.Client',
             field: 'Data',
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             selected: selectedValues,
             purchaseQualifiers: purchaseQualifiers,
         };
@@ -386,7 +387,7 @@ export class FacetBuilder {
             field: 'Assortment',
             assortmentFilterType: 'Or',
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -401,7 +402,7 @@ export class FacetBuilder {
             field: 'Data',
             selected: selected,
             key: key,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -428,7 +429,7 @@ export class FacetBuilder {
             predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -442,7 +443,7 @@ export class FacetBuilder {
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -456,7 +457,7 @@ export class FacetBuilder {
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -470,7 +471,7 @@ export class FacetBuilder {
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -506,7 +507,7 @@ export class FacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             key: key,
         };
         this.facets.push(facet);
@@ -522,7 +523,7 @@ export class FacetBuilder {
             field: 'Assortment',
             assortmentFilterType: 'Or',
             selected: selectedValues,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -536,7 +537,7 @@ export class FacetBuilder {
             field: 'Data',
             selected: selected,
             key: key,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -563,7 +564,7 @@ export class FacetBuilder {
             predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -577,7 +578,7 @@ export class FacetBuilder {
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -591,7 +592,7 @@ export class FacetBuilder {
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -605,7 +606,7 @@ export class FacetBuilder {
             selected: selectedValues,
             key: key,
             collectionFilterType: collectionFilterType,
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
         };
         this.facets.push(facet);
 
@@ -641,7 +642,7 @@ export class FacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: this.handleFacetSettings(facetSettings),
+            settings: handleFacetSettings(facetSettings),
             key: key,
         };
         this.facets.push(facet);

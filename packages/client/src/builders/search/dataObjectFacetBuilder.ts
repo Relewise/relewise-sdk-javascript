@@ -1,5 +1,7 @@
 import { DataObjectFacet, DataObjectBooleanValueFacet, DataObjectDoubleRangeFacet, DataObjectDoubleRangesFacet, DataObjectDoubleValueFacet, DataObjectStringValueFacet, FacetSettings } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
+import { FacetSettingsBuilder } from './facetSettingsBuilder';
+import { handleFacetSettings } from './handleFacetSettings';
 
 
 export class DataObjectFacetBuilder {
@@ -19,7 +21,7 @@ export class DataObjectFacetBuilder {
             skip?: number,
             take?: number 
         },
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -41,7 +43,7 @@ export class DataObjectFacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: facetSettings,
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -52,7 +54,7 @@ export class DataObjectFacetBuilder {
         key: string,
         selectedValues: string[] | null = null,
         collectionFilterType?: 'Or' | 'And',
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: DataObjectStringValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectStringValueFacet, Relewise.Client',
@@ -60,7 +62,7 @@ export class DataObjectFacetBuilder {
             key: key,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -71,7 +73,7 @@ export class DataObjectFacetBuilder {
         key: string,
         selectedValues: boolean[] | null = null,
         collectionFilterType?: 'Or' | 'And',
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: DataObjectBooleanValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectBooleanValueFacet, Relewise.Client',
@@ -79,7 +81,7 @@ export class DataObjectFacetBuilder {
             key: key,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -90,7 +92,7 @@ export class DataObjectFacetBuilder {
         key: string,
         selectedValues: number[] | null = null,
         collectionFilterType?: 'Or' | 'And',
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: DataObjectDoubleValueFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectDoubleValueFacet, Relewise.Client',
@@ -98,7 +100,7 @@ export class DataObjectFacetBuilder {
             key: key,
             selected: selectedValues,
             collectionFilterType: collectionFilterType,
-            settings: facetSettings,
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -109,7 +111,7 @@ export class DataObjectFacetBuilder {
         key: string,
         lowerBound?: number | null, 
         upperBound?: number | null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: DataObjectDoubleRangeFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectDoubleRangeFacet, Relewise.Client',
@@ -119,7 +121,7 @@ export class DataObjectFacetBuilder {
                 lowerBoundInclusive: lowerBound,
                 upperBoundInclusive: upperBound,
             },
-            settings: facetSettings,
+            settings: handleFacetSettings(facetSettings)
         };
         this.facets.push(facet);
 
@@ -137,13 +139,13 @@ export class DataObjectFacetBuilder {
             lowerBound?: number,
             upperBound?: number
         }[] | null = null,
-        facetSettings?: FacetSettings): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
 
         const facet: DataObjectDoubleRangesFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.DataObjectDoubleRangesFacet, Relewise.Client',
             field: 'Data',
             key: key,
-            settings: facetSettings,
+            settings: handleFacetSettings(facetSettings),
             predefinedRanges: predefinedRanges?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),
             expandedRangeSize: expandedRangeSize,
             selected: selectedValues?.map(x => ({ lowerBoundInclusive: x.lowerBound, upperBoundExclusive: x.upperBound })),

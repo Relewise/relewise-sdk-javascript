@@ -554,6 +554,8 @@ export interface Budget {
   totalCost: number;
 }
 
+export type ByHitsFacetSorting = FacetSorting;
+
 export type CPMBudget = Budget & {
   /** @format double */
   costPerMille: number;
@@ -2121,6 +2123,13 @@ export interface FacetResult {
 export interface FacetSettings {
   alwaysIncludeSelectedInAvailable: boolean;
   includeZeroHitsInAvailable: boolean;
+  sorting?: ByHitsFacetSorting | null;
+  /** @format int32 */
+  take?: number | null;
+}
+
+export interface FacetSorting {
+  $type: string;
 }
 
 export interface FieldIndexConfiguration {
@@ -2313,6 +2322,11 @@ export interface HasChildCategoryFilter {
 export type HasClassificationCondition = UserCondition & {
   key?: string | null;
   value?: string | null;
+};
+
+export type HasDataCondition = UserCondition & {
+  key?: string | null;
+  conditions?: ValueConditionCollection | null;
 };
 
 export type HasEmailCondition = UserCondition;
@@ -2711,6 +2725,8 @@ export interface MerchandisingRule {
   /** @format double */
   priority: number;
   settings?: Record<string, string | null>;
+  schedule?: ISchedule | null;
+  status?: "Active" | "Inactive" | null;
 }
 
 export type MerchandisingRuleCollectionResponse = TimedResponse & {
@@ -5738,6 +5754,7 @@ export interface UserConditionCollection {
         | HasActivityCondition
         | HasAuthenticatedIdCondition
         | HasClassificationCondition
+        | HasDataCondition
         | HasEmailCondition
         | HasIdentifierCondition
         | HasLineItemsInCartCondition

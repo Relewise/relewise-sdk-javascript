@@ -50,6 +50,17 @@ test('Product search - data object facets', async () => {
     expect(result?.hits).toBeGreaterThan(0);
 });
 
+test('Product search - with cleared facets', async () => {
+    const request = baseProductBuilder()
+        .facets(f => f.addBrandFacet());
+
+    request.facets(builder => builder.clear());
+
+    const result = await searcher.searchProducts(request.build());
+
+    expect(result?.facets).toBeUndefined();
+});
+
 test('Retail Media search', async () => {
     const request: ProductSearchRequest = baseProductBuilder()
         .setRetailMedia({

@@ -42,3 +42,14 @@ test('brand to be added as facet and to have its value set', () => {
     const brandFacet = subject!.items![0] as BrandFacet;
     expect(brandFacet.selected).toBe(null);
 });
+
+test('clear', () => {
+    const builder: FacetBuilder = baseBuilder();
+    builder.addBrandFacet(['HP']);
+
+    builder.clear();
+
+    const subject: ProductFacetQuery | null = builder.build();
+
+    expect(subject).toBe(null);
+});

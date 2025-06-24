@@ -651,6 +651,12 @@ export class FacetBuilder {
     }
     //#endregion
 
+    public clear(): this {
+        this.facets = [];
+
+        return this;
+    }
+
     build(): ProductFacetQuery | null {
         return this.facets.length === 0
             ? null

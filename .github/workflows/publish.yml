@@ -16,9 +16,9 @@ jobs:
           registry-url: https://registry.npmjs.com/
           scope: '@relewise'
 
-      - name: Get the latest tag
-        uses: actions-ecosystem/action-get-latest-tag@v1
+      - name: Get latest tag
         id: get-latest-tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
 
       - name: Calculate environment variables
         run: |

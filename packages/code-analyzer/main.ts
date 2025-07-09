@@ -1,19 +1,20 @@
 import { ClassDeclaration, ParameterDeclaration, Project, PropertyDeclaration, Scope, SourceFile, ts, Type, TypeFormatFlags } from "ts-morph";
 import * as fs from "fs";
 import { Property } from "./models/property";
+import { Entry, Kind } from "./models/entry";
 
 const tsConfigFilePath = process.argv[2];
 const project = new Project({ tsConfigFilePath: tsConfigFilePath });
 
-const result: any[] = [];
+const result: Entry[] = [];
 
 for (const sourceFile of project.getSourceFiles()) {
     result.push(...handleClasses(sourceFile));
     result.push(...handleInterfaces(sourceFile));
 }
 
-function handleClasses(sourceFile: SourceFile): any[] {
-  const classes = [];
+function handleClasses(sourceFile: SourceFile): Entry[] {
+  const classes: Entry[] = [];
   for (const cls of sourceFile.getClasses()) {
 
     if (!cls.isExported()) continue;
@@ -25,9 +26,9 @@ function handleClasses(sourceFile: SourceFile): any[] {
 
     // TODO: Add information about parent
     classes.push({
-      kind: "Class",
+      kind: Kind[Kind.Class],
       name: cls.getName(),
-      docs: cls.getJsDocs().map(doc => doc.getComment()),
+      docs: cls.getJsDocs().map(doc => doc.getComment().toString()),
       dependencies: properties.map(x => x.type),
       isAbstract: cls.isAbstract(),
       isDefault: cls.isDefaultExport(),
@@ -38,23 +39,23 @@ function handleClasses(sourceFile: SourceFile): any[] {
   return classes;
 }
 
-function handleInterfaces(sourceFile: SourceFile): any[] {
-  const interfaces = [];
+function handleInterfaces(sourceFile: SourceFile): Entry[] {
+  const interfaces: Entry[] = [];
 
   for (const i of sourceFile.getInterfaces()) {
     // TODO: Add information about parent
     interfaces.push({
-      kind: "Interface",
+      kind: Kind[Kind.Interface],
       name: i.getName(),
-      docs: i.getJsDocs().map(doc => doc.getComment()),
+      docs: i.getJsDocs().map(doc => doc.getComment().toString()),
     });
   }
 
   return interfaces;
 }
 
-function handleMethods(cls: ClassDeclaration): any[] {
-  const methods = [];
+function handleMethods(cls: ClassDeclaration): Entry[] {
+  const methods: Entry[] = [];
 
   cls.getMethods().forEach(m => {
     const scope = m.getScope(); // "public" | "protected" | "private" | undefined
@@ -65,10 +66,11 @@ function handleMethods(cls: ClassDeclaration): any[] {
     }
 
     methods.push({
-      kind: "Method",
+      kind: Kind[Kind.Method],
       name: m.getName(),
       parent: cls.getName(),
-      docs: m.getJsDocs().map(doc => doc.getComment()),
+      parentKind: Kind[Kind.Class],
+      docs: m.getJsDocs().map(doc => doc.getComment()?.toString()),
       dependencies: handleParameters(m.getParameters()),
     });
   });
@@ -77,8 +79,8 @@ function handleMethods(cls: ClassDeclaration): any[] {
 }
 
 
-function handleConstructors(cls: ClassDeclaration): any[] {
-  const constructors = []
+function handleConstructors(cls: ClassDeclaration): Entry[] {
+  const constructors: Entry[] = []
   cls.getConstructors().map(c => {
     const scope = c.getScope(); // "public" | "protected" | "private" | undefined
 
@@ -88,11 +90,11 @@ function handleConstructors(cls: ClassDeclaration): any[] {
     }
 
     constructors.push({
-      kind: "Constructor",
+      kind: Kind[Kind.Constructor],
       name: "constructor",
-      docs: c.getJsDocs().map(doc => doc.getComment()),
+      docs: c.getJsDocs().map(doc => doc.getComment().toString()),
       parent: cls.getName(),
-      parentKind: "Class",
+      parentKind: Kind[Kind.Class],
       dependencies: handleParameters(c.getParameters())
     })
   });

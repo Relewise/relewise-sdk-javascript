@@ -3,6 +3,7 @@
     "kind": "Method",
     "name": "recommendPopularSearchTerms",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PopularSearchTermsRecommendationRequest",
@@ -13,6 +14,7 @@
     "kind": "Method",
     "name": "recommendPersonalBrands",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PersonalBrandRecommendationRequest",
@@ -23,6 +25,7 @@
     "kind": "Method",
     "name": "recommendPopularBrands",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PopularBrandsRecommendationRequest",
@@ -33,6 +36,7 @@
     "kind": "Method",
     "name": "recommendPersonalContentCategories",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PersonalContentCategoryRecommendationRequest",
@@ -43,6 +47,7 @@
     "kind": "Method",
     "name": "recommendPopularContentCategories",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PopularContentCategoriesRecommendationRequest",
@@ -53,6 +58,7 @@
     "kind": "Method",
     "name": "recommendPersonalProductCategories",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PersonalProductCategoryRecommendationRequest",
@@ -63,6 +69,7 @@
     "kind": "Method",
     "name": "recommendPopularProductCategories",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PopularProductCategoriesRecommendationRequest",
@@ -73,6 +80,7 @@
     "kind": "Method",
     "name": "recommendPurchasedWithProduct",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PurchasedWithProductRequest",
@@ -83,6 +91,7 @@
     "kind": "Method",
     "name": "recommendPurchasedWithMultipleProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PurchasedWithMultipleProductsRequest",
@@ -93,6 +102,7 @@
     "kind": "Method",
     "name": "sortVariants",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "SortVariantsRequest",
@@ -103,6 +113,7 @@
     "kind": "Method",
     "name": "sortProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "SortProductsRequest",
@@ -113,6 +124,7 @@
     "kind": "Method",
     "name": "recommendSimilarProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "SimilarProductsRequest",
@@ -123,6 +135,7 @@
     "kind": "Method",
     "name": "recommendSearchTermBasedProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "SearchTermBasedProductRecommendationRequest",
@@ -133,6 +146,7 @@
     "kind": "Method",
     "name": "recentlyViewedProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "RecentlyViewedProductsRequest",
@@ -143,6 +157,7 @@
     "kind": "Method",
     "name": "recommendPurchasedWithCurrentCart",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PurchasedWithCurrentCartRequest",
@@ -153,6 +168,7 @@
     "kind": "Method",
     "name": "recommendProductsViewedAfterViewingProduct",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductsViewedAfterViewingProductRequest",
@@ -163,6 +179,7 @@
     "kind": "Method",
     "name": "recommendProductsViewedAfterViewingContent",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductsViewedAfterViewingContentRequest",
@@ -173,6 +190,7 @@
     "kind": "Method",
     "name": "recommendPopularProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PopularProductsRequest",
@@ -183,6 +201,7 @@
     "kind": "Method",
     "name": "recommendPersonalProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PersonalProductRecommendationRequest",
@@ -193,6 +212,7 @@
     "kind": "Method",
     "name": "recommendPopularContents",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PopularContentsRequest",
@@ -203,6 +223,7 @@
     "kind": "Method",
     "name": "recommendPersonalContents",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PersonalContentRecommendationRequest",
@@ -213,6 +234,7 @@
     "kind": "Method",
     "name": "recommendContentsViewedAfterViewingProduct",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentsViewedAfterViewingProductRequest",
@@ -223,6 +245,7 @@
     "kind": "Method",
     "name": "recommendContentsViewedAfterViewingMultipleProducts",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentsViewedAfterViewingMultipleProductsRequest",
@@ -233,6 +256,7 @@
     "kind": "Method",
     "name": "recommendContentsViewedAfterViewingMultipleContents",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentsViewedAfterViewingMultipleContentsRequest",
@@ -243,6 +267,7 @@
     "kind": "Method",
     "name": "recommendContentsViewedAfterViewingContent",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentsViewedAfterViewingContentRequest",
@@ -253,6 +278,7 @@
     "kind": "Method",
     "name": "batchProductRecommendations",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductRecommendationRequestCollection",
@@ -263,6 +289,7 @@
     "kind": "Method",
     "name": "batchContentRecommendations",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentRecommendationRequestCollection",
@@ -273,6 +300,7 @@
     "kind": "Method",
     "name": "batchContentCategoryRecommendations",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentCategoryRecommendationRequestCollection",
@@ -283,6 +311,7 @@
     "kind": "Method",
     "name": "batchProductCategoryRecommendations",
     "parent": "Recommender",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryRecommendationRequestCollection",
@@ -359,6 +388,7 @@
     "kind": "Method",
     "name": "searchProducts",
     "parent": "Searcher",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductSearchRequest",
@@ -369,6 +399,7 @@
     "kind": "Method",
     "name": "searchProductCategories",
     "parent": "Searcher",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategorySearchRequest",
@@ -379,6 +410,7 @@
     "kind": "Method",
     "name": "searchContents",
     "parent": "Searcher",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentSearchRequest",
@@ -389,6 +421,7 @@
     "kind": "Method",
     "name": "searchTermPrediction",
     "parent": "Searcher",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "SearchTermPredictionRequest",
@@ -399,6 +432,7 @@
     "kind": "Method",
     "name": "batch",
     "parent": "Searcher",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "SearchRequestCollection",
@@ -425,6 +459,7 @@
     "kind": "Method",
     "name": "trackOrder",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{\r\n        user: User,\r\n        subtotal: { currency: string, amount: number },\r\n        orderNumber: string,\r\n        /** @deprecated Use orderNumber instead. */\r\n        trackingNumber?: string,\r\n        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], \r\n        data?: Record<string, DataValue>, \r\n        cartName?: string\r\n    }",
@@ -435,6 +470,7 @@
     "kind": "Method",
     "name": "trackCart",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ \r\n        user?: User, \r\n        subtotal: { currency: string, amount: number }, \r\n        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], \r\n        data?: Record<string, DataValue>, \r\n        cartName?: string \r\n    }",
@@ -445,6 +481,7 @@
     "kind": "Method",
     "name": "trackProductView",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string, variantId?: string, user: User }",
@@ -455,6 +492,7 @@
     "kind": "Method",
     "name": "trackProductCategoryView",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ idPath: string[], user: User }",
@@ -465,6 +503,7 @@
     "kind": "Method",
     "name": "trackContentView",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ contentId: string, user: User }",
@@ -475,6 +514,7 @@
     "kind": "Method",
     "name": "trackContentCategoryView",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ idPath: string[], user: User }",
@@ -485,6 +525,7 @@
     "kind": "Method",
     "name": "trackBrandView",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ brandId: string, user: User }",
@@ -495,6 +536,7 @@
     "kind": "Method",
     "name": "trackSearchTerm",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ term: string, user: User, language: string }",
@@ -505,6 +547,7 @@
     "kind": "Method",
     "name": "trackUserUpdate",
     "parent": "Tracker",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }",
@@ -531,6 +574,7 @@
     "kind": "Method",
     "name": "addContainsCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "DataValueBase<T>",
@@ -541,6 +585,7 @@
     "kind": "Method",
     "name": "addDistinctCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -548,6 +593,7 @@
     "kind": "Method",
     "name": "addEqualsCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "DataValueBase<T>"
@@ -557,6 +603,7 @@
     "kind": "Method",
     "name": "addGreaterThanCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -564,6 +611,7 @@
     "kind": "Method",
     "name": "addLessThanCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -571,6 +619,7 @@
     "kind": "Method",
     "name": "addDataObjectCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: DataObjectFilterConditionBuilder) => void"
@@ -580,6 +629,7 @@
     "kind": "Method",
     "name": "addHasValueCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -587,6 +637,7 @@
     "kind": "Method",
     "name": "addRelativeDateTimeCondition",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Before' | 'After'",
@@ -597,6 +648,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -620,6 +672,7 @@
     "kind": "Method",
     "name": "addContainsCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "DataValueBase<T>",
@@ -630,6 +683,7 @@
     "kind": "Method",
     "name": "addEqualsCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "DataValueBase<T>"
@@ -639,6 +693,7 @@
     "kind": "Method",
     "name": "addInRangeCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "DoubleRange"
@@ -648,6 +703,7 @@
     "kind": "Method",
     "name": "addGreaterThanCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -655,6 +711,7 @@
     "kind": "Method",
     "name": "addLessThanCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -662,6 +719,7 @@
     "kind": "Method",
     "name": "addMinByCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -669,6 +727,7 @@
     "kind": "Method",
     "name": "addMaxByCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -676,6 +735,7 @@
     "kind": "Method",
     "name": "addObjectValueIsSubsetOfCondition",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "DataValueBase<T>"
@@ -685,6 +745,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "DataObjectFilterConditionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -708,6 +769,7 @@
     "kind": "Method",
     "name": "addProductAssortmentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product assortment filter to the request."
     ],
@@ -719,6 +781,7 @@
     "kind": "Method",
     "name": "addVariantAssortmentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant assortment filter to the request."
     ],
@@ -730,6 +793,7 @@
     "kind": "Method",
     "name": "addBrandAssortmentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand assortment filter to the request."
     ],
@@ -741,6 +805,7 @@
     "kind": "Method",
     "name": "addContentAssortmentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content assortment filter to the request."
     ],
@@ -752,6 +817,7 @@
     "kind": "Method",
     "name": "addContentCategoryAssortmentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category assortment filter to the request."
     ],
@@ -763,6 +829,7 @@
     "kind": "Method",
     "name": "addProductCategoryAssortmentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category assortment filter to the request."
     ],
@@ -774,6 +841,7 @@
     "kind": "Method",
     "name": "addProductCategoryIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products within the specified categories."
     ],
@@ -786,6 +854,7 @@
     "kind": "Method",
     "name": "addContentCategoryIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return contents within the specified categories."
     ],
@@ -798,6 +867,7 @@
     "kind": "Method",
     "name": "addProductIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified products."
     ],
@@ -809,6 +879,7 @@
     "kind": "Method",
     "name": "addVariantIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified variants."
     ],
@@ -820,6 +891,7 @@
     "kind": "Method",
     "name": "addBrandIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified brands."
     ],
@@ -831,6 +903,7 @@
     "kind": "Method",
     "name": "addContentIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified contents."
     ],
@@ -842,6 +915,7 @@
     "kind": "Method",
     "name": "addCompanyIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified companies."
     ],
@@ -853,6 +927,7 @@
     "kind": "Method",
     "name": "addProductHasVariantsFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a range filter to the request ensuring the product has a certain range of variants."
     ],
@@ -864,6 +939,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products purchased since a certain point in time."
     ],
@@ -875,6 +951,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products viewed since a certain point in time."
     ],
@@ -886,6 +963,7 @@
     "kind": "Method",
     "name": "addProductSalesPriceFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products within a certain sales price range."
     ],
@@ -897,6 +975,7 @@
     "kind": "Method",
     "name": "addProductListPriceFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products within a certain list price range."
     ],
@@ -908,6 +987,7 @@
     "kind": "Method",
     "name": "addVariantSalesPriceFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return variants within a certain sales price range."
     ],
@@ -919,6 +999,7 @@
     "kind": "Method",
     "name": "addVariantListPriceFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return variants within a certain list price range."
     ],
@@ -930,6 +1011,7 @@
     "kind": "Method",
     "name": "addVariantSpecificationFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return variants with a certain specification."
     ],
@@ -941,6 +1023,7 @@
     "kind": "Method",
     "name": "and",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Combines filters using logical AND."
     ],
@@ -953,6 +1036,7 @@
     "kind": "Method",
     "name": "or",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Combines filters using logical OR."
     ],
@@ -965,6 +1049,7 @@
     "kind": "Method",
     "name": "addProductDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product data filter to the request."
     ],
@@ -977,6 +1062,7 @@
     "kind": "Method",
     "name": "addVariantDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant data filter to the request."
     ],
@@ -989,6 +1075,7 @@
     "kind": "Method",
     "name": "addBrandDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand data filter to the request."
     ],
@@ -1001,6 +1088,7 @@
     "kind": "Method",
     "name": "addCartDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a cart data filter to the request."
     ],
@@ -1013,6 +1101,7 @@
     "kind": "Method",
     "name": "addContentCategoryDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category data filter to the request."
     ],
@@ -1025,6 +1114,7 @@
     "kind": "Method",
     "name": "addContentDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content data filter to the request."
     ],
@@ -1037,6 +1127,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category data filter to the request."
     ],
@@ -1049,6 +1140,7 @@
     "kind": "Method",
     "name": "addCompanyDataFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a company data filter to the request."
     ],
@@ -1061,6 +1153,7 @@
     "kind": "Method",
     "name": "addProductDisplayNameFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product display name filter to the request."
     ],
@@ -1073,6 +1166,7 @@
     "kind": "Method",
     "name": "addProductAndVariantIdFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product and variant ID filter to the request."
     ],
@@ -1085,6 +1179,7 @@
     "kind": "Method",
     "name": "addProductCategoryLevelFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category level filter to the request."
     ],
@@ -1096,6 +1191,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasParentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has parent filter to the request."
     ],
@@ -1107,6 +1203,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasChildFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has child filter to the request."
     ],
@@ -1118,6 +1215,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasAncestorFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has ancestor filter to the request."
     ],
@@ -1129,6 +1227,7 @@
     "kind": "Method",
     "name": "addContentCategoryLevelFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category level filter to the request."
     ],
@@ -1140,6 +1239,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasParentFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has parent filter to the request."
     ],
@@ -1151,6 +1251,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasChildFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has child filter to the request."
     ],
@@ -1162,6 +1263,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasAncestorFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has ancestor filter to the request."
     ],
@@ -1173,6 +1275,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasProductsFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has products filter to the request ensuring that only categories with products in them are returned."
     ],
@@ -1184,6 +1287,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasContentsFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has contents filter to the request ensuring that only categories with content in them are returned."
     ],
@@ -1195,6 +1299,7 @@
     "kind": "Method",
     "name": "addBrandDataHasKeyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand data has key filter to the request."
     ],
@@ -1206,6 +1311,7 @@
     "kind": "Method",
     "name": "addBrandDisabledFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand is disabled filter to the request. Only works for brand queries, not in searches or recommendations."
     ],
@@ -1217,6 +1323,7 @@
     "kind": "Method",
     "name": "addCompanyDataHasKeyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a company data has key filter to the request."
     ],
@@ -1228,6 +1335,7 @@
     "kind": "Method",
     "name": "addCompanyDisabledFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a company is disabled filter to the request. Only works for company queries, not in searches or recommendations."
     ],
@@ -1239,6 +1347,7 @@
     "kind": "Method",
     "name": "addVariantDataHasKeyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant data has key filter to the request."
     ],
@@ -1250,6 +1359,7 @@
     "kind": "Method",
     "name": "addVariantDisabledFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant is disabled filter to the request. Only works for product queries, not in searches or recommendations."
     ],
@@ -1261,6 +1371,7 @@
     "kind": "Method",
     "name": "addContentCategoryDataHasKeyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category data has key filter to the request."
     ],
@@ -1272,6 +1383,7 @@
     "kind": "Method",
     "name": "addContentCategoryDisabledFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category is disabled filter to the request. Only works for content queries, not in searches or recommendations."
     ],
@@ -1283,6 +1395,7 @@
     "kind": "Method",
     "name": "addContentCategoryRecentlyViewedByUserFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category recently viewed by user filter to the request."
     ],
@@ -1294,6 +1407,7 @@
     "kind": "Method",
     "name": "addContentDataHasKeyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content data has key filter to the request."
     ],
@@ -1305,6 +1419,7 @@
     "kind": "Method",
     "name": "addContentDisabledFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content is disabled filter to the request. Only works for content queries, not in searches or recommendations."
     ],
@@ -1316,6 +1431,7 @@
     "kind": "Method",
     "name": "addContentRecentlyViewedByUserFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content recently viewed by user filter to the request."
     ],
@@ -1327,6 +1443,7 @@
     "kind": "Method",
     "name": "addContentHasCategoriesFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content has categories filter to the request."
     ],
@@ -1338,6 +1455,7 @@
     "kind": "Method",
     "name": "addProductDisabledFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product is disabled filter to the request. Only works for product queries, not in searches or recommendations."
     ],
@@ -1349,6 +1467,7 @@
     "kind": "Method",
     "name": "addProductDataHasKeyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product data has key filter to the request."
     ],
@@ -1360,6 +1479,7 @@
     "kind": "Method",
     "name": "addProductHasCategoriesFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product has categories filter to the request."
     ],
@@ -1371,6 +1491,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByCompanyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently purchased by a company."
     ],
@@ -1382,6 +1503,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserCompanyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently purchased by the user's company."
     ],
@@ -1393,6 +1515,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserParentCompanyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently purchased by the user's parent company."
     ],
@@ -1404,6 +1527,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByCompanyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently viewed by a company."
     ],
@@ -1415,6 +1539,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserCompanyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently viewed by the user's company."
     ],
@@ -1426,6 +1551,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserParentCompanyFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently viewed by the user's parent company."
     ],
@@ -1437,6 +1563,7 @@
     "kind": "Method",
     "name": "addProductInCartFilter",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products in the user's cart."
     ],
@@ -1448,6 +1575,7 @@
     "kind": "Method",
     "name": "reset",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Resets all filters and filter builders."
     ],
@@ -1457,6 +1585,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "FilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Builds and combines all filters into a FilterCollection."
     ],
@@ -1475,6 +1604,7 @@
     "kind": "Method",
     "name": "fill",
     "parent": "FilterScopesBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ apply: boolean; }"
@@ -1484,6 +1614,7 @@
     "kind": "Method",
     "name": "default",
     "parent": "FilterScopesBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ apply: boolean; }"
@@ -1493,6 +1624,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "FilterScopesBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1509,6 +1641,7 @@
     "kind": "Method",
     "name": "scopes",
     "parent": "FilterSettingsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterScopesBuilder) => void"
@@ -1518,6 +1651,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "FilterSettingsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1534,6 +1668,7 @@
     "kind": "Method",
     "name": "setPageSize",
     "parent": "PaginationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Defines how many results to return"
     ],
@@ -1543,6 +1678,7 @@
     "kind": "Method",
     "name": "setPage",
     "parent": "PaginationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Page starts at 1, so this to skip 'X' pages of results"
     ],
@@ -1552,6 +1688,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PaginationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1568,6 +1705,7 @@
     "kind": "Method",
     "name": "addBrandIdRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1577,6 +1715,7 @@
     "kind": "Method",
     "name": "addProductAssortmentRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1586,6 +1725,7 @@
     "kind": "Method",
     "name": "addVariantAssortmentRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1595,6 +1735,7 @@
     "kind": "Method",
     "name": "addProductCategoryIdRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor'",
@@ -1605,6 +1746,7 @@
     "kind": "Method",
     "name": "addProductDataRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: ConditionBuilder) => void",
@@ -1616,6 +1758,7 @@
     "kind": "Method",
     "name": "addVariantDataRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: ConditionBuilder) => void",
@@ -1627,6 +1770,7 @@
     "kind": "Method",
     "name": "addContentCategoryDataRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: ConditionBuilder) => void",
@@ -1638,6 +1782,7 @@
     "kind": "Method",
     "name": "addContentDataRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: ConditionBuilder) => void",
@@ -1649,6 +1794,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: ConditionBuilder) => void",
@@ -1660,6 +1806,7 @@
     "kind": "Method",
     "name": "addVariantIdRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1669,6 +1816,7 @@
     "kind": "Method",
     "name": "addProductIdRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1678,6 +1826,7 @@
     "kind": "Method",
     "name": "addProductListPriceRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1687,6 +1836,7 @@
     "kind": "Method",
     "name": "addProductSalesPriceRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1696,6 +1846,7 @@
     "kind": "Method",
     "name": "addVariantListPriceRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1705,6 +1856,7 @@
     "kind": "Method",
     "name": "addVariantSalesPriceRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1714,6 +1866,7 @@
     "kind": "Method",
     "name": "addVariantSpecificationsInCommonRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ key: string, multiplier: number }[]",
@@ -1724,6 +1877,7 @@
     "kind": "Method",
     "name": "addVariantSpecificationValueRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1733,6 +1887,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1742,6 +1897,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByCompanyRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1751,6 +1907,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserCompanyRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1760,6 +1917,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1769,6 +1927,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByCompanyRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1778,6 +1937,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserCompanyRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1787,6 +1947,7 @@
     "kind": "Method",
     "name": "addProductCategoryRecentlyViewedByUserRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1796,6 +1957,7 @@
     "kind": "Method",
     "name": "addContentRecentlyViewedByUserRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1805,6 +1967,7 @@
     "kind": "Method",
     "name": "addContentCategoryRecentlyViewedByUserRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1814,6 +1977,7 @@
     "kind": "Method",
     "name": "addUserFavoriteProductRelevanceModifier",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: FilterBuilder) => void"
@@ -1823,6 +1987,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "RelevanceModifierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1839,6 +2004,7 @@
     "kind": "Method",
     "name": "string",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1846,6 +2012,7 @@
     "kind": "Method",
     "name": "stringCollection",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1853,6 +2020,7 @@
     "kind": "Method",
     "name": "number",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1860,6 +2028,7 @@
     "kind": "Method",
     "name": "doubleCollection",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1867,6 +2036,7 @@
     "kind": "Method",
     "name": "boolean",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1874,6 +2044,7 @@
     "kind": "Method",
     "name": "booleanCollection",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -1881,6 +2052,7 @@
     "kind": "Method",
     "name": "multiCurrency",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ amount: number, currency: string }[]"
@@ -1890,6 +2062,7 @@
     "kind": "Method",
     "name": "multilingual",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ value: string, language: string }[]"
@@ -1899,6 +2072,7 @@
     "kind": "Method",
     "name": "multilingualCollection",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ values: string[], language: string }[]"
@@ -1908,6 +2082,7 @@
     "kind": "Method",
     "name": "object",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ [key: string]: DataValue }"
@@ -1917,6 +2092,7 @@
     "kind": "Method",
     "name": "objectCollection",
     "parent": "DataValueFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ [key: string]: DataValue }[]"
@@ -1935,6 +2111,7 @@
     "kind": "Method",
     "name": "anonymous",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PartialUser<'temporaryId'|'fingerprint'|'authenticatedId'>"
@@ -1944,6 +2121,7 @@
     "kind": "Method",
     "name": "byAuthenticatedId",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PartialUser<'temporaryId'|'authenticatedId'>"
@@ -1953,6 +2131,7 @@
     "kind": "Method",
     "name": "byTemporaryId",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PartialUser<'temporaryId'>"
@@ -1962,6 +2141,7 @@
     "kind": "Method",
     "name": "byIdentifier",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PartialUser<'identifiers'>"
@@ -1971,6 +2151,7 @@
     "kind": "Method",
     "name": "byIdentifiers",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "Record<string, string>",
@@ -1981,6 +2162,7 @@
     "kind": "Method",
     "name": "byEmail",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PartialUser<'email'>"
@@ -1990,6 +2172,7 @@
     "kind": "Method",
     "name": "byFingerprint",
     "parent": "UserFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PartialUser<'fingerprint'>"
@@ -2008,6 +2191,7 @@
     "kind": "Method",
     "name": "dataDoubleSelector",
     "parent": "ValueSelectorFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -2015,6 +2199,7 @@
     "kind": "Method",
     "name": "fixedDoubleValueSelector",
     "parent": "ValueSelectorFactory",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -4230,6 +4415,7 @@
     "kind": "Method",
     "name": "addBrandAssortmentFilter",
     "parent": "BrandFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand assortment filter to the request."
     ],
@@ -4241,6 +4427,7 @@
     "kind": "Method",
     "name": "addBrandIdFilter",
     "parent": "BrandFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified brands."
     ],
@@ -4252,6 +4439,7 @@
     "kind": "Method",
     "name": "addBrandDataFilter",
     "parent": "BrandFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand data filter to the request."
     ],
@@ -4264,6 +4452,7 @@
     "kind": "Method",
     "name": "addBrandDataHasKeyFilter",
     "parent": "BrandFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand has key filter to the request."
     ],
@@ -4275,6 +4464,7 @@
     "kind": "Method",
     "name": "addBrandDisabledFilter",
     "parent": "BrandFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a brand is disabled filter to the request. Only works for brand queries, not in searches or recommendations."
     ],
@@ -4303,6 +4493,7 @@
     "kind": "Method",
     "name": "addCompanyIdFilter",
     "parent": "CompanyFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified companies."
     ],
@@ -4314,6 +4505,7 @@
     "kind": "Method",
     "name": "addCompanyDataFilter",
     "parent": "CompanyFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a company data filter to the request."
     ],
@@ -4326,6 +4518,7 @@
     "kind": "Method",
     "name": "addCompanyDataHasKeyFilter",
     "parent": "CompanyFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a company has key filter to the request."
     ],
@@ -4337,6 +4530,7 @@
     "kind": "Method",
     "name": "addCompanyDisabledFilter",
     "parent": "CompanyFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a company is disabled filter to the request. Only works for company queries, not in searches or recommendations."
     ],
@@ -4365,6 +4559,7 @@
     "kind": "Method",
     "name": "addContentAssortmentFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content assortment filter to the request."
     ],
@@ -4376,6 +4571,7 @@
     "kind": "Method",
     "name": "addContentCategoryAssortmentFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category assortment filter to the request."
     ],
@@ -4387,6 +4583,7 @@
     "kind": "Method",
     "name": "addContentCategoryIdFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return contents within the specified categories."
     ],
@@ -4399,6 +4596,7 @@
     "kind": "Method",
     "name": "addContentIdFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified contents."
     ],
@@ -4410,6 +4608,7 @@
     "kind": "Method",
     "name": "addContentCategoryLevelFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category level filter to the request."
     ],
@@ -4421,6 +4620,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasParentFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has parent filter to the request."
     ],
@@ -4432,6 +4632,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasChildFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has child filter to the request."
     ],
@@ -4443,6 +4644,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasAncestorFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has ancestor filter to the request."
     ],
@@ -4454,6 +4656,7 @@
     "kind": "Method",
     "name": "addContentCategoryHasContentsFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has contents filter to the request ensuring that only categories with content in them are returned."
     ],
@@ -4465,6 +4668,7 @@
     "kind": "Method",
     "name": "addContentCategoryDataFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category data filter to the request."
     ],
@@ -4477,6 +4681,7 @@
     "kind": "Method",
     "name": "addContentDataFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content data filter to the request."
     ],
@@ -4489,6 +4694,7 @@
     "kind": "Method",
     "name": "addContentCategoryDataHasKeyFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category has key filter to the request."
     ],
@@ -4500,6 +4706,7 @@
     "kind": "Method",
     "name": "addContentCategoryDisabledFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content category is disabled filter to the request. Only works for content queries, not in searches or recommendations."
     ],
@@ -4511,6 +4718,7 @@
     "kind": "Method",
     "name": "addContentCategoryRecentlyViewedByUserFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return content categories recently viewed by the user."
     ],
@@ -4522,6 +4730,7 @@
     "kind": "Method",
     "name": "addContentDataHasKeyFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content has key filter to the request."
     ],
@@ -4533,6 +4742,7 @@
     "kind": "Method",
     "name": "addContentDisabledFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content is disabled filter to the request. Only works for content queries, not in searches or recommendations."
     ],
@@ -4544,6 +4754,7 @@
     "kind": "Method",
     "name": "addContentRecentlyViewedByUserFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return content recently viewed by the user."
     ],
@@ -4555,6 +4766,7 @@
     "kind": "Method",
     "name": "addContentHasCategoriesFilter",
     "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a content has categories filter to the request."
     ],
@@ -4583,6 +4795,7 @@
     "kind": "Method",
     "name": "and",
     "parent": "FilterBuilderBase",
+    "parentKind": "Class",
     "docs": [
       "Adds an AND filter to the request."
     ],
@@ -4595,6 +4808,7 @@
     "kind": "Method",
     "name": "or",
     "parent": "FilterBuilderBase",
+    "parentKind": "Class",
     "docs": [
       "Adds an OR filter to the request."
     ],
@@ -4607,6 +4821,7 @@
     "kind": "Method",
     "name": "reset",
     "parent": "FilterBuilderBase",
+    "parentKind": "Class",
     "docs": [
       "Resets the filters."
     ],
@@ -4616,6 +4831,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "FilterBuilderBase",
+    "parentKind": "Class",
     "docs": [
       "Builds the filter collection."
     ],
@@ -4641,6 +4857,7 @@
     "kind": "Method",
     "name": "addProductAssortmentFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product assortment filter to the request."
     ],
@@ -4652,6 +4869,7 @@
     "kind": "Method",
     "name": "addProductCategoryAssortmentFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category assortment filter to the request."
     ],
@@ -4663,6 +4881,7 @@
     "kind": "Method",
     "name": "addProductCategoryIdFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products within the specified categories."
     ],
@@ -4675,6 +4894,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category data filter to the request."
     ],
@@ -4687,6 +4907,7 @@
     "kind": "Method",
     "name": "addProductIdFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified products."
     ],
@@ -4698,6 +4919,7 @@
     "kind": "Method",
     "name": "addProductHasVariantsFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a range filter to the request ensuring the product has a certain range of variants."
     ],
@@ -4709,6 +4931,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products purchased since a certain point in time."
     ],
@@ -4720,6 +4943,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products viewed since a certain point in time."
     ],
@@ -4731,6 +4955,7 @@
     "kind": "Method",
     "name": "addProductSalesPriceFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products within a certain sales price range."
     ],
@@ -4742,6 +4967,7 @@
     "kind": "Method",
     "name": "addProductListPriceFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return products within a certain list price range."
     ],
@@ -4753,6 +4979,7 @@
     "kind": "Method",
     "name": "addProductDisplayNameFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product display name filter to the request."
     ],
@@ -4765,6 +4992,7 @@
     "kind": "Method",
     "name": "addProductAndVariantIdFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product and variant ID filter to the request."
     ],
@@ -4777,6 +5005,7 @@
     "kind": "Method",
     "name": "addProductCategoryLevelFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category level filter to the request."
     ],
@@ -4788,6 +5017,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasParentFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has parent filter to the request."
     ],
@@ -4799,6 +5029,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasChildFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has child filter to the request."
     ],
@@ -4810,6 +5041,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasAncestorFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has ancestor filter to the request."
     ],
@@ -4821,6 +5053,7 @@
     "kind": "Method",
     "name": "addProductCategoryHasProductsFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has products filter to the request ensuring that only categories with products in them are returned."
     ],
@@ -4832,6 +5065,7 @@
     "kind": "Method",
     "name": "addProductDataFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product data filter to the request."
     ],
@@ -4844,6 +5078,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataHasKeyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category has key filter to the request."
     ],
@@ -4855,6 +5090,7 @@
     "kind": "Method",
     "name": "addProductCategoryDisabledFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category is disabled filter to the request. Only works for product queries, not in searches or recommendations."
     ],
@@ -4866,6 +5102,7 @@
     "kind": "Method",
     "name": "addProductCategoryRecentlyViewedByUserFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product category recently viewed by user filter to the request."
     ],
@@ -4877,6 +5114,7 @@
     "kind": "Method",
     "name": "addProductDataHasKeyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product has key filter to the request."
     ],
@@ -4888,6 +5126,7 @@
     "kind": "Method",
     "name": "addProductDisabledFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product is disabled filter to the request. Only works for product queries, not in searches or recommendations."
     ],
@@ -4899,6 +5138,7 @@
     "kind": "Method",
     "name": "addProductHasCategoriesFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a product has categories filter to the request."
     ],
@@ -4910,6 +5150,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByCompanyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently purchased by a company."
     ],
@@ -4921,6 +5162,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserCompanyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently purchased by the user's company."
     ],
@@ -4932,6 +5174,7 @@
     "kind": "Method",
     "name": "addProductRecentlyPurchasedByUserParentCompanyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently purchased by the user's parent company."
     ],
@@ -4943,6 +5186,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByCompanyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently viewed by a company."
     ],
@@ -4954,6 +5198,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserCompanyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently viewed by the user's company."
     ],
@@ -4965,6 +5210,7 @@
     "kind": "Method",
     "name": "addProductRecentlyViewedByUserParentCompanyFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products recently viewed by the user's parent company."
     ],
@@ -4976,6 +5222,7 @@
     "kind": "Method",
     "name": "addProductInCartFilter",
     "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a filter to only return products in the user's cart."
     ],
@@ -5004,6 +5251,7 @@
     "kind": "Method",
     "name": "addVariantAssortmentFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant assortment filter to the request."
     ],
@@ -5015,6 +5263,7 @@
     "kind": "Method",
     "name": "addVariantIdFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return the specified variants."
     ],
@@ -5026,6 +5275,7 @@
     "kind": "Method",
     "name": "addVariantListPriceFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return variants within a certain list price range."
     ],
@@ -5037,6 +5287,7 @@
     "kind": "Method",
     "name": "addVariantSalesPriceFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return variants within a certain sales price range."
     ],
@@ -5048,6 +5299,7 @@
     "kind": "Method",
     "name": "addVariantSpecificationFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Filters the request to only return variants with a certain specification."
     ],
@@ -5059,6 +5311,7 @@
     "kind": "Method",
     "name": "addVariantDataFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant data filter to the request."
     ],
@@ -5071,6 +5324,7 @@
     "kind": "Method",
     "name": "addVariantDataHasKeyFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant has key filter to the request."
     ],
@@ -5082,6 +5336,7 @@
     "kind": "Method",
     "name": "addVariantDisabledFilter",
     "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds a variant is disabled filter to the request. Only works for product queries, not in searches or recommendations."
     ],
@@ -5110,6 +5365,7 @@
     "kind": "Method",
     "name": "filters",
     "parent": "RecommendationRequestBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds filters to the request"
     ],
@@ -5121,6 +5377,7 @@
     "kind": "Method",
     "name": "relevanceModifiers",
     "parent": "RecommendationRequestBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: RelevanceModifierBuilder) => void"
@@ -5146,6 +5403,7 @@
     "kind": "Method",
     "name": "enabled",
     "parent": "ContentHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5153,6 +5411,7 @@
     "kind": "Method",
     "name": "setHighlightable",
     "parent": "ContentHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ displayName?: boolean, dataKeys?: string[] | null }"
@@ -5162,6 +5421,7 @@
     "kind": "Method",
     "name": "setLimit",
     "parent": "ContentHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits"
@@ -5171,6 +5431,7 @@
     "kind": "Method",
     "name": "setShape",
     "parent": "ContentHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape"
@@ -5180,6 +5441,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5196,6 +5458,7 @@
     "kind": "Method",
     "name": "setContentProperties",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "Partial<SelectedContentPropertiesSettings>"
@@ -5205,6 +5468,7 @@
     "kind": "Method",
     "name": "setRecommendationSettings",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "RecommendationSettings"
@@ -5214,6 +5478,7 @@
     "kind": "Method",
     "name": "setTerm",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5221,6 +5486,7 @@
     "kind": "Method",
     "name": "pagination",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(pagination: PaginationBuilder) => void"
@@ -5230,6 +5496,7 @@
     "kind": "Method",
     "name": "facets",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(pagination: FacetBuilder) => void"
@@ -5239,6 +5506,7 @@
     "kind": "Method",
     "name": "sorting",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(sortingBuilder: ContentSortingBuilder) => void"
@@ -5248,6 +5516,7 @@
     "kind": "Method",
     "name": "highlighting",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(highlightingBuilder: ContentHighlightingBuilder) => void"
@@ -5257,6 +5526,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5283,6 +5553,7 @@
     "kind": "Method",
     "name": "sortByContentData",
     "parent": "ContentSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -5294,6 +5565,7 @@
     "kind": "Method",
     "name": "sortByContentRelevance",
     "parent": "ContentSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -5304,6 +5576,7 @@
     "kind": "Method",
     "name": "sortByContentPopularity",
     "parent": "ContentSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -5314,6 +5587,7 @@
     "kind": "Method",
     "name": "sortByContentAttribute",
     "parent": "ContentSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Id' | 'DisplayName'",
@@ -5326,6 +5600,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5342,6 +5617,7 @@
     "kind": "Method",
     "name": "addDataObjectFacet",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(facets: DataObjectFacetBuilder) => void",
@@ -5353,6 +5629,7 @@
     "kind": "Method",
     "name": "addStringFacet",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5363,6 +5640,7 @@
     "kind": "Method",
     "name": "addBooleanFacet",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5373,6 +5651,7 @@
     "kind": "Method",
     "name": "addNumberFacet",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5383,6 +5662,7 @@
     "kind": "Method",
     "name": "addNumberRangeFacet",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5392,6 +5672,7 @@
     "kind": "Method",
     "name": "addNumberRangesFacet",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
@@ -5402,6 +5683,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "DataObjectFacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5418,6 +5700,7 @@
     "kind": "Method",
     "name": "select",
     "parent": "DataObjectValueSelectorBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{\r\n        filter?: {\r\n            conditions?: (builder: DataObjectFilterConditionBuilder) => void,\r\n            skip?: number,\r\n            take?: number \r\n        } | null, \r\n        childSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null,\r\n        fallbackSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null\r\n    }"
@@ -5427,6 +5710,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "DataObjectValueSelectorBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5443,6 +5727,7 @@
     "kind": "Method",
     "name": "addCategoryFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'ImmediateParent' | 'Ancestors'",
@@ -5453,6 +5738,7 @@
     "kind": "Method",
     "name": "addProductCategoryHierarchyFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'ImmediateParent' | 'Ancestors' | 'Descendants'",
@@ -5465,6 +5751,7 @@
     "kind": "Method",
     "name": "addContentCategoryHierarchyFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'ImmediateParent' | 'Ancestors' | 'Descendants'",
@@ -5477,6 +5764,7 @@
     "kind": "Method",
     "name": "addBrandFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5486,6 +5774,7 @@
     "kind": "Method",
     "name": "addProductAssortmentFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5496,6 +5785,7 @@
     "kind": "Method",
     "name": "addVariantSpecificationFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5505,6 +5795,7 @@
     "kind": "Method",
     "name": "addProductDataDoubleRangeFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5515,6 +5806,7 @@
     "kind": "Method",
     "name": "addProductDataDoubleRangesFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5526,6 +5818,7 @@
     "kind": "Method",
     "name": "addProductDataStringValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5537,6 +5830,7 @@
     "kind": "Method",
     "name": "addProductDataBooleanValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5548,6 +5842,7 @@
     "kind": "Method",
     "name": "addProductDataDoubleValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5559,6 +5854,7 @@
     "kind": "Method",
     "name": "addSalesPriceRangeFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5569,6 +5865,7 @@
     "kind": "Method",
     "name": "addSalesPriceRangesFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5580,6 +5877,7 @@
     "kind": "Method",
     "name": "addListPriceRangeFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5590,6 +5888,7 @@
     "kind": "Method",
     "name": "addListPriceRangesFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5601,6 +5900,7 @@
     "kind": "Method",
     "name": "addProductDataObjectFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -5613,6 +5913,7 @@
     "kind": "Method",
     "name": "addRecentlyPurchasedFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "PurchaseQualifiers",
@@ -5623,6 +5924,7 @@
     "kind": "Method",
     "name": "addContentAssortmentFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5632,6 +5934,7 @@
     "kind": "Method",
     "name": "addContentDataDoubleRangeFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5641,6 +5944,7 @@
     "kind": "Method",
     "name": "addContentDataDoubleRangesFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
@@ -5651,6 +5955,7 @@
     "kind": "Method",
     "name": "addContentDataStringValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5661,6 +5966,7 @@
     "kind": "Method",
     "name": "addContentDataBooleanValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5671,6 +5977,7 @@
     "kind": "Method",
     "name": "addContentDataDoubleValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5681,6 +5988,7 @@
     "kind": "Method",
     "name": "addContentDataObjectFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(facets: DataObjectFacetBuilder) => void",
@@ -5692,6 +6000,7 @@
     "kind": "Method",
     "name": "addProductCategoryAssortmentFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5701,6 +6010,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataDoubleRangeFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
@@ -5710,6 +6020,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataDoubleRangesFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
@@ -5720,6 +6031,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataStringValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5730,6 +6042,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataBooleanValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5740,6 +6053,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataDoubleValueFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Or' | 'And'",
@@ -5750,6 +6064,7 @@
     "kind": "Method",
     "name": "addProductCategoryDataObjectFacet",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(facets: DataObjectFacetBuilder) => void",
@@ -5761,6 +6076,7 @@
     "kind": "Method",
     "name": "clear",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5768,6 +6084,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "FacetBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5784,6 +6101,7 @@
     "kind": "Method",
     "name": "alwaysIncludeSelectedInAvailable",
     "parent": "FacetSettingsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5791,6 +6109,7 @@
     "kind": "Method",
     "name": "includeZeroHitsInAvailable",
     "parent": "FacetSettingsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5798,6 +6117,7 @@
     "kind": "Method",
     "name": "take",
     "parent": "FacetSettingsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5805,6 +6125,7 @@
     "kind": "Method",
     "name": "sortByHits",
     "parent": "FacetSettingsBuilder",
+    "parentKind": "Class",
     "docs": [
       "Sorts facet values in descending order by hit count, so that the values with the most hits appear first in the list."
     ],
@@ -5814,6 +6135,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "FacetSettingsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -5830,6 +6152,7 @@
     "kind": "Method",
     "name": "category",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5839,6 +6162,7 @@
     "kind": "Method",
     "name": "categoryHierarchy",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5848,6 +6172,7 @@
     "kind": "Method",
     "name": "assortment",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5857,6 +6182,7 @@
     "kind": "Method",
     "name": "dataDoubleRange",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5866,6 +6192,7 @@
     "kind": "Method",
     "name": "dataDoubleRanges",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5875,6 +6202,7 @@
     "kind": "Method",
     "name": "dataString",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5884,6 +6212,7 @@
     "kind": "Method",
     "name": "dataBoolean",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5893,6 +6222,7 @@
     "kind": "Method",
     "name": "dataNumber",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5902,6 +6232,7 @@
     "kind": "Method",
     "name": "dataObject",
     "parent": "GetContentFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentFacetResult"
@@ -5937,6 +6268,7 @@
     "kind": "Method",
     "name": "assortment",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -5946,6 +6278,7 @@
     "kind": "Method",
     "name": "dataDoubleRange",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -5955,6 +6288,7 @@
     "kind": "Method",
     "name": "dataDoubleRanges",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -5964,6 +6298,7 @@
     "kind": "Method",
     "name": "dataString",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -5973,6 +6308,7 @@
     "kind": "Method",
     "name": "dataBoolean",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -5982,6 +6318,7 @@
     "kind": "Method",
     "name": "dataNumber",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -5991,6 +6328,7 @@
     "kind": "Method",
     "name": "dataObject",
     "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryFacetResult"
@@ -6026,6 +6364,7 @@
     "kind": "Method",
     "name": "productAssortment",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6036,6 +6375,7 @@
     "kind": "Method",
     "name": "brand",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult"
@@ -6045,6 +6385,7 @@
     "kind": "Method",
     "name": "category",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6055,6 +6396,7 @@
     "kind": "Method",
     "name": "categoryHierarchy",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6065,6 +6407,7 @@
     "kind": "Method",
     "name": "listPriceRange",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6075,6 +6418,7 @@
     "kind": "Method",
     "name": "salesPriceRange",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6085,6 +6429,7 @@
     "kind": "Method",
     "name": "listPriceRanges",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6095,6 +6440,7 @@
     "kind": "Method",
     "name": "listPriceRangesWithRange",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6105,6 +6451,7 @@
     "kind": "Method",
     "name": "salesPriceRanges",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6115,6 +6462,7 @@
     "kind": "Method",
     "name": "salesPriceRangesWithRange",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6125,6 +6473,7 @@
     "kind": "Method",
     "name": "dataDoubleRange",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6135,6 +6484,7 @@
     "kind": "Method",
     "name": "dataDoubleRanges",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6145,6 +6495,7 @@
     "kind": "Method",
     "name": "variantSpecification",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult"
@@ -6154,6 +6505,7 @@
     "kind": "Method",
     "name": "dataString",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6164,6 +6516,7 @@
     "kind": "Method",
     "name": "dataBoolean",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6174,6 +6527,7 @@
     "kind": "Method",
     "name": "dataNumber",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6184,6 +6538,7 @@
     "kind": "Method",
     "name": "dataObject",
     "parent": "GetProductFacet",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductFacetResult",
@@ -6203,6 +6558,7 @@
     "kind": "Method",
     "name": "setSelectedCategoryProperties",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the product category to be returned, by default only the product category id is returned."
     ],
@@ -6214,6 +6570,7 @@
     "kind": "Method",
     "name": "setRecommendationSettings",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "RecommendationSettings"
@@ -6223,6 +6580,7 @@
     "kind": "Method",
     "name": "setTerm",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [
       "Set the term used to filter product categories by"
     ],
@@ -6232,6 +6590,7 @@
     "kind": "Method",
     "name": "pagination",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(pagination: PaginationBuilder) => void"
@@ -6241,6 +6600,7 @@
     "kind": "Method",
     "name": "facets",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(facets: FacetBuilder) => void"
@@ -6250,6 +6610,7 @@
     "kind": "Method",
     "name": "sorting",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(sortingBuilder: ProductCategorySortingBuilder) => void"
@@ -6259,6 +6620,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6285,6 +6647,7 @@
     "kind": "Method",
     "name": "sortByProductCategoryData",
     "parent": "ProductCategorySortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -6296,6 +6659,7 @@
     "kind": "Method",
     "name": "sortByProductCategoryRelevance",
     "parent": "ProductCategorySortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -6306,6 +6670,7 @@
     "kind": "Method",
     "name": "sortByProductCategoryPopularity",
     "parent": "ProductCategorySortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -6316,6 +6681,7 @@
     "kind": "Method",
     "name": "sortByProductCategoryAttribute",
     "parent": "ProductCategorySortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Id' | 'DisplayName'",
@@ -6328,6 +6694,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductCategorySortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6344,6 +6711,7 @@
     "kind": "Method",
     "name": "enabled",
     "parent": "ProductHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6351,6 +6719,7 @@
     "kind": "Method",
     "name": "setHighlightable",
     "parent": "ProductHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ displayName?: boolean, dataKeys?: string[] | null }"
@@ -6360,6 +6729,7 @@
     "kind": "Method",
     "name": "setLimit",
     "parent": "ProductHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits"
@@ -6369,6 +6739,7 @@
     "kind": "Method",
     "name": "setShape",
     "parent": "ProductHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape"
@@ -6378,6 +6749,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductHighlightingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6394,6 +6766,7 @@
     "kind": "Method",
     "name": "setSelectedProductProperties",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the product to be returned, by default only the product id is returned."
     ],
@@ -6405,6 +6778,7 @@
     "kind": "Method",
     "name": "setSelectedVariantProperties",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the variant to be returned, by default only the variant id is returned."
     ],
@@ -6416,6 +6790,7 @@
     "kind": "Method",
     "name": "setSelectedBrandProperties",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the brand to be returned, by default only the brand id is returned."
     ],
@@ -6427,6 +6802,7 @@
     "kind": "Method",
     "name": "setVariantSearchSettings",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "Partial<VariantSearchSettings>"
@@ -6436,6 +6812,7 @@
     "kind": "Method",
     "name": "setExplodedVariants",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6443,6 +6820,7 @@
     "kind": "Method",
     "name": "setRecommendationSettings",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "RecommendationSettings"
@@ -6452,6 +6830,7 @@
     "kind": "Method",
     "name": "setRetailMedia",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "RetailMediaQuery | null"
@@ -6461,6 +6840,7 @@
     "kind": "Method",
     "name": "setTerm",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [
       "Set the term used to filter products by"
     ],
@@ -6470,6 +6850,7 @@
     "kind": "Method",
     "name": "pagination",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(pagination: PaginationBuilder) => void"
@@ -6479,6 +6860,7 @@
     "kind": "Method",
     "name": "facets",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(facets: FacetBuilder) => void"
@@ -6488,6 +6870,7 @@
     "kind": "Method",
     "name": "sorting",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(sortingBuilder: ProductSortingBuilder) => void"
@@ -6497,6 +6880,7 @@
     "kind": "Method",
     "name": "searchConstraints",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(searchConstraintBuilder: SearchConstraintBuilder) => void"
@@ -6506,6 +6890,7 @@
     "kind": "Method",
     "name": "highlighting",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(highlightingBuilder: ProductHighlightingBuilder) => void"
@@ -6515,6 +6900,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6541,6 +6927,7 @@
     "kind": "Method",
     "name": "sortByProductData",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -6553,6 +6940,7 @@
     "kind": "Method",
     "name": "sortByProductDataObject",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
@@ -6566,6 +6954,7 @@
     "kind": "Method",
     "name": "sortByProductRelevance",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -6576,6 +6965,7 @@
     "kind": "Method",
     "name": "sortByProductPopularity",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -6586,6 +6976,7 @@
     "kind": "Method",
     "name": "sortByProductAttribute",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Id' | 'DisplayName' | 'BrandId' | 'BrandName' | 'ListPrice' | 'SalesPrice'",
@@ -6598,6 +6989,7 @@
     "kind": "Method",
     "name": "sortByProductVariantAttribute",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Id' | 'DisplayName' | 'ListPrice' | 'SalesPrice'",
@@ -6610,6 +7002,7 @@
     "kind": "Method",
     "name": "sortByProductVariantSpecification",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'Ascending' | 'Descending'",
@@ -6621,6 +7014,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductSortingBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6642,6 +7036,7 @@
     "kind": "Method",
     "name": "addRequest",
     "parent": "SearchCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductSearchRequest | ContentSearchRequest | ProductCategorySearchRequest  | SearchTermPredictionRequest"
@@ -6651,6 +7046,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SearchCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6677,6 +7073,7 @@
     "kind": "Method",
     "name": "setResultMustHaveVariantConstraint",
     "parent": "SearchConstraintBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ exceptWhenProductHasNoVariants: boolean }"
@@ -6686,6 +7083,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SearchConstraintBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6702,6 +7100,7 @@
     "kind": "Method",
     "name": "filters",
     "parent": "SearchRequestBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds filters to the request"
     ],
@@ -6713,6 +7112,7 @@
     "kind": "Method",
     "name": "postFilters",
     "parent": "SearchRequestBuilder",
+    "parentKind": "Class",
     "docs": [
       "Adds post filters to the request"
     ],
@@ -6724,6 +7124,7 @@
     "kind": "Method",
     "name": "relevanceModifiers",
     "parent": "SearchRequestBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(builder: RelevanceModifierBuilder) => void"
@@ -6733,6 +7134,7 @@
     "kind": "Method",
     "name": "setIndex",
     "parent": "SearchRequestBuilder",
+    "parentKind": "Class",
     "docs": [
       "Use only when a specific index different from the 'default'-index is needed"
     ],
@@ -6758,6 +7160,7 @@
     "kind": "Method",
     "name": "take",
     "parent": "SearchTermPredictionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6765,6 +7168,7 @@
     "kind": "Method",
     "name": "setTerm",
     "parent": "SearchTermPredictionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6772,6 +7176,7 @@
     "kind": "Method",
     "name": "addEntityType",
     "parent": "SearchTermPredictionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[]"
@@ -6781,6 +7186,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SearchTermPredictionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6807,6 +7213,7 @@
     "kind": "Method",
     "name": "setSelectedBrandProperties",
     "parent": "BrandSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the brand to be returned, by default only the brand id is returned."
     ],
@@ -6818,6 +7225,7 @@
     "kind": "Method",
     "name": "setNumberOfRecommendations",
     "parent": "BrandSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6825,6 +7233,7 @@
     "kind": "Method",
     "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
     "parent": "BrandSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6832,6 +7241,7 @@
     "kind": "Method",
     "name": "allowReplacingOfRecentlyShownRecommendations",
     "parent": "BrandSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6839,6 +7249,7 @@
     "kind": "Method",
     "name": "prioritizeDiversityBetweenRequests",
     "parent": "BrandSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6870,6 +7281,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PersonalBrandRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6877,6 +7289,7 @@
     "kind": "Method",
     "name": "setWeights",
     "parent": "PersonalBrandRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "BrandRecommendationWeights"
@@ -6886,6 +7299,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PersonalBrandRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6912,6 +7326,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PopularBrandsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6919,6 +7334,7 @@
     "kind": "Method",
     "name": "setWeights",
     "parent": "PopularBrandsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "BrandRecommendationWeights"
@@ -6928,6 +7344,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularBrandsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6959,6 +7376,7 @@
     "kind": "Method",
     "name": "addRequest",
     "parent": "ContentCategoriesRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)"
@@ -6968,6 +7386,7 @@
     "kind": "Method",
     "name": "requireDistinctCategoriesAcrossResults",
     "parent": "ContentCategoriesRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6975,6 +7394,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentCategoriesRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -6991,6 +7411,7 @@
     "kind": "Method",
     "name": "setSelectedContentCategoryProperties",
     "parent": "ContentCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the content category to be returned, by default only the content category id is returned."
     ],
@@ -7002,6 +7423,7 @@
     "kind": "Method",
     "name": "setNumberOfRecommendations",
     "parent": "ContentCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7009,6 +7431,7 @@
     "kind": "Method",
     "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
     "parent": "ContentCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7016,6 +7439,7 @@
     "kind": "Method",
     "name": "allowReplacingOfRecentlyShownRecommendations",
     "parent": "ContentCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7023,6 +7447,7 @@
     "kind": "Method",
     "name": "prioritizeDiversityBetweenRequests",
     "parent": "ContentCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7049,6 +7474,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PersonalContentCategoryRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7056,6 +7482,7 @@
     "kind": "Method",
     "name": "setWeights",
     "parent": "PersonalContentCategoryRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentCategoryRecommendationWeights"
@@ -7065,6 +7492,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PersonalContentCategoryRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7091,6 +7519,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PopularContentCategoriesRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7098,6 +7527,7 @@
     "kind": "Method",
     "name": "setWeights",
     "parent": "PopularContentCategoriesRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentCategoryRecommendationWeights"
@@ -7107,6 +7537,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularContentCategoriesRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7133,6 +7564,7 @@
     "kind": "Method",
     "name": "setSelectedContentProperties",
     "parent": "ContentSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the content to be returned, by default only the content id is returned."
     ],
@@ -7144,6 +7576,7 @@
     "kind": "Method",
     "name": "setNumberOfRecommendations",
     "parent": "ContentSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7151,6 +7584,7 @@
     "kind": "Method",
     "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
     "parent": "ContentSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7158,6 +7592,7 @@
     "kind": "Method",
     "name": "allowReplacingOfRecentlyShownRecommendations",
     "parent": "ContentSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7165,6 +7600,7 @@
     "kind": "Method",
     "name": "prioritizeDiversityBetweenRequests",
     "parent": "ContentSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7196,6 +7632,7 @@
     "kind": "Method",
     "name": "addRequest",
     "parent": "ContentsRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ContentsViewedAfterViewingContentRequest\r\n        | ContentsViewedAfterViewingMultipleContentsRequest\r\n        | ContentsViewedAfterViewingMultipleProductsRequest\r\n        | ContentsViewedAfterViewingProductRequest\r\n        | PersonalContentRecommendationRequest\r\n        | PopularContentsRequest"
@@ -7205,6 +7642,7 @@
     "kind": "Method",
     "name": "requireDistinctContentsAcrossResults",
     "parent": "ContentsRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7212,6 +7650,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentsRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7228,6 +7667,7 @@
     "kind": "Method",
     "name": "setContentId",
     "parent": "ContentsViewedAfterViewingContentBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7235,6 +7675,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentsViewedAfterViewingContentBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7261,6 +7702,7 @@
     "kind": "Method",
     "name": "setContentIds",
     "parent": "ContentsViewedAfterViewingMultipleContentsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7268,6 +7710,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentsViewedAfterViewingMultipleContentsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7294,6 +7737,7 @@
     "kind": "Method",
     "name": "addProduct",
     "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string; variantId?: string; }"
@@ -7303,6 +7747,7 @@
     "kind": "Method",
     "name": "addProducts",
     "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string; variantId?: string; }[]"
@@ -7312,6 +7757,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7338,6 +7784,7 @@
     "kind": "Method",
     "name": "product",
     "parent": "ContentsViewedAfterViewingProductBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string; variantId?: string; }"
@@ -7347,6 +7794,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ContentsViewedAfterViewingProductBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7373,6 +7821,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PersonalContentRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7399,6 +7848,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PopularContentsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7406,6 +7856,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularContentsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7432,6 +7883,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PersonalProductCategoryRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7439,6 +7891,7 @@
     "kind": "Method",
     "name": "setWeights",
     "parent": "PersonalProductCategoryRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryRecommendationWeights"
@@ -7448,6 +7901,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PersonalProductCategoryRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7474,6 +7928,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PopularProductCategoriesRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7481,6 +7936,7 @@
     "kind": "Method",
     "name": "setWeights",
     "parent": "PopularProductCategoriesRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "ProductCategoryRecommendationWeights"
@@ -7490,6 +7946,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularProductCategoriesRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7521,6 +7978,7 @@
     "kind": "Method",
     "name": "addRequest",
     "parent": "ProductCategoriesRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)"
@@ -7530,6 +7988,7 @@
     "kind": "Method",
     "name": "requireDistinctCategoriesAcrossResults",
     "parent": "ProductCategoriesRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7537,6 +7996,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductCategoriesRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7553,6 +8013,7 @@
     "kind": "Method",
     "name": "setProductCategoryProperties",
     "parent": "ProductCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "Partial<SelectedProductCategoryPropertiesSettings>"
@@ -7562,6 +8023,7 @@
     "kind": "Method",
     "name": "setNumberOfRecommendations",
     "parent": "ProductCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7569,6 +8031,7 @@
     "kind": "Method",
     "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
     "parent": "ProductCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7576,6 +8039,7 @@
     "kind": "Method",
     "name": "allowReplacingOfRecentlyShownRecommendations",
     "parent": "ProductCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7583,6 +8047,7 @@
     "kind": "Method",
     "name": "prioritizeDiversityBetweenRequests",
     "parent": "ProductCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7609,6 +8074,7 @@
     "kind": "Method",
     "name": "product",
     "parent": "BySingleProductRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string; variantId?: string; }"
@@ -7637,6 +8103,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PersonalProductRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7663,6 +8130,7 @@
     "kind": "Method",
     "name": "setDataKeyPopularityMultiplierSelector",
     "parent": "PopularityMultiplierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ key?: string | null }"
@@ -7672,6 +8140,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularityMultiplierBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7688,6 +8157,7 @@
     "kind": "Method",
     "name": "basedOn",
     "parent": "PopularProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "'MostPurchased' | 'MostViewed'"
@@ -7697,6 +8167,7 @@
     "kind": "Method",
     "name": "sinceMinutesAgo",
     "parent": "PopularProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7704,6 +8175,7 @@
     "kind": "Method",
     "name": "setPopularityMultiplier",
     "parent": "PopularProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(popularityMultiplierBuilder: PopularityMultiplierBuilder) => void"
@@ -7713,6 +8185,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7739,6 +8212,7 @@
     "kind": "Method",
     "name": "setSelectedProductProperties",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the product to be returned, by default only the product id is returned."
     ],
@@ -7750,6 +8224,7 @@
     "kind": "Method",
     "name": "setSelectedVariantProperties",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the variant to be returned, by default only the variant id is returned."
     ],
@@ -7761,6 +8236,7 @@
     "kind": "Method",
     "name": "setSelectedBrandProperties",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [
       "Select the properties of the brand to be returned, by default only the brand id is returned."
     ],
@@ -7772,6 +8248,7 @@
     "kind": "Method",
     "name": "setNumberOfRecommendations",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7779,6 +8256,7 @@
     "kind": "Method",
     "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7786,6 +8264,7 @@
     "kind": "Method",
     "name": "allowReplacingOfRecentlyShownRecommendations",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7793,6 +8272,7 @@
     "kind": "Method",
     "name": "allowProductsCurrentlyInCart",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7800,6 +8280,7 @@
     "kind": "Method",
     "name": "prioritizeDiversityBetweenRequests",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7807,6 +8288,7 @@
     "kind": "Method",
     "name": "recommendVariant",
     "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7838,6 +8320,7 @@
     "kind": "Method",
     "name": "addRequest",
     "parent": "ProductsRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "CustomProductRecommendationRequest\r\n        | PersonalProductRecommendationRequest\r\n        | PopularProductsRequest\r\n        | ProductsViewedAfterViewingContentRequest\r\n        | ProductsViewedAfterViewingProductRequest\r\n        | PurchasedWithCurrentCartRequest\r\n        | PurchasedWithMultipleProductsRequest\r\n        | PurchasedWithProductRequest\r\n        | RecentlyViewedProductsRequest\r\n        | SearchTermBasedProductRecommendationRequest\r\n        | SimilarProductsRequest\r\n        | SortProductsRequest\r\n        | SortVariantsRequest"
@@ -7847,6 +8330,7 @@
     "kind": "Method",
     "name": "requireDistinctProductsAcrossResults",
     "parent": "ProductsRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7854,6 +8338,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductsRecommendationCollectionBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7870,6 +8355,7 @@
     "kind": "Method",
     "name": "setContentId",
     "parent": "ProductsViewedAfterViewingContentBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7877,6 +8363,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductsViewedAfterViewingContentBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7903,6 +8390,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "ProductsViewedAfterViewingProductBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7929,6 +8417,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PurchasedWithCurrentCartBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7955,6 +8444,7 @@
     "kind": "Method",
     "name": "addProduct",
     "parent": "PurchasedWithMultipleProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string; variantId?: string; }"
@@ -7964,6 +8454,7 @@
     "kind": "Method",
     "name": "addProducts",
     "parent": "PurchasedWithMultipleProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "{ productId: string; variantId?: string; }[]"
@@ -7973,6 +8464,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PurchasedWithMultipleProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -7999,6 +8491,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PurchasedWithProductBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8025,6 +8518,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "RecentlyViewedProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8051,6 +8545,7 @@
     "kind": "Method",
     "name": "setTerm",
     "parent": "SearchTermBasedProductRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8058,6 +8553,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SearchTermBasedProductRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8084,6 +8580,7 @@
     "kind": "Method",
     "name": "setSimilarProductsEvaluationSettings",
     "parent": "SimilarProductsProductBuilder",
+    "parentKind": "Class",
     "docs": [
       null
     ],
@@ -8095,6 +8592,7 @@
     "kind": "Method",
     "name": "setEvaluationSettings",
     "parent": "SimilarProductsProductBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "(settings: Partial<SimilarProductsEvaluationSettings>) => void"
@@ -8104,6 +8602,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SimilarProductsProductBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8130,6 +8629,7 @@
     "kind": "Method",
     "name": "setProductIds",
     "parent": "SortProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8137,6 +8637,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SortProductsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8163,6 +8664,7 @@
     "kind": "Method",
     "name": "setProductId",
     "parent": "SortVariantsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8170,6 +8672,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "SortVariantsBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8196,6 +8699,7 @@
     "kind": "Method",
     "name": "setTerm",
     "parent": "PopularSearchTermsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },
@@ -8203,6 +8707,7 @@
     "kind": "Method",
     "name": "addEntityType",
     "parent": "PopularSearchTermsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": [
       "('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[]"
@@ -8212,6 +8717,7 @@
     "kind": "Method",
     "name": "build",
     "parent": "PopularSearchTermsRecommendationBuilder",
+    "parentKind": "Class",
     "docs": [],
     "dependencies": []
   },

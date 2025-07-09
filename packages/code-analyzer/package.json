@@ -1,0 +1,17 @@
+{
+  "name": "code-analyzer",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "codeAnalyzer": "ts-node main.ts"
+  },
+  "author": "Relewise",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "ts-morph": "^26.0.0"
+  }
+}

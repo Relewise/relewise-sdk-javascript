@@ -1,0 +1,8249 @@
+[
+  {
+    "kind": "Method",
+    "name": "recommendPopularSearchTerms",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PopularSearchTermsRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPersonalBrands",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PersonalBrandRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPopularBrands",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PopularBrandsRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPersonalContentCategories",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PersonalContentCategoryRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPopularContentCategories",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PopularContentCategoriesRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPersonalProductCategories",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PersonalProductCategoryRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPopularProductCategories",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PopularProductCategoriesRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPurchasedWithProduct",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PurchasedWithProductRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPurchasedWithMultipleProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PurchasedWithMultipleProductsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortVariants",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "SortVariantsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "SortProductsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendSimilarProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "SimilarProductsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendSearchTermBasedProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "SearchTermBasedProductRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recentlyViewedProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "RecentlyViewedProductsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPurchasedWithCurrentCart",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PurchasedWithCurrentCartRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendProductsViewedAfterViewingProduct",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ProductsViewedAfterViewingProductRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendProductsViewedAfterViewingContent",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ProductsViewedAfterViewingContentRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPopularProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PopularProductsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPersonalProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PersonalProductRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPopularContents",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PopularContentsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendPersonalContents",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "PersonalContentRecommendationRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendContentsViewedAfterViewingProduct",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ContentsViewedAfterViewingProductRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendContentsViewedAfterViewingMultipleProducts",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ContentsViewedAfterViewingMultipleProductsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendContentsViewedAfterViewingMultipleContents",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ContentsViewedAfterViewingMultipleContentsRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "recommendContentsViewedAfterViewingContent",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ContentsViewedAfterViewingContentRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "batchProductRecommendations",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ProductRecommendationRequestCollection",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "batchContentRecommendations",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ContentRecommendationRequestCollection",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "batchContentCategoryRecommendations",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ContentCategoryRecommendationRequestCollection",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "batchProductCategoryRecommendations",
+    "parent": "Recommender",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryRecommendationRequestCollection",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "Recommender",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "Recommender",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProblemDetailsError",
+    "parentKind": "Class",
+    "dependencies": [
+      "HttpProblemDetails | null"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProblemDetailsError",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "RelewiseClient",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "RelewiseClient",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": true,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RelewiseClientOptions",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RelewiseRequestOptions",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HttpProblemDetails",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "searchProducts",
+    "parent": "Searcher",
+    "docs": [],
+    "dependencies": [
+      "ProductSearchRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "searchProductCategories",
+    "parent": "Searcher",
+    "docs": [],
+    "dependencies": [
+      "ProductCategorySearchRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "searchContents",
+    "parent": "Searcher",
+    "docs": [],
+    "dependencies": [
+      "ContentSearchRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "searchTermPrediction",
+    "parent": "Searcher",
+    "docs": [],
+    "dependencies": [
+      "SearchTermPredictionRequest",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "batch",
+    "parent": "Searcher",
+    "docs": [],
+    "dependencies": [
+      "SearchRequestCollection",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "Searcher",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "Searcher",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "trackOrder",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{\r\n        user: User,\r\n        subtotal: { currency: string, amount: number },\r\n        orderNumber: string,\r\n        /** @deprecated Use orderNumber instead. */\r\n        trackingNumber?: string,\r\n        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], \r\n        data?: Record<string, DataValue>, \r\n        cartName?: string\r\n    }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackCart",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ \r\n        user?: User, \r\n        subtotal: { currency: string, amount: number }, \r\n        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], \r\n        data?: Record<string, DataValue>, \r\n        cartName?: string \r\n    }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackProductView",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string, variantId?: string, user: User }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackProductCategoryView",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ idPath: string[], user: User }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackContentView",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ contentId: string, user: User }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackContentCategoryView",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ idPath: string[], user: User }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackBrandView",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ brandId: string, user: User }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackSearchTerm",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ term: string, user: User, language: string }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "trackUserUpdate",
+    "parent": "Tracker",
+    "docs": [],
+    "dependencies": [
+      "{ user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }",
+      "RelewiseRequestOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "Tracker",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "Tracker",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addContainsCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DataValueBase<T>",
+      "'All' | 'Any'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addDistinctCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addEqualsCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DataValueBase<T>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addGreaterThanCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addLessThanCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addDataObjectCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: DataObjectFilterConditionBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addHasValueCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addRelativeDateTimeCondition",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Before' | 'After'",
+      "'UnixMilliseconds' | 'UnixSeconds' | 'UnixMinutes'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "Conditions[]"
+    ],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": [
+      {
+        "name": "conditions",
+        "type": "Conditions[]"
+      }
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContainsCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DataValueBase<T>",
+      "'All' | 'Any'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addEqualsCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DataValueBase<T>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addInRangeCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DoubleRange"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addGreaterThanCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addLessThanCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addMinByCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addMaxByCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addObjectValueIsSubsetOfCondition",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DataValueBase<T>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "DataObjectFilterConditionBuilder",
+    "docs": [],
+    "dependencies": [
+      "DataObjectFilterConditions[]"
+    ],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": [
+      {
+        "name": "conditions",
+        "type": "DataObjectFilterConditions[]"
+      }
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductAssortmentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantAssortmentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a variant assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandAssortmentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a brand assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentAssortmentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryAssortmentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryAssortmentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return products within the specified categories."
+    ],
+    "dependencies": [
+      "'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor'",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return contents within the specified categories."
+    ],
+    "dependencies": [
+      "'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor'",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified products."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified variants."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified brands."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified contents."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified companies."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductHasVariantsFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a range filter to the request ensuring the product has a certain range of variants."
+    ],
+    "dependencies": [
+      "FilterOptions & { includeDisabled?: boolean }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return products purchased since a certain point in time."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return products viewed since a certain point in time."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductSalesPriceFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return products within a certain sales price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductListPriceFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return products within a certain list price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSalesPriceFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return variants within a certain sales price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantListPriceFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return variants within a certain list price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSpecificationFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Filters the request to only return variants with a certain specification."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "and",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Combines filters using logical AND."
+    ],
+    "dependencies": [
+      "(builder: FilterBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "or",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Combines filters using logical OR."
+    ],
+    "dependencies": [
+      "(builder: FilterBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a variant data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a brand data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCartDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a cart data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyDataFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a company data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDisplayNameFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product display name filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductAndVariantIdFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product and variant ID filter to the request."
+    ],
+    "dependencies": [
+      "ProductAndVariantId | ProductAndVariantId[]",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryLevelFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category level filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasParentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category has parent filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasChildFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category has child filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasAncestorFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category has ancestor filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryLevelFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category level filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasParentFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category has parent filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasChildFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category has child filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasAncestorFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category has ancestor filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasProductsFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product category has products filter to the request ensuring that only categories with products in them are returned."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasContentsFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category has contents filter to the request ensuring that only categories with content in them are returned."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandDataHasKeyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a brand data has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandDisabledFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a brand is disabled filter to the request. Only works for brand queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyDataHasKeyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a company data has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyDisabledFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a company is disabled filter to the request. Only works for company queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDataHasKeyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a variant data has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDisabledFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a variant is disabled filter to the request. Only works for product queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDataHasKeyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category data has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDisabledFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category is disabled filter to the request. Only works for content queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryRecentlyViewedByUserFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content category recently viewed by user filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataHasKeyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content data has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDisabledFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content is disabled filter to the request. Only works for content queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentRecentlyViewedByUserFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content recently viewed by user filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentHasCategoriesFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a content has categories filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDisabledFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product is disabled filter to the request. Only works for product queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataHasKeyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product data has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductHasCategoriesFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a product has categories filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByCompanyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently purchased by a company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserCompanyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently purchased by the user's company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserParentCompanyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently purchased by the user's parent company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByCompanyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently viewed by a company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserCompanyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently viewed by the user's company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserParentCompanyFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently viewed by the user's parent company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductInCartFilter",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Adds a filter to only return products in the user's cart."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "reset",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Resets all filters and filter builders."
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "FilterBuilder",
+    "docs": [
+      "Builds and combines all filters into a FilterCollection."
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "FilterBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "fill",
+    "parent": "FilterScopesBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ apply: boolean; }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "default",
+    "parent": "FilterScopesBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ apply: boolean; }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "FilterScopesBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "FilterScopesBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "scopes",
+    "parent": "FilterSettingsBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterScopesBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "FilterSettingsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "FilterSettingsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setPageSize",
+    "parent": "PaginationBuilder",
+    "docs": [
+      "Defines how many results to return"
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setPage",
+    "parent": "PaginationBuilder",
+    "docs": [
+      "Page starts at 1, so this to skip 'X' pages of results"
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PaginationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "PaginationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandIdRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductAssortmentRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantAssortmentRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryIdRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor'",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "DataDoubleSelector | FixedDoubleValueSelector",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDataRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "DataDoubleSelector | FixedDoubleValueSelector",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDataRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "DataDoubleSelector | FixedDoubleValueSelector",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "DataDoubleSelector | FixedDoubleValueSelector",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "DataDoubleSelector | FixedDoubleValueSelector",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantIdRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductIdRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductListPriceRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductSalesPriceRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantListPriceRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSalesPriceRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSpecificationsInCommonRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ key: string, multiplier: number }[]",
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSpecificationValueRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByCompanyRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserCompanyRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByCompanyRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserCompanyRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryRecentlyViewedByUserRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentRecentlyViewedByUserRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryRecentlyViewedByUserRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addUserFavoriteProductRelevanceModifier",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "RelevanceModifierBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "string",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "stringCollection",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "number",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "doubleCollection",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "boolean",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "booleanCollection",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "multiCurrency",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": [
+      "{ amount: number, currency: string }[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "multilingual",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": [
+      "{ value: string, language: string }[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "multilingualCollection",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": [
+      "{ values: string[], language: string }[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "object",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": [
+      "{ [key: string]: DataValue }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "objectCollection",
+    "parent": "DataValueFactory",
+    "docs": [],
+    "dependencies": [
+      "{ [key: string]: DataValue }[]"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "DataValueFactory",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "anonymous",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "PartialUser<'temporaryId'|'fingerprint'|'authenticatedId'>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "byAuthenticatedId",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "PartialUser<'temporaryId'|'authenticatedId'>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "byTemporaryId",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "PartialUser<'temporaryId'>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "byIdentifier",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "PartialUser<'identifiers'>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "byIdentifiers",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "Record<string, string>",
+      "PartialUser<'identifiers'>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "byEmail",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "PartialUser<'email'>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "byFingerprint",
+    "parent": "UserFactory",
+    "docs": [],
+    "dependencies": [
+      "PartialUser<'fingerprint'>"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "UserFactory",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleSelector",
+    "parent": "ValueSelectorFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "fixedDoubleValueSelector",
+    "parent": "ValueSelectorFactory",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ValueSelectorFactory",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AbandonedCartTriggerResultTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AbandonedSearchTriggerResultTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AdvertiserAdvertiserEntityStateEntityResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AdvertiserEntityStateAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AdvertiserSaveEntitiesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AdvertiserSaveEntitiesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AdvertisersRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AnalyzerRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ApplicableIndexes",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ApplicableLanguages",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AssortmentFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "AssortmentFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanBooleanValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanContentDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanContentDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanDataObjectValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanDataObjectValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanProductCategoryDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanProductCategoryDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanProductDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanProductDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BooleanValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Brand",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandNameAndIdResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandNameAndIdResultAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandRecommendationRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandRecommendationWeights",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Budget",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignAnalytics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignAnalyticsProductAnalytics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignAnalyticsProductAnalyticsPeriodMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignAnalyticsProductAnalyticsPeriodMetricsCurrencyMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignAnalyticsProductAnalyticsPromotedProductMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignCampaignEntityStateEntityResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignEntityStateCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignEntityStateCampaignMetadataValuesRetailMediaEntity",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignSaveEntitiesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignSaveEntitiesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignStatusWithHistory",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignStatusWithHistoryChange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CampaignsRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CartDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Category",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryAdministrativeAction",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryHierarchyFacetResultCategoryNode",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryIdFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryIndexConfigurationEntry",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryLevelFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryNameAndId",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryNameAndIdResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryNameAndIdResultAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryPath",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryPathResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryPathResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryPathValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CategoryUpdate",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Channel",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Company",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ConditionConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Content",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoryIdFilterCategoryQuery",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoryInterestTriggerResultTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoryRecommendationRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoryRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoryRecommendationWeights",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoryResultDetailsCategoryResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentContentHighlightPropsHighlightSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentHighlightProperties",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentRecommendationRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentSortBySpecification",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentSorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContextConditionConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Currency",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataObject",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataObjectFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataObjectValueSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataRelevanceModifier",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DateTimeRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecimalNullableChainableRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecimalNullableChainableRangeAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecimalNullableRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecimalRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecimalRangeAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecompoundRuleSaveSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecompoundRuleSaveSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecompoundRuleSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecompoundRulesRequestSortBySearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DecompoundRulesRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DeleteSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleContentDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleContentDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleDataObjectValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleDataObjectValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableChainableRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableChainableRangeAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableContentDataRangeFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableContentDataRangeFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableContentDataRangesFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableContentDataRangesFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableDataObjectRangeFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableDataObjectRangeFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableDataObjectRangesFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableDataObjectRangesFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductCategoryDataRangeFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductCategoryDataRangeFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductCategoryDataRangesFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductCategoryDataRangesFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductDataRangeFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductDataRangeFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductDataRangesFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableProductDataRangesFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleNullableRangeAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleProductCategoryDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleProductCategoryDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleProductDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleProductDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DoubleRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ExpectedSearchTermResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Facet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FacetQuery",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FacetSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FacetSorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FieldIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Filter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FilterCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FilterScopeSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FilterScopes",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FilterSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "FilteredVariantsSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "GlobalRetailMediaConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "GlobalTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HasAncestorCategoryFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HasChildCategoryFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HasParentCategoryFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightResultOffset",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightResultSnippet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightResultSnippetMatchMatchedWord",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightResultSnippetSnippetMatch",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ContentContentHighlightPropsHighlightSettings2OffsetSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ContentContentHighlightPropsHighlightSettings2SnippetsSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ProductProductHighlightPropsHighlightSettings2OffsetSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "HighlightSettings2ProductProductHighlightPropsHighlightSettings2SnippetsSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "IndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "InputConditionConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32AvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32ContentDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32ContentDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32NullableRange",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32ProductDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32ProductDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Int32Range",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "KeyMultiplier",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Language",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LanguageIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LanguageIndexConfigurationEntry",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LicensedRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LineItem",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationEntityStateLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationEntityStateLocationMetadataValuesRetailMediaEntity",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationLocationEntityStateEntityResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationPlacement",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationPlacementCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationPlacementVariation",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationPlacementVariationCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationSaveEntitiesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationSaveEntitiesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "LocationsRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MatchTypeSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MerchandisingRule",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MetadataValues",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Money",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultiCurrency",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Multilingual",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultilingualCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultilingualCollectionValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultilingualValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ObjectValueCondition",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "OverriddenContentRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "OverriddenProductRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "OverriddenSelectedBrandPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "OverriddenSelectedContentPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "OverriddenSelectedProductPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "OverriddenSelectedVariantPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PaginatedSearchRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PaginatedSearchResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Parser",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PopularityMultiplierSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRulePromotion",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRuleSaveSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRuleSaveSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRuleSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRuleSuppression",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRulesRequestSortBySearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PredictionRulesRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Product",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductAndVariantId",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryIdFilterCategoryQuery",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryInterestTriggerResultTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryRecommendationRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryRecommendationWeights",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoryResultDetailsCategoryResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategorySortBySpecification",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategorySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductChangeTriggerResultProductChangeTriggerResultSettingsProductPropertySelectorEntityChangeTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductChangeTriggerResultSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductHighlightProperties",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductInterestTriggerResultResultSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductInterestTriggerResultTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultCartMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultCategoryMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultClassificationMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultRankMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultSalesByCurrency",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultSalesMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultSalesWithKnownCartOpenerMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultViewsAndSalesMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPerformanceResultViewsMetrics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductProductHighlightPropsHighlightSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductPropertySelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductQuerySelectedPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductRecommendationRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductRecommendationRequestSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductSearchResultConstraint",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductSortBySpecification",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductSorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductVariant",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Promotion",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionLocation",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionLocationCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionLocationPlacement",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionLocationPlacementCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionSpecification",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionSpecificationCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionSpecificationVariation",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PromotionSpecificationVariationCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PurchaseQualifiers",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PurchasedByUserCompanyInfo",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "PurchasedByUserInfo",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RebuildStatus",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RecentlyViewedByUserRelevanceModifier",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RecommendPopularSearchTermSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RecommendationRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RecommendationResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RecommendationSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RecommendationTypeCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RedirectResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RedirectRuleSaveSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RedirectRuleSaveSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RedirectRuleSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RedirectRulesRequestSortBySearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RedirectRulesRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RelevanceModifier",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RelevanceModifierCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RequestConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RequestContextFilter",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RequestFilterCriteria",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaConditions",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaEntity2CampaignEntityStateCampaignMetadataValuesRetailMediaEntity2EntityFilters",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaEntity2LocationEntityStateLocationMetadataValuesRetailMediaEntity2EntityFilters",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaQuery",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaQueryLocationSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaQueryPlacementSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaQueryVariationSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaResultPlacement",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaResultPlacementResultEntity",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaResultPlacementResultEntityProduct",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "RetailMediaSearchTermConditionCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Score",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ScoreThresholds",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchIndex",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchIndexSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResultModifierRuleRuleAction",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResultModifierRuleSaveSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResultModifierRuleSaveSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResultModifierRuleSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResultModifierRulesRequestSortBySearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchResultModifierRulesRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchRule",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchRuleFilters",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermCondition",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermModifierRuleRuleAction",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermModifierRuleSaveSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermModifierRuleSaveSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermModifierRuleSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermModifierRulesRequestSortBySearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermModifierRulesRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermPredictionResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTermResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchTypeCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedBrandPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedCategoryPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedContentPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedProductDetailsPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedProductPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedScorePropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedVariantDetailsPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SelectedVariantPropertiesSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SignificantDataValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SimilarProductsEvaluationSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SimilarVariantEvaluationSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SpecificationsIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Statistics",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StemmingRuleSaveSearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StemmingRuleSaveSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StemmingRuleSearchRulesResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StemmingRulesRequestSortBySearchRulesRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StemmingRulesRequestSortBySorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringAvailableFacetValue",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringBrandNameAndIdResultValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringCategoryNameAndIdResultValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringContentDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringContentDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringDataObjectValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringDataObjectValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringFieldSnippetMatchArrayKeyValuePair",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringProductCategoryDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringProductCategoryDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringProductDataValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringProductDataValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringRange1ArrayKeyValuePair",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringStringKeyValuePair",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringValueFacet",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "StringValueFacetResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Synonym",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SynonymsRequestSynonymSortingSorting",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "TargetConditionConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "TimedResponse",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "Trackable",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "TrackingRequest",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "TrimStringTransformer",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "User",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserActivityTriggerResultTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserAssociatedCompanyResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserCondition",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserConditionCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserConditionConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserQueryCriteria",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "UserResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ValueCondition",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ValueConditionCollection",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ValueSelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantChangeTriggerResultSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantChangeTriggerResultVariantChangeTriggerResultSettingsVariantPropertySelectorEntityChangeTriggerConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantIndexConfiguration",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantPropertySelector",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantResult",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantResultDetails",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "VariantSearchSettings",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ViewedByUserCompanyInfo",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ViewedByUserInfo",
+    "docs": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "DataValueBase",
+    "parentKind": "Class",
+    "dependencies": [
+      "DataValueTypes",
+      "T"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "DataValueBase",
+    "docs": [],
+    "dependencies": [
+      "DataValueTypes",
+      "T",
+      "boolean"
+    ],
+    "isAbstract": true,
+    "isDefault": false,
+    "properties": [
+      {
+        "name": "type",
+        "type": "DataValueTypes"
+      },
+      {
+        "name": "value",
+        "type": "T"
+      },
+      {
+        "name": "isCollection",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "StringDataValue",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "StringDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "StringCollectionDataValue",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "StringCollectionDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "MultilingualCollectionDataValue",
+    "parentKind": "Class",
+    "dependencies": [
+      "{ values: string[], language: string }[]"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "MultilingualCollectionDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "NumberDataValue",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "NumberDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "DoubleCollectionDataValue",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "DoubleCollectionDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "BooleanDataValue",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "BooleanDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "BooleanCollectionDataValue",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "BooleanCollectionDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "MultiCurrencyDataValue",
+    "parentKind": "Class",
+    "dependencies": [
+      "{ amount: number, currency: string }[]"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "MultiCurrencyDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "MultilingualDataValue",
+    "parentKind": "Class",
+    "dependencies": [
+      "{ value: string, language: string }[]"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "MultilingualDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ObjectDataValue",
+    "parentKind": "Class",
+    "dependencies": [
+      "{ [key: string]: DataValue }"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ObjectDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ObjectCollectionDataValue",
+    "parentKind": "Class",
+    "dependencies": [
+      "{ [key: string]: DataValue }[]"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ObjectCollectionDataValue",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "CollectionWithType",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultilingualCollectionWithType",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultiCurrencyWithType",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "MultilingualWithType",
+    "docs": []
+  },
+  {
+    "kind": "Interface",
+    "name": "DataObjectWithType",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandAssortmentFilter",
+    "parent": "BrandFilterBuilder",
+    "docs": [
+      "Adds a brand assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandIdFilter",
+    "parent": "BrandFilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified brands."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandDataFilter",
+    "parent": "BrandFilterBuilder",
+    "docs": [
+      "Adds a brand data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandDataHasKeyFilter",
+    "parent": "BrandFilterBuilder",
+    "docs": [
+      "Adds a brand has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandDisabledFilter",
+    "parent": "BrandFilterBuilder",
+    "docs": [
+      "Adds a brand is disabled filter to the request. Only works for brand queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "BrandFilterBuilder",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "BrandFilterBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyIdFilter",
+    "parent": "CompanyFilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified companies."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyDataFilter",
+    "parent": "CompanyFilterBuilder",
+    "docs": [
+      "Adds a company data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyDataHasKeyFilter",
+    "parent": "CompanyFilterBuilder",
+    "docs": [
+      "Adds a company has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addCompanyDisabledFilter",
+    "parent": "CompanyFilterBuilder",
+    "docs": [
+      "Adds a company is disabled filter to the request. Only works for company queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "CompanyFilterBuilder",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "CompanyFilterBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addContentAssortmentFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryAssortmentFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryIdFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Filters the request to only return contents within the specified categories."
+    ],
+    "dependencies": [
+      "'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor'",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentIdFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified contents."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryLevelFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category level filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasParentFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category has parent filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasChildFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category has child filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasAncestorFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category has ancestor filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHasContentsFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category has contents filter to the request ensuring that only categories with content in them are returned."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDataFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDataHasKeyFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryDisabledFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content category is disabled filter to the request. Only works for content queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryRecentlyViewedByUserFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a filter to only return content categories recently viewed by the user."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataHasKeyFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDisabledFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content is disabled filter to the request. Only works for content queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentRecentlyViewedByUserFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a filter to only return content recently viewed by the user."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentHasCategoriesFilter",
+    "parent": "ContentFilterBuilder",
+    "docs": [
+      "Adds a content has categories filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentFilterBuilder",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ContentFilterBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "and",
+    "parent": "FilterBuilderBase",
+    "docs": [
+      "Adds an AND filter to the request."
+    ],
+    "dependencies": [
+      "(builder: TFilterBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "or",
+    "parent": "FilterBuilderBase",
+    "docs": [
+      "Adds an OR filter to the request."
+    ],
+    "dependencies": [
+      "(builder: TFilterBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "reset",
+    "parent": "FilterBuilderBase",
+    "docs": [
+      "Resets the filters."
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "FilterBuilderBase",
+    "docs": [
+      "Builds the filter collection."
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "FilterBuilderBase",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "FilterBuilderBase",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": true,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addProductAssortmentFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryAssortmentFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryIdFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Filters the request to only return products within the specified categories."
+    ],
+    "dependencies": [
+      "'ImmediateParent' | 'ImmediateParentOrItsParent' | 'Ancestor'",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductIdFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified products."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductHasVariantsFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a range filter to the request ensuring the product has a certain range of variants."
+    ],
+    "dependencies": [
+      "FilterOptions & { includeDisabled?: boolean }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Filters the request to only return products purchased since a certain point in time."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Filters the request to only return products viewed since a certain point in time."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductSalesPriceFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Filters the request to only return products within a certain sales price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductListPriceFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Filters the request to only return products within a certain list price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDisplayNameFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product display name filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductAndVariantIdFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product and variant ID filter to the request."
+    ],
+    "dependencies": [
+      "ProductAndVariantId | ProductAndVariantId[]",
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryLevelFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category level filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasParentFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category has parent filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasChildFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category has child filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasAncestorFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category has ancestor filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHasProductsFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category has products filter to the request ensuring that only categories with products in them are returned."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataHasKeyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDisabledFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category is disabled filter to the request. Only works for product queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryRecentlyViewedByUserFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product category recently viewed by user filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataHasKeyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDisabledFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product is disabled filter to the request. Only works for product queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductHasCategoriesFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a product has categories filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByCompanyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently purchased by a company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserCompanyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently purchased by the user's company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyPurchasedByUserParentCompanyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently purchased by the user's parent company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByCompanyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently viewed by a company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserCompanyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently viewed by the user's company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductRecentlyViewedByUserParentCompanyFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products recently viewed by the user's parent company."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductInCartFilter",
+    "parent": "ProductFilterBuilder",
+    "docs": [
+      "Adds a filter to only return products in the user's cart."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductFilterBuilder",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ProductFilterBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantAssortmentFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Adds a variant assortment filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantIdFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Filters the request to only return the specified variants."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantListPriceFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Filters the request to only return variants within a certain list price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSalesPriceFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Filters the request to only return variants within a certain sales price range."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSpecificationFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Filters the request to only return variants with a certain specification."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDataFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Adds a variant data filter to the request."
+    ],
+    "dependencies": [
+      "(builder: ConditionBuilder) => void",
+      "EntityDataFilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDataHasKeyFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Adds a variant has key filter to the request."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantDisabledFilter",
+    "parent": "VariantFilterBuilder",
+    "docs": [
+      "Adds a variant is disabled filter to the request. Only works for product queries, not in searches or recommendations."
+    ],
+    "dependencies": [
+      "FilterOptions"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "VariantFilterBuilder",
+    "parentKind": "Class",
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "VariantFilterBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "filters",
+    "parent": "RecommendationRequestBuilder",
+    "docs": [
+      "Adds filters to the request"
+    ],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "relevanceModifiers",
+    "parent": "RecommendationRequestBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: RelevanceModifierBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "RecommendationRequestBuilder",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "RecommendationRequestBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": true,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "enabled",
+    "parent": "ContentHighlightingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setHighlightable",
+    "parent": "ContentHighlightingBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ displayName?: boolean, dataKeys?: string[] | null }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setLimit",
+    "parent": "ContentHighlightingBuilder",
+    "docs": [],
+    "dependencies": [
+      "HighlightSettings2ContentContentHighlightPropsHighlightSettings2Limits"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setShape",
+    "parent": "ContentHighlightingBuilder",
+    "docs": [],
+    "dependencies": [
+      "HighlightSettings2ContentContentHighlightPropsHighlightSettings2ResponseShape"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentHighlightingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ContentHighlightingBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setContentProperties",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "Partial<SelectedContentPropertiesSettings>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setRecommendationSettings",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "RecommendationSettings"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setTerm",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "pagination",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(pagination: PaginationBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "facets",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(pagination: FacetBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sorting",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(sortingBuilder: ContentSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "highlighting",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(highlightingBuilder: ContentHighlightingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentSearchBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentSearchBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sortByContentData",
+    "parent": "ContentSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "'Auto' | 'Alphabetical' | 'Numerical'",
+      "(thenBy: ContentSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByContentRelevance",
+    "parent": "ContentSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ContentSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByContentPopularity",
+    "parent": "ContentSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ContentSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByContentAttribute",
+    "parent": "ContentSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Id' | 'DisplayName'",
+      "'Ascending' | 'Descending'",
+      "'Auto' | 'Alphabetical' | 'Numerical'",
+      "(thenBy: ContentSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentSortingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ContentSortingBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addDataObjectFacet",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "(facets: DataObjectFacetBuilder) => void",
+      "{\r\n            conditions?: (builder: DataObjectFilterConditionBuilder) => void,\r\n            skip?: number,\r\n            take?: number \r\n        }",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addStringFacet",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBooleanFacet",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addNumberFacet",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addNumberRangeFacet",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addNumberRangesFacet",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "DataObjectFacetBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "select",
+    "parent": "DataObjectValueSelectorBuilder",
+    "docs": [],
+    "dependencies": [
+      "{\r\n        filter?: {\r\n            conditions?: (builder: DataObjectFilterConditionBuilder) => void,\r\n            skip?: number,\r\n            take?: number \r\n        } | null, \r\n        childSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null,\r\n        fallbackSelector?: (childSelector: DataObjectValueSelectorBuilder) => void | null\r\n    }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "DataObjectValueSelectorBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "DataObjectValueSelectorBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addCategoryFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'ImmediateParent' | 'Ancestors'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryHierarchyFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'ImmediateParent' | 'Ancestors' | 'Descendants'",
+      "CategoryPath[] | null",
+      "Partial<SelectedProductCategoryPropertiesSettings>",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentCategoryHierarchyFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'ImmediateParent' | 'Ancestors' | 'Descendants'",
+      "CategoryPath[] | null",
+      "Partial<SelectedContentCategoryPropertiesSettings>",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addBrandFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductAssortmentFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addVariantSpecificationFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataDoubleRangeFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataDoubleRangesFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataStringValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataBooleanValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataDoubleValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addSalesPriceRangeFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addSalesPriceRangesFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addListPriceRangeFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addListPriceRangesFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductDataObjectFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "(facets: DataObjectFacetBuilder) => void",
+      "{\r\n            conditions?: (builder: DataObjectFilterConditionBuilder) => void,\r\n            skip?: number,\r\n            take?: number\r\n        }",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addRecentlyPurchasedFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "PurchaseQualifiers",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentAssortmentFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataDoubleRangeFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataDoubleRangesFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataStringValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataBooleanValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataDoubleValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addContentDataObjectFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "(facets: DataObjectFacetBuilder) => void",
+      "{\r\n            conditions?: (builder: DataObjectFilterConditionBuilder) => void,\r\n            skip?: number,\r\n            take?: number\r\n        }",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryAssortmentFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataDoubleRangeFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataDoubleRangesFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "{\r\n            lowerBound?: number,\r\n            upperBound?: number\r\n        }[] | null",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataStringValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataBooleanValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataDoubleValueFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Or' | 'And'",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProductCategoryDataObjectFacet",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": [
+      "(facets: DataObjectFacetBuilder) => void",
+      "{\r\n            conditions?: (builder: DataObjectFilterConditionBuilder) => void,\r\n            skip?: number,\r\n            take?: number\r\n        }",
+      "FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "clear",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "FacetBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "FacetBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "alwaysIncludeSelectedInAvailable",
+    "parent": "FacetSettingsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "includeZeroHitsInAvailable",
+    "parent": "FacetSettingsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "take",
+    "parent": "FacetSettingsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "sortByHits",
+    "parent": "FacetSettingsBuilder",
+    "docs": [
+      "Sorts facet values in descending order by hit count, so that the values with the most hits appear first in the list."
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "FacetSettingsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "FacetSettingsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "category",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "categoryHierarchy",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "assortment",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleRange",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleRanges",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataString",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataBoolean",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataNumber",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataObject",
+    "parent": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "ContentFacetResult"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "GetContentFacet",
+    "parentKind": "Class",
+    "dependencies": [
+      "FacetResult[] | null"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "GetContentFacet",
+    "docs": [],
+    "dependencies": [
+      "FacetResult[] | null"
+    ],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": [
+      {
+        "name": "items",
+        "type": "FacetResult[] | null"
+      }
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "assortment",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleRange",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleRanges",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataString",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataBoolean",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataNumber",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataObject",
+    "parent": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryFacetResult"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "GetProductCategoryFacet",
+    "parentKind": "Class",
+    "dependencies": [
+      "FacetResult[] | null"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "GetProductCategoryFacet",
+    "docs": [],
+    "dependencies": [
+      "FacetResult[] | null"
+    ],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": [
+      {
+        "name": "items",
+        "type": "FacetResult[] | null"
+      }
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "productAssortment",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "brand",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "category",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "'ImmediateParent' | 'Ancestors' | 'Descendants'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "categoryHierarchy",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "'ImmediateParent' | 'Ancestors' | 'Descendants'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "listPriceRange",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "PriceSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "salesPriceRange",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "PriceSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "listPriceRanges",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "PriceSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "listPriceRangesWithRange",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "PriceSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "salesPriceRanges",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "PriceSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "salesPriceRangesWithRange",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "PriceSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleRange",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "DataSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataDoubleRanges",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "DataSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "variantSpecification",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataString",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "DataSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataBoolean",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "DataSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataNumber",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "DataSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "dataObject",
+    "parent": "GetProductFacet",
+    "docs": [],
+    "dependencies": [
+      "ProductFacetResult",
+      "DataSelectionStrategy"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "GetProductFacet",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedCategoryProperties",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [
+      "Select the properties of the product category to be returned, by default only the product category id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedProductCategoryPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setRecommendationSettings",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "RecommendationSettings"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setTerm",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [
+      "Set the term used to filter product categories by"
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "pagination",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(pagination: PaginationBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "facets",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(facets: FacetBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sorting",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(sortingBuilder: ProductCategorySortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductCategorySearchBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductCategorySearchBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProductCategorySearchBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductCategoryData",
+    "parent": "ProductCategorySortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "'Auto' | 'Alphabetical' | 'Numerical'",
+      "(thenBy: ProductCategorySortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductCategoryRelevance",
+    "parent": "ProductCategorySortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductCategorySortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductCategoryPopularity",
+    "parent": "ProductCategorySortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductCategorySortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductCategoryAttribute",
+    "parent": "ProductCategorySortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Id' | 'DisplayName'",
+      "'Ascending' | 'Descending'",
+      "'Auto' | 'Alphabetical' | 'Numerical'",
+      "(thenBy: ProductCategorySortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductCategorySortingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ProductCategorySortingBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "enabled",
+    "parent": "ProductHighlightingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setHighlightable",
+    "parent": "ProductHighlightingBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ displayName?: boolean, dataKeys?: string[] | null }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setLimit",
+    "parent": "ProductHighlightingBuilder",
+    "docs": [],
+    "dependencies": [
+      "HighlightSettings2ProductProductHighlightPropsHighlightSettings2Limits"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setShape",
+    "parent": "ProductHighlightingBuilder",
+    "docs": [],
+    "dependencies": [
+      "HighlightSettings2ProductProductHighlightPropsHighlightSettings2ResponseShape"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductHighlightingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ProductHighlightingBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedProductProperties",
+    "parent": "ProductSearchBuilder",
+    "docs": [
+      "Select the properties of the product to be returned, by default only the product id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedProductPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedVariantProperties",
+    "parent": "ProductSearchBuilder",
+    "docs": [
+      "Select the properties of the variant to be returned, by default only the variant id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedVariantPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedBrandProperties",
+    "parent": "ProductSearchBuilder",
+    "docs": [
+      "Select the properties of the brand to be returned, by default only the brand id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedBrandPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setVariantSearchSettings",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "Partial<VariantSearchSettings>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setExplodedVariants",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setRecommendationSettings",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "RecommendationSettings"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setRetailMedia",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "RetailMediaQuery | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setTerm",
+    "parent": "ProductSearchBuilder",
+    "docs": [
+      "Set the term used to filter products by"
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "pagination",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(pagination: PaginationBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "facets",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(facets: FacetBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sorting",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(sortingBuilder: ProductSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "searchConstraints",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(searchConstraintBuilder: SearchConstraintBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "highlighting",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [
+      "(highlightingBuilder: ProductHighlightingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductSearchBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProductSearchBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductData",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductSortingBuilder) => void",
+      "'Auto' | 'Alphabetical' | 'Numerical'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductDataObject",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Product' | 'Variant' | 'VariantWithFallbackToProduct' | 'ProductWithFallbackToVariant'",
+      "'Ascending' | 'Descending'",
+      "(valueSelector: DataObjectValueSelectorBuilder) => void",
+      "(thenBy: ProductSortingBuilder) => void",
+      "'Auto' | 'Alphabetical' | 'Numerical'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductRelevance",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductPopularity",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductSortingBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductAttribute",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Id' | 'DisplayName' | 'BrandId' | 'BrandName' | 'ListPrice' | 'SalesPrice'",
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductSortingBuilder) => void",
+      "'Auto' | 'Alphabetical' | 'Numerical'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductVariantAttribute",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Id' | 'DisplayName' | 'ListPrice' | 'SalesPrice'",
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductSortingBuilder) => void",
+      "'Auto' | 'Alphabetical' | 'Numerical'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sortByProductVariantSpecification",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [
+      "'Ascending' | 'Descending'",
+      "(thenBy: ProductSortingBuilder) => void",
+      "'Auto' | 'Alphabetical' | 'Numerical'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ProductSortingBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "SearchBuilder",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "addRequest",
+    "parent": "SearchCollectionBuilder",
+    "docs": [],
+    "dependencies": [
+      "ProductSearchRequest | ContentSearchRequest | ProductCategorySearchRequest  | SearchTermPredictionRequest"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SearchCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SearchCollectionBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "SearchCollectionBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setResultMustHaveVariantConstraint",
+    "parent": "SearchConstraintBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ exceptWhenProductHasNoVariants: boolean }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SearchConstraintBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "SearchConstraintBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "filters",
+    "parent": "SearchRequestBuilder",
+    "docs": [
+      "Adds filters to the request"
+    ],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "postFilters",
+    "parent": "SearchRequestBuilder",
+    "docs": [
+      "Adds post filters to the request"
+    ],
+    "dependencies": [
+      "(builder: FilterBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "relevanceModifiers",
+    "parent": "SearchRequestBuilder",
+    "docs": [],
+    "dependencies": [
+      "(builder: RelevanceModifierBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setIndex",
+    "parent": "SearchRequestBuilder",
+    "docs": [
+      "Use only when a specific index different from the 'default'-index is needed"
+    ],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SearchRequestBuilder",
+    "parentKind": "Class"
+  },
+  {
+    "kind": "Class",
+    "name": "SearchRequestBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": true,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "take",
+    "parent": "SearchTermPredictionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setTerm",
+    "parent": "SearchTermPredictionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addEntityType",
+    "parent": "SearchTermPredictionBuilder",
+    "docs": [],
+    "dependencies": [
+      "('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SearchTermPredictionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SearchTermPredictionBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "SearchTermPredictionBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedBrandProperties",
+    "parent": "BrandSettingsRecommendationBuilder",
+    "docs": [
+      "Select the properties of the brand to be returned, by default only the brand id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedBrandPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setNumberOfRecommendations",
+    "parent": "BrandSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
+    "parent": "BrandSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowReplacingOfRecentlyShownRecommendations",
+    "parent": "BrandSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "prioritizeDiversityBetweenRequests",
+    "parent": "BrandSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "BrandSettingsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "BrandSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "BrandsRecommendationBuilder",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PersonalBrandRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setWeights",
+    "parent": "PersonalBrandRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "BrandRecommendationWeights"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PersonalBrandRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PersonalBrandRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PersonalBrandRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PopularBrandsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setWeights",
+    "parent": "PopularBrandsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "BrandRecommendationWeights"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularBrandsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PopularBrandsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PopularBrandsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentCategoriesRecommendationBuilder",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "addRequest",
+    "parent": "ContentCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [
+      "(PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "requireDistinctCategoriesAcrossResults",
+    "parent": "ContentCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ContentCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedContentCategoryProperties",
+    "parent": "ContentCategorySettingsRecommendationBuilder",
+    "docs": [
+      "Select the properties of the content category to be returned, by default only the content category id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedContentCategoryPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setNumberOfRecommendations",
+    "parent": "ContentCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
+    "parent": "ContentCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowReplacingOfRecentlyShownRecommendations",
+    "parent": "ContentCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "prioritizeDiversityBetweenRequests",
+    "parent": "ContentCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PersonalContentCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setWeights",
+    "parent": "PersonalContentCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "ContentCategoryRecommendationWeights"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PersonalContentCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PersonalContentCategoryRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PersonalContentCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PopularContentCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setWeights",
+    "parent": "PopularContentCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "ContentCategoryRecommendationWeights"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularContentCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PopularContentCategoriesRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PopularContentCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedContentProperties",
+    "parent": "ContentSettingsRecommendationBuilder",
+    "docs": [
+      "Select the properties of the content to be returned, by default only the content id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedContentPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setNumberOfRecommendations",
+    "parent": "ContentSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
+    "parent": "ContentSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowReplacingOfRecentlyShownRecommendations",
+    "parent": "ContentSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "prioritizeDiversityBetweenRequests",
+    "parent": "ContentSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentSettingsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ContentsRecommendationBuilder",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "addRequest",
+    "parent": "ContentsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [
+      "ContentsViewedAfterViewingContentRequest\r\n        | ContentsViewedAfterViewingMultipleContentsRequest\r\n        | ContentsViewedAfterViewingMultipleProductsRequest\r\n        | ContentsViewedAfterViewingProductRequest\r\n        | PersonalContentRecommendationRequest\r\n        | PopularContentsRequest"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "requireDistinctContentsAcrossResults",
+    "parent": "ContentsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ContentsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setContentId",
+    "parent": "ContentsViewedAfterViewingContentBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentsViewedAfterViewingContentBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentsViewedAfterViewingContentBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentsViewedAfterViewingContentBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setContentIds",
+    "parent": "ContentsViewedAfterViewingMultipleContentsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentsViewedAfterViewingMultipleContentsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentsViewedAfterViewingMultipleContentsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentsViewedAfterViewingMultipleContentsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addProduct",
+    "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string; variantId?: string; }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProducts",
+    "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string; variantId?: string; }[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentsViewedAfterViewingMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "product",
+    "parent": "ContentsViewedAfterViewingProductBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string; variantId?: string; }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ContentsViewedAfterViewingProductBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ContentsViewedAfterViewingProductBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ContentsViewedAfterViewingProductBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PersonalContentRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PersonalContentRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PersonalContentRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PopularContentsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularContentsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PopularContentsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PopularContentsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PersonalProductCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setWeights",
+    "parent": "PersonalProductCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryRecommendationWeights"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PersonalProductCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PersonalProductCategoryRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PersonalProductCategoryRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PopularProductCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setWeights",
+    "parent": "PopularProductCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "ProductCategoryRecommendationWeights"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularProductCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PopularProductCategoriesRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PopularProductCategoriesRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductCategoriesRecommendationBuilder",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "addRequest",
+    "parent": "ProductCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [
+      "(PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "requireDistinctCategoriesAcrossResults",
+    "parent": "ProductCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ProductCategoriesRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setProductCategoryProperties",
+    "parent": "ProductCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "Partial<SelectedProductCategoryPropertiesSettings>"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setNumberOfRecommendations",
+    "parent": "ProductCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
+    "parent": "ProductCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowReplacingOfRecentlyShownRecommendations",
+    "parent": "ProductCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "prioritizeDiversityBetweenRequests",
+    "parent": "ProductCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductCategorySettingsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProductCategorySettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "product",
+    "parent": "BySingleProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string; variantId?: string; }"
+    ]
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "BySingleProductRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "BySingleProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PersonalProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PersonalProductRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PersonalProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setDataKeyPopularityMultiplierSelector",
+    "parent": "PopularityMultiplierBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ key?: string | null }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularityMultiplierBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "PopularityMultiplierBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "basedOn",
+    "parent": "PopularProductsBuilder",
+    "docs": [],
+    "dependencies": [
+      "'MostPurchased' | 'MostViewed'"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "sinceMinutesAgo",
+    "parent": "PopularProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "setPopularityMultiplier",
+    "parent": "PopularProductsBuilder",
+    "docs": [],
+    "dependencies": [
+      "(popularityMultiplierBuilder: PopularityMultiplierBuilder) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PopularProductsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PopularProductsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedProductProperties",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [
+      "Select the properties of the product to be returned, by default only the product id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedProductPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedVariantProperties",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [
+      "Select the properties of the variant to be returned, by default only the variant id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedVariantPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setSelectedBrandProperties",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [
+      "Select the properties of the brand to be returned, by default only the brand id is returned."
+    ],
+    "dependencies": [
+      "Partial<SelectedBrandPropertiesSettings> | null"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setNumberOfRecommendations",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowFillIfNecessaryToReachNumberOfRecommendations",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowReplacingOfRecentlyShownRecommendations",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "allowProductsCurrentlyInCart",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "prioritizeDiversityBetweenRequests",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "recommendVariant",
+    "parent": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductSettingsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProductSettingsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Interface",
+    "name": "ProductsRecommendationBuilder",
+    "docs": []
+  },
+  {
+    "kind": "Method",
+    "name": "addRequest",
+    "parent": "ProductsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [
+      "CustomProductRecommendationRequest\r\n        | PersonalProductRecommendationRequest\r\n        | PopularProductsRequest\r\n        | ProductsViewedAfterViewingContentRequest\r\n        | ProductsViewedAfterViewingProductRequest\r\n        | PurchasedWithCurrentCartRequest\r\n        | PurchasedWithMultipleProductsRequest\r\n        | PurchasedWithProductRequest\r\n        | RecentlyViewedProductsRequest\r\n        | SearchTermBasedProductRecommendationRequest\r\n        | SimilarProductsRequest\r\n        | SortProductsRequest\r\n        | SortVariantsRequest"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "requireDistinctProductsAcrossResults",
+    "parent": "ProductsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Class",
+    "name": "ProductsRecommendationCollectionBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setContentId",
+    "parent": "ProductsViewedAfterViewingContentBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductsViewedAfterViewingContentBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductsViewedAfterViewingContentBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProductsViewedAfterViewingContentBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "ProductsViewedAfterViewingProductBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "ProductsViewedAfterViewingProductBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "ProductsViewedAfterViewingProductBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PurchasedWithCurrentCartBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PurchasedWithCurrentCartBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PurchasedWithCurrentCartBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "addProduct",
+    "parent": "PurchasedWithMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string; variantId?: string; }"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "addProducts",
+    "parent": "PurchasedWithMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": [
+      "{ productId: string; variantId?: string; }[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PurchasedWithMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PurchasedWithMultipleProductsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PurchasedWithMultipleProductsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PurchasedWithProductBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PurchasedWithProductBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PurchasedWithProductBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "RecentlyViewedProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "RecentlyViewedProductsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "RecentlyViewedProductsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setTerm",
+    "parent": "SearchTermBasedProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SearchTermBasedProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SearchTermBasedProductRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "SearchTermBasedProductRecommendationBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setSimilarProductsEvaluationSettings",
+    "parent": "SimilarProductsProductBuilder",
+    "docs": [
+      null
+    ],
+    "dependencies": [
+      "SimilarProductsEvaluationSettings"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "setEvaluationSettings",
+    "parent": "SimilarProductsProductBuilder",
+    "docs": [],
+    "dependencies": [
+      "(settings: Partial<SimilarProductsEvaluationSettings>) => void"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SimilarProductsProductBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SimilarProductsProductBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "SimilarProductsProductBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setProductIds",
+    "parent": "SortProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SortProductsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SortProductsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "SortProductsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setProductId",
+    "parent": "SortVariantsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "SortVariantsBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "SortVariantsBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "SortVariantsBuilder",
+    "docs": [],
+    "dependencies": [],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": []
+  },
+  {
+    "kind": "Method",
+    "name": "setTerm",
+    "parent": "PopularSearchTermsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Method",
+    "name": "addEntityType",
+    "parent": "PopularSearchTermsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "('Product' | 'Variant' | 'ProductCategory' | 'Brand' | 'Content' | 'ContentCategory')[]"
+    ]
+  },
+  {
+    "kind": "Method",
+    "name": "build",
+    "parent": "PopularSearchTermsRecommendationBuilder",
+    "docs": [],
+    "dependencies": []
+  },
+  {
+    "kind": "Constructor",
+    "name": "constructor",
+    "docs": [],
+    "parent": "PopularSearchTermsRecommendationBuilder",
+    "parentKind": "Class",
+    "dependencies": [
+      "Settings"
+    ]
+  },
+  {
+    "kind": "Class",
+    "name": "PopularSearchTermsRecommendationBuilder",
+    "docs": [],
+    "dependencies": [
+      "string | null | undefined",
+      "RecommendPopularSearchTermSettings"
+    ],
+    "isAbstract": false,
+    "isDefault": false,
+    "properties": [
+      {
+        "name": "term",
+        "type": "string | null | undefined"
+      },
+      {
+        "name": "recommendationSettings",
+        "type": "RecommendPopularSearchTermSettings"
+      }
+    ]
+  }
+]

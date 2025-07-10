@@ -1,7 +1,8 @@
-import { ClassDeclaration, ParameterDeclaration, Project, PropertyDeclaration, Scope, SourceFile, ts, Type, TypeFormatFlags } from "ts-morph";
+import { ClassDeclaration, ParameterDeclaration, Project, PropertyDeclaration, PropertySignature, Scope, SourceFile } from "ts-morph";
 import * as fs from "fs";
 import { Property } from "./models/property";
 import { Entry, Kind } from "./models/entry";
+import { Parameter } from "./models/parameter";
 
 const tsConfigFilePath = process.argv[2];
 const project = new Project({ tsConfigFilePath: tsConfigFilePath });
@@ -11,6 +12,8 @@ const result: Entry[] = [];
 for (const sourceFile of project.getSourceFiles()) {
     result.push(...handleClasses(sourceFile));
     result.push(...handleInterfaces(sourceFile));
+    result.push(...handleFunctions(sourceFile));
+    // TODO: handle types
 }
 
 function handleClasses(sourceFile: SourceFile): Entry[] {
@@ -24,15 +27,18 @@ function handleClasses(sourceFile: SourceFile): Entry[] {
 
     const properties = handleProperties(cls.getProperties());
 
+    const ex = cls.getExtends()?.getText();
+
     // TODO: Add information about parent
     classes.push({
       kind: Kind[Kind.Class],
       name: cls.getName(),
-      docs: cls.getJsDocs().map(doc => doc.getComment().toString()),
+      docs: cls.getJsDocs()[0]?.getText(),
       dependencies: properties.map(x => x.type),
       isAbstract: cls.isAbstract(),
       isDefault: cls.isDefaultExport(),
-      properties: properties
+      properties: properties,
+      extends: ex ? [ex] : null
     });
   }
 
@@ -41,13 +47,19 @@ function handleClasses(sourceFile: SourceFile): Entry[] {
 
 function handleInterfaces(sourceFile: SourceFile): Entry[] {
   const interfaces: Entry[] = [];
-
+  
   for (const i of sourceFile.getInterfaces()) {
+    const ex = i.getExtends()?.map(x => x.getText()) ?? null;
+
+    const properties = handlePropertySignatures(i.getProperties());
+
     // TODO: Add information about parent
     interfaces.push({
       kind: Kind[Kind.Interface],
       name: i.getName(),
-      docs: i.getJsDocs().map(doc => doc.getComment().toString()),
+      docs: i.getJsDocs()[0]?.getText(),
+      extends: ex,
+      properties: properties
     });
   }
 
@@ -70,12 +82,32 @@ function handleMethods(cls: ClassDeclaration): Entry[] {
       name: m.getName(),
       parent: cls.getName(),
       parentKind: Kind[Kind.Class],
-      docs: m.getJsDocs().map(doc => doc.getComment()?.toString()),
-      dependencies: handleParameters(m.getParameters()),
+      docs: m.getJsDocs()[0]?.getText(),
+      dependencies: findNonTrivialParameters(m.getParameters()),
+      parameters: handleParameters(m.getParameters()),
+      returnType: m.getReturnTypeNode()?.getText(),
+      isAsync: m.isAsync()
     });
   });
 
   return methods;
+}
+
+function handleFunctions(sourceFile: SourceFile): Entry[] {
+  const functions: Entry[] = [];
+
+  sourceFile.getFunctions().forEach(m => {
+    functions.push({
+      kind: Kind[Kind.Method],
+      name: m.getName(),
+      docs: m.getJsDocs()[0]?.getText(),
+      dependencies: findNonTrivialParameters(m.getParameters()),
+      parameters: handleParameters(m.getParameters()),
+      returnType: m.getReturnTypeNode()?.getText()
+    });
+  });
+
+  return functions;
 }
 
 
@@ -92,17 +124,18 @@ function handleConstructors(cls: ClassDeclaration): Entry[] {
     constructors.push({
       kind: Kind[Kind.Constructor],
       name: "constructor",
-      docs: c.getJsDocs().map(doc => doc.getComment().toString()),
+      docs: c.getJsDocs()[0]?.getText(),
       parent: cls.getName(),
       parentKind: Kind[Kind.Class],
-      dependencies: handleParameters(c.getParameters())
+      dependencies: findNonTrivialParameters(c.getParameters()),
+      parameters: handleParameters(c.getParameters())
     })
   });
 
   return constructors;
 }
 
-function handleParameters(parameters: ParameterDeclaration[]): string[] {
+function findNonTrivialParameters(parameters: ParameterDeclaration[]): string[] {
   const baseTypes = [
     "string", "number", "boolean", "bigint", "symbol", "object", "void", "undefined", "null", "any", "never", "unknown", "Date"
   ];
@@ -156,6 +189,32 @@ function handleParameters(parameters: ParameterDeclaration[]): string[] {
   return result;
 }
 
+function handleParameters(parameters: ParameterDeclaration[]): Parameter[] {
+  const results: Parameter[] = [];
+
+  for (const param of parameters) {
+    const name = param.getName();
+    const typeNode = param.getTypeNode();
+    const typeText = typeNode ? typeNode.getText().trim() : "any";
+
+    const nullable = param.hasQuestionToken();
+
+    const initializer = param.getInitializer();
+    const defaultValue = initializer ? initializer.getText() : null;
+
+    results.push({
+      name,
+      type: typeText,
+      nullable: nullable,
+      defaultValue: defaultValue,
+      isReadonly: param.isReadonly(),
+      scope: param.getScope()
+    });
+  }
+
+  return results;
+}
+
 function handleProperties(properties: PropertyDeclaration[]): Property[] {
 
   return properties.flatMap(p => { 
@@ -171,10 +230,36 @@ function handleProperties(properties: PropertyDeclaration[]): Property[] {
       return [];
     } 
 
+    const initializer = p.getInitializer();
+    const defaultValue = initializer ? initializer.getText() : null;
+
     return {
       name: p.getName(),
-      type: typeNode.getText()
-    };;
+      type: typeNode.getText(),
+      docs: p.getJsDocs()[0]?.getText(),
+      nullable: p.hasQuestionToken(),
+      defaultValue: defaultValue
+    };
+  });
+}
+
+function handlePropertySignatures(properties: PropertySignature[]): Property[] {
+  return properties.flatMap(p => { 
+    const typeNode = p.getTypeNode();
+    if (!typeNode) {
+      return [];
+    } 
+    
+    const initializer = p.getInitializer();
+    const defaultValue = initializer ? initializer.getText() : null;
+
+    return {
+      name: p.getName(),
+      type: typeNode.getText(),
+      docs: p.getJsDocs()[0]?.getText(),
+      nullable: p.hasQuestionToken(),
+      defaultValue: defaultValue
+    };
   });
 }
 

@@ -28,6 +28,7 @@ jobs:
         working-directory: ./packages/code-analyzer
 
       - name: Upload result to API
+        working-directory: ./packages/code-analyzer
         run: |
           curl -X POST http://mcp.relewise.com/IngestDataSource/TypeScript \
             -H "Content-Type: application/json" \

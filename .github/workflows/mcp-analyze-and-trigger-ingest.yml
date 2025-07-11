@@ -32,4 +32,4 @@ jobs:
           curl -X POST http://mcp.relewise.com/IngestDataSource/TypeScript \
             -H "Content-Type: application/json" \
             -H "X-API-KEY: ${{secrets.MCP_INGESTION_API_KEY}}" \
-            -d @code-analysis.json
+            -d @ingestion-request.json

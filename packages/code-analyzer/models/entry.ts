@@ -16,10 +16,3 @@ export type Entry = {
     returnType?: string;
     isAsync?: boolean;
 }
-
-export enum Kind {
-    Class,
-    Interface,
-    Method,
-    Constructor
-}

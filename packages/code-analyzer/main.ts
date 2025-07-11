@@ -1,8 +1,10 @@
 import { ClassDeclaration, ParameterDeclaration, Project, PropertyDeclaration, PropertySignature, Scope, SourceFile } from "ts-morph";
 import * as fs from "fs";
 import { Property } from "./models/property";
-import { Entry, Kind } from "./models/entry";
+import { Entry } from "./models/entry";
 import { Parameter } from "./models/parameter";
+import { Kind } from "./models/kind";
+import { IngestionRequest } from "./models/ingestionRequest";
 
 const tsConfigFilePath = process.argv[2];
 const project = new Project({ tsConfigFilePath: tsConfigFilePath });
@@ -29,7 +31,6 @@ function handleClasses(sourceFile: SourceFile): Entry[] {
 
     const ex = cls.getExtends()?.getText();
 
-    // TODO: Add information about parent
     classes.push({
       kind: Kind[Kind.Class],
       name: cls.getName(),
@@ -53,7 +54,6 @@ function handleInterfaces(sourceFile: SourceFile): Entry[] {
 
     const properties = handlePropertySignatures(i.getProperties());
 
-    // TODO: Add information about parent
     interfaces.push({
       kind: Kind[Kind.Interface],
       name: i.getName(),
@@ -70,9 +70,8 @@ function handleMethods(cls: ClassDeclaration): Entry[] {
   const methods: Entry[] = [];
 
   cls.getMethods().forEach(m => {
-    const scope = m.getScope(); // "public" | "protected" | "private" | undefined
+    const scope = m.getScope();
 
-    // Skip if private or protected
     if (scope === Scope.Private || scope === Scope.Protected) {
       return;
     }
@@ -114,9 +113,8 @@ function handleFunctions(sourceFile: SourceFile): Entry[] {
 function handleConstructors(cls: ClassDeclaration): Entry[] {
   const constructors: Entry[] = []
   cls.getConstructors().map(c => {
-    const scope = c.getScope(); // "public" | "protected" | "private" | undefined
+    const scope = c.getScope();
 
-    // Skip if private or protected
     if (scope === Scope.Private || scope === Scope.Protected) {
       return;
     }
@@ -163,9 +161,8 @@ function findNonTrivialParameters(parameters: ParameterDeclaration[]): string[] 
   const result: string[] = [];
 
   for (const param of parameters) {
-    const scope = param.getScope(); // "public" | "protected" | "private" | undefined
+    const scope = param.getScope();
 
-    // Skip if private or protected
     if (scope === Scope.Private || scope === Scope.Protected) {
       return;
     }
@@ -218,9 +215,8 @@ function handleParameters(parameters: ParameterDeclaration[]): Parameter[] {
 function handleProperties(properties: PropertyDeclaration[]): Property[] {
 
   return properties.flatMap(p => { 
-    const scope = p.getScope(); // "public" | "protected" | "private" | undefined
+    const scope = p.getScope();
 
-    // Skip if private or protected
     if (scope === Scope.Private || scope === Scope.Protected) {
       return [];
     }
@@ -263,4 +259,8 @@ function handlePropertySignatures(properties: PropertySignature[]): Property[] {
   });
 }
 
-fs.writeFileSync("code-analysis.json", JSON.stringify(result, null, 2));
+const ingestionRequest: IngestionRequest = {
+  entries: result
+};
+
+fs.writeFileSync("ingestion-request.json", JSON.stringify(ingestionRequest, null, 2));

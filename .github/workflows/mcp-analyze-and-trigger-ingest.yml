@@ -1,9 +1,9 @@
-name: Code Analyzer
+name: Analyze code & ingest into MCP 
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   analyze-code:

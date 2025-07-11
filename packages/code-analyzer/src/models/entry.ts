@@ -1,5 +1,5 @@
-import { Parameter } from "./parameter";
-import { Property } from "./property";
+import { Parameter } from './parameter';
+import { Property } from './property';
 
 export type Entry = {
     kind: string;

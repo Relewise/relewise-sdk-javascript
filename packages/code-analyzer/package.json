@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "codeAnalyzer": "ts-node main.ts"
+    "codeAnalyzer": "ts-node main.ts",
+    "lint": "eslint --ext .ts,.js ./src",
+    "lint-fix": "eslint --fix --ext .ts,.js ./src"
   },
   "author": "Relewise",
   "license": "ISC",
   "devDependencies": {
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.11.1"
   },
   "dependencies": {
     "ts-morph": "^26.0.0"

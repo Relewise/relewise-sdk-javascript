@@ -29,6 +29,7 @@ jobs:
 
       - name: Upload result to API
         run: |
-          curl -X POST https://your-api-endpoint.com/analyze \
+          curl -X POST http://mcp.relewise.com/IngestDataSource/TypeScript \
             -H "Content-Type: application/json" \
+            -H "X-API-KEY: ${{secrets.MCP_INGESTION_API_KEY}}" \
             -d @code-analysis.json

@@ -1,0 +1,35 @@
+name: Code Analyzer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  analyze-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./packages/code-analyzer
+
+
+      - name: Run codeAnalyzer script
+        run: npm run codeAnalyzer -- ./packages/client/tsconfig.json
+        working-directory: ./packages/code-analyzer
+
+      - name: Upload result to API
+        run: |
+          curl -X POST http://mcp.relewise.com/IngestDataSource/TypeScript \
+            -H "Content-Type: application/json" \
+            -H "X-API-KEY: ${{secrets.MCP_INGESTION_API_KEY}}" \
+            -d @ingestion-request.json

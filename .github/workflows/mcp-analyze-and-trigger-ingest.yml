@@ -24,7 +24,7 @@ jobs:
 
 
       - name: Run codeAnalyzer script
-        run: npm run codeAnalyzer -- ./packages/client/tsconfig.json
+        run: npm run codeAnalyzer -- ..\client\tsconfig.json
         working-directory: ./packages/code-analyzer
 
       - name: Upload result to API

@@ -90,3 +90,6 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Request build for MCP
+packages/code-analyzer/ingestion-request.json

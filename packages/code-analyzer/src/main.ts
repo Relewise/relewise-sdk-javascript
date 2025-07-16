@@ -5,6 +5,7 @@ import { IngestionRequest } from './models/ingestionRequest';
 import { handleClasses } from './handlers/handleClasses';
 import { handleInterfaces } from './handlers/handleInterfaces';
 import { handleFunctions } from './handlers/handleFunctions';
+import { handleTypes } from './handlers/handleTypes';
 
 const tsConfigFilePath = process.argv[2];
 const project = new Project({ tsConfigFilePath: tsConfigFilePath });
@@ -15,7 +16,7 @@ for (const sourceFile of project.getSourceFiles()) {
     result.push(...handleClasses(sourceFile));
     result.push(...handleInterfaces(sourceFile));
     result.push(...handleFunctions(sourceFile));
-    // TODO: handle types
+    result.push(...handleTypes(sourceFile));
 }
 
 const ingestionRequest: IngestionRequest = {

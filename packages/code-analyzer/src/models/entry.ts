@@ -15,4 +15,5 @@ export type Entry = {
     parameters?: Parameter[];
     returnType?: string;
     isAsync?: boolean;
+    typeDefinition?: string;
 }

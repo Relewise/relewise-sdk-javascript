@@ -30,7 +30,7 @@ jobs:
       - name: Upload result to API
         working-directory: ./packages/code-analyzer
         run: |
-          curl -X POST http://mcp.relewise.com/IngestDataSource/TypeScript \
+          curl -X PUT http://mcp.relewise.com/IngestDataSource/TypeScript \
             -H "Content-Type: application/json" \
             -H "X-API-KEY: ${{secrets.MCP_INGESTION_API_KEY}}" \
             -d @ingestion-request.json

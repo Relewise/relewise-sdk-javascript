@@ -11,13 +11,17 @@ export function handleTypes(sourceFile: SourceFile): Entry[] {
     const name = typeAlias.getName();
     const typeNode = typeAlias.getTypeNode();
     const dependencies = extractTypeDependencies(typeNode);
-
+    
+    // Get the full text and extract just the type definition without the 'export' keyword
+    const fullText = typeAlias.getText();
+    const typeText = fullText.replace(/^export\s+/, '');
+    
     types.push({
       kind: Kind[Kind.Type],
       name: name,
       docs: typeAlias.getJsDocs()[0]?.getText(),
       dependencies: dependencies.length > 0 ? dependencies : undefined,
-      typeDefinition: `type ${name} = ${typeNode?.getText() || 'unknown'}`
+      definition: typeText
     });
   }
 

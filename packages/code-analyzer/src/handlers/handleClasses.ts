@@ -21,7 +21,7 @@ export function handleClasses(sourceFile: SourceFile): Entry[] {
         kind: Kind[Kind.Class],
         name: cls.getName(),
         docs: cls.getJsDocs()[0]?.getText(),
-        dependencies: properties.map(x => x.type),
+        dependencies: properties.map(x => x.baseType),
         isAbstract: cls.isAbstract(),
         isDefault: cls.isDefaultExport(),
         properties: properties,

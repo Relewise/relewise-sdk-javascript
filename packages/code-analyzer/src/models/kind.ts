@@ -3,5 +3,6 @@ export enum Kind {
     Interface,
     Method,
     Constructor,
-    Type
+    Type,
+    Enum
 }

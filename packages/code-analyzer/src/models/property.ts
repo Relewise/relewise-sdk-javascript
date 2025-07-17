@@ -4,4 +4,5 @@ export type Property = {
     docs: string,
     nullable: boolean,
     defaultValue?: string;
+    baseType: string;
 }

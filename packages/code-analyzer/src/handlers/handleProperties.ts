@@ -10,16 +10,16 @@ export function handleProperties(properties: PropertyDeclaration[]): Property[] 
         }
 
         const typeNode = p.getTypeNode();
-        if (!typeNode) {
-            return [];
-        } 
+
+        // When working with enums we don't have a typeNode
+        const type = typeNode ? typeNode.getText() : p.getType().getSymbol()?.getName();
 
         const initializer = p.getInitializer();
         const defaultValue = initializer ? initializer.getText() : null;
 
         return {
             name: p.getName(),
-            type: typeNode.getText(),
+            type: type || "unknown",
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,

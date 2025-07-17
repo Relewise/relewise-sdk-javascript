@@ -21,7 +21,7 @@ export function handleTypes(sourceFile: SourceFile): Entry[] {
       name: name,
       docs: typeAlias.getJsDocs()[0]?.getText(),
       dependencies: dependencies.length > 0 ? dependencies : undefined,
-      typeDefinition: typeText
+      definition: typeText
     });
   }
 

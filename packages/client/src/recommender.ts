@@ -41,25 +41,10 @@ import {
     PersonalProductRecommendationRequest,
 } from './models/data-contracts';
 
-/**
- * This enum is used by Simon to test if we can find it in the code analyzer
- */
-export enum SimonTest {
-    simon,
-    test,
-    stuff
-}
-
 export class Recommender extends RelewiseClient {
-
-    /**
-     * Some docs on this enum added for testing
-     */
-    public bla = SimonTest.simon;
 
     constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
         super(datasetId, apiKey, options);
-        console.log(this.bla);
     }
 
     public async recommendPopularSearchTerms(request: PopularSearchTermsRecommendationRequest, options?: RelewiseRequestOptions): Promise<SearchTermRecommendationResponse | undefined> {

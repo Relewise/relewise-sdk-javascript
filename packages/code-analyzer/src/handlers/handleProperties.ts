@@ -1,4 +1,4 @@
-import { PropertyDeclaration, PropertySignature, Scope } from 'ts-morph';
+import { PropertyDeclaration, PropertySignature, Scope, Type } from 'ts-morph';
 import { Property } from '../models/property';
 
 export function handleProperties(properties: PropertyDeclaration[]): Property[] {
@@ -23,6 +23,7 @@ export function handleProperties(properties: PropertyDeclaration[]): Property[] 
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,
+            baseType: getBaseType(p.getType())
         };
     });
 }
@@ -43,6 +44,16 @@ export function handlePropertySignatures(properties: PropertySignature[]): Prope
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,
+            baseType: getBaseType(p.getType())
         };
     });
+}
+
+function getBaseType(type: Type): string | undefined {
+    if (type.isArray()) {
+
+        return type.getArrayElementType()?.getAliasSymbol()?.getName();
+    } 
+
+    return type.getSymbol()?.getName();
 }

@@ -1,7 +1,7 @@
 import { SourceFile } from 'ts-morph';
 import { Entry } from '../models/entry';
 import { Kind } from '../models/kind';
-import { findNonTrivialParameters, handleParameters } from './handleParameters';
+import { findParameterDependencies, handleParameters } from './handleParameters';
 
 export function handleFunctions(sourceFile: SourceFile): Entry[] {
     const functions: Entry[] = [];
@@ -11,7 +11,7 @@ export function handleFunctions(sourceFile: SourceFile): Entry[] {
             kind: Kind[Kind.Method],
             name: m.getName(),
             docs: m.getJsDocs()[0]?.getText(),
-            dependencies: findNonTrivialParameters(m.getParameters()),
+            dependencies: findParameterDependencies(m.getParameters()),
             parameters: handleParameters(m.getParameters()),
             returnType: m.getReturnTypeNode()?.getText(),
         });

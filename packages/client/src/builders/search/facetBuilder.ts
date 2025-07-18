@@ -331,7 +331,8 @@ export class FacetBuilder {
             skip?: number,
             take?: number
         },
-        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
+        evaluationMode?: "And" | "Or" | null): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -355,6 +356,7 @@ export class FacetBuilder {
             dataSelectionStrategy: selectionStrategy,
             settings: handleFacetSettings(facetSettings),
             key: key,
+            evaluationMode: evaluationMode
         };
         this.facets.push(facet);
 
@@ -486,7 +488,8 @@ export class FacetBuilder {
             skip?: number,
             take?: number
         },
-        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
+        evaluationMode?: "And" | "Or" | null): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -509,6 +512,7 @@ export class FacetBuilder {
             },
             settings: handleFacetSettings(facetSettings),
             key: key,
+            evaluationMode: evaluationMode
         };
         this.facets.push(facet);
 
@@ -621,7 +625,8 @@ export class FacetBuilder {
             skip?: number,
             take?: number
         },
-        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
+        evaluationMode?: "And" | "Or" | null): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -644,6 +649,7 @@ export class FacetBuilder {
             },
             settings: handleFacetSettings(facetSettings),
             key: key,
+            evaluationMode: evaluationMode
         };
         this.facets.push(facet);
 

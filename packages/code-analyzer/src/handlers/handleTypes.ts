@@ -1,6 +1,7 @@
-import { SourceFile, SyntaxKind, TypeNode, IntersectionTypeNode, TypeLiteralNode, PropertySignature, TypeReferenceNode, UnionTypeNode } from 'ts-morph';
+import { SourceFile, SyntaxKind, TypeNode, IntersectionTypeNode, TypeLiteralNode, PropertySignature, TypeReferenceNode, UnionTypeNode, Type, FunctionTypeNode } from 'ts-morph';
 import { Entry } from '../models/entry';
 import { Kind } from '../models/kind';
+import { findNonTrivialParameters } from './handleParameters';
 
 export function handleTypes(sourceFile: SourceFile): Entry[] {
   const types: Entry[] = [];
@@ -28,7 +29,7 @@ export function handleTypes(sourceFile: SourceFile): Entry[] {
   return types;
 }
 
-function extractTypeDependencies(typeNode: TypeNode | undefined): string[] {
+export function extractTypeDependencies(typeNode: TypeNode | undefined): string[] {
   if (!typeNode) return [];
 
   const dependencies = new Set<string>();
@@ -83,7 +84,23 @@ function extractTypeDependencies(typeNode: TypeNode | undefined): string[] {
         }
       });
       break;
+    
+    case SyntaxKind.FunctionType:
+      const func = typeNode as FunctionTypeNode;
+      findNonTrivialParameters(func.getParameters()).forEach(dep => dependencies.add(dep));
   }
 
   return Array.from(dependencies);
+}
+
+export function getBaseType(type: Type): string | undefined {
+    if (type.isArray()) {
+
+        return type.getArrayElementType()?.getAliasSymbol()?.getName();
+    } else if (type.isObject() && type.getTypeArguments().length > 0) {
+        // If it's an object type with type arguments (e.g., List<T>, Record<K, V>)
+        return type.getTypeArguments()[0].getSymbol()?.getName(); // Assuming the first type argument is the base type
+    }
+
+    return type.getSymbol()?.getName();
 }

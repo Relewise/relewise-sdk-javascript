@@ -1,5 +1,7 @@
 import { ParameterDeclaration, Scope } from 'ts-morph';
 import { Parameter } from '../models/parameter';
+import { extractTypeDependencies, getBaseType, handleTypes } from './handleTypes';
+import { handleProperties } from './handleProperties';
 
 export function handleParameters(parameters: ParameterDeclaration[]): Parameter[] {
     const results: Parameter[] = [];
@@ -72,7 +74,16 @@ export function findNonTrivialParameters(parameters: ParameterDeclaration[]): st
         const allTrivial = parts.every(p => trivial.has(p));
 
         if (!allTrivial && !seen.has(normalized)) {
-            result.push(raw);
+
+            const type = typeNode.getType();
+
+            // Parameter is an object literal
+            if (type.isObject() && !type.isInterface()) {
+                result.push(...extractTypeDependencies(typeNode));
+            } else {
+                result.push(raw);
+            }
+
             seen.add(normalized);
         }
     }

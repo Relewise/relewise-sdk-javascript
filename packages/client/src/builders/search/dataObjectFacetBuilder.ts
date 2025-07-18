@@ -21,7 +21,8 @@ export class DataObjectFacetBuilder {
             skip?: number,
             take?: number 
         },
-        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
+        evaluationMode?: "And" | "Or" | null): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -43,7 +44,8 @@ export class DataObjectFacetBuilder {
                 take: filter?.take,
                 skip: filter?.skip,
             },
-            settings: handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings),
+            evaluationMode: evaluationMode
         };
         this.facets.push(facet);
 

@@ -1566,6 +1566,7 @@ export type DataObjectFacet = UtilRequiredKeys<Facet, "$type"> & {
     | VariantSpecificationFacet
   )[];
   filter: DataObjectFilter;
+  evaluationMode?: "And" | "Or" | null;
 };
 
 export type DataObjectFacetResult = UtilRequiredKeys<FacetResult, "$type"> & {
@@ -1612,6 +1613,7 @@ export type DataObjectFacetResult = UtilRequiredKeys<FacetResult, "$type"> & {
       )[]
     | null;
   filter?: DataObjectFilter | null;
+  evaluationMode: "And" | "Or";
 };
 
 export interface DataObjectFilter {

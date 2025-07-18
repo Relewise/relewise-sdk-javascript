@@ -1,7 +1,7 @@
 import { ClassDeclaration, Scope } from 'ts-morph';
 import { Entry } from '../models/entry';
 import { Kind } from '../models/kind';
-import { findNonTrivialParameters, handleParameters } from './handleParameters';
+import { findParameterDependencies, handleParameters } from './handleParameters';
 
 export function handleConstructors(cls: ClassDeclaration): Entry[] {
     const constructors: Entry[] = [];
@@ -18,7 +18,7 @@ export function handleConstructors(cls: ClassDeclaration): Entry[] {
             docs: c.getJsDocs()[0]?.getText(),
             parent: cls.getName(),
             parentKind: Kind[Kind.Class],
-            dependencies: findNonTrivialParameters(c.getParameters()),
+            dependencies: findParameterDependencies(c.getParameters()),
             parameters: handleParameters(c.getParameters()),
         });
     });

@@ -1,6 +1,7 @@
-import { SourceFile, SyntaxKind, TypeNode, IntersectionTypeNode, TypeLiteralNode, PropertySignature, TypeReferenceNode, UnionTypeNode } from 'ts-morph';
+import { SourceFile, SyntaxKind, TypeNode, IntersectionTypeNode, TypeLiteralNode, PropertySignature, TypeReferenceNode, UnionTypeNode, Type, FunctionTypeNode } from 'ts-morph';
 import { Entry } from '../models/entry';
 import { Kind } from '../models/kind';
+import { findParameterDependencies } from './handleParameters';
 
 export function handleTypes(sourceFile: SourceFile): Entry[] {
   const types: Entry[] = [];
@@ -10,7 +11,7 @@ export function handleTypes(sourceFile: SourceFile): Entry[] {
 
     const name = typeAlias.getName();
     const typeNode = typeAlias.getTypeNode();
-    const dependencies = extractTypeDependencies(typeNode);
+    const dependencies = findTypeDependencies(typeNode);
     
     // Get the full text and extract just the type definition without the 'export' keyword
     const fullText = typeAlias.getText();
@@ -28,7 +29,7 @@ export function handleTypes(sourceFile: SourceFile): Entry[] {
   return types;
 }
 
-function extractTypeDependencies(typeNode: TypeNode | undefined): string[] {
+export function findTypeDependencies(typeNode: TypeNode | undefined): string[] {
   if (!typeNode) return [];
 
   const dependencies = new Set<string>();
@@ -48,27 +49,27 @@ function extractTypeDependencies(typeNode: TypeNode | undefined): string[] {
       // Handle generic type arguments
       const typeArgs = typeRef.getTypeArguments();
       typeArgs.forEach(arg => {
-        extractTypeDependencies(arg).forEach(dep => dependencies.add(dep));
+        findTypeDependencies(arg).forEach(dep => dependencies.add(dep));
       });
       break;
 
     case SyntaxKind.UnionType:
       const unionType = typeNode as UnionTypeNode;
       unionType.getTypeNodes().forEach(unionMember => {
-        extractTypeDependencies(unionMember).forEach(dep => dependencies.add(dep));
+        findTypeDependencies(unionMember).forEach(dep => dependencies.add(dep));
       });
       break;
 
     case SyntaxKind.IntersectionType:
       const intersectionType = typeNode as IntersectionTypeNode;
       intersectionType.getTypeNodes().forEach(intersectionMember => {
-        extractTypeDependencies(intersectionMember).forEach(dep => dependencies.add(dep));
+        findTypeDependencies(intersectionMember).forEach(dep => dependencies.add(dep));
       });
       break;
 
     case SyntaxKind.ArrayType:
       const arrayType = typeNode.asKindOrThrow(SyntaxKind.ArrayType);
-      extractTypeDependencies(arrayType.getElementTypeNode()).forEach(dep => dependencies.add(dep));
+      findTypeDependencies(arrayType.getElementTypeNode()).forEach(dep => dependencies.add(dep));
       break;
 
     case SyntaxKind.TypeLiteral:
@@ -78,12 +79,28 @@ function extractTypeDependencies(typeNode: TypeNode | undefined): string[] {
           const propSig = prop as PropertySignature;
           const propTypeNode = propSig.getTypeNode();
           if (propTypeNode) {
-            extractTypeDependencies(propTypeNode).forEach(dep => dependencies.add(dep));
+            findTypeDependencies(propTypeNode).forEach(dep => dependencies.add(dep));
           }
         }
       });
       break;
+    
+    case SyntaxKind.FunctionType:
+      const func = typeNode as FunctionTypeNode;
+      findParameterDependencies(func.getParameters()).forEach(dep => dependencies.add(dep));
   }
 
   return Array.from(dependencies);
+}
+
+export function getBaseType(type: Type): string | undefined {
+    if (type.isArray()) {
+
+        return type.getArrayElementType()?.getAliasSymbol()?.getName();
+    } else if (type.isObject() && type.getTypeArguments().length > 0) {
+        // If it's an object type with type arguments (e.g., List<T>, Record<K, V>)
+        return type.getTypeArguments()[0].getSymbol()?.getName(); // Assuming the first type argument is the base type
+    }
+
+    return type.getSymbol()?.getName();
 }

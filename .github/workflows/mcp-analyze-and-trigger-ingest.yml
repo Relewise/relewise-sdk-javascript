@@ -22,15 +22,26 @@ jobs:
         run: npm ci
         working-directory: ./packages/code-analyzer
 
-
-      - name: Run codeAnalyzer script
-        run: npm run codeAnalyzer -- '..\client\tsconfig.json'
+      - name: Run codeAnalyzer script for client
+        run: npm run codeAnalyzer -- '..\client\tsconfig.json' '@relewise/client'
         working-directory: ./packages/code-analyzer
 
       - name: Upload result to API
         working-directory: ./packages/code-analyzer
         run: |
-          curl -X PUT http://mcp.relewise.com/IngestDataSource/TypeScript \
+          curl --fail -X PUT http://mcp.relewise.com/IngestDataSource/TypeScript \
+            -H "Content-Type: application/json" \
+            -H "X-API-KEY: ${{secrets.MCP_INGESTION_API_KEY}}" \
+            -d @ingestion-request.json
+
+      - name: Run codeAnalyzer script for integrations
+        run: npm run codeAnalyzer -- '..\integrations\tsconfig.json' '@relewise/integrations'
+        working-directory: ./packages/code-analyzer
+
+      - name: Upload result to API
+        working-directory: ./packages/code-analyzer
+        run: |
+          curl --fail -X PUT http://mcp.relewise.com/IngestDataSource/TypeScript \
             -H "Content-Type: application/json" \
             -H "X-API-KEY: ${{secrets.MCP_INGESTION_API_KEY}}" \
             -d @ingestion-request.json

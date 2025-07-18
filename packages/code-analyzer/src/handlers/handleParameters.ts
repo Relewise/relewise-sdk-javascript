@@ -1,5 +1,6 @@
 import { ParameterDeclaration, Scope } from 'ts-morph';
 import { Parameter } from '../models/parameter';
+import { findTypeDependencies } from './handleTypes';
 
 export function handleParameters(parameters: ParameterDeclaration[]): Parameter[] {
     const results: Parameter[] = [];
@@ -27,7 +28,7 @@ export function handleParameters(parameters: ParameterDeclaration[]): Parameter[
     return results;
 }
 
-export function findNonTrivialParameters(parameters: ParameterDeclaration[]): string[] {
+export function findParameterDependencies(parameters: ParameterDeclaration[]): string[] {
     const baseTypes = [
         'string', 'number', 'boolean', 'bigint', 'symbol', 'object', 'void', 'undefined', 'null', 'any', 'never', 'unknown', 'Date',
     ];
@@ -51,7 +52,6 @@ export function findNonTrivialParameters(parameters: ParameterDeclaration[]): st
         }
     }
 
-    const seen = new Set<string>();
     const result: string[] = [];
 
     for (const param of parameters) {
@@ -64,18 +64,24 @@ export function findNonTrivialParameters(parameters: ParameterDeclaration[]): st
         const typeNode = param.getTypeNode();
         if (!typeNode) continue;
 
-        const raw = typeNode.getText();
-        const normalized = raw.replace(/\s/g, '').toLowerCase();
-
         // Split on union (|) and intersection (&), and check all parts
+        const normalized = typeNode.getText().replace(/\s/g, '');
         const parts = normalized.split(/[\|&]/).map(p => p.trim());
-        const allTrivial = parts.every(p => trivial.has(p));
 
-        if (!allTrivial && !seen.has(normalized)) {
-            result.push(raw);
-            seen.add(normalized);
+        // Check if all parts of the param in trivial
+        if (parts.every(p => trivial.has(p))) continue;
+
+        const type = typeNode.getType();
+
+        // Check if parameter is an object literal
+        if (type.isObject() && !type.isInterface()) {
+
+            // Find the dependencies for that object
+            result.push(...findTypeDependencies(typeNode));
+        } else {
+            result.push(normalized);
         }
     }
 
-    return result;
+    return [...new Set(result)];
 }

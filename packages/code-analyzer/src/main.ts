@@ -9,6 +9,8 @@ import { handleTypes } from './handlers/handleTypes';
 import { handleEnums } from './handlers/handleEnums';
 
 const tsConfigFilePath = process.argv[2];
+const packageName = process.argv[3];
+
 const project = new Project({ tsConfigFilePath: tsConfigFilePath });
 
 const result: Entry[] = [];
@@ -22,7 +24,8 @@ for (const sourceFile of project.getSourceFiles()) {
 }
 
 const ingestionRequest: IngestionRequest = {
-    entries: result,
+    packageName: packageName,
+    entries: result
 };
 
 fs.writeFileSync('ingestion-request.json', JSON.stringify(ingestionRequest, null, 2));

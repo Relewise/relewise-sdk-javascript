@@ -1,5 +1,6 @@
 import { PropertyDeclaration, PropertySignature, Scope, Type } from 'ts-morph';
 import { Property } from '../models/property';
+import { getBaseType } from './handleTypes';
 
 export function handleProperties(properties: PropertyDeclaration[]): Property[] {
     return properties.flatMap(p => { 
@@ -47,13 +48,4 @@ export function handlePropertySignatures(properties: PropertySignature[]): Prope
             baseType: getBaseType(p.getType())
         };
     });
-}
-
-function getBaseType(type: Type): string | undefined {
-    if (type.isArray()) {
-
-        return type.getArrayElementType()?.getAliasSymbol()?.getName();
-    } 
-
-    return type.getSymbol()?.getName();
 }

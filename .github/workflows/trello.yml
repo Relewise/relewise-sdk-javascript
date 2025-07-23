@@ -1,0 +1,16 @@
+name: Create Trello Card on Issue
+on:
+  issues:
+    types: [opened]
+jobs:
+  create_card:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Trello card in Weekly Inbound
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://hub.relewise.com/development/services/create-trello-card'
+          method: 'POST'        
+          username: '${{ secrets.HUB_BASIC_AUTH_USERNAME }}'
+          password: '${{ secrets.HUB_BASIC_AUTH_PASSWORD }}'
+          data: '{"title": "JS SDK: ${{ github.event.issue.title }}", "listId": "6797608aa0eb86a30698134f", "labelIds": ["62547bf8c1f9f669438d8b00"], "description": "A new issue has been created.\n\nIssue URL: ${{ github.event.issue.html_url }}"}'

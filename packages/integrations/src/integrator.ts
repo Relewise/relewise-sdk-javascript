@@ -128,7 +128,7 @@ export class Integrator extends RelewiseClient {
             options);
     }
 
-    public async batch(trackable: Trackable[], options?: RelewiseRequestOptions): Promise<SearchResponseCollection | undefined> {
+    public async batch(trackable: Trackable[], options?: RelewiseRequestOptions): Promise<void | undefined> {
         if (!trackable) {
             throw new Error('No trackable items was provided');
         }
@@ -142,7 +142,7 @@ export class Integrator extends RelewiseClient {
             : [trackable];
 
         for (const chunck of chuncks) {
-            await this.request<BatchedTrackingRequest, SearchResponseCollection>(
+            await this.request<BatchedTrackingRequest, void>(
                 'BatchedTrackingRequest',
                 {
                     $type: 'Relewise.Client.Requests.Tracking.BatchedTrackingRequest, Relewise.Client',

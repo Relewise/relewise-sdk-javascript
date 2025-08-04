@@ -332,7 +332,7 @@ export class FacetBuilder {
             take?: number
         },
         facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
-        evaluationMode?: "And" | "Or" | null): this {
+        evaluationMode?: "And" | "Or"): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -489,7 +489,7 @@ export class FacetBuilder {
             take?: number
         },
         facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
-        evaluationMode?: "And" | "Or" | null): this {
+        evaluationMode?: "And" | "Or"): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {
@@ -626,7 +626,7 @@ export class FacetBuilder {
             take?: number
         },
         facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void),
-        evaluationMode?: "And" | "Or" | null): this {
+        evaluationMode?: "And" | "Or"): this {
 
         const facetBuilder = new DataObjectFacetBuilder();
         if (builder) {

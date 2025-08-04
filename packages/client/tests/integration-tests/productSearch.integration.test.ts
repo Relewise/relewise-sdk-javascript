@@ -1,4 +1,4 @@
-import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult, BrandFacetResult, Tracker } from '../../src';
+import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult, BrandFacetResult, Tracker, ProductDataObjectFacet } from '../../src';
 import { Integrator, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { test, expect } from '@jest/globals'
 import { fail } from 'assert';
@@ -48,6 +48,40 @@ test('Product search - data object facets', async () => {
     const result = await searcher.searchProducts(request);
 
     expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('Product search - data object facets evaluation mode', async () => {
+
+    const product = new ProductUpdateBuilder({
+        id: 'Object facet evaluation mode test product',
+        productUpdateKind: 'ReplaceProvidedProperties',
+    })
+        .data({
+            'ObjectForFacet': DataValueFactory.object({
+                'Key': DataValueFactory.string('data')
+            })
+        });
+
+    await integrator.updateProduct(product.build());
+
+    const request: ProductSearchRequest = baseProductBuilder()
+        .facets(f => f.addProductDataObjectFacet(
+            'ObjectForFacet',
+            'Product',
+            f => f
+                .addStringFacet('Key', [])
+                .addStringFacet('Key2', []),
+           undefined,
+           undefined,
+           'Or'))
+
+        .build();
+
+    const result = await searcher.searchProducts(request);
+    const facet = result?.facets?.items?.find(x => x.$type.includes('ProductDataObjectFacetResult'))  as ProductDataObjectFacet;
+    
+    expect(facet).toBeDefined();
+    expect(facet.evaluationMode).toBe('Or');
 });
 
 test('Product search - with cleared facets', async () => {

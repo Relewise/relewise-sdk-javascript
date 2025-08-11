@@ -1,12 +1,12 @@
-import { error } from 'console';
 import version from './version';
 
 export interface RelewiseClientOptions {
     serverUrl?: string;
+    cache?: RequestCache;
 }
 
 export interface RelewiseRequestOptions {
-    abortSignal?: AbortSignal
+    abortSignal?: AbortSignal;
 }
 
 export class ProblemDetailsError extends Error {
@@ -35,6 +35,7 @@ export abstract class RelewiseClient {
     private readonly _serverUrl: string = 'https://api.relewise.com';
     private readonly _urlPath: string = 'v1';
     private readonly _apiKeyHeader: string;
+    private readonly cache: RequestCache = 'no-cache';
 
     constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
         if (!datasetId) throw new Error('Dataset id cannot be null or empty. Please contact Relewise if you don\'t have an account already or would like a free demo license');
@@ -44,6 +45,9 @@ export abstract class RelewiseClient {
 
         if (options?.serverUrl) {
             this._serverUrl = options.serverUrl;
+        }
+        if (options?.cache) {
+            this.cache = options.cache;
         }
     }
 
@@ -64,7 +68,7 @@ export abstract class RelewiseClient {
                 },
                 body: JSON.stringify(data),
                 signal: options?.abortSignal,
-                cache: 'no-cache',
+                cache: this.cache,
             });
 
             if (!response.ok) {

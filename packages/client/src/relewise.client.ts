@@ -73,21 +73,21 @@ export abstract class RelewiseClient {
 
             if (!response.ok) {
                 let responseMessage: HttpProblemDetails | null = null;
-    
-                try { 
+
+                try {
                     responseMessage = await response.json();
-                } catch (_) { 
+                } catch (_) {
                 }
-    
+
                 const details = responseMessage?.detail ? `Details: ${responseMessage.detail}\n` : '';
-    
+
                 throw new ProblemDetailsError(`Error when calling the Relewise API.\n\nTitle: ${response.statusText}\nStatus: ${response.status}\n${details}\nRead more in the details property if there is error response or look in the network tab.`, responseMessage);
             }
 
             return await this.parseJson<TResponse>(response);
 
         } catch (err) {
-           this.handleRequestError(err);
+            this.handleRequestError(err);
         }
     }
 
@@ -101,10 +101,49 @@ export abstract class RelewiseClient {
     private handleRequestError(err: unknown): never {
         if (err instanceof ProblemDetailsError) throw err;
         if (err instanceof DOMException) throw err;
-        
-        console.error("Network error or preflight request failed. Check API Key and Dataset ID.");
-        throw new Error("Network error or preflight request failed. Check API Key and Dataset ID.");
+
+        let extraInfo = '';
+        let possibleCause: string | null = null;
+
+        if (err instanceof Error) {
+            extraInfo += `\nOriginal error: ${err.name} - ${err.message}`;
+            if ((err as any).code) {
+                extraInfo += `\nCode: ${(err as any).code}`;
+            }
+
+            const message = err.message.toLowerCase();
+
+            if (message.includes('failed to fetch')) {
+                possibleCause = 'Failed to connect to API. Possible network outage, incorrect server URL, or CORS/preflight issue.';
+            }
+            else if (message.includes('401') || message.includes('unauthorized')) {
+                possibleCause = 'Unauthorized: Your API Key might be missing, expired, or incorrect.';
+            }
+            else if (message.includes('403') || message.includes('forbidden')) {
+                possibleCause = 'Forbidden: Your API Key might not have access to this dataset.';
+            }
+            else if (message.includes('404') || message.includes('not found')) {
+                possibleCause = 'Not Found: The Dataset ID or endpoint may be incorrect.';
+            }
+        }
+        else {
+            extraInfo += `\nNon-Error thrown: ${JSON.stringify(err)}`;
+        }
+
+        const errorMessage =
+            "Network error or preflight request failed.\n" +
+            (possibleCause ? `Possible cause: ${possibleCause}\n` : "") +
+            "Troubleshooting steps:\n" +
+            "- Check your API Key is correct and active\n" +
+            "- Verify the Dataset ID exists and is correctly spelled\n" +
+            "- Ensure the server URL is reachable from your network\n" +
+            "- Check browser console/network tab for blocked requests or CORS issues" +
+            extraInfo;
+
+        console.error(errorMessage);
+        throw new Error(errorMessage);
     }
+
 
     private async parseJson<T>(response: Response): Promise<T | undefined> {
         try {

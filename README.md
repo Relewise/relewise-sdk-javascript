@@ -40,6 +40,18 @@ Replace the `RELEWISE_DATASET_ID`, `RELEWISE_API_KEY` and `RELEWISE_SERVER_URL` 
 After which you have access to various methods depending on the client you've bootstrapped.
 
 ***Note: serverUrl is not required and will default to https://api.relewise.com/*** 
+
+#### Cache mode
+By default, clients use `cache: 'no-cache'` to ensure responses are always fresh — this prevents stale results that could break personalization.
+However, some service workers (often used in integrations) do not support the `no-cache` mode.
+
+```ts
+const integrator = new Integrator(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+    serverUrl: RELEWISE_SERVER_URL,
+    cache: 'default'
+});
+```
+
 ### Tracking
 
 If you need to track e.g. Product-, Category or Content Views, track Cart Updates or Completed Orders in your solution, you need to use the `Tracker` 

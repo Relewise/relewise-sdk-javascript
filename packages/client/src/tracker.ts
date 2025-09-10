@@ -1,7 +1,16 @@
 import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions } from './relewise.client';
-import { 
+import {
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
     TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest, DataValue,
+    FeedDwell,
+    TrackFeedDwellRequest,
+    TrackFeedItemClickRequest,
+    FeedItemClick,
+    TrackFeedItemPreviewRequest,
+    FeedItemPreview,
+    TrackFeedItemFeedbackRequest,
+    FeedItemFeedback,
+    FeedItem,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -15,8 +24,8 @@ export class Tracker extends RelewiseClient {
         orderNumber: string,
         /** @deprecated Use orderNumber instead. */
         trackingNumber?: string,
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], 
-        data?: Record<string, DataValue>, 
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[],
+        data?: Record<string, DataValue>,
         cartName?: string
     }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
@@ -27,12 +36,12 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
-                    ...(l.variantId && { variant: { id: l.variantId }}),
+                    ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
                     data: l.data,
                 })),
-                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
+                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency } },
                 orderNumber: orderNumber,
                 trackingNumber: trackingNumber,
                 cartName: cartName,
@@ -42,12 +51,12 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: { 
-        user?: User, 
-        subtotal: { currency: string, amount: number }, 
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], 
-        data?: Record<string, DataValue>, 
-        cartName?: string 
+    public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: {
+        user?: User,
+        subtotal: { currency: string, amount: number },
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[],
+        data?: Record<string, DataValue>,
+        cartName?: string
     }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackCartRequest, void>('TrackCartRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackCartRequest, Relewise.Client',
@@ -57,12 +66,12 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
-                    ...(l.variantId && { variant: { id: l.variantId }}),
+                    ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
                     data: l.data,
                 })),
-                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
+                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency } },
                 name: cartName,
                 user: user,
                 data: data,
@@ -78,7 +87,7 @@ export class Tracker extends RelewiseClient {
                 product: {
                     id: productId,
                 },
-                ...(variantId && { variant: { id: variantId }}),
+                ...(variantId && { variant: { id: variantId } }),
                 user: user,
             },
         }, options);
@@ -146,7 +155,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }, options?: RelewiseRequestOptions): Promise<void | undefined> {
+    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace' }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackUserUpdateRequest, void>('TrackUserUpdateRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackUserUpdateRequest, Relewise.Client',
             userUpdate: {
@@ -154,6 +163,56 @@ export class Tracker extends RelewiseClient {
                 user: user,
                 kind: updateKind,
             },
+        }, options);
+    }
+
+    public async trackFeedDwell({ user, feedId, dwellTimeMilliseconds, visibleItems }: Omit<FeedDwell, '$type'>, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedDwellRequest, void>('TrackFeedDwellRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedDwellRequest, Relewise.Client',
+            dwell: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedDwell, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                dwellTimeMilliseconds: dwellTimeMilliseconds,
+                visibleItems: visibleItems,
+            }
+        }, options);
+    }
+
+    public async trackFeedItemClick({ user, feedId, item }: { user?: User | null; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedItemClickRequest, void>('TrackFeedItemClickRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemClickRequest, Relewise.Client',
+            click: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedItemClick, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                item: item,
+            }
+        }, options);
+    }
+
+    public async trackFeedItemFeedback({ user, feedId, item, kind }: Omit<FeedItemFeedback, '$type'>, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedItemFeedbackRequest, void>('TrackFeedItemClickRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemClickRequest, Relewise.Client',
+            feedback: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedItemFeedback, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                item: item,
+                kind: kind
+            }
+        }, options);
+    }
+
+    public async trackFeedItemPreview({ user, feedId, item }: { user?: User | null; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedItemPreviewRequest, void>('TrackFeedItemPreviewRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemPreviewRequest, Relewise.Client',
+            preview: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedItemPreview, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                item: item,
+            }
         }, options);
     }
 }

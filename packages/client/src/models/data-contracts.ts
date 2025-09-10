@@ -13,7 +13,12 @@ export type UtilRequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<
 
 export type AbandonedCartTriggerConfiguration = AbandonedCartTriggerResultTriggerConfiguration & {
   cartName?: string | null;
+  selectedProperties?: AbandonedCartTriggerConfigurationPropertySelectionSettings | null;
 };
+
+export interface AbandonedCartTriggerConfigurationPropertySelectionSettings {
+  user?: UserResultDetailsSelectedPropertiesSettings | null;
+}
 
 export interface AbandonedCartTriggerResultTriggerConfiguration {
   $type: string;
@@ -283,6 +288,10 @@ export type BatchedTrackingRequest = TrackingRequest & {
         | ProductView
         | SearchTerm
         | UserUpdate
+        | FeedDwell
+        | FeedItemClick
+        | FeedItemFeedback
+        | FeedItemPreview
       )[]
     | null;
 };
@@ -733,6 +742,12 @@ export interface CartDetails {
   lineItems?: LineItem[] | null;
   subtotal?: Money | null;
   data?: Record<string, DataValue>;
+}
+
+export interface CartDetailsSelectedPropertiesSettings {
+  allData: boolean;
+  dataKeys?: string[] | null;
+  lineItems?: LineItemSelectedPropertiesSettings | null;
 }
 
 export interface Category {
@@ -2134,6 +2149,92 @@ export interface FacetSorting {
   $type: string;
 }
 
+export interface Feed {
+  /** @format int32 */
+  minimumPageSize: number;
+  seed?: FeedSeed | null;
+  compositions: FeedComposition[];
+  selectedProductProperties?: SelectedProductPropertiesSettings | null;
+  selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
+  selectedContentProperties?: SelectedContentPropertiesSettings | null;
+  recommendVariant?: boolean | null;
+  allowProductsCurrentlyInCart?: boolean | null;
+}
+
+export interface FeedComposition {
+  type: "Product" | "Content";
+  count: Int32Range;
+  filters?: FilterCollection | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  fill?: FeedComposition | null;
+  name?: string | null;
+  includeEmptyResults: boolean;
+  /** @format int32 */
+  rotationLimit?: number | null;
+}
+
+export interface FeedCompositionResult {
+  name?: string | null;
+  products?: ProductResult[] | null;
+  content?: ContentResult[] | null;
+}
+
+export type FeedDwell = Trackable & {
+  user: User;
+  /** @format uuid */
+  feedId: string;
+  /** @format int32 */
+  dwellTimeMilliseconds: number;
+  visibleItems: FeedItem[];
+};
+
+export interface FeedItem {
+  productAndVariantId?: ProductAndVariantId | null;
+  contentId?: string | null;
+}
+
+export type FeedItemClick = Trackable & {
+  user?: User | null;
+  /** @format uuid */
+  feedId: string;
+  item?: FeedItem | null;
+};
+
+export type FeedItemFeedback = Trackable & {
+  user: User;
+  /** @format uuid */
+  feedId: string;
+  item: FeedItem;
+  kind: "Like" | "Dislike" | "Favorite" | "Unfavorite";
+};
+
+export type FeedItemPreview = Trackable & {
+  user?: User | null;
+  /** @format uuid */
+  feedId: string;
+  item?: FeedItem | null;
+};
+
+export type FeedRecommendationInitializationRequest = RecommendationRequest & {
+  feed: Feed;
+};
+
+export type FeedRecommendationNextItemsRequest = LicensedRequest & {
+  /** @format uuid */
+  initializedFeedId: string;
+};
+
+export type FeedRecommendationResponse = RecommendationResponse & {
+  /** @format uuid */
+  initializedFeedId: string;
+  recommendations?: FeedCompositionResult[] | null;
+};
+
+export interface FeedSeed {
+  productAndVariantIds?: ProductAndVariantId[] | null;
+  contentIds?: string[] | null;
+}
+
 export interface FieldIndexConfiguration {
   included: boolean;
   /** @format int32 */
@@ -2324,6 +2425,12 @@ export interface HasChildCategoryFilter {
 export type HasClassificationCondition = UserCondition & {
   key?: string | null;
   value?: string | null;
+};
+
+export type HasCompanyDataCondition = UserCondition & {
+  key: string;
+  conditions?: ValueConditionCollection | null;
+  evaluationScope: "ImmediateCompany" | "ParentCompany" | "ImmediateOrParentCompany";
 };
 
 export type HasDataCondition = UserCondition & {
@@ -2595,6 +2702,13 @@ export interface LineItem {
   data?: Record<string, DataValue>;
 }
 
+export interface LineItemSelectedPropertiesSettings {
+  product?: SelectedProductPropertiesSettings | null;
+  variant?: SelectedVariantPropertiesSettings | null;
+  allData: boolean;
+  dataKeys?: string[] | null;
+}
+
 export type Location = LocationEntityStateLocationMetadataValuesRetailMediaEntity & {
   name: string;
   key?: string | null;
@@ -2767,6 +2881,7 @@ export type MixedRecommendationResponseCollection = TimedResponse & {
         | BrandRecommendationResponse
         | ContentCategoryRecommendationResponse
         | ContentRecommendationResponse
+        | FeedRecommendationResponse
         | ProductCategoryRecommendationResponse
         | ProductRecommendationResponse
         | SearchTermRecommendationResponse
@@ -4687,6 +4802,7 @@ export interface RequestContextFilter {
   languages?: Language[] | null;
   currencies?: Currency[] | null;
   filters?: RequestFilterCriteria | null;
+  searchTermCondition?: SearchTermCondition | RetailMediaSearchTermCondition | null;
 }
 
 export interface RequestFilterCriteria {
@@ -5598,6 +5714,22 @@ export type TrackContentViewRequest = TrackingRequest & {
   contentView: ContentView;
 };
 
+export type TrackFeedDwellRequest = TrackingRequest & {
+  dwell: FeedDwell;
+};
+
+export type TrackFeedItemClickRequest = TrackingRequest & {
+  click: FeedItemClick;
+};
+
+export type TrackFeedItemFeedbackRequest = TrackingRequest & {
+  feedback: FeedItemFeedback;
+};
+
+export type TrackFeedItemPreviewRequest = TrackingRequest & {
+  preview: FeedItemPreview;
+};
+
 export type TrackOrderRequest = TrackingRequest & {
   order: Order;
 };
@@ -5756,6 +5888,7 @@ export interface UserConditionCollection {
         | HasActivityCondition
         | HasAuthenticatedIdCondition
         | HasClassificationCondition
+        | HasCompanyDataCondition
         | HasDataCondition
         | HasEmailCondition
         | HasIdentifierCondition
@@ -5825,6 +5958,16 @@ export interface UserResultDetails {
   temporaryIds?: string[] | null;
   channel?: Channel | null;
   company?: UserAssociatedCompanyResultDetails | null;
+}
+
+export interface UserResultDetailsSelectedPropertiesSettings {
+  allClassifications: boolean;
+  classificationKeys?: string[] | null;
+  carts?: CartDetailsSelectedPropertiesSettings | null;
+  allIdentifiers: boolean;
+  identifierKeys?: string[] | null;
+  allData: boolean;
+  dataKeys?: string[] | null;
 }
 
 export type UserUpdate = Trackable & {

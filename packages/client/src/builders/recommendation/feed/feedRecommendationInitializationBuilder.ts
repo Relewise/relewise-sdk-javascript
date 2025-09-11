@@ -1,6 +1,7 @@
 import { Settings } from '../../../builders/settings';
-import { Feed, FeedComposition, FeedRecommendationInitializationRequest, FeedSeed, SelectedContentPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from '../../../models/data-contracts';
+import { Feed, FeedComposition, FeedRecommendationInitializationRequest, FeedSeed, Int32Range, SelectedContentPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from '../../../models/data-contracts';
 import { RecommendationRequestBuilder } from '../recommendationRequestBuilder';
+import { FeedCompositionBuilder } from './feedCompositionBuilder';
 
 export class FeedRecommendationInitializationBuilder extends RecommendationRequestBuilder {
     private feed: Feed;
@@ -33,6 +34,17 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
      */
     public compositions(compositions: FeedComposition[]): this {
         this.feed.compositions = compositions;
+
+        return this;
+    }
+
+    public addCompostion(options: { type: 'Product' | 'Content', count: Int32Range }, builderFn: (fillBuilder: FeedCompositionBuilder) => void): this {
+        this.feed.compositions ??= [];
+
+        const builder = new FeedCompositionBuilder(options);
+        builderFn(builder);
+
+        this.feed.compositions.push(builder.build());
 
         return this;
     }

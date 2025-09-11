@@ -1,4 +1,4 @@
-import { ContentRecommendationRequestCollection, ContentsRecommendationCollectionBuilder, ContentsViewedAfterViewingContentBuilder, PopularContentsBuilder, Recommender, UserFactory } from '../../src';
+import { ContentRecommendationRequestCollection, ContentsRecommendationCollectionBuilder, ContentsViewedAfterViewingContentBuilder, FeedRecommendationInitializationBuilder, PopularContentsBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -12,9 +12,9 @@ const settings = {
     user: UserFactory.anonymous(),
 };
 
-test('Batched Content Reommendations', async() => {
+test('Batched Content Reommendations', async () => {
 
-    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()      
+    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()
         .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).setNumberOfRecommendations(1).build())
         .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setNumberOfRecommendations(1).setContentId('1').build())
         .build();
@@ -25,4 +25,17 @@ test('Batched Content Reommendations', async() => {
     expect(result!.responses![0].recommendations?.length).toBeGreaterThan(0);
     expect(result!.responses![1].recommendations?.length).toBeGreaterThan(0);
 
+});
+
+test('Batched Content Reommendations', async () => {
+
+    const t = new FeedRecommendationInitializationBuilder({ minimumPageSize: 10 }, settings)
+        .addCompostion({
+            type: 'Product',
+            count: { lowerBoundInclusive: 1, upperBoundInclusive: 2 }
+        },
+            b => b
+                .filters(f => f.addContentCategoryIdFilter('Imm', 2))
+                .rotationLimit(1)
+        );
 });

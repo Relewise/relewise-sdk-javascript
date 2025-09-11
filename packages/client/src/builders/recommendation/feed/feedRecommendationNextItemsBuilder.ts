@@ -4,7 +4,6 @@ export class FeedRecommendationNextItemsBuilder {
     private initializedFeedId: string;
 
     constructor({ initializedFeedId }: { initializedFeedId: string }) {
-
         this.initializedFeedId = initializedFeedId;
     }
 

@@ -192,8 +192,8 @@ export class Tracker extends RelewiseClient {
     }
 
     public async trackFeedItemFeedback({ user, feedId, item, kind }: Omit<FeedItemFeedback, '$type'>, options?: RelewiseRequestOptions) {
-        return this.request<TrackFeedItemFeedbackRequest, void>('TrackFeedItemClickRequest', {
-            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemClickRequest, Relewise.Client',
+        return this.request<TrackFeedItemFeedbackRequest, void>('TrackFeedItemFeedbackRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemFeedbackRequest, Relewise.Client',
             feedback: {
                 $type: 'Relewise.Client.DataTypes.Feed.FeedItemFeedback, Relewise.Client',
                 user: user,

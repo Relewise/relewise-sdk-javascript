@@ -1,6 +1,6 @@
-import { FilterBuilder } from 'src/builders/filterBuilder';
+import { FilterBuilder } from '../../filterBuilder';
 import { FeedComposition, Int32Range } from '../../../models/data-contracts';
-import { RelevanceModifierBuilder } from 'src/builders/relevanceModifierBuilder';
+import { RelevanceModifierBuilder } from '../../relevanceModifierBuilder';
 
 export class FeedCompositionBuilder {
     private composition: FeedComposition;

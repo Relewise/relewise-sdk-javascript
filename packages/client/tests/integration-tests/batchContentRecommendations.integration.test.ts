@@ -29,13 +29,17 @@ test('Batched Content Reommendations', async () => {
 
 test('Batched Content Reommendations', async () => {
 
-    const t = new FeedRecommendationInitializationBuilder({ minimumPageSize: 10 }, settings)
+    const request = new FeedRecommendationInitializationBuilder({ minimumPageSize: 10 }, settings)
         .addCompostion({
             type: 'Product',
             count: { lowerBoundInclusive: 1, upperBoundInclusive: 2 }
         },
             b => b
-                .filters(f => f.addContentCategoryIdFilter('Imm', 2))
+                .filters(f => f.addContentCategoryIdFilter('ImmediateParent', "2"))
                 .rotationLimit(1)
         );
+
+    const result = await recommender.recommendFeedRecommendationInitialization(request.build());
+
+    expect(result).not.toBe(undefined);
 });

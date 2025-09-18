@@ -1,6 +1,6 @@
 {
   "name": "@relewise/client",
-  "version": "2.22.0",
+  "version": "2.23.0",
   "description": "Relewise is a next generation personalization SaaS-platform, which offers functionality within product- and content recommendations and personalized search. This official SDK helps you interact with our API.",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "prebuild:types": "rimraf ./build",
     "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
     "clean": "rimraf ./build ./dist ./docs",
-    "gen-api": "swagger-typescript-api -p https://sandbox-api.relewise.com/3ef4dc87-6260-43c0-95e9-9b8bd9a6fe7c/public/swagger.json -o src/models --modular --no-client --enum-names-as-values && node fix-exports.js",
+    "gen-api": "swagger-typescript-api -p https://sandbox-api.relewise.com/33126744-648a-441a-9c61-091ae00333ad/public/swagger.json -o src/models --modular --no-client --enum-names-as-values && node fix-exports.js",
     "gen-api-dev": "swagger-typescript-api -p swagger.json -o src/models --modular --no-client --enum-names-as-values && node fix-exports.js",
     "publish": "npm run gen-api && npm run build && npm run build:types"
   },

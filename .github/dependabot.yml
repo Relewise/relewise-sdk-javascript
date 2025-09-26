@@ -1,14 +1,14 @@
-# .github/dependabot.yml
 version: 2
 
 updates:
-  # /packages/client — weekly minor/patch (grouped)
-  - package-ecosystem: "npm"
-    directory: "/packages/client"
-    schedule: { interval: "weekly", day: "monday", time: "07:00", timezone: "Europe/Copenhagen" }
+  # ---------- /packages/client ----------
+  # Weekly: group all minor/patch into one PR (to main)
+  - package-ecosystem: npm
+    directory: /packages/client
+    schedule: { interval: weekly, day: monday, time: "07:00", timezone: Europe/Copenhagen }
     versioning-strategy: increase-if-necessary
     open-pull-requests-limit: 10
-    # prevent majors in this weekly job
+    # keep majors out of the weekly run
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -17,57 +17,32 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
     labels: ["dependencies"]
-    commit-message: { prefix: "deps(client)", include: "scope" }
+    commit-message: { prefix: "deps(client)", include: scope }
 
-  # /packages/client — monthly majors (separate PRs)
-  - package-ecosystem: "npm"
-    directory: "/packages/client"
-    schedule: { interval: "monthly", time: "07:00", timezone: "Europe/Copenhagen" }
+  # Monthly: only majors, grouped into a single PR per month (to a majors branch)
+  - package-ecosystem: npm
+    directory: /packages/client
+    target-branch: deps/majors-client            # <— unique combo, no collision
+    schedule: { interval: monthly, time: "07:00", timezone: Europe/Copenhagen }
     versioning-strategy: increase-if-necessary
     open-pull-requests-limit: 10
-    # only majors in this monthly job
+    # accept only majors here
     ignore:
       - dependency-name: "*"
-        update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
-    labels: ["dependencies"]
-    commit-message: { prefix: "deps(client:major)", include: "scope" }
-
-  # /packages/integrations — weekly minor/patch (grouped)
-  - package-ecosystem: "npm"
-    directory: "/packages/integrations"
-    schedule: { interval: "weekly", day: "monday", time: "07:00", timezone: "Europe/Copenhagen" }
-    versioning-strategy: increase-if-necessary
-    open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
     groups:
-      minor-and-patch:
+      major-only:
         patterns: ["*"]
-        update-types: ["minor", "patch"]
+        update-types: ["major"]
     labels: ["dependencies"]
-    commit-message: { prefix: "deps(integrations)", include: "scope" }
+    commit-message: { prefix: "deps(client:major)", include: scope }
 
-  # /packages/integrations — monthly majors (separate PRs)
-  - package-ecosystem: "npm"
-    directory: "/packages/integrations"
-    schedule: { interval: "monthly", time: "07:00", timezone: "Europe/Copenhagen" }
+  # ---------- /packages/integrations ----------
+  # Weekly: group all minor/patch into one PR (to main)
+  - package-ecosystem: npm
+    directory: /packages/integrations
+    schedule: { interval: weekly, day: monday, time: "07:00", timezone: Europe/Copenhagen }
     versioning-strategy: increase-if-necessary
-    open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "*"
-        update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
-    labels: ["dependencies"]
-    commit-message: { prefix: "deps(integrations:major)", include: "scope" }
-
-  # GitHub Actions — weekly minor/patch (grouped)
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule: { interval: "weekly", day: "monday", time: "07:00", timezone: "Europe/Copenhagen" }
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "*"
@@ -77,15 +52,51 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
     labels: ["dependencies"]
+    commit-message: { prefix: "deps(integrations)", include: scope }
 
-  # GitHub Actions — monthly majors (separate PRs)
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule: { interval: "monthly", time: "07:00", timezone: "Europe/Copenhagen" }
+  # Monthly: only majors, grouped (to a majors branch)
+  - package-ecosystem: npm
+    directory: /packages/integrations
+    target-branch: deps/majors-integrations      # <— unique combo
+    schedule: { interval: monthly, time: "07:00", timezone: Europe/Copenhagen }
+    versioning-strategy: increase-if-necessary
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "*"
-        update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
+    groups:
+      major-only:
+        patterns: ["*"]
+        update-types: ["major"]
+    labels: ["dependencies"]
+    commit-message: { prefix: "deps(integrations:major)", include: scope }
+
+  # ---------- GitHub Actions ----------
+  # Weekly: group all minor/patch (to main)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly, day: monday, time: "07:00", timezone: Europe/Copenhagen }
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    labels: ["dependencies"]
+
+  # Monthly: only majors, grouped (to a majors branch)
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: deps/majors-actions           # <— unique combo
+    schedule: { interval: monthly, time: "07:00", timezone: Europe/Copenhagen }
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
+    groups:
+      major-only:
+        patterns: ["*"]
+        update-types: ["major"]
     labels: ["dependencies"]

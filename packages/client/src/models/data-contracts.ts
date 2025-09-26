@@ -13,7 +13,12 @@ export type UtilRequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<
 
 export type AbandonedCartTriggerConfiguration = AbandonedCartTriggerResultTriggerConfiguration & {
   cartName?: string | null;
+  selectedProperties?: AbandonedCartTriggerConfigurationPropertySelectionSettings | null;
 };
+
+export interface AbandonedCartTriggerConfigurationPropertySelectionSettings {
+  user?: UserResultDetailsSelectedPropertiesSettings | null;
+}
 
 export interface AbandonedCartTriggerResultTriggerConfiguration {
   $type: string;
@@ -38,7 +43,7 @@ export interface AbandonedCartTriggerResultTriggerConfiguration {
 
 export type AbandonedSearchTriggerConfiguration = AbandonedSearchTriggerResultTriggerConfiguration & {
   searchTypesInPrioritizedOrder: ("Product" | "ProductCategory" | "Content")[];
-  searchTermCondition?: SearchTermCondition | RetailMediaSearchTermCondition | null;
+  searchTermCondition?: SearchTermCondition | SearchTermConditionByLanguage | null;
   suppressOnEntityFromSearchResultViewed: boolean;
   /** @format int32 */
   considerAbandonedAfterMinutes: number;
@@ -65,13 +70,32 @@ export interface AbandonedSearchTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
-export type Advertiser = AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity & {
+export type Advertiser = AdvertiserEntityStateGuidNullableAdvertiserMetadataValuesRetailMediaEntity & {
   name: string;
   allowedPromotions?: PromotionSpecificationCollection | null;
   allowedLocations?: PromotionLocationCollection | null;
 };
 
-export interface AdvertiserAdvertiserEntityStateEntityResponse {
+export interface AdvertiserEntityStateGuidNullableAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: AdvertisersRequestEntityFilters | null;
+  sorting?: AdvertisersRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface AdvertiserEntityStateGuidNullableAdvertiserMetadataValuesRetailMediaEntity {
+  $type: string;
+  state: "Active" | "Inactive" | "Archived";
+  metadata: AdvertiserMetadataValues;
+  /** @format uuid */
+  id?: string | null;
+}
+
+export interface AdvertiserGuidNullableAdvertiserEntityStateEntityResponse {
   $type: string;
   entities?: Advertiser[] | null;
   /** @format int32 */
@@ -87,23 +111,17 @@ export interface AdvertiserAdvertiserEntityStateEntityResponse {
   statistics?: Statistics | null;
 }
 
-export interface AdvertiserEntityStateAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest {
+export interface AdvertiserGuidNullableSaveEntitiesRequest {
   $type: string;
-  filters?: AdvertisersRequestEntityFilters | null;
-  sorting?: AdvertisersRequestSortBySorting | null;
-  /** @format int32 */
-  skip: number;
-  /** @format int32 */
-  take: number;
+  entities: Advertiser[];
+  modifiedBy: string;
   custom?: Record<string, string | null>;
 }
 
-export interface AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity {
+export interface AdvertiserGuidNullableSaveEntitiesResponse {
   $type: string;
-  state: "Active" | "Inactive" | "Archived";
-  metadata: AdvertiserMetadataValues;
-  /** @format uuid */
-  id?: string | null;
+  entities?: Advertiser[] | null;
+  statistics?: Statistics | null;
 }
 
 export type AdvertiserMetadataValues = MetadataValues & {
@@ -118,24 +136,11 @@ export type AdvertiserMetadataValues = MetadataValues & {
   archivedBy?: string | null;
 };
 
-export interface AdvertiserSaveEntitiesRequest {
-  $type: string;
-  entities: Advertiser[];
-  modifiedBy: string;
-  custom?: Record<string, string | null>;
-}
-
-export interface AdvertiserSaveEntitiesResponse {
-  $type: string;
-  entities?: Advertiser[] | null;
-  statistics?: Statistics | null;
-}
-
 export type AdvertisersRequest =
-  AdvertiserEntityStateAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest;
+  AdvertiserEntityStateGuidNullableAdvertiserMetadataValuesAdvertisersRequestSortByAdvertisersRequestEntityFiltersEntitiesRequest;
 
 export type AdvertisersRequestEntityFilters =
-  RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters & {
+  RetailMediaEntity3AdvertiserEntityStateGuidNullableAdvertiserMetadataValuesRetailMediaEntity3EntityFilters & {
     ids?: string[] | null;
   };
 
@@ -144,7 +149,7 @@ export interface AdvertisersRequestSortBySorting {
   sortOrder: "Ascending" | "Descending";
 }
 
-export type AdvertisersResponse = AdvertiserAdvertiserEntityStateEntityResponse;
+export type AdvertisersResponse = AdvertiserGuidNullableAdvertiserEntityStateEntityResponse;
 
 export interface AnalyzerRequest {
   $type: string;
@@ -561,7 +566,7 @@ export type CPMBudget = Budget & {
   costPerMille: number;
 };
 
-export type Campaign = CampaignEntityStateCampaignMetadataValuesRetailMediaEntity & {
+export type Campaign = CampaignEntityStateGuidNullableCampaignMetadataValuesRetailMediaEntity & {
   name: string;
   schedule?: ISchedule | null;
   promotions: PromotionCollection;
@@ -617,10 +622,29 @@ export type CampaignAnalyticsResponse = TimedResponse & {
 };
 
 export type CampaignCampaignConditions = RetailMediaConditions & {
-  searchTerm?: RetailMediaSearchTermConditionCollection | null;
+  searchTerm?: SearchTermConditionByLanguageCollection | null;
 };
 
-export interface CampaignCampaignEntityStateEntityResponse {
+export interface CampaignEntityStateGuidNullableCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: CampaignsRequestEntityFilters | null;
+  sorting?: CampaignsRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface CampaignEntityStateGuidNullableCampaignMetadataValuesRetailMediaEntity {
+  $type: string;
+  state: "Proposed" | "Approved" | "Archived";
+  metadata: CampaignMetadataValues;
+  /** @format uuid */
+  id?: string | null;
+}
+
+export interface CampaignGuidNullableCampaignEntityStateEntityResponse {
   $type: string;
   entities?: Campaign[] | null;
   /** @format int32 */
@@ -636,23 +660,17 @@ export interface CampaignCampaignEntityStateEntityResponse {
   statistics?: Statistics | null;
 }
 
-export interface CampaignEntityStateCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest {
+export interface CampaignGuidNullableSaveEntitiesRequest {
   $type: string;
-  filters?: CampaignsRequestEntityFilters | null;
-  sorting?: CampaignsRequestSortBySorting | null;
-  /** @format int32 */
-  skip: number;
-  /** @format int32 */
-  take: number;
+  entities: Campaign[];
+  modifiedBy: string;
   custom?: Record<string, string | null>;
 }
 
-export interface CampaignEntityStateCampaignMetadataValuesRetailMediaEntity {
+export interface CampaignGuidNullableSaveEntitiesResponse {
   $type: string;
-  state: "Proposed" | "Approved" | "Archived";
-  metadata: CampaignMetadataValues;
-  /** @format uuid */
-  id?: string | null;
+  entities?: Campaign[] | null;
+  statistics?: Statistics | null;
 }
 
 export type CampaignMetadataValues = MetadataValues & {
@@ -667,19 +685,6 @@ export type CampaignMetadataValues = MetadataValues & {
   archivedBy?: string | null;
 };
 
-export interface CampaignSaveEntitiesRequest {
-  $type: string;
-  entities: Campaign[];
-  modifiedBy: string;
-  custom?: Record<string, string | null>;
-}
-
-export interface CampaignSaveEntitiesResponse {
-  $type: string;
-  entities?: Campaign[] | null;
-  statistics?: Statistics | null;
-}
-
 export interface CampaignStatusWithHistory {
   current: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached";
   history: CampaignStatusWithHistoryChange[];
@@ -692,10 +697,10 @@ export interface CampaignStatusWithHistoryChange {
 }
 
 export type CampaignsRequest =
-  CampaignEntityStateCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest;
+  CampaignEntityStateGuidNullableCampaignMetadataValuesCampaignsRequestSortByCampaignsRequestEntityFiltersEntitiesRequest;
 
 export type CampaignsRequestEntityFilters =
-  RetailMediaEntity2CampaignEntityStateCampaignMetadataValuesRetailMediaEntity2EntityFilters & {
+  RetailMediaEntity3CampaignEntityStateGuidNullableCampaignMetadataValuesRetailMediaEntity3EntityFilters & {
     ids?: string[] | null;
     advertiserIds?: string[] | null;
   };
@@ -705,7 +710,7 @@ export interface CampaignsRequestSortBySorting {
   sortOrder: "Ascending" | "Descending";
 }
 
-export type CampaignsResponse = CampaignCampaignEntityStateEntityResponse;
+export type CampaignsResponse = CampaignGuidNullableCampaignEntityStateEntityResponse;
 
 export type Cart = Trackable & {
   user?: User | null;
@@ -733,6 +738,12 @@ export interface CartDetails {
   lineItems?: LineItem[] | null;
   subtotal?: Money | null;
   data?: Record<string, DataValue>;
+}
+
+export interface CartDetailsSelectedPropertiesSettings {
+  allData: boolean;
+  dataKeys?: string[] | null;
+  lineItems?: LineItemSelectedPropertiesSettings | null;
 }
 
 export interface Category {
@@ -2326,6 +2337,12 @@ export type HasClassificationCondition = UserCondition & {
   value?: string | null;
 };
 
+export type HasCompanyDataCondition = UserCondition & {
+  key: string;
+  conditions?: ValueConditionCollection | null;
+  evaluationScope: "ImmediateCompany" | "ParentCompany" | "ImmediateOrParentCompany";
+};
+
 export type HasDataCondition = UserCondition & {
   key?: string | null;
   conditions?: ValueConditionCollection | null;
@@ -2595,14 +2612,21 @@ export interface LineItem {
   data?: Record<string, DataValue>;
 }
 
-export type Location = LocationEntityStateLocationMetadataValuesRetailMediaEntity & {
+export interface LineItemSelectedPropertiesSettings {
+  product?: SelectedProductPropertiesSettings | null;
+  variant?: SelectedVariantPropertiesSettings | null;
+  allData: boolean;
+  dataKeys?: string[] | null;
+}
+
+export type Location = LocationEntityStateGuidNullableLocationMetadataValuesRetailMediaEntity & {
   name: string;
   key?: string | null;
   placements?: LocationPlacementCollection | null;
   supportedPromotions?: PromotionSpecificationCollection | null;
 };
 
-export interface LocationEntityStateLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest {
+export interface LocationEntityStateGuidLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest {
   $type: string;
   filters?: LocationsRequestEntityFilters | null;
   sorting?: LocationsRequestSortBySorting | null;
@@ -2613,7 +2637,7 @@ export interface LocationEntityStateLocationMetadataValuesLocationsRequestSortBy
   custom?: Record<string, string | null>;
 }
 
-export interface LocationEntityStateLocationMetadataValuesRetailMediaEntity {
+export interface LocationEntityStateGuidNullableLocationMetadataValuesRetailMediaEntity {
   $type: string;
   state: "Active" | "Inactive" | "Archived";
   metadata: LocationMetadataValues;
@@ -2621,7 +2645,7 @@ export interface LocationEntityStateLocationMetadataValuesRetailMediaEntity {
   id?: string | null;
 }
 
-export interface LocationLocationEntityStateEntityResponse {
+export interface LocationGuidNullableLocationEntityStateEntityResponse {
   $type: string;
   entities?: Location[] | null;
   /** @format int32 */
@@ -2634,6 +2658,19 @@ export interface LocationLocationEntityStateEntityResponse {
     /** @format int32 */
     Archived: number;
   } | null;
+  statistics?: Statistics | null;
+}
+
+export interface LocationGuidNullableSaveEntitiesRequest {
+  $type: string;
+  entities: Location[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface LocationGuidNullableSaveEntitiesResponse {
+  $type: string;
+  entities?: Location[] | null;
   statistics?: Statistics | null;
 }
 
@@ -2670,24 +2707,11 @@ export interface LocationPlacementVariationCollection {
   items: LocationPlacementVariation[];
 }
 
-export interface LocationSaveEntitiesRequest {
-  $type: string;
-  entities: Location[];
-  modifiedBy: string;
-  custom?: Record<string, string | null>;
-}
-
-export interface LocationSaveEntitiesResponse {
-  $type: string;
-  entities?: Location[] | null;
-  statistics?: Statistics | null;
-}
-
 export type LocationsRequest =
-  LocationEntityStateLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest;
+  LocationEntityStateGuidLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest;
 
 export type LocationsRequestEntityFilters =
-  RetailMediaEntity2LocationEntityStateLocationMetadataValuesRetailMediaEntity2EntityFilters & {
+  RetailMediaEntity3LocationEntityStateGuidLocationMetadataValuesRetailMediaEntity3EntityFilters & {
     ids?: string[] | null;
     keys?: string[] | null;
   };
@@ -2697,7 +2721,7 @@ export interface LocationsRequestSortBySorting {
   sortOrder: "Ascending" | "Descending";
 }
 
-export type LocationsResponse = LocationLocationEntityStateEntityResponse;
+export type LocationsResponse = LocationGuidNullableLocationEntityStateEntityResponse;
 
 export interface MatchTypeSettings {
   compound: boolean;
@@ -3121,7 +3145,7 @@ export interface PredictionConfiguration {
 }
 
 export type PredictionRule = SearchRule & {
-  condition: SearchTermCondition | RetailMediaSearchTermCondition;
+  condition: SearchTermCondition | SearchTermConditionByLanguage;
   promote?: PredictionRulePromotion | null;
   suppress?: PredictionRuleSuppression | null;
 };
@@ -4007,7 +4031,7 @@ export type ProductPromotion = Promotion & {
 };
 
 export type ProductPromotionPromotionConditions = RetailMediaConditions & {
-  searchTerm?: RetailMediaSearchTermConditionCollection | null;
+  searchTerm?: SearchTermConditionByLanguageCollection | null;
 };
 
 export type ProductPromotionSpecification = PromotionSpecification & {
@@ -4574,13 +4598,13 @@ export interface RecommendationTypeCollection {
 export interface RedirectResult {
   /** @format uuid */
   id: string;
-  condition: SearchTermCondition | RetailMediaSearchTermCondition;
+  condition: SearchTermCondition | SearchTermConditionByLanguage;
   destination?: string | null;
   data?: Record<string, string>;
 }
 
 export type RedirectRule = SearchRule & {
-  condition: SearchTermCondition | RetailMediaSearchTermCondition;
+  condition: SearchTermCondition | SearchTermConditionByLanguage;
   destination?: string | null;
   data?: Record<string, string>;
 };
@@ -4687,6 +4711,7 @@ export interface RequestContextFilter {
   languages?: Language[] | null;
   currencies?: Currency[] | null;
   filters?: RequestFilterCriteria | null;
+  searchTerms?: SearchTermConditionByLanguageCollection | null;
 }
 
 export interface RequestFilterCriteria {
@@ -4703,19 +4728,19 @@ export interface RetailMediaConditions {
   $type: string;
 }
 
-export interface RetailMediaEntity2AdvertiserEntityStateAdvertiserMetadataValuesRetailMediaEntity2EntityFilters {
+export interface RetailMediaEntity3AdvertiserEntityStateGuidNullableAdvertiserMetadataValuesRetailMediaEntity3EntityFilters {
   $type: string;
   term?: string | null;
   states?: ("Active" | "Inactive" | "Archived")[] | null;
 }
 
-export interface RetailMediaEntity2CampaignEntityStateCampaignMetadataValuesRetailMediaEntity2EntityFilters {
+export interface RetailMediaEntity3CampaignEntityStateGuidNullableCampaignMetadataValuesRetailMediaEntity3EntityFilters {
   $type: string;
   term?: string | null;
   states?: ("Proposed" | "Approved" | "Archived")[] | null;
 }
 
-export interface RetailMediaEntity2LocationEntityStateLocationMetadataValuesRetailMediaEntity2EntityFilters {
+export interface RetailMediaEntity3LocationEntityStateGuidLocationMetadataValuesRetailMediaEntity3EntityFilters {
   $type: string;
   term?: string | null;
   states?: ("Active" | "Inactive" | "Archived")[] | null;
@@ -4755,21 +4780,13 @@ export interface RetailMediaResultPlacementResultEntityProduct {
   result: ProductResult;
 }
 
-export type RetailMediaSearchTermCondition = SearchTermCondition & {
-  language?: Language | null;
-};
+export type SaveAdvertisersRequest = AdvertiserGuidNullableSaveEntitiesRequest;
 
-export interface RetailMediaSearchTermConditionCollection {
-  values?: RetailMediaSearchTermCondition[] | null;
-}
+export type SaveAdvertisersResponse = AdvertiserGuidNullableSaveEntitiesResponse;
 
-export type SaveAdvertisersRequest = AdvertiserSaveEntitiesRequest;
+export type SaveCampaignsRequest = CampaignGuidNullableSaveEntitiesRequest;
 
-export type SaveAdvertisersResponse = AdvertiserSaveEntitiesResponse;
-
-export type SaveCampaignsRequest = CampaignSaveEntitiesRequest;
-
-export type SaveCampaignsResponse = CampaignSaveEntitiesResponse;
+export type SaveCampaignsResponse = CampaignGuidNullableSaveEntitiesResponse;
 
 export type SaveDecompoundRulesRequest = DecompoundRuleSaveSearchRulesRequest;
 
@@ -4785,9 +4802,9 @@ export type SaveGlobalTriggerConfigurationRequest = LicensedRequest & {
   modifiedBy?: string | null;
 };
 
-export type SaveLocationsRequest = LocationSaveEntitiesRequest;
+export type SaveLocationsRequest = LocationGuidNullableSaveEntitiesRequest;
 
-export type SaveLocationsResponse = LocationSaveEntitiesResponse;
+export type SaveLocationsResponse = LocationGuidNullableSaveEntitiesResponse;
 
 export type SaveMerchandisingRuleRequest = LicensedRequest & {
   rule?: BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule | null;
@@ -4935,7 +4952,7 @@ export type SearchResponseCollection = SearchResponse & {
 };
 
 export type SearchResultModifierRule = SearchRule & {
-  condition: SearchTermCondition | RetailMediaSearchTermCondition;
+  condition: SearchTermCondition | SearchTermConditionByLanguage;
   actions: (SearchResultModifierRuleAddFiltersAction | SearchResultModifierRuleAddTermFilterAction)[];
 };
 
@@ -5038,15 +5055,23 @@ export interface SearchTermCondition {
   $type: string;
   kind?: "Equals" | "StartsWith" | "EndsWith" | "Contains" | null;
   value?: string | null;
-  andConditions?: (SearchTermCondition | RetailMediaSearchTermCondition)[] | null;
-  orConditions?: (SearchTermCondition | RetailMediaSearchTermCondition)[] | null;
+  andConditions?: (SearchTermCondition | SearchTermConditionByLanguage)[] | null;
+  orConditions?: (SearchTermCondition | SearchTermConditionByLanguage)[] | null;
   /** @format int32 */
   minimumLength?: number | null;
   negated: boolean;
 }
 
+export type SearchTermConditionByLanguage = SearchTermCondition & {
+  language?: Language | null;
+};
+
+export interface SearchTermConditionByLanguageCollection {
+  values?: SearchTermConditionByLanguage[] | null;
+}
+
 export type SearchTermModifierRule = SearchRule & {
-  condition: SearchTermCondition | RetailMediaSearchTermCondition;
+  condition: SearchTermCondition | SearchTermConditionByLanguage;
   actions: (
     | SearchTermModifierRuleAppendToTermAction
     | SearchTermModifierRuleRemoveFromTermAction
@@ -5756,6 +5781,7 @@ export interface UserConditionCollection {
         | HasActivityCondition
         | HasAuthenticatedIdCondition
         | HasClassificationCondition
+        | HasCompanyDataCondition
         | HasDataCondition
         | HasEmailCondition
         | HasIdentifierCondition
@@ -5825,6 +5851,16 @@ export interface UserResultDetails {
   temporaryIds?: string[] | null;
   channel?: Channel | null;
   company?: UserAssociatedCompanyResultDetails | null;
+}
+
+export interface UserResultDetailsSelectedPropertiesSettings {
+  allClassifications: boolean;
+  classificationKeys?: string[] | null;
+  carts?: CartDetailsSelectedPropertiesSettings | null;
+  allIdentifiers: boolean;
+  identifierKeys?: string[] | null;
+  allData: boolean;
+  dataKeys?: string[] | null;
 }
 
 export type UserUpdate = Trackable & {

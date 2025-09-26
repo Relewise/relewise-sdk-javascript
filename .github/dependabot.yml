@@ -1,0 +1,62 @@
+version: 2
+
+updates:
+  # Keep JS/TS deps fresh for @relewise/client
+  - package-ecosystem: "npm"
+    directory: "/packages/client"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Copenhagen"
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 10
+    groups:
+      tooling:
+        patterns: ["typescript", "eslint*", "@typescript-eslint/*", "prettier"]
+      testing:
+        patterns: ["jest*", "@testing-library/*", "vitest*"]
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "direct-dev"
+    labels: ["dependencies", "automated"]
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # Keep JS/TS deps fresh for @relewise/integrations
+  - package-ecosystem: "npm"
+    directory: "/packages/integrations"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Copenhagen"
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 10
+    groups:
+      tooling:
+        patterns: ["typescript", "eslint*", "@typescript-eslint/*", "prettier"]
+      testing:
+        patterns: ["jest*", "@testing-library/*", "vitest*"]
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "direct-dev"
+    labels: ["dependencies", "automated"]
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # Keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Copenhagen"
+    labels: ["dependencies", "ci"]

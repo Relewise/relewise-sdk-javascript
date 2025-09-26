@@ -1,7 +1,7 @@
 version: 2
 
 updates:
-  # Keep JS/TS deps fresh for @relewise/client
+  # @relewise/client
   - package-ecosystem: "npm"
     directory: "/packages/client"
     schedule:
@@ -19,14 +19,18 @@ updates:
       minor-and-patch:
         update-types: ["minor", "patch"]
     allow:
-      - dependency-type: "direct"
-      - dependency-type: "direct-dev"
+      - dependency-type: "production"
+      - dependency-type: "development"
     labels: ["dependencies", "automated"]
+    # reviewers:
+    #   - "mza"     # uncomment if this is your GitHub handle
+    # assignees:
+    #   - "mza"
     commit-message:
       prefix: "deps"
       include: "scope"
 
-  # Keep JS/TS deps fresh for @relewise/integrations
+  # @relewise/integrations
   - package-ecosystem: "npm"
     directory: "/packages/integrations"
     schedule:
@@ -44,9 +48,13 @@ updates:
       minor-and-patch:
         update-types: ["minor", "patch"]
     allow:
-      - dependency-type: "direct"
-      - dependency-type: "direct-dev"
+      - dependency-type: "production"
+      - dependency-type: "development"
     labels: ["dependencies", "automated"]
+    # reviewers:
+    #   - "mza"
+    # assignees:
+    #   - "mza"
     commit-message:
       prefix: "deps"
       include: "scope"

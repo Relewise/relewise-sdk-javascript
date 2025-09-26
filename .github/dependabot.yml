@@ -2,56 +2,90 @@
 version: 2
 
 updates:
-  # /packages/client — 1 PR for all minor/patch; majors separate
+  # /packages/client — weekly minor/patch (grouped)
   - package-ecosystem: "npm"
     directory: "/packages/client"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "07:00"
-      timezone: "Europe/Copenhagen"
+    schedule: { interval: "weekly", day: "monday", time: "07:00", timezone: "Europe/Copenhagen" }
     versioning-strategy: increase-if-necessary
-    # allow room for separate major PRs alongside the grouped one
     open-pull-requests-limit: 10
+    # prevent majors in this weekly job
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       minor-and-patch:
         patterns: ["*"]
         update-types: ["minor", "patch"]
     labels: ["dependencies"]
-    commit-message:
-      prefix: "deps(client)"
-      include: "scope"
+    commit-message: { prefix: "deps(client)", include: "scope" }
 
-  # /packages/integrations — 1 PR for all minor/patch; majors separate
+  # /packages/client — monthly majors (separate PRs)
+  - package-ecosystem: "npm"
+    directory: "/packages/client"
+    schedule: { interval: "monthly", time: "07:00", timezone: "Europe/Copenhagen" }
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 10
+    # only majors in this monthly job
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+    labels: ["dependencies"]
+    commit-message: { prefix: "deps(client:major)", include: "scope" }
+
+  # /packages/integrations — weekly minor/patch (grouped)
   - package-ecosystem: "npm"
     directory: "/packages/integrations"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "07:00"
-      timezone: "Europe/Copenhagen"
+    schedule: { interval: "weekly", day: "monday", time: "07:00", timezone: "Europe/Copenhagen" }
     versioning-strategy: increase-if-necessary
     open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       minor-and-patch:
         patterns: ["*"]
         update-types: ["minor", "patch"]
     labels: ["dependencies"]
-    commit-message:
-      prefix: "deps(integrations)"
-      include: "scope"
+    commit-message: { prefix: "deps(integrations)", include: "scope" }
 
-  # GitHub Actions — 1 PR for all minor/patch; majors separate
+  # /packages/integrations — monthly majors (separate PRs)
+  - package-ecosystem: "npm"
+    directory: "/packages/integrations"
+    schedule: { interval: "monthly", time: "07:00", timezone: "Europe/Copenhagen" }
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+    labels: ["dependencies"]
+    commit-message: { prefix: "deps(integrations:major)", include: "scope" }
+
+  # GitHub Actions — weekly minor/patch (grouped)
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "07:00"
-      timezone: "Europe/Copenhagen"
+    schedule: { interval: "weekly", day: "monday", time: "07:00", timezone: "Europe/Copenhagen" }
     open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       minor-and-patch:
         patterns: ["*"]
         update-types: ["minor", "patch"]
+    labels: ["dependencies"]
+
+  # GitHub Actions — monthly majors (separate PRs)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: { interval: "monthly", time: "07:00", timezone: "Europe/Copenhagen" }
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
     labels: ["dependencies"]

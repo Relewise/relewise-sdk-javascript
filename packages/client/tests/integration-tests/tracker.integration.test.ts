@@ -1,4 +1,4 @@
-import { error  } from 'console';
+import { error } from 'console';
 import { DataValueFactory, ProblemDetailsError, Tracker, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -6,7 +6,7 @@ const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_conf
 
 const tracker = new Tracker(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
-test('Track Order', async() => {
+test('Track Order', async () => {
     const result = await tracker.trackOrder({
         lineItems: [
             {
@@ -33,7 +33,7 @@ test('Track Order', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Cart', async() => {
+test('Track Cart', async () => {
     const result = await tracker.trackCart({
         lineItems: [
             {
@@ -60,7 +60,7 @@ test('Track Cart', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Product View', async() => {
+test('Track Product View', async () => {
     const result = await tracker.trackProductView({
         productId: '1',
         user: UserFactory.anonymous(),
@@ -69,7 +69,7 @@ test('Track Product View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Product View', async() => {
+test('Track Product View', async () => {
     const result = await tracker.trackProductView({
         productId: '2',
         user: UserFactory.anonymous(),
@@ -78,7 +78,7 @@ test('Track Product View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Product Category View', async() => {
+test('Track Product Category View', async () => {
     const result = await tracker.trackProductCategoryView({
         idPath: ['c1'],
         user: UserFactory.anonymous(),
@@ -87,7 +87,7 @@ test('Track Product Category View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Content View', async() => {
+test('Track Content View', async () => {
     const result = await tracker.trackContentView({
         contentId: '1',
         user: UserFactory.anonymous(),
@@ -96,7 +96,7 @@ test('Track Content View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Content View', async() => {
+test('Track Content View', async () => {
     const result = await tracker.trackContentView({
         contentId: '2',
         user: UserFactory.anonymous(),
@@ -120,7 +120,7 @@ test('Track Content View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Content Category View', async() => {
+test('Track Content Category View', async () => {
     const result = await tracker.trackContentCategoryView({
         idPath: ['c1'],
         user: UserFactory.anonymous(),
@@ -129,7 +129,7 @@ test('Track Content Category View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Brand View', async() => {
+test('Track Brand View', async () => {
     const result = await tracker.trackBrandView({
         brandId: 'b-1',
         user: UserFactory.anonymous(),
@@ -138,7 +138,7 @@ test('Track Brand View', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Search Term', async() => {
+test('Track Search Term', async () => {
 
     const result = await tracker.trackSearchTerm({
         term: 'term',
@@ -149,7 +149,7 @@ test('Track Search Term', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track User Update', async() => {
+test('Track User Update', async () => {
     const user = UserFactory.byTemporaryId('tempId', {
         email: 'integrationtests@relewise.com',
         identifiers: {
@@ -164,7 +164,7 @@ test('Track User Update', async() => {
     expect(result).toBeUndefined();
 });
 
-test('Track Product View with invalid key', async() => {
+test('Track Product View with invalid key', async () => {
 
     await new Tracker(DATASET_ID!, '12', { serverUrl: SERVER_URL }).trackProductView({
         productId: '2',
@@ -178,8 +178,8 @@ test('Track Product View with invalid key', async() => {
     });
 });
 
-test('Track Product View without id', async() => {
-    await expect(async() => {
+test('Track Product View without id', async () => {
+    await expect(async () => {
         return await tracker.trackProductView({
             productId: null,
             user: UserFactory.anonymous(),
@@ -187,7 +187,7 @@ test('Track Product View without id', async() => {
     }).rejects.toThrow();
 });
 
-test('Track Product View without id', async() => {
+test('Track Product View without id', async () => {
     try {
         await tracker.trackProductView({
             productId: null,
@@ -199,8 +199,23 @@ test('Track Product View without id', async() => {
     }
 });
 
-test('Track Product View on a Dataset that does not exist', async() => {
-    await expect(async() => {
+test('Track Product Engagement', async () => {
+    try {
+        await tracker.trackProductEngagement({
+            product: { productId: "1" },
+            engagement: {
+                sentiment: 'Like'
+            },
+            user: UserFactory.byAuthenticatedId("1"),
+        });
+    }
+    catch (e) {
+        expect(e).toBeDefined();
+    }
+});
+
+test('Track Product View on a Dataset that does not exist', async () => {
+    await expect(async () => {
         const tracker = new Tracker("00000000-0000-0000-0000-000000000000", API_KEY!, { serverUrl: SERVER_URL });
 
         return await tracker.trackProductView({

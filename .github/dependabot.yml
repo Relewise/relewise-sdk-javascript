@@ -1,7 +1,8 @@
+# .github/dependabot.yml
 version: 2
 
 updates:
-  # @relewise/client
+  # /packages/client — 1 PR for all minor/patch; majors separate
   - package-ecosystem: "npm"
     directory: "/packages/client"
     schedule:
@@ -10,27 +11,18 @@ updates:
       time: "07:00"
       timezone: "Europe/Copenhagen"
     versioning-strategy: increase-if-necessary
+    # allow room for separate major PRs alongside the grouped one
     open-pull-requests-limit: 10
     groups:
-      tooling:
-        patterns: ["typescript", "eslint*", "@typescript-eslint/*", "prettier"]
-      testing:
-        patterns: ["jest*", "@testing-library/*", "vitest*"]
       minor-and-patch:
+        patterns: ["*"]
         update-types: ["minor", "patch"]
-    allow:
-      - dependency-type: "production"
-      - dependency-type: "development"
-    labels: ["dependencies", "automated"]
-    # reviewers:
-    #   - "mza"     # uncomment if this is your GitHub handle
-    # assignees:
-    #   - "mza"
+    labels: ["dependencies"]
     commit-message:
-      prefix: "deps"
+      prefix: "deps(client)"
       include: "scope"
 
-  # @relewise/integrations
+  # /packages/integrations — 1 PR for all minor/patch; majors separate
   - package-ecosystem: "npm"
     directory: "/packages/integrations"
     schedule:
@@ -41,25 +33,15 @@ updates:
     versioning-strategy: increase-if-necessary
     open-pull-requests-limit: 10
     groups:
-      tooling:
-        patterns: ["typescript", "eslint*", "@typescript-eslint/*", "prettier"]
-      testing:
-        patterns: ["jest*", "@testing-library/*", "vitest*"]
       minor-and-patch:
+        patterns: ["*"]
         update-types: ["minor", "patch"]
-    allow:
-      - dependency-type: "production"
-      - dependency-type: "development"
-    labels: ["dependencies", "automated"]
-    # reviewers:
-    #   - "mza"
-    # assignees:
-    #   - "mza"
+    labels: ["dependencies"]
     commit-message:
-      prefix: "deps"
+      prefix: "deps(integrations)"
       include: "scope"
 
-  # Keep GitHub Actions up to date
+  # GitHub Actions — 1 PR for all minor/patch; majors separate
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -67,4 +49,9 @@ updates:
       day: "monday"
       time: "07:00"
       timezone: "Europe/Copenhagen"
-    labels: ["dependencies", "ci"]
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    labels: ["dependencies"]

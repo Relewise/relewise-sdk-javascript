@@ -277,6 +277,7 @@ export type BatchedTrackingRequest = TrackingRequest & {
         | ContentCategoryAdministrativeAction
         | ContentCategoryUpdate
         | ContentCategoryView
+        | ContentEngagement
         | ContentUpdate
         | ContentView
         | Order
@@ -284,10 +285,14 @@ export type BatchedTrackingRequest = TrackingRequest & {
         | ProductCategoryAdministrativeAction
         | ProductCategoryUpdate
         | ProductCategoryView
+        | ProductEngagement
         | ProductUpdate
         | ProductView
         | SearchTerm
         | UserUpdate
+        | FeedDwell
+        | FeedItemClick
+        | FeedItemPreview
       )[]
     | null;
 };
@@ -1204,6 +1209,17 @@ export type ContentDetailsCollectionResponse = TimedResponse & {
 };
 
 export type ContentDisabledFilter = Filter;
+
+export type ContentEngagement = Trackable & {
+  user?: User | null;
+  id: string;
+  engagement: ContentEngagementData;
+};
+
+export interface ContentEngagementData {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+}
 
 export type ContentFacetQuery = FacetQuery & {
   items: (
@@ -2145,6 +2161,84 @@ export interface FacetSorting {
   $type: string;
 }
 
+export interface Feed {
+  /** @format int32 */
+  minimumPageSize: number;
+  seed?: FeedSeed | null;
+  compositions: FeedComposition[];
+  selectedProductProperties?: SelectedProductPropertiesSettings | null;
+  selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
+  selectedContentProperties?: SelectedContentPropertiesSettings | null;
+  recommendVariant?: boolean | null;
+  allowProductsCurrentlyInCart?: boolean | null;
+}
+
+export interface FeedComposition {
+  type: "Product" | "Content";
+  count: Int32Range;
+  filters?: FilterCollection | null;
+  relevanceModifiers?: RelevanceModifierCollection | null;
+  fill?: FeedComposition | null;
+  name?: string | null;
+  includeEmptyResults: boolean;
+  /** @format int32 */
+  rotationLimit?: number | null;
+}
+
+export interface FeedCompositionResult {
+  name?: string | null;
+  products?: ProductResult[] | null;
+  content?: ContentResult[] | null;
+}
+
+export type FeedDwell = Trackable & {
+  user: User;
+  /** @format uuid */
+  feedId: string;
+  /** @format int32 */
+  dwellTimeMilliseconds: number;
+  visibleItems: FeedItem[];
+};
+
+export interface FeedItem {
+  productAndVariantId?: ProductAndVariantId | null;
+  contentId?: string | null;
+}
+
+export type FeedItemClick = Trackable & {
+  user?: User | null;
+  /** @format uuid */
+  feedId: string;
+  item?: FeedItem | null;
+};
+
+export type FeedItemPreview = Trackable & {
+  user?: User | null;
+  /** @format uuid */
+  feedId: string;
+  item?: FeedItem | null;
+};
+
+export type FeedRecommendationInitializationRequest = RecommendationRequest & {
+  feed: Feed;
+};
+
+export type FeedRecommendationNextItemsRequest = LicensedRequest & {
+  /** @format uuid */
+  initializedFeedId: string;
+};
+
+export type FeedRecommendationResponse = RecommendationResponse & {
+  /** @format uuid */
+  initializedFeedId: string;
+  recommendations?: FeedCompositionResult[] | null;
+};
+
+export interface FeedSeed {
+  productAndVariantIds?: ProductAndVariantId[] | null;
+  contentIds?: string[] | null;
+}
+
 export interface FieldIndexConfiguration {
   included: boolean;
   /** @format int32 */
@@ -2791,6 +2885,7 @@ export type MixedRecommendationResponseCollection = TimedResponse & {
         | BrandRecommendationResponse
         | ContentCategoryRecommendationResponse
         | ContentRecommendationResponse
+        | FeedRecommendationResponse
         | ProductCategoryRecommendationResponse
         | ProductRecommendationResponse
         | SearchTermRecommendationResponse
@@ -3749,6 +3844,17 @@ export type ProductDisplayNameFilter = Filter & {
   conditions?: ValueConditionCollection | null;
   mustMatchAllConditions: boolean;
 };
+
+export type ProductEngagement = Trackable & {
+  user?: User | null;
+  id: ProductAndVariantId;
+  engagement: ProductEngagementData;
+};
+
+export interface ProductEngagementData {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+}
 
 export type ProductFacetQuery = FacetQuery & {
   items: (
@@ -5615,12 +5721,28 @@ export type TrackContentCategoryViewRequest = TrackingRequest & {
   contentCategoryView: ContentCategoryView;
 };
 
+export type TrackContentEngagementRequest = TrackingRequest & {
+  contentEngagement: ContentEngagement;
+};
+
 export type TrackContentUpdateRequest = TrackingRequest & {
   contentUpdate?: ContentUpdate | null;
 };
 
 export type TrackContentViewRequest = TrackingRequest & {
   contentView: ContentView;
+};
+
+export type TrackFeedDwellRequest = TrackingRequest & {
+  dwell: FeedDwell;
+};
+
+export type TrackFeedItemClickRequest = TrackingRequest & {
+  click: FeedItemClick;
+};
+
+export type TrackFeedItemPreviewRequest = TrackingRequest & {
+  preview: FeedItemPreview;
 };
 
 export type TrackOrderRequest = TrackingRequest & {
@@ -5641,6 +5763,10 @@ export type TrackProductCategoryUpdateRequest = TrackingRequest & {
 
 export type TrackProductCategoryViewRequest = TrackingRequest & {
   productCategoryView: ProductCategoryView;
+};
+
+export type TrackProductEngagementRequest = TrackingRequest & {
+  productEngagement: ProductEngagement;
 };
 
 export type TrackProductUpdateRequest = TrackingRequest & {

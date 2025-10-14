@@ -106,7 +106,7 @@ test('resultMustHaveVariantConstraint', () => {
     expect(subject.settings?.resultConstraint?.exceptWhenProductHasNoVariants).toBe(true);
 });
 
-test('searchHightlighting', () => {
+test('searchHighlighting', () => {
     const subject: ProductSearchRequest = baseBuilder()
         .highlighting(h => {
             h.enabled(false);

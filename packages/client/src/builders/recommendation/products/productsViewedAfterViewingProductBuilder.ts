@@ -11,7 +11,7 @@ export class ProductsViewedAfterViewingProductBuilder extends BySingleProductRec
 
     public build() {
         if (this.productAndVariantId === null) {
-            throw new Error('Must specificy a product');
+            throw new Error('Must specify a product');
         }
 
         const request: ProductsViewedAfterViewingProductRequest = {

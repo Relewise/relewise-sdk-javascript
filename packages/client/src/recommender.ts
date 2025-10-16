@@ -151,7 +151,7 @@ export class Recommender extends RelewiseClient {
     }
 
     public async recommendContentsViewedAfterViewingMultipleProducts(request: ContentsViewedAfterViewingMultipleProductsRequest, options?: RelewiseRequestOptions): Promise<ContentRecommendationResponse | undefined> {
-        return this.request<ContentsViewedAfterViewingMultipleProductsRequest, ContentRecommendationResponse>('ContentsViewedAfterViewingProductRequest', request, options);
+        return this.request<ContentsViewedAfterViewingMultipleProductsRequest, ContentRecommendationResponse>('ContentsViewedAfterViewingMultipleProductsRequest', request, options);
     }
 
     public async recommendContentsViewedAfterViewingMultipleContents(request: ContentsViewedAfterViewingMultipleContentsRequest, options?: RelewiseRequestOptions): Promise<ContentRecommendationResponse | undefined> {

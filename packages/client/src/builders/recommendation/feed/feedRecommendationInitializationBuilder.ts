@@ -43,11 +43,13 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
      * @param builderFn 
      * @returns 
      */
-    public addCompostion(options: FeedCompositionOptions, builderFn: (fillBuilder: FeedCompositionBuilder) => void): this {
+    public addCompostion(options: FeedCompositionOptions, builderFn?: (fillBuilder: FeedCompositionBuilder) => void): this {
         this.feed.compositions ??= [];
 
         const builder = new FeedCompositionBuilder(options);
-        builderFn(builder);
+        if (builderFn) {
+            (builder);
+        }
 
         this.feed.compositions.push(builder.build());
 

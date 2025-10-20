@@ -41,7 +41,6 @@ test('Create Product', async() => {
             .path(p => p
                 .category({
                     id: '1',
-                    displayName: [{ language: 'da', value: 'Værktøj' }],
                 })
                 .category({
                     id: '2',

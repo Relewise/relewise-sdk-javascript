@@ -6,7 +6,7 @@ export type ProductCategoryPath = {
 
 export type PathNode = {
     id: string;
-    displayName: {
+    displayName?: {
         value: string;
         language: string;
     }[]
@@ -33,7 +33,7 @@ export class PathBuilder {
 
     category(categoryIdAndName: {
         id: string;
-        displayName: {
+        displayName?: {
             value: string;
             language: string;
         }[]
@@ -47,7 +47,8 @@ export class PathBuilder {
     build(): CategoryNameAndId[] {
         return this.path.map(x=> ({
             id: x.id, 
-            displayName: { values: x.displayName.map(d => ({ text: d.value, language: { value: d.language } })) },
+            displayName: x.displayName 
+                ? { values: x.displayName.map(d => ({ text: d.value, language: { value: d.language } })) } : undefined,
         }));
     }
 }

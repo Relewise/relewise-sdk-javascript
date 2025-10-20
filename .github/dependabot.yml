@@ -1,0 +1,53 @@
+# .github/dependabot.yml
+version: 2
+
+updates:
+  # /packages/client — single monthly PR with majors+minors+patches
+  - package-ecosystem: npm
+    directory: /packages/client
+    schedule:
+      interval: monthly
+      time: "07:00"
+      timezone: Europe/Copenhagen
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 1
+    groups:
+      all-deps:
+        patterns: ["*"]
+        update-types: ["major", "minor", "patch"]
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "deps(client)"
+      include: scope
+
+  # /packages/integrations — single monthly PR with majors+minors+patches
+  - package-ecosystem: npm
+    directory: /packages/integrations
+    schedule:
+      interval: monthly
+      time: "07:00"
+      timezone: Europe/Copenhagen
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 1
+    groups:
+      all-deps:
+        patterns: ["*"]
+        update-types: ["major", "minor", "patch"]
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "deps(integrations)"
+      include: scope
+
+  # GitHub Actions — single monthly PR with majors+minors+patches
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      time: "07:00"
+      timezone: Europe/Copenhagen
+    open-pull-requests-limit: 1
+    groups:
+      all-actions:
+        patterns: ["*"]
+        update-types: ["major", "minor", "patch"]
+    labels: ["dependencies"]

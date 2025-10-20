@@ -30,7 +30,7 @@ const searcher = new Searcher(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
     serverUrl: RELEWISE_SERVER_URL,
 });
         
-const recommeder = new Recommender(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
+const recommender = new Recommender(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
     serverUrl: RELEWISE_SERVER_URL,
 });
 ```

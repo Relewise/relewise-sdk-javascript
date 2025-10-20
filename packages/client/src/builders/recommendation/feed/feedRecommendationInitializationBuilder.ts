@@ -31,8 +31,11 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
      * Defines how the feed will be composed, which types of entities to include, how many of each type, and any filters or relevance modifiers that should apply to each type, etc.
      * @param compositions 
      */
-    public compositions(compositions: FeedComposition[]): this {
-        this.feed.compositions = compositions;
+    public addCompositions(compositions: FeedComposition[]): this {
+        this.feed.compositions ??= [];
+        for (const composition of compositions) {
+            this.feed.compositions.push(composition);
+        }
 
         return this;
     }
@@ -43,12 +46,12 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
      * @param builderFn 
      * @returns 
      */
-    public addCompostion(options: FeedCompositionOptions, builderFn?: (fillBuilder: FeedCompositionBuilder) => void): this {
+    public addCompostion(options: FeedCompositionOptions, builderFn?: (feedBuilder: FeedCompositionBuilder) => void): this {
         this.feed.compositions ??= [];
 
         const builder = new FeedCompositionBuilder(options);
         if (builderFn) {
-            (builder);
+            builderFn(builder);
         }
 
         this.feed.compositions.push(builder.build());

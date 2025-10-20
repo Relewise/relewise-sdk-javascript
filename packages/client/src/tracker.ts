@@ -7,12 +7,12 @@ import {
     TrackFeedItemClickRequest,
     TrackFeedItemPreviewRequest,
     FeedItem,
-    ProductEngagement,
     TrackProductEngagementRequest,
     ContentEngagement,
     TrackContentEngagementRequest,
     ProductEngagementData,
     ProductAndVariantId,
+    ContentEngagementData,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -168,7 +168,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackProductEngagement({ user, engagement, product }: { user?: User | null, product: ProductAndVariantId, engagement: ProductEngagementData }, options?: RelewiseRequestOptions) {
+    public async trackProductEngagement({ user, engagement, product }: { user: User, product: ProductAndVariantId, engagement: ProductEngagementData }, options?: RelewiseRequestOptions) {
         return this.request<TrackProductEngagementRequest, void>('TrackProductEngagementRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackProductEngagementRequest, Relewise.Client',
             productEngagement: {
@@ -180,7 +180,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackContentEngagement({ user, engagement, id: contentId }: Omit<ContentEngagement, '$type'>, options?: RelewiseRequestOptions) {
+    public async trackContentEngagement({ user, engagement, contentId }: { user: User, contentId: string, engagement: ContentEngagementData }, options?: RelewiseRequestOptions) {
         return this.request<TrackContentEngagementRequest, void>('TrackContentEngagementRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackContentEngagementRequest, Relewise.Client',
             contentEngagement: {
@@ -192,7 +192,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackFeedDwell({ user, feedId, dwellTimeMilliseconds, visibleItems }: Omit<FeedDwell, '$type'>, options?: RelewiseRequestOptions) {
+    public async trackFeedDwell({ user, feedId, dwellTimeMilliseconds, visibleItems }: { user: User; feedId: string, dwellTimeMilliseconds: number, visibleItems: FeedItem[] }, options?: RelewiseRequestOptions) {
         return this.request<TrackFeedDwellRequest, void>('TrackFeedDwellRequest', {
             $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedDwellRequest, Relewise.Client',
             dwell: {
@@ -205,7 +205,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackFeedItemClick({ user, feedId, item }: { user?: User | null; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
+    public async trackFeedItemClick({ user, feedId, item }: { user: User; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
         return this.request<TrackFeedItemClickRequest, void>('TrackFeedItemClickRequest', {
             $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemClickRequest, Relewise.Client',
             click: {
@@ -217,7 +217,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackFeedItemPreview({ user, feedId, item }: { user?: User | null; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
+    public async trackFeedItemPreview({ user, feedId, item }: { user: User; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
         return this.request<TrackFeedItemPreviewRequest, void>('TrackFeedItemPreviewRequest', {
             $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemPreviewRequest, Relewise.Client',
             preview: {

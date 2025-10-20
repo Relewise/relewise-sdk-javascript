@@ -1,13 +1,12 @@
 import { Settings } from '../../../builders/settings';
-import { Feed, FeedComposition, FeedRecommendationInitializationRequest, FeedSeed, Int32Range, SelectedContentPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from '../../../models/data-contracts';
+import { Feed, FeedComposition, FeedRecommendationInitializationRequest, FeedSeed, SelectedContentPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings } from '../../../models/data-contracts';
 import { RecommendationRequestBuilder } from '../recommendationRequestBuilder';
-import { FeedCompositionBuilder } from './feedCompositionBuilder';
+import { FeedCompositionBuilder, FeedCompositionOptions } from './feedCompositionBuilder';
 
 export class FeedRecommendationInitializationBuilder extends RecommendationRequestBuilder {
     private feed: Feed;
 
-    constructor({ minimumPageSize }: { minimumPageSize: number },
-        settings: Settings) {
+    constructor({ minimumPageSize }: { minimumPageSize: number }, settings: Settings) {
         super(settings);
 
         this.feed = {
@@ -38,7 +37,13 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
         return this;
     }
 
-    public addCompostion(options: { type: 'Product' | 'Content', count: Int32Range }, builderFn: (fillBuilder: FeedCompositionBuilder) => void): this {
+    /**
+     * Adds a composition to the feed.
+     * @param options 
+     * @param builderFn 
+     * @returns 
+     */
+    public addCompostion(options: FeedCompositionOptions, builderFn: (fillBuilder: FeedCompositionBuilder) => void): this {
         this.feed.compositions ??= [];
 
         const builder = new FeedCompositionBuilder(options);

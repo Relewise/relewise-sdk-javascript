@@ -2,14 +2,21 @@ import { FilterBuilder } from '../../filterBuilder';
 import { FeedComposition, Int32Range } from '../../../models/data-contracts';
 import { RelevanceModifierBuilder } from '../../relevanceModifierBuilder';
 
+export type FeedCompositionOptions = {
+    type: 'Product' | 'Content';
+    count: Int32Range;
+    name?: string;
+};
+
 export class FeedCompositionBuilder {
     private composition: FeedComposition;
 
-    constructor({ type, count }: { type: 'Product' | 'Content', count: Int32Range }) {
+    constructor({ type, count, name }: FeedCompositionOptions) {
         this.composition = {
             includeEmptyResults: false,
             type,
             count,
+            name
         };
     }
 
@@ -19,13 +26,25 @@ export class FeedCompositionBuilder {
         return this;
     }
 
-    public rotationLimit(limit: number): this {
+    public rotationLimit(limit: number | null): this {
         this.composition.rotationLimit = limit;
 
         return this;
     }
 
-    public fill(options: { type: 'Product' | 'Content', count: Int32Range }, fill: (fillBuilder: FeedCompositionBuilder) => void): this {
+    public name(name: string | null): this {
+        this.composition.name = name;
+
+        return this;
+    }
+
+    public count(count: Int32Range): this {
+        this.composition.count = count;
+
+        return this;
+    }
+
+    public fill(options: FeedCompositionOptions, fill: (fillBuilder: FeedCompositionBuilder) => void): this {
         const builder = new FeedCompositionBuilder(options);
         fill(builder);
         this.composition.fill = builder.build();

@@ -190,9 +190,13 @@ export type AndFilter = Filter & {
     | ContentDataFilter
     | ContentDataHasKeyFilter
     | ContentDisabledFilter
+    | ContentEngagementFilter
     | ContentHasCategoriesFilter
     | ContentIdFilter
     | ContentRecentlyViewedByUserFilter
+    | DisplayAdDataFilter
+    | DisplayAdIdFilter
+    | DisplayAdTemplateIdFilter
     | OrFilter
     | ProductAndVariantIdFilter
     | ProductAssortmentFilter
@@ -211,6 +215,7 @@ export type AndFilter = Filter & {
     | ProductDataHasKeyFilter
     | ProductDisabledFilter
     | ProductDisplayNameFilter
+    | ProductEngagementFilter
     | ProductHasCategoriesFilter
     | ProductHasVariantsFilter
     | ProductIdFilter
@@ -229,6 +234,7 @@ export type AndFilter = Filter & {
     | VariantDataFilter
     | VariantDataHasKeyFilter
     | VariantDisabledFilter
+    | VariantEngagementFilter
     | VariantIdFilter
     | VariantListPriceFilter
     | VariantSalesPriceFilter
@@ -280,6 +286,7 @@ export type BatchedTrackingRequest = TrackingRequest & {
         | ContentEngagement
         | ContentUpdate
         | ContentView
+        | DisplayAdClick
         | Order
         | ProductAdministrativeAction
         | ProductCategoryAdministrativeAction
@@ -584,6 +591,33 @@ export type Campaign = CampaignEntityStateGuidNullableCampaignMetadataValuesReta
 
 export interface CampaignAnalytics {
   products?: CampaignAnalyticsProductAnalytics | null;
+  displayAds?: CampaignAnalyticsDisplayAdAnalytics | null;
+}
+
+export interface CampaignAnalyticsDisplayAdAnalytics {
+  timeSeries?: CampaignAnalyticsDisplayAdAnalyticsPeriodMetrics[] | null;
+  /** @format int32 */
+  promotions: number;
+  promotedDisplayAds?: CampaignAnalyticsDisplayAdAnalyticsPromotedDisplayAdMetrics[] | null;
+}
+
+export interface CampaignAnalyticsDisplayAdAnalyticsPeriodMetrics {
+  /** @format date-time */
+  periodFromUtc: string;
+  /** @format int32 */
+  views: number;
+  /** @format int32 */
+  clicks: number;
+}
+
+export interface CampaignAnalyticsDisplayAdAnalyticsPromotedDisplayAdMetrics {
+  displayAdId?: string | null;
+  /** @format int32 */
+  promotions: number;
+  /** @format int32 */
+  lastClickedUnixMinutes: number;
+  /** @format int32 */
+  numberOfTimesClicked: number;
 }
 
 export interface CampaignAnalyticsProductAnalytics {
@@ -619,7 +653,8 @@ export type CampaignAnalyticsRequest = LicensedRequest & {
   /** @format uuid */
   id: string;
   periodUtc: DateTimeRange;
-  filters?: FilterCollection | null;
+  productFilters?: FilterCollection | null;
+  displayAdFilters?: FilterCollection | null;
 };
 
 export type CampaignAnalyticsResponse = TimedResponse & {
@@ -891,6 +926,13 @@ export interface Channel {
 }
 
 export type ClearTextParser = Parser;
+
+export interface ClickedByUserInfo {
+  /** @format date-time */
+  mostRecentlyClickedUtc: string;
+  /** @format int32 */
+  totalNumberOfTimesClicked: number;
+}
 
 export interface Company {
   id: string;
@@ -1221,6 +1263,19 @@ export interface ContentEngagementData {
   isFavorite?: boolean | null;
 }
 
+export type ContentEngagementFilter = Filter & {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+};
+
+export type ContentEngagementRelevanceModifier = RelevanceModifier & {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+  /** @format double */
+  multiplyWeightBy: number;
+  negated: boolean;
+};
+
 export type ContentFacetQuery = FacetQuery & {
   items: (
     | ContentAssortmentFacet
@@ -1410,6 +1465,7 @@ export interface ContentResult {
   viewedByUser?: ViewedByUserInfo | null;
   custom?: Record<string, string | null>;
   highlight?: HighlightResult | null;
+  userEngagement?: ContentEngagementData | null;
 }
 
 export interface ContentResultDetails {
@@ -1430,6 +1486,7 @@ export interface ContentResultDetails {
   disabled: boolean;
   deleted: boolean;
   custom?: Record<string, string | null>;
+  userEngagement?: ContentEngagementData | null;
 }
 
 export type ContentSearchRequest = PaginatedSearchRequest & {
@@ -1850,6 +1907,213 @@ export type DeleteTriggerConfigurationRequest = LicensedRequest & {
   id: string;
 };
 
+export type DisplayAd = DisplayAdEntityStateStringDisplayAdMetadataValuesRetailMediaEntity & {
+  name: string;
+  /** @format uuid */
+  advertiserId: string;
+  /** @format uuid */
+  templateId: string;
+  data?: Record<string, DataValue>;
+};
+
+export type DisplayAdClick = Trackable & {
+  user?: User | null;
+  displayAdId: string;
+  /** @format uuid */
+  campaignId: string;
+};
+
+export type DisplayAdDataFilter = DataFilter;
+
+export interface DisplayAdEntityStateStringDisplayAdMetadataValuesDisplayAdsRequestSortByDisplayAdsRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: DisplayAdsRequestEntityFilters | null;
+  sorting?: DisplayAdsRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface DisplayAdEntityStateStringDisplayAdMetadataValuesRetailMediaEntity {
+  $type: string;
+  state: "Active" | "Inactive" | "Archived";
+  metadata: DisplayAdMetadataValues;
+  id: string;
+}
+
+export type DisplayAdIdFilter = Filter & {
+  ids?: string[] | null;
+};
+
+export type DisplayAdMetadataValues = MetadataValues;
+
+export type DisplayAdPromotion = Promotion & {
+  productFilters?: FilterCollection | null;
+  conditions?: DisplayAdPromotionPromotionConditions | null;
+  displayAdFilters?: FilterCollection | null;
+};
+
+export type DisplayAdPromotionPromotionConditions = RetailMediaConditions & {
+  searchTerm?: SearchTermConditionByLanguageCollection | null;
+  requestFilters?: RequestFilterCriteria | null;
+};
+
+export type DisplayAdPromotionSpecification = PromotionSpecification & {
+  promotableDisplayAdTemplateIds?: string[] | null;
+  promotableDisplayAdTemplateFilters?: FilterCollection | null;
+};
+
+export interface DisplayAdResult {
+  displayAdId: string;
+  name?: string | null;
+  data?: Record<string, DataValue>;
+  clickedByUserInfo?: ClickedByUserInfo | null;
+}
+
+export interface DisplayAdStringDisplayAdEntityStateEntityResponse {
+  $type: string;
+  entities?: DisplayAd[] | null;
+  /** @format int32 */
+  hits: number;
+  hitsPerState?: {
+    /** @format int32 */
+    Active: number;
+    /** @format int32 */
+    Inactive: number;
+    /** @format int32 */
+    Archived: number;
+  } | null;
+  statistics?: Statistics | null;
+}
+
+export interface DisplayAdStringSaveEntitiesRequest {
+  $type: string;
+  entities: DisplayAd[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface DisplayAdStringSaveEntitiesResponse {
+  $type: string;
+  entities?: DisplayAd[] | null;
+  statistics?: Statistics | null;
+}
+
+export type DisplayAdTemplate =
+  DisplayAdTemplateEntityStateGuidNullableDisplayAdTemplateMetadataValuesRetailMediaEntity & {
+    name: string;
+    fields: DisplayAdTemplateFieldDefinition[];
+  };
+
+export interface DisplayAdTemplateEntityStateGuidDisplayAdTemplateMetadataValuesDisplayAdTemplatesRequestSortByDisplayAdTemplatesRequestEntityFiltersEntitiesRequest {
+  $type: string;
+  filters?: DisplayAdTemplatesRequestEntityFilters | null;
+  sorting?: DisplayAdTemplatesRequestSortBySorting | null;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface DisplayAdTemplateEntityStateGuidNullableDisplayAdTemplateMetadataValuesRetailMediaEntity {
+  $type: string;
+  state: "Active" | "Inactive" | "Archived";
+  metadata: DisplayAdTemplateMetadataValues;
+  /** @format uuid */
+  id?: string | null;
+}
+
+export interface DisplayAdTemplateFieldDefinition {
+  name: string;
+  type:
+    | "String"
+    | "Double"
+    | "Boolean"
+    | "Multilingual"
+    | "Money"
+    | "MultiCurrency"
+    | "StringList"
+    | "DoubleList"
+    | "BooleanList"
+    | "MultilingualCollection"
+    | "Object"
+    | "ObjectList";
+  metadata?: Record<string, string>;
+}
+
+export interface DisplayAdTemplateGuidNullableDisplayAdTemplateEntityStateEntityResponse {
+  $type: string;
+  entities?: DisplayAdTemplate[] | null;
+  /** @format int32 */
+  hits: number;
+  hitsPerState?: {
+    /** @format int32 */
+    Active: number;
+    /** @format int32 */
+    Inactive: number;
+    /** @format int32 */
+    Archived: number;
+  } | null;
+  statistics?: Statistics | null;
+}
+
+export interface DisplayAdTemplateGuidNullableSaveEntitiesRequest {
+  $type: string;
+  entities: DisplayAdTemplate[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface DisplayAdTemplateGuidNullableSaveEntitiesResponse {
+  $type: string;
+  entities?: DisplayAdTemplate[] | null;
+  statistics?: Statistics | null;
+}
+
+export type DisplayAdTemplateIdFilter = Filter & {
+  ids?: string[] | null;
+};
+
+export type DisplayAdTemplateMetadataValues = MetadataValues;
+
+export type DisplayAdTemplatesRequest =
+  DisplayAdTemplateEntityStateGuidDisplayAdTemplateMetadataValuesDisplayAdTemplatesRequestSortByDisplayAdTemplatesRequestEntityFiltersEntitiesRequest;
+
+export type DisplayAdTemplatesRequestEntityFilters =
+  RetailMediaEntity3DisplayAdTemplateEntityStateGuidDisplayAdTemplateMetadataValuesRetailMediaEntity3EntityFilters & {
+    ids?: string[] | null;
+    keys?: string[] | null;
+    filters?: FilterCollection | null;
+  };
+
+export interface DisplayAdTemplatesRequestSortBySorting {
+  sortBy: "Created" | "Modified" | "Name";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type DisplayAdTemplatesResponse = DisplayAdTemplateGuidNullableDisplayAdTemplateEntityStateEntityResponse;
+
+export type DisplayAdsRequest =
+  DisplayAdEntityStateStringDisplayAdMetadataValuesDisplayAdsRequestSortByDisplayAdsRequestEntityFiltersEntitiesRequest;
+
+export type DisplayAdsRequestEntityFilters =
+  RetailMediaEntity3DisplayAdEntityStateStringDisplayAdMetadataValuesRetailMediaEntity3EntityFilters & {
+    ids?: string[] | null;
+    advertiserIds?: string[] | null;
+    templateIds?: string[] | null;
+    filters?: FilterCollection | null;
+  };
+
+export interface DisplayAdsRequestSortBySorting {
+  sortBy: "Created" | "Modified" | "Name";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type DisplayAdsResponse = DisplayAdStringDisplayAdEntityStateEntityResponse;
+
 export type DistinctCondition = ValueCondition & {
   /** @format int32 */
   numberOfOccurrencesAllowedWithTheSameValue: number;
@@ -2192,7 +2456,7 @@ export interface FeedCompositionResult {
 }
 
 export type FeedDwell = Trackable & {
-  user: User;
+  user?: User | null;
   /** @format uuid */
   feedId: string;
   /** @format int32 */
@@ -2286,9 +2550,13 @@ export interface FilterCollection {
         | ContentDataFilter
         | ContentDataHasKeyFilter
         | ContentDisabledFilter
+        | ContentEngagementFilter
         | ContentHasCategoriesFilter
         | ContentIdFilter
         | ContentRecentlyViewedByUserFilter
+        | DisplayAdDataFilter
+        | DisplayAdIdFilter
+        | DisplayAdTemplateIdFilter
         | OrFilter
         | ProductAndVariantIdFilter
         | ProductAssortmentFilter
@@ -2307,6 +2575,7 @@ export interface FilterCollection {
         | ProductDataHasKeyFilter
         | ProductDisabledFilter
         | ProductDisplayNameFilter
+        | ProductEngagementFilter
         | ProductHasCategoriesFilter
         | ProductHasVariantsFilter
         | ProductIdFilter
@@ -2325,6 +2594,7 @@ export interface FilterCollection {
         | VariantDataFilter
         | VariantDataHasKeyFilter
         | VariantDisabledFilter
+        | VariantEngagementFilter
         | VariantIdFilter
         | VariantListPriceFilter
         | VariantSalesPriceFilter
@@ -2785,6 +3055,7 @@ export interface LocationPlacement {
   key?: string | null;
   variations?: LocationPlacementVariationCollection | null;
   thresholds?: ScoreThresholds | null;
+  displayAdTemplateFilters?: FilterCollection | null;
 }
 
 export interface LocationPlacementCollection {
@@ -3014,9 +3285,13 @@ export type OrFilter = Filter & {
     | ContentDataFilter
     | ContentDataHasKeyFilter
     | ContentDisabledFilter
+    | ContentEngagementFilter
     | ContentHasCategoriesFilter
     | ContentIdFilter
     | ContentRecentlyViewedByUserFilter
+    | DisplayAdDataFilter
+    | DisplayAdIdFilter
+    | DisplayAdTemplateIdFilter
     | OrFilter
     | ProductAndVariantIdFilter
     | ProductAssortmentFilter
@@ -3035,6 +3310,7 @@ export type OrFilter = Filter & {
     | ProductDataHasKeyFilter
     | ProductDisabledFilter
     | ProductDisplayNameFilter
+    | ProductEngagementFilter
     | ProductHasCategoriesFilter
     | ProductHasVariantsFilter
     | ProductIdFilter
@@ -3053,6 +3329,7 @@ export type OrFilter = Filter & {
     | VariantDataFilter
     | VariantDataHasKeyFilter
     | VariantDisabledFilter
+    | VariantEngagementFilter
     | VariantIdFilter
     | VariantListPriceFilter
     | VariantSalesPriceFilter
@@ -3118,6 +3395,7 @@ export interface OverriddenSelectedContentPropertiesSettings {
   allData?: boolean | null;
   viewedByUserInfo?: boolean | null;
   dataKeys?: string[] | null;
+  userEngagement?: boolean | null;
 }
 
 export interface OverriddenSelectedProductPropertiesSettings {
@@ -3132,6 +3410,7 @@ export interface OverriddenSelectedProductPropertiesSettings {
   allVariants?: boolean | null;
   dataKeys?: string[] | null;
   score?: SelectedScorePropertiesSettings | null;
+  userEngagement?: boolean | null;
 }
 
 export interface OverriddenSelectedVariantPropertiesSettings {
@@ -3142,6 +3421,7 @@ export interface OverriddenSelectedVariantPropertiesSettings {
   allData?: boolean | null;
   dataKeys?: string[] | null;
   specificationKeys?: string[] | null;
+  userEngagement?: boolean | null;
 }
 
 export interface PaginatedSearchRequest {
@@ -3856,6 +4136,19 @@ export interface ProductEngagementData {
   isFavorite?: boolean | null;
 }
 
+export type ProductEngagementFilter = Filter & {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+};
+
+export type ProductEngagementRelevanceModifier = RelevanceModifier & {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+  /** @format double */
+  multiplyWeightBy: number;
+  negated: boolean;
+};
+
 export type ProductFacetQuery = FacetQuery & {
   items: (
     | ContentAssortmentFacet
@@ -4138,6 +4431,7 @@ export type ProductPromotion = Promotion & {
 
 export type ProductPromotionPromotionConditions = RetailMediaConditions & {
   searchTerm?: SearchTermConditionByLanguageCollection | null;
+  requestFilters?: RequestFilterCriteria | null;
 };
 
 export type ProductPromotionSpecification = PromotionSpecification & {
@@ -4388,6 +4682,7 @@ export interface ProductResult {
   filteredVariants?: VariantResult[] | null;
   highlight?: HighlightResult | null;
   score?: Score | null;
+  userEngagement?: ProductEngagementData | null;
 }
 
 export interface ProductResultDetails {
@@ -4422,6 +4717,7 @@ export interface ProductResultDetails {
   salesPrice?: MultiCurrency | null;
   brand?: BrandResultDetails | null;
   filteredVariants?: VariantResultDetails[] | null;
+  userEngagement?: ProductEngagementData | null;
 }
 
 export type ProductSalesPriceFilter = Filter & {
@@ -4551,8 +4847,10 @@ export interface Promotion {
 }
 
 export interface PromotionCollection {
-  promotions: ProductPromotion[];
+  promotions: (DisplayAdPromotion | ProductPromotion)[];
 }
+
+export type PromotionDisplayAdsVariationPromotionPriority = PromotionVariationPromotionPriority;
 
 export interface PromotionLocation {
   key: string;
@@ -4572,12 +4870,15 @@ export interface PromotionLocationPlacementCollection {
   items?: PromotionLocationPlacement[] | null;
 }
 
+export type PromotionProductsVariationPromotionPriority = PromotionVariationPromotionPriority;
+
 export interface PromotionSpecification {
   $type: string;
 }
 
 export interface PromotionSpecificationCollection {
   productPromotion?: ProductPromotionSpecification | null;
+  displayAdPromotion?: DisplayAdPromotionSpecification | null;
 }
 
 export interface PromotionSpecificationVariation {
@@ -4585,7 +4886,23 @@ export interface PromotionSpecificationVariation {
 }
 
 export interface PromotionSpecificationVariationCollection {
+  /** @deprecated */
   productPromotion?: ProductPromotionSpecificationVariation | null;
+  variationPromotion?: PromotionVariationPromotion | null;
+}
+
+export type PromotionVariationPromotion = PromotionSpecificationVariation & {
+  /** @format int32 */
+  maxCount: number;
+  /** @format int32 */
+  preferredNumberOfProducts?: number | null;
+  /** @format int32 */
+  preferredNumberOfDisplayAds?: number | null;
+  priority?: PromotionProductsVariationPromotionPriority | PromotionDisplayAdsVariationPromotionPriority | null;
+};
+
+export interface PromotionVariationPromotionPriority {
+  $type: string;
 }
 
 export interface PurchaseQualifiers {
@@ -4776,12 +5093,14 @@ export interface RelevanceModifierCollection {
         | ContentCategoryDataRelevanceModifier
         | ContentCategoryRecentlyViewedByUserRelevanceModifier
         | ContentDataRelevanceModifier
+        | ContentEngagementRelevanceModifier
         | ContentRecentlyViewedByUserRelevanceModifier
         | ProductAssortmentRelevanceModifier
         | ProductCategoryDataRelevanceModifier
         | ProductCategoryIdRelevanceModifier
         | ProductCategoryRecentlyViewedByUserRelevanceModifier
         | ProductDataRelevanceModifier
+        | ProductEngagementRelevanceModifier
         | ProductIdRelevanceModifier
         | ProductListPriceRelevanceModifier
         | ProductRecentlyPurchasedByCompanyRelevanceModifier
@@ -4794,6 +5113,7 @@ export interface RelevanceModifierCollection {
         | UserFavoriteProductRelevanceModifier
         | VariantAssortmentRelevanceModifier
         | VariantDataRelevanceModifier
+        | VariantEngagementRelevanceModifier
         | VariantIdRelevanceModifier
         | VariantListPriceRelevanceModifier
         | VariantSalesPriceRelevanceModifier
@@ -4846,6 +5166,18 @@ export interface RetailMediaEntity3CampaignEntityStateGuidNullableCampaignMetada
   states?: ("Proposed" | "Approved" | "Archived")[] | null;
 }
 
+export interface RetailMediaEntity3DisplayAdEntityStateStringDisplayAdMetadataValuesRetailMediaEntity3EntityFilters {
+  $type: string;
+  term?: string | null;
+  states?: ("Active" | "Inactive" | "Archived")[] | null;
+}
+
+export interface RetailMediaEntity3DisplayAdTemplateEntityStateGuidDisplayAdTemplateMetadataValuesRetailMediaEntity3EntityFilters {
+  $type: string;
+  term?: string | null;
+  states?: ("Active" | "Inactive" | "Archived")[] | null;
+}
+
 export interface RetailMediaEntity3LocationEntityStateGuidLocationMetadataValuesRetailMediaEntity3EntityFilters {
   $type: string;
   term?: string | null;
@@ -4854,6 +5186,7 @@ export interface RetailMediaEntity3LocationEntityStateGuidLocationMetadataValues
 
 export interface RetailMediaQuery {
   location: RetailMediaQueryLocationSelector;
+  settings?: RetailMediaQuerySettings | null;
 }
 
 export interface RetailMediaQueryLocationSelector {
@@ -4864,6 +5197,10 @@ export interface RetailMediaQueryLocationSelector {
 
 export interface RetailMediaQueryPlacementSelector {
   key: string;
+}
+
+export interface RetailMediaQuerySettings {
+  selectedDisplayAdProperties?: SelectedDisplayAdPropertiesSettings | null;
 }
 
 export interface RetailMediaQueryVariationSelector {
@@ -4880,6 +5217,11 @@ export interface RetailMediaResultPlacement {
 
 export interface RetailMediaResultPlacementResultEntity {
   promotedProduct?: RetailMediaResultPlacementResultEntityProduct | null;
+  promotedDisplayAd?: RetailMediaResultPlacementResultEntityDisplayAd | null;
+}
+
+export interface RetailMediaResultPlacementResultEntityDisplayAd {
+  result: DisplayAdResult;
 }
 
 export interface RetailMediaResultPlacementResultEntityProduct {
@@ -4897,6 +5239,14 @@ export type SaveCampaignsResponse = CampaignGuidNullableSaveEntitiesResponse;
 export type SaveDecompoundRulesRequest = DecompoundRuleSaveSearchRulesRequest;
 
 export type SaveDecompoundRulesResponse = DecompoundRuleSaveSearchRulesResponse;
+
+export type SaveDisplayAdTemplatesRequest = DisplayAdTemplateGuidNullableSaveEntitiesRequest;
+
+export type SaveDisplayAdTemplatesResponse = DisplayAdTemplateGuidNullableSaveEntitiesResponse;
+
+export type SaveDisplayAdsRequest = DisplayAdStringSaveEntitiesRequest;
+
+export type SaveDisplayAdsResponse = DisplayAdStringSaveEntitiesResponse;
 
 export type SaveGlobalRetailMediaConfigurationRequest = LicensedRequest & {
   configuration?: GlobalRetailMediaConfiguration | null;
@@ -5315,6 +5665,14 @@ export interface SelectedContentPropertiesSettings {
   allData: boolean;
   viewedByUserInfo: boolean;
   dataKeys?: string[] | null;
+  userEngagement: boolean;
+}
+
+export interface SelectedDisplayAdPropertiesSettings {
+  displayName: boolean;
+  allData: boolean;
+  dataKeys?: string[] | null;
+  clickedByUserInfo: boolean;
 }
 
 export type SelectedProductCategoryPropertiesSettings = SelectedCategoryPropertiesSettings;
@@ -5333,6 +5691,7 @@ export interface SelectedProductDetailsPropertiesSettings {
   viewedByUserCompanyInfo: boolean;
   purchasedByUserCompanyInfo: boolean;
   filteredVariants?: FilteredVariantsSettings | null;
+  userEngagement: boolean;
 }
 
 export interface SelectedProductPropertiesSettings {
@@ -5350,6 +5709,7 @@ export interface SelectedProductPropertiesSettings {
   purchasedByUserCompanyInfo: boolean;
   filteredVariants?: FilteredVariantsSettings | null;
   score?: SelectedScorePropertiesSettings | null;
+  userEngagement: boolean;
 }
 
 export interface SelectedScorePropertiesSettings {
@@ -5365,6 +5725,7 @@ export interface SelectedVariantDetailsPropertiesSettings {
   allData: boolean;
   dataKeys?: string[] | null;
   specificationKeys?: string[] | null;
+  userEngagement: boolean;
 }
 
 export interface SelectedVariantPropertiesSettings {
@@ -5375,6 +5736,7 @@ export interface SelectedVariantPropertiesSettings {
   allData: boolean;
   dataKeys?: string[] | null;
   specificationKeys?: string[] | null;
+  userEngagement: boolean;
 }
 
 export interface SignificantDataValue {
@@ -5733,6 +6095,10 @@ export type TrackContentViewRequest = TrackingRequest & {
   contentView: ContentView;
 };
 
+export type TrackDisplayAdClickRequest = TrackingRequest & {
+  displayAdClick: DisplayAdClick;
+};
+
 export type TrackFeedDwellRequest = TrackingRequest & {
   dwell: FeedDwell;
 };
@@ -6071,6 +6437,19 @@ export type VariantDataRelevanceModifier = DataRelevanceModifier;
 
 export type VariantDisabledFilter = Filter;
 
+export type VariantEngagementFilter = Filter & {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+};
+
+export type VariantEngagementRelevanceModifier = RelevanceModifier & {
+  sentiment?: "Neutral" | "Like" | "Dislike" | null;
+  isFavorite?: boolean | null;
+  /** @format double */
+  multiplyWeightBy: number;
+  negated: boolean;
+};
+
 export type VariantIdFilter = Filter & {
   variantIds: string[];
 };
@@ -6119,6 +6498,7 @@ export interface VariantResult {
   listPrice?: number | null;
   /** @format double */
   salesPrice?: number | null;
+  userEngagement?: ProductEngagementData | null;
 }
 
 export interface VariantResultDetails {
@@ -6131,6 +6511,7 @@ export interface VariantResultDetails {
   listPrice?: MultiCurrency | null;
   salesPrice?: MultiCurrency | null;
   disabled: boolean;
+  userEngagement?: ProductEngagementData | null;
 }
 
 export type VariantSalesPriceFilter = Filter & {

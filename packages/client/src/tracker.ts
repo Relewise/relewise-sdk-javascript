@@ -1,7 +1,12 @@
 import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions } from './relewise.client';
-import { 
+import {
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
     TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest, DataValue,
+    ContentEngagementData,
+    ProductAndVariantId,
+    ProductEngagementData,
+    TrackContentEngagementRequest,
+    TrackProductEngagementRequest,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -15,8 +20,8 @@ export class Tracker extends RelewiseClient {
         orderNumber: string,
         /** @deprecated Use orderNumber instead. */
         trackingNumber?: string,
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], 
-        data?: Record<string, DataValue>, 
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[],
+        data?: Record<string, DataValue>,
         cartName?: string
     }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackOrderRequest, void>('TrackOrderRequest', {
@@ -27,12 +32,12 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
-                    ...(l.variantId && { variant: { id: l.variantId }}),
+                    ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
                     data: l.data,
                 })),
-                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
+                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency } },
                 orderNumber: orderNumber,
                 trackingNumber: trackingNumber,
                 cartName: cartName,
@@ -42,12 +47,12 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: { 
-        user?: User, 
-        subtotal: { currency: string, amount: number }, 
-        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[], 
-        data?: Record<string, DataValue>, 
-        cartName?: string 
+    public async trackCart({ user, subtotal, lineItems, data, cartName = 'default' }: {
+        user?: User,
+        subtotal: { currency: string, amount: number },
+        lineItems: { productId: string, variantId?: string, lineTotal: number, quantity: number, data?: Record<string, DataValue> }[],
+        data?: Record<string, DataValue>,
+        cartName?: string
     }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackCartRequest, void>('TrackCartRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackCartRequest, Relewise.Client',
@@ -57,12 +62,12 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
-                    ...(l.variantId && { variant: { id: l.variantId }}),
+                    ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
                     data: l.data,
                 })),
-                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency }},
+                subtotal: { amount: subtotal.amount, currency: { value: subtotal.currency } },
                 name: cartName,
                 user: user,
                 data: data,
@@ -78,7 +83,7 @@ export class Tracker extends RelewiseClient {
                 product: {
                     id: productId,
                 },
-                ...(variantId && { variant: { id: variantId }}),
+                ...(variantId && { variant: { id: variantId } }),
                 user: user,
             },
         }, options);
@@ -146,7 +151,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace'  }, options?: RelewiseRequestOptions): Promise<void | undefined> {
+    public async trackUserUpdate({ user, updateKind = 'UpdateAndAppend' }: { user: User, updateKind?: 'None' | 'UpdateAndAppend' | 'ReplaceProvidedProperties' | 'ClearAndReplace' }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackUserUpdateRequest, void>('TrackUserUpdateRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackUserUpdateRequest, Relewise.Client',
             userUpdate: {
@@ -154,6 +159,30 @@ export class Tracker extends RelewiseClient {
                 user: user,
                 kind: updateKind,
             },
+        }, options);
+    }
+
+    public async trackProductEngagement({ user, engagement, product }: { user: User, product: ProductAndVariantId, engagement: ProductEngagementData }, options?: RelewiseRequestOptions) {
+        return this.request<TrackProductEngagementRequest, void>('TrackProductEngagementRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackProductEngagementRequest, Relewise.Client',
+            productEngagement: {
+                $type: 'Relewise.Client.DataTypes.ProductEngagement, Relewise.Client',
+                user: user,
+                id: product,
+                engagement: engagement
+            }
+        }, options);
+    }
+
+    public async trackContentEngagement({ user, engagement, contentId }: { user: User, contentId: string, engagement: ContentEngagementData }, options?: RelewiseRequestOptions) {
+        return this.request<TrackContentEngagementRequest, void>('TrackContentEngagementRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackContentEngagementRequest, Relewise.Client',
+            contentEngagement: {
+                $type: 'Relewise.Client.DataTypes.ContentEngagement, Relewise.Client',
+                user: user,
+                id: contentId,
+                engagement: engagement
+            }
         }, options);
     }
 }

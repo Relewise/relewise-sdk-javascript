@@ -30,7 +30,7 @@ test('Product Id filter', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
         .filters(f => f.addProductIdFilter(['1'])
-            .addVariantDataFilter('avaliableMarkets', c => c.addGreaterThanCondition(1693526400 - 1)))
+            .addVariantDataFilter('availableMarkets', c => c.addGreaterThanCondition(1693526400 - 1)))
         .pagination(p => p.setPageSize(20))
         .build();
 
@@ -42,7 +42,7 @@ test('Product Id filter', async() => {
 test('Product Variant Object Path filter', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .filters(f => f.addVariantDataFilter('avaliableMarkets', c => c.addGreaterThanCondition(1693526400 - 1), undefined, undefined, undefined,
+        .filters(f => f.addVariantDataFilter('availableMarkets', c => c.addGreaterThanCondition(1693526400 - 1), undefined, undefined, undefined,
             {
                 objectPath: ['US', 'ValidFromDate'],
                 filterSettings: s => s.scopes(sc => sc.fill({ apply: true }).default({ apply: false })),
@@ -58,7 +58,7 @@ test('Product Variant Object Path filter', async() => {
 test('Object value is subset of condition filter', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
-        .filters(f => f.addProductDataFilter('objects', c => c.addDataObjectCondition(doc => 
+        .filters(f => f.addProductDataFilter('objects', c => c.addDataObjectCondition(doc =>
             doc.addObjectValueIsSubsetOfCondition('list', DataValueFactory.stringCollection(['123', '456', '789'])))))
         .pagination(p => p.setPageSize(3))
         .build();

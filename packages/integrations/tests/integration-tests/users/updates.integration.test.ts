@@ -13,7 +13,7 @@ test('Query Users when no user found', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(randomId))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
@@ -29,7 +29,7 @@ test('Query Users when user found by authenticated id', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
@@ -46,7 +46,7 @@ test('Query Users when user found by temporary id', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byTemporaryId(temporaryId))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
@@ -63,7 +63,7 @@ test('Query Users when user found by email', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byEmail(email))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
@@ -81,15 +81,15 @@ test('Query Users when user found by identifier', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byIdentifier(key, value))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
     expect(result?.results).toHaveLength(1);
     expect(result?.results![0]).toHaveLength(1);
     expect(result?.results![0][0].identifiers).toBeDefined();
-    
-    // The API always to lower cases indentifer keys
+
+    // The API always to lower cases identifier keys
     expect(result?.results![0][0].identifiers![key.toLowerCase()]).toBe(value);
 });
 
@@ -105,15 +105,15 @@ test('Query Users when user found by identifier', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byIdentifiers({ [key]: value, [key2]: value2 }))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
     expect(result?.results).toHaveLength(1);
     expect(result?.results![0]).toHaveLength(1);
     expect(result?.results![0][0].identifiers).toBeDefined();
-    
-    // The API always to lower cases indentifer keys
+
+    // The API always to lower cases identifier keys
     expect(result?.results![0][0].identifiers![key.toLowerCase()]).toBe(value);
     expect(result?.results![0][0].identifiers![key2.toLowerCase()]).toBe(value2);
 });
@@ -129,7 +129,7 @@ test('Query Users when user found by authenticated id', async() => {
         .criteria(c => c.byAuthenticatedId(authenticatedId))
         .criteria(c => c.byTemporaryId(temporaryId))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
@@ -157,7 +157,7 @@ test('Query Users when no language or currency provided', async() => {
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();
@@ -186,7 +186,7 @@ test('Query Users when a language is provided', async() => {
         .criteria(c => c.byAuthenticatedId(authenticatedId))
         .language(da)
         .build();
-    
+
     const result = await dataAccessor.queryUsers(query);
 
     expect(result?.results).toBeDefined();

@@ -110,7 +110,7 @@ UserFactory.anonymous()
 
 ### Search
 
-To use our fully-fledged search engine, start by bootstraping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.
+To use our fully-fledged search engine, start by bootstrapping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.
 
 Here is a basic usage example for selecting product properties, paging, facets and filters.
 
@@ -149,7 +149,7 @@ const builder = new ProductSearchBuilder(settings)
 searcher.searchProducts(builder.build());
 ```
 
-You can use the `*` in `dataKeys` to extract properties by conventions - if you store data that is unqiue for a store or have many `dataKeys` with the same prefix or postfix.
+You can use the `*` in `dataKeys` to extract properties by conventions - if you store data that is unique for a store or have many `dataKeys` with the same prefix or postfix.
 
 ### Category pages
 

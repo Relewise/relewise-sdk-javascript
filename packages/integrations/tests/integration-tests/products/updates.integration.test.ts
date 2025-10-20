@@ -25,7 +25,7 @@ test('Create Product', async() => {
             'Complex': DataValueFactory.object({
                 'nestedDataKey': DataValueFactory.string('Key'),
             }),
-            'avaliableMarkets': DataValueFactory.object({
+            'availableMarkets': DataValueFactory.object({
                 'US': DataValueFactory.object({
                     'ValidFromDate': DataValueFactory.number(1693526400),
                 }),
@@ -145,7 +145,7 @@ test('Create Product with variants', async() => {
             'Description': DataValueFactory.string('Really nice product'),
             'Tags': DataValueFactory.stringCollection(['fall collection', 'blue', 'good-deal']),
             'InStock': DataValueFactory.boolean(true),
-            'avaliableMarkets': DataValueFactory.number(1693526400),
+            'availableMarkets': DataValueFactory.number(1693526400),
         })
         .specifications({ Size: 'S' })
         .build();

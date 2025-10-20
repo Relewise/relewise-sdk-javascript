@@ -12,7 +12,7 @@ const settings = {
     user: UserFactory.anonymous(),
 };
 
-test('Batched Product Reommendations', async() => {
+test('Batched Product Recommendations', async() => {
 
     const request: ProductRecommendationRequestCollection = new ProductsRecommendationCollectionBuilder()
         .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())

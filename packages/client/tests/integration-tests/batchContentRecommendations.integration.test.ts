@@ -12,9 +12,9 @@ const settings = {
     user: UserFactory.anonymous(),
 };
 
-test('Batched Content Reommendations', async() => {
+test('Batched Content Recommendations', async() => {
 
-    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()      
+    const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()
         .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).setNumberOfRecommendations(1).build())
         .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setNumberOfRecommendations(1).setContentId('1').build())
         .build();

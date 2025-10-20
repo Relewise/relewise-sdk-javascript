@@ -25,12 +25,13 @@ jobs:
           echo 'TAG_NAME=${{ steps.get-latest-tag.outputs.tag }}'
           echo 'PACKAGE_PATH=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 1 >> $GITHUB_ENV
 
-      - uses: brettdorrans/write-version-to-file@master
+      - name: Update version
         if: ${{ env.PACKAGE_PATH == 'client' }} 
-        name: Update version
-        with:
-          filename: './packages/${{ env.PACKAGE_PATH }}/src/version.ts'
-          placeholder: '${VERSION}'
+        run: |
+          VERSION="${{ github.ref_name }}"
+          sed -i "s|\${VERSION}|${VERSION}|g" ./packages/client/src/version.ts
+          echo "Result:"
+          cat ./packages/client/src/version.ts
 
       - run: npm ci
         working-directory: ./packages/${{ env.PACKAGE_PATH }}

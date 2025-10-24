@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.com/
-          scope: '@relewise'
 
       - name: Get latest tag
         id: get-latest-tag
@@ -36,6 +35,9 @@ jobs:
           sed -i "s|\${VERSION}|${VERSION}|g" ./packages/client/src/version.ts
           echo "Result:"
           cat ./packages/client/src/version.ts
+
+      # (optional) ensure a fresh npm with latest trusted-publish bits
+      - run: npm i -g npm@latest
 
       - run: npm ci
         working-directory: ./packages/${{ env.PACKAGE_PATH }}

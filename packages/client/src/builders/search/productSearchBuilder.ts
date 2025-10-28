@@ -90,12 +90,6 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    // public retailMedia(retailMediaBuilder: (retailMediaQuery: RetailMediaQueryBuilder) => void): this {
-
-
-    //     return this;
-    // }
-
     /**
      * Set the term used to filter products by
      */

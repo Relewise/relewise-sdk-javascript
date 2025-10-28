@@ -24,7 +24,7 @@ export class RetailMediaQueryBuilder {
         return {
             location: this.location,
             settings: {
-                selectedDisplayAdProperties: null
+                selectedDisplayAdProperties: this.selectedDisplayAdProperties
             }
         };
     }

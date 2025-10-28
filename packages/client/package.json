@@ -34,7 +34,7 @@
     "clean": "rimraf ./build ./dist ./docs",
     "gen-api": "swagger-typescript-api -p https://api.relewise.com/public/swagger.json -o src/models --modular --no-client --enum-names-as-values && node fix-exports.js",
     "gen-api-dev": "swagger-typescript-api -p swagger.json -o src/models --modular --no-client --enum-names-as-values && node fix-exports.js",
-    "publish": "npm run gen-api-dev && npm run build && npm run build:types"
+    "publish": "npm run gen-api && npm run build && npm run build:types"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.53.1",

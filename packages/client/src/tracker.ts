@@ -35,7 +35,6 @@ export class Tracker extends RelewiseClient {
                         id: l.productId,
                     },
                     ...(l.variantId && { variant: { id: l.variantId } }),
-                    ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
                     data: l.data,
@@ -65,7 +64,6 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
-                    ...(l.variantId && { variant: { id: l.variantId } }),
                     ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,

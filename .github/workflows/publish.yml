@@ -38,6 +38,7 @@ jobs:
 
       # (optional) ensure a fresh npm with latest trusted-publish bits
       - run: npm i -g npm@latest
+        working-directory: ./packages/${{ env.PACKAGE_PATH }}
 
       - run: npm ci
         working-directory: ./packages/${{ env.PACKAGE_PATH }}

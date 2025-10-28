@@ -8,7 +8,6 @@ import {
     TrackContentEngagementRequest,
     TrackProductEngagementRequest,
     TrackDisplayAdClickRequest,
-    DisplayAdClick,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {

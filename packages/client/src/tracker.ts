@@ -7,6 +7,8 @@ import {
     ProductEngagementData,
     TrackContentEngagementRequest,
     TrackProductEngagementRequest,
+    TrackDisplayAdClickRequest,
+    DisplayAdClick,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -32,6 +34,7 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
+                    ...(l.variantId && { variant: { id: l.variantId } }),
                     ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
@@ -62,6 +65,7 @@ export class Tracker extends RelewiseClient {
                     product: {
                         id: l.productId,
                     },
+                    ...(l.variantId && { variant: { id: l.variantId } }),
                     ...(l.variantId && { variant: { id: l.variantId } }),
                     lineTotal: l.lineTotal,
                     quantity: l.quantity,
@@ -183,6 +187,18 @@ export class Tracker extends RelewiseClient {
                 id: contentId,
                 engagement: engagement
             }
+        }, options);
+    }
+
+    public async trackDisplayAdClick({ user, campaignId, displayAdId }: { user: User, displayAdId: string, campaignId: string }, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackDisplayAdClickRequest, void>('TrackDisplayAdClickRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackDisplayAdClickRequest, Relewise.Client',
+            displayAdClick: {
+                $type: 'Relewise.Client.DataTypes.DisplayAdClick, Relewise.Client',
+                user: user,
+                campaignId: campaignId,
+                displayAdId: displayAdId,
+            },
         }, options);
     }
 }

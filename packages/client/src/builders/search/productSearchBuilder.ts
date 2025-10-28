@@ -1,5 +1,6 @@
 import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, ResultMustHaveVariantConstraint, RetailMediaQuery, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
+import { RetailMediaQueryBuilder } from '../retailMediaQueryBuilder';
 import { Settings } from '../settings';
 import { FacetBuilder } from './facetBuilder';
 import { ProductHighlightingBuilder } from './productHighlightingBuilder';
@@ -74,8 +75,17 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
-    public setRetailMedia(query: RetailMediaQuery | null): this {
-        this.retailMediaQuery = query;
+    public setRetailMedia(query: RetailMediaQuery | ((retailMediaQuery: RetailMediaQueryBuilder) => void) | null): this {
+
+        if (typeof query === 'function') {
+            const builder = new RetailMediaQueryBuilder();
+            query(builder);
+
+            this.retailMediaQuery = builder.build();
+
+        } else {
+            this.retailMediaQuery = query;
+        }
 
         return this;
     }

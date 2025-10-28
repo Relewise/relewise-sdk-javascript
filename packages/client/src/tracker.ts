@@ -187,7 +187,7 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
-    public async trackDisplayAdClick({ user, campaignId, displayAdId }: { user: User, displayAdId: string, campaignId: string }, options?: RelewiseRequestOptions): Promise<void | undefined> {
+    public async trackDisplayAdClick({ user, campaignId, displayAdId }: { user: User, campaignId: string, displayAdId: string }, options?: RelewiseRequestOptions): Promise<void | undefined> {
         return this.request<TrackDisplayAdClickRequest, void>('TrackDisplayAdClickRequest', {
             $type: 'Relewise.Client.Requests.Tracking.TrackDisplayAdClickRequest, Relewise.Client',
             displayAdClick: {

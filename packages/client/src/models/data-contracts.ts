@@ -605,19 +605,20 @@ export interface CampaignAnalyticsDisplayAdAnalyticsPeriodMetrics {
   /** @format date-time */
   periodFromUtc: string;
   /** @format int32 */
-  views: number;
+  promotions: number;
   /** @format int32 */
   clicks: number;
 }
 
 export interface CampaignAnalyticsDisplayAdAnalyticsPromotedDisplayAdMetrics {
-  displayAdId?: string | null;
+  displayAdId: string;
   /** @format int32 */
   promotions: number;
   /** @format int32 */
   lastClickedUnixMinutes: number;
   /** @format int32 */
   numberOfTimesClicked: number;
+  displayAd?: DisplayAdResult | null;
 }
 
 export interface CampaignAnalyticsProductAnalytics {
@@ -635,6 +636,8 @@ export interface CampaignAnalyticsProductAnalyticsPeriodMetrics {
   /** @format int32 */
   salesQuantity: number;
   currencies?: CampaignAnalyticsProductAnalyticsPeriodMetricsCurrencyMetrics[] | null;
+  /** @format int32 */
+  promotions: number;
 }
 
 export interface CampaignAnalyticsProductAnalyticsPeriodMetricsCurrencyMetrics {
@@ -644,9 +647,10 @@ export interface CampaignAnalyticsProductAnalyticsPeriodMetricsCurrencyMetrics {
 }
 
 export interface CampaignAnalyticsProductAnalyticsPromotedProductMetrics {
-  productId?: string | null;
+  productId: string;
   /** @format int32 */
   promotions: number;
+  product?: ProductResult | null;
 }
 
 export type CampaignAnalyticsRequest = LicensedRequest & {
@@ -655,6 +659,10 @@ export type CampaignAnalyticsRequest = LicensedRequest & {
   periodUtc: DateTimeRange;
   productFilters?: FilterCollection | null;
   displayAdFilters?: FilterCollection | null;
+  language?: Language | null;
+  currency?: Currency | null;
+  selectedProductProperties?: SelectedProductPropertiesSettings | null;
+  selectedDisplayAdProperties?: SelectedDisplayAdPropertiesSettings | null;
 };
 
 export type CampaignAnalyticsResponse = TimedResponse & {
@@ -1960,11 +1968,6 @@ export type DisplayAdPromotionPromotionConditions = RetailMediaConditions & {
   requestFilters?: RequestFilterCriteria | null;
 };
 
-export type DisplayAdPromotionSpecification = PromotionSpecification & {
-  promotableDisplayAdTemplateIds?: string[] | null;
-  promotableDisplayAdTemplateFilters?: FilterCollection | null;
-};
-
 export interface DisplayAdResult {
   displayAdId: string;
   name?: string | null;
@@ -2987,7 +2990,6 @@ export type Location = LocationEntityStateGuidNullableLocationMetadataValuesReta
   name: string;
   key?: string | null;
   placements?: LocationPlacementCollection | null;
-  supportedPromotions?: PromotionSpecificationCollection | null;
 };
 
 export interface LocationEntityStateGuidLocationMetadataValuesLocationsRequestSortByLocationsRequestEntityFiltersEntitiesRequest {
@@ -4878,7 +4880,6 @@ export interface PromotionSpecification {
 
 export interface PromotionSpecificationCollection {
   productPromotion?: ProductPromotionSpecification | null;
-  displayAdPromotion?: DisplayAdPromotionSpecification | null;
 }
 
 export interface PromotionSpecificationVariation {
@@ -5137,7 +5138,9 @@ export interface RequestContextFilter {
   languages?: Language[] | null;
   currencies?: Currency[] | null;
   filters?: RequestFilterCriteria | null;
+  /** @deprecated */
   searchTerms?: SearchTermConditionByLanguageCollection | null;
+  searchTermCriteria?: SearchTermCriteria | null;
 }
 
 export interface RequestFilterCriteria {
@@ -5222,6 +5225,8 @@ export interface RetailMediaResultPlacementResultEntity {
 
 export interface RetailMediaResultPlacementResultEntityDisplayAd {
   result: DisplayAdResult;
+  /** @format uuid */
+  campaignId: string;
 }
 
 export interface RetailMediaResultPlacementResultEntityProduct {
@@ -5524,6 +5529,11 @@ export type SearchTermConditionByLanguage = SearchTermCondition & {
 
 export interface SearchTermConditionByLanguageCollection {
   values?: SearchTermConditionByLanguage[] | null;
+}
+
+export interface SearchTermCriteria {
+  policy?: "MustHaveSearchTerm" | "MustNotHaveSearchTerm" | null;
+  termCriteria?: SearchTermConditionByLanguageCollection | null;
 }
 
 export type SearchTermModifierRule = SearchRule & {

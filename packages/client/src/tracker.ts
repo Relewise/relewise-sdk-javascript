@@ -2,6 +2,12 @@ import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions } from '.
 import {
     TrackOrderRequest, TrackCartRequest, TrackProductViewRequest, TrackProductCategoryViewRequest, TrackContentViewRequest, TrackContentCategoryViewRequest,
     TrackBrandViewRequest, User, TrackSearchTermRequest, TrackUserUpdateRequest, DataValue,
+    ContentEngagementData,
+    ProductAndVariantId,
+    ProductEngagementData,
+    TrackContentEngagementRequest,
+    TrackProductEngagementRequest,
+    TrackDisplayAdClickRequest,
     TrackFeedDwellRequest,
     TrackFeedItemClickRequest,
     TrackFeedItemPreviewRequest,
@@ -161,6 +167,41 @@ export class Tracker extends RelewiseClient {
         }, options);
     }
 
+    public async trackProductEngagement({ user, engagement, product }: { user: User, product: ProductAndVariantId, engagement: ProductEngagementData }, options?: RelewiseRequestOptions) {
+        return this.request<TrackProductEngagementRequest, void>('TrackProductEngagementRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackProductEngagementRequest, Relewise.Client',
+            productEngagement: {
+                $type: 'Relewise.Client.DataTypes.ProductEngagement, Relewise.Client',
+                user: user,
+                id: product,
+                engagement: engagement
+            }
+        }, options);
+    }
+
+    public async trackContentEngagement({ user, engagement, contentId }: { user: User, contentId: string, engagement: ContentEngagementData }, options?: RelewiseRequestOptions) {
+        return this.request<TrackContentEngagementRequest, void>('TrackContentEngagementRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackContentEngagementRequest, Relewise.Client',
+            contentEngagement: {
+                $type: 'Relewise.Client.DataTypes.ContentEngagement, Relewise.Client',
+                user: user,
+                id: contentId,
+                engagement: engagement
+            }
+        }, options);
+    }
+
+    public async trackDisplayAdClick({ user, campaignId, displayAdId }: { user: User, campaignId: string, displayAdId: string }, options?: RelewiseRequestOptions): Promise<void | undefined> {
+        return this.request<TrackDisplayAdClickRequest, void>('TrackDisplayAdClickRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.TrackDisplayAdClickRequest, Relewise.Client',
+            displayAdClick: {
+                $type: 'Relewise.Client.DataTypes.DisplayAdClick, Relewise.Client',
+                user: user,
+                campaignId: campaignId,
+                displayAdId: displayAdId,
+            },
+        }, options);
+    }
 
     public async trackFeedDwell({ user, feedId, dwellTimeMilliseconds, visibleItems }: { user: User; feedId: string, dwellTimeMilliseconds: number, visibleItems: FeedItem[] }, options?: RelewiseRequestOptions) {
         return this.request<TrackFeedDwellRequest, void>('TrackFeedDwellRequest', {

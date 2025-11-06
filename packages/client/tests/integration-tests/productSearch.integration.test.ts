@@ -71,15 +71,15 @@ test('Product search - data object facets evaluation mode', async () => {
             f => f
                 .addStringFacet('Key', [])
                 .addStringFacet('Key2', []),
-           undefined,
-           undefined,
-           'Or'))
+            undefined,
+            undefined,
+            'Or'))
 
         .build();
 
     const result = await searcher.searchProducts(request);
-    const facet = result?.facets?.items?.find(x => x.$type.includes('ProductDataObjectFacetResult'))  as ProductDataObjectFacet;
-    
+    const facet = result?.facets?.items?.find(x => x.$type.includes('ProductDataObjectFacetResult')) as ProductDataObjectFacet;
+
     expect(facet).toBeDefined();
     expect(facet.evaluationMode).toBe('Or');
 });
@@ -101,6 +101,20 @@ test('Retail Media search', async () => {
             location: {
                 key: 'SEARCH_RESULTS_PAGE', placements: [{ key: 'TOP' }], variation: { key: 'DESKTOP' },
             },
+            settings: {
+                selectedDisplayAdProperties: {
+                    allData: true,
+                    clickedByUserInfo: false,
+                    displayName: false,
+                }
+            }
+        })
+        .setRetailMedia(retailMediaBuilder => {
+            retailMediaBuilder
+                .setSelectedDisplayAdProperties({
+                    allData: true
+                })
+                .setLocation({ key: 'SEARCH_RESULTS_PAGE', placements: [{ key: 'TOP' }], variation: { key: 'DESKTOP' } })
         })
         .build();
 

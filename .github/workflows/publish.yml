@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -12,9 +16,8 @@ jobs:
 
       - uses: actions/setup-node@v5
         with:
-          node-version: 18
-          registry-url: https://registry.npmjs.com/
-          scope: '@relewise'
+          node-version: 22
+          registry-url: https://registry.npmjs.org
 
       - name: Get latest tag
         id: get-latest-tag
@@ -25,12 +28,17 @@ jobs:
           echo 'TAG_NAME=${{ steps.get-latest-tag.outputs.tag }}'
           echo 'PACKAGE_PATH=${{ steps.get-latest-tag.outputs.tag }}' | cut -d '@' -f 1 >> $GITHUB_ENV
 
-      - uses: brettdorrans/write-version-to-file@master
+      - name: Update version
         if: ${{ env.PACKAGE_PATH == 'client' }} 
-        name: Update version
-        with:
-          filename: './packages/${{ env.PACKAGE_PATH }}/src/version.ts'
-          placeholder: '${VERSION}'
+        run: |
+          VERSION="${{ github.ref_name }}"
+          sed -i "s|\${VERSION}|${VERSION}|g" ./packages/client/src/version.ts
+          echo "Result:"
+          cat ./packages/client/src/version.ts
+
+      # (optional) ensure a fresh npm with latest trusted-publish bits
+      - run: npm i -g npm@latest
+        working-directory: ./packages/${{ env.PACKAGE_PATH }}
 
       - run: npm ci
         working-directory: ./packages/${{ env.PACKAGE_PATH }}
@@ -54,5 +62,3 @@ jobs:
       - name: Publish to NPM
         run: npm publish --access public --tag $NPM_TAG
         working-directory: ./packages/${{ env.PACKAGE_PATH }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

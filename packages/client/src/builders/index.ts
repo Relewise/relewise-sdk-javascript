@@ -9,3 +9,4 @@ export * from './conditionBuilder';
 export * from './relevanceModifierBuilder';
 export * from './search';
 export * from './recommendation';
+export * from './retailMediaQueryBuilder';

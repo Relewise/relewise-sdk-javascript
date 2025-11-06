@@ -272,36 +272,36 @@ export interface AssortmentFacetResult {
 
 export type BatchedTrackingRequest = TrackingRequest & {
   items?:
-  | (
-    | BrandAdministrativeAction
-    | BrandUpdate
-    | BrandView
-    | Cart
-    | CompanyAdministrativeAction
-    | CompanyUpdate
-    | ContentAdministrativeAction
-    | ContentCategoryAdministrativeAction
-    | ContentCategoryUpdate
-    | ContentCategoryView
-    | ContentEngagement
-    | ContentUpdate
-    | ContentView
-    | DisplayAdClick
-    | Order
-    | ProductAdministrativeAction
-    | ProductCategoryAdministrativeAction
-    | ProductCategoryUpdate
-    | ProductCategoryView
-    | ProductEngagement
-    | ProductUpdate
-    | ProductView
-    | SearchTerm
-    | UserUpdate
-    | FeedDwell
-    | FeedItemClick
-    | FeedItemPreview
-  )[]
-  | null;
+    | (
+        | BrandAdministrativeAction
+        | BrandUpdate
+        | BrandView
+        | Cart
+        | CompanyAdministrativeAction
+        | CompanyUpdate
+        | ContentAdministrativeAction
+        | ContentCategoryAdministrativeAction
+        | ContentCategoryUpdate
+        | ContentCategoryView
+        | ContentEngagement
+        | ContentUpdate
+        | ContentView
+        | DisplayAdClick
+        | Order
+        | ProductAdministrativeAction
+        | ProductCategoryAdministrativeAction
+        | ProductCategoryUpdate
+        | ProductCategoryView
+        | ProductEngagement
+        | ProductUpdate
+        | ProductView
+        | SearchTerm
+        | UserUpdate
+        | FeedDwell
+        | FeedItemClick
+        | FeedItemPreview
+      )[]
+    | null;
 };
 
 export interface BooleanAvailableFacetValue {
@@ -824,9 +824,9 @@ export type CategoryFacetResult = StringCategoryNameAndIdResultValueFacetResult 
 export type CategoryHierarchyFacet = CategoryPathValueFacet & {
   categorySelectionStrategy: "ImmediateParent" | "Ancestors" | "Descendants";
   selectedPropertiesSettings?:
-  | SelectedContentCategoryPropertiesSettings
-  | SelectedProductCategoryPropertiesSettings
-  | null;
+    | SelectedContentCategoryPropertiesSettings
+    | SelectedProductCategoryPropertiesSettings
+    | null;
 };
 
 export type CategoryHierarchyFacetResult = FacetResult & {
@@ -1327,45 +1327,45 @@ export type ContentFacetQuery = FacetQuery & {
 
 export interface ContentFacetResult {
   items?:
-  | (
-    | ProductAssortmentFacetResult
-    | ContentAssortmentFacetResult
-    | ProductCategoryAssortmentFacetResult
-    | BrandFacetResult
-    | CategoryFacetResult
-    | CategoryHierarchyFacetResult
-    | ContentDataObjectFacetResult
-    | ContentDataDoubleRangeFacetResult
-    | ContentDataDoubleRangesFacetResult
-    | ContentDataStringValueFacetResult
-    | ContentDataBooleanValueFacetResult
-    | ContentDataDoubleValueFacetResult
-    | ContentDataIntegerValueFacetResult
-    | DataObjectFacetResult
-    | DataObjectDoubleRangeFacetResult
-    | DataObjectDoubleRangesFacetResult
-    | DataObjectStringValueFacetResult
-    | DataObjectBooleanValueFacetResult
-    | DataObjectDoubleValueFacetResult
-    | PriceRangeFacetResult
-    | PriceRangesFacetResult
-    | ProductCategoryDataObjectFacetResult
-    | ProductCategoryDataDoubleRangeFacetResult
-    | ProductCategoryDataDoubleRangesFacetResult
-    | ProductCategoryDataStringValueFacetResult
-    | ProductCategoryDataBooleanValueFacetResult
-    | ProductCategoryDataDoubleValueFacetResult
-    | ProductDataObjectFacetResult
-    | ProductDataDoubleRangeFacetResult
-    | ProductDataDoubleRangesFacetResult
-    | ProductDataStringValueFacetResult
-    | ProductDataBooleanValueFacetResult
-    | ProductDataDoubleValueFacetResult
-    | ProductDataIntegerValueFacetResult
-    | RecentlyPurchasedFacetResult
-    | VariantSpecificationFacetResult
-  )[]
-  | null;
+    | (
+        | ProductAssortmentFacetResult
+        | ContentAssortmentFacetResult
+        | ProductCategoryAssortmentFacetResult
+        | BrandFacetResult
+        | CategoryFacetResult
+        | CategoryHierarchyFacetResult
+        | ContentDataObjectFacetResult
+        | ContentDataDoubleRangeFacetResult
+        | ContentDataDoubleRangesFacetResult
+        | ContentDataStringValueFacetResult
+        | ContentDataBooleanValueFacetResult
+        | ContentDataDoubleValueFacetResult
+        | ContentDataIntegerValueFacetResult
+        | DataObjectFacetResult
+        | DataObjectDoubleRangeFacetResult
+        | DataObjectDoubleRangesFacetResult
+        | DataObjectStringValueFacetResult
+        | DataObjectBooleanValueFacetResult
+        | DataObjectDoubleValueFacetResult
+        | PriceRangeFacetResult
+        | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
+        | ProductCategoryDataDoubleRangeFacetResult
+        | ProductCategoryDataDoubleRangesFacetResult
+        | ProductCategoryDataStringValueFacetResult
+        | ProductCategoryDataBooleanValueFacetResult
+        | ProductCategoryDataDoubleValueFacetResult
+        | ProductDataObjectFacetResult
+        | ProductDataDoubleRangeFacetResult
+        | ProductDataDoubleRangesFacetResult
+        | ProductDataStringValueFacetResult
+        | ProductDataBooleanValueFacetResult
+        | ProductDataDoubleValueFacetResult
+        | ProductDataIntegerValueFacetResult
+        | RecentlyPurchasedFacetResult
+        | VariantSpecificationFacetResult
+      )[]
+    | null;
 }
 
 export type ContentHasCategoriesFilter = Filter;
@@ -1428,15 +1428,15 @@ export interface ContentRecommendationRequest {
 
 export type ContentRecommendationRequestCollection = LicensedRequest & {
   requests?:
-  | (
-    | ContentsViewedAfterViewingContentRequest
-    | ContentsViewedAfterViewingMultipleContentsRequest
-    | ContentsViewedAfterViewingMultipleProductsRequest
-    | ContentsViewedAfterViewingProductRequest
-    | PersonalContentRecommendationRequest
-    | PopularContentsRequest
-  )[]
-  | null;
+    | (
+        | ContentsViewedAfterViewingContentRequest
+        | ContentsViewedAfterViewingMultipleContentsRequest
+        | ContentsViewedAfterViewingMultipleProductsRequest
+        | ContentsViewedAfterViewingProductRequest
+        | PersonalContentRecommendationRequest
+        | PopularContentsRequest
+      )[]
+    | null;
   requireDistinctContentsAcrossResults: boolean;
 };
 
@@ -1665,63 +1665,63 @@ export type DataObjectFacetResult = UtilRequiredKeys<FacetResult, "$type"> & {
   $type: string;
   key?: string | null;
   items?:
-  | (
-    | ProductAssortmentFacetResult
-    | ContentAssortmentFacetResult
-    | ProductCategoryAssortmentFacetResult
-    | BrandFacetResult
-    | CategoryFacetResult
-    | CategoryHierarchyFacetResult
-    | ContentDataObjectFacetResult
-    | ContentDataDoubleRangeFacetResult
-    | ContentDataDoubleRangesFacetResult
-    | ContentDataStringValueFacetResult
-    | ContentDataBooleanValueFacetResult
-    | ContentDataDoubleValueFacetResult
-    | ContentDataIntegerValueFacetResult
-    | DataObjectFacetResult
-    | DataObjectDoubleRangeFacetResult
-    | DataObjectDoubleRangesFacetResult
-    | DataObjectStringValueFacetResult
-    | DataObjectBooleanValueFacetResult
-    | DataObjectDoubleValueFacetResult
-    | PriceRangeFacetResult
-    | PriceRangesFacetResult
-    | ProductCategoryDataObjectFacetResult
-    | ProductCategoryDataDoubleRangeFacetResult
-    | ProductCategoryDataDoubleRangesFacetResult
-    | ProductCategoryDataStringValueFacetResult
-    | ProductCategoryDataBooleanValueFacetResult
-    | ProductCategoryDataDoubleValueFacetResult
-    | ProductDataObjectFacetResult
-    | ProductDataDoubleRangeFacetResult
-    | ProductDataDoubleRangesFacetResult
-    | ProductDataStringValueFacetResult
-    | ProductDataBooleanValueFacetResult
-    | ProductDataDoubleValueFacetResult
-    | ProductDataIntegerValueFacetResult
-    | RecentlyPurchasedFacetResult
-    | VariantSpecificationFacetResult
-  )[]
-  | null;
+    | (
+        | ProductAssortmentFacetResult
+        | ContentAssortmentFacetResult
+        | ProductCategoryAssortmentFacetResult
+        | BrandFacetResult
+        | CategoryFacetResult
+        | CategoryHierarchyFacetResult
+        | ContentDataObjectFacetResult
+        | ContentDataDoubleRangeFacetResult
+        | ContentDataDoubleRangesFacetResult
+        | ContentDataStringValueFacetResult
+        | ContentDataBooleanValueFacetResult
+        | ContentDataDoubleValueFacetResult
+        | ContentDataIntegerValueFacetResult
+        | DataObjectFacetResult
+        | DataObjectDoubleRangeFacetResult
+        | DataObjectDoubleRangesFacetResult
+        | DataObjectStringValueFacetResult
+        | DataObjectBooleanValueFacetResult
+        | DataObjectDoubleValueFacetResult
+        | PriceRangeFacetResult
+        | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
+        | ProductCategoryDataDoubleRangeFacetResult
+        | ProductCategoryDataDoubleRangesFacetResult
+        | ProductCategoryDataStringValueFacetResult
+        | ProductCategoryDataBooleanValueFacetResult
+        | ProductCategoryDataDoubleValueFacetResult
+        | ProductDataObjectFacetResult
+        | ProductDataDoubleRangeFacetResult
+        | ProductDataDoubleRangesFacetResult
+        | ProductDataStringValueFacetResult
+        | ProductDataBooleanValueFacetResult
+        | ProductDataDoubleValueFacetResult
+        | ProductDataIntegerValueFacetResult
+        | RecentlyPurchasedFacetResult
+        | VariantSpecificationFacetResult
+      )[]
+    | null;
   filter?: DataObjectFilter | null;
   evaluationMode: "And" | "Or";
 };
 
 export interface DataObjectFilter {
   conditions?:
-  | (
-    | ObjectValueContainsCondition
-    | ObjectValueEqualsCondition
-    | ObjectValueGreaterThanCondition
-    | ObjectValueInRangeCondition
-    | ObjectValueIsSubsetOfCondition
-    | ObjectValueLessThanCondition
-    | ObjectValueMaxByCondition
-    | ObjectValueMinByCondition
-    | ObjectValueRelativeDateTimeCondition
-  )[]
-  | null;
+    | (
+        | ObjectValueContainsCondition
+        | ObjectValueEqualsCondition
+        | ObjectValueGreaterThanCondition
+        | ObjectValueInRangeCondition
+        | ObjectValueIsSubsetOfCondition
+        | ObjectValueLessThanCondition
+        | ObjectValueMaxByCondition
+        | ObjectValueMinByCondition
+        | ObjectValueRelativeDateTimeCondition
+      )[]
+    | null;
   /** @format int32 */
   skip?: number | null;
   /** @format int32 */
@@ -1750,16 +1750,16 @@ export interface DataRelevanceModifier {
   multiplyWeightBy: number;
   mustMatchAllConditions: boolean;
   conditions?:
-  | (
-    | ContainsCondition
-    | DistinctCondition
-    | EqualsCondition
-    | GreaterThanCondition
-    | HasValueCondition
-    | LessThanCondition
-    | RelativeDateTimeCondition
-  )[]
-  | null;
+    | (
+        | ContainsCondition
+        | DistinctCondition
+        | EqualsCondition
+        | GreaterThanCondition
+        | HasValueCondition
+        | LessThanCondition
+        | RelativeDateTimeCondition
+      )[]
+    | null;
   multiplierSelector?: DataDoubleSelector | FixedDoubleValueSelector | null;
   filters?: FilterCollection | null;
   custom?: Record<string, string | null>;
@@ -1767,18 +1767,18 @@ export interface DataRelevanceModifier {
 
 export interface DataValue {
   type:
-  | "String"
-  | "Double"
-  | "Boolean"
-  | "Multilingual"
-  | "Money"
-  | "MultiCurrency"
-  | "StringList"
-  | "DoubleList"
-  | "BooleanList"
-  | "MultilingualCollection"
-  | "Object"
-  | "ObjectList";
+    | "String"
+    | "Double"
+    | "Boolean"
+    | "Multilingual"
+    | "Money"
+    | "MultiCurrency"
+    | "StringList"
+    | "DoubleList"
+    | "BooleanList"
+    | "MultilingualCollection"
+    | "Object"
+    | "ObjectList";
   value?: any;
   isCollection: boolean;
 }
@@ -2032,18 +2032,18 @@ export interface DisplayAdTemplateEntityStateGuidNullableDisplayAdTemplateMetada
 export interface DisplayAdTemplateFieldDefinition {
   name: string;
   type:
-  | "String"
-  | "Double"
-  | "Boolean"
-  | "Multilingual"
-  | "Money"
-  | "MultiCurrency"
-  | "StringList"
-  | "DoubleList"
-  | "BooleanList"
-  | "MultilingualCollection"
-  | "Object"
-  | "ObjectList";
+    | "String"
+    | "Double"
+    | "Boolean"
+    | "Multilingual"
+    | "Money"
+    | "MultiCurrency"
+    | "StringList"
+    | "DoubleList"
+    | "BooleanList"
+    | "MultilingualCollection"
+    | "Object"
+    | "ObjectList";
   metadata?: Record<string, string>;
 }
 
@@ -2526,84 +2526,84 @@ export interface Filter {
 
 export interface FilterCollection {
   items?:
-  | (
-    | AndFilter
-    | BrandAssortmentFilter
-    | BrandDataFilter
-    | BrandDataHasKeyFilter
-    | BrandDisabledFilter
-    | BrandIdFilter
-    | CartDataFilter
-    | CompanyDataFilter
-    | CompanyDataHasKeyFilter
-    | CompanyDisabledFilter
-    | CompanyIdFilter
-    | ContentAssortmentFilter
-    | ContentCategoryAssortmentFilter
-    | ContentCategoryDataFilter
-    | ContentCategoryDataHasKeyFilter
-    | ContentCategoryDisabledFilter
-    | ContentCategoryHasAncestorFilter
-    | ContentCategoryHasChildFilter
-    | ContentCategoryHasContentsFilter
-    | ContentCategoryHasParentFilter
-    | ContentCategoryIdFilter
-    | ContentCategoryLevelFilter
-    | ContentCategoryRecentlyViewedByUserFilter
-    | ContentDataFilter
-    | ContentDataHasKeyFilter
-    | ContentDisabledFilter
-    | ContentEngagementFilter
-    | ContentHasCategoriesFilter
-    | ContentIdFilter
-    | ContentRecentlyViewedByUserFilter
-    | DisplayAdDataFilter
-    | DisplayAdIdFilter
-    | DisplayAdTemplateIdFilter
-    | OrFilter
-    | ProductAndVariantIdFilter
-    | ProductAssortmentFilter
-    | ProductCategoryAssortmentFilter
-    | ProductCategoryDataFilter
-    | ProductCategoryDataHasKeyFilter
-    | ProductCategoryDisabledFilter
-    | ProductCategoryHasAncestorFilter
-    | ProductCategoryHasChildFilter
-    | ProductCategoryHasParentFilter
-    | ProductCategoryHasProductsFilter
-    | ProductCategoryIdFilter
-    | ProductCategoryLevelFilter
-    | ProductCategoryRecentlyViewedByUserFilter
-    | ProductDataFilter
-    | ProductDataHasKeyFilter
-    | ProductDisabledFilter
-    | ProductDisplayNameFilter
-    | ProductEngagementFilter
-    | ProductHasCategoriesFilter
-    | ProductHasVariantsFilter
-    | ProductIdFilter
-    | ProductInCartFilter
-    | ProductListPriceFilter
-    | ProductRecentlyPurchasedByCompanyFilter
-    | ProductRecentlyPurchasedByUserCompanyFilter
-    | ProductRecentlyPurchasedByUserFilter
-    | ProductRecentlyPurchasedByUserParentCompanyFilter
-    | ProductRecentlyViewedByCompanyFilter
-    | ProductRecentlyViewedByUserCompanyFilter
-    | ProductRecentlyViewedByUserFilter
-    | ProductRecentlyViewedByUserParentCompanyFilter
-    | ProductSalesPriceFilter
-    | VariantAssortmentFilter
-    | VariantDataFilter
-    | VariantDataHasKeyFilter
-    | VariantDisabledFilter
-    | VariantEngagementFilter
-    | VariantIdFilter
-    | VariantListPriceFilter
-    | VariantSalesPriceFilter
-    | VariantSpecificationFilter
-  )[]
-  | null;
+    | (
+        | AndFilter
+        | BrandAssortmentFilter
+        | BrandDataFilter
+        | BrandDataHasKeyFilter
+        | BrandDisabledFilter
+        | BrandIdFilter
+        | CartDataFilter
+        | CompanyDataFilter
+        | CompanyDataHasKeyFilter
+        | CompanyDisabledFilter
+        | CompanyIdFilter
+        | ContentAssortmentFilter
+        | ContentCategoryAssortmentFilter
+        | ContentCategoryDataFilter
+        | ContentCategoryDataHasKeyFilter
+        | ContentCategoryDisabledFilter
+        | ContentCategoryHasAncestorFilter
+        | ContentCategoryHasChildFilter
+        | ContentCategoryHasContentsFilter
+        | ContentCategoryHasParentFilter
+        | ContentCategoryIdFilter
+        | ContentCategoryLevelFilter
+        | ContentCategoryRecentlyViewedByUserFilter
+        | ContentDataFilter
+        | ContentDataHasKeyFilter
+        | ContentDisabledFilter
+        | ContentEngagementFilter
+        | ContentHasCategoriesFilter
+        | ContentIdFilter
+        | ContentRecentlyViewedByUserFilter
+        | DisplayAdDataFilter
+        | DisplayAdIdFilter
+        | DisplayAdTemplateIdFilter
+        | OrFilter
+        | ProductAndVariantIdFilter
+        | ProductAssortmentFilter
+        | ProductCategoryAssortmentFilter
+        | ProductCategoryDataFilter
+        | ProductCategoryDataHasKeyFilter
+        | ProductCategoryDisabledFilter
+        | ProductCategoryHasAncestorFilter
+        | ProductCategoryHasChildFilter
+        | ProductCategoryHasParentFilter
+        | ProductCategoryHasProductsFilter
+        | ProductCategoryIdFilter
+        | ProductCategoryLevelFilter
+        | ProductCategoryRecentlyViewedByUserFilter
+        | ProductDataFilter
+        | ProductDataHasKeyFilter
+        | ProductDisabledFilter
+        | ProductDisplayNameFilter
+        | ProductEngagementFilter
+        | ProductHasCategoriesFilter
+        | ProductHasVariantsFilter
+        | ProductIdFilter
+        | ProductInCartFilter
+        | ProductListPriceFilter
+        | ProductRecentlyPurchasedByCompanyFilter
+        | ProductRecentlyPurchasedByUserCompanyFilter
+        | ProductRecentlyPurchasedByUserFilter
+        | ProductRecentlyPurchasedByUserParentCompanyFilter
+        | ProductRecentlyViewedByCompanyFilter
+        | ProductRecentlyViewedByUserCompanyFilter
+        | ProductRecentlyViewedByUserFilter
+        | ProductRecentlyViewedByUserParentCompanyFilter
+        | ProductSalesPriceFilter
+        | VariantAssortmentFilter
+        | VariantDataFilter
+        | VariantDataHasKeyFilter
+        | VariantDisabledFilter
+        | VariantEngagementFilter
+        | VariantIdFilter
+        | VariantListPriceFilter
+        | VariantSalesPriceFilter
+        | VariantSpecificationFilter
+      )[]
+    | null;
 }
 
 export type FilterRule = MerchandisingRule;
@@ -3154,16 +3154,16 @@ export interface MetadataValues {
 
 export type MixedRecommendationResponseCollection = TimedResponse & {
   responses?:
-  | (
-    | BrandRecommendationResponse
-    | ContentCategoryRecommendationResponse
-    | ContentRecommendationResponse
-    | FeedRecommendationResponse
-    | ProductCategoryRecommendationResponse
-    | ProductRecommendationResponse
-    | SearchTermRecommendationResponse
-  )[]
-  | null;
+    | (
+        | BrandRecommendationResponse
+        | ContentCategoryRecommendationResponse
+        | ContentRecommendationResponse
+        | FeedRecommendationResponse
+        | ProductCategoryRecommendationResponse
+        | ProductRecommendationResponse
+        | SearchTermRecommendationResponse
+      )[]
+    | null;
 };
 
 export interface Money {
@@ -3621,21 +3621,21 @@ export type ProductAdministrativeAction = Trackable & {
   filters: FilterCollection;
   language?: Language | null;
   productUpdateKind:
-  | "None"
-  | "DisableInRecommendations"
-  | "Disable"
-  | "EnableInRecommendations"
-  | "Enable"
-  | "PermanentlyDelete"
-  | "Delete";
+    | "None"
+    | "DisableInRecommendations"
+    | "Disable"
+    | "EnableInRecommendations"
+    | "Enable"
+    | "PermanentlyDelete"
+    | "Delete";
   variantUpdateKind:
-  | "None"
-  | "DisableInRecommendations"
-  | "Disable"
-  | "EnableInRecommendations"
-  | "Enable"
-  | "PermanentlyDelete"
-  | "Delete";
+    | "None"
+    | "DisableInRecommendations"
+    | "Disable"
+    | "EnableInRecommendations"
+    | "Enable"
+    | "PermanentlyDelete"
+    | "Delete";
   currency?: Currency | null;
 };
 
@@ -3776,45 +3776,45 @@ export type ProductCategoryFacetQuery = FacetQuery & {
 
 export interface ProductCategoryFacetResult {
   items?:
-  | (
-    | ProductAssortmentFacetResult
-    | ContentAssortmentFacetResult
-    | ProductCategoryAssortmentFacetResult
-    | BrandFacetResult
-    | CategoryFacetResult
-    | CategoryHierarchyFacetResult
-    | ContentDataObjectFacetResult
-    | ContentDataDoubleRangeFacetResult
-    | ContentDataDoubleRangesFacetResult
-    | ContentDataStringValueFacetResult
-    | ContentDataBooleanValueFacetResult
-    | ContentDataDoubleValueFacetResult
-    | ContentDataIntegerValueFacetResult
-    | DataObjectFacetResult
-    | DataObjectDoubleRangeFacetResult
-    | DataObjectDoubleRangesFacetResult
-    | DataObjectStringValueFacetResult
-    | DataObjectBooleanValueFacetResult
-    | DataObjectDoubleValueFacetResult
-    | PriceRangeFacetResult
-    | PriceRangesFacetResult
-    | ProductCategoryDataObjectFacetResult
-    | ProductCategoryDataDoubleRangeFacetResult
-    | ProductCategoryDataDoubleRangesFacetResult
-    | ProductCategoryDataStringValueFacetResult
-    | ProductCategoryDataBooleanValueFacetResult
-    | ProductCategoryDataDoubleValueFacetResult
-    | ProductDataObjectFacetResult
-    | ProductDataDoubleRangeFacetResult
-    | ProductDataDoubleRangesFacetResult
-    | ProductDataStringValueFacetResult
-    | ProductDataBooleanValueFacetResult
-    | ProductDataDoubleValueFacetResult
-    | ProductDataIntegerValueFacetResult
-    | RecentlyPurchasedFacetResult
-    | VariantSpecificationFacetResult
-  )[]
-  | null;
+    | (
+        | ProductAssortmentFacetResult
+        | ContentAssortmentFacetResult
+        | ProductCategoryAssortmentFacetResult
+        | BrandFacetResult
+        | CategoryFacetResult
+        | CategoryHierarchyFacetResult
+        | ContentDataObjectFacetResult
+        | ContentDataDoubleRangeFacetResult
+        | ContentDataDoubleRangesFacetResult
+        | ContentDataStringValueFacetResult
+        | ContentDataBooleanValueFacetResult
+        | ContentDataDoubleValueFacetResult
+        | ContentDataIntegerValueFacetResult
+        | DataObjectFacetResult
+        | DataObjectDoubleRangeFacetResult
+        | DataObjectDoubleRangesFacetResult
+        | DataObjectStringValueFacetResult
+        | DataObjectBooleanValueFacetResult
+        | DataObjectDoubleValueFacetResult
+        | PriceRangeFacetResult
+        | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
+        | ProductCategoryDataDoubleRangeFacetResult
+        | ProductCategoryDataDoubleRangesFacetResult
+        | ProductCategoryDataStringValueFacetResult
+        | ProductCategoryDataBooleanValueFacetResult
+        | ProductCategoryDataDoubleValueFacetResult
+        | ProductDataObjectFacetResult
+        | ProductDataDoubleRangeFacetResult
+        | ProductDataDoubleRangesFacetResult
+        | ProductDataStringValueFacetResult
+        | ProductDataBooleanValueFacetResult
+        | ProductDataDoubleValueFacetResult
+        | ProductDataIntegerValueFacetResult
+        | RecentlyPurchasedFacetResult
+        | VariantSpecificationFacetResult
+      )[]
+    | null;
 }
 
 export type ProductCategoryHasAncestorFilter = HasAncestorCategoryFilter;
@@ -3996,22 +3996,22 @@ export type ProductCategorySearchSettings = SearchSettings & {
 
 export interface ProductCategorySortBySpecification {
   value?:
-  | ProductCategoryAttributeSorting
-  | ProductCategoryDataSorting
-  | ProductCategoryPopularitySorting
-  | ProductCategoryRelevanceSorting
-  | null;
+    | ProductCategoryAttributeSorting
+    | ProductCategoryDataSorting
+    | ProductCategoryPopularitySorting
+    | ProductCategoryRelevanceSorting
+    | null;
 }
 
 export interface ProductCategorySorting {
   $type: string;
   order: "Ascending" | "Descending";
   thenBy?:
-  | ProductCategoryAttributeSorting
-  | ProductCategoryDataSorting
-  | ProductCategoryPopularitySorting
-  | ProductCategoryRelevanceSorting
-  | null;
+    | ProductCategoryAttributeSorting
+    | ProductCategoryDataSorting
+    | ProductCategoryPopularitySorting
+    | ProductCategoryRelevanceSorting
+    | null;
 }
 
 export type ProductCategoryUpdate = CategoryUpdate & {
@@ -4194,45 +4194,45 @@ export type ProductFacetQuery = FacetQuery & {
 
 export interface ProductFacetResult {
   items?:
-  | (
-    | ProductAssortmentFacetResult
-    | ContentAssortmentFacetResult
-    | ProductCategoryAssortmentFacetResult
-    | BrandFacetResult
-    | CategoryFacetResult
-    | CategoryHierarchyFacetResult
-    | ContentDataObjectFacetResult
-    | ContentDataDoubleRangeFacetResult
-    | ContentDataDoubleRangesFacetResult
-    | ContentDataStringValueFacetResult
-    | ContentDataBooleanValueFacetResult
-    | ContentDataDoubleValueFacetResult
-    | ContentDataIntegerValueFacetResult
-    | DataObjectFacetResult
-    | DataObjectDoubleRangeFacetResult
-    | DataObjectDoubleRangesFacetResult
-    | DataObjectStringValueFacetResult
-    | DataObjectBooleanValueFacetResult
-    | DataObjectDoubleValueFacetResult
-    | PriceRangeFacetResult
-    | PriceRangesFacetResult
-    | ProductCategoryDataObjectFacetResult
-    | ProductCategoryDataDoubleRangeFacetResult
-    | ProductCategoryDataDoubleRangesFacetResult
-    | ProductCategoryDataStringValueFacetResult
-    | ProductCategoryDataBooleanValueFacetResult
-    | ProductCategoryDataDoubleValueFacetResult
-    | ProductDataObjectFacetResult
-    | ProductDataDoubleRangeFacetResult
-    | ProductDataDoubleRangesFacetResult
-    | ProductDataStringValueFacetResult
-    | ProductDataBooleanValueFacetResult
-    | ProductDataDoubleValueFacetResult
-    | ProductDataIntegerValueFacetResult
-    | RecentlyPurchasedFacetResult
-    | VariantSpecificationFacetResult
-  )[]
-  | null;
+    | (
+        | ProductAssortmentFacetResult
+        | ContentAssortmentFacetResult
+        | ProductCategoryAssortmentFacetResult
+        | BrandFacetResult
+        | CategoryFacetResult
+        | CategoryHierarchyFacetResult
+        | ContentDataObjectFacetResult
+        | ContentDataDoubleRangeFacetResult
+        | ContentDataDoubleRangesFacetResult
+        | ContentDataStringValueFacetResult
+        | ContentDataBooleanValueFacetResult
+        | ContentDataDoubleValueFacetResult
+        | ContentDataIntegerValueFacetResult
+        | DataObjectFacetResult
+        | DataObjectDoubleRangeFacetResult
+        | DataObjectDoubleRangesFacetResult
+        | DataObjectStringValueFacetResult
+        | DataObjectBooleanValueFacetResult
+        | DataObjectDoubleValueFacetResult
+        | PriceRangeFacetResult
+        | PriceRangesFacetResult
+        | ProductCategoryDataObjectFacetResult
+        | ProductCategoryDataDoubleRangeFacetResult
+        | ProductCategoryDataDoubleRangesFacetResult
+        | ProductCategoryDataStringValueFacetResult
+        | ProductCategoryDataBooleanValueFacetResult
+        | ProductCategoryDataDoubleValueFacetResult
+        | ProductDataObjectFacetResult
+        | ProductDataDoubleRangeFacetResult
+        | ProductDataDoubleRangesFacetResult
+        | ProductDataStringValueFacetResult
+        | ProductDataBooleanValueFacetResult
+        | ProductDataDoubleValueFacetResult
+        | ProductDataIntegerValueFacetResult
+        | RecentlyPurchasedFacetResult
+        | VariantSpecificationFacetResult
+      )[]
+    | null;
 }
 
 export type ProductHasCategoriesFilter = Filter;
@@ -4616,22 +4616,22 @@ export interface ProductRecommendationRequest {
 
 export type ProductRecommendationRequestCollection = LicensedRequest & {
   requests?:
-  | (
-    | CustomProductRecommendationRequest
-    | PersonalProductRecommendationRequest
-    | PopularProductsRequest
-    | ProductsViewedAfterViewingContentRequest
-    | ProductsViewedAfterViewingProductRequest
-    | PurchasedWithCurrentCartRequest
-    | PurchasedWithMultipleProductsRequest
-    | PurchasedWithProductRequest
-    | RecentlyViewedProductsRequest
-    | SearchTermBasedProductRecommendationRequest
-    | SimilarProductsRequest
-    | SortProductsRequest
-    | SortVariantsRequest
-  )[]
-  | null;
+    | (
+        | CustomProductRecommendationRequest
+        | PersonalProductRecommendationRequest
+        | PopularProductsRequest
+        | ProductsViewedAfterViewingContentRequest
+        | ProductsViewedAfterViewingProductRequest
+        | PurchasedWithCurrentCartRequest
+        | PurchasedWithMultipleProductsRequest
+        | PurchasedWithProductRequest
+        | RecentlyViewedProductsRequest
+        | SearchTermBasedProductRecommendationRequest
+        | SimilarProductsRequest
+        | SortProductsRequest
+        | SortVariantsRequest
+      )[]
+    | null;
   requireDistinctProductsAcrossResults: boolean;
 };
 
@@ -4772,28 +4772,28 @@ export type ProductSearchSettingsHighlightSettings = ProductProductHighlightProp
 
 export interface ProductSortBySpecification {
   value?:
-  | ProductAttributeSorting
-  | ProductDataObjectSorting
-  | ProductDataSorting
-  | ProductPopularitySorting
-  | ProductRelevanceSorting
-  | ProductVariantAttributeSorting
-  | ProductVariantSpecificationSorting
-  | null;
+    | ProductAttributeSorting
+    | ProductDataObjectSorting
+    | ProductDataSorting
+    | ProductPopularitySorting
+    | ProductRelevanceSorting
+    | ProductVariantAttributeSorting
+    | ProductVariantSpecificationSorting
+    | null;
 }
 
 export interface ProductSorting {
   $type: string;
   order: "Ascending" | "Descending";
   thenBy?:
-  | ProductAttributeSorting
-  | ProductDataObjectSorting
-  | ProductDataSorting
-  | ProductPopularitySorting
-  | ProductRelevanceSorting
-  | ProductVariantAttributeSorting
-  | ProductVariantSpecificationSorting
-  | null;
+    | ProductAttributeSorting
+    | ProductDataObjectSorting
+    | ProductDataSorting
+    | ProductPopularitySorting
+    | ProductRelevanceSorting
+    | ProductVariantAttributeSorting
+    | ProductVariantSpecificationSorting
+    | null;
 }
 
 export type ProductUpdate = Trackable & {
@@ -4880,7 +4880,6 @@ export interface PromotionSpecification {
 
 export interface PromotionSpecificationCollection {
   productPromotion?: ProductPromotionSpecification | null;
-  displayAdPromotion?: DisplayAdPromotionSpecification | null;
 }
 
 export interface PromotionSpecificationVariation {
@@ -5090,39 +5089,39 @@ export interface RelevanceModifier {
 
 export interface RelevanceModifierCollection {
   items?:
-  | (
-    | BrandIdRelevanceModifier
-    | ContentCategoryDataRelevanceModifier
-    | ContentCategoryRecentlyViewedByUserRelevanceModifier
-    | ContentDataRelevanceModifier
-    | ContentEngagementRelevanceModifier
-    | ContentRecentlyViewedByUserRelevanceModifier
-    | ProductAssortmentRelevanceModifier
-    | ProductCategoryDataRelevanceModifier
-    | ProductCategoryIdRelevanceModifier
-    | ProductCategoryRecentlyViewedByUserRelevanceModifier
-    | ProductDataRelevanceModifier
-    | ProductEngagementRelevanceModifier
-    | ProductIdRelevanceModifier
-    | ProductListPriceRelevanceModifier
-    | ProductRecentlyPurchasedByCompanyRelevanceModifier
-    | ProductRecentlyPurchasedByUserCompanyRelevanceModifier
-    | ProductRecentlyPurchasedByUserRelevanceModifier
-    | ProductRecentlyViewedByCompanyRelevanceModifier
-    | ProductRecentlyViewedByUserCompanyRelevanceModifier
-    | ProductRecentlyViewedByUserRelevanceModifier
-    | ProductSalesPriceRelevanceModifier
-    | UserFavoriteProductRelevanceModifier
-    | VariantAssortmentRelevanceModifier
-    | VariantDataRelevanceModifier
-    | VariantEngagementRelevanceModifier
-    | VariantIdRelevanceModifier
-    | VariantListPriceRelevanceModifier
-    | VariantSalesPriceRelevanceModifier
-    | VariantSpecificationsInCommonRelevanceModifier
-    | VariantSpecificationValueRelevanceModifier
-  )[]
-  | null;
+    | (
+        | BrandIdRelevanceModifier
+        | ContentCategoryDataRelevanceModifier
+        | ContentCategoryRecentlyViewedByUserRelevanceModifier
+        | ContentDataRelevanceModifier
+        | ContentEngagementRelevanceModifier
+        | ContentRecentlyViewedByUserRelevanceModifier
+        | ProductAssortmentRelevanceModifier
+        | ProductCategoryDataRelevanceModifier
+        | ProductCategoryIdRelevanceModifier
+        | ProductCategoryRecentlyViewedByUserRelevanceModifier
+        | ProductDataRelevanceModifier
+        | ProductEngagementRelevanceModifier
+        | ProductIdRelevanceModifier
+        | ProductListPriceRelevanceModifier
+        | ProductRecentlyPurchasedByCompanyRelevanceModifier
+        | ProductRecentlyPurchasedByUserCompanyRelevanceModifier
+        | ProductRecentlyPurchasedByUserRelevanceModifier
+        | ProductRecentlyViewedByCompanyRelevanceModifier
+        | ProductRecentlyViewedByUserCompanyRelevanceModifier
+        | ProductRecentlyViewedByUserRelevanceModifier
+        | ProductSalesPriceRelevanceModifier
+        | UserFavoriteProductRelevanceModifier
+        | VariantAssortmentRelevanceModifier
+        | VariantDataRelevanceModifier
+        | VariantEngagementRelevanceModifier
+        | VariantIdRelevanceModifier
+        | VariantListPriceRelevanceModifier
+        | VariantSalesPriceRelevanceModifier
+        | VariantSpecificationsInCommonRelevanceModifier
+        | VariantSpecificationValueRelevanceModifier
+      )[]
+    | null;
 }
 
 export interface RequestConfiguration {
@@ -5309,15 +5308,15 @@ export type SaveSynonymsResponse = TimedResponse & {
 
 export type SaveTriggerConfigurationRequest = LicensedRequest & {
   configuration?:
-  | AbandonedCartTriggerConfiguration
-  | AbandonedSearchTriggerConfiguration
-  | ContentCategoryInterestTriggerConfiguration
-  | ProductCategoryInterestTriggerConfiguration
-  | ProductChangeTriggerConfiguration
-  | ProductInterestTriggerConfiguration
-  | UserActivityTriggerConfiguration
-  | VariantChangeTriggerConfiguration
-  | null;
+    | AbandonedCartTriggerConfiguration
+    | AbandonedSearchTriggerConfiguration
+    | ContentCategoryInterestTriggerConfiguration
+    | ProductCategoryInterestTriggerConfiguration
+    | ProductChangeTriggerConfiguration
+    | ProductInterestTriggerConfiguration
+    | UserActivityTriggerConfiguration
+    | VariantChangeTriggerConfiguration
+    | null;
   modifiedBy?: string | null;
 };
 
@@ -5402,15 +5401,15 @@ export interface SearchResponse {
 
 export type SearchResponseCollection = SearchResponse & {
   responses?:
-  | (
-    | ContentCategorySearchResponse
-    | ContentSearchResponse
-    | ProductCategorySearchResponse
-    | ProductSearchResponse
-    | SearchResponseCollection
-    | SearchTermPredictionResponse
-  )[]
-  | null;
+    | (
+        | ContentCategorySearchResponse
+        | ContentSearchResponse
+        | ProductCategorySearchResponse
+        | ProductSearchResponse
+        | SearchResponseCollection
+        | SearchTermPredictionResponse
+      )[]
+    | null;
 };
 
 export type SearchResultModifierRule = SearchRule & {
@@ -6028,15 +6027,15 @@ export type SynonymsRequest = LicensedRequest & {
 
 export interface SynonymsRequestSynonymSortingSorting {
   sortBy:
-  | "Created"
-  | "CreatedBy"
-  | "Modified"
-  | "ModifiedBy"
-  | "Approved"
-  | "ApprovedBy"
-  | "Usages"
-  | "Type"
-  | "Predictable";
+    | "Created"
+    | "CreatedBy"
+    | "Modified"
+    | "ModifiedBy"
+    | "Approved"
+    | "ApprovedBy"
+    | "Usages"
+    | "Type"
+    | "Predictable";
   sortOrder: "Ascending" | "Descending";
 }
 
@@ -6174,17 +6173,17 @@ export interface TrackingRequest {
 
 export type TriggerConfigurationCollectionResponse = TimedResponse & {
   configurations?:
-  | (
-    | AbandonedCartTriggerConfiguration
-    | AbandonedSearchTriggerConfiguration
-    | ContentCategoryInterestTriggerConfiguration
-    | ProductCategoryInterestTriggerConfiguration
-    | ProductChangeTriggerConfiguration
-    | ProductInterestTriggerConfiguration
-    | UserActivityTriggerConfiguration
-    | VariantChangeTriggerConfiguration
-  )[]
-  | null;
+    | (
+        | AbandonedCartTriggerConfiguration
+        | AbandonedSearchTriggerConfiguration
+        | ContentCategoryInterestTriggerConfiguration
+        | ProductCategoryInterestTriggerConfiguration
+        | ProductChangeTriggerConfiguration
+        | ProductInterestTriggerConfiguration
+        | UserActivityTriggerConfiguration
+        | VariantChangeTriggerConfiguration
+      )[]
+    | null;
 };
 
 export type TriggerConfigurationRequest = LicensedRequest & {
@@ -6196,15 +6195,15 @@ export type TriggerConfigurationRequest = LicensedRequest & {
 
 export type TriggerConfigurationResponse = TimedResponse & {
   configuration?:
-  | AbandonedCartTriggerConfiguration
-  | AbandonedSearchTriggerConfiguration
-  | ContentCategoryInterestTriggerConfiguration
-  | ProductCategoryInterestTriggerConfiguration
-  | ProductChangeTriggerConfiguration
-  | ProductInterestTriggerConfiguration
-  | UserActivityTriggerConfiguration
-  | VariantChangeTriggerConfiguration
-  | null;
+    | AbandonedCartTriggerConfiguration
+    | AbandonedSearchTriggerConfiguration
+    | ContentCategoryInterestTriggerConfiguration
+    | ProductCategoryInterestTriggerConfiguration
+    | ProductChangeTriggerConfiguration
+    | ProductInterestTriggerConfiguration
+    | UserActivityTriggerConfiguration
+    | VariantChangeTriggerConfiguration
+    | null;
 };
 
 export type TriggerConfigurationsRequest = LicensedRequest & {
@@ -6279,23 +6278,23 @@ export interface UserCondition {
 
 export interface UserConditionCollection {
   items?:
-  | (
-    | AndCondition
-    | HasActivityCondition
-    | HasAuthenticatedIdCondition
-    | HasClassificationCondition
-    | HasCompanyDataCondition
-    | HasDataCondition
-    | HasEmailCondition
-    | HasIdentifierCondition
-    | HasLineItemsInCartCondition
-    | HasModifiedCartCondition
-    | HasPlacedOrderCondition
-    | HasRecentlyReceivedSameTriggerCondition
-    | HasRecentlyReceivedTriggerCondition
-    | OrCondition
-  )[]
-  | null;
+    | (
+        | AndCondition
+        | HasActivityCondition
+        | HasAuthenticatedIdCondition
+        | HasClassificationCondition
+        | HasCompanyDataCondition
+        | HasDataCondition
+        | HasEmailCondition
+        | HasIdentifierCondition
+        | HasLineItemsInCartCondition
+        | HasModifiedCartCondition
+        | HasPlacedOrderCondition
+        | HasRecentlyReceivedSameTriggerCondition
+        | HasRecentlyReceivedTriggerCondition
+        | OrCondition
+      )[]
+    | null;
 }
 
 export interface UserConditionConfiguration {
@@ -6378,16 +6377,16 @@ export interface ValueCondition {
 
 export interface ValueConditionCollection {
   items?:
-  | (
-    | ContainsCondition
-    | DistinctCondition
-    | EqualsCondition
-    | GreaterThanCondition
-    | HasValueCondition
-    | LessThanCondition
-    | RelativeDateTimeCondition
-  )[]
-  | null;
+    | (
+        | ContainsCondition
+        | DistinctCondition
+        | EqualsCondition
+        | GreaterThanCondition
+        | HasValueCondition
+        | LessThanCondition
+        | RelativeDateTimeCondition
+      )[]
+    | null;
 }
 
 export interface ValueSelector {

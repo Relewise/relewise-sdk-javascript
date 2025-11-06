@@ -6,7 +6,7 @@ import { FeedCompositionBuilder, FeedCompositionOptions } from './feedCompositio
 export class FeedRecommendationInitializationBuilder extends RecommendationRequestBuilder {
     private feed: Feed;
 
-    constructor({ minimumPageSize }: { minimumPageSize: number }, settings: Settings) {
+    constructor(settings: Settings, { minimumPageSize }: { minimumPageSize: number }) {
         super(settings);
 
         this.feed = {
@@ -28,30 +28,16 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
     }
 
     /**
-     * Defines how the feed will be composed, which types of entities to include, how many of each type, and any filters or relevance modifiers that should apply to each type, etc.
-     * @param compositions 
-     */
-    public addCompositions(compositions: FeedComposition[]): this {
-        this.feed.compositions ??= [];
-        for (const composition of compositions) {
-            this.feed.compositions.push(composition);
-        }
-
-        return this;
-    }
-
-    /**
-     * Adds a composition to the feed.
+     * Adds a composition to the feed. Defines how the feed will be composed, which types of entities to include, how many of each type, and any filters or relevance modifiers that should apply to each type, etc.
      * @param options 
      * @param builderFn 
-     * @returns 
      */
-    public addCompostion(options: FeedCompositionOptions, builderFn?: (feedBuilder: FeedCompositionBuilder) => void): this {
+    public addCompostion({ options, settingsBuilder }: { options: FeedCompositionOptions, settingsBuilder?: (feedBuilder: FeedCompositionBuilder) => void }): this {
         this.feed.compositions ??= [];
 
         const builder = new FeedCompositionBuilder(options);
-        if (builderFn) {
-            builderFn(builder);
+        if (settingsBuilder) {
+            settingsBuilder(builder);
         }
 
         this.feed.compositions.push(builder.build());

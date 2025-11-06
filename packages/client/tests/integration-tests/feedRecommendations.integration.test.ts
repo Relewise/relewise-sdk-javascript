@@ -14,12 +14,16 @@ const settings = {
 
 test('Feed Recommendation', async () => {
 
-    const request = new FeedRecommendationInitializationBuilder({ minimumPageSize: 10 }, settings)
+    const request = new FeedRecommendationInitializationBuilder(settings, { minimumPageSize: 10 })
         .addCompostion({
-            type: 'Product',
-            count: { lowerBoundInclusive: 1, upperBoundInclusive: 2 }
-        }
-        );
+            options: {
+                type: 'Product',
+                count: { lowerBoundInclusive: 1, upperBoundInclusive: 2 }
+            },
+            settingsBuilder: (builder) => {
+                builder.rotationLimit(5)
+            }
+        });
 
     const result = await recommender.recommendFeedRecommendationInitialization(request.build());
 

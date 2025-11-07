@@ -167,11 +167,11 @@ export class Recommender extends RelewiseClient {
     //#endregion
 
     //#region feed
-    public async recommendFeedRecommendationInitialization(request: FeedRecommendationInitializationRequest, options?: RelewiseRequestOptions): Promise<FeedRecommendationResponse | undefined> {
+    public async recommendFeedInitialization(request: FeedRecommendationInitializationRequest, options?: RelewiseRequestOptions): Promise<FeedRecommendationResponse | undefined> {
         return this.request<FeedRecommendationInitializationRequest, FeedRecommendationResponse>('FeedRecommendationInitializationRequest', request, options);
     }
 
-    public async recommendFeedRecommendationNextItems(request: FeedRecommendationNextItemsRequest, options?: RelewiseRequestOptions): Promise<FeedRecommendationResponse | undefined> {
+    public async recommendFeedNextItems(request: FeedRecommendationNextItemsRequest, options?: RelewiseRequestOptions): Promise<FeedRecommendationResponse | undefined> {
         return this.request<FeedRecommendationNextItemsRequest, FeedRecommendationResponse>('FeedRecommendationNextItemsRequest', request, options);
     }
     //#endregion

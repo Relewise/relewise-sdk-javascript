@@ -25,7 +25,7 @@ test('Feed Recommendation', async () => {
             }
         });
 
-    const result = await recommender.recommendFeedRecommendationInitialization(request.build());
+    const result = await recommender.recommendFeedInitialization(request.build());
 
     expect(result).not.toBe(undefined);
 });

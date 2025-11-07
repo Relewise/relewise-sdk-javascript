@@ -8,6 +8,10 @@ import {
     TrackContentEngagementRequest,
     TrackProductEngagementRequest,
     TrackDisplayAdClickRequest,
+    TrackFeedDwellRequest,
+    TrackFeedItemClickRequest,
+    TrackFeedItemPreviewRequest,
+    FeedItem,
 } from './models/data-contracts';
 
 export class Tracker extends RelewiseClient {
@@ -196,6 +200,43 @@ export class Tracker extends RelewiseClient {
                 campaignId: campaignId,
                 displayAdId: displayAdId,
             },
+        }, options);
+    }
+
+    public async trackFeedDwell({ user, feedId, dwellTimeMilliseconds, visibleItems }: { user: User; feedId: string, dwellTimeMilliseconds: number, visibleItems: FeedItem[] }, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedDwellRequest, void>('TrackFeedDwellRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedDwellRequest, Relewise.Client',
+            dwell: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedDwell, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                dwellTimeMilliseconds: dwellTimeMilliseconds,
+                visibleItems: visibleItems,
+            }
+        }, options);
+    }
+
+    public async trackFeedItemClick({ user, feedId, item }: { user: User; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedItemClickRequest, void>('TrackFeedItemClickRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemClickRequest, Relewise.Client',
+            click: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedItemClick, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                item: item,
+            }
+        }, options);
+    }
+
+    public async trackFeedItemPreview({ user, feedId, item }: { user: User; feedId: string; item?: FeedItem }, options?: RelewiseRequestOptions) {
+        return this.request<TrackFeedItemPreviewRequest, void>('TrackFeedItemPreviewRequest', {
+            $type: 'Relewise.Client.Requests.Tracking.Feed.TrackFeedItemPreviewRequest, Relewise.Client',
+            preview: {
+                $type: 'Relewise.Client.DataTypes.Feed.FeedItemPreview, Relewise.Client',
+                user: user,
+                feedId: feedId,
+                item: item,
+            }
         }, options);
     }
 }

@@ -39,6 +39,9 @@ import {
     ProductsViewedAfterViewingContentRequest,
     PopularProductsRequest,
     PersonalProductRecommendationRequest,
+    FeedRecommendationInitializationRequest,
+    FeedRecommendationResponse,
+    FeedRecommendationNextItemsRequest,
 } from './models/data-contracts';
 
 export class Recommender extends RelewiseClient {
@@ -161,7 +164,16 @@ export class Recommender extends RelewiseClient {
     public async recommendContentsViewedAfterViewingContent(request: ContentsViewedAfterViewingContentRequest, options?: RelewiseRequestOptions): Promise<ContentRecommendationResponse | undefined> {
         return this.request<ContentsViewedAfterViewingContentRequest, ContentRecommendationResponse>('ContentsViewedAfterViewingContentRequest', request, options);
     }
+    //#endregion
 
+    //#region feed
+    public async recommendFeedInitialization(request: FeedRecommendationInitializationRequest, options?: RelewiseRequestOptions): Promise<FeedRecommendationResponse | undefined> {
+        return this.request<FeedRecommendationInitializationRequest, FeedRecommendationResponse>('FeedRecommendationInitializationRequest', request, options);
+    }
+
+    public async recommendFeedNextItems(request: FeedRecommendationNextItemsRequest, options?: RelewiseRequestOptions): Promise<FeedRecommendationResponse | undefined> {
+        return this.request<FeedRecommendationNextItemsRequest, FeedRecommendationResponse>('FeedRecommendationNextItemsRequest', request, options);
+    }
     //#endregion
 
     //#region Batching 
@@ -180,6 +192,5 @@ export class Recommender extends RelewiseClient {
     public async batchProductCategoryRecommendations(request: ProductCategoryRecommendationRequestCollection, options?: RelewiseRequestOptions): Promise<ProductCategoryRecommendationResponseCollection | undefined> {
         return this.request<ProductCategoryRecommendationRequestCollection, ProductCategoryRecommendationResponseCollection>('ProductCategoryRecommendationRequestCollection', request, options);
     }
-
     //#endregion
 }

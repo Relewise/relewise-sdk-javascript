@@ -1,4 +1,4 @@
-import { VariantAssortmentFilter, VariantDataFilter, VariantDataHasKeyFilter, VariantDisabledFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../../models/data-contracts';
+import { VariantAssortmentFilter, VariantDataFilter, VariantDataHasKeyFilter, VariantDisabledFilter, VariantEngagementFilter, VariantIdFilter, VariantListPriceFilter, VariantSalesPriceFilter, VariantSpecificationFilter } from '../../models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -51,6 +51,29 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
         const filter: VariantIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.VariantIdFilter, Relewise.Client',
             variantIds: ids,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a variant engagement filter to the request.
+     * @param engagement - Engagement criteria to match.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The VariantFilterBuilder instance for chaining.
+     */
+    public addVariantEngagementFilter(engagement: Pick<VariantEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: VariantEngagementFilter = {
+            $type: 'Relewise.Client.Requests.Filters.VariantEngagementFilter, Relewise.Client',
+            sentiment: engagement?.sentiment,
+            isFavorite: engagement?.isFavorite,
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };

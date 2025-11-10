@@ -1,4 +1,4 @@
-import { ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentCategoryDataFilter, ContentDataFilter, ContentIdFilter, ContentCategoryDataHasKeyFilter, ContentCategoryDisabledFilter, ContentCategoryRecentlyViewedByUserFilter, ContentDataHasKeyFilter, ContentDisabledFilter, ContentRecentlyViewedByUserFilter, ContentHasCategoriesFilter } from '../../models/data-contracts';
+import { ContentAssortmentFilter, ContentCategoryAssortmentFilter, ContentCategoryHasAncestorFilter, ContentCategoryHasChildFilter, ContentCategoryHasContentsFilter, ContentCategoryHasParentFilter, ContentCategoryIdFilter, ContentCategoryLevelFilter, ContentCategoryDataFilter, ContentDataFilter, ContentIdFilter, ContentCategoryDataHasKeyFilter, ContentCategoryDisabledFilter, ContentCategoryRecentlyViewedByUserFilter, ContentDataHasKeyFilter, ContentDisabledFilter, ContentRecentlyViewedByUserFilter, ContentHasCategoriesFilter, ContentEngagementFilter } from '../../models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -105,6 +105,29 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
         const filter: ContentIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.ContentIdFilter, Relewise.Client',
             contentIds: ids,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a content engagement filter to the request.
+     * @param engagement - Engagement criteria to match.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The ContentFilterBuilder instance for chaining.
+     */
+    public addContentEngagementFilter(engagement: Pick<ContentEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ContentEngagementFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ContentEngagementFilter, Relewise.Client',
+            sentiment: engagement?.sentiment,
+            isFavorite: engagement?.isFavorite,
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };

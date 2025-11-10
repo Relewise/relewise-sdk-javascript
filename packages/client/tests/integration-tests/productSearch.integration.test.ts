@@ -237,7 +237,14 @@ test('ProductSearch with search constraint', async () => {
 
 test('ProductSearch with engagements', async () => {
 
-    const request: ProductSearchRequest = baseProductBuilder()
+    const builder = new ProductSearchBuilder({
+        language: 'da',
+        currency: 'DKK',
+        displayedAtLocation: 'integration test',
+        user: UserFactory.byTemporaryId('temp-id-1234'),
+    });
+
+    const request: ProductSearchRequest = builder
         .filters(filters => filters
             .addProductEngagementFilter({ isFavorite: true, sentiment: 'Like' })
             .addProductEngagementFilter({ isFavorite: true })

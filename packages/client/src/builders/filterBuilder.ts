@@ -134,7 +134,7 @@ export class FilterBuilder {
      * @param options - Optional settings for the filter.
      * @returns The FilterBuilder instance for chaining.
      */
-    public addProductEngagementFilter(engagement?: Pick<ProductEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+    public addProductEngagementFilter(engagement: Pick<ProductEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
         this.productFilterBuilder.addProductEngagementFilter(engagement, negated, options);
         return this;
     }
@@ -158,7 +158,7 @@ export class FilterBuilder {
      * @param options - Optional settings for the filter.
      * @returns The FilterBuilder instance for chaining.
      */
-    public addVariantEngagementFilter(engagement?: Pick<VariantEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+    public addVariantEngagementFilter(engagement: Pick<VariantEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
         this.variantFilterBuilder.addVariantEngagementFilter(engagement, negated, options);
         return this;
     }
@@ -194,7 +194,7 @@ export class FilterBuilder {
      * @param options - Optional settings for the filter.
      * @returns The FilterBuilder instance for chaining.
      */
-    public addContentEngagementFilter(engagement?: Pick<ContentEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+    public addContentEngagementFilter(engagement: Pick<ContentEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
         this.contentFilterBuilder.addContentEngagementFilter(engagement, negated, options);
         return this;
     }

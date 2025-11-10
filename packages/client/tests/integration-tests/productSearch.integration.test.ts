@@ -225,11 +225,30 @@ test('ProductSearch with search constraint', async () => {
 
     const request: ProductSearchRequest = baseProductBuilder()
         .searchConstraints(constraints => constraints.setResultMustHaveVariantConstraint({ exceptWhenProductHasNoVariants: true }))
+        .filters(filters => filters
+            .addProductEngagementFilter({ isFavorite: true, sentiment: 'Like' })
+        )
         .build();
 
     const result = await searcher.searchProducts(request);
 
     expect(result?.hits).toBeGreaterThan(0);
+});
+
+test('ProductSearch with engagements', async () => {
+
+    const request: ProductSearchRequest = baseProductBuilder()
+        .filters(filters => filters
+            .addProductEngagementFilter({ isFavorite: true, sentiment: 'Like' })
+            .addProductEngagementFilter({ isFavorite: true })
+            .addProductEngagementFilter({ sentiment: 'Like' })
+            .addProductEngagementFilter({})
+        )
+        .build();
+
+    const result = await searcher.searchProducts(request);
+
+    expect(result?.hits).toBe(0);
 });
 
 test('Highlighting', async () => {
@@ -248,7 +267,7 @@ test('Highlighting', async () => {
 
     expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
     expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("SomeValue");
-})
+});
 
 test('Aborting a search throws the expected error', async () => {
     const controller = new AbortController();

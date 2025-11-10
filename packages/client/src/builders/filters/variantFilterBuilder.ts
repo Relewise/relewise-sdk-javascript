@@ -66,7 +66,7 @@ export class VariantFilterBuilder extends FilterBuilderBase<VariantFilterBuilder
      * @param options - Optional settings for the filter.
      * @returns The VariantFilterBuilder instance for chaining.
      */
-    public addVariantEngagementFilter(engagement?: Pick<VariantEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+    public addVariantEngagementFilter(engagement: Pick<VariantEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
 

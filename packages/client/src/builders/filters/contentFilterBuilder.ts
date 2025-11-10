@@ -120,7 +120,7 @@ export class ContentFilterBuilder extends FilterBuilderBase<ContentFilterBuilder
      * @param options - Optional settings for the filter.
      * @returns The ContentFilterBuilder instance for chaining.
      */
-    public addContentEngagementFilter(engagement?: Pick<ContentEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+    public addContentEngagementFilter(engagement: Pick<ContentEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
 

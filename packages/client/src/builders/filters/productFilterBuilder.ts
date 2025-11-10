@@ -152,7 +152,7 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
      * @param options - Optional settings for the filter.
      * @returns The ProductFilterBuilder instance for chaining.
      */
-    public addProductEngagementFilter(engagement?: Pick<ProductEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+    public addProductEngagementFilter(engagement: Pick<ProductEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
         const internalSettingsBuilder = new FilterSettingsBuilder();
         options?.filterSettings?.(internalSettingsBuilder);
 
@@ -190,7 +190,7 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
             settings: internalSettingsBuilder.build(),
             includeDisabled: options?.includeDisabled ?? false
         };
-        
+
         this.filters.push(filter);
 
         return this;

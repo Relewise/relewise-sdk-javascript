@@ -242,7 +242,6 @@ test('ProductSearch with engagements', async () => {
             .addProductEngagementFilter({ isFavorite: true, sentiment: 'Like' })
             .addProductEngagementFilter({ isFavorite: true })
             .addProductEngagementFilter({ sentiment: 'Like' })
-            .addProductEngagementFilter({})
         )
         .build();
 

@@ -225,9 +225,6 @@ test('ProductSearch with search constraint', async () => {
 
     const request: ProductSearchRequest = baseProductBuilder()
         .searchConstraints(constraints => constraints.setResultMustHaveVariantConstraint({ exceptWhenProductHasNoVariants: true }))
-        .filters(filters => filters
-            .addProductEngagementFilter({ isFavorite: true, sentiment: 'Like' })
-        )
         .build();
 
     const result = await searcher.searchProducts(request);

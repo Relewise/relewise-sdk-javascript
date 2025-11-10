@@ -1,4 +1,4 @@
-import { AndFilter, CartDataFilter, FilterCollection, OrFilter, ProductAndVariantId } from '../models/data-contracts';
+import { AndFilter, CartDataFilter, ContentEngagementFilter, FilterCollection, OrFilter, ProductAndVariantId, ProductEngagementFilter, VariantEngagementFilter } from '../models/data-contracts';
 import { FilterSettingsBuilder } from './filterSettingsBuilder';
 import { ConditionBuilder } from './conditionBuilder';
 import { BrandFilterBuilder } from './filters/brandFilterBuilder';
@@ -128,6 +128,18 @@ export class FilterBuilder {
     }
 
     /**
+     * Adds a product engagement filter to the request.
+     * @param engagement - Engagement criteria to match.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The FilterBuilder instance for chaining.
+     */
+    public addProductEngagementFilter(engagement?: Pick<ProductEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+        this.productFilterBuilder.addProductEngagementFilter(engagement, negated, options);
+        return this;
+    }
+
+    /**
      * Filters the request to only return the specified variants.
      * @param variantIds - Array of variant IDs or a single ID.
      * @param negated - If true, negates the filter (default is false).
@@ -136,6 +148,18 @@ export class FilterBuilder {
      */
     public addVariantIdFilter(variantIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
         this.variantFilterBuilder.addVariantIdFilter(variantIds, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a variant engagement filter to the request.
+     * @param engagement - Engagement criteria to match.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The FilterBuilder instance for chaining.
+     */
+    public addVariantEngagementFilter(engagement?: Pick<VariantEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+        this.variantFilterBuilder.addVariantEngagementFilter(engagement, negated, options);
         return this;
     }
 
@@ -160,6 +184,18 @@ export class FilterBuilder {
      */
     public addContentIdFilter(contentIds: string | string[], negated: boolean = false, options?: FilterOptions): this {
         this.contentFilterBuilder.addContentIdFilter(contentIds, negated, options);
+        return this;
+    }
+
+    /**
+     * Adds a content engagement filter to the request.
+     * @param engagement - Engagement criteria to match.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The FilterBuilder instance for chaining.
+     */
+    public addContentEngagementFilter(engagement?: Pick<ContentEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+        this.contentFilterBuilder.addContentEngagementFilter(engagement, negated, options);
         return this;
     }
 

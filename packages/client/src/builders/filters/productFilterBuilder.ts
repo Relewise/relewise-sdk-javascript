@@ -1,4 +1,4 @@
-import { ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, ProductAndVariantId, ProductCategoryDataFilter, ProductCategoryDataHasKeyFilter, ProductCategoryDisabledFilter, ProductCategoryRecentlyViewedByUserFilter, ProductDataHasKeyFilter, ProductDisabledFilter, ProductHasCategoriesFilter, ProductRecentlyPurchasedByCompanyFilter, ProductRecentlyPurchasedByUserCompanyFilter, ProductRecentlyPurchasedByUserParentCompanyFilter, ProductRecentlyViewedByCompanyFilter, ProductRecentlyViewedByUserCompanyFilter, ProductRecentlyViewedByUserParentCompanyFilter, ProductInCartFilter } from '../../models/data-contracts';
+import { ProductAndVariantIdFilter, ProductAssortmentFilter, ProductCategoryAssortmentFilter, ProductCategoryHasAncestorFilter, ProductCategoryHasChildFilter, ProductCategoryHasParentFilter, ProductCategoryHasProductsFilter, ProductCategoryIdFilter, ProductCategoryLevelFilter, ProductDataFilter, ProductDisplayNameFilter, ProductHasVariantsFilter, ProductIdFilter, ProductListPriceFilter, ProductRecentlyPurchasedByUserFilter, ProductRecentlyViewedByUserFilter, ProductSalesPriceFilter, ProductAndVariantId, ProductCategoryDataFilter, ProductCategoryDataHasKeyFilter, ProductCategoryDisabledFilter, ProductCategoryRecentlyViewedByUserFilter, ProductDataHasKeyFilter, ProductDisabledFilter, ProductEngagementFilter, ProductHasCategoriesFilter, ProductRecentlyPurchasedByCompanyFilter, ProductRecentlyPurchasedByUserCompanyFilter, ProductRecentlyPurchasedByUserParentCompanyFilter, ProductRecentlyViewedByCompanyFilter, ProductRecentlyViewedByUserCompanyFilter, ProductRecentlyViewedByUserParentCompanyFilter, ProductInCartFilter } from '../../models/data-contracts';
 import { ConditionBuilder } from '../conditionBuilder';
 import { EntityDataFilterOptions, FilterOptions } from './filters.types.shared';
 import { FilterSettingsBuilder } from '../filterSettingsBuilder';
@@ -137,6 +137,29 @@ export class ProductFilterBuilder extends FilterBuilderBase<ProductFilterBuilder
         const filter: ProductIdFilter = {
             $type: 'Relewise.Client.Requests.Filters.ProductIdFilter, Relewise.Client',
             productIds: ids,
+            negated: negated,
+            settings: internalSettingsBuilder.build(),
+        };
+        this.filters.push(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds a product engagement filter to the request.
+     * @param engagement - Engagement criteria to match.
+     * @param negated - If true, negates the filter (default is false).
+     * @param options - Optional settings for the filter.
+     * @returns The ProductFilterBuilder instance for chaining.
+     */
+    public addProductEngagementFilter(engagement?: Pick<ProductEngagementFilter, 'sentiment' | 'isFavorite'>, negated: boolean = false, options?: FilterOptions): this {
+        const internalSettingsBuilder = new FilterSettingsBuilder();
+        options?.filterSettings?.(internalSettingsBuilder);
+
+        const filter: ProductEngagementFilter = {
+            $type: 'Relewise.Client.Requests.Filters.ProductEngagementFilter, Relewise.Client',
+            sentiment: engagement?.sentiment,
+            isFavorite: engagement?.isFavorite,
             negated: negated,
             settings: internalSettingsBuilder.build(),
         };

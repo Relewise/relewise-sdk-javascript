@@ -1,15 +1,7 @@
 
 import { UserFactory } from '../../src/factory';
+import { User } from '../../src/models/data-contracts';
 import { userIsAnonymous } from '../../src/user-functions';
-
-// If you have these types exported somewhere, import them instead:
-interface User {
-    authenticatedId?: string;
-    temporaryId?: string;
-    email?: string;
-    fingerprint?: string;
-    identifiers?: Record<string, string>;
-}
 
 describe('userIsAnonymous', () => {
     it('returns true for a completely empty user object', () => {

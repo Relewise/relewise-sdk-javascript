@@ -108,6 +108,23 @@ UserFactory.byAuthenticatedId('authenticatedId', 'temporaryId')
 UserFactory.anonymous()
 ```
 
+#### Checking if a user is anonymous at runtime
+
+When you are working with `User` objects that may come from different sources, you can use the helper `userIsAnonymous(user)` to
+verify whether a given user should be treated as anonymous. The helper returns `true` only when the user has no
+`authenticatedId`, `temporaryId`, `email`, or custom `identifiers` set — matching the rules that Relewise applies when
+processing users.
+
+```ts
+import { userIsAnonymous, UserFactory } from '@relewise/client';
+
+const user = UserFactory.anonymous();
+
+if (userIsAnonymous(user)) {
+    // render consent prompt or do alternate rendering for anonymous users
+}
+```
+
 ### Search
 
 To use our fully-fledged search engine, start by bootstrapping the `Searcher`-class - see section above on how to bootstrap the `Searcher`.

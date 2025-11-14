@@ -121,7 +121,7 @@ import { userIsAnonymous, UserFactory } from '@relewise/client';
 const user = UserFactory.anonymous();
 
 if (userIsAnonymous(user)) {
-    // render consent prompt or limit tracking
+    // render consent prompt or do alternate rendering for anonymous users
 }
 ```
 

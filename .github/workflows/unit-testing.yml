@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v6
         with:
@@ -48,7 +48,7 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v6
         with:

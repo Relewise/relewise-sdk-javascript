@@ -14,6 +14,8 @@ export class FeedCompositionBuilder {
     constructor({ type, count, name }: FeedCompositionOptions) {
         this.composition = {
             includeEmptyResults: false,
+            skipEntirelyIfUnableToMeetCount: false,
+            rotationLimitPerRequest: null,
             type,
             count,
             name
@@ -40,6 +42,18 @@ export class FeedCompositionBuilder {
 
     public count(count: Int32Range): this {
         this.composition.count = count;
+
+        return this;
+    }
+
+    public rotationLimitPerRequest(limit: number | null): this {
+        this.composition.rotationLimitPerRequest = limit;
+
+        return this;
+    }
+
+    public skipEntirelyIfUnableToMeetCount(skip: boolean = true): this {
+        this.composition.skipEntirelyIfUnableToMeetCount = skip;
 
         return this;
     }

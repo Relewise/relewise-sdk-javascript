@@ -855,6 +855,11 @@ export interface CategoryIdFilter {
 export interface CategoryIndexConfiguration {
   $type: string;
   unspecified?: CategoryIndexConfigurationEntry | null;
+  byScope?: {
+    ImmediateParent: CategoryIndexConfigurationEntry;
+    ImmediateParentOrItsParent: CategoryIndexConfigurationEntry;
+    Ancestor: CategoryIndexConfigurationEntry;
+  } | null;
 }
 
 export interface CategoryIndexConfigurationEntry {
@@ -2450,6 +2455,9 @@ export interface FeedComposition {
   includeEmptyResults: boolean;
   /** @format int32 */
   rotationLimit?: number | null;
+  /** @format int32 */
+  rotationLimitPerRequest?: number | null;
+  skipEntirelyIfUnableToMeetCount: boolean;
 }
 
 export interface FeedCompositionResult {

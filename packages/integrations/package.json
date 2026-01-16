@@ -34,7 +34,7 @@
     "publish": "npm run build && npm run build:types"
   },
   "peerDependencies": {
-    "@relewise/client": "^2.22.0"
+    "@relewise/client": ">=1.22.0-0 <3.0.0"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.55.2",

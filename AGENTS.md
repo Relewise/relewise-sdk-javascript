@@ -17,6 +17,10 @@ The repository is a multi-package TypeScript SDK. Follow this guide to keep chan
   - Location: `.agents/skills/upgrade-dependencies/SKILL.md`
   - Use when asked to refresh npm package versions or prepare dependency-upgrade PRs for this repository.
   - This skill enforces clean-main preflight checks, monthly chore branch creation, direct dependency upgrades, per-package validation, and Trello-first PR descriptions.
+- `update-sdk`:
+  - Location: `.agents/skills/update-sdk/SKILL.md`
+  - Use when asked to regenerate `@relewise/client` models/types from Swagger.
+  - This skill enforces main-URL Swagger generation (`https://api.relewise.com/public/swagger.json`), expected-file checks, client validation commands, and Trello-first PR descriptions.
 
 ## Core Working Conventions
 - Run commands from package directories; there is no root workspace `package.json`.
@@ -91,6 +95,15 @@ Core expectations from the skill:
 Notes:
 - Dependabot already opens monthly grouped updates for `packages/client` and `packages/integrations`.
 - Minor/patch Dependabot PRs may auto-merge via workflow. Manual chore upgrades should coexist without breaking that flow.
+
+## SDK Update Guidance
+For Swagger-driven client SDK regeneration, prefer using the `update-sdk` skill:
+
+```text
+$update-sdk
+```
+
+Use `update-sdk` when the goal is updating generated client contracts/types from the main Swagger source URL, not general npm dependency upgrades.
 
 ## PR Expectations
 Each PR should include:

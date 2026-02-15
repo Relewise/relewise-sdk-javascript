@@ -1,0 +1,4 @@
+interface:
+  display_name: "Upgrade Dependencies"
+  short_description: "Safe npm upgrades for SDK monorepo"
+  default_prompt: "Use $upgrade-dependencies to safely upgrade dependencies in relewise-sdk-javascript with clean-branch preflight, per-package validation, and a Trello-linked PR."

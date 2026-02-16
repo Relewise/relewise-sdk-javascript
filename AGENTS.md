@@ -117,5 +117,6 @@ Each PR should include:
 - There is no root npm workspace command surface.
 - `packages/client/src/models/data-contracts.ts` is generated; avoid manual drift.
 - `swagger-typescript-api` major changes can break `npm run gen-api`; dependency upgrades touching client codegen tooling must run `npm --prefix .\packages\client run gen-api` before first push.
+- PowerShell-generated PR body files can corrupt Markdown symbols if encoding/escaping is mishandled; write with `Set-Content -Encoding utf8` and avoid expandable here-strings for Markdown-heavy content.
 - `client` and `integrations` are versioned separately and keep separate lockfiles.
 - Some `client` integration tests depend on data prepared by `integrations` integration tests.

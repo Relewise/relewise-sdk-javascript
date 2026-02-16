@@ -20,11 +20,11 @@ export function handleProperties(properties: PropertyDeclaration[]): Property[] 
 
         return {
             name: p.getName(),
-            type: type || "unknown",
+            type: type || 'unknown',
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,
-            baseType: getBaseType(p.getType())
+            baseType: getBaseType(p.getType()),
         };
     });
 }
@@ -45,7 +45,7 @@ export function handlePropertySignatures(properties: PropertySignature[]): Prope
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,
-            baseType: getBaseType(p.getType())
+            baseType: getBaseType(p.getType()),
         };
     });
 }

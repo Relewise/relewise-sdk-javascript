@@ -25,7 +25,7 @@ for (const sourceFile of project.getSourceFiles()) {
 
 const ingestionRequest: IngestionRequest = {
     packageName: packageName,
-    entries: result
+    entries: result,
 };
 
 fs.writeFileSync('ingestion-request.json', JSON.stringify(ingestionRequest, null, 2));

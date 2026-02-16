@@ -16,7 +16,7 @@ The repository is a multi-package TypeScript SDK. Follow this guide to keep chan
 - `upgrade-dependencies`:
   - Location: `.agents/skills/upgrade-dependencies/SKILL.md`
   - Use when asked to refresh npm package versions or prepare dependency-upgrade PRs for this repository.
-  - This skill enforces clean-main preflight checks, monthly chore branch creation, direct dependency upgrades, per-package validation, and Trello-first PR descriptions.
+  - This skill enforces clean-main preflight checks, monthly chore branch creation, direct dependency upgrades, script-compatibility smoke checks (`packages/client` `gen-api` when relevant), per-package validation, and Trello-first PR descriptions.
 - `update-sdk`:
   - Location: `.agents/skills/update-sdk/SKILL.md`
   - Use when asked to regenerate `@relewise/client` models/types from Swagger.
@@ -88,9 +88,10 @@ Core expectations from the skill:
 4. Upgrade direct `dependencies` and `devDependencies` in each target package.
 5. Keep each package lockfile updated.
 6. Resolve manageable compatibility fallout (types, build, test failures).
-7. Run required validation (build + unit; integration tests conditional).
-8. Push and open PR to `main`.
-9. Put the Trello card URL on the first line of the PR description.
+7. Run script compatibility smoke checks before first commit (for `packages/client` tooling/script changes, run `npm --prefix .\packages\client run gen-api`).
+8. Run required validation (build + unit; integration tests conditional).
+9. Push and open PR to `main`.
+10. Put the Trello card URL on the first line of the PR description.
 
 Notes:
 - Dependabot already opens monthly grouped updates for `packages/client` and `packages/integrations`.
@@ -115,5 +116,6 @@ Each PR should include:
 ## Known Pitfalls
 - There is no root npm workspace command surface.
 - `packages/client/src/models/data-contracts.ts` is generated; avoid manual drift.
+- `swagger-typescript-api` major changes can break `npm run gen-api`; dependency upgrades touching client codegen tooling must run `npm --prefix .\packages\client run gen-api` before first push.
 - `client` and `integrations` are versioned separately and keep separate lockfiles.
 - Some `client` integration tests depend on data prepared by `integrations` integration tests.

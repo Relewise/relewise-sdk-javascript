@@ -1,6 +1,6 @@
 ---
 name: upgrade-dependencies
-description: Upgrade npm dependencies in relewise-sdk-javascript with a safe branch and PR flow. Use when asked to refresh package versions, maintain npm dependencies, or prepare a dependency-upgrade PR for this repository. Require a Trello card URL, enforce clean-main preflight checks, create a monthly chore branch, upgrade direct dependencies across package manifests, resolve manageable compatibility fallout, run repo-aligned validation, then push and open a PR with the Trello link on the first line.
+description: Upgrade npm dependencies in relewise-sdk-javascript with a safe branch and PR flow. Use when asked to refresh package versions, maintain npm dependencies, or prepare a dependency-upgrade PR for this repository. Require a Trello card URL, enforce clean-main preflight checks, create a monthly chore branch, upgrade direct dependencies across package manifests, run script-compatibility smoke checks (including client gen-api when relevant), resolve manageable compatibility fallout, run repo-aligned validation, then push and open a PR with the Trello link on the first line.
 ---
 
 # Upgrade Dependencies
@@ -131,11 +131,28 @@ Fix compatibility issues directly caused by dependency upgrades:
 
 Pause and ask for collaborative direction when fixes become extensive, such as broad refactors or behavior changes.
 
+## Script Compatibility Smoke Checks (Required Before First Commit)
+Dependency upgrades can break npm script contracts even when build/tests pass. Run these checks before creating the first commit on the branch:
+
+1. If `packages/client/package.json` changed and includes script/tooling updates (especially `swagger-typescript-api`), run:
+```powershell
+npm --prefix .\packages\client run gen-api
+```
+2. Treat failures as blocking and fix before commit/push.
+3. If generated drift is not intended for this dependency PR, restore generated files after the smoke check:
+```powershell
+git restore .\packages\client\src\models\data-contracts.ts
+```
+4. Record whether `gen-api` was run and passed in the PR validation section.
+
 ## Validation (Required)
 Run validation per touched package and treat failures as blocking unless the user explicitly accepts known failures.
 
 For `packages/client`:
 ```powershell
+# Required when client script/tooling dependencies changed:
+npm --prefix .\packages\client run gen-api
+# Then standard validation:
 npm --prefix .\packages\client run build
 npm --prefix .\packages\client test
 ```
@@ -161,18 +178,19 @@ npm --prefix .\packages\client run integration-test --DATASET_ID=... --API_KEY=.
 - If secrets are unavailable, report integration tests as not run.
 
 ## Commit, Push, and Pull Request
-1. Commit dependency and compatibility changes on the upgrade branch.
-2. Push branch:
+1. Confirm required script compatibility smoke checks passed (including `packages/client gen-api` when relevant).
+2. Commit dependency and compatibility changes on the upgrade branch.
+3. Push branch:
 ```powershell
 git push -u origin $branchName
 ```
-3. Create PR to `main`.
+4. Create PR to `main`.
 
 Preferred automated flow with GitHub CLI:
 ```powershell
 $prBodyPath = ".\\upgrade-dependencies-pr-body.md"
-@"
-$TrelloCardUrl
+$prBodyTemplate = @'
+__TRELLO_CARD_URL__
 
 ## Summary
 - <short summary of upgraded dependencies and compatibility fixes>
@@ -185,7 +203,9 @@ $TrelloCardUrl
 
 ## Notes
 - <known issues or limitations>
-"@ | Set-Content $prBodyPath
+'@
+$prBody = $prBodyTemplate -replace '__TRELLO_CARD_URL__', $TrelloCardUrl
+Set-Content -Path $prBodyPath -Value $prBody -Encoding utf8
 
 $prUrl = gh pr create --base main --head $branchName --title "chore: upgrade dependencies ($stamp)" --body-file $prBodyPath
 if ($LASTEXITCODE -ne 0) { throw 'gh pr create failed.' }
@@ -201,6 +221,7 @@ Write-Host "PR body file: $prBodyPath"
 ```
 
 Keep the Trello URL as the first line in PR description.
+Write the PR body file as UTF-8 to avoid symbol corruption in GitHub-rendered text.
 
 ## Output Expectations
 Provide a final summary with:

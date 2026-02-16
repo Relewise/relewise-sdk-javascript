@@ -10,12 +10,12 @@
   "author": "Relewise",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.46.1",
-    "eslint": "^9.37.0",
+    "@typescript-eslint/parser": "^8.55.0",
+    "eslint": "^9.39.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "ts-morph": "^26.0.0"
+    "ts-morph": "^27.0.2"
   }
 }

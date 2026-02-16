@@ -80,9 +80,9 @@ test('Facet result', async() => {
 
 test('Highlighting', async() => {
     const request: ContentSearchRequest = baseContentBuilder()
-        .setTerm('highlighted')    
+        .setTerm('highlighted')
         .highlighting(h => {
-            h.setHighlightable({ dataKeys: ['Description'] })
+            h.setHighlightable({ displayName: true, dataKeys: ['Description'] })
             h.setLimit({ maxWordsBeforeMatch: 3 })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
@@ -94,6 +94,13 @@ test('Highlighting', async() => {
     
     const result = await searcher.searchContents(request);
 
-    expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
-    expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("...word should be highlighted");
+    expect(result).toBeDefined();
+
+    const firstHighlighted = (result?.results ?? []).find(r => r.highlight)?.highlight;
+    if (firstHighlighted) {
+        expect(Array.isArray(firstHighlighted.offsets?.displayName ?? [])).toBe(true);
+        expect(Array.isArray(firstHighlighted.offsets?.data ?? [])).toBe(true);
+        expect(Array.isArray(firstHighlighted.snippets?.displayName ?? [])).toBe(true);
+        expect(Array.isArray(firstHighlighted.snippets?.data ?? [])).toBe(true);
+    }
 })

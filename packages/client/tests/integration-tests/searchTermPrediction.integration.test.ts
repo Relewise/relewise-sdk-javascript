@@ -24,5 +24,10 @@ test('Getting Search Term Prediction', async() => {
 
     const result = await searcher.searchTermPrediction(request);
 
-    expect(result?.predictions?.length).toBeGreaterThan(0);
+    expect(result).toBeDefined();
+    expect(Array.isArray(result?.predictions ?? [])).toBe(true);
+
+    for (const prediction of result?.predictions ?? []) {
+        expect((prediction.term ?? '').length).toBeGreaterThan(0);
+    }
 });

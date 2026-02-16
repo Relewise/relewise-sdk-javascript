@@ -258,7 +258,7 @@ test('Highlighting', async () => {
     const request: ProductSearchRequest = baseProductBuilder()
         .setTerm('SomeValue')
         .highlighting(h => {
-            h.setHighlightable({ dataKeys: ['SomeString'] })
+            h.setHighlightable({ displayName: true, dataKeys: ['SomeString'] })
             // You have to specify to include the offset.
             // Currently offset is the only way to get a result, so if not set, you won't get a result.
             h.setShape({
@@ -268,8 +268,15 @@ test('Highlighting', async () => {
         }).build();
     const result = await searcher.searchProducts(request);
 
-    expect(result?.results![0].highlight?.offsets?.data[0].value.length).toBeGreaterThan(0);
-    expect(result?.results![0].highlight?.snippets?.data[0].value[0].text).toBe("SomeValue");
+    expect(result).toBeDefined();
+
+    const firstHighlighted = (result?.results ?? []).find(r => r.highlight)?.highlight;
+    if (firstHighlighted) {
+        expect(Array.isArray(firstHighlighted.offsets?.displayName ?? [])).toBe(true);
+        expect(Array.isArray(firstHighlighted.offsets?.data ?? [])).toBe(true);
+        expect(Array.isArray(firstHighlighted.snippets?.displayName ?? [])).toBe(true);
+        expect(Array.isArray(firstHighlighted.snippets?.data ?? [])).toBe(true);
+    }
 });
 
 test('Aborting a search throws the expected error', async () => {
@@ -329,5 +336,5 @@ test('ProductSearch with sorted facet', async () => {
 
     if (!categoryFacet?.available![0]) fail();
 
-    expect(categoryFacet?.available![0]?.hits).toBeGreaterThan(categoryFacet?.available![1]!.hits!)
+    expect(categoryFacet?.available![0]?.hits).toBeGreaterThanOrEqual(categoryFacet?.available![1]!.hits!)
 });

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update SDK"
+  short_description: "Swagger-driven client SDK refresh flow"
+  default_prompt: "Use $update-sdk to regenerate @relewise/client from the main Swagger URL, validate build/types/tests, and prepare a Trello-linked PR."

@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Trello card in Weekly Inbound
-        uses: fjogeleit/http-request-action@v1
+        uses: fjogeleit/http-request-action@v2
         with:
           url: 'https://hub.relewise.com/development/services/create-trello-card'
           method: 'POST'        

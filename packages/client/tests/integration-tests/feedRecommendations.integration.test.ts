@@ -15,7 +15,7 @@ const settings = {
 test('Feed Recommendation', async () => {
 
     const request = new FeedRecommendationInitializationBuilder(settings, { minimumPageSize: 10 })
-        .addCompostion({
+        .addComposition({
             options: {
                 type: 'Product',
                 count: { lowerBoundInclusive: 1, upperBoundInclusive: 2 }

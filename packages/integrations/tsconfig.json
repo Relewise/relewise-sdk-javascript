@@ -3,9 +3,11 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "rootDir": "./src",
     "strict": true,
     "target": "es6",
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "lib": ["es5", "es6", "dom", "esnext"],
     // This causes issues when creating index.d.ts
     // "paths": {
@@ -18,8 +20,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "environment.d.ts"
+    "src/**/*.vue"
   ],
   "exclude": [
     "node_modules", 

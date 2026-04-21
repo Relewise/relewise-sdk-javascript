@@ -15,6 +15,7 @@ module.exports = {
         'ts-jest': {
             tsconfig: {
                 allowJs: true,
+                types: ['jest', 'node'],
             },
         },
     },

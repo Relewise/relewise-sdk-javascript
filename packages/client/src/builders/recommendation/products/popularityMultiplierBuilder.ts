@@ -1,10 +1,10 @@
-import { DataKeyPopularityMultiplierSelector, PopularityMultiplierSelector } from '../../../models/data-contracts';
+import { PopularityMultiplierSelector } from '../../../models/data-contracts';
 
 export class PopularityMultiplierBuilder {
     private popularityMultiplierSelector: PopularityMultiplierSelector | null = null;
 
     public setDataKeyPopularityMultiplierSelector(selector: { key?: string | null }): this {
-        const dataKeyPopularityMultiplierSelector: DataKeyPopularityMultiplierSelector = {
+        const dataKeyPopularityMultiplierSelector: PopularityMultiplierSelector = {
             $type: 'Relewise.Client.Requests.PopularityMultiplierSelectors.DataKeyPopularityMultiplierSelector, Relewise.Client',
             ...selector,
         }

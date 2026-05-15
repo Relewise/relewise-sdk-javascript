@@ -27,10 +27,16 @@
     "compilerMessageReporting": {
       "default": {
         "logLevel": "warning"
+      },
+      "TS2456": {
+        "logLevel": "none"
       }
     },
     "extractorMessageReporting": {
       "default": {
+        "logLevel": "none"
+      },
+      "ae-forgotten-export": {
         "logLevel": "none"
       }
     },

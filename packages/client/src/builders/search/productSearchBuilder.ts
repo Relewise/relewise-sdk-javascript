@@ -1,4 +1,4 @@
-import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, ResultMustHaveVariantConstraint, RetailMediaQuery, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
+import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, RetailMediaQuery, SelectedBrandPropertiesSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, VariantSearchSettings } from '../../models/data-contracts';
 import { PaginationBuilder } from '../paginationBuilder';
 import { RetailMediaQueryBuilder } from '../retailMediaQueryBuilder';
 import { Settings } from '../settings';
@@ -121,7 +121,7 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
     public searchConstraints(searchConstraintbuilder: (searchConstraintBuilder: SearchConstraintBuilder) => void): this {
         searchConstraintbuilder(this.searchConstraintBuilder);
 
-        this.searchSettings.resultConstraint = this.searchConstraintBuilder.build();
+        this.searchSettings.resultConstraint = this.searchConstraintBuilder.build() as ProductSearchSettings['resultConstraint'];
 
         return this;
     }

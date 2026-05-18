@@ -270,6 +270,10 @@ export interface AssortmentFacetResult {
   field: "Category" | "Assortment" | "ListPrice" | "SalesPrice" | "Brand" | "Data" | "VariantSpecification" | "User";
 }
 
+export type AuthenticatedIdCondition = UserCondition & {
+  authenticatedIds: string[];
+};
+
 export type BatchedTrackingRequest = TrackingRequest & {
   items?:
     | (
@@ -296,6 +300,7 @@ export type BatchedTrackingRequest = TrackingRequest & {
         | ProductUpdate
         | ProductView
         | SearchTerm
+        | UserAdministrativeAction
         | UserUpdate
         | FeedDwell
         | FeedItemClick
@@ -400,7 +405,7 @@ export interface BooleanValueFacet {
 }
 
 export type BoostAndBuryRule = MerchandisingRule & {
-  multiplierSelector?: DataDoubleSelector | FixedDoubleValueSelector | null;
+  multiplierSelector?: DataDoubleSelector | DataObjectDoubleSelector | FixedDoubleValueSelector | null;
 };
 
 export interface Brand {
@@ -1617,6 +1622,12 @@ export type DataObjectDoubleRangesFacet = DoubleNullableDataObjectRangesFacet;
 
 export type DataObjectDoubleRangesFacetResult = DoubleNullableDataObjectRangesFacetResult;
 
+export type DataObjectDoubleSelector = ValueSelector & {
+  key?: string | null;
+  objectPath?: string[] | null;
+  objectFilter?: DataObjectFilter | null;
+};
+
 export type DataObjectDoubleValueFacet = DoubleDataObjectValueFacet;
 
 export type DataObjectDoubleValueFacetResult = DoubleDataObjectValueFacetResult;
@@ -1765,7 +1776,7 @@ export interface DataRelevanceModifier {
         | RelativeDateTimeCondition
       )[]
     | null;
-  multiplierSelector?: DataDoubleSelector | FixedDoubleValueSelector | null;
+  multiplierSelector?: DataDoubleSelector | DataObjectDoubleSelector | FixedDoubleValueSelector | null;
   filters?: FilterCollection | null;
   custom?: Record<string, string | null>;
 }
@@ -2396,6 +2407,10 @@ export interface DoubleRange {
   upperBoundInclusive: number;
 }
 
+export type EmailCondition = UserCondition & {
+  emails: string[];
+};
+
 export type EqualsCondition = ValueCondition & {
   value?: DataValue | null;
 };
@@ -2871,6 +2886,11 @@ export type IChange = object;
 export type ISchedule = object;
 
 export type ITriggerResult = object;
+
+export type IdentifierCondition = UserCondition & {
+  key: string;
+  values: string[];
+};
 
 export interface IndexConfiguration {
   language?: LanguageIndexConfiguration | null;
@@ -3379,6 +3399,7 @@ export interface OverriddenProductRecommendationRequestSettings {
   numberOfRecommendations?: number | null;
   allowFillIfNecessaryToReachNumberOfRecommendations?: boolean | null;
   allowReplacingOfRecentlyShownRecommendations?: boolean | null;
+  /** @deprecated */
   recommendVariant?: boolean | null;
   selectedProductProperties?: OverriddenSelectedProductPropertiesSettings | null;
   selectedVariantProperties?: OverriddenSelectedVariantPropertiesSettings | null;
@@ -3388,6 +3409,7 @@ export interface OverriddenProductRecommendationRequestSettings {
   selectedBrandProperties?: OverriddenSelectedBrandPropertiesSettings | null;
   /** @format int32 */
   prioritizeResultsNotRecommendedWithinSeconds?: number | null;
+  variantRequestSettings?: VariantRecommendationRequestSettings | null;
 }
 
 export interface OverriddenSelectedBrandPropertiesSettings {
@@ -4648,6 +4670,7 @@ export interface ProductRecommendationRequestSettings {
   numberOfRecommendations: number;
   allowFillIfNecessaryToReachNumberOfRecommendations: boolean;
   allowReplacingOfRecentlyShownRecommendations: boolean;
+  /** @deprecated */
   recommendVariant: boolean;
   selectedProductProperties?: SelectedProductPropertiesSettings | null;
   selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
@@ -4657,6 +4680,7 @@ export interface ProductRecommendationRequestSettings {
   selectedBrandProperties?: SelectedBrandPropertiesSettings | null;
   /** @format int32 */
   prioritizeResultsNotRecommendedWithinSeconds?: number | null;
+  variantRequestSettings?: VariantRecommendationRequestSettings | null;
 }
 
 export type ProductRecommendationResponse = RecommendationResponse & {
@@ -4766,7 +4790,10 @@ export interface ProductSearchResultConstraint {
 export type ProductSearchSettings = SearchSettings & {
   selectedProductProperties?: SelectedProductPropertiesSettings | null;
   selectedVariantProperties?: SelectedVariantPropertiesSettings | null;
-  /** @format int32 */
+  /**
+   * @deprecated
+   * @format int32
+   */
   explodedVariants?: number | null;
   /** @deprecated */
   recommendations: RecommendationSettings;
@@ -4774,6 +4801,7 @@ export type ProductSearchSettings = SearchSettings & {
   variantSettings?: VariantSearchSettings | null;
   resultConstraint?: ResultMustHaveVariantConstraint | null;
   highlight?: ProductSearchSettingsHighlightSettings | null;
+  variantRequestSettings?: VariantSearchRequestSettings | null;
 };
 
 export type ProductSearchSettingsHighlightSettings = ProductProductHighlightPropsHighlightSettings;
@@ -5276,8 +5304,8 @@ export type SaveLocationsRequest = LocationGuidNullableSaveEntitiesRequest;
 export type SaveLocationsResponse = LocationGuidNullableSaveEntitiesResponse;
 
 export type SaveMerchandisingRuleRequest = LicensedRequest & {
-  rule?: BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule | null;
-  modifiedBy?: string | null;
+  rule: BoostAndBuryRule | FilterRule | FixedPositionRule | InputModifierRule;
+  modifiedBy: string;
 };
 
 export type SavePredictionRulesRequest = PredictionRuleSaveSearchRulesRequest;
@@ -5306,8 +5334,8 @@ export type SaveStemmingRulesRequest = StemmingRuleSaveSearchRulesRequest;
 export type SaveStemmingRulesResponse = StemmingRuleSaveSearchRulesResponse;
 
 export type SaveSynonymsRequest = LicensedRequest & {
-  synonyms?: Synonym[] | null;
-  modifiedBy?: string | null;
+  synonyms: Synonym[];
+  modifiedBy: string;
 };
 
 export type SaveSynonymsResponse = TimedResponse & {
@@ -5315,7 +5343,7 @@ export type SaveSynonymsResponse = TimedResponse & {
 };
 
 export type SaveTriggerConfigurationRequest = LicensedRequest & {
-  configuration?:
+  configuration:
     | AbandonedCartTriggerConfiguration
     | AbandonedSearchTriggerConfiguration
     | ContentCategoryInterestTriggerConfiguration
@@ -5323,9 +5351,8 @@ export type SaveTriggerConfigurationRequest = LicensedRequest & {
     | ProductChangeTriggerConfiguration
     | ProductInterestTriggerConfiguration
     | UserActivityTriggerConfiguration
-    | VariantChangeTriggerConfiguration
-    | null;
-  modifiedBy?: string | null;
+    | VariantChangeTriggerConfiguration;
+  modifiedBy: string;
 };
 
 export interface Score {
@@ -5794,7 +5821,10 @@ export type SimilarProductsRequest = ProductRecommendationRequest & {
   productData?: Product | null;
   considerAlreadyKnownInformationAboutProduct: boolean;
   evaluationSettings?: SimilarProductsEvaluationSettings | null;
-  /** @format int32 */
+  /**
+   * @deprecated
+   * @format int32
+   */
   explodedVariants?: number | null;
 };
 
@@ -6165,6 +6195,10 @@ export type TrackSearchTermRequest = TrackingRequest & {
   searchTerm?: SearchTerm | null;
 };
 
+export type TrackUserAdministrativeActionRequest = TrackingRequest & {
+  administrativeAction: UserAdministrativeAction;
+};
+
 export type TrackUserUpdateRequest = TrackingRequest & {
   userUpdate?: UserUpdate | null;
 };
@@ -6268,6 +6302,28 @@ export interface UserActivityTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
+export type UserAdministrativeAction = Trackable & {
+  userConditions: UserConditionCollection;
+  userUpdateAction:
+    | UserAdministrativeActionDeleteUser
+    | UserAdministrativeActionRemoveClassifications
+    | UserAdministrativeActionRemoveIdentifiers;
+};
+
+export type UserAdministrativeActionDeleteUser = UserAdministrativeActionUpdateAction;
+
+export type UserAdministrativeActionRemoveClassifications = UserAdministrativeActionUpdateAction & {
+  classificationKeys?: string[] | null;
+};
+
+export type UserAdministrativeActionRemoveIdentifiers = UserAdministrativeActionUpdateAction & {
+  identifierKeys?: string[] | null;
+};
+
+export interface UserAdministrativeActionUpdateAction {
+  $type: string;
+}
+
 export interface UserAssociatedCompanyResultDetails {
   id: string;
   parent?: UserAssociatedCompanyResultDetails | null;
@@ -6288,6 +6344,8 @@ export interface UserConditionCollection {
   items?:
     | (
         | AndCondition
+        | AuthenticatedIdCondition
+        | EmailCondition
         | HasActivityCondition
         | HasAuthenticatedIdCondition
         | HasClassificationCondition
@@ -6300,6 +6358,7 @@ export interface UserConditionCollection {
         | HasPlacedOrderCondition
         | HasRecentlyReceivedSameTriggerCondition
         | HasRecentlyReceivedTriggerCondition
+        | IdentifierCondition
         | OrCondition
       )[]
     | null;
@@ -6503,6 +6562,14 @@ export interface VariantPropertySelector {
   $type: string;
 }
 
+export type VariantRecommendationRequestSettings = VariantRequestSettings;
+
+export interface VariantRequestSettings {
+  $type: string;
+  /** @format int32 */
+  maxVariantsPerProduct?: number | null;
+}
+
 export interface VariantResult {
   variantId?: string | null;
   displayName?: string | null;
@@ -6544,6 +6611,8 @@ export type VariantSalesPriceRelevanceModifier = RelevanceModifier & {
   multiplyWeightBy: number;
   negated: boolean;
 };
+
+export type VariantSearchRequestSettings = VariantRequestSettings;
 
 export interface VariantSearchSettings {
   /** @deprecated */

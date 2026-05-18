@@ -9,7 +9,7 @@ export class RecentlyViewedProductsBuilder extends ProductSettingsRecommendation
         super(settings);
     }
 
-    public build() {
+    public build(): RecentlyViewedProductsRequest {
         const request: RecentlyViewedProductsRequest = {
             $type: 'Relewise.Client.Requests.Recommendations.RecentlyViewedProductsRequest, Relewise.Client',
             ...this.baseBuild(),

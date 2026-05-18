@@ -9,7 +9,7 @@ export class PurchasedWithCurrentCartBuilder extends ProductSettingsRecommendati
         super(settings);
     }
 
-    public build() {
+    public build(): PurchasedWithCurrentCartRequest {
         const request: PurchasedWithCurrentCartRequest = {
             $type: 'Relewise.Client.Requests.Recommendations.PurchasedWithCurrentCartRequest, Relewise.Client',
             ...this.baseBuild(),

@@ -9,7 +9,7 @@ export class PersonalProductRecommendationBuilder extends ProductSettingsRecomme
         super(settings);
     }
 
-    public build() {
+    public build(): PersonalProductRecommendationRequest {
         const request: PersonalProductRecommendationRequest = {
             $type: 'Relewise.Client.Requests.Recommendations.PersonalProductRecommendationRequest, Relewise.Client',
             ...this.baseBuild(),

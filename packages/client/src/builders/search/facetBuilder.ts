@@ -357,7 +357,7 @@ export class FacetBuilder {
             settings: handleFacetSettings(facetSettings),
             key: key,
             evaluationMode: evaluationMode
-        } as ProductDataObjectFacet;
+        };
         this.facets.push(facet);
 
         return this;
@@ -513,7 +513,7 @@ export class FacetBuilder {
             settings: handleFacetSettings(facetSettings),
             key: key,
             evaluationMode: evaluationMode
-        } as ContentDataObjectFacet;
+        };
         this.facets.push(facet);
 
         return this;
@@ -650,7 +650,7 @@ export class FacetBuilder {
             settings: handleFacetSettings(facetSettings),
             key: key,
             evaluationMode: evaluationMode
-        } as ProductCategoryDataObjectFacet;
+        };
         this.facets.push(facet);
 
         return this;

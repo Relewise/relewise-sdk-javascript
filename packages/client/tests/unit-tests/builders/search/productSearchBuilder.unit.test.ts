@@ -96,6 +96,27 @@ test('variantSearchSettings', () => {
     expect(subject.settings?.variantSettings?.excludeResultsWithoutVariant).toBe(true);
 });
 
+test('variantRequestSettings', () => {
+    const subject: ProductSearchRequest = baseBuilder()
+        .setVariantRequestSettings(settings => settings
+            .setMaxVariantsPerProduct(3)
+            .setSorting('ByRelevance'))
+        .build();
+
+    expect(subject.settings?.variantRequestSettings?.$type).toBe('Relewise.Client.Requests.Search.Settings.VariantSearchRequestSettings, Relewise.Client');
+    expect(subject.settings?.variantRequestSettings?.maxVariantsPerProduct).toBe(3);
+    expect(subject.settings?.variantRequestSettings?.sorting).toBe('ByRelevance');
+});
+
+test('reset variantRequestSettings', () => {
+    const subject: ProductSearchRequest = baseBuilder()
+        .setVariantRequestSettings(settings => settings.setMaxVariantsPerProduct(3))
+        .setVariantRequestSettings(null)
+        .build();
+
+    expect(subject.settings?.variantRequestSettings).toBeNull();
+});
+
 test('resultMustHaveVariantConstraint', () => {
     const subject: ProductSearchRequest = baseBuilder()
         .searchConstraints(s => s.setResultMustHaveVariantConstraint({

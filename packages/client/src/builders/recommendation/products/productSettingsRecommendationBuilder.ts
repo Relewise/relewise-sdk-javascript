@@ -1,5 +1,6 @@
 import { Settings } from '../../../builders/settings';
 import { ProductRecommendationRequestSettings, SelectedProductPropertiesSettings, SelectedVariantPropertiesSettings, SelectedBrandPropertiesSettings } from '../../../models/data-contracts';
+import { VariantRecommendationRequestSettingsBuilder } from '../../variantRequestSettingsBuilder';
 import { RecommendationRequestBuilder } from '../recommendationRequestBuilder';
 
 export class ProductSettingsRecommendationBuilder extends RecommendationRequestBuilder {
@@ -42,6 +43,19 @@ export class ProductSettingsRecommendationBuilder extends RecommendationRequestB
      */
     public setSelectedBrandProperties(brandProperties: Partial<SelectedBrandPropertiesSettings> | null): this {
         this.recommendationSettings.selectedBrandProperties = brandProperties as SelectedBrandPropertiesSettings | null;
+
+        return this;
+    }
+
+    public setVariantRequestSettings(variantRequestSettings: ((variantRequestSettingsBuilder: VariantRecommendationRequestSettingsBuilder) => void) | null): this {
+        if (typeof variantRequestSettings === 'function') {
+            const builder = new VariantRecommendationRequestSettingsBuilder();
+            variantRequestSettings(builder);
+
+            this.recommendationSettings.variantRequestSettings = builder.build();
+        } else {
+            this.recommendationSettings.variantRequestSettings = null;
+        }
 
         return this;
     }

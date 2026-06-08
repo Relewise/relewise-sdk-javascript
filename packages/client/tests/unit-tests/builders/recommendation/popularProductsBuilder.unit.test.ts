@@ -38,3 +38,24 @@ test('set since minutes ago', () => {
 
     expect(subject.sinceMinutesAgo).toBe(since);
 });
+
+test('variantRequestSettings', () => {
+    const subject: PopularProductsRequest = baseBuilder()
+        .setVariantRequestSettings(settings => settings
+            .setMaxVariantsPerProduct(2)
+            .setSorting('GroupedByProduct'))
+        .build();
+
+    expect(subject.settings.variantRequestSettings?.$type).toBe('Relewise.Client.Requests.Recommendations.VariantRecommendationRequestSettings, Relewise.Client');
+    expect(subject.settings.variantRequestSettings?.maxVariantsPerProduct).toBe(2);
+    expect(subject.settings.variantRequestSettings?.sorting).toBe('GroupedByProduct');
+});
+
+test('reset variantRequestSettings', () => {
+    const subject: PopularProductsRequest = baseBuilder()
+        .setVariantRequestSettings(settings => settings.setMaxVariantsPerProduct(2))
+        .setVariantRequestSettings(null)
+        .build();
+
+    expect(subject.settings.variantRequestSettings).toBeNull();
+});

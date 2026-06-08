@@ -2,6 +2,7 @@ import { ProductSearchRequest, ProductSearchSettings, RecommendationSettings, Re
 import { PaginationBuilder } from '../paginationBuilder';
 import { RetailMediaQueryBuilder } from '../retailMediaQueryBuilder';
 import { Settings } from '../settings';
+import { VariantSearchRequestSettingsBuilder } from '../variantRequestSettingsBuilder';
 import { FacetBuilder } from './facetBuilder';
 import { ProductHighlightingBuilder } from './productHighlightingBuilder';
 import { ProductSortingBuilder } from './productSortingBuilder';
@@ -63,12 +64,27 @@ export class ProductSearchBuilder extends SearchRequestBuilder implements Search
         return this;
     }
 
+    public setVariantRequestSettings(variantRequestSettings: ((variantRequestSettingsBuilder: VariantSearchRequestSettingsBuilder) => void) | null): this {
+        if (typeof variantRequestSettings === 'function') {
+            const builder = new VariantSearchRequestSettingsBuilder();
+            variantRequestSettings(builder);
+
+            this.searchSettings.variantRequestSettings = builder.build();
+        } else {
+            this.searchSettings.variantRequestSettings = null;
+        }
+
+        return this;
+    }
+
+    /** @deprecated */
     public setExplodedVariants(count?: number | null): this {
         this.searchSettings.explodedVariants = count;
 
         return this;
     }
 
+    /** @deprecated */
     public setRecommendationSettings(settings: RecommendationSettings): this {
         this.searchSettings.recommendations = settings;
 

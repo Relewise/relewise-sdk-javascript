@@ -952,6 +952,16 @@ export interface ClickedByUserInfo {
   totalNumberOfTimesClicked: number;
 }
 
+export interface CommonMetadataValues {
+  $type: string;
+  /** @format date-time */
+  created: string;
+  createdBy: string;
+  /** @format date-time */
+  modified: string;
+  modifiedBy: string;
+}
+
 export interface Company {
   id: string;
   parent?: Company | null;
@@ -1890,6 +1900,12 @@ export type DecompoundRulesResponse = DecompoundRuleSearchRulesResponse;
 
 export type DeleteDecompoundRulesRequest = DeleteSearchRulesRequest;
 
+export type DeleteFeedConfigurationRequest = LicensedRequest & {
+  /** @format uuid */
+  configurationId: string;
+  deletedBy: string;
+};
+
 export type DeleteMerchandisingRuleRequest = LicensedRequest & {
   /** @format uuid */
   id: string;
@@ -2458,6 +2474,7 @@ export interface Feed {
   selectedContentProperties?: SelectedContentPropertiesSettings | null;
   recommendVariant?: boolean | null;
   allowProductsCurrentlyInCart?: boolean | null;
+  configurationKey?: string | null;
 }
 
 export interface FeedComposition {
@@ -2480,6 +2497,46 @@ export interface FeedCompositionResult {
   products?: ProductResult[] | null;
   content?: ContentResult[] | null;
 }
+
+export type FeedConfiguration =
+  FeedConfigurationEntityStateGuidNullableFeedConfigurationMetadataValuesConfigurationEntity & {
+    name: string;
+    key?: string | null;
+    isDefault: boolean;
+    sources: FeedSourceConfiguration;
+  };
+
+export interface FeedConfigurationEntityStateGuidNullableFeedConfigurationMetadataValuesConfigurationEntity {
+  $type: string;
+  state: "Active" | "Inactive";
+  metadata: FeedConfigurationMetadataValues;
+  /** @format uuid */
+  id?: string | null;
+}
+
+export type FeedConfigurationMetadataValues = CommonMetadataValues & {
+  /** @format date-time */
+  activated?: string | null;
+  activatedBy?: string | null;
+  /** @format date-time */
+  inactivated?: string | null;
+  inactivatedBy?: string | null;
+};
+
+export type FeedConfigurationRequest = LicensedRequest & {
+  /** @format uuid */
+  configurationId: string;
+};
+
+export type FeedConfigurationResponse = TimedResponse & {
+  configuration: FeedConfiguration;
+};
+
+export type FeedConfigurationsRequest = LicensedRequest;
+
+export type FeedConfigurationsResponse = TimedResponse & {
+  configurations: FeedConfiguration[];
+};
 
 export type FeedDwell = Trackable & {
   user?: User | null;
@@ -2527,6 +2584,11 @@ export type FeedRecommendationResponse = RecommendationResponse & {
 export interface FeedSeed {
   productAndVariantIds?: ProductAndVariantId[] | null;
   contentIds?: string[] | null;
+}
+
+export interface FeedSourceConfiguration {
+  products: IProductFeedSource[];
+  content: IContentFeedSource[];
 }
 
 export interface FieldIndexConfiguration {
@@ -2882,6 +2944,10 @@ export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings
 export type HtmlParser = Parser;
 
 export type IChange = object;
+
+export type IContentFeedSource = object;
+
+export type IProductFeedSource = object;
 
 export type ISchedule = object;
 
@@ -4717,6 +4783,7 @@ export interface ProductResult {
   highlight?: HighlightResult | null;
   score?: Score | null;
   userEngagement?: ProductEngagementData | null;
+  variantResolution?: VariantResolutionInfo | null;
 }
 
 export interface ProductResultDetails {
@@ -5289,6 +5356,11 @@ export type SaveDisplayAdsRequest = DisplayAdStringSaveEntitiesRequest;
 
 export type SaveDisplayAdsResponse = DisplayAdStringSaveEntitiesResponse;
 
+export type SaveFeedConfigurationRequest = LicensedRequest & {
+  configuration: FeedConfiguration;
+  modifiedBy: string;
+};
+
 export type SaveGlobalRetailMediaConfigurationRequest = LicensedRequest & {
   configuration?: GlobalRetailMediaConfiguration | null;
   modifiedBy?: string | null;
@@ -5755,6 +5827,7 @@ export interface SelectedProductPropertiesSettings {
   filteredVariants?: FilteredVariantsSettings | null;
   score?: SelectedScorePropertiesSettings | null;
   userEngagement: boolean;
+  variantResolution: boolean;
 }
 
 export interface SelectedScorePropertiesSettings {
@@ -6568,6 +6641,11 @@ export interface VariantRequestSettings {
   $type: string;
   /** @format int32 */
   maxVariantsPerProduct?: number | null;
+  sorting?: "GroupedByProduct" | "ByRelevance" | null;
+}
+
+export interface VariantResolutionInfo {
+  source: "Default" | "PartialMatchByTerm" | "MatchByTerm";
 }
 
 export interface VariantResult {

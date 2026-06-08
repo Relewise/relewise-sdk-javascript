@@ -10,3 +10,4 @@ export * from './relevanceModifierBuilder';
 export * from './search';
 export * from './recommendation';
 export * from './retailMediaQueryBuilder';
+export * from './variantRequestSettingsBuilder';

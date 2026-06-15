@@ -74,6 +74,13 @@ Preserve existing version-range declarations when upgrading dependencies.
 - Skip upgrade commands for dependencies already declared as ranges under the rules above.
 - You may still report recommended minimum-version bumps when vulnerabilities or critical fixes are identified.
 
+## Fixed Skip List
+Skip these direct npm packages during routine dependency upgrades unless the user explicitly asks to upgrade them:
+
+- `swagger-typescript-api`: keep the current declaration unchanged because major upgrades can rewrite generated SDK models and require script/template migration outside a routine dependency refresh.
+
+Record fixed-skip packages in the PR summary and final output.
+
 
 ## Discover npm Manifests
 Discover package manifests under `packages/`, excluding `node_modules`.
@@ -131,9 +138,10 @@ Notes:
 - Ignore nested lockfiles that do not have a sibling `package.json`.
 
 Before running `npm install "$pkg@latest"` for each package, inspect the current declaration in `dependencies` or `devDependencies`:
+- If the package is listed in the fixed skip list, skip that package and keep the declaration unchanged.
 - If the current declaration uses comparator-range syntax (for example `>=1.1.6 <2.0.0`), skip that package and keep the declaration unchanged.
 - Do not rewrite comparator ranges to caret, tilde, or exact-version declarations.
-- Record skipped ranged npm packages and any recommended minimum-version bumps in both PR summary and final output.
+- Record skipped fixed-skip and ranged npm packages, plus any recommended minimum-version bumps, in both PR summary and final output.
 
 ## Resolve Upgrade Fallout
 Fix compatibility issues directly caused by dependency upgrades:
@@ -147,7 +155,7 @@ Pause and ask for collaborative direction when fixes become extensive, such as b
 ## Script Compatibility Smoke Checks (Required Before First Commit)
 Dependency upgrades can break npm script contracts even when build/tests pass. Run these checks before creating the first commit on the branch:
 
-1. If `packages/client/package.json` changed and includes script/tooling updates (especially `swagger-typescript-api`), run:
+1. If `packages/client/package.json` changed and includes script/tooling updates, run:
 ```powershell
 npm --prefix .\packages\client run gen-api
 ```
@@ -207,7 +215,7 @@ __TRELLO_CARD_URL__
 
 ## Summary
 - <short summary of upgraded dependencies and compatibility fixes>
-- <skipped ranged dependencies kept unchanged, plus recommended minimum-version bumps (if any)>
+- <skipped fixed-skip/ranged dependencies kept unchanged, plus recommended minimum-version bumps (if any)>
 
 ## Validation
 - `packages/client`: <build/test result or not touched>
@@ -244,6 +252,6 @@ Provide a final summary with:
 - upgraded npm packages grouped by manifest path
 - compatibility fixes applied
 - results for each validation command
-- skipped ranged dependencies kept unchanged, with recommended minimum-version bumps when applicable.
+- skipped fixed-skip/ranged dependencies kept unchanged, with recommended minimum-version bumps when applicable.
 - pushed branch URL
 - PR URL, or exact manual fallback instructions when automated PR creation is unavailable

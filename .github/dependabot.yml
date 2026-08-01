@@ -38,16 +38,15 @@ updates:
       prefix: "deps(integrations)"
       include: scope
 
-  # GitHub Actions — single monthly PR with majors+minors+patches
+  # Group routine GitHub Actions updates while keeping majors separate
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
       time: "07:00"
       timezone: Europe/Copenhagen
-    open-pull-requests-limit: 1
     groups:
-      all-actions:
+      actions-minor-and-patch:
         patterns: ["*"]
-        update-types: ["major", "minor", "patch"]
+        update-types: ["minor", "patch"]
     labels: ["dependencies"]

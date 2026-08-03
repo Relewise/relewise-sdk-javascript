@@ -6,7 +6,9 @@ export interface RelewiseClientOptions {
 }
 
 export interface RelewiseRequestOptions {
+    /** Cancels the request when the provided abort signal is triggered. */
     abortSignal?: AbortSignal;
+    /** Allows the request to outlive the page, such as when tracking events during page unload or navigation. */
     keepalive?: boolean;
 }
 

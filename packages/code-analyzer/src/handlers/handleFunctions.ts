@@ -9,7 +9,7 @@ export function handleFunctions(sourceFile: SourceFile): Entry[] {
     sourceFile.getFunctions().forEach(m => {
         functions.push({
             kind: Kind[Kind.Method],
-            name: m.getName(),
+            name: m.getName() ?? 'default',
             docs: m.getJsDocs()[0]?.getText(),
             dependencies: findParameterDependencies(m.getParameters()),
             parameters: handleParameters(m.getParameters()),

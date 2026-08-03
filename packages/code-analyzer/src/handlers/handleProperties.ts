@@ -16,7 +16,7 @@ export function handleProperties(properties: PropertyDeclaration[]): Property[] 
         const type = typeNode ? typeNode.getText() : p.getType().getSymbol()?.getName();
 
         const initializer = p.getInitializer();
-        const defaultValue = initializer ? initializer.getText() : null;
+        const defaultValue = initializer?.getText();
 
         return {
             name: p.getName(),
@@ -24,7 +24,7 @@ export function handleProperties(properties: PropertyDeclaration[]): Property[] 
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,
-            baseType: getBaseType(p.getType()),
+            baseType: getBaseType(p.getType()) ?? 'unknown',
         };
     });
 }
@@ -37,7 +37,7 @@ export function handlePropertySignatures(properties: PropertySignature[]): Prope
         } 
     
         const initializer = p.getInitializer();
-        const defaultValue = initializer ? initializer.getText() : null;
+        const defaultValue = initializer?.getText();
 
         return {
             name: p.getName(),
@@ -45,7 +45,7 @@ export function handlePropertySignatures(properties: PropertySignature[]): Prope
             docs: p.getJsDocs()[0]?.getText(),
             nullable: p.hasQuestionToken(),
             defaultValue: defaultValue,
-            baseType: getBaseType(p.getType()),
+            baseType: getBaseType(p.getType()) ?? 'unknown',
         };
     });
 }

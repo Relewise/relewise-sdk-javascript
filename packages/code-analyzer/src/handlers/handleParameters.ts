@@ -13,7 +13,7 @@ export function handleParameters(parameters: ParameterDeclaration[]): Parameter[
         const nullable = param.hasQuestionToken();
 
         const initializer = param.getInitializer();
-        const defaultValue = initializer ? initializer.getText() : null;
+        const defaultValue = initializer?.getText();
 
         results.push({
             name,
@@ -58,7 +58,7 @@ export function findParameterDependencies(parameters: ParameterDeclaration[]): s
         const scope = param.getScope();
 
         if (scope === Scope.Private || scope === Scope.Protected) {
-            return;
+            continue;
         }
 
         const typeNode = param.getTypeNode();

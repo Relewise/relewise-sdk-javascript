@@ -19,13 +19,13 @@ export function handleClasses(sourceFile: SourceFile): Entry[] {
 
         classes.push({
             kind: Kind[Kind.Class],
-            name: cls.getName(),
+            name: cls.getName() ?? 'default',
             docs: cls.getJsDocs()[0]?.getText(),
             dependencies: properties.map(x => x.baseType),
             isAbstract: cls.isAbstract(),
             isDefault: cls.isDefaultExport(),
             properties: properties,
-            extends: ex ? [ex] : null,
+            extends: ex ? [ex] : undefined,
         });
     }
 

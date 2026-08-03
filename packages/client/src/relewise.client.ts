@@ -7,6 +7,7 @@ export interface RelewiseClientOptions {
 
 export interface RelewiseRequestOptions {
     abortSignal?: AbortSignal;
+    keepalive?: boolean;
 }
 
 export class ProblemDetailsError extends Error {
@@ -68,6 +69,7 @@ export abstract class RelewiseClient {
                 },
                 body: JSON.stringify(data),
                 signal: options?.abortSignal,
+                keepalive: options?.keepalive,
                 cache: this.cache,
             });
 

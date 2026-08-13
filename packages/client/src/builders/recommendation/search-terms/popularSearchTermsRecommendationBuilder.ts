@@ -26,6 +26,12 @@ export class PopularSearchTermsRecommendationBuilder extends RecommendationReque
         return this;
     }
 
+    public take(count: number): this {
+        this.recommendationSettings.numberOfRecommendations = count;
+
+        return this;
+    }
+
     public build() {
         const request: PopularSearchTermsRecommendationRequest = {
             $type: 'Relewise.Client.Requests.Recommendations.PopularSearchTermsRecommendationRequest, Relewise.Client',

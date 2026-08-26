@@ -41,14 +41,16 @@ After which you have access to various methods depending on the client you've bo
 
 ***Note: serverUrl is not required and will default to https://api.relewise.com/*** 
 
-#### Cache mode
+#### Cache mode & Keep Alive
 By default, clients use `cache: 'no-cache'` to ensure responses are always fresh — this prevents stale results that could break personalization.
 However, some service workers (often used in integrations) do not support the `no-cache` mode.
 
+You can also configure request with `keepalive`: `true`. This can be useful to prevent tracking requests from being cancelled because the user navigated away from the page before the request compeleted.
 ```ts
 const integrator = new Integrator(RELEWISE_DATASET_ID, RELEWISE_API_KEY, {
     serverUrl: RELEWISE_SERVER_URL,
-    cache: 'default'
+    cache: 'default',
+    keepalive: true
 });
 ```
 

@@ -20,6 +20,10 @@ export interface AbandonedCartTriggerConfigurationPropertySelectionSettings {
   user?: UserResultDetailsSelectedPropertiesSettings | null;
 }
 
+export type AbandonedCartTriggerResult = TriggerResultBase & {
+  user?: UserResultDetails | null;
+};
+
 export interface AbandonedCartTriggerResultTriggerConfiguration {
   $type: string;
   custom?: Record<string, string | null>;
@@ -41,12 +45,24 @@ export interface AbandonedCartTriggerResultTriggerConfiguration {
   userConditions?: UserConditionCollection | null;
 }
 
+export type AbandonedContentSearch = StringAbandonedSearch;
+
+export type AbandonedProductCategorySearch = StringAbandonedSearch;
+
+export type AbandonedProductSearch = ProductAndVariantIdAbandonedSearch;
+
 export type AbandonedSearchTriggerConfiguration = AbandonedSearchTriggerResultTriggerConfiguration & {
   searchTypesInPrioritizedOrder: ("Product" | "ProductCategory" | "Content")[];
   searchTermCondition?: SearchTermCondition | SearchTermConditionByLanguage | null;
   suppressOnEntityFromSearchResultViewed: boolean;
   /** @format int32 */
   considerAbandonedAfterMinutes: number;
+};
+
+export type AbandonedSearchTriggerResult = TriggerResultBase & {
+  user?: UserResultDetails | null;
+  type: "Product" | "ProductCategory" | "Content";
+  searches?: (AbandonedContentSearch | AbandonedProductCategorySearch | AbandonedProductSearch)[] | null;
 };
 
 export interface AbandonedSearchTriggerResultTriggerConfiguration {
@@ -585,7 +601,7 @@ export type CPMBudget = Budget & {
 
 export type Campaign = CampaignEntityStateGuidNullableCampaignMetadataValuesRetailMediaEntity & {
   name: string;
-  schedule?: ISchedule | null;
+  schedule?: ScheduledPeriod | null;
   promotions: PromotionCollection;
   /** @format uuid */
   advertiserId: string;
@@ -938,6 +954,12 @@ export interface CategoryUpdate {
   custom?: Record<string, string | null>;
 }
 
+export type Change = ChangeBase;
+
+export interface ChangeBase {
+  $type: string;
+}
+
 export interface Channel {
   name: string;
   subChannel?: Channel | null;
@@ -1036,6 +1058,33 @@ export type ContentAttributeSorting = ContentSorting & {
   mode: "Auto" | "Alphabetical" | "Numerical";
 };
 
+export type ContentByOverlappingDataValuesWithContentSeedFeedSource = EntityBySeedFeedSource & {
+  contentDataKeys: FeedEntityDataKey[];
+  /** @format int32 */
+  contentPopularityThreshold: number;
+};
+
+export type ContentByPopularityFeedSource = FeedSource & {
+  /** @format int32 */
+  popularityWindowMinutes: number;
+  /** @format int32 */
+  randomizationWindow: number;
+};
+
+export type ContentByProductPopularityOfProductIdFromContentDataFeedSource = FeedSource & {
+  contentDataKey: string;
+  /** @format int32 */
+  productPopularityWindowMinutes: number;
+  productPopularityDimension: "MostPurchased" | "MostViewed" | "LineRevenue";
+  aggregation: "Max" | "Average";
+  /** @format int32 */
+  contentPopularityThreshold: number;
+  /** @format int32 */
+  maxProductIdsPerContent: number;
+  /** @format int32 */
+  randomizationWindow: number;
+};
+
 export type ContentCategory = Category;
 
 export type ContentCategoryAdministrativeAction = CategoryAdministrativeAction;
@@ -1093,6 +1142,18 @@ export type ContentCategoryInterestTriggerConfiguration = ContentCategoryInteres
   contentViews?: Int32NullableRange | null;
   filters?: FilterCollection | null;
 };
+
+export type ContentCategoryInterestTriggerResult = TriggerResultBase & {
+  user?: UserResultDetails | null;
+  categories?: ContentCategoryInterestTriggerResultCategory[] | null;
+};
+
+export interface ContentCategoryInterestTriggerResultCategory {
+  lastPath?: string[] | null;
+  /** @format int32 */
+  views: number;
+  viewedContents?: ContentResultDetails[] | null;
+}
 
 export interface ContentCategoryInterestTriggerResultTriggerConfiguration {
   $type: string;
@@ -1560,6 +1621,10 @@ export type ContentView = Trackable & {
   channel?: Channel | null;
 };
 
+export type ContentsViewedAfterContentSeedFeedSource = EntityBySeedFeedSource;
+
+export type ContentsViewedAfterProductSeedFeedSource = EntityBySeedFeedSource;
+
 export type ContentsViewedAfterViewingContentRequest = ContentRecommendationRequest & {
   contentId: string;
 };
@@ -1897,6 +1962,8 @@ export interface DecompoundRulesRequestSortBySorting {
 }
 
 export type DecompoundRulesResponse = DecompoundRuleSearchRulesResponse;
+
+export type Decrease = ChangeBase;
 
 export type DeleteDecompoundRulesRequest = DeleteSearchRulesRequest;
 
@@ -2427,6 +2494,20 @@ export type EmailCondition = UserCondition & {
   emails: string[];
 };
 
+export interface EntityBySeedFeedSource {
+  $type: string;
+  /** @format int32 */
+  maxSeedItems: number;
+  /** @format int32 */
+  randomizationWindow: number;
+  enabled: boolean;
+  selectionPolicy: FeedSourceSelectionPolicy;
+  /** @format int32 */
+  maxResults?: number | null;
+  /** @format int32 */
+  maxResultsPerChanceGiven?: number | null;
+}
+
 export type EqualsCondition = ValueCondition & {
   value?: DataValue | null;
 };
@@ -2547,6 +2628,17 @@ export type FeedDwell = Trackable & {
   visibleItems: FeedItem[];
 };
 
+export interface FeedEntityDataKey {
+  key: string;
+  /** @format float */
+  weight: number;
+  required: boolean;
+  /** @format int32 */
+  seedDataCollectionsLimit: number;
+  /** @format int32 */
+  candidateDataCollectionsLimit: number;
+}
+
 export interface FeedItem {
   productAndVariantId?: ProductAndVariantId | null;
   contentId?: string | null;
@@ -2586,9 +2678,39 @@ export interface FeedSeed {
   contentIds?: string[] | null;
 }
 
+export interface FeedSource {
+  $type: string;
+  enabled: boolean;
+  selectionPolicy: FeedSourceSelectionPolicy;
+  /** @format int32 */
+  maxResults?: number | null;
+  /** @format int32 */
+  maxResultsPerChanceGiven?: number | null;
+}
+
 export interface FeedSourceConfiguration {
-  products: IProductFeedSource[];
-  content: IContentFeedSource[];
+  products: (
+    | ProductByPurchasePopularityFeedSource
+    | ProductByViewPopularityFeedSource
+    | ProductByProductIdFromContentDataFeedSource
+    | ProductsViewedAfterProductSeedFeedSource
+    | ProductsPurchasedWithProductSeedFeedSource
+    | ProductsViewedAfterContentSeedFeedSource
+  )[];
+  content: (
+    | ContentByPopularityFeedSource
+    | ContentByProductPopularityOfProductIdFromContentDataFeedSource
+    | ContentsViewedAfterProductSeedFeedSource
+    | ContentsViewedAfterContentSeedFeedSource
+    | ContentByOverlappingDataValuesWithContentSeedFeedSource
+  )[];
+}
+
+export interface FeedSourceSelectionPolicy {
+  /** @format int32 */
+  priority: number;
+  /** @format float */
+  tieBreakerProbability: number;
 }
 
 export interface FieldIndexConfiguration {
@@ -2943,20 +3065,12 @@ export interface HighlightSettings2ProductProductHighlightPropsHighlightSettings
 
 export type HtmlParser = Parser;
 
-export type IChange = object;
-
-export type IContentFeedSource = object;
-
-export type IProductFeedSource = object;
-
-export type ISchedule = object;
-
-export type ITriggerResult = object;
-
 export type IdentifierCondition = UserCondition & {
   key: string;
   values: string[];
 };
+
+export type Increase = ChangeBase;
 
 export interface IndexConfiguration {
   language?: LanguageIndexConfiguration | null;
@@ -3190,6 +3304,7 @@ export interface MatchTypeSettings {
   startsWith: boolean;
   endsWith: boolean;
   fuzzy: boolean;
+  semantic: boolean;
 }
 
 export interface MerchandisingRule {
@@ -3212,7 +3327,7 @@ export interface MerchandisingRule {
   /** @format double */
   priority: number;
   settings?: Record<string, string | null>;
-  schedule?: ISchedule | null;
+  schedule?: ScheduledPeriod | null;
   status?: "Active" | "Inactive" | null;
 }
 
@@ -3740,6 +3855,15 @@ export interface ProductAndVariantId {
   variantId?: string | null;
 }
 
+export interface ProductAndVariantIdAbandonedSearch {
+  $type: string;
+  topResults: ProductAndVariantId[];
+  loweredSearchTerm: string;
+  /** @format int32 */
+  hits: number;
+  language?: Language | null;
+}
+
 export type ProductAndVariantIdFilter = Filter & {
   productAndVariantIds: ProductAndVariantId[];
 };
@@ -3766,6 +3890,34 @@ export type ProductAttributeSorting = ProductSorting & {
   attribute: "Id" | "DisplayName" | "BrandId" | "BrandName" | "ListPrice" | "SalesPrice";
   mode: "Auto" | "Alphabetical" | "Numerical";
 };
+
+export interface ProductByPopularityFeedSource {
+  $type: string;
+  /** @format int32 */
+  popularityWindowMinutes: number;
+  /** @format int32 */
+  randomizationWindow: number;
+  enabled: boolean;
+  selectionPolicy: FeedSourceSelectionPolicy;
+  /** @format int32 */
+  maxResults?: number | null;
+  /** @format int32 */
+  maxResultsPerChanceGiven?: number | null;
+}
+
+export type ProductByProductIdFromContentDataFeedSource = FeedSource & {
+  contentDataKey: string;
+  /** @format int32 */
+  maxLookBehindDistance: number;
+  /** @format int32 */
+  maxLookBehindCount: number;
+  /** @format int32 */
+  randomizationWindow: number;
+};
+
+export type ProductByPurchasePopularityFeedSource = ProductByPopularityFeedSource;
+
+export type ProductByViewPopularityFeedSource = ProductByPopularityFeedSource;
 
 export type ProductCategory = Category;
 
@@ -3957,6 +4109,23 @@ export type ProductCategoryInterestTriggerConfiguration = ProductCategoryInteres
   filters?: FilterCollection | null;
 };
 
+export type ProductCategoryInterestTriggerResult = TriggerResultBase & {
+  user?: UserResultDetails | null;
+  categories?: ProductCategoryInterestTriggerResultCategory[] | null;
+};
+
+export interface ProductCategoryInterestTriggerResultCategory {
+  lastPath?: string[] | null;
+  /** @format int32 */
+  views: number;
+  viewedProducts?: ProductCategoryInterestTriggerResultCategoryProductAndVariant[] | null;
+}
+
+export interface ProductCategoryInterestTriggerResultCategoryProductAndVariant {
+  product?: ProductResultDetails | null;
+  variant?: VariantResultDetails | null;
+}
+
 export interface ProductCategoryInterestTriggerResultTriggerConfiguration {
   $type: string;
   custom?: Record<string, string | null>;
@@ -4124,12 +4293,28 @@ export type ProductCategoryView = Trackable & {
 export type ProductChangeTriggerConfiguration =
   ProductChangeTriggerResultProductChangeTriggerResultSettingsProductPropertySelectorEntityChangeTriggerConfiguration;
 
+export type ProductChangeTriggerResult = ProductChangeTriggerResultProductChangeResultDetailsEntityChangeTriggerResult;
+
+export interface ProductChangeTriggerResultProductChangeResultDetails {
+  /** @format date-time */
+  changeTimeUtc: string;
+  oldValue?: DataValue | null;
+  newValue?: DataValue | null;
+  product?: ProductResultDetails | null;
+}
+
+export interface ProductChangeTriggerResultProductChangeResultDetailsEntityChangeTriggerResult {
+  $type: string;
+  entitiesWithChanges?: ProductChangeTriggerResultProductChangeResultDetails[] | null;
+  user?: UserResultDetails | null;
+}
+
 export interface ProductChangeTriggerResultProductChangeTriggerResultSettingsProductPropertySelectorEntityChangeTriggerConfiguration {
   $type: string;
   entityPropertySelector: ObservableProductAttributeSelector | ObservableProductDataValueSelector;
   beforeChangeFilters: FilterCollection;
   afterChangeFilters: FilterCollection;
-  change: IChange;
+  change: Change | Decrease | Increase;
   resultSettings: ProductChangeTriggerResultSettings;
   custom?: Record<string, string | null>;
   /** @format uuid */
@@ -4373,6 +4558,18 @@ export type ProductInterestTriggerConfiguration = ProductInterestTriggerResultTr
   filters?: FilterCollection | null;
   resultSettings?: ProductInterestTriggerResultResultSettings | null;
 };
+
+export type ProductInterestTriggerResult = TriggerResultBase & {
+  user?: UserResultDetails | null;
+  products?: ProductInterestTriggerResultProductAndVariant[] | null;
+};
+
+export interface ProductInterestTriggerResultProductAndVariant {
+  product?: ProductResultDetails | null;
+  variant?: VariantResultDetails | null;
+  /** @format int32 */
+  views: number;
+}
 
 export interface ProductInterestTriggerResultResultSettings {
   selectedProductProperties?: SelectedProductDetailsPropertiesSettings | null;
@@ -4937,6 +5134,12 @@ export type ProductView = Trackable & {
   channel?: Channel | null;
 };
 
+export type ProductsPurchasedWithProductSeedFeedSource = EntityBySeedFeedSource;
+
+export type ProductsViewedAfterContentSeedFeedSource = EntityBySeedFeedSource;
+
+export type ProductsViewedAfterProductSeedFeedSource = EntityBySeedFeedSource;
+
 export type ProductsViewedAfterViewingContentRequest = ProductRecommendationRequest & {
   contentId: string;
 };
@@ -5427,6 +5630,17 @@ export type SaveTriggerConfigurationRequest = LicensedRequest & {
   modifiedBy: string;
 };
 
+export interface ScheduleBase {
+  $type: string;
+}
+
+export type ScheduledPeriod = ScheduleBase & {
+  /** @format date-time */
+  fromUtc?: string | null;
+  /** @format date-time */
+  toUtc?: string | null;
+};
+
 export interface Score {
   /** @format float */
   relevance?: number | null;
@@ -5455,6 +5669,7 @@ export interface SearchIndex {
   custom?: Record<string, string | null>;
   configuration?: IndexConfiguration | null;
   rebuildStatus?: RebuildStatus | null;
+  semanticIndex?: SemanticIndexInfo | null;
 }
 
 export type SearchIndexCollectionResponse = TimedResponse & {
@@ -5857,6 +6072,12 @@ export interface SelectedVariantPropertiesSettings {
   userEngagement: boolean;
 }
 
+export interface SemanticIndexInfo {
+  status: "Disabled" | "Skipped" | "Built" | "Capped" | "Failed";
+  /** @format date-span */
+  lastBuildDuration: string;
+}
+
 export interface SignificantDataValue {
   key: string;
   comparer: "Equals" | "NumericPercentDifference" | "StringSimilarity" | "KeyExists" | "CollectionOverlap";
@@ -5978,6 +6199,15 @@ export interface StemmingRulesRequestSortBySorting {
 }
 
 export type StemmingRulesResponse = StemmingRuleSearchRulesResponse;
+
+export interface StringAbandonedSearch {
+  $type: string;
+  topResults: string[];
+  loweredSearchTerm: string;
+  /** @format int32 */
+  hits: number;
+  language?: Language | null;
+}
 
 export interface StringAvailableFacetValue {
   value?: string | null;
@@ -6326,13 +6556,26 @@ export type TriggerConfigurationsRequest = LicensedRequest & {
   type?: number | null;
 };
 
+export interface TriggerResultBase {
+  $type: string;
+}
+
 export type TriggerResultRequest = LicensedRequest & {
   /** @format uuid */
   configurationId: string;
 };
 
 export type TriggerResultResponse = TimedResponse & {
-  result?: ITriggerResult | null;
+  result?:
+    | ProductCategoryInterestTriggerResult
+    | ProductInterestTriggerResult
+    | AbandonedCartTriggerResult
+    | UserActivityTriggerResult
+    | ContentCategoryInterestTriggerResult
+    | AbandonedSearchTriggerResult
+    | ProductChangeTriggerResult
+    | VariantChangeTriggerResult
+    | null;
 };
 
 export interface TrimStringTransformer {
@@ -6353,6 +6596,10 @@ export interface User {
 }
 
 export type UserActivityTriggerConfiguration = UserActivityTriggerResultTriggerConfiguration;
+
+export type UserActivityTriggerResult = TriggerResultBase & {
+  user?: UserResultDetails | null;
+};
 
 export interface UserActivityTriggerResultTriggerConfiguration {
   $type: string;
@@ -6546,9 +6793,26 @@ export type VariantAssortmentRelevanceModifier = RelevanceModifier & {
 export type VariantChangeTriggerConfiguration =
   VariantChangeTriggerResultVariantChangeTriggerResultSettingsVariantPropertySelectorEntityChangeTriggerConfiguration;
 
+export type VariantChangeTriggerResult = VariantChangeTriggerResultVariantChangeResultDetailsEntityChangeTriggerResult;
+
 export interface VariantChangeTriggerResultSettings {
   selectedProductProperties?: SelectedProductDetailsPropertiesSettings | null;
   selectedVariantProperties?: SelectedVariantDetailsPropertiesSettings | null;
+}
+
+export interface VariantChangeTriggerResultVariantChangeResultDetails {
+  /** @format date-time */
+  changeTime: string;
+  oldValue?: DataValue | null;
+  newValue?: DataValue | null;
+  product?: ProductResultDetails | null;
+  variant?: VariantResultDetails | null;
+}
+
+export interface VariantChangeTriggerResultVariantChangeResultDetailsEntityChangeTriggerResult {
+  $type: string;
+  entitiesWithChanges?: VariantChangeTriggerResultVariantChangeResultDetails[] | null;
+  user?: UserResultDetails | null;
 }
 
 export interface VariantChangeTriggerResultVariantChangeTriggerResultSettingsVariantPropertySelectorEntityChangeTriggerConfiguration {
@@ -6556,7 +6820,7 @@ export interface VariantChangeTriggerResultVariantChangeTriggerResultSettingsVar
   entityPropertySelector: ObservableVariantAttributeSelector | ObservableVariantDataValueSelector;
   beforeChangeFilters: FilterCollection;
   afterChangeFilters: FilterCollection;
-  change: IChange;
+  change: Change | Decrease | Increase;
   resultSettings: VariantChangeTriggerResultSettings;
   custom?: Record<string, string | null>;
   /** @format uuid */

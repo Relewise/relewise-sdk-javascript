@@ -6,11 +6,12 @@ import { FeedCompositionBuilder, FeedCompositionOptions } from './feedCompositio
 export class FeedRecommendationInitializationBuilder extends RecommendationRequestBuilder {
     private feed: Feed;
 
-    constructor(settings: Settings, { minimumPageSize }: { minimumPageSize: number }) {
+    constructor(settings: Settings, { minimumPageSize, configurationKey }: { minimumPageSize: number, configurationKey?: string | null }) {
         super(settings);
 
         this.feed = {
             minimumPageSize: minimumPageSize,
+            configurationKey: configurationKey,
             compositions: [],
             allowProductsCurrentlyInCart: false,
             recommendVariant: false
@@ -102,6 +103,16 @@ export class FeedRecommendationInitializationBuilder extends RecommendationReque
      */
     public allowProductsCurrentlyInCart(allow: boolean = true): this {
         this.feed.allowProductsCurrentlyInCart = allow;
+
+        return this;
+    }
+
+    /**
+     * Defines a configuration to be used for this feed.
+     * @param configurationKey 
+     */
+    public configurationKey(configurationKey: string | null = null): this {
+        this.feed.configurationKey = configurationKey;
 
         return this;
     }

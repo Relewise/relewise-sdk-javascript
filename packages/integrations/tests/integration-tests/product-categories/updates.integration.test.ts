@@ -46,13 +46,15 @@ test('Create Product Category', async() => {
     await integrator.updateProductCategory(category.build());
 
     const enable = new ProductCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addProductCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductCategoryDataFilter('IntegrationTestRun', c => c.addEqualsCondition(DataValueFactory.string(testId('run'))))
+            .addProductCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeProductCategoryAdministrativeAction(enable.build());
 
     const disable = new ProductCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addProductCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductCategoryDataFilter('IntegrationTestRun', c => c.addEqualsCondition(DataValueFactory.string(testId('run'))))
+            .addProductCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeProductCategoryAdministrativeAction(disable.build());

@@ -46,13 +46,15 @@ test('Create Content Category', async() => {
     await integrator.updateContentCategory(category.build());
 
     const enable = new ContentCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addContentCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentCategoryDataFilter('IntegrationTestRun', c => c.addEqualsCondition(DataValueFactory.string(testId('run'))))
+            .addContentCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeContentCategoryAdministrativeAction(enable.build());
 
     const disable = new ContentCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addContentCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentCategoryDataFilter('IntegrationTestRun', c => c.addEqualsCondition(DataValueFactory.string(testId('run'))))
+            .addContentCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeContentCategoryAdministrativeAction(disable.build());

@@ -10,6 +10,7 @@ const searcher = new Searcher(datasetId!, apiKey!, { serverUrl });
 
 const marker = { IntegrationTestRun: DataValueFactory.string(testId('run')) };
 const viewer = markUser(UserFactory.byTemporaryId(testId('recommendation-viewer')));
+const relatedViewer = markUser(UserFactory.byTemporaryId(testId('related-viewer')));
 
 test('create the client integration test dataset fixtures', async () => {
     await integrator.updateBrand(new BrandUpdateBuilder({ id: testId('brand-1'), updateKind: 'ReplaceProvidedProperties' })
@@ -23,15 +24,17 @@ test('create the client integration test dataset fixtures', async () => {
     }
 
     for (const id of ['1', '2', '3']) {
-        const variant = new ProductVariantBuilder({ id: testId(`variant-${id}`) })
+        const numericVariant = new ProductVariantBuilder({ id: testId(`variant-numeric-${id}`) })
             .data({ availableMarkets: DataValueFactory.number(1693526400) })
+            .build();
+        const objectVariant = new ProductVariantBuilder({ id: testId(`variant-object-${id}`) })
+            .data({ availableMarkets: DataValueFactory.object({ US: DataValueFactory.object({ ValidFromDate: DataValueFactory.number(1693526400) }) }) })
             .build();
         const product = new ProductUpdateBuilder({ id: testId(id), productUpdateKind: 'ReplaceProvidedProperties' })
             .displayName([{ language: 'da', value: testId(`Product ${id}`) }, { language: 'en-US', value: testId(`Product ${id}`) }])
             .data({
                 ...marker,
                 objects: DataValueFactory.objectCollection([{ list: DataValueFactory.stringCollection(['123', '456', '789']) }]),
-                availableMarkets: DataValueFactory.object({ US: DataValueFactory.object({ ValidFromDate: DataValueFactory.number(1693526400) }) }),
                 'some-data-key': DataValueFactory.number(10000),
                 SomeString: DataValueFactory.string('SomeValue'),
             })
@@ -39,12 +42,12 @@ test('create the client integration test dataset fixtures', async () => {
             .brand({ id: testId('brand-1'), displayName: testId('Relewise') })
             .listPrice([{ amount: 100, currency: 'DKK' }, { amount: 100, currency: 'USD' }])
             .salesPrice([{ amount: 50, currency: 'DKK' }, { amount: 50, currency: 'USD' }])
-            .variants([variant])
+            .variants([numericVariant, objectVariant])
             .categoryPaths(b => b.path(p => p.category({ id: testId(id === '3' ? '2' : '1') })));
         await integrator.updateProduct(product.build());
     }
 
-    for (const id of ['1', '2']) {
+    for (const id of ['1', '2', '3']) {
         const content = new ContentUpdateBuilder({ id: testId(id), updateKind: 'ReplaceProvidedProperties' })
             .displayName([{ language: 'da', value: testId(`Content ${id}`) }, { language: 'en-US', value: testId(`Content ${id}`) }])
             .data({ ...marker, Description: DataValueFactory.multilingual([{ language: 'da', value: 'The last word should be highlighted' }]) })
@@ -67,6 +70,8 @@ test('create the client integration test dataset fixtures', async () => {
     await tracker.trackProductView({ productId: testId('2'), user: viewer });
     await tracker.trackContentView({ contentId: testId('1'), user: viewer });
     await tracker.trackContentView({ contentId: testId('2'), user: viewer });
+    await tracker.trackContentView({ contentId: testId('1'), user: relatedViewer });
+    await tracker.trackContentView({ contentId: testId('3'), user: relatedViewer });
 
     const request = new ProductSearchBuilder({ language: 'da', currency: 'DKK', displayedAtLocation: 'integration test', user: UserFactory.anonymous() })
         .filters(f => f.addProductIdFilter([testId('1'), testId('2'), testId('3')]))

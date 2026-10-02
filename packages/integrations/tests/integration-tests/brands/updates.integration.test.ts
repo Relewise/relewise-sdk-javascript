@@ -29,13 +29,13 @@ test('Create Brand', async() => {
     await integrator.updateBrand(brand.build());
 
     const enable = new BrandAdministrativeActionBuilder({
-        filters: (f) => f.addBrandDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addBrandIdFilter(testId('1234')).addBrandDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeBrandAdministrativeAction(enable.build());
 
     const disable = new BrandAdministrativeActionBuilder({
-        filters: (f) => f.addBrandDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addBrandIdFilter(testId('1234')).addBrandDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeBrandAdministrativeAction(disable.build());

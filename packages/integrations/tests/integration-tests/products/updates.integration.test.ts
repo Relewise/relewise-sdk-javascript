@@ -60,13 +60,13 @@ test('Create Product', async() => {
     await integrator.updateProduct(product.build());
 
     const enable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter(testId('1')).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
     await integrator.executeProductAdministrativeAction(enable.build());
 
     const disable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter(testId('1')).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Disable',
     });
     await integrator.executeProductAdministrativeAction(disable.build());
@@ -125,12 +125,12 @@ test('Batch create products', async() => {
     });
 
     const enable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter([testId('1'), testId('2')]).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
 
     const disable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter([testId('1'), testId('2')]).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Disable',
     });
 

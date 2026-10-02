@@ -36,13 +36,13 @@ test('Create Companies', async() => {
     await integrator.updateCompany(company.build());
 
     const enable = new CompanyAdministrativeActionBuilder({
-        filters: (f) => f.addCompanyDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addCompanyIdFilter(testId('2')).addCompanyDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeCompanyAdministrativeAction(enable.build());
 
     const disable = new CompanyAdministrativeActionBuilder({
-        filters: (f) => f.addCompanyDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addCompanyIdFilter(testId('2')).addCompanyDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeCompanyAdministrativeAction(disable.build());

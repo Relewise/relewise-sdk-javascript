@@ -50,13 +50,13 @@ test('Create Content', async() => {
     await integrator.updateContent(Content.build());
 
     const enable = new ContentAdministrativeActionBuilder({
-        filters: (f) => f.addContentDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentIdFilter(testId('1')).addContentDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeContentAdministrativeAction(enable.build());
 
     const disable = new ContentAdministrativeActionBuilder({
-        filters: (f) => f.addContentDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentIdFilter(testId('1')).addContentDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeContentAdministrativeAction(disable.build());

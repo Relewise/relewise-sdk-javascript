@@ -8,7 +8,7 @@ const integrator = new Integrator(datasetId!, apiKey!, { serverUrl });
 
 test('remove the client integration test fixtures', async () => {
     const productIds = ['1', '2', '3', 'Object facet evaluation mode test product', 'GetProductFacet test product', 'Cat Product #1', 'Cat Product #2', 'Cat Product #3'].map(testId);
-    const contentIds = ['1', '2', 'GetContentFacet test content'].map(testId);
+    const contentIds = ['1', '2', '3', 'GetContentFacet test content'].map(testId);
     const runMarker = DataValueFactory.string(testId('run'));
 
     await integrator.executeProductAdministrativeAction(new ProductAdministrativeActionBuilder({

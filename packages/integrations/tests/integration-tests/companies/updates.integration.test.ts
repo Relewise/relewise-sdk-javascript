@@ -1,3 +1,4 @@
+import { testId } from '../testData';
 import { test } from '@jest/globals';
 import { CompanyUpdateBuilder, CompanyAdministrativeActionBuilder, Integrator } from '../../../src';
 import { DataValueFactory } from '@relewise/client';
@@ -10,13 +11,13 @@ const unixTimeStamp: number = Date.now();
 test('Create Companies', async() => {
 
     const parentCompany = new CompanyUpdateBuilder({
-        id: '1',
+        id: testId('1'),
         updateKind: 'ReplaceProvidedProperties',
         replaceExistingParents: true,
     });
 
     const company = new CompanyUpdateBuilder({
-        id: '2',
+        id: testId('2'),
         updateKind: 'ReplaceProvidedProperties',
         replaceExistingParents: true,
     })
@@ -41,7 +42,7 @@ test('Create Companies', async() => {
     await integrator.executeCompanyAdministrativeAction(enable.build());
 
     const disable = new CompanyAdministrativeActionBuilder({
-        filters: (f) => f.addCompanyDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addCompanyDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeCompanyAdministrativeAction(disable.build());

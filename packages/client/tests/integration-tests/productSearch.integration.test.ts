@@ -1,3 +1,4 @@
+import { testId } from './testData';
 import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult, BrandFacetResult, Tracker, ProductDataObjectFacet } from '../../src';
 import { Integrator, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { test, expect } from '@jest/globals'
@@ -53,7 +54,7 @@ test('Product search - data object facets', async () => {
 test('Product search - data object facets evaluation mode', async () => {
 
     const product = new ProductUpdateBuilder({
-        id: 'Object facet evaluation mode test product',
+        id: testId('Object facet evaluation mode test product'),
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .data({
@@ -124,12 +125,12 @@ test('Retail Media search', async () => {
 });
 
 test('Facet result', async () => {
-    const variant = new ProductVariantBuilder({ id: 'GetProductFacet test variant' })
+    const variant = new ProductVariantBuilder({ id: testId('GetProductFacet test variant') })
         .specifications({ SomeSpecification: 'S' })
         .build();
 
     const product = new ProductUpdateBuilder({
-        id: 'GetProductFacet test product',
+        id: testId('GetProductFacet test product'),
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .data({
@@ -238,7 +239,7 @@ test('ProductSearch with engagements', async () => {
         language: 'da',
         currency: 'DKK',
         displayedAtLocation: 'integration test',
-        user: UserFactory.byTemporaryId('temp-id-1234'),
+        user: UserFactory.byTemporaryId(testId('temp-id-1234')),
     });
 
     const request: ProductSearchRequest = builder
@@ -302,21 +303,21 @@ test('Aborting a search throws the expected error', async () => {
 test('ProductSearch with sorted facet', async () => {
 
     const product = new ProductUpdateBuilder({
-        id: 'Cat Product #1',
+        id: testId('Cat Product #1'),
         productUpdateKind: 'ReplaceProvidedProperties',
-    }).categoryPaths(c => c.path(p => p.category({ id: "1", displayName: [{ language: 'da', value: "name" }] })));
+    }).categoryPaths(c => c.path(p => p.category({ id: testId('1'), displayName: [{ language: 'da', value: "name" }] })));
     await integrator.updateProduct(product.build());
 
     const product2 = new ProductUpdateBuilder({
-        id: 'Cat Product #2',
+        id: testId('Cat Product #2'),
         productUpdateKind: 'ReplaceProvidedProperties',
-    }).categoryPaths(c => c.path(p => p.category({ id: "1", displayName: [{ language: 'da', value: "name" }] })));
+    }).categoryPaths(c => c.path(p => p.category({ id: testId('1'), displayName: [{ language: 'da', value: "name" }] })));
     await integrator.updateProduct(product2.build());
 
     const product3 = new ProductUpdateBuilder({
-        id: 'Cat Product #3',
+        id: testId('Cat Product #3'),
         productUpdateKind: 'ReplaceProvidedProperties',
-    }).categoryPaths(c => c.path(p => p.category({ id: "2", displayName: [{ language: 'da', value: "name 2" }] })));
+    }).categoryPaths(c => c.path(p => p.category({ id: testId('2'), displayName: [{ language: 'da', value: "name 2" }] })));
     await integrator.updateProduct(product3.build());
 
     const request: ProductSearchRequest = baseProductBuilder()

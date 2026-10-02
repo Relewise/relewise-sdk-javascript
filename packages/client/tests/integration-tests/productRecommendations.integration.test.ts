@@ -1,3 +1,4 @@
+import { testId } from './testData';
 import { randomUUID } from 'crypto';
 import { DataValueFactory, PopularProductsBuilder, ProductRecommendationResponse, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
@@ -15,7 +16,7 @@ const settings = {
 
 test('PurchasedWithProduct', async() => {
 
-    const result: ProductRecommendationResponse | undefined = await recommender.recommendPurchasedWithProduct(new PurchasedWithProductBuilder(settings).product({ productId: '1' }).build());
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendPurchasedWithProduct(new PurchasedWithProductBuilder(settings).product({ productId: testId('1') }).build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);
@@ -23,7 +24,7 @@ test('PurchasedWithProduct', async() => {
 
 test('ProductsViewedAfterViewingProduct', async() => {
 
-    const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(new ProductsViewedAfterViewingProductBuilder(settings).product({ productId: '1' }).build());
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(new ProductsViewedAfterViewingProductBuilder(settings).product({ productId: testId('1') }).build());
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);
@@ -37,7 +38,7 @@ test('ProductsViewedAfterViewingProduct with all conditions', async() => {
         displayedAtLocation: 'integration test Conditions',
         user: UserFactory.anonymous(),
     })
-        .product({ productId: '1' })
+        .product({ productId: testId('1') })
         .filters(f => f
             .addProductDataFilter('ShortDescription', b => b
                 .addContainsCondition(DataValueFactory.stringCollection(['d']), 'Any')

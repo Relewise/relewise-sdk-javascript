@@ -1,3 +1,4 @@
+import { testId } from './testData';
 import { ContentRecommendationRequestCollection, ContentsRecommendationCollectionBuilder, ContentsViewedAfterViewingContentBuilder, PopularContentsBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -16,7 +17,7 @@ test('Batched Content Recommendations', async () => {
 
     const request: ContentRecommendationRequestCollection = new ContentsRecommendationCollectionBuilder()
         .addRequest(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).setNumberOfRecommendations(1).build())
-        .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setNumberOfRecommendations(1).setContentId('1').build())
+        .addRequest(new ContentsViewedAfterViewingContentBuilder(settings).setNumberOfRecommendations(1).setContentId(testId('1')).build())
         .build();
 
     const result = await recommender.batchContentRecommendations(request);

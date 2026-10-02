@@ -67,14 +67,13 @@ npm publish --access public
 
 ### Integrations
 
-To run integrations tests, run the following command with parameters.
+Use the dedicated JavaScript SDK integration dataset (`d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f`) on `https://sandbox-api.relewise.com/`. Set `DATASET_ID`, `SERVER_URL`, and a dataset API key in `API_KEY`. Set `TEST_RUN_ID` to a unique value for each run; it prefixes fixture IDs and marks users for cleanup.
 
-DATASET_ID - This is the Relewise Dataset Id
+Run these commands in order with the same parameters:
 
-API_KEY - This is the Relewise API Key
+    npm run integration-seed --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
+    npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
+    npm run integration-cleanup --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
 
-SERVER_URL - This is an optional parameter for changing the API url. e.g. https://localhost:5000 for development
-
-
-    npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://api.relewise.com
+Run cleanup even if a test fails. The suite creates its own category and brand fixtures and deletes its products, content, companies, categories, brands, and tracked users. GitHub Actions supplies the API key from the `INTEGRATION_TESTS_DATASET_API_KEY` repository secret.
 

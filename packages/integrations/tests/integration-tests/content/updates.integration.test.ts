@@ -1,3 +1,4 @@
+import { testId } from '../testData';
 import { test } from '@jest/globals';
 import { ContentAdministrativeActionBuilder, ContentUpdateBuilder, Integrator } from '../../../src';
 import { DataValueFactory } from '@relewise/client';
@@ -9,7 +10,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Content', async() => {
     const Content = new ContentUpdateBuilder({
-        id: '1',
+        id: testId('1'),
         updateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -29,20 +30,20 @@ test('Create Content', async() => {
         .categoryPaths(b => b
             .path(p => p
                 .category({
-                    id: '1',
+                    id: testId('1'),
                     displayName: [{ language: 'da', value: 'Værktøj' }],
                 })
                 .category({
-                    id: '2',
+                    id: testId('2'),
                     displayName: [{ language: 'da', value: 'Udendørs' }],
                 })
                 .category({
-                    id: '3',
+                    id: testId('3'),
                     displayName: [{ language: 'da', value: 'Skovle' }],
                 }))
             .path(p => p
                 .category({
-                    id: '4',
+                    id: testId('4'),
                     displayName: [{ language: 'da', value: 'Tilbud' }],
                 })));
 
@@ -55,7 +56,7 @@ test('Create Content', async() => {
     await integrator.executeContentAdministrativeAction(enable.build());
 
     const disable = new ContentAdministrativeActionBuilder({
-        filters: (f) => f.addContentDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addContentDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeContentAdministrativeAction(disable.build());

@@ -1,3 +1,4 @@
+import { testId } from '../testData';
 import { test } from '@jest/globals';
 import { BrandUpdateBuilder, BrandAdministrativeActionBuilder, Integrator } from '../../../src';
 import { DataValueFactory } from '@relewise/client';
@@ -9,7 +10,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Brand', async() => {
     const brand = new BrandUpdateBuilder({
-        id: '1234',
+        id: testId('1234'),
         updateKind: 'ReplaceProvidedProperties',
     })
         .displayName('HP')
@@ -34,7 +35,7 @@ test('Create Brand', async() => {
     await integrator.executeBrandAdministrativeAction(enable.build());
 
     const disable = new BrandAdministrativeActionBuilder({
-        filters: (f) => f.addBrandDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addBrandDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeBrandAdministrativeAction(disable.build());

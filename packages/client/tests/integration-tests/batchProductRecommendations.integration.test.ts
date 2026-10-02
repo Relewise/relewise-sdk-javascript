@@ -1,3 +1,4 @@
+import { testId } from './testData';
 import { ProductRecommendationRequestCollection, ProductsRecommendationCollectionBuilder, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, SearchTermPredictionBuilder, SearchTermPredictionRequest, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -15,8 +16,8 @@ const settings = {
 test('Batched Product Recommendations', async() => {
 
     const request: ProductRecommendationRequestCollection = new ProductsRecommendationCollectionBuilder()
-        .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())
-        .addRequest(new PurchasedWithProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())
+        .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: testId('1') }).build())
+        .addRequest(new PurchasedWithProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: testId('1') }).build())
         .build();
 
     const result = await recommender.batchProductRecommendations(request);

@@ -1,6 +1,7 @@
 import { testId } from './testData';
+import { expectContentRecommendations } from './recommendationAssertions';
 import { ContentRecommendationResponse, ContentsViewedAfterViewingContentBuilder, PersonalContentRecommendationBuilder, PopularContentsBuilder, ProductRecommendationResponse, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, UserFactory } from '../../src';
-import { test, expect } from '@jest/globals'
+import { test } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
@@ -17,21 +18,18 @@ test('ContentsViewedAfterViewing', async() => {
 
     const result: ContentRecommendationResponse | undefined = await recommender.recommendContentsViewedAfterViewingContent(new ContentsViewedAfterViewingContentBuilder(settings).setContentId(testId('1')).build());
 
-    expect(result).not.toBe(undefined);
-    expect(result!.recommendations?.length).toBeGreaterThan(0);
+    expectContentRecommendations(result);
 });
 
 test('PopularContents', async() => {
 
     const result: ContentRecommendationResponse | undefined = await recommender.recommendPopularContents(new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build());
 
-    expect(result).not.toBe(undefined);
-    expect(result!.recommendations?.length).toBeGreaterThan(0);
+    expectContentRecommendations(result);
 });
 
 test('PersonalContent', async() => {
     const result: ContentRecommendationResponse | undefined = await recommender.recommendPersonalContents(new PersonalContentRecommendationBuilder(settings).build());
 
-    expect(result).not.toBe(undefined);
-    expect(result!.recommendations?.length).toBeGreaterThan(0);
+    expectContentRecommendations(result);
 });

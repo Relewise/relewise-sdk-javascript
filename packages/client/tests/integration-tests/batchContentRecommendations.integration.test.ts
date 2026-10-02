@@ -1,4 +1,5 @@
 import { testId } from './testData';
+import { expectContentRecommendations } from './recommendationAssertions';
 import { ContentRecommendationRequestCollection, ContentsRecommendationCollectionBuilder, ContentsViewedAfterViewingContentBuilder, PopularContentsBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -22,8 +23,9 @@ test('Batched Content Recommendations', async () => {
 
     const result = await recommender.batchContentRecommendations(request);
 
-    expect(result?.responses).not.toBe(undefined);
-    expect(result!.responses![0].recommendations?.length).toBeGreaterThan(0);
-    expect(result!.responses![1].recommendations?.length).toBeGreaterThan(0);
+    expect(result?.responses).toHaveLength(2);
+    for (const response of result?.responses ?? []) {
+        expectContentRecommendations(response);
+    }
 
 });

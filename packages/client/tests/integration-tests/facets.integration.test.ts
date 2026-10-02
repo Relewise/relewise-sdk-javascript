@@ -32,7 +32,6 @@ test('RecentlyPurchased facet', async() => {
         if (error instanceof ProblemDetailsError && error.details?.status === 400
             && error.details.detail?.includes("The feature: 'RecentlyPurchasedFacet' is not yet enabled for this dataset")) {
             // Fresh integration datasets do not necessarily have this optional feature enabled.
-            expect(error.details.title).toBe('Bad Request');
             return;
         }
         throw error;

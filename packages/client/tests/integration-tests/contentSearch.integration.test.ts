@@ -1,3 +1,4 @@
+import { testId } from './testData';
 import { ContentUpdateBuilder, Integrator } from '@relewise/integrations';
 import { Searcher, GetContentFacet, UserFactory, CategoryFacetResult, ContentSearchBuilder, ContentSearchRequest, ContentAssortmentFacet, ContentDataStringValueFacetResult, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
@@ -18,7 +19,7 @@ function baseContentBuilder() {
 
 test('Facet result', async() => {
     const content = new ContentUpdateBuilder({
-        id: 'GetContentFacet test content',
+        id: testId('GetContentFacet test content'),
         updateKind: 'ReplaceProvidedProperties'
     })
         .data({

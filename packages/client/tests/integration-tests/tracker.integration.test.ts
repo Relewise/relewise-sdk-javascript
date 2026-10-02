@@ -1,3 +1,4 @@
+import { markUser, testId } from './testData';
 import { error } from 'console';
 import { DataValueFactory, ProblemDetailsError, Tracker, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
@@ -11,13 +12,13 @@ test('Track Order', async () => {
         lineItems: [
             {
                 lineTotal: 100,
-                productId: '1',
+                productId: testId('1'),
                 quantity: 1,
                 variantId: 'v1',
             },
             {
                 lineTotal: 100,
-                productId: '2',
+                productId: testId('2'),
                 quantity: 1,
                 variantId: 'v1',
             }],
@@ -38,13 +39,13 @@ test('Track Cart', async () => {
         lineItems: [
             {
                 lineTotal: 100,
-                productId: '1',
+                productId: testId('1'),
                 quantity: 1,
                 variantId: 'v1',
             },
             {
                 lineTotal: 100,
-                productId: '2',
+                productId: testId('2'),
                 quantity: 1,
                 variantId: 'v1',
             },
@@ -62,7 +63,7 @@ test('Track Cart', async () => {
 
 test('Track Product View', async () => {
     const result = await tracker.trackProductView({
-        productId: '1',
+        productId: testId('1'),
         user: UserFactory.anonymous(),
     });
 
@@ -71,7 +72,7 @@ test('Track Product View', async () => {
 
 test('Track Product View', async () => {
     const result = await tracker.trackProductView({
-        productId: '2',
+        productId: testId('2'),
         user: UserFactory.anonymous(),
     });
 
@@ -80,7 +81,7 @@ test('Track Product View', async () => {
 
 test('Track Product Category View', async () => {
     const result = await tracker.trackProductCategoryView({
-        idPath: ['c1'],
+        idPath: [testId('c1')],
         user: UserFactory.anonymous(),
     });
 
@@ -89,7 +90,7 @@ test('Track Product Category View', async () => {
 
 test('Track Content View', async () => {
     const result = await tracker.trackContentView({
-        contentId: '1',
+        contentId: testId('1'),
         user: UserFactory.anonymous(),
     });
 
@@ -98,22 +99,22 @@ test('Track Content View', async () => {
 
 test('Track Content View', async () => {
     const result = await tracker.trackContentView({
-        contentId: '2',
+        contentId: testId('2'),
         user: UserFactory.anonymous(),
     });
 
     await tracker.trackContentView({
-        contentId: '3',
+        contentId: testId('3'),
         user: UserFactory.anonymous(),
     });
 
     await tracker.trackContentView({
-        contentId: '4',
+        contentId: testId('4'),
         user: UserFactory.anonymous(),
     });
 
     await tracker.trackContentView({
-        contentId: '5',
+        contentId: testId('5'),
         user: UserFactory.anonymous(),
     });
 
@@ -122,7 +123,7 @@ test('Track Content View', async () => {
 
 test('Track Content Category View', async () => {
     const result = await tracker.trackContentCategoryView({
-        idPath: ['c1'],
+        idPath: [testId('c1')],
         user: UserFactory.anonymous(),
     });
 
@@ -131,7 +132,7 @@ test('Track Content Category View', async () => {
 
 test('Track Brand View', async () => {
     const result = await tracker.trackBrandView({
-        brandId: 'b-1',
+        brandId: testId('b-1'),
         user: UserFactory.anonymous(),
     });
 
@@ -150,12 +151,12 @@ test('Track Search Term', async () => {
 });
 
 test('Track User Update', async () => {
-    const user = UserFactory.byTemporaryId('tempId', {
-        email: 'integrationtests@relewise.com',
+    const user = markUser(UserFactory.byTemporaryId(testId('tempId'), {
+        email: `${testId('integrationtests')}@example.com`,
         identifiers: {
-            'emailIntegrationId': 'abc',
+            'emailIntegrationId': testId('abc'),
         },
-    });
+    }));
 
     const result = await tracker.trackUserUpdate({
         user: user,
@@ -167,7 +168,7 @@ test('Track User Update', async () => {
 test('Track Product View with invalid key', async () => {
 
     await new Tracker(DATASET_ID!, '12', { serverUrl: SERVER_URL }).trackProductView({
-        productId: '2',
+        productId: testId('2'),
         user: UserFactory.anonymous(),
     }).catch((e) => {
         expect(e).toBeDefined();
@@ -202,11 +203,11 @@ test('Track Product View without id', async () => {
 test('Track Product Engagement', async () => {
     try {
         await tracker.trackProductEngagement({
-            product: { productId: "1" },
+            product: { productId: testId('1') },
             engagement: {
                 sentiment: 'Like'
             },
-            user: UserFactory.byAuthenticatedId("1"),
+            user: markUser(UserFactory.byAuthenticatedId(testId('1'))),
         });
     }
     catch (e) {

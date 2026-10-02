@@ -1,3 +1,4 @@
+import { testId } from './testData';
 
 import { Integrator, ProductCategoryUpdateBuilder } from '@relewise/integrations';
 import { Searcher, ProductCategorySearchBuilder, ProductCategorySearchRequest, UserFactory, GetProductCategoryFacet, DataValueFactory } from '../../src';
@@ -29,10 +30,11 @@ test('ProductCategorySearch', async() => {
 
 test('Facet result', async() => {
     const category = new ProductCategoryUpdateBuilder({
-        id: 'GetProductCategoryFacet test category',
+        id: testId('GetProductCategoryFacet test category'),
         kind: 'ReplaceProvidedProperties'
     })
     .data({
+        'IntegrationTestRun': DataValueFactory.string(testId('run')),
         'SomeString': DataValueFactory.string('Test String'),
         'SomeBoolean': DataValueFactory.boolean(true),
         'SomeDouble': DataValueFactory.number(100),

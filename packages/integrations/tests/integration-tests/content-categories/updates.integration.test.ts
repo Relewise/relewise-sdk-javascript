@@ -1,3 +1,4 @@
+import { testId } from '../testData';
 import { test } from '@jest/globals';
 import { ContentCategoryUpdateBuilder, Integrator, ContentCategoryAdministrativeActionBuilder } from '../../../src';
 import { DataValueFactory } from '@relewise/client';
@@ -9,13 +10,14 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Content Category', async() => {
     const category = new ContentCategoryUpdateBuilder({
-        id: '1',
+        id: testId('1'),
         kind: 'ReplaceProvidedProperties',
     })
         .displayName([
             { language: 'da', value: 'Skovle' },
         ])
         .data({
+            'IntegrationTestRun': DataValueFactory.string(testId('run')),
             'UnixTimestamp': DataValueFactory.number(unixTimeStamp),
             'Description': DataValueFactory.string('Misc. skovle'),
             'Tags': DataValueFactory.stringCollection(['outdoor', 'quality', 'good-deal']),
@@ -29,28 +31,30 @@ test('Create Content Category', async() => {
         .categoryPaths(b => b
             .path(p => p
                 .category({
-                    id: '1',
+                    id: testId('1'),
                     displayName: [{ language: 'da', value: 'Værktøj' }],
                 })
                 .category({
-                    id: '2',
+                    id: testId('2'),
                     displayName: [{ language: 'da', value: 'Udendørs' }],
                 })
                 .category({
-                    id: '3',
+                    id: testId('3'),
                     displayName: [{ language: 'da', value: 'Skovle' }],
                 })));
 
     await integrator.updateContentCategory(category.build());
 
     const enable = new ContentCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addContentCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentCategoryDataFilter('IntegrationTestRun', c => c.addEqualsCondition(DataValueFactory.string(testId('run'))))
+            .addContentCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeContentCategoryAdministrativeAction(enable.build());
 
     const disable = new ContentCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addContentCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addContentCategoryDataFilter('IntegrationTestRun', c => c.addEqualsCondition(DataValueFactory.string(testId('run'))))
+            .addContentCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeContentCategoryAdministrativeAction(disable.build());

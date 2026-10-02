@@ -1,3 +1,5 @@
+import { testId } from './testData';
+import { expectProductRecommendations } from './recommendationAssertions';
 import { ProductRecommendationRequestCollection, ProductsRecommendationCollectionBuilder, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, SearchTermPredictionBuilder, SearchTermPredictionRequest, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -15,14 +17,15 @@ const settings = {
 test('Batched Product Recommendations', async() => {
 
     const request: ProductRecommendationRequestCollection = new ProductsRecommendationCollectionBuilder()
-        .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())
-        .addRequest(new PurchasedWithProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: '1' }).build())
+        .addRequest(new ProductsViewedAfterViewingProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: testId('1') }).build())
+        .addRequest(new PurchasedWithProductBuilder(settings).setNumberOfRecommendations(1).product({ productId: testId('1') }).build())
         .build();
 
     const result = await recommender.batchProductRecommendations(request);
 
-    expect(result?.responses).not.toBe(undefined);
-    expect(result!.responses![0].recommendations?.length).toBeGreaterThan(0);
-    expect(result!.responses![1].recommendations?.length).toBeGreaterThan(0);
+    expect(result?.responses).toHaveLength(2);
+    for (const response of result?.responses ?? []) {
+        expectProductRecommendations(response);
+    }
 
 });

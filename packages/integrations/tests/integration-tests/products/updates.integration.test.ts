@@ -1,3 +1,4 @@
+import { testId } from '../testData';
 import { test, expect } from '@jest/globals';
 import { Integrator, ProductAdministrativeActionBuilder, ProductUpdateBuilder, ProductVariantBuilder } from '../../../src';
 import { DataValueFactory } from '@relewise/client';
@@ -9,7 +10,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Product', async() => {
     const product = new ProductUpdateBuilder({
-        id: '1',
+        id: testId('1'),
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -34,38 +35,38 @@ test('Create Product', async() => {
             'SomeString': DataValueFactory.string('SomeValue'),
         })
         .assortments([1, 2, 3])
-        .brand({ id: '1', displayName: 'Relewise' })
+        .brand({ id: testId('1'), displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }])
         .categoryPaths(b => b
             .path(p => p
                 .category({
-                    id: '1',
+                    id: testId('1'),
                 })
                 .category({
-                    id: '2',
+                    id: testId('2'),
                     displayName: [{ language: 'da', value: 'Udendørs' }],
                 })
                 .category({
-                    id: '3',
+                    id: testId('3'),
                     displayName: [{ language: 'da', value: 'Skovle' }],
                 }))
             .path(p => p
                 .category({
-                    id: '4',
+                    id: testId('4'),
                     displayName: [{ language: 'da', value: 'Tilbud' }],
                 })));
 
     await integrator.updateProduct(product.build());
 
     const enable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter(testId('1')).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
     await integrator.executeProductAdministrativeAction(enable.build());
 
     const disable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addProductIdFilter(testId('1')).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Disable',
     });
     await integrator.executeProductAdministrativeAction(disable.build());
@@ -73,7 +74,7 @@ test('Create Product', async() => {
 
 test('Batch create products', async() => {
     const product = new ProductUpdateBuilder({
-        id: '1',
+        id: testId('1'),
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -89,12 +90,12 @@ test('Batch create products', async() => {
             }]),
         })
         .assortments([1, 2, 3])
-        .brand({ id: '1', displayName: 'Relewise' })
+        .brand({ id: testId('1'), displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }]);
 
     const product2 = new ProductUpdateBuilder({
-        id: '2',
+        id: testId('2'),
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -110,12 +111,12 @@ test('Batch create products', async() => {
             }]),
         })
         .assortments([1, 2, 3])
-        .brand({ id: '1', displayName: 'Relewise' })
+        .brand({ id: testId('1'), displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }]);
 
     const product3 = new ProductUpdateBuilder({
-        id: '3',
+        id: testId('3'),
         productUpdateKind: 'ReplaceProvidedProperties',
     }).data({
         'objects': DataValueFactory.objectCollection([{
@@ -124,12 +125,12 @@ test('Batch create products', async() => {
     });
 
     const enable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter([testId('1'), testId('2')]).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
 
     const disable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addProductIdFilter([testId('1'), testId('2')]).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Disable',
     });
 
@@ -138,7 +139,7 @@ test('Batch create products', async() => {
 
 test('Create Product with variants', async() => {
 
-    const variant1 = new ProductVariantBuilder({ id: 'v-1' })
+    const variant1 = new ProductVariantBuilder({ id: testId('v-1') })
         .displayName([{ language: 'da', value: 'Small Sweater' }])
         .data({
             'UnixTimestamp': DataValueFactory.number(unixTimeStamp),
@@ -150,7 +151,7 @@ test('Create Product with variants', async() => {
         .specifications({ Size: 'S' })
         .build();
 
-    const variant2 = new ProductVariantBuilder({ id: 'v-2' })
+    const variant2 = new ProductVariantBuilder({ id: testId('v-2') })
         .displayName([{ language: 'da', value: 'Medium Sweater' }])
         .data({
             'UnixTimestamp': DataValueFactory.number(unixTimeStamp),
@@ -162,7 +163,7 @@ test('Create Product with variants', async() => {
         .build();
 
     const product = new ProductUpdateBuilder({
-        id: '1',
+        id: testId('1'),
         productUpdateKind: 'ReplaceProvidedProperties',
         variantUpdateKind: 'ReplaceProvidedProperties',
         replaceExistingVariants: true,

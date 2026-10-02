@@ -1,3 +1,4 @@
+import { markUser, testId } from '../testData';
 import { expect, test } from '@jest/globals';
 import { DataAccessor, UserQueryBuilder } from '../../../src';
 import { DataValueFactory, MultiCurrency, Multilingual, MultilingualDataValue, Tracker, UserFactory } from '@relewise/client';
@@ -22,9 +23,9 @@ test('Query Users when no user found', async() => {
 });
 
 test('Query Users when user found by authenticated id', async() => {
-    const authenticatedId = "some authenticated id";
+    const authenticatedId = testId('some authenticated id');
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byAuthenticatedId(authenticatedId)});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byAuthenticatedId(authenticatedId))});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))
@@ -39,9 +40,9 @@ test('Query Users when user found by authenticated id', async() => {
 });
 
 test('Query Users when user found by temporary id', async() => {
-    const temporaryId = "some temporary id";
+    const temporaryId = testId('some temporary id');
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byTemporaryId(temporaryId)});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byTemporaryId(temporaryId))});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byTemporaryId(temporaryId))
@@ -56,9 +57,9 @@ test('Query Users when user found by temporary id', async() => {
 });
 
 test('Query Users when user found by email', async() => {
-    const email = "some@email.com";
+    const email = `${testId('some')}@example.com`;
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byEmail(email)});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byEmail(email))});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byEmail(email))
@@ -74,9 +75,9 @@ test('Query Users when user found by email', async() => {
 
 test('Query Users when user found by identifier', async() => {
     const key = "SomeKey";
-    const value = "SomeValue";
+    const value = testId('SomeValue');
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byIdentifier(key, value)});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byIdentifier(key, value))});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byIdentifier(key, value))
@@ -95,12 +96,12 @@ test('Query Users when user found by identifier', async() => {
 
 test('Query Users when user found by identifier', async() => {
     const key = "SomeKey";
-    const value = "SomeValue";
+    const value = testId('SomeValue');
 
     const key2 = "SomeKey2";
-    const value2 = "SomeValue2";
+    const value2 = testId('SomeValue2');
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byIdentifiers({ [key]: value, [key2]: value2 })});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byIdentifiers({ [key]: value, [key2]: value2 }))});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byIdentifiers({ [key]: value, [key2]: value2 }))
@@ -119,11 +120,11 @@ test('Query Users when user found by identifier', async() => {
 });
 
 test('Query Users when user found by authenticated id', async() => {
-    const authenticatedId = "some authenticated id";
-    const temporaryId = "some temporary id";
+    const authenticatedId = testId('some authenticated id');
+    const temporaryId = testId('some temporary id');
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byAuthenticatedId(authenticatedId)});
-    await tracker.trackProductView({ productId: "SomeProduct", user: UserFactory.byTemporaryId(temporaryId)});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byAuthenticatedId(authenticatedId))});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: markUser(UserFactory.byTemporaryId(temporaryId))});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))
@@ -141,9 +142,9 @@ test('Query Users when user found by authenticated id', async() => {
 });
 
 test('Query Users when no language or currency provided', async() => {
-    const authenticatedId = "some authenticated id";
+    const authenticatedId = testId('some authenticated id');
 
-    const user = UserFactory.byAuthenticatedId(authenticatedId);
+    const user = markUser(UserFactory.byAuthenticatedId(authenticatedId));
 
     const multilingualKey = "multilingual";
     const multiCurrencyKey = "multiCurrency";
@@ -152,7 +153,7 @@ test('Query Users when no language or currency provided', async() => {
     user.data[multilingualKey] = DataValueFactory.multilingual([{ language: "da", value: "123" }, { language: "en", value: "456" }]);
     user.data[multiCurrencyKey] = DataValueFactory.multiCurrency([{ currency: "DKK", amount: 123 }, { currency: "EUR", amount: 123 }]);
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: user});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: user});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))
@@ -168,9 +169,9 @@ test('Query Users when no language or currency provided', async() => {
 });
 
 test('Query Users when a language is provided', async() => {
-    const authenticatedId = "some authenticated id";
+    const authenticatedId = testId('some authenticated id');
 
-    const user = UserFactory.byAuthenticatedId(authenticatedId);
+    const user = markUser(UserFactory.byAuthenticatedId(authenticatedId));
 
     const multilingualKey = "multilingual";
 
@@ -180,7 +181,7 @@ test('Query Users when a language is provided', async() => {
     user.data = {};
     user.data[multilingualKey] = DataValueFactory.multilingual([{ language: da, value: "123" }, { language: en, value: "456" }]);
 
-    await tracker.trackProductView({ productId: "SomeProduct", user: user});
+    await tracker.trackProductView({ productId: testId('SomeProduct'), user: user});
 
     const query = new UserQueryBuilder()
         .criteria(c => c.byAuthenticatedId(authenticatedId))

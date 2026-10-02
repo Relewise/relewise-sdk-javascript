@@ -24,7 +24,9 @@
   ],
   "scripts": {
     "test": "jest ./tests/unit-tests",
-    "integration-test": "jest ./tests/integration-tests",
+    "integration-test": "jest ./tests/integration-tests --runInBand",
+    "integration-seed": "jest ./tests/integration-seed.test.ts --runInBand",
+    "integration-cleanup": "jest ./tests/integration-cleanup.test.ts --runInBand",
     "lint": "eslint --ext .ts,.js ./src",
     "lint-fix": "eslint --fix --ext .ts,.js ./src",
     "dev": "rollup -c -w",

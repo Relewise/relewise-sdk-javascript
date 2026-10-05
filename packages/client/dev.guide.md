@@ -77,3 +77,5 @@ Run these commands in order with the same parameters:
     npm run integration-cleanup --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
 
 Run cleanup even if a test fails. The suite creates its own products, categories, brand, content, and tracked users. GitHub Actions supplies the API key from the `INTEGRATION_TESTS_DATASET_API_KEY` repository secret.
+
+Search indexing is asynchronous. The seed step waits for its products and content in both test languages and its product categories to become searchable. Search tests that create additional fixtures wait for their exact IDs before checking facets. These checks poll every 500 ms for up to 45 seconds and report the fixture IDs and last hit count on timeout; API errors fail immediately. Recommendation tests allow empty results because model readiness depends on historical activity.

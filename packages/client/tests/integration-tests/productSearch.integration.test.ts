@@ -1,10 +1,13 @@
+import { awaitProducts } from '../integrationReadiness';
 import { testId } from './testData';
 import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult, BrandFacetResult, Tracker, ProductDataObjectFacet } from '../../src';
 import { Integrator, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
-import { test, expect } from '@jest/globals'
+import { test, expect, jest } from '@jest/globals'
 import { fail } from 'assert';
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
+
+jest.setTimeout(90_000);
 
 const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 const integrator = new Integrator(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
@@ -64,6 +67,7 @@ test('Product search - data object facets evaluation mode', async () => {
         });
 
     await integrator.updateProduct(product.build());
+    await awaitProducts(searcher, [testId('Object facet evaluation mode test product')]);
 
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f => f.addProductDataObjectFacet(
@@ -142,6 +146,7 @@ test('Facet result', async () => {
         .variants([variant]);
 
     await integrator.updateProduct(product.build());
+    await awaitProducts(searcher, [testId('GetProductFacet test product')]);
 
     const request: ProductSearchRequest = baseProductBuilder()
         .setSelectedProductProperties({ allData: true })
@@ -319,6 +324,7 @@ test('ProductSearch with sorted facet', async () => {
         productUpdateKind: 'ReplaceProvidedProperties',
     }).categoryPaths(c => c.path(p => p.category({ id: testId('2'), displayName: [{ language: 'da', value: "name 2" }] })));
     await integrator.updateProduct(product3.build());
+    await awaitProducts(searcher, ['Cat Product #1', 'Cat Product #2', 'Cat Product #3'].map(testId));
 
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f =>

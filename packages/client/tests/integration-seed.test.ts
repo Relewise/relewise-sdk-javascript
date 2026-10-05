@@ -1,6 +1,7 @@
-import { test, expect } from '@jest/globals';
+import { awaitProducts, awaitContents, awaitProductCategories } from './integrationReadiness';
+import { test } from '@jest/globals';
 import { BrandUpdateBuilder, ContentCategoryUpdateBuilder, ContentUpdateBuilder, Integrator, ProductCategoryUpdateBuilder, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
-import { DataValueFactory, ProductSearchBuilder, Searcher, Tracker, UserFactory } from '../src';
+import { DataValueFactory, Searcher, Tracker, UserFactory } from '../src';
 import { markUser, testId } from './integration-tests/testData';
 
 const { npm_config_API_KEY: apiKey, npm_config_DATASET_ID: datasetId, npm_config_SERVER_URL: serverUrl } = process.env;
@@ -73,14 +74,11 @@ test('create the client integration test dataset fixtures', async () => {
     await tracker.trackContentView({ contentId: testId('1'), user: relatedViewer });
     await tracker.trackContentView({ contentId: testId('3'), user: relatedViewer });
 
-    const request = new ProductSearchBuilder({ language: 'da', currency: 'DKK', displayedAtLocation: 'integration test', user: UserFactory.anonymous() })
-        .filters(f => f.addProductIdFilter([testId('1'), testId('2'), testId('3')]))
-        .build();
-    let hits = 0;
-    for (let attempt = 0; attempt < 30; attempt++) {
-        hits = (await searcher.searchProducts(request))?.hits ?? 0;
-        if (hits >= 3) break;
-        await new Promise(resolve => setTimeout(resolve, 2_000));
-    }
-    expect(hits).toBe(3);
+    await Promise.all([
+        awaitProducts(searcher, ['1', '2', '3'].map(testId)),
+        awaitProducts(searcher, ['1', '2', '3'].map(testId), 'en-US'),
+        awaitContents(searcher, ['1', '2', '3'].map(testId)),
+        awaitContents(searcher, ['1', '2', '3'].map(testId), 'en-US'),
+        awaitProductCategories(searcher, ['1', '2', '3', '4'].map(testId)),
+    ]);
 }, 120_000);

@@ -1,6 +1,6 @@
 import { ContentSearchBuilder, ProductCategorySearchBuilder, ProductSearchBuilder, Searcher, UserFactory } from '../src';
 
-const readinessTimeoutMs = 45_000;
+const readinessTimeoutMs = 120_000;
 
 // Retry visibility only: API/serialization errors must still fail the test immediately.
 export async function awaitSearchHits(

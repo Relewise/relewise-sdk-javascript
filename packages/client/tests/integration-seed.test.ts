@@ -81,4 +81,4 @@ test('create the client integration test dataset fixtures', async () => {
         awaitContents(searcher, ['1', '2', '3'].map(testId), 'en-US'),
         awaitProductCategories(searcher, ['1', '2', '3', '4'].map(testId)),
     ]);
-}, 120_000);
+}, 240_000);

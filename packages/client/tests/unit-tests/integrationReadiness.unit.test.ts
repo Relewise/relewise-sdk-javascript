@@ -17,8 +17,8 @@ test('reports fixture context and last hit count when indexing times out', async
     jest.useFakeTimers();
     const search = jest.fn<() => Promise<{ hits: number }>>().mockResolvedValue({ hits: 1 });
     const waiting = expect(awaitSearchHits('Products: run-1, run-2', search, 2))
-        .rejects.toThrow('Products: run-1, run-2 was not indexed within 45000ms: expected 2 hits, last observed 1');
-    await jest.advanceTimersByTimeAsync(45_000);
+        .rejects.toThrow('Products: run-1, run-2 was not indexed within 120000ms: expected 2 hits, last observed 1');
+    await jest.advanceTimersByTimeAsync(120_000);
     await waiting;
 });
 

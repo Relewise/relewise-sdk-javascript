@@ -75,6 +75,7 @@ test('create the client integration test dataset fixtures', async () => {
     await tracker.trackContentView({ contentId: testId('1'), user: relatedViewer });
     await tracker.trackContentView({ contentId: testId('3'), user: relatedViewer });
 
+    // Synchronize after all entity and behavior writes, then verify the exact fixtures are visible.
     await syncIntegrationSearchIndex();
 
     await Promise.all([

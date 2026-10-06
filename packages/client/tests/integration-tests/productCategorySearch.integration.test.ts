@@ -46,6 +46,7 @@ test('Facet result', async() => {
     });
 
     await integrator.updateProductCategory(category.build());
+    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
     await syncIntegrationSearchIndex();
     await awaitProductCategories(searcher, [testId('GetProductCategoryFacet test category')]);
 

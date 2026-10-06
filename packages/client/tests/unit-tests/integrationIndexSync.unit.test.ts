@@ -3,6 +3,7 @@ import { syncIntegrationSearchIndex } from '../integrationIndexSync';
 
 const originalFetch = globalThis.fetch;
 const originalEnvironment = { ...process.env };
+// Fake HTTP responses exercise ordering and failures without calling a real dataset.
 const fetchMock = jest.fn<typeof fetch>();
 
 beforeEach(() => {
@@ -19,6 +20,7 @@ afterEach(() => {
 });
 
 test('does not continue until the rebuild response has completed', async () => {
+    // Hold the response open to prove synchronization cannot finish before rebuild completes.
     let completeRebuild!: (response: Response) => void;
     fetchMock.mockImplementationOnce(() => new Promise(resolve => { completeRebuild = resolve; }))
         .mockResolvedValue(new Response(JSON.stringify({ refreshTimeMs: 5 }), { status: 200 }));
@@ -51,6 +53,7 @@ test('rejects a successful HTTP response that is not a rebuild response', async 
 });
 
 test('does not continue until the presorter refresh completes', async () => {
+    // Rebuild success must still wait for the separate candidate-cache refresh.
     let completeRefresh!: (response: Response) => void;
     fetchMock.mockResolvedValueOnce(new Response(JSON.stringify({ rebuildTimeMs: 12 }), { status: 200 }))
         .mockImplementationOnce(() => new Promise(resolve => { completeRefresh = resolve; }));

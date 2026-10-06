@@ -68,6 +68,7 @@ test('Product search - data object facets evaluation mode', async () => {
         });
 
     await integrator.updateProduct(product.build());
+    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
     await syncIntegrationSearchIndex();
     await awaitProducts(searcher, [testId('Object facet evaluation mode test product')]);
 
@@ -148,6 +149,7 @@ test('Facet result', async () => {
         .variants([variant]);
 
     await integrator.updateProduct(product.build());
+    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
     await syncIntegrationSearchIndex();
     await awaitProducts(searcher, [testId('GetProductFacet test product')]);
 
@@ -327,6 +329,7 @@ test('ProductSearch with sorted facet', async () => {
         productUpdateKind: 'ReplaceProvidedProperties',
     }).categoryPaths(c => c.path(p => p.category({ id: testId('2'), displayName: [{ language: 'da', value: "name 2" }] })));
     await integrator.updateProduct(product3.build());
+    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
     await syncIntegrationSearchIndex();
     await awaitProducts(searcher, ['Cat Product #1', 'Cat Product #2', 'Cat Product #3'].map(testId));
 

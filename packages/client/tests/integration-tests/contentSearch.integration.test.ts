@@ -35,6 +35,7 @@ test('Facet result', async() => {
         .assortments([1, 2, 3]);
 
     await integrator.updateContent(content.build());
+    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
     await syncIntegrationSearchIndex();
     await awaitContents(searcher, [testId('GetContentFacet test content')]);
     

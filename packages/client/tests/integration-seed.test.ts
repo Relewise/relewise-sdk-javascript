@@ -1,3 +1,4 @@
+import { syncIntegrationSearchIndex } from './integrationIndexSync';
 import { awaitProducts, awaitContents, awaitProductCategories } from './integrationReadiness';
 import { test } from '@jest/globals';
 import { BrandUpdateBuilder, ContentCategoryUpdateBuilder, ContentUpdateBuilder, Integrator, ProductCategoryUpdateBuilder, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
@@ -74,6 +75,8 @@ test('create the client integration test dataset fixtures', async () => {
     await tracker.trackContentView({ contentId: testId('1'), user: relatedViewer });
     await tracker.trackContentView({ contentId: testId('3'), user: relatedViewer });
 
+    await syncIntegrationSearchIndex();
+
     await Promise.all([
         awaitProducts(searcher, ['1', '2', '3'].map(testId)),
         awaitProducts(searcher, ['1', '2', '3'].map(testId), 'en-US'),
@@ -81,4 +84,4 @@ test('create the client integration test dataset fixtures', async () => {
         awaitContents(searcher, ['1', '2', '3'].map(testId), 'en-US'),
         awaitProductCategories(searcher, ['1', '2', '3', '4'].map(testId)),
     ]);
-}, 240_000);
+}, 360_000);

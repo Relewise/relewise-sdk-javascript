@@ -7,7 +7,7 @@ import { test, expect, jest } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
-jest.setTimeout(300_000);
+jest.setTimeout(420_000);
 
 const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 const integrator = new Integrator(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });

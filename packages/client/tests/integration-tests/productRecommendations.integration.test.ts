@@ -51,7 +51,6 @@ test('ProductsViewedAfterViewingProduct with all conditions', async() => {
     const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(recommendationBuilder.build());
 
     expect(result).toBeDefined();
-    expect(result!.recommendations?.length).toBeGreaterThan(0);
     expect(result!.recommendations).toHaveLength(0);
 });
 
@@ -76,7 +75,6 @@ test('Filter on products in cart', async() => {
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
 
     expect(result).toBeDefined();
-    expect(result!.recommendations?.length).toBeGreaterThan(0);
     expect(result!.recommendations).toHaveLength(0);
 });
 

@@ -175,3 +175,18 @@ test('Create Product with variants', async() => {
 
     await integrator.updateProduct(product.build());
 });
+
+test('Delete a disposable product', async () => {
+    const id = testId('delete-product');
+    await integrator.updateProduct(new ProductUpdateBuilder({
+        id,
+        productUpdateKind: 'ReplaceProvidedProperties',
+    }).displayName([{ language: 'da', value: 'Disposable delete test product' }]).build());
+
+    const result = await integrator.executeProductAdministrativeAction(new ProductAdministrativeActionBuilder({
+        filters: f => f.addProductIdFilter(id),
+        productUpdateKind: 'Delete',
+        variantUpdateKind: 'Delete',
+    }).build());
+    expect(result).toBeUndefined();
+});

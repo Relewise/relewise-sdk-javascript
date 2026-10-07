@@ -11,7 +11,7 @@ test('remove integrations suite entities', async () => {
     await integrator.executeProductAdministrativeAction(new ProductAdministrativeActionBuilder({
         productUpdateKind: 'Delete',
         variantUpdateKind: 'Delete',
-        filters: f => f.addProductIdFilter(['1', '2', '3'].map(testId)),
+        filters: f => f.addProductIdFilter(['1', '2', '3', 'delete-product'].map(testId)),
     }).build());
     await integrator.executeContentAdministrativeAction(new ContentAdministrativeActionBuilder({
         kind: 'Delete',

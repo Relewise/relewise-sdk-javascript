@@ -1,5 +1,7 @@
 import { afterEach, expect, jest, test } from '@jest/globals';
-import { awaitSearchHits } from '../integrationReadiness';
+import { awaitProducts, awaitSearchHits } from '../integrationReadiness';
+import { Searcher } from '../../src';
+import { fixtureRevision, fixtureRevisionKey } from '../integrationFixtures';
 
 afterEach(() => { jest.useRealTimers(); });
 
@@ -26,4 +28,13 @@ test('does not retry API failures as indexing delays', async () => {
     const search = jest.fn<() => Promise<undefined>>().mockRejectedValue(new Error('Unauthorized'));
     await expect(awaitSearchHits('run products', search, 3)).rejects.toThrow('Unauthorized');
     expect(search).toHaveBeenCalledTimes(1);
+});
+
+test('product readiness scopes results to both fixture IDs and the current revision', async () => {
+    const searchProducts = jest.fn<Searcher['searchProducts']>().mockResolvedValue({ hits: 1 } as any);
+    await awaitProducts({ searchProducts } as unknown as Searcher, ['persistent-product']);
+    const filters = JSON.stringify(searchProducts.mock.calls[0][0].filters);
+    expect(filters).toContain('persistent-product');
+    expect(filters).toContain(fixtureRevisionKey);
+    expect(filters).toContain(JSON.stringify(fixtureRevision));
 });

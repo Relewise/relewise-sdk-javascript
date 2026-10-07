@@ -68,7 +68,7 @@ npm publish --access public
 
 ### Integrations
 
-Use the dedicated JavaScript SDK integration dataset (`d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f`) on `https://sandbox-api.relewise.com/`. Set `DATASET_ID`, `SERVER_URL`, and a dataset API key in `API_KEY`. Set `TEST_RUN_ID` to a unique value for each run; it prefixes fixture IDs and marks users for cleanup.
+Use the dedicated JavaScript SDK integration dataset (`d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f`) on `https://sandbox-api.relewise.com/`. Set `DATASET_ID`, `SERVER_URL`, and a dataset API key in `API_KEY`. Set `TEST_RUN_ID` to a unique value for each run; it isolates transient users and order identifiers. Catalog fixture IDs use a stable `javascript-sdk-client-` prefix.
 
 Run these commands in order with the same parameters:
 
@@ -76,6 +76,8 @@ Run these commands in order with the same parameters:
     npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
     npm run integration-cleanup --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
 
-Run cleanup even if a test fails. The suite creates its own products, categories, brand, content, and tracked users. GitHub Actions supplies the API key from the `INTEGRATION_TESTS_DATASET_API_KEY` repository secret.
+Run cleanup even if a test fails. It removes only users marked for the current run. Products, content, categories, the brand, and recommendation seed users remain available for subsequent runs. The integrations package uses a separate run-specific namespace for disposable update, enable/disable, and delete tests, so its cleanup cannot remove the client catalog.
 
-After seeding, the suite calls the synchronous UI RebuildSearchIndexRequest for the configured default index, using the master API key and a 120-second request timeout. This bypasses automatic rebuild backoff. The suite then synchronously calls RefreshPresorterRequest with Fill, Popular, and Fallback enabled, since termless content search uses presorted candidates. Each operation has a 120-second timeout and completes before visibility checks start. Search tests that create additional fixtures also rebuild before checking visibility. The seed step waits for its products and content in both test languages and its product categories to become searchable. Search tests that create additional fixtures wait for their exact IDs before checking facets. These checks poll every 500 ms for up to 120 seconds and report the fixture IDs and last hit count on timeout; API errors fail immediately. Recommendation tests allow empty results because model readiness depends on historical activity.
+The seed step upserts all search and facet fixtures through the public update API, including fixtures previously created inside individual tests. It restores expected properties before checking readiness; search tests then read those fixtures without changing them. Increment the fixture revision in `tests/integrationFixtures.ts` whenever expected fixture properties change. Readiness searches require both the exact IDs and the current revision in both test languages where applicable. They use normal indexing and candidate-cache propagation, poll every 500 ms for up to 120 seconds, and fail immediately on API errors. An initial seed or a fixture revision change may need a later retry if normal indexing takes longer. Recommendation tests allow empty results because model readiness depends on historical activity.
+
+GitHub Actions supplies the API key from the `INTEGRATION_TESTS_DATASET_API_KEY` repository secret. Tests use public SDK operations and do not call internal index or cache endpoints. Workflow concurrency serializes runs against the shared dataset. Do not run local integration tests concurrently with CI or another local run using this dataset.

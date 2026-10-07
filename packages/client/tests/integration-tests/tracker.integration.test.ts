@@ -1,4 +1,4 @@
-import { markUser, testId } from './testData';
+import { disposableId, markUser, testId } from './testData';
 import { error } from 'console';
 import { DataValueFactory, ProblemDetailsError, Tracker, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
@@ -151,10 +151,10 @@ test('Track Search Term', async () => {
 });
 
 test('Track User Update', async () => {
-    const user = markUser(UserFactory.byTemporaryId(testId('tempId'), {
-        email: `${testId('integrationtests')}@example.com`,
+    const user = markUser(UserFactory.byTemporaryId(disposableId('tempId'), {
+        email: `${disposableId('integrationtests')}@example.com`,
         identifiers: {
-            'emailIntegrationId': testId('abc'),
+            'emailIntegrationId': disposableId('abc'),
         },
     }));
 
@@ -207,7 +207,7 @@ test('Track Product Engagement', async () => {
             engagement: {
                 sentiment: 'Like'
             },
-            user: markUser(UserFactory.byAuthenticatedId(testId('1'))),
+            user: markUser(UserFactory.byAuthenticatedId(disposableId('1'))),
         });
     }
     catch (e) {

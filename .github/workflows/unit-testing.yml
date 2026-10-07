@@ -11,6 +11,11 @@ env:
   npm_config_DATASET_ID: d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f
   npm_config_SERVER_URL: https://sandbox-api.relewise.com/
 
+# All branches use the same persistent search fixtures in the sandbox dataset.
+concurrency:
+  group: javascript-sdk-integration-dataset
+  cancel-in-progress: false
+
 jobs:
   test-sdk:
     needs: test-integrations

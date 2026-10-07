@@ -1,7 +1,5 @@
-import { syncIntegrationSearchIndex } from '../integrationIndexSync';
-import { awaitContents } from '../integrationReadiness';
 import { testId } from './testData';
-import { ContentUpdateBuilder, Integrator } from '@relewise/integrations';
+import { contentFixtureNames } from '../integrationFixtures';
 import { Searcher, GetContentFacet, UserFactory, CategoryFacetResult, ContentSearchBuilder, ContentSearchRequest, ContentAssortmentFacet, ContentDataStringValueFacetResult, DataValueFactory } from '../../src';
 import { test, expect, jest } from '@jest/globals'
 
@@ -10,7 +8,6 @@ const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_conf
 jest.setTimeout(420_000);
 
 const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
-const integrator = new Integrator(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
 function baseContentBuilder() {
     return new ContentSearchBuilder({
@@ -18,27 +15,10 @@ function baseContentBuilder() {
         currency: 'DKK',
         displayedAtLocation: 'integration test',
         user: UserFactory.anonymous(),
-    });
+    }).filters(f => f.addContentIdFilter(contentFixtureNames.map(testId)));
 };
 
 test('Facet result', async() => {
-    const content = new ContentUpdateBuilder({
-        id: testId('GetContentFacet test content'),
-        updateKind: 'ReplaceProvidedProperties'
-    })
-        .data({
-            'SomeString': DataValueFactory.string('Really nice product'),
-            'SomeDouble': DataValueFactory.number(1),   
-            'SomeBoolean': DataValueFactory.boolean(true),
-            'SomeObject': DataValueFactory.object({ })   
-        })
-        .assortments([1, 2, 3]);
-
-    await integrator.updateContent(content.build());
-    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
-    await syncIntegrationSearchIndex();
-    await awaitContents(searcher, [testId('GetContentFacet test content')]);
-    
     const request: ContentSearchRequest = baseContentBuilder()
         .facets(f => f
             .addContentAssortmentFacet()

@@ -1,4 +1,5 @@
 import { ContentSearchBuilder, ProductCategorySearchBuilder, ProductSearchBuilder, Searcher, UserFactory } from '../src';
+import { fixtureRevision, fixtureRevisionKey } from './integrationFixtures';
 
 const readinessTimeoutMs = 120_000;
 
@@ -27,18 +28,21 @@ const settings = (language: string) => ({
 
 export async function awaitProducts(searcher: Searcher, ids: string[], language = 'da'): Promise<void> {
     const request = new ProductSearchBuilder(settings(language))
-        .filters(f => f.addProductIdFilter(ids)).build();
+        .filters(f => f.addProductIdFilter(ids)
+            .addProductDataFilter(fixtureRevisionKey, c => c.addEqualsCondition(fixtureRevision))).build();
     await awaitSearchHits(`Products (${language}): ${ids.join(', ')}`, () => searcher.searchProducts(request), ids.length);
 }
 
 export async function awaitContents(searcher: Searcher, ids: string[], language = 'da'): Promise<void> {
     const request = new ContentSearchBuilder(settings(language))
-        .filters(f => f.addContentIdFilter(ids)).build();
+        .filters(f => f.addContentIdFilter(ids)
+            .addContentDataFilter(fixtureRevisionKey, c => c.addEqualsCondition(fixtureRevision))).build();
     await awaitSearchHits(`Content (${language}): ${ids.join(', ')}`, () => searcher.searchContents(request), ids.length);
 }
 
 export async function awaitProductCategories(searcher: Searcher, ids: string[]): Promise<void> {
     const request = new ProductCategorySearchBuilder(settings('da'))
-        .filters(f => f.addProductCategoryIdFilter('ImmediateParent', ids)).build();
+        .filters(f => f.addProductCategoryIdFilter('ImmediateParent', ids)
+            .addProductCategoryDataFilter(fixtureRevisionKey, c => c.addEqualsCondition(fixtureRevision))).build();
     await awaitSearchHits(`Product categories: ${ids.join(', ')}`, () => searcher.searchProductCategories(request), ids.length);
 }

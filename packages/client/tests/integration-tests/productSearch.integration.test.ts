@@ -1,8 +1,6 @@
-import { syncIntegrationSearchIndex } from '../integrationIndexSync';
-import { awaitProducts } from '../integrationReadiness';
 import { testId } from './testData';
+import { productFixtureNames } from '../integrationFixtures';
 import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, ValueSelectorFactory, DataValueFactory, GetProductFacet, ProductAssortmentFacet, ProductDataStringValueFacetResult, CategoryFacetResult, BrandFacetResult, Tracker, ProductDataObjectFacet } from '../../src';
-import { Integrator, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { test, expect, jest } from '@jest/globals'
 import { fail } from 'assert';
 
@@ -11,7 +9,6 @@ const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_conf
 jest.setTimeout(420_000);
 
 const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
-const integrator = new Integrator(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
 function baseProductBuilder() {
     return new ProductSearchBuilder({
@@ -19,7 +16,7 @@ function baseProductBuilder() {
         currency: 'DKK',
         displayedAtLocation: 'integration test',
         user: UserFactory.anonymous(),
-    });
+    }).filters(f => f.addProductIdFilter(productFixtureNames.map(testId)));
 };
 
 test('ProductSearch: Relevance modifier without conditions', async () => {
@@ -56,22 +53,6 @@ test('Product search - data object facets', async () => {
 });
 
 test('Product search - data object facets evaluation mode', async () => {
-
-    const product = new ProductUpdateBuilder({
-        id: testId('Object facet evaluation mode test product'),
-        productUpdateKind: 'ReplaceProvidedProperties',
-    })
-        .data({
-            'ObjectForFacet': DataValueFactory.object({
-                'Key': DataValueFactory.string('data')
-            })
-        });
-
-    await integrator.updateProduct(product.build());
-    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
-    await syncIntegrationSearchIndex();
-    await awaitProducts(searcher, [testId('Object facet evaluation mode test product')]);
-
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f => f.addProductDataObjectFacet(
             'ObjectForFacet',
@@ -132,27 +113,6 @@ test('Retail Media search', async () => {
 });
 
 test('Facet result', async () => {
-    const variant = new ProductVariantBuilder({ id: testId('GetProductFacet test variant') })
-        .specifications({ SomeSpecification: 'S' })
-        .build();
-
-    const product = new ProductUpdateBuilder({
-        id: testId('GetProductFacet test product'),
-        productUpdateKind: 'ReplaceProvidedProperties',
-    })
-        .data({
-            'SomeString': DataValueFactory.string('Really nice product'),
-            'SomeDouble': DataValueFactory.number(1),
-            'SomeBoolean': DataValueFactory.boolean(true),
-            'SomeObject': DataValueFactory.object({})
-        })
-        .variants([variant]);
-
-    await integrator.updateProduct(product.build());
-    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
-    await syncIntegrationSearchIndex();
-    await awaitProducts(searcher, [testId('GetProductFacet test product')]);
-
     const request: ProductSearchRequest = baseProductBuilder()
         .setSelectedProductProperties({ allData: true })
         .facets(f => f
@@ -311,28 +271,6 @@ test('Aborting a search throws the expected error', async () => {
 });
 
 test('ProductSearch with sorted facet', async () => {
-
-    const product = new ProductUpdateBuilder({
-        id: testId('Cat Product #1'),
-        productUpdateKind: 'ReplaceProvidedProperties',
-    }).categoryPaths(c => c.path(p => p.category({ id: testId('1'), displayName: [{ language: 'da', value: "name" }] })));
-    await integrator.updateProduct(product.build());
-
-    const product2 = new ProductUpdateBuilder({
-        id: testId('Cat Product #2'),
-        productUpdateKind: 'ReplaceProvidedProperties',
-    }).categoryPaths(c => c.path(p => p.category({ id: testId('1'), displayName: [{ language: 'da', value: "name" }] })));
-    await integrator.updateProduct(product2.build());
-
-    const product3 = new ProductUpdateBuilder({
-        id: testId('Cat Product #3'),
-        productUpdateKind: 'ReplaceProvidedProperties',
-    }).categoryPaths(c => c.path(p => p.category({ id: testId('2'), displayName: [{ language: 'da', value: "name 2" }] })));
-    await integrator.updateProduct(product3.build());
-    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
-    await syncIntegrationSearchIndex();
-    await awaitProducts(searcher, ['Cat Product #1', 'Cat Product #2', 'Cat Product #3'].map(testId));
-
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f =>
             f.addCategoryFacet("ImmediateParent", null, b => b.take(2).sortByHits())

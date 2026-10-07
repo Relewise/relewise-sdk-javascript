@@ -1,20 +1,20 @@
-import { syncIntegrationSearchIndex } from './integrationIndexSync';
 import { awaitProducts, awaitContents, awaitProductCategories } from './integrationReadiness';
+import { contentFixtureNames, fixtureData, productCategoryFixtureNames, productFixtureNames } from './integrationFixtures';
 import { test } from '@jest/globals';
 import { BrandUpdateBuilder, ContentCategoryUpdateBuilder, ContentUpdateBuilder, Integrator, ProductCategoryUpdateBuilder, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { DataValueFactory, Searcher, Tracker, UserFactory } from '../src';
-import { markUser, testId } from './integration-tests/testData';
+import { disposableId, testId } from './integration-tests/testData';
 
 const { npm_config_API_KEY: apiKey, npm_config_DATASET_ID: datasetId, npm_config_SERVER_URL: serverUrl } = process.env;
 const integrator = new Integrator(datasetId!, apiKey!, { serverUrl });
 const tracker = new Tracker(datasetId!, apiKey!, { serverUrl });
 const searcher = new Searcher(datasetId!, apiKey!, { serverUrl });
 
-const marker = { IntegrationTestRun: DataValueFactory.string(testId('run')) };
-const viewer = markUser(UserFactory.byTemporaryId(testId('recommendation-viewer')));
-const relatedViewer = markUser(UserFactory.byTemporaryId(testId('related-viewer')));
+const marker = fixtureData;
+const viewer = UserFactory.byTemporaryId(testId('recommendation-viewer'));
+const relatedViewer = UserFactory.byTemporaryId(testId('related-viewer'));
 
-test('create the client integration test dataset fixtures', async () => {
+test('upsert the persistent client integration test fixtures', async () => {
     await integrator.updateBrand(new BrandUpdateBuilder({ id: testId('brand-1'), updateKind: 'ReplaceProvidedProperties' })
         .displayName(testId('Relewise')).data(marker).build());
 
@@ -32,7 +32,10 @@ test('create the client integration test dataset fixtures', async () => {
         const objectVariant = new ProductVariantBuilder({ id: testId(`variant-object-${id}`) })
             .data({ availableMarkets: DataValueFactory.object({ US: DataValueFactory.object({ ValidFromDate: DataValueFactory.number(1693526400) }) }) })
             .build();
-        const product = new ProductUpdateBuilder({ id: testId(id), productUpdateKind: 'ReplaceProvidedProperties' })
+        const product = new ProductUpdateBuilder({
+            id: testId(id), productUpdateKind: 'ReplaceProvidedProperties',
+            variantUpdateKind: 'ReplaceProvidedProperties', replaceExistingVariants: true,
+        })
             .displayName([{ language: 'da', value: testId(`Product ${id}`) }, { language: 'en-US', value: testId(`Product ${id}`) }])
             .data({
                 ...marker,
@@ -58,14 +61,96 @@ test('create the client integration test dataset fixtures', async () => {
         await integrator.updateContent(content.build());
     }
 
+    {
+        const product = new ProductUpdateBuilder({
+            id: testId('Object facet evaluation mode test product'),
+            productUpdateKind: 'ReplaceProvidedProperties',
+        })
+            .data({
+                ...marker,
+                'ObjectForFacet': DataValueFactory.object({
+                    'Key': DataValueFactory.string('data')
+                })
+            });
+        await integrator.updateProduct(product.build());
+    }
+
+    {
+        const facetVariant = new ProductVariantBuilder({ id: testId('GetProductFacet test variant') })
+            .specifications({ SomeSpecification: 'S' })
+            .build();
+        const product = new ProductUpdateBuilder({
+            id: testId('GetProductFacet test product'),
+            productUpdateKind: 'ReplaceProvidedProperties',
+        })
+            .data({
+                ...marker,
+                'SomeString': DataValueFactory.string('Really nice product'),
+                'SomeDouble': DataValueFactory.number(1),
+                'SomeBoolean': DataValueFactory.boolean(true),
+                'SomeObject': DataValueFactory.object({})
+            })
+            .variants([facetVariant]);
+        await integrator.updateProduct(product.build());
+    }
+
+    {
+        const product = new ProductUpdateBuilder({
+            id: testId('Cat Product #1'),
+            productUpdateKind: 'ReplaceProvidedProperties',
+        }).data(marker).categoryPaths(c => c.path(p => p.category({ id: testId('1') })));
+        await integrator.updateProduct(product.build());
+        const product2 = new ProductUpdateBuilder({
+            id: testId('Cat Product #2'),
+            productUpdateKind: 'ReplaceProvidedProperties',
+        }).data(marker).categoryPaths(c => c.path(p => p.category({ id: testId('1') })));
+        await integrator.updateProduct(product2.build());
+        const product3 = new ProductUpdateBuilder({
+            id: testId('Cat Product #3'),
+            productUpdateKind: 'ReplaceProvidedProperties',
+        }).data(marker).categoryPaths(c => c.path(p => p.category({ id: testId('2') })));
+        await integrator.updateProduct(product3.build());
+    }
+
+    {
+        const content = new ContentUpdateBuilder({
+            id: testId('GetContentFacet test content'),
+            updateKind: 'ReplaceProvidedProperties'
+        })
+            .data({
+                ...marker,
+                'SomeString': DataValueFactory.string('Really nice product'),
+                'SomeDouble': DataValueFactory.number(1),
+                'SomeBoolean': DataValueFactory.boolean(true),
+                'SomeObject': DataValueFactory.object({})
+            })
+            .assortments([1, 2, 3]);
+        await integrator.updateContent(content.build());
+    }
+
+    {
+        const category = new ProductCategoryUpdateBuilder({
+            id: testId('GetProductCategoryFacet test category'),
+            kind: 'ReplaceProvidedProperties'
+        })
+            .data({
+                ...marker,
+                'SomeString': DataValueFactory.string('Test String'),
+                'SomeBoolean': DataValueFactory.boolean(true),
+                'SomeDouble': DataValueFactory.number(100),
+                'SomeObject': DataValueFactory.object({})
+            });
+        await integrator.updateProductCategory(category.build());
+    }
+
     await tracker.trackOrder({
         lineItems: [
             { productId: testId('1'), quantity: 1, lineTotal: 100 },
             { productId: testId('2'), quantity: 1, lineTotal: 100 },
         ],
         subtotal: { amount: 200, currency: 'DKK' },
-        orderNumber: testId('order'),
-        trackingNumber: testId('tracking'),
+        orderNumber: disposableId('order'),
+        trackingNumber: disposableId('tracking'),
         user: viewer,
     });
     await tracker.trackProductView({ productId: testId('1'), user: viewer });
@@ -75,14 +160,13 @@ test('create the client integration test dataset fixtures', async () => {
     await tracker.trackContentView({ contentId: testId('1'), user: relatedViewer });
     await tracker.trackContentView({ contentId: testId('3'), user: relatedViewer });
 
-    // Synchronize after all entity and behavior writes, then verify the exact fixtures are visible.
-    await syncIntegrationSearchIndex();
+    // Wait for normal indexing and candidate-cache propagation through public search APIs.
 
     await Promise.all([
-        awaitProducts(searcher, ['1', '2', '3'].map(testId)),
+        awaitProducts(searcher, productFixtureNames.map(testId)),
         awaitProducts(searcher, ['1', '2', '3'].map(testId), 'en-US'),
-        awaitContents(searcher, ['1', '2', '3'].map(testId)),
+        awaitContents(searcher, contentFixtureNames.map(testId)),
         awaitContents(searcher, ['1', '2', '3'].map(testId), 'en-US'),
-        awaitProductCategories(searcher, ['1', '2', '3', '4'].map(testId)),
+        awaitProductCategories(searcher, productCategoryFixtureNames.map(testId)),
     ]);
 }, 480_000);

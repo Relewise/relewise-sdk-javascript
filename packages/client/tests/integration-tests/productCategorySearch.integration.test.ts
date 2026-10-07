@@ -1,8 +1,6 @@
-import { syncIntegrationSearchIndex } from '../integrationIndexSync';
-import { awaitProductCategories } from '../integrationReadiness';
 import { testId } from './testData';
+import { productCategoryFixtureNames } from '../integrationFixtures';
 
-import { Integrator, ProductCategoryUpdateBuilder } from '@relewise/integrations';
 import { Searcher, ProductCategorySearchBuilder, ProductCategorySearchRequest, UserFactory, GetProductCategoryFacet, DataValueFactory } from '../../src';
 import { test, expect, jest } from '@jest/globals'
 
@@ -11,7 +9,6 @@ const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_conf
 jest.setTimeout(420_000);
 
 const searcher = new Searcher(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
-const integrator = new Integrator(DATASET_ID!, API_KEY!, { serverUrl: SERVER_URL });
 
 function baseProductCategoryBuilder() {
     return new ProductCategorySearchBuilder({
@@ -19,7 +16,7 @@ function baseProductCategoryBuilder() {
         currency: 'DKK',
         displayedAtLocation: 'integration test',
         user: UserFactory.anonymous(),
-    });
+    }).filters(f => f.addProductCategoryIdFilter('ImmediateParent', productCategoryFixtureNames.map(testId)));
 };
 
 test('ProductCategorySearch', async() => {
@@ -33,23 +30,6 @@ test('ProductCategorySearch', async() => {
 });
 
 test('Facet result', async() => {
-    const category = new ProductCategoryUpdateBuilder({
-        id: testId('GetProductCategoryFacet test category'),
-        kind: 'ReplaceProvidedProperties'
-    })
-    .data({
-        'IntegrationTestRun': DataValueFactory.string(testId('run')),
-        'SomeString': DataValueFactory.string('Test String'),
-        'SomeBoolean': DataValueFactory.boolean(true),
-        'SomeDouble': DataValueFactory.number(100),
-        'SomeObject': DataValueFactory.object({})
-    });
-
-    await integrator.updateProductCategory(category.build());
-    // This test adds fixtures after the shared seed; synchronize them before checking visibility.
-    await syncIntegrationSearchIndex();
-    await awaitProductCategories(searcher, [testId('GetProductCategoryFacet test category')]);
-
     const request: ProductCategorySearchRequest = baseProductCategoryBuilder()
         .facets(f => f
             .addProductCategoryAssortmentFacet()

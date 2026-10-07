@@ -75,5 +75,4 @@ Run these commands in order with the same parameters:
     npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
     npm run integration-cleanup --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/ --TEST_RUN_ID=...
 
-Run cleanup even if a test fails. The suite creates its own category and brand fixtures and deletes its products, content, companies, categories, brands, and tracked users. GitHub Actions supplies the API key from the `INTEGRATION_TESTS_DATASET_API_KEY` repository secret.
-
+Run cleanup even if a test fails. This write-focused suite uses disposable run-specific entities for update, enable/disable, and delete tests. It creates its own category and brand fixtures and deletes its products, content, companies, categories, brands, and tracked users. Its IDs are separate from the persistent catalog owned by the client search suite; cleanup must never delete that catalog. GitHub Actions supplies the API key from the `INTEGRATION_TESTS_DATASET_API_KEY` repository secret.

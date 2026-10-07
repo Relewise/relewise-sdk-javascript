@@ -1,14 +1,15 @@
-import { awaitProducts, awaitContents, awaitProductCategories } from './integrationReadiness';
+import { awaitProducts, awaitContents, awaitProductCategories, awaitRecommendations } from './integrationReadiness';
 import { contentFixtureNames, fixtureData, productCategoryFixtureNames, productFixtureNames } from './integrationFixtures';
 import { test } from '@jest/globals';
 import { BrandUpdateBuilder, ContentCategoryUpdateBuilder, ContentUpdateBuilder, Integrator, ProductCategoryUpdateBuilder, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
-import { DataValueFactory, Searcher, Tracker, UserFactory } from '../src';
+import { ContentsViewedAfterViewingContentBuilder, DataValueFactory, PersonalContentRecommendationBuilder, PopularContentsBuilder, PopularProductsBuilder, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, Searcher, Tracker, UserFactory } from '../src';
 import { disposableId, testId } from './integration-tests/testData';
 
 const { npm_config_API_KEY: apiKey, npm_config_DATASET_ID: datasetId, npm_config_SERVER_URL: serverUrl } = process.env;
 const integrator = new Integrator(datasetId!, apiKey!, { serverUrl });
 const tracker = new Tracker(datasetId!, apiKey!, { serverUrl });
 const searcher = new Searcher(datasetId!, apiKey!, { serverUrl });
+const recommender = new Recommender(datasetId!, apiKey!, { serverUrl });
 
 const marker = fixtureData;
 const viewer = UserFactory.byTemporaryId(testId('recommendation-viewer'));
@@ -168,5 +169,25 @@ test('upsert the persistent client integration test fixtures', async () => {
         awaitContents(searcher, contentFixtureNames.map(testId)),
         awaitContents(searcher, ['1', '2', '3'].map(testId), 'en-US'),
         awaitProductCategories(searcher, productCategoryFixtureNames.map(testId)),
+    ]);
+
+    const settings = {
+        language: 'en-US', currency: 'USD', displayedAtLocation: 'integration fixture readiness',
+        user: UserFactory.anonymous(),
+    };
+    await Promise.all([
+        awaitRecommendations('PurchasedWithProduct candidates', () => recommender.recommendPurchasedWithProduct(
+            new PurchasedWithProductBuilder(settings).product({ productId: testId('1') }).build())),
+        awaitRecommendations('ProductsViewedAfterViewingProduct candidates', () => recommender.recommendProductsViewedAfterViewingProduct(
+            new ProductsViewedAfterViewingProductBuilder(settings).product({ productId: testId('1') }).build())),
+        awaitRecommendations('PopularProducts candidates', () => recommender.recommendPopularProducts(
+            new PopularProductsBuilder(settings).sinceMinutesAgo(5000)
+                .setPopularityMultiplier(pm => pm.setDataKeyPopularityMultiplierSelector({ key: 'some-data-key' })).build())),
+        awaitRecommendations('ContentsViewedAfterViewingContent candidates', () => recommender.recommendContentsViewedAfterViewingContent(
+            new ContentsViewedAfterViewingContentBuilder(settings).setContentId(testId('1')).build())),
+        awaitRecommendations('PopularContents candidates', () => recommender.recommendPopularContents(
+            new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build())),
+        awaitRecommendations('PersonalContent candidates', () => recommender.recommendPersonalContents(
+            new PersonalContentRecommendationBuilder({ ...settings, user: viewer }).build())),
     ]);
 }, 480_000);

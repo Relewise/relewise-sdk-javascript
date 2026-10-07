@@ -1,5 +1,4 @@
 import { testId } from './testData';
-import { expectProductRecommendations } from './recommendationAssertions';
 import { ProductRecommendationRequestCollection, ProductsRecommendationCollectionBuilder, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, SearchTermPredictionBuilder, SearchTermPredictionRequest, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
@@ -25,7 +24,7 @@ test('Batched Product Recommendations', async() => {
 
     expect(result?.responses).toHaveLength(2);
     for (const response of result?.responses ?? []) {
-        expectProductRecommendations(response);
+        expect(response.recommendations?.length).toBeGreaterThan(0);
     }
 
 });

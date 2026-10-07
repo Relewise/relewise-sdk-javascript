@@ -7,7 +7,6 @@ if (!runId) {
 }
 
 export const testId = (id: string): string => `javascript-sdk-${runId}-${id}`;
-export const testRunId = runId;
 
 export const markUser = <T extends User>(user: T): T => {
     user.identifiers = { ...user.identifiers, JavascriptSdkIntegrationRun: testId('run') };

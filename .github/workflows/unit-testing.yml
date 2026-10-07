@@ -10,6 +10,8 @@ env:
   node-version: '22'
   npm_config_DATASET_ID: d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f
   npm_config_SERVER_URL: https://sandbox-api.relewise.com/
+  # This optional feature is not enabled on the dedicated dataset.
+  npm_config_TEST_RECENTLY_PURCHASED_FACET: 'false'
 
 # All branches use the same persistent search fixtures in the sandbox dataset.
 concurrency:
@@ -18,7 +20,6 @@ concurrency:
 
 jobs:
   test-sdk:
-    needs: test-integrations
     runs-on: ubuntu-latest
     env:
       npm_config_TEST_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}-client

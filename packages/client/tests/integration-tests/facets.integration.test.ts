@@ -1,4 +1,4 @@
-import { ProblemDetailsError, ProductCategorySearchBuilder, ProductCategorySearchRequest, ProductSearchBuilder, ProductSearchRequest, Searcher, UserFactory } from '../../src';
+import { ProductCategorySearchBuilder, ProductCategorySearchRequest, ProductSearchBuilder, ProductSearchRequest, Searcher, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
@@ -14,7 +14,9 @@ function baseBuilder() {
     });
 };
 
-test('RecentlyPurchased facet', async() => {
+// Report unavailable coverage as skipped; enabled datasets must exercise the facet.
+const recentlyPurchasedTest = process.env.npm_config_TEST_RECENTLY_PURCHASED_FACET === 'true' ? test : test.skip;
+recentlyPurchasedTest('RecentlyPurchased facet', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
         .facets(f => f.addRecentlyPurchasedFacet({ 
@@ -25,17 +27,8 @@ test('RecentlyPurchased facet', async() => {
         }, [true]))
         .build();
 
-    try {
-        const result = await searcher.searchProducts(request);
-        expect(result?.facets?.items![0].field).toBe('User');
-    } catch (error) {
-        if (error instanceof ProblemDetailsError && error.details?.status === 400
-            && error.details.detail?.includes("The feature: 'RecentlyPurchasedFacet' is not yet enabled for this dataset")) {
-            // Fresh integration datasets do not necessarily have this optional feature enabled.
-            return;
-        }
-        throw error;
-    }
+    const result = await searcher.searchProducts(request);
+    expect(result?.facets?.items![0].field).toBe('User');
 });
 
 test('SalesPrice facet', async() => {

@@ -1,5 +1,4 @@
 import { testId } from './testData';
-import { expectProductRecommendations } from './recommendationAssertions';
 import { randomUUID } from 'crypto';
 import { DataValueFactory, PopularProductsBuilder, ProductRecommendationResponse, ProductsViewedAfterViewingProductBuilder, PurchasedWithProductBuilder, Recommender, UserFactory } from '../../src';
 import { test, expect } from '@jest/globals'
@@ -19,14 +18,16 @@ test('PurchasedWithProduct', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPurchasedWithProduct(new PurchasedWithProductBuilder(settings).product({ productId: testId('1') }).build());
 
-    expectProductRecommendations(result);
+    expect(result).toBeDefined();
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
 test('ProductsViewedAfterViewingProduct', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(new ProductsViewedAfterViewingProductBuilder(settings).product({ productId: testId('1') }).build());
 
-    expectProductRecommendations(result);
+    expect(result).toBeDefined();
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
 test('ProductsViewedAfterViewingProduct with all conditions', async() => {
@@ -49,7 +50,8 @@ test('ProductsViewedAfterViewingProduct with all conditions', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(recommendationBuilder.build());
 
-    expectProductRecommendations(result);
+    expect(result).toBeDefined();
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
     expect(result!.recommendations).toHaveLength(0);
 });
 
@@ -61,7 +63,8 @@ test('PopularProducts with popularity multiplier', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
 
-    expectProductRecommendations(result);
+    expect(result).toBeDefined();
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
 test('Filter on products in cart', async() => {
@@ -72,7 +75,8 @@ test('Filter on products in cart', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
 
-    expectProductRecommendations(result);
+    expect(result).toBeDefined();
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
     expect(result!.recommendations).toHaveLength(0);
 });
 
@@ -84,5 +88,6 @@ test('Filter on products in cart negated', async() => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(recommendationBuilder.build());
 
-    expectProductRecommendations(result);
+    expect(result).toBeDefined();
+    expect(result!.recommendations?.length).toBeGreaterThan(0);
 });

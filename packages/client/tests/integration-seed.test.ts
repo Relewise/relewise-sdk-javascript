@@ -65,4 +65,4 @@ test('create or update persistent client fixtures', async () => {
             language: 'da', currency: 'DKK', displayedAtLocation: 'integration test', user: UserFactory.anonymous(),
         }).filters(f => f.addProductCategoryIdFilter('ImmediateParent', ['1', '2', '3', '4'])).build()), 4),
     ]);
-}, 180_000);
+}, 360_000);

@@ -73,7 +73,7 @@ Use the dedicated JavaScript SDK sandbox dataset configured in `.github/workflow
     npm run integration-seed --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/
     npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/
 
-Seeding creates missing base fixtures and updates existing ones through the public API. Keep fixtures and tracked behavior between runs; there is no teardown. Individual facet tests also update their existing fixed-ID fixtures. Public search checks wait up to two minutes for initial indexing. Recommendation assertions remain unchanged; a newly populated dataset may need time for recommendation models to become available.
+Seeding creates missing base fixtures and updates existing ones through the public API. Keep fixtures and tracked behavior between runs; there is no teardown. Individual facet tests also update their existing fixed-ID fixtures. Public search checks wait up to five minutes for initial indexing. Recommendation assertions remain unchanged; a newly populated dataset may need time for recommendation models to become available.
 
 The integrations package uses separate fixed IDs so its administrative actions cannot disable this catalog. CI serializes runs against the shared dataset. Avoid overlapping local and CI runs.
 

@@ -188,6 +188,6 @@ test('upsert the persistent client integration test fixtures', async () => {
         awaitRecommendations('PopularContents candidates', () => recommender.recommendPopularContents(
             new PopularContentsBuilder(settings).sinceMinutesAgo(5000).build())),
         awaitRecommendations('PersonalContent candidates', () => recommender.recommendPersonalContents(
-            new PersonalContentRecommendationBuilder({ ...settings, user: viewer }).build())),
+            new PersonalContentRecommendationBuilder(settings).build())),
     ]);
 }, 480_000);

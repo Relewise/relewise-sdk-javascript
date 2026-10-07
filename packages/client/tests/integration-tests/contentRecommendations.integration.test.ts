@@ -10,7 +10,7 @@ const settings = {
     language: 'en-US',
     currency: 'USD',
     displayedAtLocation: 'integration test',
-    user: UserFactory.byTemporaryId(testId('recommendation-viewer')),
+    user: UserFactory.anonymous(),
 };
 
 test('ContentsViewedAfterViewing', async() => {

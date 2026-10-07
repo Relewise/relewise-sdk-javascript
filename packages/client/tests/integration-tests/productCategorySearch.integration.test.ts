@@ -2,6 +2,7 @@
 import { Integrator, ProductCategoryUpdateBuilder } from '@relewise/integrations';
 import { Searcher, ProductCategorySearchBuilder, ProductCategorySearchRequest, UserFactory, GetProductCategoryFacet, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
+import { waitForHits } from '../integrationReadiness';
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
@@ -40,6 +41,8 @@ test('Facet result', async() => {
     });
 
     await integrator.updateProductCategory(category.build());
+    await waitForHits(() => searcher.searchProductCategories(baseProductCategoryBuilder()
+        .filters(f => f.addProductCategoryIdFilter('ImmediateParent', 'GetProductCategoryFacet test category')).build()), 1);
 
     const request: ProductCategorySearchRequest = baseProductCategoryBuilder()
         .facets(f => f

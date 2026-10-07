@@ -2,6 +2,7 @@ import { Searcher, ProductSearchBuilder, ProductSearchRequest, UserFactory, Valu
 import { Integrator, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { test, expect } from '@jest/globals'
 import { fail } from 'assert';
+import { waitForHits } from '../integrationReadiness';
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
@@ -63,6 +64,9 @@ test('Product search - data object facets evaluation mode', async () => {
         });
 
     await integrator.updateProduct(product.build());
+
+    await waitForHits(() => searcher.searchProducts(baseProductBuilder()
+        .filters(f => f.addProductIdFilter('Object facet evaluation mode test product')).build()), 1);
 
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f => f.addProductDataObjectFacet(
@@ -141,6 +145,8 @@ test('Facet result', async () => {
         .variants([variant]);
 
     await integrator.updateProduct(product.build());
+    await waitForHits(() => searcher.searchProducts(baseProductBuilder()
+        .filters(f => f.addProductIdFilter('GetProductFacet test product')).build()), 1);
 
     const request: ProductSearchRequest = baseProductBuilder()
         .setSelectedProductProperties({ allData: true })
@@ -318,6 +324,8 @@ test('ProductSearch with sorted facet', async () => {
         productUpdateKind: 'ReplaceProvidedProperties',
     }).categoryPaths(c => c.path(p => p.category({ id: "2", displayName: [{ language: 'da', value: "name 2" }] })));
     await integrator.updateProduct(product3.build());
+    await waitForHits(() => searcher.searchProducts(baseProductBuilder()
+        .filters(f => f.addProductIdFilter(['Cat Product #1', 'Cat Product #2', 'Cat Product #3'])).build()), 3);
 
     const request: ProductSearchRequest = baseProductBuilder()
         .facets(f =>

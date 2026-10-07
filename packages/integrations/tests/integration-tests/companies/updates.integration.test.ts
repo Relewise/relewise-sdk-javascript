@@ -10,13 +10,13 @@ const unixTimeStamp: number = Date.now();
 test('Create Companies', async() => {
 
     const parentCompany = new CompanyUpdateBuilder({
-        id: '1',
+        id: 'javascript-sdk-integrations-1',
         updateKind: 'ReplaceProvidedProperties',
         replaceExistingParents: true,
     });
 
     const company = new CompanyUpdateBuilder({
-        id: '2',
+        id: 'javascript-sdk-integrations-2',
         updateKind: 'ReplaceProvidedProperties',
         replaceExistingParents: true,
     })
@@ -35,13 +35,13 @@ test('Create Companies', async() => {
     await integrator.updateCompany(company.build());
 
     const enable = new CompanyAdministrativeActionBuilder({
-        filters: (f) => f.addCompanyDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addCompanyIdFilter('javascript-sdk-integrations-2').addCompanyDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeCompanyAdministrativeAction(enable.build());
 
     const disable = new CompanyAdministrativeActionBuilder({
-        filters: (f) => f.addCompanyDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addCompanyIdFilter('javascript-sdk-integrations-2').addCompanyDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeCompanyAdministrativeAction(disable.build());

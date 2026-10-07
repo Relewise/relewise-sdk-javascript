@@ -68,17 +68,13 @@ npm publish --access public
 
 ### Integrations
 
-To run integrations tests, run the following command with parameters.
+Use the dedicated JavaScript SDK sandbox dataset configured in `.github/workflows/unit-testing.yml`. Run these commands from `packages/client` with the same dataset and key:
 
-DATASET_ID - This is the Relewise Dataset Id
+    npm run integration-seed --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/
+    npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/
 
-API_KEY - This is the Relewise API Key
+Seeding creates missing base fixtures and updates existing ones through the public API. Keep fixtures and tracked behavior between runs; there is no teardown. Individual facet tests also update their existing fixed-ID fixtures. Public search checks wait up to two minutes for initial indexing. Recommendation assertions remain unchanged; a newly populated dataset may need time for recommendation models to become available.
 
-SERVER_URL - This is an optional parameter for changing the API url. e.g. https://localhost:5000 for development
+The integrations package uses separate fixed IDs so its administrative actions cannot disable this catalog. CI serializes runs against the shared dataset. Avoid overlapping local and CI runs.
 
-
-    npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://api.relewise.com
-
-Some tests are dependent on data therefore one must run the integration tests in the integrations package first.
-
-Those tests will create all data needed for these tests to pass.
+RecentlyPurchasedFacet is not enabled on this dataset, so its test is explicitly skipped. Pass `--TEST_RECENTLY_PURCHASED_FACET=true` to run it on an enabled dataset.

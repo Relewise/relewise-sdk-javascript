@@ -14,7 +14,9 @@ function baseBuilder() {
     });
 };
 
-test('RecentlyPurchased facet', async() => {
+// This optional feature is unavailable on the dedicated test dataset.
+const recentlyPurchasedTest = process.env.npm_config_TEST_RECENTLY_PURCHASED_FACET === 'true' ? test : test.skip;
+recentlyPurchasedTest('RecentlyPurchased facet', async() => {
 
     const request: ProductSearchRequest = baseBuilder()
         .facets(f => f.addRecentlyPurchasedFacet({ 

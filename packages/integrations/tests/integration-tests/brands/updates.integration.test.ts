@@ -9,7 +9,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Brand', async() => {
     const brand = new BrandUpdateBuilder({
-        id: 'javascript-sdk-integrations-1234',
+        id: 'integrations-1234',
         updateKind: 'ReplaceProvidedProperties',
     })
         .displayName('HP')
@@ -28,13 +28,13 @@ test('Create Brand', async() => {
     await integrator.updateBrand(brand.build());
 
     const enable = new BrandAdministrativeActionBuilder({
-        filters: (f) => f.addBrandIdFilter('javascript-sdk-integrations-1234').addBrandDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addBrandIdFilter('integrations-1234').addBrandDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeBrandAdministrativeAction(enable.build());
 
     const disable = new BrandAdministrativeActionBuilder({
-        filters: (f) => f.addBrandIdFilter('javascript-sdk-integrations-1234').addBrandDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addBrandIdFilter('integrations-1234').addBrandDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeBrandAdministrativeAction(disable.build());

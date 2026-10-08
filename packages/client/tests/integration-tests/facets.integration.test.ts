@@ -14,24 +14,6 @@ function baseBuilder() {
     });
 };
 
-// This optional feature is unavailable on the dedicated test dataset.
-const recentlyPurchasedTest = process.env.npm_config_TEST_RECENTLY_PURCHASED_FACET === 'true' ? test : test.skip;
-recentlyPurchasedTest('RecentlyPurchased facet', async() => {
-
-    const request: ProductSearchRequest = baseBuilder()
-        .facets(f => f.addRecentlyPurchasedFacet({ 
-            byUser: true,
-            byUserCompany: false,
-            byUserParentCompany: false,
-            sinceMinutesAgo: 1140, 
-        }, [true]))
-        .build();
-
-    const result = await searcher.searchProducts(request);
-
-    expect(result?.facets?.items![0].field).toBe('User');
-});
-
 test('SalesPrice facet', async() => {
 
     const request: ProductSearchRequest = baseBuilder()

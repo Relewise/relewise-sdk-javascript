@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "test": "jest ./tests/unit-tests",
-    "integration-test": "jest ./tests/integration-tests --runInBand --testTimeout=310000",
+    "integration-test": "jest ./tests/integration-tests --runInBand",
     "integration-seed": "jest ./tests/integration-seed.test.ts --runInBand",
     "lint": "eslint --ext .ts,.js ./src",
     "lint-fix": "eslint --fix --ext .ts,.js ./src",

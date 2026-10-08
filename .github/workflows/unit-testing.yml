@@ -10,7 +10,6 @@ env:
   node-version: '22'
   npm_config_DATASET_ID: d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f
   npm_config_SERVER_URL: https://sandbox-api.relewise.com/
-  npm_config_TEST_RECENTLY_PURCHASED_FACET: 'false'
 
 # Persistent fixtures are shared by all runs against this dedicated dataset.
 concurrency:

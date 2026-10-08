@@ -9,7 +9,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Content', async() => {
     const Content = new ContentUpdateBuilder({
-        id: 'javascript-sdk-integrations-1',
+        id: 'integrations-1',
         updateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -29,33 +29,33 @@ test('Create Content', async() => {
         .categoryPaths(b => b
             .path(p => p
                 .category({
-                    id: 'javascript-sdk-integrations-1',
+                    id: 'integrations-1',
                     displayName: [{ language: 'da', value: 'Værktøj' }],
                 })
                 .category({
-                    id: 'javascript-sdk-integrations-2',
+                    id: 'integrations-2',
                     displayName: [{ language: 'da', value: 'Udendørs' }],
                 })
                 .category({
-                    id: 'javascript-sdk-integrations-3',
+                    id: 'integrations-3',
                     displayName: [{ language: 'da', value: 'Skovle' }],
                 }))
             .path(p => p
                 .category({
-                    id: 'javascript-sdk-integrations-4',
+                    id: 'integrations-4',
                     displayName: [{ language: 'da', value: 'Tilbud' }],
                 })));
 
     await integrator.updateContent(Content.build());
 
     const enable = new ContentAdministrativeActionBuilder({
-        filters: (f) => f.addContentIdFilter('javascript-sdk-integrations-1').addContentDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentIdFilter('integrations-1').addContentDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeContentAdministrativeAction(enable.build());
 
     const disable = new ContentAdministrativeActionBuilder({
-        filters: (f) => f.addContentIdFilter('javascript-sdk-integrations-1').addContentDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addContentIdFilter('integrations-1').addContentDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeContentAdministrativeAction(disable.build());

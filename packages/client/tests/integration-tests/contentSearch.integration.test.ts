@@ -1,7 +1,6 @@
 import { ContentUpdateBuilder, Integrator } from '@relewise/integrations';
 import { Searcher, GetContentFacet, UserFactory, CategoryFacetResult, ContentSearchBuilder, ContentSearchRequest, ContentAssortmentFacet, ContentDataStringValueFacetResult, DataValueFactory } from '../../src';
 import { test, expect } from '@jest/globals'
-import { waitForHits } from '../integrationReadiness';
 
 const { npm_config_API_KEY: API_KEY, npm_config_DATASET_ID: DATASET_ID, npm_config_SERVER_URL: SERVER_URL } = process.env;
 
@@ -31,8 +30,6 @@ test('Facet result', async() => {
         .assortments([1, 2, 3]);
 
     await integrator.updateContent(content.build());
-    await waitForHits(() => searcher.searchContents(baseContentBuilder()
-        .filters(f => f.addContentIdFilter('GetContentFacet test content')).build()), 1);
     
     const request: ContentSearchRequest = baseContentBuilder()
         .facets(f => f

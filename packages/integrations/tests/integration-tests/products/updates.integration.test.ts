@@ -10,7 +10,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Product', async() => {
     const product = new ProductUpdateBuilder({
-        id: 'javascript-sdk-integrations-1',
+        id: 'integrations-1',
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -35,38 +35,38 @@ test('Create Product', async() => {
             'SomeString': DataValueFactory.string('SomeValue'),
         })
         .assortments([1, 2, 3])
-        .brand({ id: 'javascript-sdk-integrations-1', displayName: 'Relewise' })
+        .brand({ id: 'integrations-1', displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }])
         .categoryPaths(b => b
             .path(p => p
                 .category({
-                    id: 'javascript-sdk-integrations-1',
+                    id: 'integrations-1',
                 })
                 .category({
-                    id: 'javascript-sdk-integrations-2',
+                    id: 'integrations-2',
                     displayName: [{ language: 'da', value: 'Udendørs' }],
                 })
                 .category({
-                    id: 'javascript-sdk-integrations-3',
+                    id: 'integrations-3',
                     displayName: [{ language: 'da', value: 'Skovle' }],
                 }))
             .path(p => p
                 .category({
-                    id: 'javascript-sdk-integrations-4',
+                    id: 'integrations-4',
                     displayName: [{ language: 'da', value: 'Tilbud' }],
                 })));
 
     await integrator.updateProduct(product.build());
 
     const enable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductIdFilter('javascript-sdk-integrations-1').addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter('integrations-1').addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
     await integrator.executeProductAdministrativeAction(enable.build());
 
     const disable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductIdFilter('javascript-sdk-integrations-1').addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter('integrations-1').addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Disable',
     });
     await integrator.executeProductAdministrativeAction(disable.build());
@@ -74,7 +74,7 @@ test('Create Product', async() => {
 
 test('Batch create products', async() => {
     const product = new ProductUpdateBuilder({
-        id: 'javascript-sdk-integrations-1',
+        id: 'integrations-1',
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -90,12 +90,12 @@ test('Batch create products', async() => {
             }]),
         })
         .assortments([1, 2, 3])
-        .brand({ id: 'javascript-sdk-integrations-1', displayName: 'Relewise' })
+        .brand({ id: 'integrations-1', displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }]);
 
     const product2 = new ProductUpdateBuilder({
-        id: 'javascript-sdk-integrations-2',
+        id: 'integrations-2',
         productUpdateKind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -111,12 +111,12 @@ test('Batch create products', async() => {
             }]),
         })
         .assortments([1, 2, 3])
-        .brand({ id: 'javascript-sdk-integrations-1', displayName: 'Relewise' })
+        .brand({ id: 'integrations-1', displayName: 'Relewise' })
         .listPrice([{ amount: 100, currency: 'DKK' }])
         .salesPrice([{ amount: 50, currency: 'DKK' }]);
 
     const product3 = new ProductUpdateBuilder({
-        id: 'javascript-sdk-integrations-3',
+        id: 'integrations-3',
         productUpdateKind: 'ReplaceProvidedProperties',
     }).data({
         'objects': DataValueFactory.objectCollection([{
@@ -125,12 +125,12 @@ test('Batch create products', async() => {
     });
 
     const enable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductIdFilter(['javascript-sdk-integrations-1', 'javascript-sdk-integrations-2']).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter(['integrations-1', 'integrations-2']).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Enable',
     });
 
     const disable = new ProductAdministrativeActionBuilder({
-        filters: (f) => f.addProductIdFilter(['javascript-sdk-integrations-1', 'javascript-sdk-integrations-2']).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductIdFilter(['integrations-1', 'integrations-2']).addProductDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         productUpdateKind: 'Disable',
     });
 
@@ -139,7 +139,7 @@ test('Batch create products', async() => {
 
 test('Create Product with variants', async() => {
 
-    const variant1 = new ProductVariantBuilder({ id: 'javascript-sdk-integrations-v-1' })
+    const variant1 = new ProductVariantBuilder({ id: 'integrations-v-1' })
         .displayName([{ language: 'da', value: 'Small Sweater' }])
         .data({
             'UnixTimestamp': DataValueFactory.number(unixTimeStamp),
@@ -151,7 +151,7 @@ test('Create Product with variants', async() => {
         .specifications({ Size: 'S' })
         .build();
 
-    const variant2 = new ProductVariantBuilder({ id: 'javascript-sdk-integrations-v-2' })
+    const variant2 = new ProductVariantBuilder({ id: 'integrations-v-2' })
         .displayName([{ language: 'da', value: 'Medium Sweater' }])
         .data({
             'UnixTimestamp': DataValueFactory.number(unixTimeStamp),
@@ -163,7 +163,7 @@ test('Create Product with variants', async() => {
         .build();
 
     const product = new ProductUpdateBuilder({
-        id: 'javascript-sdk-integrations-1',
+        id: 'integrations-1',
         productUpdateKind: 'ReplaceProvidedProperties',
         variantUpdateKind: 'ReplaceProvidedProperties',
         replaceExistingVariants: true,

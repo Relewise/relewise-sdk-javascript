@@ -1,7 +1,6 @@
 import { test } from '@jest/globals';
 import { BrandUpdateBuilder, ContentCategoryUpdateBuilder, ContentUpdateBuilder, Integrator, ProductCategoryUpdateBuilder, ProductUpdateBuilder, ProductVariantBuilder } from '@relewise/integrations';
 import { ContentSearchBuilder, DataValueFactory, ProductCategorySearchBuilder, ProductSearchBuilder, Searcher, Tracker, UserFactory } from '../src';
-import { waitForHits } from './integrationReadiness';
 
 const { npm_config_API_KEY: apiKey, npm_config_DATASET_ID: datasetId, npm_config_SERVER_URL: serverUrl } = process.env;
 const integrator = new Integrator(datasetId!, apiKey!, { serverUrl });
@@ -66,3 +65,13 @@ test('create or update persistent client fixtures', async () => {
         }).filters(f => f.addProductCategoryIdFilter('ImmediateParent', ['1', '2', '3', '4'])).build()), 4),
     ]);
 }, 360_000);
+
+// Only the initial seed needs to wait for indexing on a fresh dataset.
+async function waitForHits(search: () => Promise<{ hits?: number | null } | undefined>, expectedHits: number): Promise<void> {
+    const deadline = Date.now() + 300_000;
+    while (Date.now() < deadline) {
+        if ((await search())?.hits === expectedHits) return;
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+    throw new Error(`Seed fixtures not searchable: expected ${expectedHits} hits`);
+}

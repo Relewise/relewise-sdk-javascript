@@ -77,4 +77,4 @@ SERVER_URL - This is an optional parameter for changing the API url. e.g. https:
 
 
     npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://api.relewise.com
-Integration fixtures use fixed `javascript-sdk-integrations-` IDs and remain between runs. Updates create missing entities and update existing ones. Administrative actions target only these fixtures. Only the delete test creates a uniquely named disposable product. CI uses the dedicated JavaScript SDK sandbox dataset and the repository API-key secret configured in `.github/workflows/unit-testing.yml`; avoid overlapping local and CI runs.
+Integration fixtures use fixed `integrations-` IDs and remain between runs. Updates create missing entities and update existing ones. Administrative actions target only these fixtures. Only the delete test creates a uniquely named disposable product. CI uses the dedicated JavaScript SDK sandbox dataset and the repository API-key secret configured in `.github/workflows/unit-testing.yml`; avoid overlapping local and CI runs.

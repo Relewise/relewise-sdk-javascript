@@ -9,7 +9,7 @@ const unixTimeStamp: number = Date.now();
 
 test('Create Product Category', async() => {
     const category = new ProductCategoryUpdateBuilder({
-        id: '1234',
+        id: 'integrations-1234',
         kind: 'ReplaceProvidedProperties',
     })
         .displayName([
@@ -29,28 +29,28 @@ test('Create Product Category', async() => {
         .categoryPaths(b => b
             .path(p => p
                 .category({
-                    id: '1',
+                    id: 'integrations-1',
                     displayName: [{ language: 'da', value: 'Værktøj' }],
                 })
                 .category({
-                    id: '2',
+                    id: 'integrations-2',
                     displayName: [{ language: 'da', value: 'Udendørs' }],
                 })
                 .category({
-                    id: '3',
+                    id: 'integrations-3',
                     displayName: [{ language: 'da', value: 'Skovle' }],
                 })));
 
     await integrator.updateProductCategory(category.build());
 
     const enable = new ProductCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addProductCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
+        filters: (f) => f.addProductCategoryIdFilter('ImmediateParent', 'integrations-1234').addProductCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Enable',
     });
     await integrator.executeProductCategoryAdministrativeAction(enable.build());
 
     const disable = new ProductCategoryAdministrativeActionBuilder({
-        filters: (f) => f.addProductCategoryDataFilter('UnixTimeStamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp), /* negated: */ true)),
+        filters: (f) => f.addProductCategoryIdFilter('ImmediateParent', 'integrations-1234').addProductCategoryDataFilter('UnixTimestamp', c => c.addEqualsCondition(DataValueFactory.number(unixTimeStamp))),
         kind: 'Disable',
     });
     await integrator.executeProductCategoryAdministrativeAction(disable.build());

@@ -8,6 +8,13 @@ on:
 
 env:
   node-version: '22'
+  npm_config_DATASET_ID: d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f
+  npm_config_SERVER_URL: https://sandbox-api.relewise.com/
+
+# Persistent fixtures are shared by all runs against this dedicated dataset.
+concurrency:
+  group: javascript-sdk-integration-dataset
+  cancel-in-progress: false
 
 jobs:
   test-sdk:
@@ -33,11 +40,13 @@ jobs:
         name: Build Types
       - run: npm test
         name: Unit tests
+      - run: npm run integration-seed
+        env:
+          npm_config_API_KEY: ${{ secrets.INTEGRATION_TESTS_DATASET_API_KEY }}
+        name: Create or update integration fixtures
       - run: npm run integration-test
         env:
-          npm_config_DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
-          npm_config_API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}
-          npm_config_SERVER_URL: ${{secrets.INTEGRATIONTESTS_SERVER_URL}}
+          npm_config_API_KEY: ${{ secrets.INTEGRATION_TESTS_DATASET_API_KEY }}
         name: Integration tests
   
   test-integrations:
@@ -61,7 +70,5 @@ jobs:
         name: Unit tests
       - run: npm run integration-test
         env:
-          npm_config_DATASET_ID: ${{secrets.INTEGRATIONTESTS_DATASET_ID}}
-          npm_config_API_KEY: ${{secrets.INTEGRATIONTESTS_API_KEY}}
-          npm_config_SERVER_URL: ${{secrets.INTEGRATIONTESTS_SERVER_URL}}
+          npm_config_API_KEY: ${{ secrets.INTEGRATION_TESTS_DATASET_API_KEY }}
         name: Integration tests

@@ -37,8 +37,8 @@ export abstract class RecommendationRequestBuilder {
      * In a batch, request values override matching batch keys; other batch values are inherited.
      * A null or empty dictionary leaves any batch values unchanged.
      * Values are visible in LiveView and are not stored on the user. Do not include sensitive information.
-     * @param contextValues 
-     * @returns 
+     * @param contextValues Context values to replace the current values with, or null to clear them.
+     * @returns This builder.
      */
     public contextValues(contextValues: Record<string, string> | null): this {
         this.configuredContextValues = contextValues === null ? null : { ...contextValues };
@@ -48,9 +48,9 @@ export abstract class RecommendationRequestBuilder {
 
     /**
      * Adds or replaces a single context value.
-     * @param key
-     * @param value
-     * @returns
+     * @param key The case-sensitive context value key.
+     * @param value The context value.
+     * @returns This builder.
      */
     public addContextValue(key: string, value: string): this {
         this.configuredContextValues = {

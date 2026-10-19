@@ -6,20 +6,41 @@ import {
     ProductsRecommendationCollectionBuilder,
 } from '../../../../src';
 
-test.each([
-    ['product', new ProductsRecommendationCollectionBuilder()],
-    ['content', new ContentsRecommendationCollectionBuilder()],
-    ['product category', new ProductCategoriesRecommendationCollectionBuilder()],
-    ['content category', new ContentCategoriesRecommendationCollectionBuilder()],
-])('%s recommendation collection supports context values', (_, builder) => {
+const collectionBuilderFactories = [
+    ['product', () => new ProductsRecommendationCollectionBuilder()],
+    ['content', () => new ContentsRecommendationCollectionBuilder()],
+    ['product category', () => new ProductCategoriesRecommendationCollectionBuilder()],
+    ['content category', () => new ContentCategoriesRecommendationCollectionBuilder()],
+] as const;
+
+test.each(collectionBuilderFactories)('%s recommendation collection supports replacing and appending context values', (_, createBuilder) => {
     const contextValues = {
         DeviceType: 'Mobile',
         SplitTestVariant: null,
     };
 
-    const subject = builder
+    const subject = createBuilder()
         .contextValues(contextValues)
+        .addContextValue('DeviceType', 'Desktop')
+        .addContextValue('Market', null)
         .build();
 
-    expect(subject.contextValues).toEqual(contextValues);
+    expect(subject.contextValues).toEqual({
+        DeviceType: 'Desktop',
+        SplitTestVariant: null,
+        Market: null,
+    });
+    expect(contextValues).toEqual({
+        DeviceType: 'Mobile',
+        SplitTestVariant: null,
+    });
+});
+
+test.each(collectionBuilderFactories)('%s recommendation collection can clear context values', (_, createBuilder) => {
+    const subject = createBuilder()
+        .contextValues({ DeviceType: 'Mobile' })
+        .contextValues(null)
+        .build();
+
+    expect(subject.contextValues).toBeUndefined();
 });

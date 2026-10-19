@@ -18,7 +18,16 @@ export class ContentCategoriesRecommendationCollectionBuilder {
     }
 
     public contextValues(contextValues: Record<string, string | null> | null): this {
-        this.configuredContextValues = contextValues;
+        this.configuredContextValues = contextValues === null ? null : { ...contextValues };
+
+        return this;
+    }
+
+    public addContextValue(key: string, value: string | null): this {
+        this.configuredContextValues = {
+            ...(this.configuredContextValues ?? {}),
+            [key]: value,
+        };
 
         return this;
     }

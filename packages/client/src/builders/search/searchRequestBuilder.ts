@@ -65,7 +65,22 @@ export abstract class SearchRequestBuilder {
  * @returns 
  */
     public contextValues(contextValues: Record<string, string> | null): this {
-        this.configuredContextValues = contextValues;
+        this.configuredContextValues = contextValues === null ? null : { ...contextValues };
+
+        return this;
+    }
+
+    /**
+     * Adds or replaces a single context value.
+     * @param key
+     * @param value
+     * @returns
+     */
+    public addContextValue(key: string, value: string): this {
+        this.configuredContextValues = {
+            ...(this.configuredContextValues ?? {}),
+            [key]: value,
+        };
 
         return this;
     }

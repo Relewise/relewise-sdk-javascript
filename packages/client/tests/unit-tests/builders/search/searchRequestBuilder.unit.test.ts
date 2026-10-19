@@ -29,3 +29,28 @@ test('Index', () => {
 
     expect(subject.indexSelector?.id).toBe(expectedIndexId);
 });
+
+test('context values can be replaced and appended without mutating the input', () => {
+    const contextValues = { DeviceType: 'Mobile' };
+
+    const subject = baseBuilder()
+        .contextValues(contextValues)
+        .addContextValue('DeviceType', 'Desktop')
+        .addContextValue('SplitTestVariant', 'A')
+        .build();
+
+    expect(subject.contextValues).toEqual({
+        DeviceType: 'Desktop',
+        SplitTestVariant: 'A',
+    });
+    expect(contextValues).toEqual({ DeviceType: 'Mobile' });
+});
+
+test('context values can be cleared', () => {
+    const subject = baseBuilder()
+        .contextValues({ DeviceType: 'Mobile' })
+        .contextValues(null)
+        .build();
+
+    expect(subject.contextValues).toBeUndefined();
+});

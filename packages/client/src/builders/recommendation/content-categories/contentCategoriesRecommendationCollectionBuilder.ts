@@ -23,7 +23,7 @@ export class ContentCategoriesRecommendationCollectionBuilder {
         return this;
     }
 
-    public addContextValue(key: string, value: string | null): this {
+    public addContextValue(key: string, value: string): this {
         this.configuredContextValues = {
             ...(this.configuredContextValues ?? {}),
             [key]: value,

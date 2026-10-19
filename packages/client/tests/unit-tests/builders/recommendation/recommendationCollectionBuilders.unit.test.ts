@@ -22,13 +22,11 @@ test.each(collectionBuilderFactories)('%s recommendation collection supports rep
     const subject = createBuilder()
         .contextValues(contextValues)
         .addContextValue('DeviceType', 'Desktop')
-        .addContextValue('Market', null)
         .build();
 
     expect(subject.contextValues).toEqual({
         DeviceType: 'Desktop',
         SplitTestVariant: null,
-        Market: null,
     });
     expect(contextValues).toEqual({
         DeviceType: 'Mobile',

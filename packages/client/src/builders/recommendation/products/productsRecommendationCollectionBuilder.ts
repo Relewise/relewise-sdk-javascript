@@ -16,6 +16,7 @@ export class ProductsRecommendationCollectionBuilder {
         | SortVariantsRequest)[] = [];
 
     private distinctProductsAcrossResults: boolean = true;
+    private configuredContextValues: Record<string, string | null> | null = null;
 
     public addRequest(request: CustomProductRecommendationRequest
         | PersonalProductRecommendationRequest
@@ -41,11 +42,18 @@ export class ProductsRecommendationCollectionBuilder {
         return this;
     }
 
+    public contextValues(contextValues: Record<string, string | null> | null): this {
+        this.configuredContextValues = contextValues;
+
+        return this;
+    }
+
     public build(): ProductRecommendationRequestCollection {
         return {
             $type: 'Relewise.Client.Requests.Recommendations.ProductRecommendationRequestCollection, Relewise.Client',
             requireDistinctProductsAcrossResults: this.distinctProductsAcrossResults,
             requests: this.requests,
+            contextValues: this.configuredContextValues ?? undefined,
         };
     }
 }

@@ -9,6 +9,7 @@ export class ContentsRecommendationCollectionBuilder {
         | PopularContentsRequest)[] = [];
 
     private distinctContentsAcrossResults: boolean = true;
+    private configuredContextValues: Record<string, string | null> | null = null;
 
     public addRequest(request: ContentsViewedAfterViewingContentRequest
         | ContentsViewedAfterViewingMultipleContentsRequest
@@ -27,11 +28,18 @@ export class ContentsRecommendationCollectionBuilder {
         return this;
     }
 
+    public contextValues(contextValues: Record<string, string | null> | null): this {
+        this.configuredContextValues = contextValues;
+
+        return this;
+    }
+
     public build(): ContentRecommendationRequestCollection {
         return {
             $type: 'Relewise.Client.Requests.Recommendations.ContentRecommendationRequestCollection, Relewise.Client',
             requireDistinctContentsAcrossResults: this.distinctContentsAcrossResults,
             requests: this.requests,
+            contextValues: this.configuredContextValues ?? undefined,
         };
     }
 }

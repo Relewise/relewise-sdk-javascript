@@ -33,7 +33,7 @@ export abstract class RecommendationRequestBuilder {
      * Context values used to determine which merchandising rules apply to this request,
      * such as DeviceType=Mobile or SplitTestVariant=A.
      * Keys and values are case-sensitive.
-     * On a search request collection, these values provide defaults for its requests.
+     * On a recommendation request collection, these values provide defaults for its requests.
      * In a batch, request values override matching batch keys; other batch values are inherited.
      * A null or empty dictionary leaves any batch values unchanged.
      * Values are visible in LiveView and are not stored on the user. Do not include sensitive information.

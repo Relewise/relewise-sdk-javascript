@@ -3,6 +3,7 @@ import { PersonalContentCategoryRecommendationRequest, PopularContentCategoriesR
 export class ContentCategoriesRecommendationCollectionBuilder {
     private requests: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)[] = [];
     private distinctCategoriesAcrossResults: boolean = true;
+    private configuredContextValues: Record<string, string | null> | null = null;
 
     public addRequest(request: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)): this {
         this.requests.push(request);
@@ -16,11 +17,18 @@ export class ContentCategoriesRecommendationCollectionBuilder {
         return this;
     }
 
+    public contextValues(contextValues: Record<string, string | null> | null): this {
+        this.configuredContextValues = contextValues;
+
+        return this;
+    }
+
     public build(): ContentCategoryRecommendationRequestCollection {
         return {
             $type: 'Relewise.Client.Requests.Recommendations.ContentRecommendationRequestCollection, Relewise.Client',
             requireDistinctCategoriesAcrossResults: this.distinctCategoriesAcrossResults,
             requests: this.requests,
+            contextValues: this.configuredContextValues ?? undefined,
         }
     }
 }

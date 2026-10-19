@@ -73,7 +73,7 @@ export abstract class SearchRequestBuilder {
     /**
      * Adds or replaces a single context value.
      * @param key The case-sensitive context value key.
-     * @param value The context value.
+     * @param value The case-sensitive context value.
      * @returns This builder.
      */
     public addContextValue(key: string, value: string): this {

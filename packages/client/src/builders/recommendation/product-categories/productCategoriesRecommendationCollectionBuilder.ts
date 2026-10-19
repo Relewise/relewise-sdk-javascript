@@ -3,7 +3,7 @@ import { PersonalProductCategoryRecommendationRequest, PopularProductCategoriesR
 export class ProductCategoriesRecommendationCollectionBuilder {
     private requests: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)[] = [];
     private distinctCategoriesAcrossResults: boolean = true;
-    private configuredContextValues: Record<string, string | null> | null = null;
+    private configuredContextValues: Record<string, string> | null = null;
 
     public addRequest(request: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)): this {
         this.requests.push(request);
@@ -17,7 +17,7 @@ export class ProductCategoriesRecommendationCollectionBuilder {
         return this;
     }
 
-    public contextValues(contextValues: Record<string, string | null> | null): this {
+    public contextValues(contextValues: Record<string, string> | null): this {
         this.configuredContextValues = contextValues === null ? null : { ...contextValues };
 
         return this;

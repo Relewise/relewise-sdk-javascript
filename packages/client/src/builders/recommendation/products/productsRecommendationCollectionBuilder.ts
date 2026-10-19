@@ -16,7 +16,7 @@ export class ProductsRecommendationCollectionBuilder {
         | SortVariantsRequest)[] = [];
 
     private distinctProductsAcrossResults: boolean = true;
-    private configuredContextValues: Record<string, string | null> | null = null;
+    private configuredContextValues: Record<string, string> | null = null;
 
     public addRequest(request: CustomProductRecommendationRequest
         | PersonalProductRecommendationRequest
@@ -42,7 +42,7 @@ export class ProductsRecommendationCollectionBuilder {
         return this;
     }
 
-    public contextValues(contextValues: Record<string, string | null> | null): this {
+    public contextValues(contextValues: Record<string, string> | null): this {
         this.configuredContextValues = contextValues === null ? null : { ...contextValues };
 
         return this;

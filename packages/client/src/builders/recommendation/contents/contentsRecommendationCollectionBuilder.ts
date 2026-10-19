@@ -9,7 +9,7 @@ export class ContentsRecommendationCollectionBuilder {
         | PopularContentsRequest)[] = [];
 
     private distinctContentsAcrossResults: boolean = true;
-    private configuredContextValues: Record<string, string | null> | null = null;
+    private configuredContextValues: Record<string, string> | null = null;
 
     public addRequest(request: ContentsViewedAfterViewingContentRequest
         | ContentsViewedAfterViewingMultipleContentsRequest
@@ -28,7 +28,7 @@ export class ContentsRecommendationCollectionBuilder {
         return this;
     }
 
-    public contextValues(contextValues: Record<string, string | null> | null): this {
+    public contextValues(contextValues: Record<string, string> | null): this {
         this.configuredContextValues = contextValues === null ? null : { ...contextValues };
 
         return this;

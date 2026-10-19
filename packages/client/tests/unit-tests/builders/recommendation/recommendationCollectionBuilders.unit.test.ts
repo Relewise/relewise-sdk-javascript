@@ -16,7 +16,7 @@ const collectionBuilderFactories = [
 test.each(collectionBuilderFactories)('%s recommendation collection supports replacing and appending context values', (_, createBuilder) => {
     const contextValues = {
         DeviceType: 'Mobile',
-        SplitTestVariant: null,
+        SplitTestVariant: 'A',
     };
 
     const subject = createBuilder()
@@ -26,11 +26,11 @@ test.each(collectionBuilderFactories)('%s recommendation collection supports rep
 
     expect(subject.contextValues).toEqual({
         DeviceType: 'Desktop',
-        SplitTestVariant: null,
+        SplitTestVariant: 'A',
     });
     expect(contextValues).toEqual({
         DeviceType: 'Mobile',
-        SplitTestVariant: null,
+        SplitTestVariant: 'A',
     });
 });
 

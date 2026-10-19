@@ -512,6 +512,7 @@ export interface BrandRecommendationRequest {
   currency?: Currency | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
@@ -755,14 +756,14 @@ export type CampaignMetadataValues = MetadataValues & {
 };
 
 export interface CampaignStatusWithHistory {
-  current: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached";
+  current: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached" | "Scheduled";
   history: CampaignStatusWithHistoryChange[];
 }
 
 export interface CampaignStatusWithHistoryChange {
   /** @format date-time */
   utcTime: string;
-  status: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached";
+  status: "Active" | "Inactive" | "ScheduleCompleted" | "BudgetReached" | "Scheduled";
 }
 
 export type CampaignsRequest =
@@ -1200,12 +1201,14 @@ export interface ContentCategoryRecommendationRequest {
   currency?: Currency | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
 export type ContentCategoryRecommendationRequestCollection = LicensedRequest & {
   requests?: (PersonalContentCategoryRecommendationRequest | PopularContentCategoriesRecommendationRequest)[] | null;
   requireDistinctCategoriesAcrossResults: boolean;
+  contextValues?: Record<string, string | null>;
 };
 
 export interface ContentCategoryRecommendationRequestSettings {
@@ -1504,6 +1507,7 @@ export interface ContentRecommendationRequest {
   currency?: Currency | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
@@ -1519,6 +1523,7 @@ export type ContentRecommendationRequestCollection = LicensedRequest & {
       )[]
     | null;
   requireDistinctContentsAcrossResults: boolean;
+  contextValues?: Record<string, string | null>;
 };
 
 export interface ContentRecommendationRequestSettings {
@@ -1644,6 +1649,14 @@ export type ContentsViewedAfterViewingProductRequest = ContentRecommendationRequ
 export interface ContextConditionConfiguration {
   filters?: RequestContextFilter[] | null;
 }
+
+export interface ContextValueCondition {
+  $type: string;
+}
+
+export type ContextValuesMatchCondition = ContextValueCondition & {
+  acceptedValues?: Record<string, string[] | null>;
+};
 
 export interface Currency {
   value: string;
@@ -2001,6 +2014,8 @@ export type DeleteSearchRulesResponse = TimedResponse;
 export type DeleteSearchTermModifierRulesRequest = DeleteSearchRulesRequest;
 
 export type DeleteStemmingRulesRequest = DeleteSearchRulesRequest;
+
+export type DeleteSynonymRulesRequest = DeleteSearchRulesRequest;
 
 export type DeleteSynonymsRequest = LicensedRequest & {
   ids?: string[] | null;
@@ -3403,6 +3418,17 @@ export interface MultilingualValue {
   text?: string | null;
 }
 
+export interface OAuthControllerErrorResponse {
+  error: string;
+}
+
+export interface OAuthControllerTokenResponse {
+  access_token: string;
+  token_type: string;
+  /** @format int32 */
+  expires_in: number;
+}
+
 export interface ObjectValueCondition {
   $type: string;
   negated: boolean;
@@ -3653,6 +3679,7 @@ export interface PaginatedSearchRequest {
   postFilters?: FilterCollection | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
@@ -4173,12 +4200,14 @@ export interface ProductCategoryRecommendationRequest {
   currency?: Currency | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
 export type ProductCategoryRecommendationRequestCollection = LicensedRequest & {
   requests?: (PersonalProductCategoryRecommendationRequest | PopularProductCategoriesRecommendationRequest)[] | null;
   requireDistinctCategoriesAcrossResults: boolean;
+  contextValues?: Record<string, string | null>;
 };
 
 export interface ProductCategoryRecommendationRequestSettings {
@@ -4904,6 +4933,7 @@ export interface ProductRecommendationRequest {
   currency?: Currency | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
@@ -4926,6 +4956,7 @@ export type ProductRecommendationRequestCollection = LicensedRequest & {
       )[]
     | null;
   requireDistinctProductsAcrossResults: boolean;
+  contextValues?: Record<string, string | null>;
 };
 
 export interface ProductRecommendationRequestSettings {
@@ -5264,6 +5295,10 @@ export interface RebuildStatus {
   staleDuration: string;
   /** @format date-span */
   lastStaleDuration: string;
+  /** @format date-time */
+  lastFieldChangeCheck?: string | null;
+  /** @format date-time */
+  lastFieldChangeMarkedIndexStale?: string | null;
 }
 
 export type RecentlyPurchasedFacet = BooleanValueFacet & {
@@ -5306,6 +5341,7 @@ export interface RecommendationRequest {
   currency?: Currency | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
@@ -5447,6 +5483,7 @@ export interface RequestContextFilter {
   /** @deprecated */
   searchTerms?: SearchTermConditionByLanguageCollection | null;
   searchTermCriteria?: SearchTermCriteria | null;
+  contextValueCondition?: ContextValuesMatchCondition | null;
 }
 
 export interface RequestFilterCriteria {
@@ -5608,6 +5645,10 @@ export type SaveStemmingRulesRequest = StemmingRuleSaveSearchRulesRequest;
 
 export type SaveStemmingRulesResponse = StemmingRuleSaveSearchRulesResponse;
 
+export type SaveSynonymRulesRequest = SynonymRuleSaveSearchRulesRequest;
+
+export type SaveSynonymRulesResponse = SynonymRuleSaveSearchRulesResponse;
+
 export type SaveSynonymsRequest = LicensedRequest & {
   synonyms: Synonym[];
   modifiedBy: string;
@@ -5702,6 +5743,7 @@ export interface SearchRequest {
   postFilters?: FilterCollection | null;
   /** @deprecated */
   channel?: Channel | null;
+  contextValues?: Record<string, string>;
   custom?: Record<string, string | null>;
 }
 
@@ -6356,6 +6398,54 @@ export interface Synonym {
   allowInPredictions: boolean;
 }
 
+export type SynonymRule = SearchRule & {
+  type: "OneWay" | "Multidirectional";
+  from?: string[] | null;
+  words?: string[] | null;
+  allowInPredictions: boolean;
+};
+
+export interface SynonymRuleSaveSearchRulesRequest {
+  $type: string;
+  rules: SynonymRule[];
+  modifiedBy: string;
+  custom?: Record<string, string | null>;
+}
+
+export interface SynonymRuleSaveSearchRulesResponse {
+  $type: string;
+  rules?: SynonymRule[] | null;
+  statistics?: Statistics | null;
+}
+
+export interface SynonymRuleSearchRulesResponse {
+  $type: string;
+  rules?: SynonymRule[] | null;
+  /** @format int32 */
+  hits: number;
+  statistics?: Statistics | null;
+}
+
+export type SynonymRulesRequest = SynonymRulesRequestSortBySearchRulesRequest;
+
+export interface SynonymRulesRequestSortBySearchRulesRequest {
+  $type: string;
+  filters: SearchRuleFilters;
+  sorting: SynonymRulesRequestSortBySorting;
+  /** @format int32 */
+  skip: number;
+  /** @format int32 */
+  take: number;
+  custom?: Record<string, string | null>;
+}
+
+export interface SynonymRulesRequestSortBySorting {
+  sortBy: "Created" | "CreatedBy" | "Modified" | "ModifiedBy" | "Approved" | "ApprovedBy" | "Type" | "Predictable";
+  sortOrder: "Ascending" | "Descending";
+}
+
+export type SynonymRulesResponse = SynonymRuleSearchRulesResponse;
+
 export type SynonymsRequest = LicensedRequest & {
   sorting?: SynonymsRequestSynonymSortingSorting | null;
   /** @format int32 */
@@ -6939,6 +7029,16 @@ export interface VariantResultDetails {
   salesPrice?: MultiCurrency | null;
   disabled: boolean;
   userEngagement?: ProductEngagementData | null;
+  /** @format int64 */
+  containedInTotalNumberOfOrders: number;
+  /** @format int64 */
+  viewedTotalNumberOfTimes: number;
+  /** @format date-time */
+  createdUtc: string;
+  /** @format date-time */
+  lastPurchasedUtc?: string | null;
+  /** @format date-time */
+  lastViewedUtc?: string | null;
 }
 
 export type VariantSalesPriceFilter = Filter & {

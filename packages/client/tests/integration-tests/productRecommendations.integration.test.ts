@@ -13,7 +13,7 @@ const settings = {
     user: UserFactory.anonymous(),
 };
 
-test('PurchasedWithProduct', async() => {
+test('PurchasedWithProduct', async () => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendPurchasedWithProduct(new PurchasedWithProductBuilder(settings).product({ productId: '1' }).build());
 
@@ -21,7 +21,7 @@ test('PurchasedWithProduct', async() => {
     expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
-test('ProductsViewedAfterViewingProduct', async() => {
+test('ProductsViewedAfterViewingProduct', async () => {
 
     const result: ProductRecommendationResponse | undefined = await recommender.recommendProductsViewedAfterViewingProduct(new ProductsViewedAfterViewingProductBuilder(settings).product({ productId: '1' }).build());
 
@@ -29,7 +29,7 @@ test('ProductsViewedAfterViewingProduct', async() => {
     expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
-test('ProductsViewedAfterViewingProduct with all conditions', async() => {
+test('ProductsViewedAfterViewingProduct with all conditions', async () => {
 
     const recommendationBuilder = new ProductsViewedAfterViewingProductBuilder({
         language: 'en-US',
@@ -53,7 +53,7 @@ test('ProductsViewedAfterViewingProduct with all conditions', async() => {
     expect(result!.recommendations?.length).toEqual(0);
 });
 
-test('ProductsViewedAfterViewingProduct with all conditions', async() => {
+test('ProductsViewedAfterViewingProduct with all conditions', async () => {
 
     const recommendationBuilder = new PopularProductsBuilder(settings)
         .setPopularityMultiplier(pm => pm.setDataKeyPopularityMultiplierSelector({ key: 'some-data-key' }));
@@ -64,7 +64,7 @@ test('ProductsViewedAfterViewingProduct with all conditions', async() => {
     expect(result!.recommendations?.length).toBeGreaterThan(0);
 });
 
-test('Filter on products in cart', async() => {
+test('Filter on products in cart', async () => {
     settings.user = UserFactory.byTemporaryId(randomUUID());
     const recommendationBuilder = new PopularProductsBuilder(settings)
         .filters(f => f.addProductInCartFilter());
@@ -75,7 +75,7 @@ test('Filter on products in cart', async() => {
     expect(result!.recommendations?.length).toEqual(0);
 });
 
-test('Filter on products in cart negated', async() => {
+test('Filter on products in cart negated', async () => {
     settings.user = UserFactory.byTemporaryId(randomUUID());
     const recommendationBuilder = new PopularProductsBuilder(settings)
         .filters(f => f.addProductInCartFilter(true));
@@ -84,4 +84,16 @@ test('Filter on products in cart negated', async() => {
 
     expect(result).not.toBe(undefined);
     expect(result!.recommendations?.length).toBeGreaterThan(0);
+});
+
+test('context values', async () => {
+    settings.user = UserFactory.byTemporaryId(randomUUID());
+    const recommendationBuilder = new PopularProductsBuilder(settings)
+        .contextValues({ 'some-context-key': 'some-context-value' });
+
+    const result: ProductRecommendationResponse | undefined = await recommender.recommendPopularProducts(
+        recommendationBuilder.build());
+
+    expect(result).not.toBe(undefined);
+    expect(result!.recommendations?.length).toBeGreaterThan(1);
 });

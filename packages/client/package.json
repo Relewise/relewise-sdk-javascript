@@ -25,6 +25,7 @@
   "scripts": {
     "test": "jest ./tests/unit-tests",
     "integration-test": "jest ./tests/integration-tests --runInBand",
+    "integration-test:oauth": "jest ./tests/integration-tests/oauth.integration.test.ts --runInBand",
     "integration-seed": "jest ./tests/integration-seed.test.ts --runInBand",
     "lint": "eslint --ext .ts,.js ./src",
     "lint-fix": "eslint --fix --ext .ts,.js ./src",

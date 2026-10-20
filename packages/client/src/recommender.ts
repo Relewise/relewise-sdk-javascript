@@ -1,4 +1,5 @@
-import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions } from './relewise.client';
+import { RelewiseClient, RelewiseClientOptions, RelewiseOAuthClientOptions, RelewiseRequestOptions } from './relewise.client';
+import { OAuthClientCredentials } from './oauthTokenProvider';
 import {
     ProductRecommendationResponse,
     ContentRecommendationResponse,
@@ -45,8 +46,10 @@ import {
 } from './models/data-contracts';
 
 export class Recommender extends RelewiseClient {
-    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
-        super(datasetId, apiKey, options);
+    constructor(datasetId: string, apiKey: string, options?: RelewiseClientOptions);
+    constructor(datasetId: string, credentials: OAuthClientCredentials, options: RelewiseOAuthClientOptions);
+    constructor(datasetId: string, credentials: string | OAuthClientCredentials, options?: RelewiseClientOptions) {
+        super(datasetId, credentials as string, options);
     }
 
     public async recommendPopularSearchTerms(request: PopularSearchTermsRecommendationRequest, options?: RelewiseRequestOptions): Promise<SearchTermRecommendationResponse | undefined> {

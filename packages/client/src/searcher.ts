@@ -1,4 +1,5 @@
-import { RelewiseClient, RelewiseClientOptions, RelewiseRequestOptions } from './relewise.client';
+import { RelewiseClient, RelewiseClientOptions, RelewiseOAuthClientOptions, RelewiseRequestOptions } from './relewise.client';
+import { OAuthClientCredentials } from './oauthTokenProvider';
 import { 
     SearchRequestCollection, 
     SearchResponseCollection, 
@@ -13,8 +14,10 @@ import {
 } from './models/data-contracts';
 
 export class Searcher extends RelewiseClient {
-    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
-        super(datasetId, apiKey, options);
+    constructor(datasetId: string, apiKey: string, options?: RelewiseClientOptions);
+    constructor(datasetId: string, credentials: OAuthClientCredentials, options: RelewiseOAuthClientOptions);
+    constructor(datasetId: string, credentials: string | OAuthClientCredentials, options?: RelewiseClientOptions) {
+        super(datasetId, credentials as string, options);
     }
 
     public async searchProducts(request: ProductSearchRequest, options?: RelewiseRequestOptions): Promise<ProductSearchResponse | undefined> {

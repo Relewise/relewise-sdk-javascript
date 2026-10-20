@@ -63,7 +63,15 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - run: npm ci
+        working-directory: ./packages/client
+        name: Install client dependencies
+      - run: npm run build && npm run build:types
+        working-directory: ./packages/client
+        name: Build local client
+      - run: npm ci
         name: Install dependencies
+      - run: npm install --no-save --package-lock=false ../client
+        name: Install local client
       - run: npm run build
         name: Build
       - run: npm test

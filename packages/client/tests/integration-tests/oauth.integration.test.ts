@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import { Tracker, UserFactory } from '../../src';
 
 const {
@@ -36,24 +36,26 @@ oauthTest('OAuth client credentials acquire one token and reuse it for API reque
 
         return nativeFetch(input, init);
     };
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockImplementation(observedFetch);
 
-    const tracker = new Tracker(
-        datasetId,
-        {
-            type: 'oauth',
-            clientId,
-            clientSecret,
-        },
-        {
-            serverUrl,
-            fetch: observedFetch,
-        },
-    );
-    const user = UserFactory.byTemporaryId(`oauth-integration-test-${Date.now()}`);
+    try {
+        const tracker = new Tracker(
+            datasetId,
+            {
+                type: 'oauth',
+                clientId,
+                clientSecret,
+            },
+            { serverUrl },
+        );
+        const user = UserFactory.byTemporaryId(`oauth-integration-test-${Date.now()}`);
 
-    await tracker.trackProductView({ productId: 'oauth-integration-test-1', user });
-    await tracker.trackProductView({ productId: 'oauth-integration-test-2', user });
+        await tracker.trackProductView({ productId: 'oauth-integration-test-1', user });
+        await tracker.trackProductView({ productId: 'oauth-integration-test-2', user });
 
-    expect(tokenRequests).toBe(1);
-    expect(apiRequests).toBe(2);
+        expect(tokenRequests).toBe(1);
+        expect(apiRequests).toBe(2);
+    } finally {
+        fetchSpy.mockRestore();
+    }
 }, 30_000);

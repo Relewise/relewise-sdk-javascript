@@ -5,8 +5,6 @@ import { OAuthClientCredentials, OAuthTokenProvider } from './oauthTokenProvider
 export interface RelewiseClientOptions {
     serverUrl?: string;
     cache?: RequestCache;
-    /** Overrides the Fetch implementation used for token acquisition and API requests. */
-    fetch?: typeof fetch;
 }
 
 export interface RelewiseOAuthClientOptions extends RelewiseClientOptions {
@@ -53,7 +51,6 @@ export abstract class RelewiseClient {
     private readonly _urlPath: string = 'v1';
     private readonly _apiKeyHeader?: string;
     private readonly _oauthTokenProvider?: OAuthTokenProvider;
-    private readonly fetcher: typeof fetch;
     private readonly cache: RequestCache = 'no-cache';
 
     constructor(datasetId: string, apiKey: string, options?: RelewiseClientOptions);
@@ -63,7 +60,6 @@ export abstract class RelewiseClient {
 
         this.datasetId = datasetId;
         this.apiKey = typeof credentials === 'string' ? credentials : '';
-        this.fetcher = options?.fetch ?? globalThis.fetch;
 
         if (typeof credentials === 'string') {
             if (!credentials) throw new Error('API Key secret cannot be null or empty. Please contact Relewise support if you don\'t know the apiKeySecret for your datasetId.');
@@ -73,7 +69,7 @@ export abstract class RelewiseClient {
             if (credentials.type !== 'oauth') throw new Error('Unsupported authentication type.');
             if (!uuidPattern.test(datasetId)) throw new Error('Dataset id must be a valid UUID when using OAuth.');
             if (!options?.serverUrl) throw new Error('Server URL cannot be null or empty when using OAuth.');
-            this._oauthTokenProvider = new OAuthTokenProvider(credentials.clientId, credentials.clientSecret, this.fetcher);
+            this._oauthTokenProvider = new OAuthTokenProvider(credentials.clientId, credentials.clientSecret);
         }
 
         if (options?.serverUrl) {
@@ -93,7 +89,7 @@ export abstract class RelewiseClient {
         const body = JSON.stringify(data);
 
         try {
-            const send = (authorization: string) => this.fetcher(requestUrl, {
+            const send = (authorization: string) => globalThis.fetch(requestUrl, {
                 method: 'POST',
                 headers: {
                     Authorization: authorization,

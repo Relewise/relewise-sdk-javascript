@@ -141,9 +141,8 @@ describe('OAuthTokenProvider', () => {
 describe('OAuth Relewise client', () => {
     test('preserves the existing API-key constructor and does not acquire a token', async () => {
         const fetchMock = jest.fn<typeof fetch>().mockResolvedValue(noContentResponse());
-        const tracker = new Tracker('dataset-id', 'api-key', {
-            fetch: fetchMock as typeof fetch,
-        });
+        jest.spyOn(globalThis, 'fetch').mockImplementation(fetchMock as typeof fetch);
+        const tracker = new Tracker('dataset-id', 'api-key');
 
         await tracker.trackProductView({
             productId: 'product-1',
@@ -178,13 +177,11 @@ describe('OAuth Relewise client', () => {
             expect(init?.headers).toEqual(expect.objectContaining({ Authorization: 'Bearer token-1' }));
             return noContentResponse();
         });
+        jest.spyOn(globalThis, 'fetch').mockImplementation(fetchMock as typeof fetch);
         const tracker = new Tracker(
             datasetId,
             { type: 'oauth', clientId, clientSecret: 'secret' },
-            {
-                serverUrl,
-                fetch: fetchMock as typeof fetch,
-            },
+            { serverUrl },
         );
 
         await tracker.trackProductView({
@@ -223,13 +220,11 @@ describe('OAuth Relewise client', () => {
                   })
                 : noContentResponse();
         });
+        jest.spyOn(globalThis, 'fetch').mockImplementation(fetchMock as typeof fetch);
         const tracker = new Tracker(
             datasetId,
             { type: 'oauth', clientId, clientSecret: 'secret' },
-            {
-                serverUrl,
-                fetch: fetchMock as typeof fetch,
-            },
+            { serverUrl },
         );
 
         await Promise.all(

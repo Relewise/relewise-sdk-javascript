@@ -26,6 +26,8 @@ function parseChallenges(header: string): AuthenticationChallenge[] {
 
     for (const part of parts) {
         const trimmed = part.trim();
+        if (!trimmed) continue;
+
         const start = challengeStartPattern.exec(trimmed);
         const startsChallenge = start !== null && start[2]?.trimStart().startsWith('=') !== true;
 

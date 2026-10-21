@@ -113,6 +113,45 @@ describe('OAuthTokenProvider', () => {
         expect(fetchMock).toHaveBeenCalledTimes(2);
     });
 
+    test('abandons a stalled acquisition after its final waiter is cancelled', async () => {
+        let stalledSignal: AbortSignal | undefined;
+        let completeStalled!: (response: Response) => void;
+        const fetchMock = jest
+            .fn<typeof fetch>()
+            .mockImplementationOnce((_input, init) => {
+                stalledSignal = init?.signal ?? undefined;
+                // Deliberately ignore the signal to represent a non-cooperative transport.
+                return new Promise<Response>((resolve) => (completeStalled = resolve));
+            })
+            .mockResolvedValueOnce(
+                jsonResponse({
+                    access_token: 'replacement',
+                    token_type: 'Bearer',
+                    expires_in: 300,
+                }),
+            );
+        const provider = new OAuthTokenProvider(clientId, 'secret', fetchMock as typeof fetch);
+        const endpoint = `${serverUrl}/${datasetId}/oauth/token`;
+        const cancellation = new AbortController();
+        const stalled = provider.getToken(endpoint, undefined, cancellation.signal);
+
+        cancellation.abort();
+        await expect(stalled).rejects.toHaveProperty('name', 'AbortError');
+        await expect(provider.getToken(endpoint)).resolves.toEqual(expect.objectContaining({ accessToken: 'replacement' }));
+
+        expect(stalledSignal?.aborted).toBe(true);
+        completeStalled(
+            jsonResponse({
+                access_token: 'abandoned-token',
+                token_type: 'Bearer',
+                expires_in: 300,
+            }),
+        );
+        await Promise.resolve();
+        await expect(provider.getToken(endpoint)).resolves.toEqual(expect.objectContaining({ accessToken: 'replacement' }));
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
     test.each([
         { access_token: 'token with spaces', token_type: 'Bearer', expires_in: 300 },
         { access_token: "token\r\nvalue", token_type: 'Bearer', expires_in: 300 },
@@ -122,6 +161,16 @@ describe('OAuthTokenProvider', () => {
         const provider = new OAuthTokenProvider(clientId, 'secret', fetchMock as typeof fetch);
 
         await expect(provider.getToken(`${serverUrl}/${datasetId}/oauth/token`)).rejects.toThrow('The OAuth endpoint returned an invalid token response.');
+    });
+
+    test('sanitizes malformed token-response JSON', async () => {
+        const sensitiveMarker = 'SUPER_SECRET_TOKEN_RESPONSE_MARKER';
+        const fetchMock = jest.fn<typeof fetch>().mockResolvedValue(new Response(sensitiveMarker, { status: 200 }));
+        const provider = new OAuthTokenProvider(clientId, 'secret', fetchMock as typeof fetch);
+        const acquisition = provider.getToken(`${serverUrl}/${datasetId}/oauth/token`);
+
+        await expect(acquisition).rejects.toThrow('The OAuth endpoint returned an invalid token response.');
+        await expect(acquisition).rejects.not.toThrow(sensitiveMarker);
     });
 
     test.each([
@@ -164,6 +213,10 @@ describe('OAuthTokenProvider', () => {
 });
 
 describe('OAuth Relewise client', () => {
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
     test('preserves the existing API-key constructor and does not acquire a token', async () => {
         const fetchMock = jest.fn<typeof fetch>().mockResolvedValue(noContentResponse());
         jest.spyOn(globalThis, 'fetch').mockImplementation(fetchMock as typeof fetch);
@@ -192,6 +245,33 @@ describe('OAuth Relewise client', () => {
         for (const invalidServerUrl of ['', 'not-a-url', 'http://example.com', 'https://user:password@example.com', 'https://example.com?query=1', 'https://example.com#fragment']) {
             expect(() => new Tracker(datasetId, { type: 'oauth', clientId, clientSecret: 'secret' }, { serverUrl: invalidServerUrl })).toThrow('Server URL must be a valid HTTPS URL without credentials, query, or fragment when using OAuth.');
         }
+    });
+
+    test('does not expose malformed token-response content in logs or the public error', async () => {
+        const sensitiveMarker = 'SUPER_SECRET_TOKEN_RESPONSE_MARKER';
+        const fetchMock = jest.fn<typeof fetch>().mockResolvedValue(new Response(sensitiveMarker, { status: 200 }));
+        jest.spyOn(globalThis, 'fetch').mockImplementation(fetchMock as typeof fetch);
+        const consoleError = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+        const tracker = new Tracker(
+            datasetId,
+            { type: 'oauth', clientId, clientSecret: 'secret' },
+            { serverUrl },
+        );
+        let thrown: unknown;
+
+        try {
+            await tracker.trackProductView({
+                productId: 'product-1',
+                user: { temporaryId: 'user-1' },
+            });
+        } catch (error) {
+            thrown = error;
+        }
+
+        expect(thrown).toBeInstanceOf(Error);
+        expect((thrown as Error).message).toContain('The OAuth endpoint returned an invalid token response.');
+        expect((thrown as Error).message).not.toContain(sensitiveMarker);
+        expect(consoleError.mock.calls.flat().join(' ')).not.toContain(sensitiveMarker);
     });
 
     test('reuses a token and preserves the API request contract', async () => {

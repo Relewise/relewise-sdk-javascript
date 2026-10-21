@@ -14,6 +14,13 @@ interface CachedOAuthToken extends OAuthToken {
     renewAt: number;
 }
 
+interface OAuthTokenAcquisition {
+    promise: Promise<CachedOAuthToken>;
+    abortController: AbortController;
+    waiters: number;
+    settled: boolean;
+}
+
 interface OAuthTokenResponse {
     access_token?: unknown;
     token_type?: unknown;
@@ -37,7 +44,7 @@ function isValidTokenEndpoint(endpoint: string): boolean {
 /** Acquires and caches OAuth client-credentials tokens. Reuse the provider to share cached tokens. */
 export class OAuthTokenProvider {
     private cachedToken?: CachedOAuthToken;
-    private tokenAcquisition?: Promise<CachedOAuthToken>;
+    private tokenAcquisition?: OAuthTokenAcquisition;
 
     constructor(
         private readonly clientId: string,
@@ -56,16 +63,8 @@ export class OAuthTokenProvider {
             return this.cachedToken!;
         }
 
-        if (!this.tokenAcquisition) {
-            const acquisition = this.acquireToken(endpoint);
-            this.tokenAcquisition = acquisition;
-            acquisition.then(
-                () => this.clearAcquisition(acquisition),
-                () => this.clearAcquisition(acquisition),
-            );
-        }
-
-        await this.waitForAcquisition(this.tokenAcquisition, abortSignal);
+        const acquisition = this.tokenAcquisition ?? this.startAcquisition(endpoint);
+        await this.waitForAcquisition(acquisition, abortSignal);
 
         // Recheck after waiting. Another caller may have replaced the rejected token,
         // or the completed acquisition may have been for another endpoint.
@@ -76,7 +75,23 @@ export class OAuthTokenProvider {
         return this.cachedToken !== undefined && this.cachedToken.endpoint === endpoint && this.cachedToken.accessToken !== rejectedToken && Date.now() < this.cachedToken.renewAt;
     }
 
-    private async acquireToken(endpoint: string): Promise<CachedOAuthToken> {
+    private startAcquisition(endpoint: string): OAuthTokenAcquisition {
+        const abortController = new AbortController();
+        const acquisition: OAuthTokenAcquisition = {
+            promise: this.acquireToken(endpoint, abortController.signal),
+            abortController,
+            waiters: 0,
+            settled: false,
+        };
+        this.tokenAcquisition = acquisition;
+        acquisition.promise.then(
+            (token) => this.completeAcquisition(acquisition, token),
+            () => this.completeAcquisition(acquisition),
+        );
+        return acquisition;
+    }
+
+    private async acquireToken(endpoint: string, abortSignal: AbortSignal): Promise<CachedOAuthToken> {
         // A failed acquisition must not leave a previously rejected or expired token reusable.
         this.cachedToken = undefined;
         const requestedAt = Date.now();
@@ -87,13 +102,22 @@ export class OAuthTokenProvider {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: 'grant_type=client_credentials',
+            signal: abortSignal,
         });
 
         if (!response.ok) {
             throw new Error(`OAuth token acquisition failed with status ${response.status}.`);
         }
 
-        const value = (await response.json()) as OAuthTokenResponse;
+        let value: OAuthTokenResponse;
+        try {
+            value = (await response.json()) as OAuthTokenResponse;
+        } catch {
+            if (abortSignal.aborted) {
+                throw abortSignal.reason ?? new DOMException('The operation was aborted.', 'AbortError');
+            }
+            throw new Error('The OAuth endpoint returned an invalid token response.');
+        }
         if (
             typeof value.access_token !== 'string'
             || value.access_token.length === 0
@@ -116,7 +140,6 @@ export class OAuthTokenProvider {
             renewAt: expiresAt - renewBeforeExpirySeconds * 1_000,
         };
 
-        this.cachedToken = token;
         return token;
     }
 
@@ -125,35 +148,47 @@ export class OAuthTokenProvider {
         return btoa(`${formEncode(this.clientId)}:${formEncode(this.clientSecret)}`);
     }
 
-    private clearAcquisition(acquisition: Promise<CachedOAuthToken>): void {
+    private completeAcquisition(acquisition: OAuthTokenAcquisition, token?: CachedOAuthToken): void {
+        acquisition.settled = true;
         if (this.tokenAcquisition === acquisition) {
+            if (token) this.cachedToken = token;
             this.tokenAcquisition = undefined;
         }
     }
 
-    private async waitForAcquisition(acquisition: Promise<CachedOAuthToken>, abortSignal?: AbortSignal): Promise<void> {
-        if (!abortSignal) {
-            await acquisition;
-            return;
-        }
+    private async waitForAcquisition(acquisition: OAuthTokenAcquisition, abortSignal?: AbortSignal): Promise<void> {
+        acquisition.waiters++;
 
-        if (abortSignal.aborted) {
-            throw abortSignal.reason ?? new DOMException('The operation was aborted.', 'AbortError');
-        }
+        try {
+            if (!abortSignal) {
+                await acquisition.promise;
+                return;
+            }
 
-        await new Promise<void>((resolve, reject) => {
-            const aborted = () => reject(abortSignal.reason ?? new DOMException('The operation was aborted.', 'AbortError'));
-            abortSignal.addEventListener('abort', aborted, { once: true });
-            acquisition.then(
-                () => {
-                    abortSignal.removeEventListener('abort', aborted);
-                    resolve();
-                },
-                (error) => {
-                    abortSignal.removeEventListener('abort', aborted);
-                    reject(error);
-                },
-            );
-        });
+            if (abortSignal.aborted) {
+                throw abortSignal.reason ?? new DOMException('The operation was aborted.', 'AbortError');
+            }
+
+            await new Promise<void>((resolve, reject) => {
+                const aborted = () => reject(abortSignal.reason ?? new DOMException('The operation was aborted.', 'AbortError'));
+                abortSignal.addEventListener('abort', aborted, { once: true });
+                acquisition.promise.then(
+                    () => {
+                        abortSignal.removeEventListener('abort', aborted);
+                        resolve();
+                    },
+                    (error) => {
+                        abortSignal.removeEventListener('abort', aborted);
+                        reject(error);
+                    },
+                );
+            });
+        } finally {
+            acquisition.waiters--;
+            if (acquisition.waiters === 0 && !acquisition.settled && this.tokenAcquisition === acquisition) {
+                this.tokenAcquisition = undefined;
+                acquisition.abortController.abort();
+            }
+        }
     }
 }

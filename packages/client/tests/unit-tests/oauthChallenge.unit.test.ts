@@ -13,6 +13,10 @@ describe('OAuth invalid-token challenge parsing', () => {
         expect(isInvalidTokenResponse(response(challenge))).toBe(true);
     });
 
+    test.each(['Bearer error="invalid_token",', ', Bearer error="invalid_token"', 'Bearer realm="relewise", , error="invalid_token"'])('ignores empty authentication-list elements: %s', (challenge) => {
+        expect(isInvalidTokenResponse(response(challenge))).toBe(true);
+    });
+
     test.each(['Bearer realm="relewise"', 'Bearer error="insufficient_scope"', 'Bearer error="INVALID_TOKEN"', 'Basic error="invalid_token"', 'Bearer error_description="invalid_token"', 'Bearer error="invalid_token", error="insufficient_scope"', 'Bearer error="insufficient_scope", error="invalid_token"', 'Bearer error="invalid_token", realm="unterminated'])('rejects another or malformed challenge: %s', (challenge) => {
         expect(isInvalidTokenResponse(response(challenge))).toBe(false);
     });

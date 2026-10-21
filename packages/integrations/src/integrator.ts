@@ -1,13 +1,11 @@
-import { RelewiseClient, RelewiseClientOptions, RelewiseOAuthClientOptions, OAuthClientCredentials, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest, BrandUpdate, BrandAdministrativeAction, TrackBrandAdministrativeActionRequest, TrackBrandUpdateRequest, CompanyUpdate, TrackCompanyUpdateRequest, CompanyAdministrativeAction, TrackCompanyAdministrativeActionRequest } from '@relewise/client';
+import { RelewiseClient, RelewiseClientOptions, ProductUpdate, RelewiseRequestOptions, TrackProductUpdateRequest, ProductAdministrativeAction, TrackProductAdministrativeActionRequest, Trackable, SearchResponseCollection, BatchedTrackingRequest, ProductCategoryUpdate, TrackProductCategoryUpdateRequest, TrackProductCategoryAdministrativeActionRequest, ProductCategoryAdministrativeAction, ContentCategoryAdministrativeAction, ContentCategoryUpdate, TrackContentCategoryAdministrativeActionRequest, TrackContentCategoryUpdateRequest, ContentUpdate, TrackContentUpdateRequest, ContentAdministrativeAction, TrackContentAdministrativeActionRequest, BrandUpdate, BrandAdministrativeAction, TrackBrandAdministrativeActionRequest, TrackBrandUpdateRequest, CompanyUpdate, TrackCompanyUpdateRequest, CompanyAdministrativeAction, TrackCompanyAdministrativeActionRequest } from '@relewise/client';
 
 export class Integrator extends RelewiseClient {
 
     public batchSize: number = 1_000;
 
-    constructor(datasetId: string, apiKey: string, options?: RelewiseClientOptions);
-    constructor(datasetId: string, credentials: OAuthClientCredentials, options: RelewiseOAuthClientOptions);
-    constructor(datasetId: string, credentials: string | OAuthClientCredentials, options?: RelewiseClientOptions) {
-        super(datasetId, credentials as string, options);
+    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
+        super(datasetId, apiKey, options);
     }
 
     public async updateProduct(request: ProductUpdate, options?: RelewiseRequestOptions): Promise<void | undefined> {

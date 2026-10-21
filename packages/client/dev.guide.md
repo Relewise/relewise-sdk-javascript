@@ -73,6 +73,12 @@ Use the dedicated JavaScript SDK sandbox dataset configured in `.github/workflow
     npm run integration-seed --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/
     npm run integration-test --DATASET_ID=... --API_KEY=... --SERVER_URL=https://sandbox-api.relewise.com/
 
+To verify OAuth client credentials locally, use an OAuth API key with product-view tracking permission:
+
+    npm run integration-test:oauth --DATASET_ID=... --OAUTH_CLIENT_ID=... --OAUTH_CLIENT_SECRET=... --SERVER_URL=https://sandbox-api.relewise.com/
+
+The OAuth test deliberately replaces the first API request's bearer token with an invalid token. It verifies that the client acquires a replacement, retries the complete request once, preserves the request body, and reuses the replacement for a second product-view event. It is skipped by the regular integration suite when the OAuth variables are not configured.
+
 Seeding creates missing base fixtures and updates existing ones through the public API. Keep fixtures and tracked behavior between runs; there is no teardown. Individual facet tests also update their existing fixed-ID fixtures. The seed step waits up to five minutes for initial indexing; individual tests search directly. Recommendation assertions remain unchanged; a newly populated dataset may need time for recommendation models to become available.
 
 The integrations package uses separate fixed IDs so its administrative actions cannot disable this catalog. CI serializes runs against the shared dataset. Avoid overlapping local and CI runs.

@@ -39,7 +39,29 @@ Replace the `RELEWISE_DATASET_ID`, `RELEWISE_API_KEY` and `RELEWISE_SERVER_URL` 
 
 After which you have access to various methods depending on the client you've bootstrapped.
 
-***Note: serverUrl is not required and will default to https://api.relewise.com/*** 
+***Note: When using API-key authentication, serverUrl is optional and defaults to https://api.relewise.com/. OAuth authentication requires the dataset's server URL.***
+
+#### OAuth client credentials (server-side only)
+
+Backend applications can authenticate using OAuth 2.0 Client Credentials instead of an API key. The client ID and client secret must be kept on the server and must never be included in browser code. The server URL must use HTTPS and cannot contain credentials, a query string, or a fragment.
+
+```ts
+const tracker = new Tracker(
+    RELEWISE_DATASET_ID,
+    {
+        type: 'oauth',
+        clientId: RELEWISE_OAUTH_CLIENT_ID,
+        clientSecret: RELEWISE_OAUTH_CLIENT_SECRET,
+    },
+    {
+        serverUrl: RELEWISE_SERVER_URL,
+    },
+);
+```
+
+Create the client once and reuse it for subsequent requests. Each client instance owns an in-memory token cache. It automatically acquires a token on the first request, reuses it until renewal is needed, and retries once with a new token if the API reports that the current token is invalid. Creating a new client instance creates a new token cache and may result in another token request.
+
+The same OAuth credentials object can be passed to `Searcher` and `Recommender`.
 
 #### Cache mode & Keep Alive
 By default, clients use `cache: 'no-cache'` to ensure responses are always fresh — this prevents stale results that could break personalization.

@@ -1,9 +1,17 @@
 import version from './version';
+import { isInvalidTokenResponse } from './oauthChallenge';
+import { OAuthClientCredentials, OAuthTokenProvider } from './oauthTokenProvider';
 
 export interface RelewiseClientOptions {
     serverUrl?: string;
     cache?: RequestCache;
 }
+
+export interface RelewiseOAuthClientOptions extends RelewiseClientOptions {
+    serverUrl: string;
+}
+
+export type RelewiseCredentials = string | OAuthClientCredentials;
 
 export interface RelewiseRequestOptions {
     /** Cancels the request when the provided abort signal is triggered. */
@@ -34,17 +42,47 @@ export interface HttpProblemDetails {
     errors?: Record<string, string>;
 }
 
+const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const emptyUuid = '00000000-0000-0000-0000-000000000000';
+
+function isValidOAuthServerUrl(serverUrl: string): boolean {
+    if (serverUrl !== serverUrl.trim()) return false;
+
+    try {
+        const url = new URL(serverUrl);
+        return url.protocol === 'https:' && !url.username && !url.password && !url.search && !url.hash;
+    } catch {
+        return false;
+    }
+}
+
 export abstract class RelewiseClient {
+    protected readonly datasetId: string;
+    protected readonly apiKey: string;
     private readonly _serverUrl: string = 'https://api.relewise.com';
     private readonly _urlPath: string = 'v1';
-    private readonly _apiKeyHeader: string;
+    private readonly _apiKeyHeader?: string;
+    private readonly _oauthTokenProvider?: OAuthTokenProvider;
     private readonly cache: RequestCache = 'no-cache';
 
-    constructor(protected readonly datasetId: string, protected readonly apiKey: string, options?: RelewiseClientOptions) {
+    constructor(datasetId: string, apiKey: string, options?: RelewiseClientOptions);
+    constructor(datasetId: string, credentials: OAuthClientCredentials, options: RelewiseOAuthClientOptions);
+    constructor(datasetId: string, credentials: RelewiseCredentials, options?: RelewiseClientOptions) {
         if (!datasetId) throw new Error('Dataset id cannot be null or empty. Please contact Relewise if you don\'t have an account already or would like a free demo license');
-        if (!apiKey) throw new Error('API Key secret cannot be null or empty. Please contact Relewise support if you don\'t know the apiKeySecret for your datasetId.');
 
-        this._apiKeyHeader = `APIKey ${this.apiKey}`;
+        this.datasetId = datasetId;
+        this.apiKey = typeof credentials === 'string' ? credentials : '';
+
+        if (typeof credentials === 'string') {
+            if (!credentials) throw new Error('API Key secret cannot be null or empty. Please contact Relewise support if you don\'t know the apiKeySecret for your datasetId.');
+            this._apiKeyHeader = `APIKey ${credentials}`;
+        }
+        else {
+            if (credentials.type !== 'oauth') throw new Error('Unsupported authentication type.');
+            if (!uuidPattern.test(datasetId) || datasetId.toLowerCase() === emptyUuid) throw new Error('Dataset id must be a valid non-empty UUID when using OAuth.');
+            if (!options?.serverUrl || !isValidOAuthServerUrl(options.serverUrl)) throw new Error('Server URL must be a valid HTTPS URL without credentials, query, or fragment when using OAuth.');
+            this._oauthTokenProvider = new OAuthTokenProvider(credentials.clientId, credentials.clientSecret);
+        }
 
         if (options?.serverUrl) {
             this._serverUrl = options.serverUrl;
@@ -60,20 +98,36 @@ export abstract class RelewiseClient {
 
     protected async request<TRequest, TResponse>(name: string, data: TRequest, options?: RelewiseRequestOptions): Promise<TResponse | undefined> {
         const requestUrl = this.createRequestUrl(this._serverUrl, this.datasetId, this._urlPath, name);
+        const body = JSON.stringify(data);
 
         try {
-            const response = await fetch(requestUrl, {
+            const send = (authorization: string) => globalThis.fetch(requestUrl, {
                 method: 'POST',
                 headers: {
-                    Authorization: this._apiKeyHeader,
+                    Authorization: authorization,
                     'Content-Type': 'application/json',
                     'X-Relewise-Version': version.tag,
                 },
-                body: JSON.stringify(data),
+                body,
                 signal: options?.abortSignal,
                 keepalive: options?.keepalive,
                 cache: this.cache,
             });
+
+            let response: Response;
+            if (this._oauthTokenProvider) {
+                const tokenEndpoint = this.createRequestUrl(this._serverUrl, this.datasetId, 'oauth/token');
+                let token = await this._oauthTokenProvider.getToken(tokenEndpoint, undefined, options?.abortSignal);
+                response = await send(`Bearer ${token.accessToken}`);
+
+                if (isInvalidTokenResponse(response)) {
+                    token = await this._oauthTokenProvider.getToken(tokenEndpoint, token.accessToken, options?.abortSignal);
+                    response = await send(`Bearer ${token.accessToken}`);
+                }
+            }
+            else {
+                response = await send(this._apiKeyHeader!);
+            }
 
             if (!response.ok) {
                 let responseMessage: HttpProblemDetails | null = null;
@@ -121,10 +175,10 @@ export abstract class RelewiseClient {
                 possibleCause = 'Failed to connect to API. Possible network outage, incorrect server URL, or CORS/preflight issue.';
             }
             else if (message.includes('401') || message.includes('unauthorized')) {
-                possibleCause = 'Unauthorized: Your API Key might be missing, expired, or incorrect.';
+                possibleCause = 'Unauthorized: Your credentials might be missing, expired, or incorrect.';
             }
             else if (message.includes('403') || message.includes('forbidden')) {
-                possibleCause = 'Forbidden: Your API Key might not have access to this dataset.';
+                possibleCause = 'Forbidden: Your credentials might not have access to this dataset.';
             }
             else if (message.includes('404') || message.includes('not found')) {
                 possibleCause = 'Not Found: The Dataset ID or endpoint may be incorrect.';
@@ -138,7 +192,7 @@ export abstract class RelewiseClient {
             "Network error or preflight request failed.\n" +
             (possibleCause ? `Possible cause: ${possibleCause}\n` : "") +
             "Troubleshooting steps:\n" +
-            "- Check your API Key is correct and active\n" +
+            "- Check your credentials are correct and active\n" +
             "- Verify the Dataset ID exists and is correctly spelled\n" +
             "- Ensure the server URL is reachable from your network\n" +
             "- Check browser console/network tab for blocked requests or CORS issues" +

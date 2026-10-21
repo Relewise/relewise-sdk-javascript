@@ -43,7 +43,7 @@ After which you have access to various methods depending on the client you've bo
 
 #### OAuth client credentials (server-side only)
 
-Backend applications can authenticate using OAuth 2.0 Client Credentials instead of an API key. The client ID and client secret must be kept on the server and must never be included in browser code.
+Backend applications can authenticate using OAuth 2.0 Client Credentials instead of an API key. The client ID and client secret must be kept on the server and must never be included in browser code. The server URL must use HTTPS and cannot contain credentials, a query string, or a fragment.
 
 ```ts
 const tracker = new Tracker(

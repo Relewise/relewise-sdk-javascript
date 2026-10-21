@@ -21,6 +21,18 @@ interface OAuthTokenResponse {
 }
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const emptyUuid = '00000000-0000-0000-0000-000000000000';
+
+function isValidTokenEndpoint(endpoint: string): boolean {
+    if (endpoint !== endpoint.trim()) return false;
+
+    try {
+        const url = new URL(endpoint);
+        return url.protocol === 'https:' && !url.username && !url.password && !url.search && !url.hash;
+    } catch {
+        return false;
+    }
+}
 
 /** Acquires and caches OAuth client-credentials tokens. Reuse the provider to share cached tokens. */
 export class OAuthTokenProvider {
@@ -32,12 +44,14 @@ export class OAuthTokenProvider {
         private readonly clientSecret: string,
         private readonly fetcher: typeof fetch = globalThis.fetch,
     ) {
-        if (!uuidPattern.test(clientId)) throw new Error('Client id must be a valid UUID.');
+        if (!uuidPattern.test(clientId) || clientId.toLowerCase() === emptyUuid) throw new Error('Client id must be a valid non-empty UUID.');
         if (!clientSecret.trim()) throw new Error('Client secret cannot be null or empty.');
     }
 
     /** Returns a cached token or acquires a new one when renewal is needed. */
     public async getToken(endpoint: string, rejectedToken?: string, abortSignal?: AbortSignal): Promise<OAuthToken> {
+        if (!isValidTokenEndpoint(endpoint)) throw new Error('OAuth token endpoint must be a valid HTTPS URL without credentials, query, or fragment.');
+
         if (this.canReuseToken(endpoint, rejectedToken)) {
             return this.cachedToken!;
         }
@@ -80,7 +94,16 @@ export class OAuthTokenProvider {
         }
 
         const value = (await response.json()) as OAuthTokenResponse;
-        if (typeof value.access_token !== 'string' || value.access_token.length === 0 || typeof value.expires_in !== 'number' || value.expires_in <= 0 || typeof value.token_type !== 'string' || value.token_type.toLowerCase() !== 'bearer') {
+        if (
+            typeof value.access_token !== 'string'
+            || value.access_token.length === 0
+            || /[\x00-\x20\x7f]/.test(value.access_token)
+            || typeof value.expires_in !== 'number'
+            || !Number.isInteger(value.expires_in)
+            || value.expires_in <= 0
+            || typeof value.token_type !== 'string'
+            || value.token_type.toLowerCase() !== 'bearer'
+        ) {
             throw new Error('The OAuth endpoint returned an invalid token response.');
         }
 

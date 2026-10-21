@@ -113,6 +113,31 @@ describe('OAuthTokenProvider', () => {
         expect(fetchMock).toHaveBeenCalledTimes(2);
     });
 
+    test.each([
+        { access_token: 'token with spaces', token_type: 'Bearer', expires_in: 300 },
+        { access_token: "token\r\nvalue", token_type: 'Bearer', expires_in: 300 },
+        { access_token: 'token-1', token_type: 'Bearer', expires_in: 300.5 },
+    ])('rejects unsafe or non-integral token responses', async (response) => {
+        const fetchMock = jest.fn<typeof fetch>().mockResolvedValue(jsonResponse(response));
+        const provider = new OAuthTokenProvider(clientId, 'secret', fetchMock as typeof fetch);
+
+        await expect(provider.getToken(`${serverUrl}/${datasetId}/oauth/token`)).rejects.toThrow('The OAuth endpoint returned an invalid token response.');
+    });
+
+    test.each([
+        'not-a-url',
+        'http://example.com/oauth/token',
+        'https://user:password@example.com/oauth/token',
+        'https://example.com/oauth/token?query=1',
+        'https://example.com/oauth/token#fragment',
+    ])('rejects an unsafe token endpoint before making a request', async (endpoint) => {
+        const fetchMock = jest.fn<typeof fetch>();
+        const provider = new OAuthTokenProvider(clientId, 'secret', fetchMock as typeof fetch);
+
+        await expect(provider.getToken(endpoint)).rejects.toThrow('OAuth token endpoint must be a valid HTTPS URL without credentials, query, or fragment.');
+        expect(fetchMock).not.toHaveBeenCalled();
+    });
+
     test("a cancelled waiter does not cancel another caller's shared acquisition", async () => {
         let completeFetch!: (response: Response) => void;
         const fetchMock = jest.fn<typeof fetch>().mockReturnValue(new Promise<Response>((resolve) => (completeFetch = resolve)));
@@ -159,9 +184,14 @@ describe('OAuth Relewise client', () => {
     });
 
     test('validates OAuth identifiers and server URL locally', () => {
-        expect(() => new Tracker('not-a-uuid', { type: 'oauth', clientId, clientSecret: 'secret' }, { serverUrl })).toThrow('Dataset id must be a valid UUID when using OAuth.');
-        expect(() => new Tracker(datasetId, { type: 'oauth', clientId: 'not-a-uuid', clientSecret: 'secret' }, { serverUrl })).toThrow('Client id must be a valid UUID.');
-        expect(() => new Tracker(datasetId, { type: 'oauth', clientId, clientSecret: 'secret' }, { serverUrl: '' })).toThrow('Server URL cannot be null or empty when using OAuth.');
+        const emptyUuid = '00000000-0000-0000-0000-000000000000';
+        expect(() => new Tracker('not-a-uuid', { type: 'oauth', clientId, clientSecret: 'secret' }, { serverUrl })).toThrow('Dataset id must be a valid non-empty UUID when using OAuth.');
+        expect(() => new Tracker(emptyUuid, { type: 'oauth', clientId, clientSecret: 'secret' }, { serverUrl })).toThrow('Dataset id must be a valid non-empty UUID when using OAuth.');
+        expect(() => new Tracker(datasetId, { type: 'oauth', clientId: 'not-a-uuid', clientSecret: 'secret' }, { serverUrl })).toThrow('Client id must be a valid non-empty UUID.');
+        expect(() => new Tracker(datasetId, { type: 'oauth', clientId: emptyUuid, clientSecret: 'secret' }, { serverUrl })).toThrow('Client id must be a valid non-empty UUID.');
+        for (const invalidServerUrl of ['', 'not-a-url', 'http://example.com', 'https://user:password@example.com', 'https://example.com?query=1', 'https://example.com#fragment']) {
+            expect(() => new Tracker(datasetId, { type: 'oauth', clientId, clientSecret: 'secret' }, { serverUrl: invalidServerUrl })).toThrow('Server URL must be a valid HTTPS URL without credentials, query, or fragment when using OAuth.');
+        }
     });
 
     test('reuses a token and preserves the API request contract', async () => {

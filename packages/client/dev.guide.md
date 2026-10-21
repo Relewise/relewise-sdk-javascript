@@ -77,7 +77,7 @@ To verify OAuth client credentials locally, use an OAuth API key with product-vi
 
     npm run integration-test:oauth --DATASET_ID=... --OAUTH_CLIENT_ID=... --OAUTH_CLIENT_SECRET=... --SERVER_URL=https://sandbox-api.relewise.com/
 
-The OAuth test sends two product-view events, verifies that both API requests use Bearer authentication, and verifies that the client acquires only one token. It is skipped by the regular integration suite when the OAuth variables are not configured.
+The OAuth test deliberately replaces the first API request's bearer token with an invalid token. It verifies that the client acquires a replacement, retries the complete request once, preserves the request body, and reuses the replacement for a second product-view event. It is skipped by the regular integration suite when the OAuth variables are not configured.
 
 Seeding creates missing base fixtures and updates existing ones through the public API. Keep fixtures and tracked behavior between runs; there is no teardown. Individual facet tests also update their existing fixed-ID fixtures. The seed step waits up to five minutes for initial indexing; individual tests search directly. Recommendation assertions remain unchanged; a newly populated dataset may need time for recommendation models to become available.
 

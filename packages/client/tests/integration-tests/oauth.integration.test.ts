@@ -12,7 +12,7 @@ const configured = Boolean(datasetId && clientId && clientSecret && serverUrl);
 const dedicatedOAuthRun = process.env.npm_lifecycle_event === 'integration-test:oauth';
 const oauthTest = configured || dedicatedOAuthRun ? test : test.skip;
 
-oauthTest('OAuth client credentials acquire one token and reuse it for API requests', async () => {
+oauthTest('OAuth client credentials replace an invalid token once and reuse the replacement', async () => {
     if (!datasetId || !clientId || !clientSecret || !serverUrl) {
         throw new Error('OAuth integration testing requires DATASET_ID, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, and SERVER_URL.');
     }
@@ -20,6 +20,8 @@ oauthTest('OAuth client credentials acquire one token and reuse it for API reque
     const nativeFetch = globalThis.fetch.bind(globalThis);
     let tokenRequests = 0;
     let apiRequests = 0;
+    let rejectNextApiToken = true;
+    const apiRequestBodies: Array<BodyInit | null | undefined> = [];
 
     const observedFetch: typeof fetch = async (input, init) => {
         const url = input instanceof Request ? input.url : input.toString();
@@ -32,6 +34,14 @@ oauthTest('OAuth client credentials acquire one token and reuse it for API reque
         else {
             apiRequests++;
             expect(authorization?.startsWith('Bearer ')).toBe(true);
+            apiRequestBodies.push(init?.body);
+
+            if (rejectNextApiToken) {
+                rejectNextApiToken = false;
+                const headers = new Headers(init?.headers);
+                headers.set('Authorization', 'Bearer invalid-javascript-sdk-test-token');
+                return nativeFetch(input, { ...init, headers });
+            }
         }
 
         return nativeFetch(input, init);
@@ -53,8 +63,9 @@ oauthTest('OAuth client credentials acquire one token and reuse it for API reque
         await tracker.trackProductView({ productId: 'oauth-integration-test-1', user });
         await tracker.trackProductView({ productId: 'oauth-integration-test-2', user });
 
-        expect(tokenRequests).toBe(1);
-        expect(apiRequests).toBe(2);
+        expect(tokenRequests).toBe(2);
+        expect(apiRequests).toBe(3);
+        expect(apiRequestBodies[1]).toBe(apiRequestBodies[0]);
     } finally {
         fetchSpy.mockRestore();
     }

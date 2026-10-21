@@ -43,6 +43,18 @@ export interface HttpProblemDetails {
 }
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const emptyUuid = '00000000-0000-0000-0000-000000000000';
+
+function isValidOAuthServerUrl(serverUrl: string): boolean {
+    if (serverUrl !== serverUrl.trim()) return false;
+
+    try {
+        const url = new URL(serverUrl);
+        return url.protocol === 'https:' && !url.username && !url.password && !url.search && !url.hash;
+    } catch {
+        return false;
+    }
+}
 
 export abstract class RelewiseClient {
     protected readonly datasetId: string;
@@ -67,8 +79,8 @@ export abstract class RelewiseClient {
         }
         else {
             if (credentials.type !== 'oauth') throw new Error('Unsupported authentication type.');
-            if (!uuidPattern.test(datasetId)) throw new Error('Dataset id must be a valid UUID when using OAuth.');
-            if (!options?.serverUrl) throw new Error('Server URL cannot be null or empty when using OAuth.');
+            if (!uuidPattern.test(datasetId) || datasetId.toLowerCase() === emptyUuid) throw new Error('Dataset id must be a valid non-empty UUID when using OAuth.');
+            if (!options?.serverUrl || !isValidOAuthServerUrl(options.serverUrl)) throw new Error('Server URL must be a valid HTTPS URL without credentials, query, or fragment when using OAuth.');
             this._oauthTokenProvider = new OAuthTokenProvider(credentials.clientId, credentials.clientSecret);
         }
 

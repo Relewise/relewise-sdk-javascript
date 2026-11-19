@@ -1,0 +1,170 @@
+name: Generate API Version
+
+on:
+  workflow_call:
+    inputs:
+      trello-card-url:
+        description: Trello card URL
+        required: true
+        type: string
+    secrets:
+      SDK_UPDATE_TOKEN:
+        description: Token with contents and pull request write access to this repository
+        required: false
+      INTEGRATION_TESTS_DATASET_API_KEY:
+        required: false
+  workflow_dispatch:
+    inputs:
+      trello-card-url:
+        description: Trello card URL
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  TARGET_REPOSITORY: Relewise/relewise-sdk-javascript
+  REVIEWERS: mzanoni,soe-relewise
+  TRELLO_CARD_URL: ${{ inputs['trello-card-url'] }}
+
+# Share the CI lock because integration fixtures persist between runs.
+concurrency:
+  group: javascript-sdk-integration-dataset
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  generate-api-version:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ./packages/client
+    steps:
+      - name: Validate workflow input
+        shell: pwsh
+        working-directory: .
+        run: |
+          if ($env:TRELLO_CARD_URL -notmatch '^https://trello\.com/c/[A-Za-z0-9]+(?:/[^\s]*)?$') {
+            throw 'Provide a valid Trello card URL in trello-card-url.'
+          }
+
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ env.TARGET_REPOSITORY }}
+          ref: main
+          token: ${{ secrets.SDK_UPDATE_TOKEN || github.token }}
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate API contracts from published Swagger
+        run: npm run gen-api
+
+      - name: Check generated changes
+        id: changes
+        shell: pwsh
+        working-directory: .
+        run: |
+          $changes = git status --porcelain -- packages/client/src/models
+          if ($LASTEXITCODE -ne 0) { throw 'Could not inspect generated API contract changes.' }
+
+          if ([string]::IsNullOrWhiteSpace(($changes -join "`n"))) {
+            'has_changes=false' >> $env:GITHUB_OUTPUT
+            'No client API contract changes were produced. No version bump or pull request was created.' >> $env:GITHUB_STEP_SUMMARY
+          } else {
+            'has_changes=true' >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Bump client minor version
+        if: steps.changes.outputs.has_changes == 'true'
+        run: npm version minor --no-git-tag-version --ignore-scripts
+
+      - name: Build
+        if: steps.changes.outputs.has_changes == 'true'
+        run: npm run build
+
+      - name: Build declaration types
+        if: steps.changes.outputs.has_changes == 'true'
+        run: npm run build:types
+
+      - name: Unit tests
+        if: steps.changes.outputs.has_changes == 'true'
+        run: npm test -- --runInBand
+
+      - name: Integration tests
+        if: steps.changes.outputs.has_changes == 'true'
+        shell: bash
+        env:
+          npm_config_DATASET_ID: ${{ vars.INTEGRATION_TESTS_DATASET_ID }}
+          npm_config_API_KEY: ${{ secrets.INTEGRATION_TESTS_DATASET_API_KEY }}
+          npm_config_SERVER_URL: https://sandbox-api.relewise.com/
+        run: |
+          if [ -z "$npm_config_API_KEY" ]; then
+            echo 'INTEGRATION_TEST_RESULT=Not run (INTEGRATION_TESTS_DATASET_API_KEY unavailable).' >> "$GITHUB_ENV"
+            echo 'Integration tests not run: INTEGRATION_TESTS_DATASET_API_KEY unavailable.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            if [ -z "$npm_config_DATASET_ID" ]; then
+              echo 'Set INTEGRATION_TESTS_DATASET_ID to the dedicated JavaScript SDK CI dataset.' >&2
+              exit 1
+            fi
+            npm run integration-seed
+            npm run integration-test
+            echo 'INTEGRATION_TEST_RESULT=Passed (integration-seed and integration-test).' >> "$GITHUB_ENV"
+          fi
+
+      - name: Create pull request
+        if: steps.changes.outputs.has_changes == 'true'
+        shell: bash
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.SDK_UPDATE_TOKEN || github.token }}
+        run: |
+          sdk_version=$(node -p "require('./packages/client/package.json').version")
+          branch="chore/update-sdk-api-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          title="feat(client): update API contracts ($sdk_version)"
+          body_path="$RUNNER_TEMP/generate-api-version-pr-body.md"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c "$branch"
+          git add -A -- packages/client/src/models packages/client/package.json packages/client/package-lock.json
+          git commit -m "chore(client): update API contracts ($sdk_version)"
+          git push --set-upstream origin "$branch"
+
+          cat > "$body_path" <<EOF
+          $TRELLO_CARD_URL
+
+          ## Summary
+          - Regenerated @relewise/client API contracts from https://api.relewise.com/public/swagger.json using npm run gen-api, including fix-exports.js.
+          - Bumped the client minor version to $sdk_version in package.json and package-lock.json.
+          - The Swagger endpoint reflects the currently published API; this run does not target an exact historical API version.
+
+          ## Risk
+          - Generated public model/type changes can affect client consumers. Review contract compatibility before merging.
+
+          ## Validation
+          - npm ci
+          - npm run gen-api
+          - npm run build
+          - npm run build:types
+          - npm test -- --runInBand
+          - Integration tests: $INTEGRATION_TEST_RESULT
+          EOF
+
+          pr_url=$(gh pr create \
+            --repo "$TARGET_REPOSITORY" \
+            --base main \
+            --head "$branch" \
+            --title "$title" \
+            --body-file "$body_path" \
+            --reviewer "$REVIEWERS")
+          echo "Created pull request: $pr_url" >> "$GITHUB_STEP_SUMMARY"

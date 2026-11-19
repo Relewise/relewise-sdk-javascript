@@ -15,6 +15,7 @@ env:
 concurrency:
   group: javascript-sdk-integration-dataset
   cancel-in-progress: false
+  queue: max
 
 jobs:
   test-sdk:

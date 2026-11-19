@@ -82,3 +82,16 @@ The OAuth test deliberately replaces the first API request's bearer token with a
 Seeding creates missing base fixtures and updates existing ones through the public API. Keep fixtures and tracked behavior between runs; there is no teardown. Individual facet tests also update their existing fixed-ID fixtures. The seed step waits up to five minutes for initial indexing; individual tests search directly. Recommendation assertions remain unchanged; a newly populated dataset may need time for recommendation models to become available.
 
 The integrations package uses separate fixed IDs so its administrative actions cannot disable this catalog. CI serializes runs against the shared dataset. Avoid overlapping local and CI runs.
+
+## Automated API contract updates
+
+Run **Generate API Version** in GitHub Actions with a `trello-card-url`. The workflow checks out `main`, runs the client's `gen-api` script against `https://api.relewise.com/public/swagger.json`, and opens a PR only when generated models change. It increments the client minor version (for example, `2.29.0` to `2.30.0`) in both package files, builds the SDK and declarations, and runs unit tests before pushing. The Trello link is the first line of the PR description; reviewers match the Java SDK workflow. Merging the PR does not publish a release.
+
+Unlike the Java generator's exact NuGet package input, this workflow uses the currently published Swagger contracts. It cannot select a historical API version.
+
+Repository configuration:
+
+- Set `SDK_UPDATE_TOKEN` to a token with contents and pull request write access to `Relewise/relewise-sdk-javascript`. Without it, the workflow uses `GITHUB_TOKEN`; repository settings must allow Actions to create pull requests. Use `SDK_UPDATE_TOKEN` when generated PRs must trigger the normal CI workflows automatically.
+- Set `INTEGRATION_TESTS_DATASET_API_KEY` and the repository variable `INTEGRATION_TESTS_DATASET_ID` to the dedicated JavaScript SDK sandbox dataset used by `unit-testing.yml`. The workflow shares CI's concurrency group and seeds persistent fixtures before integration tests. Without the key, integration tests are explicitly reported as not run. If the key is supplied without the dataset variable, the workflow fails.
+
+The workflow also supports `workflow_call` for release orchestration. Pass `trello-card-url`, grant `contents: write` and `pull-requests: write`, and pass the optional secrets explicitly or use `secrets: inherit`. Cross-repository callers need `SDK_UPDATE_TOKEN` with access to the target JavaScript repository; the dataset variable must be configured in the caller's context. GitHub concurrency groups are scoped to the caller repository, so cross-repository orchestration should dispatch this workflow in the JavaScript repository to share its CI dataset lock.

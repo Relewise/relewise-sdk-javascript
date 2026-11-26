@@ -1,4 +1,4 @@
-import { ProductCategoryAssortmentFacet, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange, ContentDataObjectFacet, ProductCategoryDataObjectFacet, RecentlyPurchasedFacet, PurchaseQualifiers } from '../../models/data-contracts';
+import { ProductCategoryAssortmentFacet, SelectedBrandPropertiesSettings, BrandFacet, CategoryFacet, CategoryPath, CategoryHierarchyFacet, SelectedProductCategoryPropertiesSettings, SelectedContentCategoryPropertiesSettings, ContentAssortmentFacet, ContentDataBooleanValueFacet, ContentDataDoubleRangeFacet, ContentDataDoubleRangesFacet, ContentDataDoubleValueFacet, ContentDataStringValueFacet, FacetSettings, PriceRangeFacet, PriceRangesFacet, ProductAssortmentFacet, ProductCategoryDataBooleanValueFacet, ProductCategoryDataDoubleRangeFacet, ProductCategoryDataDoubleRangesFacet, ProductCategoryDataDoubleValueFacet, ProductCategoryDataStringValueFacet, ProductDataBooleanValueFacet, ProductDataDoubleRangeFacet, ProductDataDoubleRangesFacet, ProductDataDoubleValueFacet, ProductDataStringValueFacet, ProductFacetQuery, VariantSpecificationFacet, ProductDataObjectFacet, DoubleNullableRange, ContentDataObjectFacet, ProductCategoryDataObjectFacet, RecentlyPurchasedFacet, PurchaseQualifiers } from '../../models/data-contracts';
 import { DataObjectFilterConditionBuilder } from '../dataObjectFilterConditionBuilder';
 import { DataObjectFacetBuilder } from './dataObjectFacetBuilder';
 import { FacetSettingsBuilder } from './facetSettingsBuilder';
@@ -36,13 +36,50 @@ export class FacetBuilder {
         | RecentlyPurchasedFacet)[] = [];
 
     //#region Product
-    public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors', selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {    
+    /**
+     * @deprecated Use addProductCategoryFacet or addContentCategoryFacet instead.
+     */
+    public addCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
         const facet: CategoryFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryFacet, Relewise.Client',
             categorySelectionStrategy: categorySelectionStrategy,
             field: 'Category',
             selected: selectedValues,
             settings: handleFacetSettings(facetSettings),
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addProductCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: string[] | null = null, selectedPropertiesSettings?: Partial<SelectedProductCategoryPropertiesSettings>, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        const facet: CategoryFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryFacet, Relewise.Client',
+            categorySelectionStrategy: categorySelectionStrategy,
+            field: 'Category',
+            selected: selectedValues,
+            settings: handleFacetSettings(facetSettings),
+            selectedPropertiesSettings: selectedPropertiesSettings ? ({
+                ...selectedPropertiesSettings,
+                $type: 'Relewise.Client.Requests.Shared.SelectedProductCategoryPropertiesSettings, Relewise.Client',
+            } as SelectedProductCategoryPropertiesSettings) : undefined,
+        };
+        this.facets.push(facet);
+
+        return this;
+    }
+
+    public addContentCategoryFacet(categorySelectionStrategy: 'ImmediateParent' | 'Ancestors' | 'Descendants', selectedValues: string[] | null = null, selectedPropertiesSettings?: Partial<SelectedContentCategoryPropertiesSettings>, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+        const facet: CategoryFacet = {
+            $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.CategoryFacet, Relewise.Client',
+            categorySelectionStrategy: categorySelectionStrategy,
+            field: 'Category',
+            selected: selectedValues,
+            settings: handleFacetSettings(facetSettings),
+            selectedPropertiesSettings: selectedPropertiesSettings ? ({
+                ...selectedPropertiesSettings,
+                $type: 'Relewise.Client.Requests.Shared.SelectedContentCategoryPropertiesSettings, Relewise.Client',
+            } as SelectedContentCategoryPropertiesSettings) : undefined,
         };
         this.facets.push(facet);
 
@@ -83,12 +120,13 @@ export class FacetBuilder {
         return this;
     }
 
-    public addBrandFacet(selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void)): this {
+    public addBrandFacet(selectedValues: string[] | null = null, facetSettings?: FacetSettings | ((facetSettingsBuilder: FacetSettingsBuilder) => void), selectedPropertiesSettings?: Partial<SelectedBrandPropertiesSettings>): this {
         const facet: BrandFacet = {
             $type: 'Relewise.Client.DataTypes.Search.Facets.Queries.BrandFacet, Relewise.Client',
             field: 'Brand',
             selected: selectedValues,
-            settings: handleFacetSettings(facetSettings)
+            settings: handleFacetSettings(facetSettings),
+            selectedPropertiesSettings: selectedPropertiesSettings as SelectedBrandPropertiesSettings | undefined,
         };
         this.facets.push(facet);
 

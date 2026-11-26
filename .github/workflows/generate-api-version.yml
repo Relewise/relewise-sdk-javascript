@@ -26,6 +26,8 @@ permissions:
 
 env:
   TARGET_REPOSITORY: Relewise/relewise-sdk-javascript
+  npm_config_DATASET_ID: d4abb40e-22d4-4eb7-b48e-5325b7ce2a1f
+  npm_config_SERVER_URL: https://sandbox-api.relewise.com/
   REVIEWERS: mzanoni,soe-relewise
   TRELLO_CARD_URL: ${{ inputs['trello-card-url'] }}
 
@@ -104,18 +106,12 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         shell: bash
         env:
-          npm_config_DATASET_ID: ${{ vars.INTEGRATION_TESTS_DATASET_ID }}
           npm_config_API_KEY: ${{ secrets.INTEGRATION_TESTS_DATASET_API_KEY }}
-          npm_config_SERVER_URL: https://sandbox-api.relewise.com/
         run: |
           if [ -z "$npm_config_API_KEY" ]; then
             echo 'INTEGRATION_TEST_RESULT=Not run (INTEGRATION_TESTS_DATASET_API_KEY unavailable).' >> "$GITHUB_ENV"
             echo 'Integration tests not run: INTEGRATION_TESTS_DATASET_API_KEY unavailable.' >> "$GITHUB_STEP_SUMMARY"
           else
-            if [ -z "$npm_config_DATASET_ID" ]; then
-              echo 'Set INTEGRATION_TESTS_DATASET_ID to the dedicated JavaScript SDK CI dataset.' >&2
-              exit 1
-            fi
             npm run integration-seed
             npm run integration-test
             echo 'INTEGRATION_TEST_RESULT=Passed (integration-seed and integration-test).' >> "$GITHUB_ENV"

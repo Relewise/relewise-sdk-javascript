@@ -456,7 +456,9 @@ export type BrandDetailsCollectionResponse = TimedResponse & {
 
 export type BrandDisabledFilter = Filter;
 
-export type BrandFacet = StringValueFacet;
+export type BrandFacet = StringValueFacet & {
+  selectedPropertiesSettings?: SelectedBrandPropertiesSettings | null;
+};
 
 export type BrandFacetResult = StringBrandNameAndIdResultValueFacetResult;
 
@@ -480,6 +482,7 @@ export interface BrandIndexConfiguration {
 export interface BrandNameAndIdResult {
   id?: string | null;
   displayName?: string | null;
+  brand?: BrandResult | null;
 }
 
 export interface BrandNameAndIdResultAvailableFacetValue {
@@ -837,6 +840,10 @@ export interface CategoryAdministrativeAction {
 
 export type CategoryFacet = StringValueFacet & {
   categorySelectionStrategy: "ImmediateParent" | "Ancestors" | "Descendants";
+  selectedPropertiesSettings?:
+    | SelectedContentCategoryPropertiesSettings
+    | SelectedProductCategoryPropertiesSettings
+    | null;
 };
 
 export type CategoryFacetResult = StringCategoryNameAndIdResultValueFacetResult & {
@@ -906,6 +913,7 @@ export interface CategoryNameAndId {
 export interface CategoryNameAndIdResult {
   id?: string | null;
   displayName?: string | null;
+  category?: ContentCategoryResult | ProductCategoryResult | null;
 }
 
 export interface CategoryNameAndIdResultAvailableFacetValue {

@@ -25,7 +25,7 @@ The repository is a multi-package TypeScript SDK. Follow this guide to keep chan
 ## Core Working Conventions
 - Run commands from package directories; there is no root workspace `package.json`.
 - Keep changes minimal and package-local.
-- Public SDK APIs must never require callers to supply a `$type` property or know its discriminator value. Builders and factories must populate the correct `$type` internally. When callers need to choose a subtype, expose a meaningful SDK option or helper instead of requiring a raw `$type`.
+- Public SDK APIs must use the builder pattern to handle `$type` discriminators. Callers must never be required to supply a `$type` property or know its discriminator value. Expose typed builder methods for subtype selection, and have those methods populate the correct `$type` internally.
 - Do not commit secrets (dataset IDs, API keys, private URLs, credentials).
 - Treat generated files as generated. In particular:
   - `packages/client/src/models/data-contracts.ts` is generated from Swagger.
